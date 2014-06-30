@@ -1275,61 +1275,62 @@ function calcGrowTimes(growDurationInitial,period,bonus){
 	return period/calcGrowDuration(growDurationInitial,bonus);
 }
 
-function calcTotalRecursive(recursionCount,stack){
-try{
- if(DEVMODE_FUNCTION){ var trackingHandle = tracking.start("berater","calcTotalRecursive",[recursionCount]); }
-	if(recursionCount>100){throw("TOO MUCH RECURSION")}
-	var err_trace="init";
-	var help;
-	var next=false;
-	var nextStack={};
-	if(!stack){
-		totalRecursive=new Array(new Object(),new Object(),new Object(),new Object());
-		stack=prodStock.clone();
-		for(var type in prodMinRack){
-			if(!prodMinRack.hasOwnProperty(type)){ continue; }
-			for(var iProd in prodMinRack[type]){
-				if (!prodMinRack[type].hasOwnProperty(iProd)){ continue; }
-				if(!stack[type]){ stack[type]={}; }
-				stack[type][iProd]-=prodMinRack[type][iProd];
-			}
-		}
-	}
-	err_trace="step";
-	for(var type in stack){
-		if(!stack.hasOwnProperty(type)){ continue; }
-		for(var iProd in stack[type]){
-			if(!stack[type].hasOwnProperty(iProd)){ continue; }
-			if(stack[type][iProd]<0){
-				if(typeof prodRequire[type][iProd]=="object"){
-					err_trace="prodRequire";
-					for(var i=0;i<prodRequire[type][iProd].length;i++){
-						err_trace="prodRequire "+i;
-						if(prodRequire[type][iProd][i][0]>-1){
-							help=-stack[type][iProd]/prodYield[type][iProd]*prodRequire[type][iProd][i][2];
-							if(!nextStack[prodRequire[type][iProd][i][0]]){
-								nextStack[prodRequire[type][iProd][i][0]]={}; 
-							}
-							if(!nextStack[prodRequire[type][iProd][i][0]][prodRequire[type][iProd][i][1]]){
-								nextStack[prodRequire[type][iProd][i][0]][prodRequire[type][iProd][i][1]]=0;
-							}
-							next=true;
-							nextStack[prodRequire[type][iProd][i][0]][prodRequire[type][iProd][i][1]]-=help;
-							if(!totalRecursive[prodRequire[type][iProd][i][0]][prodRequire[type][iProd][i][1]]){
-								totalRecursive[prodRequire[type][iProd][i][0]][prodRequire[type][iProd][i][1]]=0;
-							}
-							totalRecursive[prodRequire[type][iProd][i][0]][prodRequire[type][iProd][i][1]]+=help;
-						}
-					}
-				}
-
-			}		
-		}
-	}
-	if(next){ calcTotalRecursive(++recursionCount,nextStack); }
- if(DEVMODE_FUNCTION){ tracking.end("berater",trackingHandle); }
-}catch(err){ GM_logError("calcTotalRecursive ("+err_trace+")\ntype="+type+" iProd="+iProd+" help="+implode(help)+" i="+i+"\n"+err); }
+function calcTotalRecursive() {
+    var type, id, req, i, amountMissingProducts, j;
+    try {
+        if (DEVMODE_FUNCTION) {
+            var trackingHandle = tracking.start("berater", "calcTotalRecursive", []);
+        }
+ 
+        totalRecursive = new Array(new Object(), new Object(), new Object(), new Object());
+        // Type is set to '1', so only forestry products are inspected
+        type = 1;
+ 
+        // Iterate over all products starting with those which are no pre-product. It is important that an inspected product won't be needed by a non-yet-inspected product!
+        for (i = prodNameSort[type].length - 1; i >= 0; i--) {
+            // Id of currently inspected product
+            id = prodNameSort[type][i];
+ 
+            /** Calculate the amount of missing products:
+             *   - Amount of directly needed product and currently in production in 'prodMinRack'
+             *   - Amount of recursivly needed product in 'totalRecursive'
+             *   - Amount of already produced/existing product in stock in 'ProdStock'
+             */
+            amountMissingProducts = prodMinRack[type][id] + (totalRecursive[type][id] ? totalRecursive[type][id] : 0) - prodStock[type][id];
+ 
+            // If there is a need to gain this product...
+            if (amountMissingProducts > 0) {
+                // If this product requires other products... (e.g. tree logs DON'T!)
+                if (prodRequire[type][id]) {
+                    // Iterate over pre-products
+                    for (j = 0; j < prodRequire[type][id].length; j++) {
+                        // Cache the currently inspected pre-product
+                        req = prodRequire[type][id][j];
+                        if (!totalRecursive[req[0]][req[1]]) {
+                            // Initialize result storage of pre-product, if necessary
+                            totalRecursive[req[0]][req[1]] = 0;
+                        }
+ 
+                        /** Some real magic is done here: We calculate, how many pre-products are recursivly needed!
+                         *  We know the amount to produce ('amountMissingProducts') and divide it by the yielded amount per production
+                         *  cycle ('prodYield'). Then we (should) multiply with the amount of needed pre-product ('req[2]') to initiate
+                         *  the production. Finally, we round up, since we can't produce fractions ('Math.ceil()').
+                         *  If the production needs more than one unit of the pre-product, we need to round up to a multiple of 'req[2]'.
+                         *  The formula therefore is 'Math.ceil(x / req[2]) * req[2]'. We then reduce 'req[2]' inside the ceiling-function.
+                         */
+                        totalRecursive[req[0]][req[1]] += Math.ceil((amountMissingProducts) / prodYield[type][id]) * req[2];
+                    }
+                }
+            }
+        }
+        if (DEVMODE_FUNCTION) {
+            tracking.end("berater", trackingHandle);
+        }
+    } catch (err) {
+        GM_logError("calcTotalRecursive\ntype=" + type + " id=" + id + " req=" + implode(req) + " i=" + i + " j=" + j + "\n" + err);
+    }
 }
+
 function calcTotalErnte(){
 	try{
 		totalErnte=new Array(new Object(),new Object(),new Object(),new Object());
