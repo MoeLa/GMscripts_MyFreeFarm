@@ -12874,15 +12874,15 @@ return false;
 		}catch(err){GM_logError("_innerInfosResponse\n"+err);}
 		try{
 			$("innermaincontainer").setAttribute("zoneNr",zoneNr);
-			if(unsafeWindow.locationinfo["buildingid"]){ 
+			if(unsafeWindow.locationinfo["buildingid"]){
 				switch(unsafeWindow.locationinfo["buildingid"]){
-				case "13": doFactoryOil(zoneNr); break; // Oil
-				case "14": doFactoryOil(zoneNr); break; // Special Oil
-				case "16":  // Knitting
-				case "17":  // Carpentry
-				case "18":  // Pony
-    			case "19":  // Gueterhof
-				default: 
+				case 13: doFactoryOil(zoneNr); break; // Oil
+				case 14: doFactoryOil(zoneNr); break; // Special Oil
+				case 16: // Knitting
+				case 17: break; // Carpentry
+				case 18: raiseEvent("gameOpenPony"); break; // Pony
+    			case 19: raiseEvent("gameOpenGueterhof"); break; // Gueterhof
+				default:
 				}
 			}else{ 
 			// }else if(unsafeWindow.locationinfo["in"]){ 
@@ -12890,6 +12890,33 @@ return false;
 			}
 		}catch(err){GM_logError("innerInfosResponse\n"+err);}
 	});
+
+	unsafeOverwriteFunction("ponySelectFarmi", function(ponyFarmiId) {
+		try {
+			unsafeWindow._ponySelectFarmi(ponyFarmiId);
+		} catch (err) { GM_logError("_ponySelectFarmi\n"+err); }
+		try {
+			if (unsafeWindow.pony_sel_farmi != 0) {
+				raiseEvent("gamePonyFarmiSelect");
+			} else {
+				raiseEvent("gamePonyFarmiUnselect");
+			}
+		} catch (err) { GM_logError("ponySelectFarmi\n" + err); }
+	});
+
+	unsafeOverwriteFunction("ponySelectPony", function(ponyId) {
+		try {
+			unsafeWindow._ponySelectPony(ponyId);
+		} catch (err) { GM_logError("_ponySelectPony\n"+err); }
+		try {
+			if (unsafeWindow.pony_sel_pony != 0) {
+				raiseEvent("gamePonyPonySelect");
+			} else {
+				raiseEvent("gamePonyPonyUnselect");
+			}
+		} catch (err) { GM_logError("ponySelectPony\n" + err); }
+	});
+
 	// Club
 	err_trace="Club";
 	// Clubquest direct show
