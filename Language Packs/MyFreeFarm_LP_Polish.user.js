@@ -1,10 +1,10 @@
-﻿// ==UserScript==
+// ==UserScript==
 // @name        MyFreeFarm LP Polish
 // @namespace   https://github.com/BastianKanaan/GMscripts_MyFreeFarm
 // @author      BastianKanaan
 // @description Language pack "Polish" for MyFreeFarm Scripts
-// @date        23.07.2015
-// @version     1.0.4
+// @date        17.11.2015
+// @version     1.0.5
 // @license     GPL version 3 or any later version; http://www.gnu.org/copyleft/gpl.html
 // @include     /^http:\/\/(|www\.|s\d+\.)wolnifarmerzy.pl\/.*$/
 // @grant       GM_log
@@ -24,7 +24,7 @@ try{
     const PRODSTOP=-1;
     const GFX = "http://mff.wavecdn.de/mff/"; // The path to the in-game images
 
-    // Important constants
+// Important constants ************************************************************************************************
     const COUNTRY="PL"; // The country ISO-code (2 digits)
     const LANGUAGE="pl"; // The language ISO-code (2 digits)        
     const delimThou="."; // The separator for thousands (e.g. in 1,000).
@@ -56,19 +56,31 @@ try{
         text[LANGUAGE]["msgContentContractsale"]="(.+) podpisał wysłaną mu przez Ciebie umowę!<br>\\s*<br>\\s*Sprzedałeś następujące produkty:\\s*<br>([\\S\\s]*)\\s*<br>\\s*Należność za produkty w wysokości (.+?) ft została przelana na Twoje konto\\."; 
         // - The line-pattern for the detailed selling list (equals the replaced information above).
         text[LANGUAGE]["msgContentContractsaleList"]="\\s*(\\d+)x\\s*(.+?)\\s*<br>";
+        // - A contract which was sent to you was canceld before you were able to accept it
+        text[LANGUAGE]["msgSubjectContractCancel"]="xxx";
         // *************
+        // Take the subject from a message sent if you purchased coins
+        text[LANGUAGE]["msgSubjectCoins"]="xxx";
         // Take the subject from a message sent if you won in a competition.
         text[LANGUAGE]["msgSubjectCongratulation"]="xxx";
+        // Take the subject from a message sent when you got a item due to achievements
+        text[LANGUAGE]["msgSubjectCongratulation2"]="xxx";
         // Take the subject from a message sent if somebody wants to add you as friend. The person has to be replaced by "(.+)".
         text[LANGUAGE]["msgSubjectFriend"]="(.+) chce zostać twoim przyjacielem";
-        // Take the subject from a message sent if you reach the next level
+        // Take the subject from a message sent if somebody has canceled your friendship. The person has to be replaced by "(.+)".
+        text[LANGUAGE]["msgSubjectFriendEnd"]="xxx";
+        // Take the subject from a message sent if you reach the next level.
         text[LANGUAGE]["msgSubjectLevel"]="xxx";
+        // Take the subject from a message sent if you have to renew premium mode
+        text[LANGUAGE]["msgSubjectPremium"]="xxx";
         // Take the subject from a message sent if you got a present.
         text[LANGUAGE]["msgSubjectPresent"]="xxx";
+        // Take the subjects from messages sent if a quest was completed.
+        text[LANGUAGE]["msgSubjectQuest"]="xxx";
         // Take the subjects from messages sent if weed occurred on your field.
         text[LANGUAGE]["msgSubjectWeed1"]="xxx";
         text[LANGUAGE]["msgSubjectWeed2"]="xxx";
-        
+    
 // And all the other texts you can enter what you want ****************************************************************
         text[LANGUAGE]["above"] = "Suma prod. powyżej";
         text[LANGUAGE]["absolute"] = "Potrzebne";
@@ -169,6 +181,7 @@ try{
         text[LANGUAGE]["general"] = "Ogólne";
         text[LANGUAGE]["given"] = "Oddano";
         text[LANGUAGE]["goods"] = "Towary";
+        text[LANGUAGE]["goToClothingDonation"]="Go to clothing donation";		
         text[LANGUAGE]["goToDonkey"]="Go to donkey Luke";
         text[LANGUAGE]["goToLottery"] = "Przejdź do loterii";
         text[LANGUAGE]["goToMarket"] = "Idź na targ";
@@ -193,6 +206,8 @@ try{
         text[LANGUAGE]["jobComplete"]="Job finished successfully";
         text[LANGUAGE]["jobCurrent"]="Current job";
         text[LANGUAGE]["keptLots"] = "Zatrzymane losy";
+        text[LANGUAGE]["lastPrice"]="Last price";
+        text[LANGUAGE]["lastQuest"]="Completed";
         text[LANGUAGE]["level"] = "Poziom";
         text[LANGUAGE]["levelTooLow"] = "Twój poziom jest za niski";
         text[LANGUAGE]["levelXneeded"] = "Wymagany&nbsp;%1%&nbsp;poziom";
@@ -255,12 +270,16 @@ try{
         text[LANGUAGE]["quest_foodworld"] = "Quest Piknikowy";
         text[LANGUAGE]["quest_forestry"]="Quest Leśny";
         text[LANGUAGE]["quest_main"]="Quest farmy";
+        text[LANGUAGE]["quest_veterinary"]="Veterinary quest series";
         text[LANGUAGE]["questfoodworld1"]="Questy piknikowe";     
         text[LANGUAGE]["questforestry1"]="Questy I (leśne)";
         text[LANGUAGE]["questforestry2"]="Questy II (leśne)";
         text[LANGUAGE]["questmain1"]="Questy I (farma)";
         text[LANGUAGE]["questmain2"]="Questy II (farma)";
+        text[LANGUAGE]["questmain3"]="Questy III (farma)";
+        text[LANGUAGE]["questveterinary1"]="Veterinary quest series";
         text[LANGUAGE]["quests"] = "Questy";
+        text[LANGUAGE]["questSetXToNrY"]="Setting %1% to No %2%";
         text[LANGUAGE]["rackX"] = "%1%. regał";
         text[LANGUAGE]["rank"] = "Pozycja";
         text[LANGUAGE]["readAll"] = "Wszystkie przeczytane";
@@ -337,7 +356,8 @@ try{
         text[LANGUAGE]["useWildcard"]= "Użyj * aby oznaczyć jedną lub więcej liter.";
         text[LANGUAGE]["value"] = "Wartość";
         text[LANGUAGE]["version"]="Version";
-        text[LANGUAGE]["veterinayLevelXNeeded"]="Veterinary level %1% needed";
+        text[LANGUAGE]["veterinary"]="Veterinary";
+        text[LANGUAGE]["veterinaryLevelXNeeded"]="Veterinary level %1% needed";
         text[LANGUAGE]["waterBonus"] = "%1%% bonus podlewania";
         text[LANGUAGE]["wateringFeature"] = "Maszyna nawadniajęaca";
         text[LANGUAGE]["waterNeeded"] = "Wymaga podlania";
@@ -421,6 +441,12 @@ try{
         text[LANGUAGE]["settings_valzoneAddToGlobalTime"]=["Zintegruj", "Czy czas produkcji ma być wliczony do czasu ogólnego?"];
         text[LANGUAGE]["settings_valGlobaltimeShowCroppedZone"]=["Zintegruj zebrane pola", "Czy doliczyć do ogólnego czasu pola już zebrane?"];
         text[LANGUAGE]["settings_cacheReset"]=["Cache reset", "Usuwanie wszystkich danych zapisanych przez ten skrypt..."];
+        text[LANGUAGE]["settings_zoneReset"]=["Zones reset","All information about your farms will be deleted ..."];
+        text[LANGUAGE]["settings_setQuestMain"]=["Questseries","Main questseries are declared terminated ..."];
+        text[LANGUAGE]["settings_setQuestMain3"]=["Overwrite Questseries 3","The questnumber of main questseries 3 is set to the mff-questnumber."];
+        text[LANGUAGE]["settings_setQuestMain3_1"]=["Execute","The questnumber of main questseries 3 is set to the chosen number. Please use it carefully ..."];
+        text[LANGUAGE]["settings_megafieldSmartTimer"]=["Integrate active tour", "Megafield-Timer is set to end of the tour after a tour is started."];
+		text[LANGUAGE]["settings_clothingDonation"]=["Clothing Donation", "A blinking icon indicates, when you can donate or gamble."];
         //help
         text[LANGUAGE]["help_0"]=[,"Oto skrócona instrukcja funkcji dostępnych w Doradcy Farmera. Nie są tu opisane wszystkie, gdyż skrypt stale się rozwija. Aby odkryć niektóre wystarczy najechać na nie myszką. <br>Na dole strony widać przycisk opcji, możesz tam dopasować skrypt do swoich wymagań.<br> Generalnie skrypt wie tylko tyle ile zobaczy i ustalisz, więc w razie jakichś problemów radzę tam zajrzeć"];
         text[LANGUAGE]["help_1"]=["Pola","Po wejściu na pole skrypt zapisuje co jest produkowane, czas produkcji oraz czy rośliny są podlane. Informacje są później wyświetlane w widoku farmy. Każde pole ma własny licznik czasu, odliczający czas do zbioru.<br> Jeśli masz włączoną pomoc w sianiu to jest ona dostępna pod ikonką kwiatka. Na górze pola są umieszczone strzałki pozwalające na przemieszczanie się między polami"];
@@ -434,7 +460,7 @@ try{
         text[LANGUAGE]["help_9"]=["Wiadomości","Twoja sprzedaż jest monitorowana i wyświetlana od razu, więc nie trzeba klikać dwa razy.<br> Przydatny na pewno będzie przycisk \"Wszystkie przeczytane\" pozwalający za jednym kliknięciem oznaczyć wszystkie wiadomości. <br> Zaś przycisk \"Log\" zawiera zestawienie zapamiętanych wiadomości oraz analizy sprzedaży towarów na targu. <br>Twoje wiadomości prywatne są również zapamiętywane, więc znacznie łatiwej obsługuje się umowy."];
         text[LANGUAGE]["help_10"]=["Umowy","Są również zapamiętywane. Podczas tworzenia umowy w bocznym oknie wyświetlana jest wiadomość źródłowa, aby łatwiej było skompletować towar. Na bieżąco pokazywana jest wartość wysyłanego towaru. Można wysyłać wiele razy tą samą umowę."];
         text[LANGUAGE]["help_11"]=["Obsługa kont","Możesz zapisać wszystkie swoje konta w opcjach. Pozwala to na łatwe logowanie przy pomocy przycisków wyświetlanych na stronie startowej. Dzięki temu możesz przełączać się między kontami na tym samym serwerze."];
- 
+
         text[LANGUAGE]["automat"] = "Automat";
         text[LANGUAGE]["automat_planting"] = "Wysiewanie...";
         text[LANGUAGE]["automat_waiting"] = "Oczekiwanie...";
@@ -612,6 +638,8 @@ try{
         text[LANGUAGE]["automat_title_off_farm3"] = "Pokaż tylko trzecią farmę<br>+Ctrl: Schowaj trzecią farmę";
         text[LANGUAGE]["automat_title_on_farm4"] = "Pokaż tylko czwartą farmę<br>+Ctrl: Pokaż czwartą farmę";
         text[LANGUAGE]["automat_title_off_farm4"] = "Pokaż tylko czwartą farmę<br>+Ctrl: Schowaj czwartą farmę";
+        text[LANGUAGE]["automat_title_on_farm5"] = "Show fifth farm only<br>+Ctrl: Show fifth farm";
+        text[LANGUAGE]["automat_title_off_farm5"] = "Show fifth farm only<br>+Ctrl: Hide fifth farm";
         text[LANGUAGE]["automat_title_on_farmersmarket"] = "Show farmersmarket only<br>+Ctrl: Show farmersmarket";
         text[LANGUAGE]["automat_title_off_farmersmarket"] = "Show farmersmarket only<br>+Ctrl: Hide farmersmarket";
         text[LANGUAGE]["automat_title_on_megafield"] = "Show megafield only<br>+Ctrl: Show megafield";
@@ -630,6 +658,7 @@ try{
         text[LANGUAGE]["automat_title_off_type3"] = "Pokaż tylko wytwórnie<br>+Ctrl: Schowaj wytwórnie";
         text[LANGUAGE]["automat_title_on_all"] ="Pokaż listy dla wszystkich farm";
         text[LANGUAGE]["automat_title_off_all"] =  "Ukryj listy dla wszystkich farm";
+
         //help
         text[LANGUAGE]["automat_help_0"] = [, "Ten skrypt służy do automatyzacji produkcji na farmie."];
         text[LANGUAGE]["automat_help_1"] = ["Jak to działa?", "Jeśli klikniesz na dole przycisk '" + text[LANGUAGE]["automat"]["botStart"] + "' rozpocznie się proces automatyzacji.<br>Możesz kontynuować grę samemu dopóki nic nie będzie gotowe. Wówczas bot rozpocznie symulację klinięć za użytkownika. Podczas tego procesu nie powinieneś przeszkadzać automatowi."];
@@ -645,34 +674,34 @@ try{
 // Do not edit ********************************************************************************************************
 /*
 function compareObjectsExistance(obj1,obj2,pre){
-        try{
-            if(typeof(pre)=="undefined") pre="";
-            for(i in obj1){
-                if(!obj1.hasOwnProperty(i)){ continue; }
-                if(typeof obj2[i] == "undefined"){
-                    GM_log("miss in 2: "+pre+i);
-                }else{
-                    if(typeof obj1[i] == "object"){
-                        compareObjectsExistance(obj1[i],obj2[i],pre+i+" : ");
-                    }
+    try{
+        if(typeof(pre)=="undefined") pre="";
+        for(i in obj1){
+            if(!obj1.hasOwnProperty(i)){ continue; }
+            if(typeof obj2[i] == "undefined"){
+                GM_log("miss in 2: "+pre+i);
+            }else{
+                if(typeof obj1[i] == "object"){
+                    compareObjectsExistance(obj1[i],obj2[i],pre+i+" : ");
                 }
             }
-            for(i in obj2){
-                if(!obj2.hasOwnProperty(i)){ continue; }
-                if(typeof obj1[i] == "undefined"){
-                    GM_log("miss in 1: "+pre+i);
-                }else{
-                    if(typeof obj2[i] == "object"){
-                        compareObjectsExistance(obj1[i],obj2[i],pre+i+" : ");
-                    }
+        }
+        for(i in obj2){
+            if(!obj2.hasOwnProperty(i)){ continue; }
+            if(typeof obj1[i] == "undefined"){
+                GM_log("miss in 1: "+pre+i);
+            }else{
+                if(typeof obj2[i] == "object"){
+                    compareObjectsExistance(obj1[i],obj2[i],pre+i+" : ");
                 }
             }
-        }catch(err){ GM_log("ERROR compareObjectsExistance\n"+err); }
+        }
+    }catch(err){ GM_log("ERROR compareObjectsExistance\n"+err); }
 }
 window.setTimeout(function(){
-        GM_log("START COMPARING");
-        compareObjectsExistance(texte,top.unsafeData.texte);
-        GM_log("END COMPARING");
+    GM_log("START COMPARING");
+    compareObjectsExistance(texte,top.unsafeData.texte);
+    GM_log("END COMPARING");
 },1000);
 */  
     if(undefined===top.unsafeData.COUNTRY){
@@ -688,4 +717,3 @@ window.setTimeout(function(){
         top.unsafeData.dateFormatDMY=dateFormatDMY;
     }    
 }catch(err){ GM_log("ERROR\npage="+location.href+"\n"+err); }
-
