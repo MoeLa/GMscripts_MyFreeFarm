@@ -1,11 +1,11 @@
-// ==UserScript==
+﻿// ==UserScript==
 // @name           MyFreeFarm Berater
 // @namespace      https://github.com/BastianKanaan/GMscripts_MyFreeFarm
 // @author         BastianKanaan
 // @description    Extends MyFreeFarm
 // @icon           data:image/png;base64,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
-// @date           31.08.2015
-// @version        2.5.10
+// @date           15.11.2015
+// @version        2.6
 // @license        GPL version 3 or any later version; http://www.gnu.org/copyleft/gpl.html
 // @include        /^http:\/\/(|www\.|s\d+\.)au\.myfreefarm\.com\/.*$/
 // @include        /^http:\/\/(|www\.|s\d+\.)veselaferma\.com\/.*$/
@@ -73,7 +73,7 @@ const CHANGELOG=[["2.0","29.05.2014",[["Migration nach openuserjs.org","Migratio
                 ,["2.4.0","01.02.2015",[["Anpassung an Firefox 35","Fix for Firefox 35"],["Neu: Güterhof","New: Megafield"]]]
                 ,["2.4.1","12.02.2015",[["Bugfix: Logging Waltraud","Bugfix: Logging Donkey Luke"]]]
                 ,["2.4.2","01.04.2015",[["Aktualisierung der Daten","Update of data"]]]
-                ,["2.5","27.06.2015",[["Neu: Güterhof","New: Megafield"],["Neu: Neues Laden der Seite, wenn Login oder Start des Skripts ausbleibt","New: Reload of page if login oder start of script misses"],["Umstellung der Speicher-Art auf JSON","Change of storing to JSON"],["Refaktorierung des Loggings","Refactoring of logging"],["Bugfix: Endzeiten-Fehler bei Ställen und Fabriken","Bugfix: Endtime error at stables and factories"]]]
+                ,["2.5","27.06.2015",[["Neu: Güterhof","New: Megafield"],["Neu: Neues Laden der Seite, wenn Login oder Start des Skripts ausbleibt","New: Reload of page if login oder start of script misses"],["Umstellung der Speicher-Art auf JSON","Change of storing to JSON"],["Überarbeitung des Loggings","Refactoring of logging"],["Bugfix: Endzeiten-Fehler bei Ställen und Fabriken","Bugfix: Endtime error at stables and factories"]]]
                 ,["2.5.1","03.07.2015",[["Aktualisierung der Daten für Tierarzt","Update of data for veterinary"],["Bugfix: Verlust der Quest Daten","Bugfix: Loss of quest data"]]]
                 ,["2.5.2","05.07.2015",[["Neu: Anpassung für Tierarzt","New: Fix for veterinary"],["Neu: Aufruf der Saatguthändlers mit Produkt","New: Call of seed vendor with product"],["Text-Korrekturen","Text fixes"]]]
                 ,["2.5.3","11.07.2015",[["Fix: Verkleinerung der Markt Quicklinks","Fix: Decrease of market quicklinks"],["Kleinere technische Korrekturen","Smaller technical fixes"]]]
@@ -84,6 +84,19 @@ const CHANGELOG=[["2.0","29.05.2014",[["Migration nach openuserjs.org","Migratio
                 ,["2.5.8","14.08.2015",[["Neu: Tierarzt-Questreihe","New: Veterinary quest series"]]]
                 ,["2.5.9","31.08.2015",[["Anpassung an Spiel-Update","Fix for game update"],["Bugfix: Berechnung benötigter Güterhofprodukte","Bugfix: Calculation of needed megafield products"]]]
                 ,["2.5.10","28.07.2015",[["Bugfixes","Bugfixes"]]]
+                ,["2.5.11","15.10.2015",[["Anpassung an Spiel-Update 14.10.2015","Fix for game update 14.10.2015"]]]
+                ,["2.5.11a","18.10.2015",[["Biospritanlage wird ignoriert","Fuelstation will be ignored"]]]
+                ,["2.5.11b","20.10.2015",[["Neu: Dritte Questreihe","New: Third quest series"],["Weitere Anpassungen an Spiel-Update 14.10.2015","Further fixes for game update  14.10.2015"]]]
+                ,["2.5.11c","21.10.2015",[["Neue Berater-Option: Farm-Questreihe 1 und 2 als abgeschlossen deklarieren","New adviser-option: declare main quest series 1 and 2 terminated"]]]
+                ,["2.5.12","26.10.2015",[["Fix: Freischaltung exotische Produkte gemäss Quest-Fortschritt","Fix: Availability of exotic products according achievment of quests"],["Bereinigung Systemmeldungen","Fix of Systemmessages"],["Berater-Option: \"Questreihen beenden\" überarbeitet und erweitert","Adviser-option: \"declare main quest series terminated\" revised and updated"]]]
+                ,["2.5.12a","29.10.2015",[["Addon: Gedächtnisstütze für Memory-Spiel","Addon: help for memory-game"]]]
+                ,["2.5.12b","31.10.2015",[["Fix: Lagerbestandsverwaltung Farm 5","Fix: Managment of products in Stock for Farm 5"],["Fix: Systemmeldungen bereinigt","Fix: Cleanup of systemmessages"],["\"Lager- Fahrzeugübersicht\" neu positioniert","new position for stock-overview"]]]
+                ,["2.5.13","02.11.2015",[["Addon: Hilfestellungen für Verträge","Addon: handling of contracts"]]]
+                ,["2.5.13a","02.11.2015",[["Bugfix","Bugfix"]]]
+                ,["2.5.13b","04.11.2015",[["Neue Berater-Option: Questnummer Questreihe 3 manuell setzen","New adviser option: Set questnumber for questserie main 3 manually"]]]
+                ,["2.5.13c","10.11.2015",[["Berater-Option \"Questnummer Questreihe 3 übernehmen\" verbessert.","Adviser option \"Gather questnumber for main questseries 3\" improoved."],["Fix: Quicklinks und beobachte Marktpreise","Fix: Quicklinks and observe market prices"]]]
+                ,["2.5.14","12.11.2015",[["Neue Berater-Option: Zone-Info löschen.","New adviser option: delete zone info."],["Fix: Marktstand-Liste führen","Fix: handle market-list"]]]
+                ,["2.6","15.11.2015",[["Neue Berater-Option \"Güterhof\": Beim Starten einer Tour wird der Güterhof-Timer auf das Ende der Tour gesetzt.","New Adviser Option \"Megafield\": Megafield-Timer is set to end of the tour after a tour is started"]]]
                 ];
 if(!VERSIONfunctionFile){
     alert("Hi, I am the Berater-Script.\nThe function-file is missing.\nPlease install me again.");
@@ -133,6 +146,7 @@ const IMAGES={"leftarrow":"data:image/gif;base64,R0lGODlhIwAaAPcAAEQWBLyCVIROJKR
              ,"graph":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAYdJREFUeNpi/P//P8NgBkwMgxyMOnDUgaMOHHUgrQGooMaFgWAmSAkQtwyUexjx1SSMjIwwyY9ALEAvB46mQSIBGzTp3IPiFqgYSWnwPxR/oIEDW5DMh+EuDDcMoANfYXHgc3Q3DGQU/x3MaRCU1r5gEV82WNLgHPSoBeIJIIdTKw0yA3Ev1GAQng/EPEQ6LhnJ3G9AbIYvwMh1YCmWBD6HCMcZA/FPJD1+hGKUVAc6QaPiMxYHfoOGLC4gCsQPkdRXEFPVEevAP9Co/E8AbwdiISz2ghy+C0ndNGLrYmIdiIxBpf5GPI58iJ6uoOkVJr8RX0hTEoKgjGCPlg6fQB0EavWkQaP5PzSd5UPFkdPcSSDmJKU1Q+1ixhgtnaFjgs02elR1oMywF4cDnwwGB8IyxQcsDrxNqgOZaFjPrsciPpfaTX5KqjoeaOH9Fhq1LQTKyeHd5AeFhspg7NW9IqL2oCYuJTUXd9HZgW9JdSAz1JG36eTAaSRlktGhj1EHjjpwCDgQIMAAkAsvxuJFQs4AAAAASUVORK5CYII="
              ,"questMain1Active":"data:image/png;base64,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"
              ,"questMain2Active":"data:image/png;base64,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"
+             ,"questMain3Active":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAjCAYAAAD8BaggAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6QzU0MDczRDI3Njc5MTFFNUI0RUREQ0MwRDE4NzFBN0YiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6QzU0MDczRDM3Njc5MTFFNUI0RUREQ0MwRDE4NzFBN0YiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpDNTQwNzNEMDc2NzkxMUU1QjRFRERDQzBEMTg3MUE3RiIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpDNTQwNzNEMTc2NzkxMUU1QjRFRERDQzBEMTg3MUE3RiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PlenTgcAAAitSURBVFjDzVhtUJTn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"
              ,"questForestry1Active":"data:image/png;base64,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"
              ,"questForestry2Active":"data:image/png;base64,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"
              ,"questFoodworldActive":"data:image/png;base64,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"
@@ -153,34 +167,37 @@ const IMAGES={"leftarrow":"data:image/gif;base64,R0lGODlhIwAaAPcAAEQWBLyCVIROJKR
              };
 // cases(%=number): %=money, "c%"=coins, "f%"=fictive money
 // task_new_plant task_new_product
-const NPC=[[,0.5,1.1,1.34,2.75,3.95,8.05,17.8,18.5,"f85","f110","f180","f280",,,,,0.16,0.52,1.02,1.44,1.96,2.28,3.8,3.69,"f340",4.38,"f510","f590",12.4,"f650",3.49,5.19,8.75,6,15.63,16.88,37.5,3.9,52.44,51.75,60.25,58.13,66.19,18.2,"c79",150,,1200,,1200,,,,,4500,,14400,1200,,"c125",,"c23",,4800,4200,,,,,,,,750,2100,"c25",,,,,,,10800,12000,,1500,3300,,,,,"f650","f1500","f1500",5000,12000,"c10",,"c20",,"c5","c5","c5","c5",,"c5",,,10.12,3.72,"f155.1","f545.7",37.42,23.32,7.44,82.36,"f106.8","f148.8","f69.6","f196.8","f278.4","f408","f240","f324","f250","f864",47.15,140.56,125.88,,"f12.8","f73.5","f127","f106","f53.05","f113.75","f44","f33.33","f71.3","f73.2","f181.2","f321","f316","f491","f350","f484.2","f906.5","f421.7","f473.5","f749.98","f237.1","f675","f975",12.25,37.5,"f1025","f1100","f810",,"f231","f6500","f58","f137.67","f197.67","f342.5","f830","f700.5","f1063.2","f704.42","f734","f339.53",3.1,3.15,3.27,7.3,4.9,5.92,6.61,6.1,7.3,5.6,5.2,3.6,10,8.1,23.5,7.8,8.2,,,,,,,,,,,,,"f410","f490","f503","f589","f469","f1312","f598","f533","f480","f420","f1620","f1030","f675","f950","f2350","f2400","f2450","f3550","f3600","f3650","f8000","f8000",,,,,,,,,,,,,,,,,,,,,,,,,,,,,3.7,3,3.3,3.45,5.1,8.20,2.1,4.3,1.95,8.85,1.4,2.1,4.8,4.85,7.4,5,5.1,2.3,3.95,10.6,11,3.5,2.9,3.6,,,,,,,,,,,,,,,,,,,,,,,,,,,"f1618","f1340","f1836","f1654","f1579",,,"f1839",,"f2655",,"f2165",,"f2877",,"f2462",,"f3093",,"f3289","f3138",,"f3622",],{},[],[]];
+// Linus--Tux 20151015
+const NPC=[[,0.5,1.1,1.34,2.75,3.95,8.05,17.8,18.5,"f85","f110","f180","f280",,,,,0.16,0.52,1.02,1.44,1.96,2.28,3.8,3.69,"f340",4.38,"f510","f590",12.4,"f650",3.49,5.19,8.75,6,15.63,16.88,37.5,3.9,52.44,51.75,60.25,58.13,66.19,18.2,"c79",150,,1200,,1200,,,,,4500,,14400,1200,,"c125",,"c23",,4800,4200,,,,,,,,750,2100,"c25",,,,,,,10800,12000,,1500,3300,,,,,"f650","f1500","f1500",5000,12000,"c10",,"c20",,"c5","c5","c5","c5",,"c5",,,10.12,3.72,"f155.1","f545.7",37.42,23.32,7.44,82.36,"f106.8","f148.8","f69.6","f196.8","f278.4","f408","f240","f324","f250","f864",47.15,140.56,125.88,,"f12.8","f73.5","f127","f106","f53.05","f113.75","f44","f33.33","f71.3","f73.2","f181.2","f321","f316","f491","f350","f484.2","f906.5","f421.7","f473.5","f749.98","f237.1","f675","f975",12.25,37.5,"f1025","f1100","f810",,"f231","f6500","f58","f137.67","f197.67","f342.5","f830","f700.5","f1063.2","f704.42","f734","f339.53",3.1,3.15,3.27,7.3,4.9,5.92,6.61,6.1,7.3,5.6,5.2,3.6,10,8.1,23.5,7.8,8.2,,,,,,,,,,,,,"f410","f490","f503","f589","f469","f1312","f598","f533","f480","f420","f1620","f1030","f675","f950","f2350","f2400","f2450","f3550","f3600","f3650","f8000","f8000",,,,,,,,,,,,,,,,,,,,,,,,,,,,,3.7,3,3.3,3.45,5.1,8.20,2.1,4.3,1.95,8.85,1.4,2.1,4.8,4.85,7.4,5,5.1,2.3,3.95,10.6,11,3.5,2.9,3.6,,,,,,,,,,,,,,,,,,,,,,,,,,,"f1618","f1340","f1836","f1654","f1579",,,"f1839",,"f2655",,"f2165",,"f2877",,"f2462",,"f3093",,"f3289","f3138",,"f3622",,,,,,,,,,,,,,,,,,,,,,,,,,,,600,14.5,9,42,22,24,185,7.5,92.5,9.9,12.8,12.5],{},[],[]];
     /*
     var new_NPC=NPC.clone();
-    new_NPC[0][221]='f8000';
+    new_NPC[0][350]='f8000';
     GM_log(implode(new_NPC));
     */
 // task_new_product
 const INIT_NPC_SAISON={"94":false,"95":false,"96":false,"98":false,"100":false,"101":false,"102":false,"103":false,"105":false};
 // task_new_zone
-const ALL_ZONES = {"farm":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24],"farmersmarket":["farmersmarket-0","farmersmarket-1","farmersmarket-2","farmersmarket-3","farmersmarket-4","farmersmarket-5","farmersmarket-6"],"forestry":["forest","sawmill","carpentry"],"city":["windmill"],"foodworld":["foodworld-0","foodworld-1","foodworld-2","foodworld-3","foodworld-4"],"megafield":["megafield"]};
+// Linus--Tux 20151015
+const ALL_ZONES = {"farm":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30],"farmersmarket":["farmersmarket-0","farmersmarket-1","farmersmarket-2","farmersmarket-3","farmersmarket-4","farmersmarket-5","farmersmarket-6"],"forestry":["forest","sawmill","carpentry"],"city":["windmill"],"foodworld":["foodworld-0","foodworld-1","foodworld-2","foodworld-3","foodworld-4"],"megafield":["megafield"]};
 unsafeData.ALL_ZONES=ALL_ZONES.clone();
 // task_new_zone
-const DATA_zones = {"1":{"location":"farm","farmNr":0,"zoneNr":1,"productional":true},"2":{"location":"farm","farmNr":0,"zoneNr":2,"productional":true},"3":{"location":"farm","farmNr":0,"zoneNr":3,"productional":true},"4":{"location":"farm","farmNr":0,"zoneNr":4,"productional":true},"5":{"location":"farm","farmNr":0,"zoneNr":5,"productional":true},"6":{"location":"farm","farmNr":0,"zoneNr":6,"productional":true},"7":{"location":"farm","farmNr":1,"zoneNr":1,"productional":true},"8":{"location":"farm","farmNr":1,"zoneNr":2,"productional":true},"9":{"location":"farm","farmNr":1,"zoneNr":3,"productional":true},"10":{"location":"farm","farmNr":1,"zoneNr":4,"productional":true},"11":{"location":"farm","farmNr":1,"zoneNr":5,"productional":true},"12":{"location":"farm","farmNr":1,"zoneNr":6,"productional":true},"13":{"location":"farm","farmNr":2,"zoneNr":1,"productional":true},"14":{"location":"farm","farmNr":2,"zoneNr":2,"productional":true},"15":{"location":"farm","farmNr":2,"zoneNr":3,"productional":true},"16":{"location":"farm","farmNr":2,"zoneNr":4,"productional":true},"17":{"location":"farm","farmNr":2,"zoneNr":5,"productional":true},"18":{"location":"farm","farmNr":2,"zoneNr":6,"productional":true},"19":{"location":"farm","farmNr":3,"zoneNr":1,"productional":true},"20":{"location":"farm","farmNr":3,"zoneNr":2,"productional":true},"21":{"location":"farm","farmNr":3,"zoneNr":3,"productional":true},"22":{"location":"farm","farmNr":3,"zoneNr":4,"productional":true},"23":{"location":"farm","farmNr":3,"zoneNr":5,"productional":true},"24":{"location":"farm","farmNr":3,"zoneNr":6,"productional":true},"windmill":{"location":"city","cityNr":2,"zoneNr":1,"productional":true},"forest":{"location":"forestry","productional":true},"sawmill":{"location":"forestry","zoneNr":1,"productional":true},"carpentry":{"location":"forestry","zoneNr":2,"productional":true},"foodworld-0":{"location":"foodworld","productional":false},"foodworld-1":{"location":"foodworld","zoneNr":1,"productional":true},"foodworld-2":{"location":"foodworld","zoneNr":2,"productional":true},"foodworld-3":{"location":"foodworld","zoneNr":3,"productional":true},"foodworld-4":{"location":"foodworld","zoneNr":4,"productional":true},"farmersmarket-0":{"location":"farmersmarket","productional":false},"farmersmarket-1":{"location":"farmersmarket","zoneNr":1,"productional":true},"farmersmarket-2":{"location":"farmersmarket","zoneNr":2,"productional":true},"farmersmarket-3":{"location":"farmersmarket","zoneNr":3,"productional":true},"farmersmarket-4":{"location":"farmersmarket","zoneNr":4,"productional":true},"farmersmarket-5":{"location":"farmersmarket","zoneNr":5,"productional":true},"farmersmarket-6":{"location":"farmersmarket","zoneNr":6,"productional":true},"megafield":{"location":"megafield","zoneNr":1,"productional":true}};
+// Linus--Tux 20151015
+const DATA_zones = {"1":{"location":"farm","farmNr":0,"zoneNr":1,"productional":true},"2":{"location":"farm","farmNr":0,"zoneNr":2,"productional":true},"3":{"location":"farm","farmNr":0,"zoneNr":3,"productional":true},"4":{"location":"farm","farmNr":0,"zoneNr":4,"productional":true},"5":{"location":"farm","farmNr":0,"zoneNr":5,"productional":true},"6":{"location":"farm","farmNr":0,"zoneNr":6,"productional":true},"7":{"location":"farm","farmNr":1,"zoneNr":1,"productional":true},"8":{"location":"farm","farmNr":1,"zoneNr":2,"productional":true},"9":{"location":"farm","farmNr":1,"zoneNr":3,"productional":true},"10":{"location":"farm","farmNr":1,"zoneNr":4,"productional":true},"11":{"location":"farm","farmNr":1,"zoneNr":5,"productional":true},"12":{"location":"farm","farmNr":1,"zoneNr":6,"productional":true},"13":{"location":"farm","farmNr":2,"zoneNr":1,"productional":true},"14":{"location":"farm","farmNr":2,"zoneNr":2,"productional":true},"15":{"location":"farm","farmNr":2,"zoneNr":3,"productional":true},"16":{"location":"farm","farmNr":2,"zoneNr":4,"productional":true},"17":{"location":"farm","farmNr":2,"zoneNr":5,"productional":true},"18":{"location":"farm","farmNr":2,"zoneNr":6,"productional":true},"19":{"location":"farm","farmNr":3,"zoneNr":1,"productional":true},"20":{"location":"farm","farmNr":3,"zoneNr":2,"productional":true},"21":{"location":"farm","farmNr":3,"zoneNr":3,"productional":true},"22":{"location":"farm","farmNr":3,"zoneNr":4,"productional":true},"23":{"location":"farm","farmNr":3,"zoneNr":5,"productional":true},"24":{"location":"farm","farmNr":3,"zoneNr":6,"productional":true},"25":{"location":"farm","farmNr":4,"zoneNr":1,"productional":true},"26":{"location":"farm","farmNr":4,"zoneNr":2,"productional":true},"27":{"location":"farm","farmNr":4,"zoneNr":3,"productional":true},"28":{"location":"farm","farmNr":4,"zoneNr":4,"productional":true},"29":{"location":"farm","farmNr":4,"zoneNr":5,"productional":true},"30":{"location":"farm","farmNr":4,"zoneNr":6,"productional":true},"windmill":{"location":"city","cityNr":2,"zoneNr":1,"productional":true},"forest":{"location":"forestry","productional":true},"sawmill":{"location":"forestry","zoneNr":1,"productional":true},"carpentry":{"location":"forestry","zoneNr":2,"productional":true},"foodworld-0":{"location":"foodworld","productional":false},"foodworld-1":{"location":"foodworld","zoneNr":1,"productional":true},"foodworld-2":{"location":"foodworld","zoneNr":2,"productional":true},"foodworld-3":{"location":"foodworld","zoneNr":3,"productional":true},"foodworld-4":{"location":"foodworld","zoneNr":4,"productional":true},"farmersmarket-0":{"location":"farmersmarket","productional":false},"farmersmarket-1":{"location":"farmersmarket","zoneNr":1,"productional":true},"farmersmarket-2":{"location":"farmersmarket","zoneNr":2,"productional":true},"farmersmarket-3":{"location":"farmersmarket","zoneNr":3,"productional":true},"farmersmarket-4":{"location":"farmersmarket","zoneNr":4,"productional":true},"farmersmarket-5":{"location":"farmersmarket","zoneNr":5,"productional":true},"farmersmarket-6":{"location":"farmersmarket","zoneNr":6,"productional":true},"megafield":{"location":"megafield","zoneNr":1,"productional":true}};
 // All single-slot-zones themselves and all slots of multi-slot-zones
 var ALL_SLOTS={};
 // [farm, forestry, recipes, powerups]
 // Growing duration in minutes (just where game data has to be overridden)
 // task_new_plant task_new_product task_fix_growtime
-const PRODUCT_GROWTIME=[{"7":480,"8":960,"19":240,"20":480,"21":600,"22":500,"23":800,"24":720,"92":0,"93":0,"111":1000,"130":180,"131":180,"132":90,"133":90,"134":200,"135":200,"136":100,"137":130,"138":150,"139":80,"140":80,"141":120,"142":120,"143":120,"145":300,"146":240,"147":300,"148":480,"149":220,"150":360,"159":0,"160":0,"161":210,"162":130,"163":260,"164":190,"165":160,"166":195,"167":250,"168":90,"169":150,"170":300}
+const PRODUCT_GROWTIME=[{"7":480,"8":960,"19":240,"20":480,"21":600,"22":500,"23":800,"24":720,"92":0,"93":0,"111":1000,"130":180,"131":180,"132":90,"133":90,"134":200,"135":200,"136":100,"137":130,"138":150,"139":80,"140":80,"141":120,"142":120,"143":120,"145":300,"146":240,"147":300,"148":480,"149":220,"150":360,"159":0,"160":0,"161":210,"162":130,"163":260,"164":190,"165":160,"166":195,"167":250,"168":90,"169":150,"170":300,"351":480,"352":360,"353":720,"354":720,"355":1320,"356":2880,"357":480,"358":1440,"359":480,"360":1440,"361":180,}
                        ,{"1":600,"2":960,"3":2160,"4":480,"5":2750,"6":490,"7":1200,"8":2520,"41":300,"42":345,"43":360,"44":270,"45":300,"46":330,"47":420,"48":480,"49":510,"50":180,"51":210,"52":240,"53":480,"54":510,"55":540,"56":300,"57":375,"58":470,"59":360,"60":450,"61":420,"101":240,"102":700,"103":640,"104":360,"105":960,"106":90,"107":120,"108":1320,"109":570,"110":330,"111":160,"112":935,"113":120,"114":300,"115":180,"116":1040,"117":1920,"118":300,"119":1440,"120":2010,"121":480,"122":300,"123":840,"124":690,"125":120,"126":240,"127":255,"128":525,"129":375,"130":410,"131":480,"132":225,"133":120,"500":0,"501":0,"502":0,"511":0,"512":0}
                        ];
 // Points earned at cropping (just where game data has to be overridden)
 // task_new_plant task_new_product task_fix_points
 const PRODUCT_POINTS=[{"7":267,"164":36,"165":27,"166":54,"300":1650,"301":1620,"302":1445}
-                     ,{"1":30,"2":48,"3":108,"4":24,"5":138,"6":0,"7":60,"8":126,"21":0,"22":0,"23":0,"24":0,"25":0,"41":150,"42":105,"43":108,"44":108,"45":60,"46":66,"47":294,"48":144,"49":153,"50":54,"51":42,"52":48,"53":48,"54":51,"55":54,"56":33,"57":38,"58":47,"59":39,"60":45,"61":42,"101":48,"102":140,"103":128,"104":74,"105":0,"106":18,"107":66,"108":0,"109":114,"110":70,"111":32,"112":187,"113":24,"114":60,"115":36,"116":208,"117":384,"118":660,"119":0,"120":0,"121":96,"122":60,"123":168,"124":138,"125":24,"126":48,"127":51,"128":105,"129":75,"130":82,"131":96,"132":45,"133":24,"500":0,"501":0,"502":0,"511":0,"512":0}
+                     ,{"1":30,"2":48,"3":108,"4":24,"5":138,"6":0,"7":60,"8":126,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0,"27":0,"41":150,"42":105,"43":108,"44":108,"45":60,"46":66,"47":294,"48":144,"49":153,"50":54,"51":42,"52":48,"53":48,"54":51,"55":54,"56":33,"57":38,"58":47,"59":39,"60":45,"61":42,"101":48,"102":140,"103":128,"104":74,"105":0,"106":18,"107":66,"108":0,"109":114,"110":70,"111":32,"112":187,"113":24,"114":60,"115":36,"116":208,"117":384,"118":660,"119":0,"120":0,"121":96,"122":60,"123":168,"124":138,"125":24,"126":48,"127":51,"128":105,"129":75,"130":82,"131":96,"132":45,"133":24,"300":0,"500":0,"501":0,"502":0,"511":0,"512":0}
                      ];
 // Required quest to unlock product
-const PRODUCT_QUEST=[{"117":["main",2,15],"118":["main",2,25],"119":["main",2,35],"120":["main",2,45],"121":["main",2,50],"123":["main",2,15],"124":["main",2,25],"125":["main",2,35]}
+const PRODUCT_QUEST=[{"117":["main",2,15],"118":["main",2,25],"119":["main",2,35],"120":["main",2,45],"121":["main",2,50],"123":["main",2,15],"124":["main",2,25],"125":["main",2,35],"351":["main",3,1],"352":["main",3,3],"353":["main",3,8],"354":["main",3,31],"355":["main",3,39],"356":["main",3,55],"357":["main",3,63],"358":["main",3,79],"359":["main",3,87],"360":["main",3,103],"361":["main",3,111]}
                     ,{"1":["forestry",1,3],"2":["forestry",1,9],"3":["forestry",1,24],"4":["forestry",1,47],"5":["forestry",1,63],"7":["forestry",2,35],"8":["forestry",2,45],"21":["forestry",1,3],"22":["forestry",1,9],"23":["forestry",1,24],"24":["forestry",1,47],"25":["forestry",1,63],"26":["forestry",2,35],"27":["forestry",2,45],"41":["forestry",1,6],"42":["forestry",1,6],"43":["forestry",1,6],"44":["forestry",1,9],"45":["forestry",1,9],"46":["forestry",1,9],"47":["forestry",1,24],"48":["forestry",1,24],"49":["forestry",1,24],"50":["forestry",1,47],"51":["forestry",1,47],"52":["forestry",1,47],"53":["forestry",1,63],"54":["forestry",1,63],"55":["forestry",1,63],"56":["forestry",2,35],"57":["forestry",2,35],"58":["forestry",2,35],"59":["forestry",2,45],"60":["forestry",2,45],"61":["forestry",2,45],"101":["forestry",1,12],"102":["forestry",1,18],"103":["forestry",1,21],"104":["forestry",1,27],"105":["forestry",1,30],"106":["forestry",1,33],"107":["forestry",1,36],"108":["forestry",1,39],"109":["forestry",1,42],"110":["forestry",1,60],"111":["forestry",1,50],"112":["forestry",1,53],"115":["forestry",1,66],"116":["forestry",1,69],"117":["forestry",1,75],"118":["forestry",1,72],"119":["forestry",2,16],"120":["forestry",2,24],"121":["forestry",2,35],"122":["forestry",2,35],"123":["forestry",2,36],"124":["forestry",2,42],"125":["forestry",2,43],"126":["forestry",2,46],"127":["forestry",2,46],"128":["forestry",2,47],"129":["forestry",2,47],"130":["forestry",2,48],"131":["forestry",2,48],"132":["forestry",2,49]}
                     ];
 // Required products to produce
@@ -190,7 +207,8 @@ const PRODUCT_REQUIRE=[{"25":[[0,9,30]],"27":[[0,10,12]],"28":[[0,11,8]],"30":[[
                       ];
 // Yielded amount of production
 // task_new_product
-const PRODUCT_YIELD=[,{"1":1,"2":1,"3":1,"4":1,"5":1,"7":1,"8":1,"21":1,"22":1,"23":1,"24":1,"25":1,"26":1,"27":1,"41":5,"42":3,"43":3,"44":4,"45":2,"46":2,"47":7,"48":3,"49":3,"50":3,"51":2,"52":2,"53":8,"54":4,"55":4,"56":5,"57":3,"58":5,"59":6,"60":4,"61":3,"101":1,"102":1,"103":1,"104":1,"105":1,"106":1,"107":1,"108":1,"109":1,"110":1,"111":1,"112":1,"113":1,"114":1,"115":1,"116":1,"117":1,"118":1,"119":1,"120":1,"121":1,"122":1,"123":1,"124":1,"125":1,"126":1,"127":1,"128":1,"129":1,"130":1,"131":1,"132":1,"133":1,"250":1,"251":1,"252":1,"253":1,"254":1,"255":1,"256":1,"257":1,"258":1,"259":1,"260":1,"261":1,"262":1,"263":1,"264":1,"265":1,"266":1,"267":1,"268":1,"269":1,"270":1,"271":1,"272":1,"273":1}];
+// Linus--Tux 20151015
+const PRODUCT_YIELD=[,{"1":1,"2":1,"3":1,"4":1,"5":1,"7":1,"8":1,"21":1,"22":1,"23":1,"24":1,"25":1,"26":1,"27":1,"41":5,"42":3,"43":3,"44":4,"45":2,"46":2,"47":7,"48":3,"49":3,"50":3,"51":2,"52":2,"53":8,"54":4,"55":4,"56":5,"57":3,"58":5,"59":6,"60":4,"61":3,"101":1,"102":1,"103":1,"104":1,"105":1,"106":1,"107":1,"108":1,"109":1,"110":1,"111":1,"112":1,"113":1,"114":1,"115":1,"116":1,"117":1,"118":1,"119":1,"120":1,"121":1,"122":1,"123":1,"124":1,"125":1,"126":1,"127":1,"128":1,"129":1,"130":1,"131":1,"132":1,"133":1,"250":1,"251":1,"252":1,"253":1,"254":1,"255":1,"256":1,"257":1,"258":1,"259":1,"260":1,"261":1,"262":1,"263":1,"264":1,"265":1,"266":1,"267":1,"268":1,"269":1,"270":1,"271":1,"272":1,"273":1,"351":1,"352":1,"353":1,"354":1,"355":1,"356":1,"357":1,"358":1,"359":1,"360":1,"361":1}];
     /*
     var new_data=PRODUCT_YIELD.clone();
     new_data[1][7]=;
@@ -198,12 +216,41 @@ const PRODUCT_YIELD=[,{"1":1,"2":1,"3":1,"4":1,"5":1,"7":1,"8":1,"21":1,"22":1,"
     */
 const ANIMAL_MOVE=[,,[false,0,0,255,10,10,505],[false,0,0,280,1,0,525],[false,0,0,280,1,25,500],,,,,,,[false,2,20,120,4,0,200]];
 // Upgrade-data of buildings
+        /*  BUILDING    NAME                    TYPE
+            0           empty
+            1           Field                   Field
+            2           Chickens                Stable
+            3           Cows                    Stable
+            4           Sheep                   Stable
+            5           Bees                    Stable
+            6           Clubhouse
+            7           Cheese                  Factory
+            8           Mayo                    Factory
+            9           Whool                   Factory
+            10          Bonbons                 Factory
+            11          Fishs                   Stable
+            12          Goats                   Stable
+            13          Oil                     Factory
+            14          Special-Oil             Factory
+            15          Angora shed             Stable
+            16          Knitting mill           Factory
+            17          Architectural office
+            18          Pony farm
+            19          Megafield               Factory
+            20          Fuelstation             Factory
+            fw1         Soda stall              Foodworld
+            fw2         Snack booth             Foodworld
+            fw3         Pastry shop             Foodworld
+            fl1         Flower meadow           Farmersmarket
+            fl2         Flower workshop         Farmersmarket
+            fl5                                 Farmersmarket
+        */
 // BUILDING_UPGRADES[zoneType][levelNr-1][needed level,buildcost,bonus,animalamount]
 // task_new_building
 const BUILDING_UPGRADES={"1":[[1,2000,0.95,0],[15,21500,0.9,0],[21,76000,0.85,0],[27,192300,0.8,0],[33,"c20",0.8,0]],"2":[[2,2500,1,5],[7,15200,1,10],[12,32500,1,15],[23,134500,0.9,20],[29,350800,0.8,20]],"3":[[11,3400,1,2],[13,16300,1,3],[17,50200,1,4],[25,159600,0.9,5],[32,441000,0.8,6]],"4":[[14,6200,1,2],[18,33500,1,3],[20,76000,1,4],[28,210500,0.9,5],[34,482000,0.8,6]],"5":[[19,6800,1,1],[22,44800,1,2],[26,128200,1,3],[31,230600,0.9,4],[35,482000,0.8,4]],"7":[[16,5200,1,1],[19,33500,0.95,1],[25,106400,0.9,1],[30,230600,0.85,1],[33,441000,0.8,1]],"8":[[18,6800,1,1],[21,38000,0.95,1],[27,128200,0.9,1],[31,230600,0.85,1],[35,482000,0.8,1]],"9":[[27,8100,1,1],[30,53200,0.95,1],[33,140300,0.9,1],[36,264600,0.85,1],[38,597200,0.8,1]],"10":[[30,9700,1,1],[33,70200,0.95,1],[34,153700,0.9,1],[37,289200,0.85,1],[39,626300,0.8,1]],"11":[[16,10000,1,1],[20,85000,1,3],[24,200000,1,5],[28,"c22",0.9,6],[32,"c38",0.8,6]],"12":[[15,38000,1,2],[17,17200,1,3],[23,54600,1,4],[29,168800,0.9,5],[38,472400,0.8,6]],"13":[[31,16800,1,1],[32,86400,0.95,1],[34,174200,0.9,1],[36,362800,0.85,1],[38,796300,0.8,1]],"14":[[35,19400,1,1],[37,97100,0.95,1],[39,218400,0.9,1],[40,509800,0.85,1],[41,1388600,0.8,1]],"15":[[37,23000,1,1],[37,95300,1,2],[38,198500,1,3],[38,391700,0.9,4],[39,842200,0.8,5]],"16":[[38,97100,1,1],[39,209736,0.95,1],[40,467711,0.9,1],[41,1080413,0.85,1],[42,2538970,0.8,1]],"17":[[10,1000,1,1]],"18":[[10,5000,1,1]],"19":[[28,250000,1,1]],"fw1":[[11,7000,1,1],[11,24600,0.95,1],[11,64200,0.9,1],[11,114400,0.85,1],[11,186300,0.8,1]],"fw2":[[12,8400,1,1],[12,32500,0.95,1],[12,68900,0.9,1],[12,122400,0.85,1],[12,178600,0.8,1]],"fw3":[[12,11200,1,1],[12,43300,0.95,1],[12,91900,0.9,1],[12,163200,0.85,1],[12,238100,0.8,1]],"fl1":[[23,85000,0.95,36]],"fl2":[[23,75000,1,1]],"fl3":[[31,900000,1,1]],"fl5":[[36,1000000,1,1]],"fl6":[[31,900000,1,1]]};
 // produced thing -> production area
 // task_new_plant task_new_product
-const PRODUCT2BUILDING=[[,1,1,1,1,1,1,1,1,2,3,4,5,,,,,1,1,1,1,1,1,1,1,7,1,8,9,1,10,1,1,1,1,1,1,1,1,1,1,1,1,1,1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,11,,,,,,1,,,,,,,1,,,1,1,1,12,8,1,1,1,1,13,13,13,13,13,13,14,14,14,14,1,1,1,1,"fw1","fw1","fw1","fw1","fw1","fw1","fw2","fw2","fw2","fw2","fw2","fw2","fw2","fw2",7,"fw1","fw1","fw1","fw2","fw2","fw2",15,9,1,1,16,16,16,1,,,"fw3","fw3","fw3","fw3","fw3","fw3","fw3","fw3","fw3","fw3","fl1","fl1","fl1","fl1","fl1","fl1","fl1","fl1","fl1","fl1","fl1","fl1","fl1","fl1","fl1","fl1","fl1","fl1","fl1",,,,,,,,,,,"fl2","fl2","fl2","fl2","fl2","fl2","fl2","fl2","fl2","fl2","fl2","fl2","fl2","fl2","fl2","fl2","fl2","fl2","fl2","fl2","fl2","fl2",,,,,,,,,,,,,,,,,,,,,,,,,,,,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,,,,,,,,,,,,,,,,,,,,,,,,,,,"fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5"]
+const PRODUCT2BUILDING=[[,1,1,1,1,1,1,1,1,2,3,4,5,,,,,1,1,1,1,1,1,1,1,7,1,8,9,1,10,1,1,1,1,1,1,1,1,1,1,1,1,1,1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,11,,,,,,1,,,,,,,1,,,1,1,1,12,8,1,1,1,1,13,13,13,13,13,13,14,14,14,14,1,1,1,1,"fw1","fw1","fw1","fw1","fw1","fw1","fw2","fw2","fw2","fw2","fw2","fw2","fw2","fw2",7,"fw1","fw1","fw1","fw2","fw2","fw2",15,9,1,1,16,16,16,1,,,"fw3","fw3","fw3","fw3","fw3","fw3","fw3","fw3","fw3","fw3","fl1","fl1","fl1","fl1","fl1","fl1","fl1","fl1","fl1","fl1","fl1","fl1","fl1","fl1","fl1","fl1","fl1","fl1","fl1",,,,,,,,,,,"fl2","fl2","fl2","fl2","fl2","fl2","fl2","fl2","fl2","fl2","fl2","fl2","fl2","fl2","fl2","fl2","fl2","fl2","fl2","fl2","fl2","fl2",,,,,,,,,,,,,,,,,,,,,,,,,,,,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,,,,,,,,,,,,,,,,,,,,,,,,,,,"fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5",,,,,,,,,,,,,,,,,,,,,,,,,,,20,1,1,1,1,1,1,1,1,1,1,1]
                        ,{"1":"forest","2":"forest","3":"forest","4":"forest","5":"forest","7":"forest","8":"forest","21":"forest","22":"forest","23":"forest","24":"forest","25":"forest","26":"forest","27":"forest","41":"sawmill","42":"sawmill","43":"sawmill","44":"sawmill","45":"sawmill","46":"sawmill","47":"sawmill","48":"sawmill","49":"sawmill","50":"sawmill","51":"sawmill","52":"sawmill","53":"sawmill","54":"sawmill","55":"sawmill","56":"sawmill","57":"sawmill","58":"sawmill","59":"sawmill","60":"sawmill","61":"sawmill","101":"carpentry","102":"carpentry","103":"carpentry","104":"carpentry","105":"carpentry","106":"carpentry","107":"carpentry","108":"carpentry","109":"carpentry","110":"carpentry","111":"carpentry","112":"carpentry","113":"carpentry","114":"carpentry","115":"carpentry","116":"carpentry","117":"carpentry","118":"carpentry","119":"carpentry","120":"carpentry","121":"carpentry","122":"carpentry","123":"carpentry","124":"carpentry","125":"carpentry","126":"carpentry","127":"carpentry","128":"carpentry","129":"carpentry","130":"carpentry","131":"carpentry","132":"carpentry","133":"carpentry","300":"forest"}
                        ,[]
                        ,[,"windmill","windmill","windmill","windmill","windmill","windmill","windmill","windmill","windmill","windmill","windmill","windmill","windmill","windmill","windmill","windmill","windmill","windmill","windmill","windmill","windmill","windmill","windmill","windmill","windmill","windmill","windmill","windmill","windmill","windmill","windmill","windmill","windmill","windmill","windmill"]
@@ -212,11 +259,18 @@ const PRODUCT2BUILDING=[[,1,1,1,1,1,1,1,1,2,3,4,5,,,,,1,1,1,1,1,1,1,1,7,1,8,9,1,
 unsafeData.PRODUCT2BUILDING=PRODUCT2BUILDING.clone();
 // produced thing <- production area
 // task_new_product
-const BUILDING2PRODUCT=[,,[9],[10],[11],[12],,[25,144],[27,111],[28,152],[30],[91],[110],[116,117,118,119,120,121],[122,123,124,125],[151],[155,156,157]];
+const BUILDING2PRODUCT=[,,[9],[10],[11],[12],,[25,144],[27,111],[28,152],[30],[91],[110],[116,117,118,119,120,121],[122,123,124,125],[151],[155,156,157],,,,[350]];
 unsafeData.BUILDING2PRODUCT=BUILDING2PRODUCT.clone();
-// building -> -, field, stable, factory, foodworld
 // task_new_building
-const BUILDINGTYPE={"0":0,"1":1,"2":2,"3":2,"4":2,"5":2,"6":0,"7":3,"8":3,"9":3,"10":3,"11":2,"12":2,"13":3,"14":3,"15":2,"16":3,"17":0,"18":0,"19":0,"fl1":1,"fl2":4,"fl5":4,"fw1":4,"fw2":4,"fw3":4}
+        /*  TYPE             NUMBER
+            Empty            0
+            Field            1
+            Stable           2
+            Factory          3
+            Foodworld        4
+            Farmersmarket    4
+        */
+const BUILDINGTYPE={"0":0,"1":1,"2":2,"3":2,"4":2,"5":2,"6":0,"7":3,"8":3,"9":3,"10":3,"11":2,"12":2,"13":3,"14":3,"15":2,"16":3,"17":0,"18":0,"19":0,"20":0,"fl1":1,"fl2":4,"fl5":4,"fw1":4,"fw2":4,"fw3":4}
 unsafeData.BUILDINGTYPE=BUILDINGTYPE.clone();
 // task_new_building
 const BUILDING_SIZE={"1":120,"forest":25,"fl1":36,"megafield":[11,9]};
@@ -227,7 +281,7 @@ unsafeData.BUILDING_SLOTS=BUILDING_SLOTS.clone();
 // Needed input of a zone
 // BUILDING_INPUT[buildTyp]{output}[alternatives]=[[prod1,amount1||reducing time1],...]
 // task_new_product
-const BUILDING_INPUT=[,,{"9":[[[1,600]],[[2,1200]]]},{"10":[[[3,900]],[[4,1800]]]},{"11":[[[5,2400]],[[6,4800]]]},{"12":[[[7,4800]],[[8,9600]]]},,{"25":[[[9,30]]],"144":[[[21,450]]]},{"27":[[[10,12]]],"111":[[[110,5]]]},{"28":[[[11,8]]],"152":[[[151,5]]]},{"30":[[[12,5]]]},{"91":[[[92,14400]],[[93,28800]]]},{"110":[[[108,3600]],[[109,1800]]]},{"116":[[[2,1980]]],"117":[[[7,550]]],"118":[[[4,1020]]],"119":[[[38,650]]],"120":[[[42,110]]],"121":[[[43,100]]]},{"122":[[[112,130],[116,35]]],"123":[[[113,220],[117,35]]],"124":[[[114,345],[118,35]]],"125":[[[115,80],[119,35]]]},{"151":[[[153,1560]],[[154,3120]]]},{"155":[[[152,5],[28,6]]],"156":[[[152,8],[28,5]]],"157":[[[152,2],[28,9]]]}];
+const BUILDING_INPUT=[,,{"9":[[[1,600]],[[2,1200]]]},{"10":[[[3,900]],[[4,1800]]]},{"11":[[[5,2400]],[[6,4800]]]},{"12":[[[7,4800]],[[8,9600]]]},,{"25":[[[9,30]]],"144":[[[21,450]]]},{"27":[[[10,12]]],"111":[[[110,5]]]},{"28":[[[11,8]]],"152":[[[151,5]]]},{"30":[[[12,5]]]},{"91":[[[92,14400]],[[93,28800]]]},{"110":[[[108,3600]],[[109,1800]]]},{"116":[[[2,1980]]],"117":[[[7,550]]],"118":[[[4,1020]]],"119":[[[38,650]]],"120":[[[42,110]]],"121":[[[43,100]]]},{"122":[[[112,130],[116,35]]],"123":[[[113,220],[117,35]]],"124":[[[114,345],[118,35]]],"125":[[[115,80],[119,35]]]},{"151":[[[153,1560]],[[154,3120]]]},{"155":[[[152,5],[28,6]]],"156":[[[152,8],[28,5]]],"157":[[[152,2],[28,9]]]},,,,];
 unsafeData.BUILDING_INPUT=BUILDING_INPUT.clone();
 // Zone  2 -> "9":[[[0,1,600]],[[0,2,1200]]]
 // Zone  3 -> "10":[[[0,3,900]],[[0,4,1800]]]
@@ -263,8 +317,10 @@ const FARMISIZE=[,[40,60,-1,-5],[30,40,0,0],[30,40,2,0],[33,45,2,0],[33,45,4,2],
 // [17,reward - more kT in %]
 // [18,reward - more points in %]
 // task_new_quest
+// georgvr 20151015: "main" "3" added
 const QUESTS = {"main":{"1":[,[[[0,17,43],[0,9,1]],1,142,[[0,54]]],[[[0,1,173],[0,9,2]],1,348,[[0,145]]],[[[0,18,192],[0,17,288]],1,255,[[0,73]]],[[[0,18,672],[0,9,10]],1,1883,[[0,608]]],[[[0,17,922],[0,9,19]],1,2304,[[0,890]]],[[[0,20,360],[0,18,960]],1,3300],[[[0,19,540],[0,20,720]],1,6413],[[[0,2,240],[0,21,245]],1,2895],[[[0,20,1440],[0,9,24]],1,11700,[[1,0,47,1]]],[[[0,21,1152],[0,9,48]],1,16200],[[[0,9,72],[0,22,1037]],1,16202],[[[0,20,3456],[0,10,27]],1,25476],[[[0,18,8064],[0,10,48]],1,15660],[[[0,23,3110],[0,9,144]],1,57240],[[[0,10,96],[0,9,180]],1,33930,[[1,0,59,1]]],[[[0,9,240],[0,6,1836]],1,62190],[[[0,10,384],[0,9,144]],1,70920],[[[0,10,192],[0,23,6739]],1,116280,[[2,2]]],[[[0,22,7518],[0,9,216]],1,108956],[[[0,11,150],[[0,10,272],[0,110,112]]],1,34650],[[[0,7,1350],[0,12,50]],1,78375,[[1,0,63,1]]],[[[0,23,15552],[0,9,1008]],1,318600],[[[0,29,6552],[0,25,130]],1,373645,[[3,2]]],[[[0,1,51840],[[0,27,55],[0,111,51]]],1,60579],[[[0,11,280],[0,12,210]],1,138705],[[[[0,10,672],[0,110,276]],[0,12,210]],1,169785],[[[0,1,75600],[0,2,25000]],1,42131,[[1,0,90,1]]],[[[0,11,480],[0,12,272]],1,206760],[[[0,9,2688],[[0,10,1024],[0,110,420]]],1,448320],[[[0,12,320],[0,11,560]],1,242160],[[[0,29,14742],[[0,27,194],[0,111,180]]],1,836328,[[2,3]]],[[[0,20,77760],[0,12,383]],1,620831,[[1,0,78,1]]],[[[0,12,540],[0,32,14600]],1,449550],[[[0,32,50400],[0,25,432]],1,1208880],[[[[0,10,1760],[0,110,722]],[0,11,1000]],1,481800,[[3,3]]],[[[0,9,4800],[0,12,595]],1,749738],[[[0,26,46550],[[0,27,216],[0,111,201]]],1,933756,[[1,0,77,1]]],[[[0,1,259200],[0,30,216]],1,252960],[[[0,23,51840],[0,28,230]],1,856800],[[[0,9,5280],[[0,10,1795],[0,110,736]]],1,849816],[[[0,25,475],[0,30,238]],1,1665576,[[1,0,80,1]]],[[[0,34,64152],[0,28,253]],1,1704780],[[[0,11,1320],[0,12,880]],1,615120],[[[[0,27,238],[0,111,221]],[0,24,30294]],1,576923,[[1,0,76,1]]],[[[[0,10,2304],[0,110,945]],[0,30,259]],1,538272],[[[0,9,5760],[[0,10,2304],[0,110,945]]],1,976320],[[[0,37,13800],[0,25,518]],1,5559806,[[1,0,61,1]]],[[[0,9,5760],[[0,10,1958],[0,110,803]]],1,927072],[[[0,28,276],[0,30,259]],1,417312],[[[0,12,1040],[0,30,281]],1,376253,[[1,0,52,1]]],[[[0,20,72000],[0,12,800]],1,732000,[[4,0,23,15]]],[[[0,12,4000],[[0,10,1920],[0,110,787]]],1,1683600],[[[0,23,64800],[0,9,4800]],1,1395000],[[[0,25,432],[0,28,230]],1,373680,[[4,0,24,15]]],[[[0,24,72000],[[0,27,216],[0,111,201]]],1,1135800],[[[0,7,18000],[[0,10,1920],[0,110,787]]],1,1083600],[[[[0,27,216],[0,111,201]],[0,11,1200]],1,423000,[[4,0,31,15]]],[[[0,31,103700],[0,30,216]],1,2965498],[[[0,11,1200],[0,25,432]],1,478080,[[4,0,21,10]]],[[[0,21,57600],[[0,10,1920],[0,110,787]]],1,813600],[[[0,12,800],[[0,27,216],[0,111,201]]],1,427800,[[4,0,29,15]]],[[[0,29,27300],[0,25,432]],1,1506635],[[[0,4,48000],[0,9,4800]],1,855000],[[[0,28,230],[[0,27,216],[0,111,201]]],1,318600,[[4,0,33,15]]],[[[0,33,43200],[0,25,432]],1,1685880,[[5,1]]],[[[0,9,4800],[0,12,800]],1,822000,[[4,0,22,10]]],[[[0,8,18000],[0,28,230]],1,1792800],[[[[0,10,1920],[0,110,787]],[0,11,1200]],1,550800,[[4,0,34,15]]],[[[0,34,64800],[0,30,216]],1,1704960],[[[0,6,10800],[0,28,230]],1,207000],[[[0,11,1200],[[0,10,1920],[0,110,787]]],1,550800,[[4,0,35,20]]],[[[0,35,12950],[[0,27,216],[0,111,201]]],1,932692],[[[0,25,432],[0,11,1200]],1,478080],[[[0,32,72000],[0,12,800]],1,1722000,[[4,0,36,15]]],[[[0,36,24500],[0,9,4800]],1,3235000],[[[[0,27,216],[0,111,201]],[0,30,216]],1,320760,[[4,0,7,10]]],[[[0,26,66500],[0,28,230]],1,1298451],[[[0,12,800],[[0,10,1920],[0,110,787]]],1,555600,[[4,0,37,30]]],[[[0,37,3833],[0,9,4800]],1,2017431],[[[0,28,230],[0,25,432]],1,373680],[[[0,33,43200],[0,12,800]],1,1767000,[[4,0,38,15]]],[[[0,38,108000],[0,30,216]],1,3594960],[[[0,9,4800],[0,28,230]],1,712800,[[4,0,19,5]]],[[[0,5,72000],[[0,10,1920],[0,110,787]]],1,963600],[[[0,30,216],[0,9,4800]],1,714960,[[4,0,39,30]]],[[[0,39,2867],[0,12,800]],1,1834778],[[[[0,10,1920],[0,110,787]],[0,25,432]],1,474480],[[[0,32,72000],[[0,27,216],[0,111,201]]],1,1585800,[[4,0,40,30]]],[[[0,40,2250],[0,12,800]],1,1782000],[[[0,25,432],[0,11,1200]],1,478080,[[4,0,20,10]]],[[[0,3,64000],[0,30,216]],1,374960],[[[[0,27,216],[0,111,201]],[0,11,1200]],1,423000,[[4,0,41,30]]],[[[0,41,1975],[[0,10,1920],[0,110,787]]],1,1819998],[[[0,11,1200],[[0,27,216],[0,111,201]]],1,423000,[[4,0,8,15]]],[[[0,24,72000],[[0,10,1280],[0,110,787]]],1,1172400,[[5,1]]],[[[0,12,800],[0,9,4800]],1,822000,[[4,0,26,15]]],[[[0,36,24500],[0,28,230]],1,2867800],[[[0,31,103700],[[0,10,1920],[0,110,787]]],1,3064138,[[4,0,42,30]]],[[[0,28,230],[0,25,432]],1,373680],[[[0,42,1680],[0,30,216]],1,1693960,[[4,0,33,15]]],[[[0,4,80000],[0,30,210]],2,722800],[[[0,6,48000],[0,12,300]],2,854400],[[[0,1,800000],[0,25,320]],2,998400,[[4,0,32,10]]],[[[0,35,64000],[0,32,12000]],2,1629600],[[[0,26,108000],[0,11,540]],2,1452600],[[[0,39,12000],[0,9,5600]],2,2160000,[[4,0,43,30]]],[[[0,43,10000],[[0,27,600],[0,111,558]]],2,2556000],[[[0,24,184000],[0,25,480]],2,2248000],[[[0,9,10200],[[0,10,24000],[0,110,9840]]],2,2205600],[[[0,23,108000],[0,91,250]],2,1359600,[[12,105]]],[[[0,34,36936],[0,37,10580]],2,1959726],[[[0,29,78624],[0,26,5200]],2,2164176],[[[0,44,2016],[0,28,1600]],2,2059245],[[[[0,10,12000],[0,110,4920]],[0,12,1200]],2,1536000],[[[0,30,840]],2,906800,[[12,123]]],[[[0,40,3240],[0,36,9800]],2,1265312],[[[0,91,750],[0,31,72590]],2,1233972],[[[0,26,113050],[[0,27,600],[0,111,558]]],2,1874430],[[[0,38,7020],[0,42,2352]],2,2134942],[[[0,41,9480],[0,9,28800]],2,1886172,[[5,1]]],[[[0,23,174960],[0,22,98515]],2,2267541],[[[0,8,5040],[0,7,3780]],2,2022804],[[[0,32,27000],[[0,10,24000],[0,110,9840]]],2,2357400],[[[0,39,2580],[0,37,7935]],2,1525641,[[1,0,99,1]]],[[[0,33,51840],[0,35,20720]],2,2464720],[[[0,43,5000],[0,21,146880]],2,2139910],[[[0,31,60664],[0,26,100520]],2,1945541],[[[0,20,100800],[0,9,15360]],2,1216320,[[4,0,44,20]]],[[[[0,10,10080],[0,110,4132]],[0,11,4500]],2,1571400],[[[0,7,18900],[0,38,5400]],2,2239480],[[[0,40,3500],[0,35,12000]],2,1168200],[[[0,91,1000]],2,600000,[[12,137]]],[[[0,44,4400],[0,26,22400]],2,1284560],[[[0,3,280000],[0,31,40000]],2,1328000],[[[0,12,1200],[0,39,3900]],2,1228860],[[[0,7,9800],[0,2,240000]],2,1003320],[[[0,26,60000],[0,1,275000]],2,1031000],[[[0,11,6400]],2,1088000],[[[0,6,14444],[0,33,34000]],2,1158911],[[[[0,27,625],[0,111,581]]],2,1078125],[[[0,38,8600],[0,41,2900]],2,1056220],[[[0,43,4050],[0,7,5250]],2,1133280],[[[0,9,16200]],2,453600,[[5,1]]],[[[0,25,900],[[0,10,5400],[0,110,2214]]],2,990000],[[[0,37,8600]],2,1016520],[[[0,28,300],[[0,10,7500],[0,110,3075]]],2,1050000],[[[0,30,400],[0,42,3600]],2,1096880],[[[0,29,51000],[0,9,3600]],2,1069800],[[[0,91,175],[0,8,18200]],2,1087560],[[[0,36,10300],[0,41,3800]],2,1312700],[[[0,24,90000],[[0,10,800],[0,110,328]]],2,1028000],[[[0,22,95500],[0,1,300000]],2,930300],[[[0,35,13000],[0,32,33000]],2,1176800],[[[0,17,155000],[0,21,99999]],2,1049993],[[[0,38,13000],[[0,27,250],[0,111,232]]],2,1104650],[[[0,37,4444],[0,39,3333]],2,1083225],[[[0,2,122000],[0,21,122000]],2,1146800],[[[0,20,112000],[[0,10,2800],[0,110,1148]]],2,1097600],[[[0,9,1111],[0,26,66000]],2,1142108],[[[0,11,2320],[0,23,72000]],2,1200800],[[[0,19,116000],[0,25,900]],2,976200,[[5,1]]],[[[0,5,220000],[0,12,720]],2,1049600],[[[0,18,240000],[0,6,50000]],2,1028000],[[[0,41,4400],[0,1,150000]],2,1076640],[[[0,40,3250],[0,30,500]],2,1069300],[[[0,29,45000],[0,20,25000]],2,1050000],[[[0,91,840],[0,1,510000]],2,1014000],[[[0,34,45000],[0,12,680]],2,1190400],[[[0,31,425000],[0,43,2800]],2,1048680],[[[[0,10,7500],[0,110,3075]],[0,3,140000]],2,1048000,[[7,5]]]]
                        ,"2":[,[[[0,8,6500],[0,12,300]],,495000],[[[0,34,18600],[0,111,75]],,496298],[[[0,33,5650],[0,30,315]],,498270],[[[0,26,15600],[0,9,11200]],,506380],[[[0,37,2150],[0,12,530]],,508530],[[[0,18,175000],[0,91,505]],,511250],[[[0,108,6350],[0,7,5400]],,505010],[[[0,35,6530],[0,110,950]],,507946],[[[0,24,19150],[0,27,412]],,511190],[[[0,23,33000],[0,25,480]],,518500,[[3,4]]],[[[0,28,366],[0,46,100]],,516000],[[[0,116,460],[0,11,1400]],,523880],[[[0,21,42000],[0,9,8000]],,534800],[[[0,32,15420],[0,10,3630]],,540204],[[[0,7,5000],[0,30,265]],,550550,[[9,0,117],[9,0,123]]],[[[0,116,480],[0,91,777]],,551640],[[[0,19,84000],[0,110,1255]],,554475],[[[0,117,917],[0,18,277000]],,559816],[[[0,12,625],[0,109,42000]],,560400],[[[0,108,12300],[0,116,670]],,559600],[[[0,5,50500],[0,26,32000]],,564800],[[[0,117,490],[0,9,16000]],,569520],[[[0,29,16600],[0,31,24000]],,574600],[[[0,33,18200],[0,11,1800]],,589560],[[[0,4,40450],[0,116,1560]],,594810,[[9,0,118],[9,0,124]]],[[[0,3,110000],[0,12,515]],,599200],[[[0,17,75000],[0,10,6800]],,605000],[[[0,91,700],[0,34,9900]],,610080],[[[0,2,155000],[0,28,305]],,615000],[[[0,37,3800],[0,118,1450]],,617360,[[8,"20"]]],[[[0,1,172350],[0,111,558]],,622350],[[[0,117,1090],[0,36,5800]],,625320],[[[0,12,900],[0,25,310]],,624400],[[[0,31,38380],[0,118,1800]],,623304],[[[0,38,9200],[0,116,840]],,623304,[[9,0,119],[9,0,125]]],[[[0,65,10],[0,27,680]],,623333],[[[0,36,7500],[0,9,8000]],,627000],[[[0,6,13150],[0,110,2214]],,626620],[[[0,37,2415],[0,11,2000]],,625453],[[[0,119,735],[0,30,360]],,626280],[[[0,21,19000],[0,10,6120]],,630200],[[[0,33,14400],[0,35,4750]],,634970],[[[0,38,8200],[0,111,116]],,640341],[[[0,73,30],[0,28,600]],,650000],[[[0,42,2980],[0,117,430]],,660324,[[9,0,120]]],[[[0,39,2250],[0,12,666]],,696030],[[[0,40,2400],[0,30,286]],,700580],[[[0,41,2200],[0,118,2275]],,702800],[[[0,20,36000],[0,23,38000]],,706400],[[[0,43,1850],[0,120,690]],,709770,[[9,0,121]]],[[[0,108,14000],[0,8,13200]],,715040],[[[0,40,1950],[0,9,14200]],,719600],[[[0,39,1900],[0,116,1540]],,729920],[[[0,27,268],[0,43,1300]],,735580],[[[0,42,2300],[0,109,34850]],,740010],[[[0,112,3300],[0,121,500]],,748000],[[[0,41,2500],[0,111,138]],,754830],[[[0,119,1000],[0,29,22750]],,760250],[[[0,112,3300],[0,22,52300]],,766260],[[[0,32,24799],[0,9,13333]],,766260,[[8,"21"]]],[[[0,113,9100],[0,27,400]],,750000],[[[0,44,1142],[0,144,790]],,755000],[[[0,154,1695],[0,111,210]],,760000],[[[0,24,39500],[0,118,2350]],,765000],[[[0,153,6250],[0,26,22650]],,765000],[[[0,23,39500],[0,28,385]],,770000],[[[0,6,34500],[0,122,37]],,770000],[[[0,32,13400],[0,10,3900]],,775000],[[[0,39,990],[0,38,8400]],,775000],[[[0,144,1150],[0,123,46]],,780000],[[[0,9,7900],[0,151,85]],,780000],[[[0,5,56200],[0,4,41500]],,785000],[[[0,64,15],[0,152,80]],,785000],[[[0,31,28500],[0,91,550]],,790000],[[[0,20,59000],[0,30,720]],,790000,[[8,"22"]]],[[[0,114,15000],[0,29,25000]],,795000],[[[0,120,400],[0,11,4500]],,795000],[[[0,2,150000],[0,6,45000]],,800000],[[[0,40,9000],[0,25,200]],,800000],[[[0,7,28000],[0,30,225]],,805000],[[[0,32,65000],[0,1,190000]],,805000],[[[0,109,125000],[0,108,65000]],,810000],[[[0,22,92000],[0,27,450]],,810000],[[[0,124,1125],[0,21,85000]],,815000],[[[0,36,9500],[0,112,6600]],,815000],[[[0,116,840],[0,24,63000]],,820000],[[[0,26,63000],[0,117,700]],,820000],[[[0,152,120],[0,44,15000]],,825000],[[[0,144,450],[0,113,30000]],,825000],[[[0,125,650],[0,151,550]],,830000,[[8,"23"]]],[[[0,115,1680],[0,10,4200]],,835000],[[[0,154,7500],[0,118,3300]],,840000],[[[0,153,18500],[0,31,22000]],,845000],[[[0,42,2250],[0,110,1450]],,850000],[[[0,43,1500],[0,1,150000]],,855000],[[[0,41,2200],[0,12,1100]],,860000],[[[0,157,550],[0,120,600]],,865000],[[[0,33,14000],[0,35,16500]],,870000],[[[0,21,29500],[0,112,11500]],,875000],[[[0,10,3500],[0,114,18200]],,880000],[[[0,22,32000],[0,123,1250]],,885000],[[[0,30,650],[0,155,350]],,890000],[[[0,91,1050],[0,7,14000]],,895000],[[[0,29,18400],[0,26,21200]],,900000],[[[0,28,650],[0,152,250]],,905000],[[[0,157,320],[0,156,410]],,910000],[[[0,121,1000],[0,9,15000]],,915000],[[[0,44,62000],[0,144,450]],,920000],[[[0,8,18000],[0,12,1350]],,925000],[[[0,113,18000],[0,27,350]],,930000],[[[0,21,42500],[0,122,1850]],,935000],[[[0,22,95000],[0,120,950]],,940000],[[[0,40,5500],[0,41,6800]],,945000],[[[0,116,2500],[0,38,18600]],,950000],[[[0,111,650],[0,119,750]],,955000],[[[0,36,18500],[0,37,12000]],,960000],[[[0,6,32500],[0,117,1450]],,965000],[[[0,34,27500],[0,32,32100]],,970000],[[[0,151,600],[0,11,1200]],,980000],[[[0,125,1000],[0,124,1600]],,985000,[[8,"24"]]]]
+                       ,"3":[,[[[0,18,134862],[0,26,16011]],,1134580,[[1,0,351,5],[9,0,351]]],[[[0,351,1080],[0,31,20094]],,1268060],[[[0,12,251],[0,9,826]],,1401540,[[1,0,352,5],[9,0,352]]],[[[0,352,1440],[0,350,10]],,1535020],[[[0,1,140257],[0,25,207]],,1668500],[[[0,351,1800],[0,23,18455]],,1801980],[[[0,113,3008],[0,18,134862]],,1935460],[[[0,352,3600],[0,31,20094]],,2068940,[[1,0,353,5],[9,0,353]]],[[[0,353,360],[0,3,52335]],,2202420],[[[0,352,4320],[0,34,11689]],,2335900],[[[0,351,720],[0,352,2160]],,2469380],[[[0,29,5656],[0,36,4155]],,2602860],[[[0,352,5040],[0,350,40]],,2736340],[[[0,21,35780],[0,26,16011]],,2869820],[[[0,27,138],[0,25,207]],,3003300],[[[0,353,1200],[0,29,5656]],,3136780],[[[0,22,30758],[0,28,119]],,3270260],[[[0,352,5760],[0,21,35780]],,3403740],[[[0,30,108],[0,10,638]],,3537220],[[[0,32,13513],[0,153,1871]],,3670700],[[[0,351,3600],[0,350,60]],,3804180],[[[0,111,129],[0,37,1871]],,3937660],[[[0,91,108],[0,22,33834]],,4071140],[[[0,351,3600],[0,21,43016]],,4204620,[[8,"26"]]],[[[0,352,4320],[0,30,130]],,4338100],[[[0,110,544],[0,22,36979]],,4471580],[[[0,353,840],[0,44,4633]],,4605060],[[[0,113,3616],[0,40,1630]],,4738540],[[[0,43,1274],[0,350,77]],,4872020],[[[0,351,720],[0,352,4320]],,5005500],[[[0,2,76647],[0,23,22188]],,5138980,[[1,0,354,5],[9,0,354]]],[[[0,354,540],[0,110,544]],,5272460],[[[0,20,58550],[0,39,1608]],,5405940],[[[0,351,720],[0,353,600]],,5539420],[[[0,353,720],[0,40,1630]],,5672900],[[[0,37,2249],[0,41,1400]],,5806380],[[[0,354,1260],[0,20,58550]],,5813054],[[[0,352,3600],[0,12,302]],,5814388],[[[0,17,526942],[0,33,9636]],,5815723,[[1,0,355,5],[9,0,355]]],[[[0,355,720],[0,350,104]],,5817058],[[[0,354,900],[0,10,767]],,5818393],[[[0,355,1680],[0,152,87]],,5819728],[[[0,42,1451],[0,108,8332]],,5821062],[[[0,355,2400],[0,109,22665]],,5822397],[[[0,111,155],[0,9,992]],,5823732],[[[0,352,5040],[0,30,130]],,5825067],[[[0,141,241],[0,25,248]],,5826402],[[[0,351,3840],[0,43,1571]],,5827736,[[8,"27"]]],[[[0,31,29780],[0,37,2772]],,5829071],[[[0,355,2160],[0,351,1320]],,5830406],[[[0,354,1350],[0,350,207]],,5831741],[[[0,353,900],[0,11,578]],,5833076],[[[0,355,1920],[0,352,1080]],,5834410],[[[0,29,8382],[0,28,177]],,5835745],[[[0,354,1890],[0,40,2009]],,5837080,[[1,0,356,5],[9,0,356]]],[[[0,356,120],[0,8,5618]],,5838415],[[[0,18,199865],[0,12,372]],,5839750],[[[0,354,1350],[0,353,360]],,5841084],[[[0,356,300],[0,1,207860]],,5842419],[[[0,353,1080],[0,34,17322]],,5843754],[[[0,154,2772],[0,115,1262]],,5845089],[[[0,354,1890],[0,36,6157]],,5846424],[[[0,355,1920],[0,44,5711]],,5847758,[[1,0,357,5],[9,0,357]]],[[[0,357,2160],[0,22,11878]],,5849093],[[[0,356,180],[0,355,720]],,5850428],[[[0,357,3360],[0,356,120]],,5851763],[[[0,21,53026],[0,19,101892]],,5853098],[[[0,355,2640],[0,32,20025]],,5854432],[[[0,356,300],[0,37,2772]],,5855767],[[[0,355,2160],[0,351,600]],,5857102],[[[0,2,94482],[0,7,5839]],,5858437],[[[0,356,480],[0,350,320]],,5859772,[[8,"28"]]],[[[0,354,1980],[0,357,2160]],,5861106],[[[0,24,27256],[0,33,11837]],,5862441],[[[0,357,9840],[0,111,190]],,5863776],[[[0,353,1200],[0,156,95]],,5865111],[[[0,357,10080],[0,155,102]],,5866446],[[[0,27,204],[0,10,942]],,5867780],[[[0,356,480],[0,12,370]],,5869115,[[1,0,358,5],[9,0,358]]],[[[0,358,360],[0,354,1440]],,5870450],[[[0,357,7200],[0,108,10235]],,5871785],[[[0,351,4320],[0,3,77291]],,5873120],[[[0,156,120],[0,6,19395]],,5874454],[[[0,352,11520],[0,350,320]],,5875789],[[[0,358,720],[0,35,6627]],,5877124],[[[0,17,647308],[0,91,160]],,5878459],[[[0,358,960],[0,30,160]],,5879794,[[1,0,359,5],[9,0,359]]],[[[0,359,2160],[0,31,29676]],,5881128],[[[0,356,360],[0,350,240]],,5882463],[[[0,36,6136],[0,32,19956]],,5883798],[[[0,357,7680],[0,353,840]],,5885133],[[[0,9,1219],[0,34,17262]],,5886468],[[[0,359,2880],[0,356,240]],,5887802],[[[0,358,840],[0,35,6627]],,5889137],[[[0,353,1680],[0,36,6136]],,5890472],[[[0,355,2400],[0,351,3000]],,5891807,[[8,"29"]]],[[[0,358,1080],[0,37,3740]],,5893142],[[[0,10,1275],[0,38,35956]],,5894476],[[[0,356,600],[0,39,2675]],,5895811],[[[0,359,6360],[0,40,2710]],,5897146],[[[0,352,12600],[0,41,2328]],,5898481],[[[0,358,1200],[0,43,2119]],,5899816],[[[0,351,4200],[0,356,180]],,5901150,[[1,0,360,5],[9,0,360]]],[[[0,360,1800],[0,42,2413]],,5902485],[[[0,12,501],[0,6,26260]],,5903820],[[[0,360,3900],[0,357,9120]],,5905155],[[[0,358,600],[0,360,3000]],,5906490],[[[0,358,1200],[0,8,7580]],,5907824],[[[0,359,7560],[0,11,780]],,5909159],[[[0,21,71545],[0,10,1275]],,5910494],[[[0,355,4320],[0,360,2400]],,5911829,[[1,0,361,5],[9,0,361]]],[[[0,361,2880],[0,359,1800]],,5913164],[[[0,358,780],[0,354,1350]],,5914498],[[[0,155,137],[0,23,36903]],,5915833],[[[0,361,12000],[0,350,400]],,5917168],[[[0,31,40180],[0,25,413]],,5918503],[[[0,360,4500],[0,361,5400]],,5919838],[[[0,354,3870],[0,26,32016]],,5921172],[[[0,360,3000],[0,361,6600]],,5922507],[[[0,359,3960],[0,361,9000]],,5923842,[[8,"30"]]]]
                        }
                ,"forestry":{"1":[,[[[0,4,3300],[0,19,4500],[0,24,1400]],,51520],[[[0,5,2600],[0,17,8000],[0,91,50]],,50360],[[[0,6,1250],[0,21,6600],[0,18,7300]],,0,[[1,1,1,5],[8,"forest"],[9,1,1],[9,1,21]]],[[[0,22,1400],[0,7,750]],,48630],[[[0,25,64],[0,3,3200],[1,21,8]],,50800],[[[0,8,650],[0,27,85],[0,4,4800],[0,91,25]],,0,[[8,"sawmill"],[9,1,41],[9,1,42],[9,1,43]]],[[[0,10,420],[0,19,1600]],,39360],[[[0,2,6000],[0,22,2100],[0,21,1800]],,38980],[[[0,24,1800],[1,21,12],[1,41,10]],,0,[[1,1,2,5],[9,1,2],[9,1,22],[9,1,44],[9,1,45],[9,1,46]]],[[[0,3,3200],[0,5,3150],[0,20,1900]],,36200],[[[0,27,40],[0,18,7700]],,39240],[[[0,91,60],[1,22,30],[1,44,12]],,0,[[8,"carpentry"],[9,1,101]]],[[[0,8,300],[0,6,2000]],,39600],[[[0,17,16000],[1,22,30],[1,42,10]],,34520],[[[0,11,90],[1,101,6],[1,22,18]],,0,[[10]]],[[[0,22,800],[0,7,430],[0,2,2200]],,32642],[[[0,10,380]],,30400],[[[0,9,460],[1,41,20]],,0,[[9,1,102]]],[[[0,19,2600],[0,3,3000],[0,18,5400],[0,4,1200]],,31740],[[[0,91,15],[0,26,1700]],,31420],[[[0,25,35],[0,5,2800],[1,102,4]],,0,[[9,1,103]]],[[[0,24,1900],[0,6,1400]],,31060],[[[0,20,1350],[0,23,1250],[0,1,4900]],,30230],[[[0,12,75],[0,21,2500],[1,45,15]],,0,[[1,1,3,5],[9,1,3],[9,1,23],[9,1,47],[9,1,48],[9,1,49]]],[[[0,8,310],[0,9,240]],,31520],[[[0,7,130],[0,6,400],[0,27,30]],,32562],[[[0,3,5400],[1,23,18],[1,103,3]],,0,[[9,1,104]]],[[[0,11,185]],,31450],[[[0,22,1900],[0,91,22],[0,2,2600]],,30940],[[[0,10,110],[1,41,32],[1,101,24]],,0,[[9,1,105]]],[[[0,25,55],[1,46,27]],,35025],[[[0,20,2300],[0,23,1350],[1,43,36]],,34485],[[[0,5,2000],[1,104,12],[1,47,72]],,0,[[9,1,106]]],[[[0,26,2100],[0,8,150]],,36600],[[[0,3,2200],[0,18,4500],[0,19,3000],[0,4,1400],[0,17,2800]],,37520],[[[0,9,600],[1,106,20]],,0,[[9,1,107]]],[[[0,7,700]],,37380],[[[0,29,1400],[0,12,40]],,42000],[[[0,1,45000],[1,107,52],[1,48,18]],,0,[[9,1,108]]],[[[0,5,3000],[0,11,240]],,44400],[[[0,3,5800],[0,9,380],[0,21,2400]],,46970],[[[0,6,1600],[1,102,12],[1,23,48]],,0,[[9,1,109]]],[[[0,25,75]],,48500],[[[0,29,1200],[0,8,1300],[0,17,20000],[0,2,5600],[1,49,24]],,50340,[[5,1]]],[[[0,20,5400],[0,10,100],[1,42,35]],,52325],[[[0,26,450],[0,25,45],[0,9,850]],,52510],[[[0,5,18000],[0,4,3600],[1,109,50]],,0,[[1,1,4,5],[9,1,4],[9,1,24],[9,1,50],[9,1,51],[9,1,52]]],[[[0,11,100],[0,3,9200],[1,45,30],[1,103,18]],,52207],[[[0,91,50],[0,22,3300],[0,18,4000],[1,46,45]],,52953],[[[1,101,40],[1,21,80],[1,48,30]],,0,[[9,1,111]]],[[[0,21,3000],[0,23,1600],[0,6,800]],,51960],[[[0,25,50],[0,24,2200],[1,43,60]],,53008],[[[1,104,70],[1,107,55],[1,24,60]],,0,[[9,1,112]]],[[[0,8,500],[0,7,450]],,50730],[[[0,91,35],[0,2,3500],[0,29,1200],[1,23,30]],,52432],[[[0,11,290],[1,52,30]],,50496,[[5,1]]],[[[0,10,360],[0,9,720],[1,106,100]],,52200],[[[0,27,75],[1,112,15]],,50049,[[11,1]]],[[[0,23,2000],[0,12,60],[1,42,50],[1,102,20]],,53630],[[[1,50,65],[1,47,30],[1,111,50]],,0,[[9,1,110]]],[[[0,109,3500],[0,24,2500],[1,48,30]],,50792],[[[0,11,275],[1,22,60]],,51934],[[[0,10,250],[0,12,100],[1,41,50],[1,23,33]],,0,[[1,1,5,5],[9,1,5],[9,1,25],[9,1,53],[9,1,54],[9,1,55]]],[[[0,9,250],[0,23,4000]],,51800],[[[0,25,90],[0,18,6400],[0,21,1000],[1,44,50]],,55282],[[[0,108,7500],[1,53,15],[1,112,5]],,0,[[9,1,115]]],[[[0,6,500],[0,22,6250]],,48650],[[[0,3,9700],[0,17,30000],[0,5,2200],[1,25,36]],,51590],[[[0,91,50],[1,115,26],[1,101,62]],,0,[[9,1,116]]],[[[0,112,2900],[0,12,80],[1,22,32]],,54505],[[[0,108,3700],[0,11,200]],,51020],[[[0,27,125],[1,115,22]],,0,[[9,1,118]]],[[[0,29,2700],[1,104,27]],,54896],[[[0,10,380],[0,19,5100],[1,50,65],[1,109,8]],,52508],[[[0,91,40],[1,118,10],[1,50,80],[1,107,65]],,0,[[9,1,117],[7,5]]]]
                            ,"2":[,[[[0,111,45],[0,9,380]],,48150],[[[1,21,400]],,,[[6,100]]],[[[0,12,100],[0,5,315]],,49140],[[[1,24,350]],,,[[6,100]]],[[[0,26,3200],[0,9,220],[1,106,30]],,47452],[[[1,22,450]],,,[[6,100]]],[[[0,11,150],[1,111,35]],,51945],[[[1,21,600],[1,41,80]],,,[[6,100]]],[[[0,8,555],[1,44,40],[1,45,30]],,46164],[[[0,91,55],[1,23,550]],,,[[6,100]]],[[[1,25,150]],,103843],[[[1,102,22]],,276206],[[[1,115,45]],,145202],[[[1,21,650],[1,22,100]],,,[[6,100]]],[[[1,110,15]],,124977],[[[1,53,120],[1,55,50],[1,54,50]],,,[[9,1,119]]],[[[0,7,5200],[0,6,1200],[0,24,3500]],,103941],[[[1,21,350],[1,22,300]],,,[[6,100]]],[[[0,10,240],[0,27,85],[0,26,2500]],,135945],[[[1,1,125],[1,2,100],[1,3,90],[1,4,70],[1,5,50]],,138279],[[[1,109,30]],,168612],[[[0,144,40],[0,110,100],[0,12,50]],,,[[6,100]]],[[[1,103,20]],,179495],[[[1,53,210],[1,55,160]],,,[[9,1,120]]],[[[1,41,100],[1,48,75],[1,52,50]],,156645],[[[1,25,190]],,,[[6,100]]],[[[0,11,400]],,125956],[[[1,24,220],[1,47,50],[1,43,85]],,114596],[[[1,118,20]],,221544],[[[1,1,250],[1,2,200],[1,3,180],[1,4,140],[1,5,100]],,,[[6,100]]],[[[0,110,100],[0,12,80],[1,41,45],[1,53,40],[1,52,20]],,237672],[[[1,41,100],[1,21,80],[1,43,125],[1,42,75]],,257504],[[[1,46,70],[1,49,50],[1,23,60],[1,25,80]],,273176],[[[0,10,60],[1,118,5],[0,27,100],[0,26,8000]],,288144],[[[1,5,200],[1,4,200],[1,3,200]],,,[[1,1,7,5],[9,1,7],[9,1,26],[9,1,56],[9,1,57],[9,1,58],[9,1,121],[9,1,122],[13,309]]],[[[1,121,20],[1,122,5]],,288473,[[9,1,123]]],[[[1,123,15],[1,56,120]],,313426],[[[0,11,500],[1,111,40],[0,5,8000],[0,1,15000]],, 346934],[[[1,24,200],[1,23,200],[1,53,100],[1,58,50]],,305630],[[[1,54,100],[1,42,150],[1,51,250]],,512943],[[[0,12,200],[1,110,20],[0,6,3000],[0,7,2500]],,382357],[[[1,109,15],[1,107,15],[1,106,4],[1,102,8]],,311131,[[9,1,124]]],[[[1,124,25]],,401729,[[9,1,125]]],[[[1,125,80]],,298927],[[[1,7,250],[1,5,200],[1,1,500]],,,[[1,1,8,5],[9,1,8],[9,1,27],[9,1,59],[9,1,60],[9,1,61],[13,310]]],[[[0,27,80],[0,26,3000],[1,27,80],[1,122,5],[1,121,10]],,337285,[[9,1,126],[9,1,127]]],[[[1,126,20],[1,127,20]],,322536,[[9,1,128],[9,1,129]]],[[[1,128,10],[1,129,5]],,377008,[[9,1,130],[9,1,131]]],[[[1,130,10],[1,131,5]],,390178,[[9,1,132]]],[[[1,132,35],[1,41,400]],,807960]]
@@ -276,7 +332,9 @@ const QUESTS = {"main":{"1":[,[[[0,17,43],[0,9,1]],1,142,[[0,54]]],[[[0,1,173],[
                };
 unsafeData.QUESTS=QUESTS.clone();
 const INIT_questDataItem = {"nr":0,"time":0,"calcTo":0,"state":0,"given":{}};
-const INIT_questData = {"main":{"1":INIT_questDataItem.clone(),"2":INIT_questDataItem.clone()},"forestry":{"1":INIT_questDataItem.clone(),"2":INIT_questDataItem.clone()},"foodworld":{"1":INIT_questDataItem.clone()},"veterinary":{"1":INIT_questDataItem.clone()}};
+//georgvr 20151015: Definition for "main" "3" added
+const INIT_questData = {"main":{"1":INIT_questDataItem.clone(),"2":INIT_questDataItem.clone(),"3":INIT_questDataItem.clone()},"forestry":{"1":INIT_questDataItem.clone(),"2":INIT_questDataItem.clone()},"foodworld":{"1":INIT_questDataItem.clone()},"veterinary":{"1":INIT_questDataItem.clone()}};
+
 // state: 0:not available, 1:not activated, 2:active
 /*
 // Generate PRODUCT_QUEST
@@ -302,10 +360,12 @@ for(type=0;type<new_PRODUCT_QUEST.length;type++){
 }
 GM_log("new_PRODUCT_QUEST:\n"+implode(new_PRODUCT_QUEST));
 */
+
 const KRAEUTER_VETERINAER_LEVEL=[{"250":1,"251":1,"252":1,"253":2,"254":3,"255":4,"256":5,"257":6,"258":7,"259":8,"260":9,"261":10,"262":11,"263":12,"264":13,"265":14,"266":16,"267":18,"268":20,"269":22,"270":24,"271":26,"272":28,"273":30}];
 //Nummer, Krankheitslevel, Tinktur1, Zeit in Minuten, Tinktur2, Zeit in Minuten
 const KRANKHEITEN_TINKTUR_ZEIT= [{"1":[[1,300,135],[1,301,195]],"2":[[1,301,240],[1,302,270]],"3":[[1,300,195],[1,302,225]],"4":[[2,303,150],[2,305,75]],"5":[[2,303,165],[2,306,82.5]],"6":[[3,305,180],[3,304,210]],"7":[[3,304,225],[3,306,112.5]],"8":[[6,307,285],[6,308,142.5]],"9":[[6,307,180],[6,310,90]],"10":[[8,309,165],[8,308,82.5]],"11":[[8,309,170],[8,312,85]],"12":[[10,311,135],[10,310,67.5]],"13":[[10,311,225],[10,312,112.5]],"14":[[10,311,285],[10,314,142.5]],"15":[[12,313,150],[12,314,75]],"16":[[12,313,255],[12,321,127.5]],"17":[[14,315,275],[14,316,137]],"18":[[14,315,270],[14,318,135]],"19":[[18,317,135],[18,318,67.5]],"20":[[18,317,150],[18,318,75]],"21":[[22,319,135],[22,321,67.5]],"22":[[24,320,285],[24,323,142.5]],"23":[[28,322,255],[28,321,127.5]],"24":[[28,322,210],[28,323,105]]}];
-const INIT_valMinRack={"v":200,"e":50,"o":10,"z":0,"f1":25,"f2":10,"f3":10,"f4":0,"fw1":10,"fw2":10,"fw3":10};
+// georgvr: limit for "ex" can not be added to "INIT_valMinRack", since description "category_ex" does not exists. This creates an warning when opening the adviser-options
+const INIT_valMinRack={"v":200,"e":50,"o":10,"z":0,"f1":25,"f2":10,"f3":10,"f4":0,"fw1":10,"fw2":10,"fw3":10,"hr":1000,"md":10};
 // task_new_level
 const LEVEL_POINTS=[0,0,58,2420,6620,15620,27900,58700,101700,163100,211900
                    ,276900,359000,467000,730000,1190000,1750000,2680000,3900000,5660000,7850000
@@ -529,7 +589,7 @@ var gutBeob=new Array();
 var preisBeob=new Array();
 var questData;
 var css_styles=new Object();
-var regMsgContentMarketsale,regMsgContentContractsale,regMsgContentContractsaleList,regMsgSubjectFriend,regMsgSubjectFriendCancel; //Fix georgvr
+var regMsgContentMarketsale,regMsgContentContractsale,regMsgContentContractsaleList,regMsgSubjectFriend,regMsgSubjectFriendCancel;
 var valAutoWater, valWaterNeeded, valAssumeWater, valAutoCrop, valErnteMsg, valLimitEmptyFields, valStatistik, valClickErrorbox, valGlobaltimeShowCroppedZone;
 var valMoveAnimals, valMinRackMan, valMinRack, valMinRackPlantsize, valMinRackFarmis,valMinRackForestryFarmis, valMinRackGrowing, valMinRackRecursive, valFarmiLimits, valFarmiMiniInfo
 var upjersAds, buyNotePadShowBlocked, show;
@@ -538,7 +598,7 @@ var zoneAddToGlobalTime;
 var totalAnimals, totalFarmis, totalPowerups, totalQuest, totalRecursive, totalZones, totalEndtime;
 var valKauflimit, valKauflimitNPC, highlightProducts, highlightUser, valNimmBeob, valVerkaufLimitDown, valVerkaufLimitUp, valJoinPreise, lastOffer, protectMinRack, ownMarketOffers;
 var valMessagesSystemMarkRead;
-var megafieldVehicle, megafieldJob, logMegafieldJob;
+var megafieldVehicle, megafieldJob, logMegafieldJob, megafieldSmartTimer;
 top.unsafeData.autoAction=null;
 
 //***********************************************************************************************************
@@ -672,7 +732,7 @@ function SortableTable (sortRow){
         }
     }
     }catch(err){ GM_logError("SortableTable","","",err); }
- }
+}
 function bar(size,markvalue,maxvalue){
     size=Math.floor(size);
     var mark=Math.floor(size*markvalue/maxvalue);
@@ -681,16 +741,16 @@ function bar(size,markvalue,maxvalue){
     return cell;
 }
 function setSelRange(inputEl, selStart, selEnd){
- if (inputEl.setSelectionRange){
-  inputEl.focus();
-  inputEl.setSelectionRange(selStart, selEnd);
- }else if (inputEl.createTextRange){
-  var range=inputEl.createTextRange();
-  range.collapse(true);
-  range.moveEnd('character', selEnd);
-  range.moveStart('character', selStart);
-  range.select();
- }
+    if (inputEl.setSelectionRange){
+        inputEl.focus();
+        inputEl.setSelectionRange(selStart, selEnd);
+    }else if (inputEl.createTextRange){
+        var range=inputEl.createTextRange();
+        range.collapse(true);
+        range.moveEnd('character', selEnd);
+        range.moveStart('character', selStart);
+        range.select();
+    }
 }
 
 // Strings
@@ -831,20 +891,24 @@ function updateProductDataFarm(){
         // c:only by club
         // f:forestry
         // p:powerup
-        // q:forestry quest too low
+        // q:quest too low (main or forestry)
         // r:recipe
         // l:level too low
         // t:not tradable
-        // v:veterinary too low
+        // v:level veterinary too low
         // u:garbage
+        //
         // task_new_plant task_new_product
-        prodBlock[0]=["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","ct","","ct","","ct","ct","","ct","","","","","","","","","","ct","ct","ct","ct","ct","ct","ct","","","","","","","ct","","ct","","","ct","","","ct","ct","ct","","","","","","","","t","","","","","","","t","","t","t","","","","","","","","","","","","","","","","","","","","","","t","","","","","","","","","","","","","","","","","","","","","","","","","","","","","t","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","ut","ut",,,,,,,,,,,"","","","","","","","","","","","","","","t","t","t","t","t","t","t","t",,,,,,,,,,,,,,,,,,,,,,,,,,,,,"","","","","","","","","","","","","","","","","","","","","","","","",,,,,,,,,,,,,,,,,,,,,,,,,,,"","","","","","t","t","","t","","t","","t","","t","","t","","t","","","t","","t"];
-         /*
+        prodBlock[0]=["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","ct","","ct","","ct","ct","","ct","","","","","","","","","","ct","ct","ct","ct","ct","ct","ct","","","","","","","ct","","ct","","","ct","","","ct","ct","ct","","","","","","","","t","","","","","","","t","","t","t","","","","","","","","","","","","","","","","","","","","","","t","","","","","","","","","","","","","","","","","","","","","","","","","","","","","t","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","ut","ut",,,,,,,,,,,"","","","","","","","","","","","","","","t","t","t","t","t","t","t","t",,,,,,,,,,,,,,,,,,,,,,,,,,,,,"","","","","","","","","","","","","","","","","","","","","","","","",,,,,,,,,,,,,,,,,,,,,,,,,,,"","","","","","t","t","","t","","t","","t","","t","","t","","t","","","t","","t",,,,,,,,,,,,,,,,,,,,,,,,,,,"","","","","","","","","","","",""];
+
+        /*
         var new_prodBlock=prodBlock[0].clone();
-        new_prodBlock[221]="";
+        new_prodBlock[361]="test";
         GM_log(implode(new_prodBlock));
         */
-        var help={"v":[],"e":[],"o":[],"fw1":[],"fw2":[],"fw3":[],"fw4":[],"z":[],"fl":[],"fla":[],"hr":[],"md":[]};
+
+        //Linus-Tux 20151015 
+        var help={"v":[],"e":[],"o":[],"fw1":[],"fw2":[],"fw3":[],"fw4":[],"z":[],"fl":[],"fla":[],"hr":[],"md":[],"ex":[]};
         // for(var v=1;v<unsafeWindow.produkt_name.length;v++){
         //*task_fix_growtime*/ var newProductGrowtime={};
         //*task_fix_points*/ var newProductPoints={};
@@ -852,14 +916,41 @@ function updateProductDataFarm(){
         if(unsafeWindow.vet_data&&unsafeWindow.vet_data.info&&unsafeWindow.vet_data.drugs){
             vet_data=unsafeWindow.vet_data;
         }
+        
+        //Linus--Tux 20151028 Rack Farm 5
+        if(!prodStock[5]||!(prodStock[5] instanceof Array)){ prodStock[5]=[]; }
+        
+        var prodStockTemp=new Array();    //Stock Farm 1
+        for(var i in unsafeWindow.rackobj) {
+            for(var j in unsafeWindow.rackobj[i]) {
+                for(var k in unsafeWindow.rackobj[i][j]) {
+                    if (i==5) { //Rackfarm 5
+                        prodStock[5][unsafeWindow.rackobj[i][j][k].pid]=parseInt(unsafeWindow.rackobj[i][j][k].amount);
+                    } else {
+                        prodStockTemp[unsafeWindow.rackobj[i][j][k].pid]=parseInt(unsafeWindow.rackobj[i][j][k].amount);
+                    }
+                }
+            }
+        }
+
         for(var v in unsafeWindow.produkt_name){
             if(!unsafeWindow.produkt_name.hasOwnProperty(v)){continue;}
             if(isNaN(gut[v])){ gut[v]=0; }
             prodName[0][v]=unsafeWindow.produkt_name[v];
             prodId[0][prodName[0][v]]=v;
             prodPlantSize[0][v]=unsafeWindow.produkt_x[v]*unsafeWindow.produkt_y[v];
+
+        /*
             var c=(unsafeWindow.rackElement[v]&&unsafeWindow.rackElement[v].number)?unsafeWindow.rackElement[v].number:0;
+            if(unsafeWindow.farm!=5){
+                prodStock[0][v]=(c?parseInt(c,10):0);
+            }
+        */
+
+            //Linus--Tux 20151020
+            var c=(prodStockTemp[v])?prodStockTemp[v]:0;
             prodStock[0][v]=(c?parseInt(c,10):0);
+            
             prodYield[0][v]=(unsafeWindow.produkt_ernte[v]?parseInt(unsafeWindow.produkt_ernte[v],10):0);
             prodTyp[0][v]=unsafeWindow.produkt_category[v];
             prodRequire[0][v]=PRODUCT_REQUIRE[0][v];
@@ -924,7 +1015,8 @@ function updateProductDataFarm(){
         //*task_fix_points*/ GM_logInfo("updateProductDataFarm","","","newProductPoints="+implode(newProductPoints,1));
         prodTyp[0][0]="c";
         try{ prodStock[0][0]=parseInt($("coins").innerHTML,10); }catch(err){}
-        prodNameSort[0]=[0].concat(help["v"],help["e"],help["o"],help["fw1"],help["fw2"],help["fw3"],help["fw4"],help["fl"],help["fla"],help["hr"],help["md"],help["z"]);
+        //Linus-Tux 20151015
+        prodNameSort[0]=[0].concat(help["v"],help["e"],help["o"],help["fw1"],help["fw2"],help["fw3"],help["fw4"],help["fl"],help["fla"],help["hr"],help["md"],help["ex"],help["z"]);
         // quest boni
         for(var v=1;v<questData["main"]["1"]["nr"];v++){
             if(QUESTS["main"]["1"][v]&&QUESTS["main"]["1"][v][3]){
@@ -978,13 +1070,13 @@ function updateProductDataForestry(){
             prodPoints[1][v]=PRODUCT_POINTS[1][v];
 
             if(prodTyp[1][v]=="u"){
-                prodBlock[1][v]="qtu";
+                prodBlock[1][v]="tu"; // Fix georgvr: value changed to "tu" instead of "qtu" - since no correlation with q = quest
             }else{
                 prodBlock[1][v]="t";
                 if((unsafeWindow.forestry_unlock===undefined)||(PRODUCT_QUEST[1][v]&&(questData[PRODUCT_QUEST[1][v][0]][PRODUCT_QUEST[1][v][1]]["nr"]<=PRODUCT_QUEST[1][v][2]))){
                     prodBlock[1][v]+="q";
                 }
-                if(v==113||v==114){ prodBlock[1][v]+="s"; }
+                if(v==113||v==114||v==133){ prodBlock[1][v]+="s"; } // Fix georgvr: added product 133: "Weihnachtspyramide"
                 if(help[prodTyp[1][v]]){
                     help[prodTyp[1][v]].push(v);
                 }
@@ -1680,6 +1772,7 @@ var zones=new function(){
             17          Architectural office
             18          Pony farm
             19          Megafield               Factory
+            20          Fuelstation             Factory
             fw1         Soda stall              Foodworld
             fw2         Snack booth             Foodworld
             fw3         Pastry shop             Foodworld
@@ -1928,8 +2021,8 @@ var zones=new function(){
             }
         }catch(err){GM_logError("zones.getEndtime","","",err);}
     }
-	//Fix Linus--Tux function hinzugefügt
-	this.setEndtime=function(zoneNr,endtime){
+    //Fix Linus--Tux function hinzugefügt
+    this.setEndtime=function(zoneNr,endtime){
         try{
             if(data[zoneNr]&&data[zoneNr]["endtime"]){
                 data[zoneNr]["endtime"]=endtime;
@@ -1977,6 +2070,56 @@ var zones=new function(){
                 var zTw=zones.getWatertime(zoneNrS);
                 var div;
 
+                // We gonna set the megafield timer to the end of the tour, if we can't/needn't to plant anything
+                if (megafieldSmartTimer && zoneNrF == "megafield") {
+                    // Do we have the data AND is a harvest tour running (and the job hasn't timed out already)?
+                    if (unsafeWindow.megafield_data && unsafeWindow.megafield_data.tour && unsafeWindow.megafield_data.job_start != "0") {
+                        var toHarvest = 0; // Amount of fields, that the machine still has to harvest
+                        if (unsafeWindow.megafield_data.tour.steps) {
+                            // Iterate over all steps (completed and to do ones)
+                            for (var i = 0; i < unsafeWindow.megafield_data.tour.steps.length; i++) {
+                                // If the i-th step has attributes, it's not completed yet
+                                if (Object.keys(unsafeWindow.megafield_data.tour.steps[i]).length > 0) {
+                                    toHarvest++;
+                                }
+                            }
+                        }
+                        var planted = Object.keys(unsafeWindow.megafield_data.area).length; // Amount of planted fields
+                        var unlocked = Object.keys(unsafeWindow.megafield_data.area_free).length; // Amount unlocked fields
+
+                        // Do we have to plant anything at all (or are we gonna finish the job soon)?
+                        var toPlant = 0; // Amount of plants missing/not yet planted to finish the job
+                        if (unsafeWindow.megafield_data.job && unsafeWindow.megafield_data.job.products) {
+                            // Iterate over needed products for current job
+                            for (var i = 0; i < unsafeWindow.megafield_data.job.products.length; i++) {
+                                var product = unsafeWindow.megafield_data.job.products[i];
+                                
+                                // If the product can be planted...
+                                if (product.duration) { // Only check plants: Cheese/Milk/Honey/... don't have a duration
+                                    // ... we add the total needed amount minus the amount we have minus the amount currently growing
+                                    toPlant += product.need - product.have - product.growing;
+                                }
+                            }
+                        }
+
+                        // There are empty fields (that need to be planted), if
+                        //  a) we still need to plant something AND
+                        //  b) there are empty fields
+                        var plantFields = toPlant && (toHarvest + planted) < unlocked;
+
+                        // If the tour is still running...
+                        if (unsafeWindow.megafield_data.tour.remain > 0) {
+                            // ... and we don't wanna plant anything right now...
+                            if (!plantFields) {
+                                // ... we set the megafield-timer to the end of the tour
+                                zT = unsafeWindow.megafield_data.tour.duration + unsafeWindow.megafield_data.tour.start;
+                                zones.setEndtime(zoneNrF, zT);
+                            }
+                            // otherwise we don't do anything until the empty fields are planted
+                        }
+                    }
+                }
+                
                 if (zT==NEVER){ // empty
                     if(unsafeData.readyZone[zoneNrS]&&(unsafeData.readyZone[zoneNrS][1]=="e")){
                         if(!unsafeData.readyZone[zoneNrS][2]){ unsafeData.readyZone[zoneNrS][2]=true; }
@@ -2550,6 +2693,10 @@ try{
                 case implode(["main","2"],"handleQuestLine/main2"):{
                     if(USERLEVEL<31){ help=-1; }
                 break;}
+                //georgvr 20151015 & 20151101
+                case implode(["main","3"],"handleQuestLine/main3"):{
+                    if((USERLEVEL<40)||(speedlink_farm5.style.display=="none")){ help=-1; }
+                break;}
                 case implode(["forestry","1"],"handleQuestLine/forestry1"):{
                     if(USERLEVEL<20){ help=-1; }
                 break;}
@@ -2581,6 +2728,10 @@ try{
                 switch(implode([type,campaign],"handleQuestLine/typeCampaign")){
                 case implode(["main","2"],"handleQuestLine/main2"):{
                     if(USERLEVEL<31){ help=-1; }
+                break;}
+                //georgvr 20151015 & 20151101
+                case implode(["main","3"],"handleQuestLine/main3"):{
+                    if((USERLEVEL<40)||(speedlink_farm5.style.display=="none")){ help=-1; }
                 break;}
                 case implode(["forestry","1"],"handleQuestLine/forestry1"):{
                     if(USERLEVEL<20){ help=-1; }
@@ -4035,10 +4186,15 @@ try{
             for(var prod in obj[type]){
                 if(!obj[type].hasOwnProperty(prod)){continue;}
                 help=(prodStock[type][prod]?prodStock[type][prod]:0);
+                if(obj[type][prod]>help) {
+                    help_Menge=obj[type][prod]-help;
+                } else {
+                    help_Menge=0;
+                }
                 if((item[0]==0)&&(gut[prod])){
-                    arr.push([type,prod,obj[type][prod],obj[type][prod]*gut[prod],(obj[type][prod]-help),(obj[type][prod]-help)*gut[prod]]);
+                    arr.push([type,prod,obj[type][prod],obj[type][prod]*gut[prod],help_Menge,help_Menge*gut[prod]]);
                 }else{
-                    arr.push([type,prod,obj[type][prod],0,(obj[type][prod]-help),0]);
+                    arr.push([type,prod,obj[type][prod],0,help_Menge,0]);
                 }
             }
         }
@@ -4047,8 +4203,8 @@ try{
         case "product": arr.sort(function (a,b){ if(a[0]==b[0]){ return(a[1]-b[1]); }else{ return(a[0]-b[0]); } }); break;
         case "absolute": arr.sort(function (a,b){ return(b[2]-a[2]); }); break;
         case "absoluteValue": arr.sort(function (a,b){ return(b[3]-a[3]); }); break;
-        case "relative": arr.sort(function (a,b){ return(b[4]-a[4]); }); break;
-        case "relativeValue": arr.sort(function (a,b){ return(b[5]-a[5]); }); break;
+        case "relative": arr.sort(function (a,b){ if(parseInt(b[4]-a[4],10)>0){ return(b[4]-a[4]); }else{ return(0); }; }); break;
+        case "relativeValue": arr.sort(function (a,b){ if(parseInt(b[5]-a[5],10)>0){ return(b[5]-a[5]); }else{ return(0); }; }); break;
         }
 
         // table
@@ -5554,14 +5710,16 @@ function buildInfoPanelOptions(){
 
         newtr=createElement("tr",{},newtable);
         newtd=createElement("td",{"align":"center"},newtr);
-        newinput=createElement("input",{"value":valLimitEmptyFields["1"],"class":"text","maxlength":"2","size":"2px","style":"background-color:transparent;text-align:center;"},newtd);
+        newinput=createElement("input",{"value":valLimitEmptyFields["1"],"class":"text","maxlength":"3","size":"2px","style":"background-color:transparent;text-align:center;"},newtd);
         newinput.addEventListener("focus",function(){this.style.backgroundColor="lightblue";},false);
         newinput.addEventListener("blur",function(){this.style.backgroundColor="transparent";},false);
         newinput.addEventListener("keyup",function(){
             var help=parseInt(this.value,10);
-            if(isNaN(help)||(help<0)){
+            if(isNaN(help)||(help<0)) {
                 this.value="";
-            }else{
+            } else if (help>120) {
+                this.value=120;
+            } else {
                 this.value=help;
                 valLimitEmptyFields["1"]=help;
                 GM_setValue2(COUNTRY+"_"+SERVER+"_"+USERNAME+"_valLimitEmptyFields",implode(valLimitEmptyFields,"buildInfoPanelOptions/valLimitEmptyFields"),14);
@@ -5742,6 +5900,24 @@ function buildInfoPanelOptions(){
                 }else{
                     newtd1.rowSpan++;
                 }
+
+            // Smarter megafield timer
+                newtr=createElement("tr",{},newtable);
+                newtd=createElement("td",{"align":"center"},newtr);
+                newinput=createElement("input", {
+                        "type":"checkbox",
+                        "class":"link",
+                        "checked": megafieldSmartTimer
+                }, newtd);
+                if(zones.getBlock(zoneNrF)){ newinput.disabled=true; }
+                newinput.addEventListener("click",function(){
+                    megafieldSmartTimer = this.checked;
+                    GM_setValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_megafieldSmartTimer", megafieldSmartTimer);
+                }, false);
+                newtd=createElement("td", {}, newtr);
+                if(zones.getBlock(zoneNrF)){ newtd.style.opacity="0.6"; }
+                createElement("span", {}, newtd, getText("settings_megafieldSmartTimer")[0]);
+                createElement("td", {"rowspan":1}, newtr, getText("settings_megafieldSmartTimer")[1]);
             }
         }
 
@@ -6004,9 +6180,6 @@ function buildInfoPanelOptions(){
         },false);
         createElement("td",{},newtr,getText("settings_valMinRackPlantsize")[0]);
         createElement("td",{},newtr,getText("settings_valMinRackPlantsize")[1]);
-
-        // newtr=createElement("tr",{},newtable);
-        // newtd=createElement("th",{"colspan":"3"},newtr,getText("minRackamount"));
 
         newtr=createElement("tr",{},newtable);
         newtd=createElement("td",{"align":"center"},newtr);
@@ -6475,6 +6648,7 @@ function buildInfoPanelOptions(){
         createElement("td",{},newtr,getText("settings_valHotkeys")[0]);
         createElement("td",{},newtr,getText("settings_valHotkeys")[1]);
 
+/*  georgvr - replaced by next Option
         newtr=createElement("tr",{},newtable);
         newtd=createElement("td",{"colspan":"2","align":"center"},newtr);
         newinput=createElement("button",{"type":"button","class":"link"},newtd,getText("settings_cacheReset")[0]);
@@ -6485,18 +6659,150 @@ function buildInfoPanelOptions(){
                     var protect={"kauf":1,"farmiLog":1,"vertraegeIn":1,"vertraegeOut":1,"levelLog":1,"nachrichten":1};
                     var help=cloneInto(GM_listValues(), unsafeWindow);
                     for(var v=help.length-1;v>-1;v--){
-                    if(help[v].match(COUNTRY+"_"+SERVER+"_"+USERNAME+"_")){
-                        var curr=help[v].replace(COUNTRY+"_"+SERVER+"_"+USERNAME+"_","");
-                        if(!protect[curr]){ GM_deleteValue(help[v]); }
-                    }
+                        if(help[v].match(COUNTRY+"_"+SERVER+"_"+USERNAME+"_")){
+                            var curr=help[v].replace(COUNTRY+"_"+SERVER+"_"+USERNAME+"_","");
+                            if(!protect[curr]){ GM_deleteValue(help[v]); }
+                        }
                     }
                     top.location.href=top.location.href;
                 },500);
             });
         },false);
         createElement("td",{},newtr,getText("settings_cacheReset")[1]);
+*/
 
-        // *****
+        /*    
+         *    Option added by georgvr 20151111
+         *    Option deletes all zones-related settings.  
+         *    Option is needed in case that buildings have been teared down and new building isn't recognized properly
+         */
+        newtr=createElement("tr",{},newtable);
+        newtd=createElement("td",{"colspan":"2","align":"center"},newtr);
+        newinput=createElement("button",{"type":"button","class":"link"},newtd,getText("settings_zoneReset")[0]);
+        newinput.addEventListener("click",function(){
+            alert2(getText("settings_zoneReset")[1],getText("yes"),getText("no"),function(){
+                GM_deleteValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_zones");
+                GM_deleteValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_zoneList");
+                GM_deleteValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_zoneSettings");
+                GM_deleteValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_zoneToLists");
+            });
+        },false);
+        createElement("td",{},newtr,getText("settings_zoneReset")[1]);
+
+        // Linus--Tux & georgvr 20151020
+        newtr=createElement("tr",{},newtable);
+        newtd=createElement("td",{"colspan":"2","align":"center"},newtr);
+        newinput=createElement("button",{"type":"button","class":"link"},newtd,getText("settings_setQuestMain")[0]);
+        newinput.addEventListener("click",function(){
+            alert2(getText("settings_setQuestMain")[1],getText("yes"),getText("no"),function(){
+                if (unsafeWindow.quests_status.hasOwnProperty("main")) { 
+                    if (!unsafeWindow.quests_status["main"].hasOwnProperty("1")){ 
+                        questData["main"][1] = INIT_questData["main"][1].clone();
+                        questData["main"][1]["nr"] = QUESTS["main"][1].length;
+                        questData["main"][1]["given"] = new Object();
+                        questData["main"][1]["time"] = 0;
+                        GM_setValueCache(COUNTRY+"_"+SERVER+"_"+USERNAME+"_questData",implode(questData,"handleQuestData/questData"));
+                        unsafeData.questData=questData.clone();
+                    }
+                    if (!unsafeWindow.quests_status["main"].hasOwnProperty("2")) { 
+                        questData["main"][2] = INIT_questData["main"][2].clone();
+                        questData["main"][2]["nr"] = QUESTS["main"][2].length;
+                        questData["main"][2]["given"] = new Object();
+                        questData["main"][2]["time"] = 0;
+                        GM_setValueCache(COUNTRY+"_"+SERVER+"_"+USERNAME+"_questData",implode(questData,"handleQuestData/questData"));
+                        unsafeData.questData=questData.clone();
+                    }
+                    if (!unsafeWindow.quests_status["main"].hasOwnProperty("3")){ 
+                        questData["main"][3] = INIT_questData["main"][3].clone();
+                        questData["main"][3]["nr"] = QUESTS["main"][3].length;
+                        questData["main"][3]["given"] = new Object();
+                        questData["main"][3]["time"] = 0;
+                        GM_setValueCache(COUNTRY+"_"+SERVER+"_"+USERNAME+"_questData",implode(questData,"handleQuestData/questData"));
+                        unsafeData.questData=questData.clone();
+                    }
+                }
+            });
+        },false);
+        createElement("td",{},newtr,getText("settings_setQuestMain")[1]);
+    
+        /*
+         *    Option added by georgvr
+         *    Option sets the questnumber of mainseries 3 to the mff-questnumber. 
+         *    Option is needed in case that the quest has been solved by an other device and cooldown-time is active
+         *    - Button is only executable if questseries 3 exists (linked to presence of Farm 5), 
+         *      and Questseries 3 is not accessible because cooldown-time is active (sandglass is visible)
+         */
+        newtr=createElement("tr",{},newtable);
+        newtd=createElement("td",{"colspan":"2","align":"center"},newtr);
+        newinput=createElement("button",{"type":"button","class":"link"},newtd,getText("settings_setQuestMain3")[0]);
+        if(unsafeWindow.quests_status["main"].hasOwnProperty("3")) {
+            var help_q = parseInt(unsafeWindow.quests_status["main"][3]["remain"],10);
+            if(isNaN(help_q)){ help_q=0; };
+        } else {
+            var help_q = 0;
+        }         
+        if(speedlink_farm5.style.display!="block" || help_q==0){newinput.disabled=true;}
+        newinput.addEventListener("click",function(){
+            alert2(getText("settings_setQuestMain3")[1],getText("yes"),getText("no"),function(){
+                //GM_log(implode(unsafeWindow.quests_status)); 
+                if (unsafeWindow.quests_status["main"].hasOwnProperty("3")){
+                    questData["main"][3] = INIT_questData["main"][3].clone();
+                    questData["main"][3]["nr"] = unsafeWindow.quests_status["main"][3]["questid"];
+                    questData["main"][3]["time"] = now+help_q;
+                    questData["main"][3]["given"] = new Object();
+                    questData["main"][3]["data"] = QUESTS["main"][3][(questData["main"][3]["nr"])];
+                    // available data-string in QUESTS (e.g. quest #3): "data\":[[[0,12,251],[0,9,826]],null,1401540,[[1,0,352,5],[9,0,352]]]
+                    // required syntax of data string for mouseover   : "data\":[[[0,12,251,true],[0,9,826,true]],null,1401540,[[1,0,352,5],[9,0,352]]]
+                    // difference from available data to required data: additional "true" within the product-array (missing true leads to display-style "strike through")
+                    questData["main"][3]["data"][0][0][3]=true;
+                    questData["main"][3]["data"][0][1][3]=true;
+                    GM_setValueCache(COUNTRY+"_"+SERVER+"_"+USERNAME+"_questData",implode(questData,"handleQuestData/questData"));
+                    unsafeData.questData=questData.clone();
+                }
+            });
+        },false);
+        createElement("td",{},newtr,(getText("settings_setQuestMain3")[1]));
+        help_q=null;
+
+/*
+        // Option added by georgvr 20151104 - Alternative mit Option um den Quest-Wert selber setzen zu können
+        // Is only shown, if Questseries 3 is available
+        if(unsafeWindow.quests_status["main"].hasOwnProperty("3") && speedlink_farm5.style.display=="block") {
+            newtr=createElement("tr",{},newtable);
+            newtd=createElement("td",{"align":"center"},newtr);
+            var newsel = createElement("select",{"id":"SetQuestMain3To","style":"width:auto;height:18px;margin-left:5px;"},newtd);
+                createElement("option",{"value":-1},newsel,getText("hide"));
+                for(var i=1;i<QUESTS["main"][3].length;i++){
+                    createElement("option",{"value":i},newsel,i);
+                }
+                createElement("option",{"value":(QUESTS["main"][3].length)++},newsel,getText("lastQuest"));
+            newsel.selectedIndex = questData["main"][3]["nr"];
+            var help_q=parseInt(questData["main"][3]["nr"],10);
+            newsel.addEventListener("change",function(){
+                if(isNaN(this.value)){return false;}
+                help_q=parseInt(this.value,10);
+            },false);
+            newtd=createElement("td",{"align":"center"},newtr);
+            newinput=createElement("button",{"type":"button","class":"link"},newtd,getText("settings_setQuestMain3_1")[0]);
+            newinput.addEventListener("click",function(){
+                alert2(getText("settings_setQuestMain3_1")[1],getText("yes"),getText("no"),function(){
+                    // Questnumber is set to the selected value - regardless whether the value is reasonable or not
+                    questData["main"][3]["nr"] = help_q;
+                    questData["main"][3]["time"] = now;
+                    questData["main"][3]["given"] = new Object();
+                    questData["main"][3]["data"] = QUESTS["main"][3][help_q];
+                    questData["main"][3]["data"][0][0][3]=true;
+                    questData["main"][3]["data"][0][1][3]=true;
+                    GM_setValueCache(COUNTRY+"_"+SERVER+"_"+USERNAME+"_questData",implode(questData,"handleQuestData/questData"));
+                    unsafeData.questData=questData.clone();
+                });
+            },false);
+            createElement("td",{},newtr,getText("settings_setQuestMain3_1")[1]);
+            newsel=null;i=null;help_q=null;
+        }
+*/
+
+        // *********************************************************************
         newtr=createElement("tr",{},newtable);
         newtd=createElement("th",{"colspan":"3"},newtr,"Developing");
 
@@ -7554,6 +7860,10 @@ function toolTipSales(nr){
     }catch(err){GM_logError("toolTipSales","","",err);}
 }
 
+/*
+  <div style="position:absolute; top:7px; left:8px;" class="tt7">  <div style="z-index: 100; display: none; position: absolute; top: 60px; right: 0px; white-space: nowrap;" class="ttbox" id="market_catitem7">Sonnenblumen (6.061)</div>  </div>
+*/
+
 function showMarket(pid){
     try{
         if(!gameLocation.check("city",1)){
@@ -7576,11 +7886,15 @@ function showMarket(pid){
             unsafeWindow.marketAction("marketinit");
         }else{
             closeInfoPanel();
-            unsafeWindow.market_filter_name="";
+            //unsafeWindow.market_filter_name="";
             unsafeWindow.market_filter_pid=parseInt(pid,10);
-            unsafeWindow.market_filter_own=0;
-            unsafeWindow.market_guild_filter=0;
-            unsafeWindow.showOffers();
+            //unsafeWindow.market_filter_own=0;
+            //unsafeWindow.market_guild_filter=0;
+            //Linus--Tux 20151110
+            //unsafeWindow.showOffers();
+            var help={"v":1,"e":2,"o":3,"fw1":4,"fw2":4,"fw3":4,"fw4":4,"z":5,"fl":7,"fla":7,"hr":1,"md":7,"ex":1,"c":0};
+            unsafeWindow.market_nav=help[prodTyp[0][parseInt(pid,10)]];
+            unsafeWindow.filterMarket();
         }
     }catch(err){ GM_logError("showMarket","pid="+pid,"",err); }
 }
@@ -8206,23 +8520,25 @@ function doMarketoffersNotepad(){
 function doRack(){
     try{
         var cand=$("rackItems").getElementsByClassName("tklein2");
-        for(var v=0;v<cand.length;v++){
-            var currProd=parseInt(cand[v].parentNode.id.replace("rackitem",""),10);
-            var cell=$(cand[v].parentNode.id+"format");
-            if(!cell){
-                cell=cand[v].parentNode.parentNode;
-                cell.setAttribute("class",(cell.getAttribute("class")+" link").replace(/(^|\s+)link\s+/g," ").replace(/^\s+/,""));
-                cand[v].style.display="none";
-                cell=createElement("div",{"id":"rackitem"+currProd+"format"},cand[v].parentNode);
+        if(unsafeWindow.farm!=5){ //Fix Linus--Tux 20151015
+            for(var v=0;v<cand.length;v++){
+                var currProd=parseInt(cand[v].parentNode.id.replace("rackitem",""),10);
+                var cell=$(cand[v].parentNode.id+"format");
+                if(!cell){
+                    cell=cand[v].parentNode.parentNode;
+                    cell.setAttribute("class",(cell.getAttribute("class")+" link").replace(/(^|\s+)link\s+/g," ").replace(/^\s+/,""));
+                    cand[v].style.display="none";
+                    cell=createElement("div",{"id":"rackitem"+currProd+"format"},cand[v].parentNode);
+                }
+                var str=numberFormatPrefixed(prodStock[0][currProd]);
+                if(cell.innerHTML!=str){ cell.innerHTML=str; }
+                str=cand[v].getAttribute("class")+(prodStock[0][currProd]<prodMinRack[0][currProd]?" lowrack":""); // .replace("tklein2","formattedRackItem")
+                if(cell.getAttribute("class")!=str){ cell.setAttribute("class",str); }
+                cell=null;
             }
-            var str=numberFormatPrefixed(prodStock[0][currProd]);
-            if(cell.innerHTML!=str){ cell.innerHTML=str; }
-            str=cand[v].getAttribute("class")+(prodStock[0][currProd]<prodMinRack[0][currProd]?" lowrack":""); // .replace("tklein2","formattedRackItem")
-            if(cell.getAttribute("class")!=str){ cell.setAttribute("class",str); }
-            cell=null;
         }
         cand=null;
-    }catch(err){ GM_logError("doRack","","v="+v,err); }
+    }catch(err){ GM_logError("doRack","","v="+v,err);}
 }
 function doFarmis(){
     try{
@@ -8608,6 +8924,7 @@ try{
         }
     }
     // Check quest requirements
+    if((USERLEVEL<40)||(speedlink_farm5.style.display=="none")){questData["main"]["3"]["nr"]=-1; }
     if(USERLEVEL<31){ questData["main"]["2"]["nr"]=-1; }
     if(USERLEVEL<20){ questData["forestry"]["1"]["nr"]=-1; }
     if(questData["forestry"]["1"]["nr"]<35){ questData["forestry"]["2"]["nr"]=-1; }
@@ -9066,6 +9383,158 @@ try{
             result=null;
         }catch(err){GM_logError("foodworldActionResponse","","",err);}
     });
+
+    unsafeOverwriteFunction("openMemoryResponse", function(s){
+        /*
+         * Contribution/Author: Moe
+         */
+    try{
+            unsafeWindow._openMemoryResponse(s);
+        } catch(err) { GM_logError("_openMemoryResponse","","",err); }
+        try{
+            if (s[4]) {
+                for (var i in s[4]) {
+                    $("memorycard"+i).innerHTML = '<span style="font-size: large;background-color:#fff;">Wert: ' + s[4][i] + '</span>';
+                }
+            }
+        } catch(err) {GM_logError("openFoodworldBuildingSelect","","",err); }
+    });
+
+    unsafeOverwriteFunction("contractsDialog", function(b, productId){
+        /*
+         * Is called, when User clicks a product in "New Contract" dialog to add that product to the cart.
+         * Contribution/Author: Moe
+         *
+         * b = Is either 'select' or nothing happens in original "contractsDialog"
+         * productId = Id of the clicked product
+         */
+        try {
+            unsafeWindow._contractsDialog(b, productId);
+        } catch(err) { GM_logError("contractsDialog","","",err); }
+        try {
+            // Read the saved value from DB (if it exists)
+            var value = GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_contractsProductInCart_"+productId,{});
+
+            // Draw radio buttons saved-value/market-value
+            var parent = $("contracts_button_add_cart").parentNode;
+            
+            var div = createElement("div", {
+                "style":"margin-bottom: 5px; text-align: left; padding-left: 50px;"
+            }, false, false);
+            parent.insertBefore(div, $("contracts_button_add_cart"));
+            
+            var radioPriceSaved = createElement("input", {
+                "id": "contractPriceSaved",
+                "type":"radio",
+                "name": "contractPrice"
+            }, div, false);
+            var labelPriceSavedText;
+            if (productId == value.id) {
+                labelPriceSavedText = getText("lastPrice") + " (" + value.price + " kT)";
+            } else {
+                labelPriceSavedText = getText("lastPrice");
+            }
+            // Label must be created before it's (possibly) disabled in the next if-else-clause
+            var labelPriceSaved = createElement("label", {
+                "for": "contractPriceSaved"
+            }, div, labelPriceSavedText);
+
+            // Check, if there is a saved value or we disable the radio button
+            if (productId == value.id) {
+                radioPriceSaved.addEventListener("click", function () {
+                    $("contracts_select_price_input").value = value.price;
+                }, false);
+            } else {
+                // No saved value
+                radioPriceSaved.disabled = true;
+                labelPriceSaved.style = "color: gray; font-style: italic;";
+            }
+
+            createElement("br", {}, div, false);
+
+            var radioPriceMarket = createElement("input", {
+                "id": "contractPriceMarket",
+                "type":"radio",
+                "name": "contractPrice"
+            }, div, false);
+            console.log(NPC[0][productId]);
+            var marketPrice = preisBeob[productId][2] ? preisBeob[productId][2] : NPC[0][productId];
+            createElement("label", {
+                "for": "contractPriceMarket"
+            }, div, getText("marketPrice") + " (" + marketPrice + " kT)");
+            radioPriceMarket.addEventListener("click", function () {
+                $("contracts_select_price_input").value = marketPrice;
+            }, false);
+
+            // Check, if there is a persisted entry for the current account and product
+            if (productId == value.id) {
+                // Yes, there is. We only set the price, not amount!
+                // $("contracts_select_pid_input").value = value.amount;
+                $("contracts_select_price_input").value = value.price;
+                radioPriceSaved.checked = true;
+            } else {
+                // No, there isn't. We set the current market price
+                $("contracts_select_price_input").value = marketPrice;
+                radioPriceMarket.checked = true;
+            }
+
+            // Uncheck radio buttons, when User edits price manually
+            $("contracts_select_price_input").addEventListener("keydown", function () {
+                radioPriceSaved.checked = false;
+                radioPriceMarket.checked = false;
+            }, false);
+
+        } catch(err) { GM_logError("contractsDialog","","",err); }
+    });
+
+    unsafeOverwriteFunction("contractsProductInCart", function(productId){
+        /*
+         * Is called, when User clicks "Add Product" in dialog.
+         * Contribution/Author: Moe
+         *
+         * productId = Id of the clicked product
+         */
+        try {
+            var amount = $("contracts_select_pid_input").value;
+            var price = $("contracts_select_price_input").value;
+            if (amount && price) {
+                var value = {id: productId, amount: amount, price: price};
+                GM_setValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_contractsProductInCart_"+productId,value);
+            }
+            unsafeWindow._contractsProductInCart(productId);
+        } catch(err) { GM_logError("contractsProductInCart","","",err); }
+    });
+
+    unsafeOverwriteFunction("contractsNew", function(){
+        /*
+         * Contribution/Author: Moe
+         */
+        try{
+            unsafeWindow._contractsNew();
+        } catch(err) { GM_logError("_contractsNew","","",err); }
+        try{
+            // We exchange the cart-div with a form-tag, so browser auto-fill hooks in
+            var cartDiv = $("contracts_new_cart");
+            var cartDivNextSibling = cartDiv.nextElementSibling;
+            cartDiv.parentNode.removeChild(cartDiv);
+            
+            var cartForm = createElement("form", {
+                "id": "contracts_new_cart",
+                "autocomplete": "on"
+            }, false, false);
+            cartForm.addEventListener("submit", function(event){
+                event.preventDefault();
+            });
+
+            var nodes = cartDiv.childNodes;
+            var length = nodes.length;
+            for(i = 0; i < length; i++) {
+                cartForm.appendChild(cartDiv.removeChild(nodes[0]));
+            }
+            cartDivNextSibling.parentNode.insertBefore(cartForm, cartDivNextSibling);
+        } catch(err) {GM_logError("contractsNew","","",err); }
+    });
+    
     unsafeOverwriteFunction("openFoodworldBuildingSelect",function(position,slot){
         try{
             unsafeWindow._openFoodworldBuildingSelect(position,slot);
@@ -11664,86 +12133,129 @@ return false;
             }
         }catch(err){ GM_logError("marketAction","","",err); }
     });
+    
+    // Revised by Moe
     unsafeOverwriteFunction("marketActionResponse",function(request,action,id,open){
         try{
-            var result = checkRequest(request)
-            if((result!=0)&&(result[0]!=0)&&(result[1]["offers"])){
-                //GM_log("marketActionResponse "+result[1]["offers"].length);
+            var result = checkRequest(request);
+            if(result!=0 && result[0]!=0 && result[1]["offers"]) {
                 // Save own offers
                 var err_trace="Save own offers";
-                var _ownMarketOffers=new Array();
-                var marketOffersArr=new Array();
-                var row,prod,preis,menge,menge_sum;
+                var ownOffersMap = new Object();
+                var marketOffersArr = new Array();
+                var row, offer_id, prod, preis, menge, menge_sum, typ;
                 err_trace="Save own offers";
-                for(var v=0;v<result[1]["offers"].length;v++){
-                    row=result[1]["offers"][v];
-                    prod=parseInt(row["p"],10);
-                    preis=parseFloat(row["pr"],10);
-                    menge=parseInt(row["a"],10);
-                    if(row["s"]){
-                        _ownMarketOffers.push([prod,preis,menge]);
+                // Iterate over received offers. Put my offers into ownOffersMap
+                for(var v = 0; v < result[1]["offers"].length; v++){
+                    row=result[1]["offers"][v]; // A received offer
+                    offer_id = parseInt(row["id"], 10); // Id of offer
+                    prod=parseInt(row["p"], 10); // Id of product in offer
+                    preis=parseFloat(row["pr"], 10); // Price of pruduct
+                    menge=parseInt(row["a"], 10); // Amount
+                    typ=prodTyp[0][prod] // Type of the product
+                    if (row["s"]) { // Is this my offer?
+                        ownOffersMap[offer_id] = {id: offer_id, prod: prod, preis: preis, menge: menge, typ: typ};
                     }
-                    if(!marketOffersArr[prod]){ marketOffersArr[prod]=new Array(); }
-                    // TODO(Seberoth): What is time again?
-                    // marketOffersArr[prod].push([menge,preis,parseInt(row["zeit"],10)]);
-                    marketOffersArr[prod].push([menge,preis]);
-                }
-                // sort the ownMarketOffers-data
-                _ownMarketOffers.sort(function(a,b){
-                    if(a[0]==b[0]){
-                        return(a[1]-b[1]);
-                    } else if(prodTyp[0][a[0]]==prodTyp[0][b[0]]){
-                        return(a[0]-b[0]);
-                    } else {
-                        return({"c":0,"v":1,"e":2,"o":3,"fw1":4,"fw2":5,"fw3":6,"fw4":7,"z":8}[prodTyp[0][a[0]]]-{"c":0,"v":1,"e":2,"o":3,"fw1":4,"fw2":5,"fw3":6,"fw4":7,"z":8}[prodTyp[0][b[0]]]);
-                    }
-                });
-                ownMarketOffers=_ownMarketOffers;
 
-                GM_setValueCache(COUNTRY+"_"+SERVER+"_"+USERNAME+"_ownMarketOffers",implode(ownMarketOffers,"marketActionResponse/ownMarketOffers"));
+                    if(!marketOffersArr[prod]) {
+                        marketOffersArr[prod] = new Array();
+                    }
+                    marketOffersArr[prod].push([menge, preis, offer_id]);
+                }
+
+                // Check, if all my offers were in the received ones
+                if (Object.keys(ownOffersMap).length != result[1]["count"]) {
+                    // No => Add the missing ones to ownOffersMap. We take them from the old ownMarketOffers-Array. It's not 100% correct, but a very good guess!
+                    for (var v = 0; v < ownMarketOffers.length; v++) {
+                        row = ownMarketOffers[v]; // An "old" offer
+                        
+                        // Check, if we know its product_id and if it isn't already in ownOffersMap. Check for product_id is neccessary because of migration :-)
+                        if (row[3] && !ownOffersMap[row[3]]) {
+                            ownOffersMap[row[3]] = {id: row[3], prod: row[0], preis: row[1], menge: row[2], typ: row[4]};
+                        }
+                    }
+                }
+
+                // Structure of ownMarketOffers: Array = [prod_id, preis, menge, offer_id, typ]
+                ownMarketOffers = new Array(); // Reset global variable, that contains all my offers
+                // Repack ownOffersMap into ownMarketOffers
+                for (var oid in ownOffersMap) {
+                    if (ownOffersMap.hasOwnProperty(oid)) {
+                        var o = ownOffersMap[oid];
+                        ownMarketOffers.push([o["prod"], o["preis"], o["menge"], o["id"], o["typ"]]);
+                    }
+                }
+                
+                // Sort ownMarketOffers-data
+                var TYP2NUMBER = {"c":0,"v":1,"e":2,"o":3,"fw1":4,"fw2":5,"fw3":6,"fw4":7,"z":8, "fl": 9, "fla": 10};
+                ownMarketOffers.sort(function(a, b) {
+                    var result = TYP2NUMBER[a[4]] - TYP2NUMBER[b[4]]; // Product-Type
+                    if (result == 0) {
+                        result = a[0] - b[0]; // Same Type => Product-Id
+
+                        if (result == 0) {
+                            result = a[1] - b[1]; // Same Product => Price
+                        }
+                    }
+                    return result;
+                });
+
+                // Persist values
+                GM_setValueCache(COUNTRY+"_"+SERVER+"_"+USERNAME+"_ownMarketOffers", implode(ownMarketOffers,"marketActionResponse/ownMarketOffers"));
                 doMarketoffersNotepad();
-                // calculate all observed prices
+                
+                // Calculate all observed prices
                 err_trace="Observing prices";
-                for(var v=0;v<prodBlock[0].length;v++){
-                    if(prodBlock[0][v]===undefined){ continue; }
-                    if((!prodBlock[0][v].match(/t/))&&(!prodBlock[0][v].match(/l/))){
-                        if(marketOffersArr[v]){
-                            // sort offers
-                            marketOffersArr[v].sort(function(a,b){
-                                return((a[1]==b[1])?(a[2]-b[2]):(a[1]-b[1]));
+                for(var v = 0; v < prodBlock[0].length; v++) {
+                    if (prodBlock[0][v] === undefined) { continue; }
+                    if(!prodBlock[0][v].match(/t/) && !prodBlock[0][v].match(/l/)) {
+                        // marketOffersArr[v] = [menge, preis, offer_id]
+                        if (marketOffersArr[v]) {
+                            // Sort offers by price, lowest first... same price? => take offer_id
+                            marketOffersArr[v].sort(function(a, b) {
+                                return a[1]==b[1] ? a[2]-b[2] : a[1]-b[1];
                             });
-                            marketOffersArr[v]=marketOffersArr[v].slice(0,18);
-                            menge_sum=0;
-                            for(var w=0;w<marketOffersArr[v].length;w++){
+                            marketOffersArr[v]=marketOffersArr[v].slice(0,18); // Take cheapest 18 offers
+                            
+                            menge_sum = 0; // Total amount of product v offered at market (within the cheapest 18 offers)
+                            // Iterate over those (at most) 18 offers of product v
+                            for(var w = 0; w < marketOffersArr[v].length; w++){
                                 menge_sum += marketOffersArr[v][w][0];
-                            }
-                            gutBeob[v]=calcObservedPrice((prodTyp[0][v]=="z"?2:1),marketOffersArr[v]);
+                            };
+                            // Calc a weighted "watched price" value for product v
+                            gutBeob[v] = calcObservedPrice((prodTyp[0][v]=="z" ? 2 : 1), marketOffersArr[v]);
                             if (valNimmBeob){
-                                if(!isNaN(NPC[0][v])){
-                                    gut[v]=Math.min(gutBeob[v],NPC[0][v]);
+                                if(!isNaN(NPC[0][v])) { // If product v can be bought at NPC
+                                    gut[v]=Math.min(gutBeob[v], NPC[0][v]);
                                 }else{
                                     gut[v]=gutBeob[v];
                                 }
                             }
-                            if(!(preisBeob instanceof Array)){ preisBeob=new Array(); }
-                            preisBeob[v]=[true,now,marketOffersArr[v][0][1],marketOffersArr[v][marketOffersArr[v].length-1][1],menge_sum];
-                        }else{
+                            if (!(preisBeob instanceof Array)) { preisBeob=new Array(); }
+                            // preisBeob[v] = [isOfferAtMarket, timeOfCalculation, priceCheapest, priceMostExpensive, amountInPriceRange]
+                            preisBeob[v]=[true, now, marketOffersArr[v][0][1], marketOffersArr[v][marketOffersArr[v].length-1][1], menge_sum];
+                        } else {
                             // no offers
-                            if (valNimmBeob){
-                                if(!isNaN(NPC[0][v])){
-                                    gut[v]=NPC[0][v];
-                                }else{
-                                    gut[v]=0;
+                            if (valNimmBeob) {
+                                if(!isNaN(NPC[0][v])) {
+                                        gut[v] = NPC[0][v]; // Use NPC price if available
+                                } else {
+                                        // Why
+                                        if (NPC[0][v]===undefined && !NPC[0][10].match(/f/)) { //Linus--Tux 20151110
+                                                gut[v]=0;
+                                        } else {
+                                                //to do
+                                        }
                                 }
                             }
-                            if(!(preisBeob instanceof Array)){ preisBeob=new Array(); }
-                            if(!(preisBeob[v]&&preisBeob[v][0])){
-                                preisBeob[v]=[false,now,,,0];
+                            if (!(preisBeob instanceof Array)) { preisBeob=new Array(); }
+                            if (!(preisBeob[v] && preisBeob[v][0])) { // If no "watched price"...
+                                preisBeob[v]=[false,now,,,0]; // ... set preisBeob[v] accordingly
                             }
                         }
                     }
                 }
-                _ownMarketOffers=null;marketOffersArr=null;
+                marketOffersArr=null; ownOffersMap=null;
                 row=null;prod=null;preis=null;menge=null;menge_sum=null;
                 if (valNimmBeob){
                     GM_setValueCache(COUNTRY+"_"+SERVER+"_gut",implode(gut,"marketActionResponse/gut"));
@@ -12031,7 +12543,8 @@ return false;
     newdiv=createElement("div",{"style":"display:none;"},$("lager_info"));//position:absolute;top:50px;left:58px;display:none;
     createElement("img",{"src":GFX+"adtime.gif","style":"float:left;width:14px;height:14px;margin-left:5px;"},newdiv);
     createElement("div",{"id":"lager_zeit_ziel","class":"tnormal","style":"float:left;margin-left:5px;"},newdiv);
-    newdiv=createElement("div",{"id":"sendStockingContract","class":"link playerContract","style":"position:absolute;top:155px;left:10px;"},$("lager").firstElementChild);
+    //Linus--Tux: Icon "contract to yourself" fade out  
+    newdiv=createElement("div",{"id":"sendStockingContract","class":"link playerContract","style":"position:absolute;top:155px;left:10px;display:none;"},$("lager").firstElementChild);
     createElement("div",{},newdiv);
     newdiv.addEventListener("mouseover",function(event){
         try{
@@ -12139,15 +12652,35 @@ return false;
     // events general =============================================================================
     err_trace="events general";
     // rack
+    var prodStockTemp=new Array(); //Stock Farm 1
+    for(var i in unsafeWindow.rackobj) {
+        for(var j in unsafeWindow.rackobj[i]) {
+            for(var k in unsafeWindow.rackobj[i][j]) {
+                if (i==5) { //Rackfarm 5
+                    prodStock[5][unsafeWindow.rackobj[i][j][k].pid]=parseInt(unsafeWindow.rackobj[i][j][k].amount);
+                }
+                else {
+                    prodStockTemp[unsafeWindow.rackobj[i][j][k].pid]=parseInt(unsafeWindow.rackobj[i][j][k].amount);
+                }
+            }
+        }
+    }
+    // save rack amounts
     for(var v in prodName[0]){
         if(!prodName[0].hasOwnProperty(v)){ continue; }
         if(v==0){ continue; } // Coins
+        //Linus--Tux 20151020
+        var c=(prodStockTemp[v])?prodStockTemp[v]:0;
+        prodStock[0][v]=(c?parseInt(c,10):0);
+                
+        /*if(unsafeWindow.farm==5){continue; } //Linus--Tux 20151028
         if (!unsafeWindow.rackElement[v]){ prodStock[0][v]=0; } // not available
         // else if ("undefined" === typeof(unsafeWindow.rackElement[v].id)){ prodStock[0][v]=0; } // empty elements
         else if ("undefined" === typeof(unsafeWindow.rackElement[v].number)){ prodStock[0][v]=0; } // no stock available
         else if (!unsafeWindow.rackElement[v].number){ prodStock[0][v]=0; } // no stock available
-        else { prodStock[0][v]=parseInt(unsafeWindow.rackElement[v].number,10); }
+        else { prodStock[0][v]=parseInt(unsafeWindow.rackElement[v].number,10); }*/
     }
+
     GM_setValueCache(COUNTRY+"_"+SERVER+"_"+USERNAME+"_prodStock",implode(prodStock,"rack/prodStock"));
     unsafeWindow.updateRackBusy=false;
     unsafeOverwriteFunction("updateRack",function(rack,init){
@@ -12170,15 +12703,34 @@ return false;
             unsafeWindow._sortRackNew(type,L);
         }catch(err){GM_logError("_sortRackNew","type="+type+" L="+L,"",err);}
         try{
+            var prodStockTemp=new Array(); //Stock Farm 1
+            for(var i in unsafeWindow.rackobj) {
+                for(var j in unsafeWindow.rackobj[i]) {
+                    for(var k in unsafeWindow.rackobj[i][j]) {
+                        if (i==5) { //Rackfarm 5
+                            prodStock[5][unsafeWindow.rackobj[i][j][k].pid]=parseInt(unsafeWindow.rackobj[i][j][k].amount);
+                        }
+                        else {
+                            prodStockTemp[unsafeWindow.rackobj[i][j][k].pid]=parseInt(unsafeWindow.rackobj[i][j][k].amount);
+                        }
+                    }
+                }
+            }
+
             // save rack amounts
             for(var v in prodName[0]){
                 if(!prodName[0].hasOwnProperty(v)){ continue; }
                 if(v==0){ continue; } // Coins
+                //Linus--Tux 20151020
+                var c=(prodStockTemp[v])?prodStockTemp[v]:0;
+                prodStock[0][v]=(c?parseInt(c,10):0);
+
+                /*if(unsafeWindow.farm==5){continue; } //Linus--Tux 20151028
                 if (!unsafeWindow.rackElement[v]){ prodStock[0][v]=0; } // not available
                 // else if ("undefined" === typeof(unsafeWindow.rackElement[v].id)){ prodStock[0][v]=0; } // empty elements
                 else if ("undefined" === typeof(unsafeWindow.rackElement[v].number)){ prodStock[0][v]=0; } // no stock available
                 else if (!unsafeWindow.rackElement[v].number){ prodStock[0][v]=0; } // no stock available
-                else { prodStock[0][v]=parseInt(unsafeWindow.rackElement[v].number,10); }
+                else { prodStock[0][v]=parseInt(unsafeWindow.rackElement[v].number,10); }*/
             }
             GM_setValueCache(COUNTRY+"_"+SERVER+"_"+USERNAME+"_prodStock",implode(prodStock,"sortRackNew/prodStock"));
             var cell=$("divUpdateRack");
@@ -12378,18 +12930,14 @@ return false;
         for(var i=unsafeWindow.messages_data.length-1;i>=0;i--){
             currMsg=unsafeWindow.messages_data[i];
             help=currMsg.body.replace(/\s+/g," ");
-			if([getText("msgSubjectCongratulation"),getText("msgSubjectContractReject"),getText("msgSubjectPresent"),getText("msgSubjectCoins"),getText("msgSubjectLevel"),getText("msgSubjectWeed1"),getText("msgSubjectWeed2"),getText("msgSubjectPremium")].contains(currMsg.subject)){ //Fix georgvr 10092015
-			/*if([getText("msgSubjectCongratulation"),getText("msgSubjectContractReject"),getText("msgSubjectPresent"),getText("msgSubjectCoins"),getText("msgSubjectLevel"),getText("msgSubjectWeed1"),getText("msgSubjectWeed2")].contains(currMsg.subject)){ *///Fix georgvr
+            if([getText("msgSubjectCongratulation"),getText("msgSubjectCongratulation2"),getText("msgSubjectContractReject"),getText("msgSubjectContractCancel"),getText("msgSubjectContractNew"),getText("msgSubjectPresent"),getText("msgSubjectCoins"),getText("msgSubjectLevel"),getText("msgSubjectWeed1"),getText("msgSubjectWeed2"),getText("msgSubjectPremium")].contains(currMsg.subject)){   //Fix georgvr 20150910 & 20151017 & 20151023
+                // New message without handling
+            }else if([getText("msgSubjectFriend"),getText("msgSubjectFriendEnd")].contains(currMsg.subject)){
                 // New message without handling
             }else if(currMsg.subject.match(regMsgSubjectQuest)){
                 // New message without handling
-            }else if(help2=regMsgSubjectFriend.exec(currMsg.subject)){
-                // New friendship
-                // GM_logInfo("messagesSystem","","messages_data["+i+"]:\n"+print_r(unsafeWindow.messages_data[i],"",true,"\n"),"Friendship message");
-                sender=help[1];
-            }else if(help2=regMsgSubjectFriendCancel.exec(currMsg.subject)){ //Fix georgvr
-				sender=help[1];
-			}else if (currMsg.subject.match(regMsgSubjectMarketsale)){ // Market sale
+            }else if (currMsg.subject.match(regMsgSubjectMarketsale)){
+                // Market sale
                 if (help2=regMsgContentMarketsale.exec(help)){
                     // Market sale
                     // GM_logInfo("messagesSystem","","messages_data["+i+"]:\n"+print_r(unsafeWindow.messages_data[i],"",true,"\n"),"Market sale");
@@ -12457,8 +13005,12 @@ return false;
                 }else{
                     GM_logWarning("messagesSystem","","messages_data["+i+"]:\n"+print_r(unsafeWindow.messages_data[i],"",true,"\n"),"Could not parse content of a market sale message.");
                 }
-            }else if (getText("msgSubjectContractsale")==currMsg.subject){ // Contract sale
+            }else if (getText("msgSubjectContractsale")==currMsg.subject){ 
+                // Contract sale
                 if (help2=regMsgContentContractsale.exec(help)){
+                    // help2[1] = Sender
+                    // help2[2] = amount of products and product (as a list)
+                    // help2[3] = amount of kT
                     // GM_logInfo("messagesSystem","","messages_data["+i+"]:\n"+print_r(unsafeWindow.messages_data[i],"",true,"\n"),"Contract sale");
                     if(COUNTRY=="SE"){
                         help2[3]=help2[3].replace(/\.(\d\d) /,",$1 ");
@@ -12481,7 +13033,13 @@ return false;
                     logSales[j][1]=time;
                     logSales[j][2]=sender;
                     logSales[j][3]=new Array();
+                    help3=new Array();
                     help4=new Array();
+                    //GM_logInfo("messagesSystem","","messages_data["+i+"]:\n"+print_r(unsafeWindow.messages_data[i],"",true,"\n"),help2[2]);
+                    //help3=regMsgContentContractsaleList.exec(help2[2])
+                    //GM_logInfo("messagesSystem","","messages_data["+i+"]:\n"+print_r(unsafeWindow.messages_data[i],"",true,"\n"),help3[2]);
+                    //GM_logInfo("messagesSystem","","messages_data["+i+"]:\n"+print_r(unsafeWindow.messages_data[i],"",true,"\n"),help3[1]);
+                    //GM_logInfo("messagesSystem","","messages_data["+i+"]:\n"+print_r(unsafeWindow.messages_data[i],"",true,"\n"),help3[2]);
                     while(help3=regMsgContentContractsaleList.exec(help2[2])){
                         help2[2]=help2[2].replace(help3[0],"");
                         logSales[j][3].push([prodId[0][help3[2]],parseInt(help3[1],10)]);
@@ -12925,8 +13483,10 @@ return false;
             z=parseInt(unsafeWindow.garten_zeit[v],10);
             p=unsafeWindow.garten_prod[v];
             switch(unsafeWindow.garten_kategorie[v]){
-			case "v":
-			case "hr": { // plants
+            //Linus-Tux 20151015
+            case "v":
+            case "hr":
+            case "ex": { // plants
                 helpArray[v]=true;
                 helpArray2[v]=false;
                 if (z>0){
@@ -13295,8 +13855,8 @@ return false;
                                 item=tempZoneProductionData[0][iType][iProdStr];
                                 for(var i=0;i<item.length;i++){
                                     item[i][2]=Math.max(item[i][2]-600,nowServer);
-									//Fix Linus--Tux
-									endTime=item[i][2];
+                                    //Fix Linus--Tux
+                                    endTime=item[i][2];
                                     if(item[i][2]<item[i][3]){ item[i][3]=NEVER; }
                                 }
                             }
@@ -13304,13 +13864,13 @@ return false;
                     }
                 }
                 zones.setProduction(zoneNrS,tempZoneProductionData.clone());
-				//Fix Linus--Tux
-				zones.setEndtime(zoneNrS, endTime);
-				tempZoneProductionData=null;
+                //Fix Linus--Tux
+                zones.setEndtime(zoneNrS, endTime);
+                tempZoneProductionData=null;
             }
-			//Fix Linus--Tux
-			calcTotalEndtime();
-			zones.save();
+            //Fix Linus--Tux
+            calcTotalEndtime();
+            zones.save();
         }catch(err){GM_logError("doDogBen","","",err);}
     }
 
@@ -13621,8 +14181,86 @@ return false;
             raiseEvent("gameOpenFactoryKnitting");
         }catch(err){GM_logError("buildStrickereiInner","","",err);}
     });
+
+    //Fuelstation
+    
+    //Div id fuelstation_product_select_inner
+    //n: product_select
+    //z: Zonenummer
+    //d: Slot
+    //s: Produkt
+    //y:
+    unsafeOverwriteFunction("dialogFuelstation",function(n, z, d, s, y){
+        try{
+            unsafeWindow._dialogFuelstation(n, z, d, s, y);
+        }catch(err){GM_logError("dialogFuelstation","","",err);}
+        try{
+            GM_log("dialogFuelstation "+"n"+n+"z"+z+"d"+d+"s"+s+"y"+y);
+            raiseEvent("gameFactoryFuelstationDialogStarted");
+        }catch(err){GM_logError("dialogFuelstation","","",err);}
+    });
+    
+    
+    //a: Zone-Nummer
+    unsafeOverwriteFunction("buildFuelstation",function(a){
+        try{
+            unsafeWindow._buildFuelstation(a);
+        }catch(err){GM_logError("_buildFuelstation","","",err);}
+        try{
+            GM_log("buildFuelstation "+"a"+a);
+        
+            raiseEvent("buildFuelstation");
+        }catch(err){GM_logError("buildFuelstation","","",err);}
+    });
+    
+    
+    //calcPointsFuelstation
+    //h:
+    //m:
+    //e:
+    unsafeOverwriteFunction("calcPointsFuelstation",function(h, m, e){
+        try{
+            unsafeWindow._calcPointsFuelstation(h, m, e);
+        }catch(err){GM_logError("_calcPointsFuelstation","","",err);}
+        try{
+            GM_log("calcPointsFuelstation "+"h"+h+"m"+m+"e"+e);
+            raiseEvent("calcPointsFuelstation");
+        }catch(err){GM_logError("calcPointsFuelstation","","",err);}
+    });
+    
+    //calcPointsFuelstation
+    //h:
+    //m:
+    //e:
+    unsafeOverwriteFunction("fuelstationStats",function(){
+        try{
+            unsafeWindow._fuelstationStats();
+        }catch(err){GM_logError("_fuelstationStats","","",err);}
+        try{
+            GM_log("fuelstationStats ");
+            raiseEvent("fuelstationStats");
+        }catch(err){GM_logError("fuelstationStats","","",err);}
+    });
+    /*unsafeOverwriteFunction("updateFuelstation",function(){
+        try{
+            unsafeWindow._updateFuelstation();
+        }catch(err){GM_logError("_updateFuelstation","","",err);}
+        try{
+            GM_log("updateFuelstation ");
+            raiseEvent("updateFuelstation");
+        }catch(err){GM_logError("updateFuelstation","","",err);}
+    });
+    */
+    //closeFuelstationHelp()
+    //openFuelstationHelp()
+    //setFuelstationHelp(a)
+    //fuelstationCheckLevelAdd(a, d)
+    //fuelstationStats()
+    //updateFuelstation()
+    //updateFuelstationLevel(e, n)
+    
     unsafeOverwriteFunction("innerInfosResponse",function(zoneNr){
-    // oil, knitting, factory, pony
+    // oil, knitting, factory, pony, megafield, fuelstation
         try{
             unsafeWindow._innerInfosResponse(zoneNr);
         }catch(err){GM_logError("_innerInfosResponse","","",err);}
@@ -13636,6 +14274,7 @@ return false;
                 case "17":  // Carpentry
                 case "18":  // Pony
                 case "19":  // Megafield
+                case "20":  // Fuelstation
                 default:
                 }
             }else{
@@ -13650,6 +14289,7 @@ return false;
     megafieldVehicle = explode(GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_megafieldVehicle"),"do_main/megafieldVehicle",[]);
     unsafeData.megafieldVehicle=megafieldVehicle.clone();
     logMegafieldJob = explode(GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_logMegafieldJob"),"do_main/logMegafieldJob",[]);
+    megafieldSmartTimer = GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_megafieldSmartTimer", true);
     for(var i=logMegafieldJob.length-1;i>=0;i--){
         if(!logMegafieldJob[i][0]){ // no start time of the job
             logMegafieldJob.splice(i,1);
@@ -16927,677 +17567,6 @@ return;
 
 //***********************************************************************************************************
 
-function do_vertraege_head(){
-try{
-    //GM_log("do_vertraege_head");
-    var candtr=document.getElementsByTagName("table")[0].getElementsByTagName("tr");
-    for(var v=0;v<candtr[0].childElementCount;v++){
-        candtr[0].children[v].setAttribute("class","bordered link hoverBgLightbrown");
-        candtr[0].children[v].firstElementChild.setAttribute("class","link");
-    }
-    var newtd=createElement("td",{"class":"bordered link hoverBgLightbrown","align":"center"},candtr[0]);
-    var newa=createElement("a",{"style":"font-weight:bold;"},newtd,getText("oldOnes"));
-    newa.addEventListener("click",function(){
-        window.setTimeout(function(){
-            GM_setValue(COUNTRY+"_"+SERVER+"_pagedataVertraegeOverview",implode({"contractview":"old"},"do_vertraege_head/contractview"));
-            if (PAGE=="vertraege/overview"){ do_vertraege_overview(); }
-            else{ location.href="overview.php"; }
-        },0);
-    },false);
-    candtr=null;newtd=null;newa=null;
-}catch(err){GM_logError("do_vertraege_head","","",err);}
-}
-
-function do_vertraege_new(){
-try{
-    var err_trace="init";
-    loadProductData();
-    var candtable=document.getElementsByTagName("table");
-    candtable[0].firstElementChild.firstElementChild.firstElementChild.bgColor="lightblue";
-
-    var candinput=candtable[1].getElementsByTagName("input");
-    candtable=null;
-    var newdiv;
-    if (candinput.length>0){
-        // contract submit page
-        err_trace="contract submit page";
-        var neuvertrag=new Array();
-        neuvertrag[3]=new Array();
-        for(var v=0;v<candinput.length;v++){
-            if (candinput[v].name=="contract_to"){
-                neuvertrag[2]=candinput[v].value;
-                GM_setValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_lastContractTo",candinput[v].value);
-            }
-            else if (candinput[v].name.search("prod")!=-1){ neuvertrag[3][/(\d+)/.exec(candinput[v].name)[1]]=[parseInt(candinput[v].value,10),,]; }
-            else if (candinput[v].name.search("anz")!=-1){ neuvertrag[3][/(\d+)/.exec(candinput[v].name)[1]][1]=parseInt(candinput[v].value,10); }
-            else if (candinput[v].name.search("preis")!=-1){ neuvertrag[3][/(\d+)/.exec(candinput[v].name)[1]][2]=parseFloat(candinput[v].value,10); }
-        }
-        if(neuvertrag[2].toLowerCase()!=USERNAME){
-            var vertraegeOut=explode(GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_vertraegeOut"),"do_vertraege_new/vertraegeOut",[]);
-            var vertraegeOutIndex={};
-            var valContractLogAmount=GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_valContractLogAmount",200);
-            neuvertrag[0]=0;
-            neuvertrag[1]= Math.round((new Date()).getTime()/1000);
-            for(var v=0;v<vertraegeOut.length;v++){
-                if(isNaN(vertraegeOut[v][0])||(vertraegeOutIndex[vertraegeOut[v][0]]>-1)){
-                    vertraegeOut.splice(v,1);
-                    v--;
-                }else{
-                    vertraegeOutIndex[vertraegeOut[v][0]]=v;
-                    neuvertrag[0]=Math.max(neuvertrag[0],vertraegeOut[v][0]);
-                }
-            }
-            neuvertrag[0]++;
-            vertraegeOut.push(neuvertrag);
-            vertraegeOut.sort(function(a,b){return (a[1]-b[1]);});
-            vertraegeOut.splice(0,vertraegeOut.length-valContractLogAmount); // shrink on storage amount
-            GM_setValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_vertraegeOut",implode(vertraegeOut,"do_vertraege_new/vertraegeOut"));
-            var contractPrices=explode(GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_vertraegePreise"),"do_vertraege_new/vertraegePreise",[]);
-            for(var v=0;v<neuvertrag[3].length;v++){
-                contractPrices[neuvertrag[3][v][0]]=neuvertrag[3][v][2];
-            }
-            GM_setValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_vertraegePreise",implode(contractPrices,"do_vertraege_new/contractPrices"));
-        }
-
-        // multi submit
-        err_trace="multi submit";
-        var submitButton=document.getElementsByName("confirm_contract")[0];
-        submitButton.style.display="none";
-        var newdiv=createElement("div",{"style":"position:absolute;width:300px;height:50px;bottom:135px;left:150px;text-align:center;"},document.getElementsByName("form_confirmcontract")[0].parentNode);
-        var newbutton=createElement("input",{"type":"button","class":"link msg_input","id":"multiSubmit","name":"1","value":submitButton.value},newdiv);
-        newbutton.addEventListener("click",function(){
-        try{
-            var submitForm=document.getElementsByName("form_confirmcontract")[0];
-            var help=submitForm.getElementsByTagName("input");
-            var str="";
-            for(var v=0;v<help.length;v++){ str += help[v].getAttribute("name")+"="+help[v].value+"&"; }
-            str=str.slice(0,str.length-1);
-            var c=parseInt(this.getAttribute("name"),10);
-            for(var d=1;d<c;d++){
-                window.setTimeout(function(d){
-                    GM_xmlhttpRequest({
-                    method: "POST",
-                    url: "http://s"+SERVER+"."+GAMEPAGES[COUNTRY]+submitForm.getAttribute("action"),
-                    headers: {"Content-type": "application/x-www-form-urlencoded"},
-                    data: str,
-                    onload: function(response){
-                        try{
-                            GM_logInfo("contractMultiSubmit.onload","","",getText("sentContractNrX").replace(/%1%/,d));
-                        }catch(err){GM_logError("contractMultiSubmit.onload","","",err);}
-                    },
-                    onerror: function(response){
-                        GM_logError("contractMultiSubmit.onerror","","",""+response.responseText);
-                    },
-                    timeout: function(response){
-                        GM_logError("contractMultiSubmit.timeout","","",""+response.responseText);
-                    }
-                    });
-                },d*100,d);
-            }
-            window.setTimeout(function(c){
-                var submitButton=document.getElementsByName("confirm_contract")[0];
-                click(submitButton);
-                GM_logInfo("#multiSubmit.click","","",getText("sentContractNrX").replace(/%1%/,c));
-                submitButton=null;submitForm=null;
-            },c*100,c);
-        }catch(err){GM_logError("#multiSubmit.click","","",err);}
-        },false);
-        createElement("div",{},newdiv);
-        newbutton=createElement("input",{"type":"button","class":"link msg_input","value":"-"},newdiv);
-        newbutton.addEventListener("click",function(){
-            var submitButton=document.getElementsByName("confirm_contract")[0];
-            var multiSubmitButton=$("multiSubmit");
-            multiSubmitButton.setAttribute("name",Math.max(1,parseInt(multiSubmitButton.getAttribute("name"),10)-1));
-            if (multiSubmitButton.getAttribute("name")=="1"){ multiSubmitButton.value=submitButton.value; }
-            else{ multiSubmitButton.value=multiSubmitButton.getAttribute("name")+"x "+submitButton.value; }
-            submitButton=null;multiSubmitButton=null;
-        },false);
-        newbutton=createElement("input",{"type":"button","class":"link msg_input","value":"+"},newdiv);
-        newbutton.addEventListener("click",function(){
-            var submitButton=document.getElementsByName("confirm_contract")[0];
-            var multiSubmitButton=$("multiSubmit");
-            multiSubmitButton.setAttribute("name",parseInt(multiSubmitButton.getAttribute("name"),10)+1);
-            multiSubmitButton.value=multiSubmitButton.getAttribute("name")+"x "+submitButton.value;
-            submitButton=null;multiSubmitButton=null;
-        },false);
-        newdiv=null;newbutton=null;submitButton=null;
-    }else{
-        // contract edit page
-        err_trace="contract edit page";
-        var pagedata=explode(GM_getValue(COUNTRY+"_"+SERVER+"_pagedataVertraegeNew"),"do_vertraege_new/pagedataVertraegeNew",{});
-        GM_setValue(COUNTRY+"_"+SERVER+"_pagedataVertraegeNew","{}");
-
-        var candtr=$("addproduct").getElementsByTagName("tr");
-        var newtr=createElement("tr");
-        candtr[4].parentNode.insertBefore(newtr,candtr[4]);
-        createElement("td",{},newtr);
-        createElement("td",{},newtr,getText("value"));
-        var newtd=createElement("td",{"align":"left"},newtr);
-        err_trace="contract edit page/addproductWert";
-        newdiv=createElement("input",{"id":"addproductWert","class":"text msg_input","type":"text","style":"width:100px;"},newtd);
-        newdiv.addEventListener("keyup",function(event){
-            var preis=parseFloat($("neu_preis").value.replace(regDelimDeci,"."),10);
-            if (preis>0){
-                $("neu_anzahl").value=Math.floor(0.01+parseFloat(this.value.replace(regDelimThou,"").replace(regDelimDeci,"."),10)/preis);
-            }
-            if (event.keyCode==13){ click($("btn_add_product")); }
-        },false);
-        // newdiv.addEventListener("focus",function(){this.style.border="1px solid #555555";},false);
-        newdiv.addEventListener("blur",function(){
-            this.value=numberFormat(parseInt($("neu_anzahl").value,10)*parseFloat($("neu_preis").value.replace(regDelimDeci,"."),10),2);this.style.border="1px solid #aaa";
-        },false);
-        err_trace="contract edit page/neu_anzahl";
-        if(newdiv=$("neu_anzahl")){
-            // newdiv.addEventListener("focus",function(){this.style.border="1px solid #555555";},false);
-            newdiv.addEventListener("keyup",function(event){
-                var anzahl=parseInt(this.value.replace(/\D/g,""),10);
-                $("addproductWert").value=numberFormat(anzahl*parseFloat($("neu_preis").value.replace(regDelimDeci,"."),10),2);
-                this.value=(anzahl>0?anzahl:"");
-                if (event.keyCode==13){ click($("btn_add_product")); }
-            },false);
-            // newdiv.addEventListener("blur",function(){this.style.border="1px solid #aaa";},false);
-        }
-        err_trace="contract edit page/neu_preis";
-        if(newdiv=$("neu_preis")){
-            // newdiv.addEventListener("focus",function(){this.style.border="1px solid #555";},false);
-            newdiv.addEventListener("keyup",function(event){
-                $("addproductWert").value=numberFormat(parseInt($("neu_anzahl").value,10)*parseFloat(this.value.replace(regDelimDeci,"."),10),2);
-                if (event.keyCode==13){ click($("btn_add_product")); }
-            },false);
-            // newdiv.addEventListener("blur",function(){this.style.border="1px solid #aaa";},false);
-        }
-
-        /*
-        // selected products
-        err_trace="selected products";
-        for(var v=0;v<=7;v++){
-             $("delbtn_"+v).addEventListener("mouseover",function(event){
-                toolTip.show(event,getText("delete"));
-             },false);
-            $("platzhalter_"+v).addEventListener("mouseover",function(event){
-                var currNr=this.id.replace(/platzhalter_/,"");
-                prod=parseInt($("produkt_"+currNr).value,10);
-                var amount=parseInt($("anzahl_"+currNr).value,10);
-                var price=parseFloat($("preis_"+currNr).value.replace(regDelimDeci,"."),10);
-
-                var str='<table class="white" cellspacing="0">';
-                str += '<tr><th colspan="2" class="lightBg">'+prodName[0][prod]+'</td></tr>';
-                str += '<tr><td style="text-align:right;">'+numberFormat(amount)+'&nbsp;'+"×"+'</td><td style="text-align:right;">'+moneyFormat(price)+'</td></tr>';
-                str += '<tr><td style="text-align:right;">=</td><td style="text-align:right;">'+moneyFormat(amount*price)+'</td></tr>';
-
-                str += '</table>';
-                toolTip.show(event,str);
-            },false);
-
-        }
-        */
-        err_trace="currContract";
-        var currContract=new Object();
-        createElement("div",{"id":"preis_total","style":"position:absolute;top:215px;left:480px;padding:2px;color:black;background-color:#b8a789;border:1px solid black;border-radius:5px;"},ALL);
-        // Change of the contract
-        //unsafeWindow._buildCart=unsafeWindow.buildCart;
-        unsafeOverwriteFunction("buildCart",function(){
-            // try{
-            //  unsafeWindow._buildCart();
-            // }catch(err){ GM_logError("_buildCart","","",err); }
-            try{
-                var html = '';
-                var count = -1;
-                var sum=0,amount,price;
-                var newdiv,newdiv1,newdiv2;
-                currContract=new Object();
-                newdiv=$("contract_cart");
-                newdiv.innerHTML = "";
-                for(var prod in unsafeWindow.cart){
-                    if(!unsafeWindow.cart.hasOwnProperty(prod)){ continue; }
-                    amount=parseInt(unsafeWindow.cart[prod]["anzahl_neu"],10);
-                    price=parseFloat(unsafeWindow.cart[prod]["preis_neu"].replace(regDelimDeci,"."),10);
-                    currContract[prod]=[amount,price];
-                    sum += amount*price;
-                    count++;
-
-                    newdiv1=createElement("div",{"prod":prod,"style":"position:relative;float:left;margin:0 0 5px 5px;"},newdiv);
-                    newdiv2=createElement("div",{"onclick":"addItem("+prod+")","class":"v"+prod+" link"},newdiv1);
-                    newdiv2.addEventListener("mouseover",function(event){
-                        var prod=this.parentNode.getAttribute("prod");
-                        var amount=currContract[prod][0];
-                        var price=currContract[prod][1];
-                        var str='<table cellspacing="0">';
-                        str += '<tr><th colspan="2" class="lightBg">'+prodName[0][prod]+'</td></tr>';
-                        str += '<tr><td style="text-align:right;">'+numberFormat(amount)+'&nbsp;'+"×"+'</td><td style="text-align:right;">'+moneyFormat(price)+'</td></tr>';
-                        str += '<tr><td style="text-align:right;">=</td><td style="text-align:right;">'+moneyFormat(amount*price)+'</td></tr>';
-                        str += '</table>';
-                        toolTip.show(event,str);
-                    },false);
-                    newdiv2=createElement("div",{"class":"link","onclick":"removeItem("+prod+")","style":"background:url(http://mff.wavecdn.de/mff/popin/contracts/delete.gif);width:11px; height:11px; position:absolute; top:-2px; right:-2px;"},newdiv1);
-                    newdiv2.addEventListener("mouseover",function(event){
-                        toolTip.show(event,getText("delete"));
-                    },false);
-                    newdiv2=createElement("input",{"type":"hidden","name":"prod["+count+"]","id":"produkt_"+count,"value":prod},newdiv1);
-                    newdiv2=createElement("input",{"type":"hidden","name":"anz["+count+"]","id":"anzahl_"+count,"value":unsafeWindow.cart[prod].anzahl_neu},newdiv1);
-                    newdiv2=createElement("input",{"type":"hidden","name":"preis["+count+"]","id":"preis_"+count,"value":unsafeWindow.cart[prod].preis_neu},newdiv1);
-                }
-                createElement("div",{"style":"clear:both;"},newdiv);
-
-                $("preis_total").innerHTML=getText("total")+":<br>"+moneyFormat(sum);
-                newdiv=null;newdiv1=null;newdiv2=null;
-            }catch(err){GM_logError("buildCart","","",err);}
-        });
-        unsafeWindow.buildCart();
-
-        // Filling data
-        err_trace="Filling data";
-        unsafeWindow.fillContract = function(player,data){
-            try{
-                // player: string or null
-                // data: {prod:[amount,single-price],...}
-                // set receiver
-                if(player){ $("to_player").value=player; }
-                // clear data
-                unsafeWindow.cart = new Object();
-                // fill data
-                for(var v in data){
-                    if(!data.hasOwnProperty(v)){ continue; }
-                    if(prodStock[0][v]>0){
-                        unsafeWindow.cart[v] = new Object();
-                        unsafeWindow.cart[v]["anzahl_neu"]=numberFormat(Math.min(prodStock[0][v],data[v][0]),0,".","");
-                        unsafeWindow.cart[v]["preis_neu"]=numberFormat(data[v][1],2,".","");
-                    }
-                }
-                // call displaying
-                unsafeWindow.buildCart();
-            }catch(err){ GM_logError("fillContract","","",err); }
-        };
-        newdiv=$("to_player");
-        if (newdiv){
-            if(pagedata["to"]){
-                newdiv.value=pagedata["to"];
-            }else if(newdiv.value==""){
-                newdiv.value=GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_lastContractTo","");
-            }
-        }
-        if(pagedata["fillContract"]){
-            unsafeWindow.fillContract(null,pagedata["fillContract"]);
-        }
-
-        // last message panel
-        err_trace="last message panel";
-        newdiv=createElement("div",{"id":"lastMessage","style":"position:absolute;top:110px;right:-403px;width:413px;height:134px;padding:5px;background-color:#b8a789;border:2px solid black;border-radius:10px 0px 0px 10px;z-index:101;z-index:15;color:black;overflow:auto;"},ALL,GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_nachrichten_letzte",""));
-        newdiv.addEventListener("mouseover",function(){this.style.right="0";},false);
-        newdiv.addEventListener("mouseout",function(){this.style.right="-403px";},false);
-
-        // set remembered price
-        err_trace="set remembered price";
-        unsafeOverwriteFunction("addItem",function(pid){
-            try{
-                unsafeWindow._addItem(pid);
-            }catch(err){ GM_logError("_addItem","pid="+pid,"",err); }
-            try{
-                window.setTimeout(function(){
-                    var contractPrices=explode(GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_vertraegePreise"),"do_vertraege_new/addproduct/vertraegePreise",[]);
-                    var cell=$("neu_preis");
-                    if(cell&&(cell.value=="0")){
-                        var new_produkt=parseInt(unsafeWindow.addboxid,10);
-                        if(contractPrices[new_produkt]){
-                            cell.value=numberFormat(contractPrices[new_produkt],2,delimDeci,"");
-                            keyup(cell);
-                        }else if(gut[new_produkt]){
-                            cell.value=numberFormat(gut[new_produkt],2,delimDeci,"");
-                            keyup(cell);
-                        }else if(!isNaN(NPC[0][new_produkt])){
-                            cell.value=numberFormat(NPC[0][new_produkt],2,delimDeci,"");
-                            keyup(cell);
-                        }
-                    }
-                    cell=null;
-                },0);
-            }catch(err){GM_logError("addItem","pid="+pid,"",err);}
-        });
-
-        // save contract, [target user,{"prod":[amount,price],...}]
-        err_trace="save contract";
-        var contractSave=explode(GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_contractSave"),"do_vertraege_new/contractSave",[]);
-        var top=345;
-        var right=120;
-        for(var v=0;v<10;v++){
-            right -= 20;
-            if(right<=0){
-                top += 20;
-                right=100;
-            }
-            newdiv=createElement("div",{"id":"contractSave"+v,"class":"link hoverBgLightblue","style":"position:absolute;top:"+top+"px;right:"+right+"px;width:13px;padding:1px;color:black;text-align:center;border:2px inset black;border-radius:10px;"+(contractSave[v]?"background-color:#bb7;":"")},ALL,v+1);
-            newdiv.addEventListener("mouseover",function(event){
-                try{
-                    var contractSave=explode(GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_contractSave"),"do_vertraege_new/contractSave/mouseover",[]);
-                    var currNr=parseInt(this.id.replace(/contractSave/,""),10);
-                    var str='<table cellspacing="0" cellpadding="0" style="width:100%;">';
-                    if(contractSave[currNr]){
-                        str += '<tr><td>'+getText("click")+':&nbsp;</td><td>'+getText("load")+'</td></tr>';
-                    }
-                    str += '<tr><td style="border-bottom:1px solid black;">'+getText("clickCtrl")+':&nbsp;</td><td style="border-bottom:1px solid black;">'+getText("save")+'</td></tr>';
-                    str += '</table><table cellspacing="0" cellpadding="0" style="line-height:15px;width:100%;">';
-                    if(contractSave[currNr]){
-                        if(contractSave[currNr][0]!=""){
-                            str += '<tr><td colspan="3">&rarr;&nbsp;'+contractSave[currNr][0]+'</td></tr>';
-                        }
-                        for(var v in contractSave[currNr][1]){
-                            if(!contractSave[currNr][1].hasOwnProperty(v)){ continue; }
-                            str += '<tr><td style="text-align:right;padding-right:3px;">'+numberFormat(contractSave[currNr][1][v][0])+'</td><td style="padding-right:3px;">'+produktPic(0,v,createElement("div")).parentNode.innerHTML+prodName[0][v]+'</td><td style="text-align:right;">'+moneyFormat(contractSave[currNr][1][v][1])+'</td></tr>';
-                        }
-                    }else{
-                        str += '<tr><td colspan="3">---</td></tr>';
-                    }
-                    str += '</table>';
-                    toolTip.show(event,str);
-                }catch(err){ GM_logError("contractSave.mouseover","","",err); }
-            },false);
-            newdiv.addEventListener("click",function(event){
-                try{
-                    var contractSave=explode(GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_contractSave"),"do_vertraege_new/contractSave/click",[]);
-                    var currNr=parseInt(this.id.replace(/contractSave/,""),10);
-                    if(event.ctrlKey){
-                        // save this contract
-                        contractSave[currNr]=[$("to_player").value,currContract];
-                        if((contractSave[currNr][0]=="")&&(contractSave[currNr][1].isEmpty())){
-                            delete contractSave[currNr];
-                            this.style.backgroundColor="";
-                        }else{
-                            this.style.backgroundColor="#bb7";
-                        }
-                        GM_setValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_contractSave",implode(contractSave,"contractSave.click/contractSave"));
-                        toolTip.adjust(this);
-                    }else{
-                        // load contract
-                        if(contractSave[currNr]){
-                            unsafeWindow.fillContract(contractSave[currNr][0]==""?null:contractSave[currNr][0],contractSave[currNr][1]);
-                        }
-                    }
-                }catch(err){ GM_logError("contractSave.click","","",err); }
-            },false);
-        }
-        newtr=null;newtd=null;candtr=null;candinput=null;
-        raiseEventTop("gameWindowContractNew");
-    }
-    newdiv=null;
-}catch(err){ GM_logError("do_vertraege_new","","err_trace="+err_trace,err); }
-}
-
-function buildAlteVertraege(mode){
-try{
-    //GM_log("buildAlteVertraege:"+mode);
-    loadProductData();
-    var vertraege;
-    if (mode=="In"){ vertraege=explode(GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_vertraegeIn"),"do_vertraege_overview/vertraegeIn",[]); }
-    else{ vertraege=explode(GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_vertraegeOut"),"do_vertraege_overview/vertraegeOut",[]); }
-    var container=document.getElementsByTagName("table")[1].parentNode;
-    container.innerHTML="";
-    container.setAttribute("mode",mode);
-    var newtable=createElement("table",{"style":"width:100%;margin-bottom:3px;"},container);
-    var newtr=createElement("tr",{},newtable);
-    var newtd=createElement("td",{"class":"link tnormal hoverBgLightbrown","align":"center","style":"color:black;font-weight:bold;"},newtr,getText("contractsReceived"));
-    if (mode=="In"){ newtd.bgColor="lightblue"; }
-    newtd.addEventListener("click",function(){buildAlteVertraege("In");},false);
-    newtd=createElement("td",{"class":"link tnormal hoverBgLightbrown","align":"center","style":"color:black;font-weight:bold;"},newtr,getText("contractsSent"));
-    if (mode=="Out"){ newtd.bgColor="lightblue"; }
-    newtd.addEventListener("click",function(){buildAlteVertraege("Out");},false);
-
-    newdiv=createElement("div",{"style":"width:100%;height:280px;overflow-x:hidden;overflow-y:scroll;"},container);
-    newtable=createElement("table",{"style":"width:100%;","cellspacing":"0"},newdiv);
-    var newtablehead=createElement("thead",{},newtable);
-    var newtablebody=createElement("tbody",{"class":"hoverRowBgLightbrown","style":"height:290px;overflow-x:hidden;overflow-y:scroll;"},newtable);
-    var newtd1,newtd2,newimg;
-    var help;
-    var sendContractAgain=((mode=="Out")&&($top("multiframe")));
-    for(var v=vertraege.length-1;v>=0;v--){
-        newtr=createElement("tr",{},newtablebody);
-        newtd=createElement("td",{},newtr);
-        if(sendContractAgain&&(typeof vertraege[v][3]=="object")){
-            newtd.setAttribute("class","link borderTop");
-            help=new Object();
-            help["to"]=vertraege[v][2];
-            help["fillContract"]=new Object();
-            for(var w=0;w<vertraege[v][3].length;w++){
-                help["fillContract"][vertraege[v][3][w][0]]=[vertraege[v][3][w][1],vertraege[v][3][w][2]];
-            }
-            newtd.setAttribute("data",implode(help,"buildAlteVertraege/help"));
-            newtd.addEventListener("mouseover",function(event){ toolTip.show(event,getText("sendContractAgain")); },false);
-            newtd.addEventListener("click",function(){
-                GM_setValue(COUNTRY+"_"+SERVER+"_pagedataVertraegeNew",this.getAttribute("data"));
-                location.href="http://s"+SERVER+"."+GAMEPAGES[COUNTRY]+"/vertraege/new.php";
-            },false);
-        }else{
-            newtd.setAttribute("class","borderTop");
-        }
-        if (vertraege[v][1]>0){
-            newtd.innerHTML=getFormattedDateStr(vertraege[v][1])+",<br>"+getDaytimeStr(vertraege[v][1],1)+"&nbsp;"+getText("shortOClock");
-        }else{
-            newtd.innerHTML="---";
-        }
-
-        newtd=createElement("td",{"class":"borderTop"},newtr,vertraege[v][2]);
-        newdiv=createElement("div",{},newtd);
-        igm(vertraege[v][2],newdiv);
-        stats(vertraege[v][2],newdiv);
-        vertrag(vertraege[v][2],newdiv);
-
-        newtd=createElement("td",{"class":"borderTop"},newtr);
-        newtd1=createElement("td",{"class":"borderTop","style":"text-align:right;"},newtr);
-        newtd2=createElement("td",{"class":"borderTop","style":"text-align:right;"},newtr);
-        if(typeof vertraege[v][3]=="object"){
-            var sum=0;
-            for(var w=0;w<vertraege[v][3].length;w++){
-                newdiv=createElement("div",{"class":"link hoverBgLightblue","style":"line-height:16px;white-space:nowrap;","prod":vertraege[v][3][w][0]},newtd);
-                newdiv.addEventListener("mouseover",function(event){ showGoToMarketToolTip(event,this.getAttribute("prod")); },false);
-                newdiv.addEventListener("click",function(){showMarket(this.getAttribute("prod"));},false);
-                produktPic(0,vertraege[v][3][w][0],newdiv);
-                createElement("span",{},newdiv,numberFormat(vertraege[v][3][w][1],0) +"&nbsp;"+ prodName[0][vertraege[v][3][w][0]]);
-                createElement("div",{"style":"line-height:16px;white-space:nowrap;"},newtd1,moneyFormat(vertraege[v][3][w][2]));
-                createElement("div",{"style":"line-height:16px;white-space:nowrap;"},newtd2,moneyFormatInt(vertraege[v][3][w][1]*vertraege[v][3][w][2]));
-                sum += vertraege[v][3][w][1]*vertraege[v][3][w][2];
-            }
-            if (vertraege[v][3].length>1){
-                createElement("div",{},newtd,"&nbsp;");
-                createElement("div",{},newtd1,"&nbsp;");
-                createElement("div",{"style":"border-top:1px solid black;text-align:right;"},newtd2,moneyFormatInt(sum));
-            }
-        }else{
-            createElement("div",{"style":"line-height:16px;white-space:nowrap;"},newtd2,moneyFormatInt(vertraege[v][3]));
-        }
-        newtd=createElement("td",{"class":"borderTop","style":"text-align:right;padding-right:20px;"},newtr);
-        newimg=createElement("img",{"objId":vertraege[v][0],"src":GFX+"popin/contracts/anullieren.gif","class":"link","style":"width:16px;height:16px;"},newtd);
-        newimg.addEventListener("mouseover",function(event){ toolTip.show(event,getText("delete")); },false);
-        newimg.addEventListener("click",function(){
-            var objId=this.getAttribute("objId");
-            var mode=this.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.getAttribute("mode");
-            alert2(getText("delete")+"?",getText("yes"),getText("no"),function(){ return function(mode){
-                if (mode=="In"){
-                    var vertraegeIn=explode(GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_vertraegeIn"),"do_vertraege_overview/vertraegeIn",[]);
-                    for(var v=vertraegeIn.length-1;v>=0;v--){
-                        if(vertraegeIn[v][0]==objId){ break; }
-                    }
-                    if(v>=0){
-                        vertraegeIn.splice(v,1);
-                        GM_setValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_vertraegeIn",implode(vertraegeIn,"buildAlteVertraege/vertraegeIn"));
-                    }
-                }else{
-                    var vertraegeOut=explode(GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_vertraegeOut"),"do_vertraege_overview/vertraegeOut",[]);
-                    for(var v=vertraegeOut.length-1;v>=0;v--){
-                        if(vertraegeOut[v][0]==objId){ break; }
-                    }
-                    if(v>=0){
-                        vertraegeOut.splice(v,1);
-                        GM_setValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_vertraegeOut",implode(vertraegeOut,"buildAlteVertraege/vertraegeOut"));
-                    }
-                }
-                buildAlteVertraege(mode);
-            }(mode)});
-        },false);
-    }
-    container=null;newtable=null;newtablehead=null;newtablebody=null;newtr=null;newtd=null;newtd1=null;newtd2=null;newimg=null;newdiv=null;
-}catch(err){GM_logError("buildAlteVertraege","mode="+mode,"v="+v,err);}
-}
-
-function do_vertraege_overview(){
-try{
-    //GM_log("do_vertraege_overview");
-    var pagedata=explode(GM_getValue(COUNTRY+"_"+SERVER+"_pagedataVertraegeOverview"),"do_vertraege_overview/pagedataVertraegeOverview",{});
-    GM_setValue(COUNTRY+"_"+SERVER+"_pagedataVertraegeOverview","{}");
-
-    var candtable=document.getElementsByTagName("table");
-    candtable[1].parentNode.style.height="310px";
-    var candtd=candtable[0].getElementsByTagName("td");
-    if (pagedata["contractview"]){
-        candtd[1].bgColor="";
-        candtd[2].bgColor="lightblue";
-        buildAlteVertraege("In");
-    }else{
-        loadProductData();
-        candtd[1].bgColor="lightblue";
-        var candtr=candtable[1].getElementsByTagName("tr");
-        var canda,user,newContract;
-        var sumTotalOut=0;
-        var valContractLogAmount=GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_valContractLogAmount",200);
-        // vertraegeX[id]=[time,person,[[prod,amount,single price],...]]
-        var vertraegeIn=explode(GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_vertraegeIn"),"do_vertraege_overview/vertraegeIn",[]);
-        var vertraegeInIndex={};
-        for(var v=0;v<vertraegeIn.length;v++){
-            if(isNaN(vertraegeIn[v][0])||(vertraegeInIndex[vertraegeIn[v][0]]>-1)){
-                vertraegeIn.splice(v,1);
-                v--;
-            }else{
-                vertraegeInIndex[vertraegeIn[v][0]]=v;
-            }
-        }
-        for(var v=0;v<candtr.length;v++){
-            candtd=candtr[v].getElementsByTagName("td");
-            canda=candtr[v].getElementsByTagName("a");
-            if (canda[0]){
-                var help=/'(\d+)',%20'(.*?)'%20/.exec(canda[0].href);
-                if (help[2] == "in"){
-                    if(COUNTRY=="SE"){
-                        candtd[3].innerHTML=candtd[3].innerHTML.replace(/\.(\d\d)&/,",$1&");
-                    }
-                    if (vertraegeInIndex[help[1]]>-1){
-                        vertraegeIn[vertraegeInIndex[help[1]]][1]=getFormattedTime(candtd[0].innerHTML);
-                    }else{
-                        user=/(.*?)&nbsp;/.exec(candtd[2].innerHTML+"&nbsp;")[1];
-                        if(user.toLowerCase()!=USERNAME){
-                            newContract=new Array();
-                            newContract[0]=parseInt(help[1],10);
-                            newContract[1]=getFormattedTime(candtd[0].innerHTML);
-                            newContract[2]=user;
-                            var help2=candtd[1].firstElementChild.innerHTML.replace(' style=""',"").replace("<b>","").replace("</b>","");
-                            var preis=parseFloat(candtd[3].innerHTML.replace(/&nbsp;/g+getText("gamecurrency"),"").replace(regDelimThou,"").replace(regDelimDeci,"."),10);
-                            if (help2.search(",")==-1){
-                                var help3=help2.split(" x ");
-                                newContract[3]=[[prodId[0][help3[1]],parseInt(help3[0],10),preis/parseInt(help3[0],10)]];
-                            }else{
-                                newContract[3]=preis;
-                            }
-                            vertraegeIn.push(newContract);
-                            vertraegeInIndex[newContract[0]]=vertraegeIn.length-1;
-                        }
-                    }
-                }else if(help[2] == "out"){
-                    if(COUNTRY=="SE"){
-                        candtd[3].innerHTML=candtd[3].innerHTML.replace(/\.(\d\d)&/,",$1&");
-                    }
-                    sumTotalOut += parseFloat(candtd[3].innerHTML.replace(regDelimThou,"").replace(regDelimDeci),10);
-                }
-            }
-        }
-        createElement("td",{"colspan":"3"},candtable[1]);
-        createElement("td",{"style":"border-top:1px solid black;text-align:right;"},candtable[1],moneyFormatInt(sumTotalOut));
-        vertraegeIn.sort(function(a,b){return (a[1]-b[1]);});
-        vertraegeIn.splice(0,vertraegeIn.length-valContractLogAmount); // shrink on storage amount
-        GM_setValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_vertraegeIn",implode(vertraegeIn,"do_vertraege_overview/vertraegeIn"));
-
-        candtr=null;canda=null;
-    }
-    candtable=null;candtd=null;
-}catch(err){GM_logError("do_vertraege_overview","","",err);}
-}
-
-function do_vertraege_show(){
-try{
-    var spanError=ALL.getElementsByClassName("error");
-    if (spanError.length>0){
-        spanError[0].parentNode.style.height="25px";
-        spanError[0].parentNode.style.top="262px";
-    }
-    spanError=null;
-
-    loadProductData();
-    var vertraegeIn=false,vertraegeInId;
-    var candtable=document.getElementsByTagName("table");
-    var candtr=candtable[1].getElementsByTagName("tr");
-    var candtd;
-    candtable[1].previousElementSibling.appendChild(candtable[1]);
-    candtable[1].setAttribute("style","height:250px;margin-left:auto;margin-right:auto;"); //centering the table
-    removeElement(candtable[1].getElementsByTagName("colgroup")[0]);
-    candtable[1].firstElementChild.insertBefore(createElement("tr",{"style":"height: 20px;"}),candtable[1].firstElementChild.firstElementChild);
-    createElement("td",{"colspan":"3","style":"border-top:1px solid #aaa;padding-right:5px;padding-left:5px;"},candtr[0]);
-    createElement("td",{"colspan":"2","style":"border-top:1px solid #aaa;border-left:1px dashed black;padding-right:5px;padding-left:5px;"},candtr[0],getText("price"));
-    createElement("td",{"style":"border-top:1px solid #aaa;border-left:1px dashed black;padding-right:5px;padding-left:5px;"},candtr[0]);
-    createElement("td",{"colspan":"2","style":"border-top:1px solid #aaa;border-left:1px dashed black;padding-right:5px;padding-left:5px;"},candtr[0],getText("marketPrice"));
-    if (pageZusatz["typ"]=="in"){
-        vertraegeIn=explode(GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_vertraegeIn"),"do_vertraege_show/vertraegeIn",[]);
-        for(vertraegeInId=vertraegeIn.length-1;vertraegeInId>=0;vertraegeInId--){
-            if(vertraegeIn[vertraegeInId][0]==pageZusatz["v"]){ break; }
-        }
-        if(vertraegeInId==-1){
-            vertraegeInId=(vertraegeIn.push([]))-1;
-            vertraegeIn[vertraegeInId][0]=pageZusatz["v"];
-            vertraegeIn[vertraegeInId][1]=now;
-            vertraegeIn[vertraegeInId][2]=/\s*(.*)&nbsp;/.exec(candtable[1].parentNode.innerHTML)[1];
-        }
-        vertraegeIn[vertraegeInId][3]=new Array();
-    }
-    var sum=0;
-    var borderStr;
-    for(var w=1;w<candtr.length-2;w++){
-        candtr[w].setAttribute("class","hoverBgLightbrown");
-        candtd=candtr[w].getElementsByTagName("td");
-        if(COUNTRY=="SE"){ candtd[4].innerHTML=candtd[4].innerHTML.replace(/\.(\d\d)\&/,",$1&"); }
-        var thisData=[prodId[0][candtd[2].innerHTML],parseInt(candtd[0].innerHTML,10),parseFloat(candtd[4].innerHTML.replace(regDelimThou,"").replace(regDelimDeci,"."),10)];
-        if(vertraegeIn){
-            vertraegeIn[vertraegeInId][3].push(thisData);
-        }
-        borderStr="border-bottom:"+candtd[0].style.borderBottom+";border-top:"+candtd[0].style.borderTop+";";
-        candtd[0].innerHTML=numberFormat(thisData[1]);
-        candtd[0].style.paddingRight="5px";
-        candtd[1].innerHTML="";
-        produktPic(0,thisData[0],candtd[1]);
-        removeElement(candtd[3]);
-        candtd[2].style.paddingRight="5px";
-        candtd[3].style.borderLeft="1px dashed black";
-        candtd[3].style.paddingLeft="5px";
-        candtd[3].style.paddingRight="5px";
-        candtd[3].innerHTML=numberFormat(thisData[2],2)+"&nbsp;:";
-        createElement("td",{"style":borderStr+"padding-right:5px;padding-left:5px;text-align:right;"},candtr[w],numberFormat(thisData[1]*thisData[2],2));
-        createElement("td",{"style":borderStr+"border-left:1px dashed black;padding-right:5px;padding-left:5px;text-align:right;"},candtr[w],numberFormat(100*thisData[2]/gut[thisData[0]],1)+"%");
-        createElement("td",{"style":borderStr+"border-left:1px dashed black;padding-right:5px;padding-left:5px;text-align:right;"},candtr[w],numberFormat(gut[thisData[0]],2)+"&nbsp;:");
-        var help=thisData[1]*gut[thisData[0]];
-        createElement("td",{"style":borderStr+"padding-right:5px;padding-left:5px;text-align:right;"},candtr[w],numberFormat(help,2));
-        sum += help;
-    }
-    candtd=candtr[candtr.length-2].getElementsByTagName("td");
-    //removeElement(candtd[0]);
-    candtd[0].style.paddingRight="5px";
-    candtd[0].align="left";
-    var preis=parseFloat(candtd[1].firstElementChild.innerHTML.replace(regDelimThou,"").replace(regDelimDeci,"."),10);
-    candtd[1].firstElementChild.innerHTML=numberFormat(preis,2);
-    candtd[1].style.paddingRight="5px";
-    createElement("td",{"style":"border-left:1px dashed black;padding-right:5px;padding-left:5px;text-align:right;"},candtr[w],numberFormat(100*preis/sum,1)+"%");
-    createElement("td",{"style":"border-left:1px dashed black;padding-right:5px;padding-left:5px;text-align:right;","colspan":"2"},candtr[w],numberFormat(sum,2));
-
-    if(vertraegeIn){
-        vertraegeIn.sort(function(a,b){return (a[1]-b[1]);});
-        GM_setValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_vertraegeIn",implode(vertraegeIn,"do_vertraege_show/vertraegeIn"));
-    }
-    candtable=null;canddiv=null;candtr=null;candtd=null;
-}catch(err){GM_logError("do_vertraege_show","","",err);}
-}
 
 //***********************************************************************************************************
 
@@ -19013,6 +18982,8 @@ try{
         .quests_status_bar_main1_active{background:url('"+IMAGES["questMain1Active"]+"') repeat scroll 0 0 rgba(0, 0, 0, 0);}\
         .quests_status_bar_main2{background:url('"+GFX+"questbar_main2.png') repeat scroll 0 0 rgba(0, 0, 0, 0);}\
         .quests_status_bar_main2_active{background:url('"+IMAGES["questMain2Active"]+"') repeat scroll 0 0 rgba(0, 0, 0, 0);}\
+        .quests_status_bar_main3{background:url('"+GFX+"questbar_main3.png') repeat scroll 0 0 rgba(0, 0, 0, 0);}\
+        .quests_status_bar_main3_active{background:url('"+IMAGES["questMain3Active"]+"') repeat scroll 0 0 rgba(0, 0, 0, 0);}\
         .quests_status_bar_forestry1{background:url('"+GFX+"questbar_forestry1.png') repeat scroll 0 0 rgba(0, 0, 0, 0);}\
         .quests_status_bar_forestry1_active{background:url('"+IMAGES["questForestry1Active"]+"') repeat scroll 0 0 rgba(0, 0, 0, 0);}\
         .quests_status_bar_forestry2{background:url('"+GFX+"questbar_forestry2.png') repeat scroll 0 0 rgba(0, 0, 0, 0);}\
@@ -19135,6 +19106,7 @@ try{
         #poweruptimes{top:158px!important;}\
         #carpentrybonus_symbol{top:186px!important;}\
         #farm_production_checker_icon{position:absolute!important;top:240px!important;}\
+        #map_stock_overview_link{position:absolute!important;top:372px!important;}\
         #weatherlink{top:-88px!important;}\
         #farm_speedlinks{top:11px!important;}"
     );
@@ -19467,9 +19439,9 @@ try{
             case "stadt/stats":         do_stats();break;
             case "stadt/wettbewerb":    do_wettbewerb();break;
             case "main":                do_main();break;
-            case "vertraege/new":       do_multiframe();do_vertraege_head();do_vertraege_new();break;
-            case "vertraege/overview":  do_multiframe();do_vertraege_head();do_vertraege_overview();break;
-            case "vertraege/show":      do_multiframe();do_vertraege_head();do_vertraege_show();break;
+//            case "vertraege/new":       do_multiframe();do_vertraege_head();do_vertraege_new();break;  // function substituted
+//            case "vertraege/overview":  do_multiframe();do_vertraege_head();do_vertraege_overview();break;  // function substituted
+//            case "vertraege/show":      do_multiframe();do_vertraege_head();do_vertraege_show();break;  // function substituted
             case "nutzer/profil":       do_multiframe();break;
             case "nutzer/usecoins":     do_multiframe();break;
             case "hilfe":               do_multiframe();do_hilfe();break;
@@ -19577,24 +19549,32 @@ try{
     text=top.unsafeData.text;
     if(undefined===text["de"]){
         text["de"]=new Object();
-        text["de"]["msgContentContractsale"]="(.+) hat einen Vertrag von dir unterzeichnet!<br><br> Folgende Produkte wurden verkauft:<br>(.+?)<br> Die Vertragssumme von (.+?) kT wurde deinem Konto gutgeschrieben\\.";
-        text["de"]["msgContentContractsaleList"]="\\s*(\\d+)x\\s*(.+?)\\s*<br>";
+        text["de"]["msgContentContractsale"]="(.+) hat einen Vertrag von dir unterzeichnet!<br><br> Folgende Produkte wurden verkauft:<br>(.+?)<br> Die Vertragssumme von (.+?)&nbsp;kT wurde deinem Konto gutgeschrieben\\."; // Fix georgvr 20151028
+        //text["de"]["msgContentContractsaleList"]="\\s*(\\d+)x\\s*(.+?)\\s*<br>"; // Original
+        //text["de"]["msgContentContractsaleList"]="\\s*(\\d+)x\\s*((\\w+)(\\s*)(\\w*))";  // Fix georgvr Versuch 1 - Musteranpassung hier
+        //text["de"]["msgContentContractsaleList"]="\\s*(\\d+)x\\s*(.+?)\\s*"; // Fix georgvr Versuch 2
+        //text["de"]["msgContentContractsaleList"]="\\s*(\\d+)x\\s*(\[A-Z])(\[a-zäöüß]+)";  // Fix georgvr Versuch 3
+        //text["de"]["msgContentContractsaleList"]="\\s*(\\d+)x\\s*(\[A-Z])\\w+";  // Fix georgvr Versuch 4
+        text["de"]["msgContentContractsaleList"]="\\s*(\\d+)x\\s*(\[a-zA-Z0-9äöüß]+)(\\s*)(\[a-zA-Z0-9äöüß]*)";  // Fix georgvr Versuch 5
         text["de"]["msgContentMarketsale"]="(.+) hat am Marktplatz (\\d+)x (.+?) von dir<br> f&uuml;r (.+?) kT gekauft\\.";
+        text["de"]["msgSubjectCoins"]="Du hast Coins erhalten"; //Fix georgvr
         text["de"]["msgSubjectCongratulation"]="Herzlichen Gl&uuml;ckwunsch!";
+        text["de"]["msgSubjectCongratulation2"]="Gl&uuml;ckwunsch";
         text["de"]["msgSubjectContractReject"]="Ein Vertrag wurde abgelehnt";
         text["de"]["msgSubjectContractsale"]="Ein Vertrag wurde angenommen";
+        text["de"]["msgSubjectContractCancel"]="Ein Vertrag wurde annulliert"; // Fix georgvr 20151023
+        text["de"]["msgSubjectContractNew"]="Neuer Vertrag"; // Fix georgvr 20151017
         text["de"]["msgSubjectFriend"]="^(.+) möchte dich als Freund hinzufügen$";
-		text["de"]["msgSubjectFriendCancel"]="^(.+) hat die Freundschaft aufgelöst$"; //Fix georgvr
+        text["de"]["msgSubjectFriendEnd"]="^(.+) hat die Freundschaft aufgelöst$"; //Fix georgvr
         text["de"]["msgSubjectPresent"]="Geschenk für Dich";
-		text["de"]["msgSubjectCoins"]="Du hast Coins erhalten"; //Fix georgvr
         text["de"]["msgSubjectLevel"]="Du bist ein Level aufgestiegen!";
         text["de"]["msgSubjectMarketsale"]="^Marktplatz&nbsp;.+ kT&nbsp;\(.+x .+\)$";
+        text["de"]["msgSubjectPremium"]="Premium Erinnerung"; //Fix georgvr 10092015
         text["de"]["msgSubjectQuest"]="^.+ abgeschlossen$";
         text["de"]["msgSubjectWeed1"]="Oh nein!";
         text["de"]["msgSubjectWeed2"]="Au Weia!";
-		text["de"]["msgSubjectPremium"]="Premium Erinnerung"; //Fix georgvr 10092015
         text["de"]["above"]="davor";
-        text["de"]["absolute"]="absolut";
+        text["de"]["absolute"]="Menge total";
         text["de"]["accountActive"]="Account aktiv";
         text["de"]["accounts"]="Accounts";
         text["de"]["activation"]="Freischaltung";
@@ -19714,6 +19694,8 @@ try{
         text["de"]["jobComplete"]="Auftrag erfolgreich beendet";
         text["de"]["jobCurrent"]="Aktueller Auftrag";
         text["de"]["keptLots"]="Behaltene Lose";
+        text["de"]["lastPrice"]="Letzter Preis";
+        text["de"]["lastQuest"]="Beendet";
         text["de"]["level"]="Level";
         text["de"]["levelTooLow"]="Dein Level ist zu niedrig";
         text["de"]["levelXneeded"]="Level&nbsp;%1%&nbsp;benötigt";
@@ -19782,6 +19764,7 @@ try{
         text["de"]["questforestry2"]="2. Baumerei-Questreihe";
         text["de"]["questmain1"]="1. Farm-Questreihe";
         text["de"]["questmain2"]="2. Farm-Questreihe";
+        text["de"]["questmain3"]="3. Farm-Questreihe"; //georgvr 20151017
         text["de"]["questveterinary1"]="Tierarzt-Questreihe";
         text["de"]["quests"]="Quests";
         text["de"]["questSetXToNrY"]="Setze %1% auf Nr %2%";
@@ -19794,7 +19777,7 @@ try{
         text["de"]["readySinceX"]="Fertig seit %1%";
         text["de"]["recipes"]="Rezepte";
         text["de"]["recursive"]="Rekursiv benötigt";
-        text["de"]["relative"]="relativ";
+        text["de"]["relative"]="Menge fehlt";
         text["de"]["reloadInXSec"]="Neu laden in %1%s.";
         text["de"]["relogin"]="Session endet bald.<br>Neuer Login in %1%.";
         text["de"]["remaining"]="Verbleibend";
@@ -19809,10 +19792,9 @@ try{
         text["de"]["sawmill"]="Sägewerk";
         text["de"]["scriptHomepage"]="Scripthomepage";
         text["de"]["searchPlayer"]="Spieler suchen";
-        text["de"]["seed"]="Saat";
-        text["de"]["seedPerField"]="Saat pro Feld";
+        text["de"]["seed"]="Saatgut";
+        text["de"]["seedPerField"]="Saatgut pro Feld";
         text["de"]["sendContract"]="Vertrag schicken";
-        text["de"]["sendContractAgain"]="Vertrag noch einmal schicken";
         text["de"]["sendingXObservedPricesToServer"]="Sende %1% beobachtete Preise an Server ...";
         text["de"]["sentContractNrX"]="Vertrag Nr %1% gesendet."
         text["de"]["server"]="Server";
@@ -19894,7 +19876,7 @@ try{
         text["de"]["category_fl"]="Blumen";
         text["de"]["category_fla"]="Gestecke";
         text["de"]["category_hr"]="Heilkräuter";
-	    text["de"]["category_md"]="Tinktur";
+        text["de"]["category_md"]="Tinktur";
         text["de"]["category_r0"]="Rezepte Produkt";
         text["de"]["category_r1"]="Rezepte Erhöhung Ertrag";
         text["de"]["category_r2"]="Rezepte Erhöhung Punkte";
@@ -19902,25 +19884,25 @@ try{
         text["de"]["category_p1"]="Power-Ups Erhöhung Ertrag";
         text["de"]["category_p2"]="Power-Ups Erhöhung Punkte";
         // settings
-        text["de"]["settings_valAutoWater"]=["Automatisch gießen","Sagt ja der Name schon: Nach dem Pflanzen wird automatisch gegossen, wenn du den 'Alles gießen' besitzt (Premium)."];
+        text["de"]["settings_valAutoWater"]=["Automatisch gießen","Nach dem Pflanzen wird automatisch gegossen, wenn du die Funktion 'Alles gießen' besitzt (Premium)."];
         text["de"]["settings_valAssumeWater"]=["Gießen annehmen","Dies ist wichtig für Pflanzen, die länger als 24h wachsen. Die Berechnung der Ernte-Zeit nimmt an, dass stets gegossen wird."];
-        text["de"]["settings_valAutoCrop"]=["Automatisch ernten","Wie zuvor auch: Es wird beim Öffnen der Ackers geerntet, falls nötig."];
-        text["de"]["settings_valWaterNeeded"]=["Gießen nötig","Soll angezeigt werden, dass dein Acker nicht gegossen ist?"];
+        text["de"]["settings_valAutoCrop"]=["Automatisch ernten","Es wird beim Öffnen der Ackers automatisch geerntet, falls es was zu ernten gibt."];
+        text["de"]["settings_valWaterNeeded"]=["Gießen nötig","Es wird angezeigt, dass der Acker gegossen werden muss."];
         text["de"]["settings_valCropMsg"]=["Erntemeldung klicken","Du magst die lästige Erntemeldung mit dem Schwein nicht? Hier wirst du sie los."];
         text["de"]["settings_valLimitEmptyFields"]=["Leere Felder","Es werden unbepflanzte Felder auf deinem Acker erkannt. Sind dies mehr als hier angegeben, wird der Acker als unbenutzt gemeldet."];
-        text["de"]["settings_valLimitEmptyFields_forest"]=["Leere Felder Wald","If the number of unplanted areas in your field exceeds this number, the field will be shown as empty."];
+        text["de"]["settings_valLimitEmptyFields_forest"]=["Leere Felder Wald","Es werden unbepflanzte Felder im Wald erkannt. Sind dies mehr als hier angegeben, wird der Wald als unbenutzt gemeldet."];
         text["de"]["settings_valMoveAnimals"]=["Bewege Tiere",""];
         text["de"]["settings_valContractLogAmount"]=["Anzahl gemerkte Verträge","Deine letzten erhaltenen und gesendeten Verträge werden gespeichert und somit kann ein Verlauf angezeigt werden."];
-        text["de"]["settings_valFarmiLimits"]=["Farmi Grenzen","Die Farmis sind in 3 Fälle markiert, je nachdem wie gut ihre Bezahl-Rate ist."];
+        text["de"]["settings_valFarmiLimits"]=["Farmi Grenzen","Die Farmis sind in 3 Klassen eingeteilt, je nachdem wie gut ihre Bezahl-Rate ist."];
         text["de"]["settings_valFarmiMiniInfo"]=["Farmi Mini Info","Zeigt einen kleinen Kreis unter jedem Farmi mit der jeweiligen Klasse der Bezahl-Rate."];
         text["de"]["settings_valMinRackMan"]=["Detail Konfiguration","Du editierst die Anzahl selbst *hier*"];
         text["de"]["settings_valMinRack"]=[,"Ein Produkt wird markiert, falls der Lagerbestand unter diese Grenze fällt. Du kannst verschiedene Werte abhängig von der Kategorie einstellen."];
         text["de"]["settings_valMinRackPlantsize"]=["Pflanzengröße einrechnen","Zum Beispiel braucht Getreide nur den halben Bestand."];
         text["de"]["settings_valMinRackGrowing"]=["Ernteprodukte","Beachtet zusätzlich die Produkte in Produktion und in den fertigen Powerups."];
-        text["de"]["settings_valMinRackQuest"]=["Quest-Produkte","Beachtet zusätzlich die Menge der Questprodukte."];
-        text["de"]["settings_valMinRackRecursive"]=["Recursive products","Add the required products needed to make missing products, and calculate these again for the required proucts.(used by forestry products)"];
+        text["de"]["settings_valMinRackQuest"]=["Quest-Produkte","Beachtet zusätzlich die benötigte Menge der Produkte für die Quests."];
+        text["de"]["settings_valMinRackRecursive"]=["Rekursive Produkte","Beachtet zusätzlich die benötigten Ausgangsprodukte um fehlenden Produkte zu produzieren (für verarbeitete Produkte der Baumerei)."];
         text["de"]["settings_valMinRackFarmis"]=["Farmi-Produkte","Beachtet zusätzlich die Menge der Produkte, die deine Farmis verlangen. Dabei gelten nur diejenigen, die besser als die untere Grenze bezahlen."];
-        text["de"]["settings_valMinRackForestryFarmis"]=["Forestry farmie products","Adds the amount of the products wanted by the forestry farmies."];
+        text["de"]["settings_valMinRackForestryFarmis"]=["Baumerei-Farmi-Produkte","Beachtet zusätzlich die Menge der Produkte, die deine Baumerei-Farmis verlangen."];
         text["de"]["settings_protectMinRack"]=["Marktschutz","Verhindert, dass die Warenmenge beim Marktverkauf den minimalen Lagerbestand unterschreitet."];
         text["de"]["settings_valBuyingLimitDown"]=["Untere Kaufmarkierung",""];
         text["de"]["settings_valBuyingLimit"]=["Obere Kaufgrenze","Du kannst am Markt nur Produkte kaufen die maximal der Prozentgrenze entsprechen. Dies schützt dich vor dem versehentlichen Kauf übertrieben teurer Waren."];
@@ -19945,7 +19927,12 @@ try{
         text["de"]["settings_hotkeymap"]={"prevPage":"vorige Nachricht, Zone, ...","nextPage":"nächste Nachricht, Zone, ...","farm1":"1. Farm","farm2":"2. Farm","farm3":"3. Farm","guild":"Club","city1":"Klein Muhstein","city2":"Teichlingen","farmiLog":"Farmi-Log","help":"Hilfe","market":"Marktplatz","marketstand":"Marktstand","messages":"Nachrichten","options":"Optionen","profit":"Profit Kalkulation","seedVendor":"Saatguthändler","overview":"Übersicht","contract":"Verträge","systemMessage":"(nächste ungelesene) Systemnachricht"};
         text["de"]["settings_valzoneAddToGlobalTime"]=["Integration","Soll die Zeit in die Global-Zeit einbezogen werden?"];
         text["de"]["settings_valGlobaltimeShowCroppedZone"]=["Beachte geerntete Zonen","Sollen geerntete Zonen in die globale Zeit einbezogen werden?"];
-        text["de"]["settings_cacheReset"]=["Cache reset","Alle Informationen über deine Zonen werden gelöscht ..."];
+        text["de"]["settings_cacheReset"]=["Cache reset","Die History und alle Informationen über die Zonen werden gelöscht ..."];
+        text["de"]["settings_zoneReset"]=["Zones reset","Alle Informationen über deine Zonen werden gelöscht ..."]; // georgvr 20151111
+        text["de"]["settings_setQuestMain"]=["Korrigiere Farm-Questreihen ","Abgeschlossene Farm-Questreihen werden entsprechend übernommen und abgespeichert."];
+        text["de"]["settings_setQuestMain3"]=["3. Farm-Questreihe nachführen","Die 3. Farm-Questreihe wird nachgeführt. Es werden die mff-Werte übernommen."];
+        text["de"]["settings_setQuestMain3_1"]=["Ausführen","Die Questnummer der 3. Farm-Questreihe wird auf den eingegebenen Wert gesetzt. Bitte vorsichtig verwenden ..."];
+        text["de"]["settings_megafieldSmartTimer"]=["Beachte aktive Tour", "Soll beim Starten einer Tour der Güterhof-Timer auf das Ende der Tour gesetzt werden?"];
         // help
         text["de"]["help_0"]=[,"This is small introduction to the functions of the Adviser-Script. Not all changes are written here, go find them yourself ... Sometimes a mouse-over helps. <br>At the bottom you see a button to visit the <a href=\""+GM_Home+"\" target=\"_blank\">homepage</a>. Next to it, there is the button for the options. You should look at them and configure as you desire.<br>Generally the script only knows what you have seen. So just visit the field if something is wrong."];
         text["de"]["help_1"]=["The Zones","The fields are observed while you see them. The script saves the plants, times and watering. So on the farm view this can be displayed. Each zone has a time counter at its top to show you when it is ready.<br>If you own the planting helper, you can access it directly from opened field. At the top of an opened zone you can navigate directly to zones of the same type."];
@@ -19962,22 +19949,26 @@ try{
     }
     if(undefined===text["en"]){
         text["en"]=new Object();
-        text["en"]["msgContentContractsale"]="(.+) has signed a contract of yours!<br><br> The following products have been sold:<br>(.+?)<br> The amount of (.+?) pD has been credited to your account\\."; // The text where the general information is stated. The information has to be replaced by "(.+?)".
+        text["en"]["msgContentContractsale"]="(.+) has signed a contract of yours!<br><br> The following products have been sold:<br>(.+?)<br> The amount of (.+?)&nbsp;pD has been credited to your account\\."; // The text where the general information is stated. The information has to be replaced by "(.+?)".
         text["en"]["msgContentContractsaleList"]="\\s*(\\d+)x\\s*(.+?)\\s*<br>"; // The line-pattern for the detailed selling list
         text["en"]["msgContentMarketsale"]="(.*) bought (\\d+)x (.+?) for<br> (.+?) pD from you\\."; // The text where the information is stated. The information has to be replaced by "(.+?)".
+        text["en"]["msgSubjectCoins"]="xxx tbd: you got coins xxx"; // Fix georgvr
         text["en"]["msgSubjectCongratulation"]="Congratulations";
         text["en"]["msgSubjectContractReject"]="A contract has been withdrawn";
         text["en"]["msgSubjectContractsale"]="A contract has been accepted";
+        text["en"]["msgSubjectContractCancel"]="A contract has been xxx tbd xxx"; // Fix georgvr
+        text["en"]["msgSubjectContractNew"]="xxx tbd xxx"; // Fix georgvr
         text["en"]["msgSubjectFriend"]="^(.+) would like to add you as a friend$"; // The subject. The person has to be replaced by "(.+)"
+        text["en"]["msgSubjectFriendEnd"]="xxx tbd xxx"; // Fix georgvr
         text["en"]["msgSubjectLevel"]="You have reached the next level!";
         text["en"]["msgSubjectMarketsale"]="^Market&nbsp;.+ pD&nbsp;\(.+x .+\)$";
-        text["en"]["msgSubjectQuest"]="^.+ completed$";
+        text["en"]["msgSubjectPremium"]="Premium remind"; //Fix georgvr 10092015
         text["en"]["msgSubjectPresent"]="A present for you";
+        text["en"]["msgSubjectQuest"]="^.+ completed$";
         text["en"]["msgSubjectWeed1"]="Oh no!";
         text["en"]["msgSubjectWeed2"]="Au Weia!";        
-        text["en"]["msgSubjectPremium"]="Premium remind"; //Fix georgvr 10092015
         text["en"]["above"]="above";
-        text["en"]["absolute"]="absolute";
+        text["en"]["absolute"]="Amount required";
         text["en"]["accountActive"]="Account active";
         text["en"]["accounts"]="Accounts";
         text["en"]["activation"]="Activation";
@@ -20097,6 +20088,8 @@ try{
         text["en"]["jobComplete"]="Job finished successfully";
         text["en"]["jobCurrent"]="Current job";
         text["en"]["keptLots"]="Kept lots";
+        text["en"]["lastPrice"]="Last price";
+        text["en"]["lastQuest"]="Completed";
         text["en"]["level"]="Level";
         text["en"]["levelTooLow"]="Your level is too low";
         text["en"]["levelXneeded"]="Level&nbsp;%1%&nbsp;needed";
@@ -20165,6 +20158,7 @@ try{
         text["en"]["questforestry2"]="2nd series of quests (forestry)";
         text["en"]["questmain1"]="1st series of quests (farm)";
         text["en"]["questmain2"]="2nd series of quests (farm)";
+        text["en"]["questmain3"]="3rd series of quests (farm)";  //georgvr 20151017
         text["en"]["questveterinary1"]="Veterinary quest series";
         text["en"]["quests"]="Quests";
         text["en"]["questSetXToNrY"]="Setting %1% to No %2%";
@@ -20177,7 +20171,7 @@ try{
         text["en"]["readySinceX"]="Ready since %1%";
         text["en"]["recipes"]="Recipes";
         text["en"]["recursive"]="Recursive Needed";
-        text["en"]["relative"]="relative";
+        text["en"]["relative"]="Amount missing";
         text["en"]["reloadInXSec"]="Reload in %1%s.";
         text["en"]["relogin"]="Session ends soon.<br>New login in %1%.";
         text["en"]["remaining"]="Remaining";
@@ -20195,13 +20189,12 @@ try{
         text["en"]["seed"]="Seed";
         text["en"]["seedPerField"]="Seed per field";
         text["en"]["sendContract"]="Send contract";
-        text["en"]["sendContractAgain"]="Send contract again";
         text["en"]["sendingXObservedPricesToServer"]="Sending %1% observed prices to server ...";
         text["en"]["sentContractNrX"]="Sent contract no %1%."
         text["en"]["server"]="Server";
         text["en"]["serverTime"]="Time of server";
         text["en"]["sessionEnd"]="End of Session at %1%<br>Click for new login";
-        text["en"]["seedVendor"]="Seed vendor"; // Short for the seller of plants
+        text["en"]["seedVendor"]="Seed vendor";
         text["en"]["seedVendorShort"]="Shop"; // Short for the seller of plants
         text["en"]["shadowboxitem"]="Shadowbox item";
         text["en"]["shortHours"]="h";
@@ -20306,11 +20299,11 @@ try{
         text["en"]["settings_valMinRackForestryFarmis"]=["Lodge farmie products","Adds the amount of the products wanted by the lodge farmies."];
         text["en"]["settings_protectMinRack"]=["Selling protection","Prohibits to sell products at market below the minimal rackamount"];
         text["en"]["settings_valBuyingLimitDown"]=["Bottom buy highlight",""];
-        text["en"]["settings_valBuyingLimit"]=["Top buy limit","You can only buy products at the Market up to the limit given.  This protects you from accidentally purchasing very over-priced goods."];
+        text["en"]["settings_valBuyingLimit"]=["Top buy limit","You can only buy products at the market up to the limit given.  This protects you from accidentally purchasing very over-priced goods."];
         text["en"]["settings_valBuyingLimitNPC"]=["Only allow buy less than price of NPC",""];
         text["en"]["settings_valSellingLimit"]=["Sell limits","Your sales are also protected, so that you don't price your own goods too cheaply or too highly."];
         text["en"]["settings_valJoinPrices"]=["One input","Joins the price input fields at the market stand."];
-        text["en"]["settings_valQuicklinks"]=["Show market quicklinks","Show Quicklinks at Market place"];
+        text["en"]["settings_valQuicklinks"]=["Show market quicklinks","Show quicklinks at market place"];
         text["en"]["settings_valUseObservedPrices"]=["Use observed prices","Prices are observed while clicking through the market place. A calculated price can be seen in the price list. Shall this automatically override your settings?"];
         text["en"]["settings_valSendStatistics"]=["Send statistics","Support the <a href='http://mff.metrax.eu/' target='_blank'>Statistik-Server</a>.  No private data is sent!"];
         text["en"]["settings_valPrivateMessages"]=["Number private messages kept","Your last private messages are kept so that a message history of one contact can be shown."];
@@ -20328,9 +20321,14 @@ try{
         text["en"]["settings_hotkeymap"]={"prevPage":"previous Message, Zone, ...","nextPage":"next Message, Zone, ...","farm1":"1st farm","farm2":"2nd farm","farm3":"3rd farm","guild":"Club","city1":"First Village","city2":"Second Village","farmiLog":"Farmi-Log","help":"Help","market":"Market place","marketstand":"Market stand","messages":"Messages","options":"Options","profit":"Profit Calculation","seedVendor":"Seed retailer","overview":"Overview","contract":"Contracts","systemMessage":"(next unread) system message"};
         text["en"]["settings_valzoneAddToGlobalTime"]=["Integrate","Shall the time be included to the global time?"];
         text["en"]["settings_valGlobaltimeShowCroppedZone"]=["Integrate cropped zone","Shall the ready-state of the cropped zones be included in the global time?"];
-        text["en"]["settings_cacheReset"]=["Cache reset","All information about your farms will be deleted ..."];
+        text["en"]["settings_cacheReset"]=["Cache reset","The History and all information about your farms will be deleted ..."];
+        text["en"]["settings_zoneReset"]=["Zones reset","All information about your farms will be deleted ..."]; // georgvr 201151111
+        text["en"]["settings_setQuestMain"]=["Questseries","Main questseries are declared terminated ..."];
+        text["en"]["settings_setQuestMain3"]=["Overwrite Questseries 3","The questnumber of main questseries 3 is set to the mff-questnumber."];
+        text["en"]["settings_setQuestMain3_1"]=["Execute","The questnumber of main questseries 3 is set to the chosen number. Please use it carefully ..."];
+        text["en"]["settings_megafieldSmartTimer"]=["Integrate active tour", "Megafield-Timer is set to end of the tour after a tour is started."];
         //help
-        text["en"]["help_0"]=[,"This is small introduction to the functions of the Adviser-Script. Not all changes are written here, go find them yourself ... Sometimes a mouse-over helps. <br>At the bottom you see a button to visit the <a href=\""+GM_Home+"\" target=\"_blank\">homepage</a>. Next to it, there is the button for the options. You should look at them and configure as you desire.<br>Generally the script only knows what you have seen. So just visit the field if something is wrong."];
+        text["en"]["help_0"]=[,"This is a small introduction to the functions of the Adviser-Script. Not all changes are written here, go find them yourself ... Sometimes a mouse-over helps. <br>At the bottom you see a button to visit the <a href=\""+GM_Home+"\" target=\"_blank\">homepage</a>. Next to it, there is the button for the options. You should look at them and configure as you desire.<br>Generally the script only knows what you have seen. So just visit the field if something is wrong."];
         text["en"]["help_1"]=["The Zones","The fields are observed while you see them. The script saves the plants, times and watering. So on the farm view this can be displayed. Each zone has a time counter at its top to show you when it is ready.<br>If you own the planting helper, you can access it directly from opened field. At the top of an opened zone you can navigate directly to zones of the same type."];
         text["en"]["help_2"]=["The Overview","Click the pig on the top and you will see an overview of your complete farm. Each zone, its output (product and points) and the next time of work are displayed. Also your total crop is shown. Below you see the wishes of your farmies. You can click each zone or farmie to navigate there. If you are run out of a product, it can take you directly to the market place."];
         text["en"]["help_3"]=["Blue Bar","Your points are kept daily. At the bottom you see a bar displaying the current and past level. Each white and red (sunday) line is a day. If you click it you get a detailed table and perhaps a hint if you are lack of a product."];
@@ -20352,7 +20350,7 @@ try{
     regMsgContentContractsale=new RegExp(getText("msgContentContractsale"));
     regMsgContentContractsaleList=new RegExp(getText("msgContentContractsaleList"));
     regMsgSubjectFriend=new RegExp(getText("msgSubjectFriend"));
-	regMsgSubjectFriendCancel=new RegExp(getText("msgSubjectFriendCancel")); //Fix georgvr
+    regMsgSubjectFriendEnd=new RegExp(getText("msgSubjectFriendEnd")); //Fix georgvr
     regMsgSubjectMarketsale=new RegExp(getText("msgSubjectMarketsale"));
     regMsgSubjectQuest=new RegExp(getText("msgSubjectQuest"));
     err_trace="Events";
@@ -20393,6 +20391,10 @@ try{
         allEvents.push("gameFarmersmarketDialogCommit");    // the farmersmarket building has requested for commit of a dialogue
         allEvents.push("gameFarmiNew");                     // a new farmi is appeared
         allEvents.push("gameFarmiResponse");                // a farmi is been rejected or accepted.
+
+        allEvents.push("buildFuelstation");                 //Fuelstation
+        allEvents.push("gameFactoryFuelstationDialogStarted");  
+
         allEvents.push("gameMegafieldDialogStarted");       // the megafield view has been moved
         allEvents.push("gameMegafieldMoved");               // a megafield vehicle has been bought
         allEvents.push("gameMegafieldTourStarted");         // a megafield tour has been started
@@ -20477,4 +20479,4 @@ try{
     }
 }catch(err){GM_logError("scriptWait","","err_trace="+err_trace+" location.href="+location.href,err);}
 }
-scriptInit();
+scriptInit();;
