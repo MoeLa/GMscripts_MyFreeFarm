@@ -3,8 +3,8 @@
 // @namespace   https://github.com/BastianKanaan/GMscripts_MyFreeFarm
 // @author      BastianKanaan
 // @description Language pack "Bulgarian" for MyFreeFarm Scripts
-// @date        23.07.2015
-// @version     1.0.4
+// @date        17.11.2015
+// @version     1.0.5
 // @license     GPL version 3 or any later version; http://www.gnu.org/copyleft/gpl.html
 // @include     /^http:\/\/(|www\.|s\d+\.)veselaferma.com\/.*$/
 // @grant       GM_log
@@ -37,7 +37,7 @@ try{
     const dateFormatDMY = "day.month.year"; // The style a date is displayed. You can use the tags "day", "month" and "year".
     const timeFormatHM = "hour:min"; // The style a time is displayed. You can use the tags "hour" and "min".
     const timeFormatHMS = "hour:min:sec"; // The style a precise time is displayed. You can use the tags "hour", "min" and "sec".
-    
+
 // Take the following from the game ***********************************************************************************
     if(undefined===text[LANGUAGE]){
         text[LANGUAGE]=new Object();
@@ -56,22 +56,34 @@ try{
         text[LANGUAGE]["msgContentContractsale"]="(.+) подписа Ваш договор!<br>\\s*<br>\\s*Вие продадохте следните продукти:\\s*<br>([\\S\\s]*)\\s*<br>\\s*Плащане на стойност (.+?) кД е преведено в сметката Ви\\."; 
         // - The line-pattern for the detailed selling list (equals the replaced information above).
         text[LANGUAGE]["msgContentContractsaleList"]="\\s*(\\d+)x\\s*(.+?)\\s*<br>";
+        // - A contract which was sent to you was canceld before you were able to accept it
+        text[LANGUAGE]["msgSubjectContractCancel"]="xxx";
         // *************
+        // Take the subject from a message sent if you purchased coins
+        text[LANGUAGE]["msgSubjectCoins"]="xxx";
         // Take the subject from a message sent if you won in a competition.
         text[LANGUAGE]["msgSubjectCongratulation"]="xxx";
+        // Take the subject from a message sent when you got a item due to achievements
+        text[LANGUAGE]["msgSubjectCongratulation2"]="xxx";
         // Take the subject from a message sent if somebody wants to add you as friend. The person has to be replaced by "(.+)".
         text[LANGUAGE]["msgSubjectFriend"]="(.+) иска да стане Ваш приятел";
+        // Take the subject from a message sent if somebody has canceled your friendship. The person has to be replaced by "(.+)".
+        text[LANGUAGE]["msgSubjectFriendEnd"]="xxx";
         // Take the subject from a message sent if you reach the next level
         text[LANGUAGE]["msgSubjectLevel"]="Вие достигнахте следващо ниво!";
+        // Take the subject from a message sent if you have to renew premium mode
+        text[LANGUAGE]["msgSubjectPremium"]="xxx";
         // Take the subject from a message sent if you got a present.
         text[LANGUAGE]["msgSubjectPresent"]="Вие получихте подарък.";
+        // Take the subjects from messages sent if a quest was completed.
+        text[LANGUAGE]["msgSubjectQuest"]="xxx";
         // Take the subjects from messages sent if weed occurred on your field.
         text[LANGUAGE]["msgSubjectWeed1"]="xxx";
         text[LANGUAGE]["msgSubjectWeed2"]="xxx";
     
 // And all the other texts you can enter what you want ****************************************************************
         text[LANGUAGE]["above"]="above";
-        text[LANGUAGE]["absolute"]="absolute";
+        text[LANGUAGE]["absolute"]="Amount required";
         text[LANGUAGE]["accountActive"]="Акаунтът активен";
         text[LANGUAGE]["accounts"]="Акаунти";
         text[LANGUAGE]["activation"]="Активиране";
@@ -166,15 +178,16 @@ try{
         text[LANGUAGE]["gamecurrency"]=unsafeWindow.gamecurrency;
         text[LANGUAGE]["general"]="Главен";
         text[LANGUAGE]["given"]="Given";
-        text[LANGUAGE]["goToDonkey"]="Към магарето Люк";
-        text[LANGUAGE]["goToLottery"]="Към лотариен пункт";
+        text[LANGUAGE]["goods"]="Стока";
+        text[LANGUAGE]["goToClothingDonation"]="Go to clothing donation";
+		text[LANGUAGE]["goToDonkey"]="Към магарето Люк";
+		text[LANGUAGE]["goToLottery"]="Към лотариен пункт";
         text[LANGUAGE]["goToMarket"]="Към пазара";
         text[LANGUAGE]["goToMarketOfX"]="Към пазара за %1%";
         text[LANGUAGE]["goToMarketstall"]="Към Щанд за сода";
         text[LANGUAGE]["goToPage"]="Към страница";
         text[LANGUAGE]["goToRank"]="Към позиция";
         text[LANGUAGE]["goToZoneX"]="Към %1%";
-        text[LANGUAGE]["goods"]="Стока";
         text[LANGUAGE]["hide"]="скрит";
         text[LANGUAGE]["highlightProducts"]="Отбележи продукти на пазара";
         text[LANGUAGE]["highlightUser"]="Отбележи играч на пазара";
@@ -182,15 +195,17 @@ try{
         text[LANGUAGE]["idle"]="не работи!";
         text[LANGUAGE]["importStorageString"]="Import storage string";
         text[LANGUAGE]["importStorageStringError"]="Sorry. Can't read the storage string.";
-        text[LANGUAGE]["inStock"]="в наличност";
         text[LANGUAGE]["informationIsMissing"]="Липсва информация."
         text[LANGUAGE]["ingredients"]="Съставки";
+        text[LANGUAGE]["inStock"]="в наличност";
         text[LANGUAGE]["invalidServer"]="Невалиден сървър";
         text[LANGUAGE]["inventory"]="Опис";
         text[LANGUAGE]["jobIncomplete"]="Задачата не завърши успешно";
         text[LANGUAGE]["jobComplete"]="задачата завърши успешно";
         text[LANGUAGE]["jobCurrent"]="Текуща задача";
         text[LANGUAGE]["keptLots"]="Kept lots";
+        text[LANGUAGE]["lastPrice"]="Last price";
+        text[LANGUAGE]["lastQuest"]="Completed";
         text[LANGUAGE]["level"]="Ниво";
         text[LANGUAGE]["levelTooLow"]="Вашето ниво е ниско";
         text[LANGUAGE]["levelXneeded"]="Ниво&nbsp;%1%&nbsp;е необходимо";
@@ -253,12 +268,16 @@ try{
         text[LANGUAGE]["quest_foodworld"]="Пикник зона мисии";
         text[LANGUAGE]["quest_forestry"]="Мисии (лесовъдство)";
         text[LANGUAGE]["quest_main"]="Мисии (ферма)";
+        text[LANGUAGE]["quest_veterinary"]="Veterinary quest series";
         text[LANGUAGE]["questfoodworld1"]="1 серия мисии (пикник зона)";
         text[LANGUAGE]["questforestry1"]="1 серия мисии (лесовъдство)";
         text[LANGUAGE]["questforestry2"]="2 серия мисии (лесовъдство)";
         text[LANGUAGE]["questmain1"]="1 серия мисии (ферма)";
         text[LANGUAGE]["questmain2"]="2 серия мисии (ферма)";
+        text[LANGUAGE]["questmain3"]="3rd series of quests (farm)";
+        text[LANGUAGE]["questveterinary1"]="Veterinary quest series";
         text[LANGUAGE]["quests"]="Мисии";
+        text[LANGUAGE]["questSetXToNrY"]="Setting %1% to No %2%";
         text[LANGUAGE]["rackX"]="%1%. шкаф";
         text[LANGUAGE]["rank"]="Позиция";
         text[LANGUAGE]["readAll"]="Read all";
@@ -354,6 +373,11 @@ try{
         text[LANGUAGE]["category_e"]="Продукти";
         text[LANGUAGE]["category_z"]=unsafeWindow.rack_deco;
         text[LANGUAGE]["category_o"]=unsafeWindow.rack_oil;
+        text[LANGUAGE]["category_f1"]="Фиданки";
+        text[LANGUAGE]["category_f2"]="Дънери";
+        text[LANGUAGE]["category_f3"]="Продукти дъскирезница";
+        text[LANGUAGE]["category_f4"]="Продукти дърводелство";
+        text[LANGUAGE]["category_f5"]="Wooden farmhouse items";
         text[LANGUAGE]["category_fw"]=unsafeWindow.rack_foodworld;
         text[LANGUAGE]["category_fw1"]="Напитки";
         text[LANGUAGE]["category_fw2"]="Храни";
@@ -361,11 +385,6 @@ try{
         text[LANGUAGE]["category_fw4"]="Не е достъпно";
         text[LANGUAGE]["category_fl"]="Цветя";
         text[LANGUAGE]["category_fla"]="Аранжименти";
-        text[LANGUAGE]["category_f1"]="Фиданки";
-        text[LANGUAGE]["category_f2"]="Дънери";
-        text[LANGUAGE]["category_f3"]="Продукти дъскирезница";
-        text[LANGUAGE]["category_f4"]="Продукти дърводелство";
-        text[LANGUAGE]["category_f5"]="Wooden farmhouse items";
         text[LANGUAGE]["category_hr"]="Билки";
         text[LANGUAGE]["category_md"]="Лечебни тинктури";
         text[LANGUAGE]["category_r0"]="Продукт-рецепти";
@@ -419,8 +438,14 @@ try{
         text[LANGUAGE]["settings_valzoneAddToGlobalTime"]=["Интегриране","Времето в играта да се сверява ли спрямо глобалното време?"];
         text[LANGUAGE]["settings_valGlobaltimeShowCroppedZone"]=["Интегриране на зони","Готовността на зоните да се свери ли спрямо глобалното време?"];
         text[LANGUAGE]["settings_cacheReset"]=["Изтриване на данни","Цялата налична информация за вашата ферма ще бъде изтрита ..."];
+        text[LANGUAGE]["settings_zoneReset"]=["Zones reset","All information about your farms will be deleted ..."];
+        text[LANGUAGE]["settings_setQuestMain"]=["Questseries","Main questseries are declared terminated ..."];
+        text[LANGUAGE]["settings_setQuestMain3"]=["Overwrite Questseries 3","The questnumber of main questseries 3 is set to the mff-questnumber."];
+        text[LANGUAGE]["settings_setQuestMain3_1"]=["Execute","The questnumber of main questseries 3 is set to the chosen number. Please use it carefully ..."];
+        text[LANGUAGE]["settings_megafieldSmartTimer"]=["Integrate active tour", "Megafield-Timer is set to end of the tour after a tour is started."];
+		text[LANGUAGE]["settings_clothingDonation"]=["Clothing Donation", "A blinking icon indicates, when you can donate or gamble."];
         //help
-        text[LANGUAGE]["help_0"]=[,"This is small introduction to the functions of the Adviser-Script. Not all changes are written here, go find them yourself ... Sometimes a mouse-over helps. <br>At the bottom you see a button to visit the <a href=\""+GM_Home+"\" target=\"_blank\">homepage</a>. Next to it, there is the button for the options. You should look at them and configure as you desire.<br>Generally the script only knows what you have seen. So just visit the field if something is wrong."];
+        text[LANGUAGE]["help_0"]=[,"This is a small introduction to the functions of the Adviser-Script. Not all changes are written here, go find them yourself ... Sometimes a mouse-over helps. <br>At the bottom you see a button to visit the <a href=\""+GM_Home+"\" target=\"_blank\">homepage</a>. Next to it, there is the button for the options. You should look at them and configure as you desire.<br>Generally the script only knows what you have seen. So just visit the field if something is wrong."];
         text[LANGUAGE]["help_1"]=["The Zones","The fields are observed while you see them. The script saves the plants, times and watering. So on the farm view this can be displayed. Each zone has a time counter at its top to show you when it is ready.<br>If you own the planting helper, you can access it directly from opened field. At the top of an opened zone you can navigate directly to zones of the same type."];
         text[LANGUAGE]["help_2"]=["The Overview","Click the pig on the top and you will see an overview of your complete farm. Each zone, its output (product and points) and the next time of work are displayed. Also your total crop is shown. Below you see the wishes of your farmies. You can click each zone or farmie to navigate there. If you are run out of a product, it can take you directly to the market place."];
         text[LANGUAGE]["help_3"]=["Blue Bar","Your points are kept daily. At the bottom you see a bar displaying the current and past level. Each white and red (sunday) line is a day. If you click it you get a detailed table and perhaps a hint if you are lack of a product."];
@@ -432,7 +457,7 @@ try{
         text[LANGUAGE]["help_9"]=["Messages","Your sales are kept and directly displayed - no need to open a message two times! Note the \"Read all\" and \"Log\" buttons. Your private messages are kept, too. So no need to look for the last messages of the current contact."];
         text[LANGUAGE]["help_10"]=["Contracts","They are kept, too. While creating a contact an input displays the value of the entered product. Enter first the price and then the amount to get inverse the amount. You can submit the same contract multiple times!"];
         text[LANGUAGE]["help_11"]=["Account Managing","You can save all your accounts in the options. So you can login easily in each one by the displayed buttons on the starting page. Note that you can switch directly the accounts at the same server."];
-         
+
         text[LANGUAGE]["automat"] = "Автомат";
         text[LANGUAGE]["automat_planting"] = "Сеене...";
         text[LANGUAGE]["automat_waiting"] = "Изчакване...";
@@ -610,6 +635,8 @@ try{
         text[LANGUAGE]["automat_title_off_farm3"] = "Показва само ферма 3<br>+Ctrl: Скрий трета ферма";
         text[LANGUAGE]["automat_title_on_farm4"] = "Показва само ферма 4<br>+Ctrl: Покажи четвърта ферма";
         text[LANGUAGE]["automat_title_off_farm4"] = "Показва само ферма 4<br>+Ctrl: Скрий четвърта ферма";
+        text[LANGUAGE]["automat_title_on_farm5"] = "Показва само ферма 5<br>+Ctrl: Покажи четвърта ферма";
+        text[LANGUAGE]["automat_title_off_farm5"] = "Показва само ферма 5<br>+Ctrl: Скрий четвърта ферма";
         text[LANGUAGE]["automat_title_on_farmersmarket"] = "Показва само фермерски пазар<br>+Ctrl: Покажи фермерски пазар ";
         text[LANGUAGE]["automat_title_off_farmersmarket"] = "Показва само фермерски пазар<br>+Ctrl: Скрий фермерски пазар ";
         text[LANGUAGE]["automat_title_on_megafield"] = "Показва само плантация<br>+Ctrl: Покажи плантация";
@@ -628,6 +655,7 @@ try{
         text[LANGUAGE]["automat_title_off_type3"] = "Показва само фабрики <br>+Ctrl: Скрий фабрики";
         text[LANGUAGE]["automat_title_on_all"] = "Покажи всички опашки";
         text[LANGUAGE]["automat_title_off_all"] = "Скрий всички опашки";
+
         //help
         text[LANGUAGE]["automat_help_0"] = [,"This script can be used to add automation to the cultivation process."];
         text[LANGUAGE]["automat_help_1"] = ["How it works","If you click the \""+text[LANGUAGE]["automat_botStart"]+"\" button at the bottom of the page the automation process will be started.<br>You even can continue gaming as long as nothing is ready. Then the bot begins to simulate the clicks a user does. During that period you shouldn't interact."];
@@ -674,15 +702,15 @@ window.setTimeout(function(){
 },1000);
 */  
     if(undefined===top.unsafeData.COUNTRY){
-    top.unsafeData.LANGUAGE=LANGUAGE;
-    top.unsafeData.COUNTRY=COUNTRY;
-    top.unsafeData.delimThou=delimThou;
-    top.unsafeData.regDelimThou=regDelimThou;
-    top.unsafeData.regDelimThouShift=regDelimThouShift;
-    top.unsafeData.regDelimThouDelete=regDelimThouDelete;
-    top.unsafeData.delimDeci=delimDeci;
-    top.unsafeData.regDelimDeci=regDelimDeci;
-    top.unsafeData.dateFormatDM=dateFormatDM;
-    top.unsafeData.dateFormatDMY=dateFormatDMY;
+        top.unsafeData.LANGUAGE=LANGUAGE;
+        top.unsafeData.COUNTRY=COUNTRY;
+        top.unsafeData.delimThou=delimThou;
+        top.unsafeData.regDelimThou=regDelimThou;
+        top.unsafeData.regDelimThouShift=regDelimThouShift;
+        top.unsafeData.regDelimThouDelete=regDelimThouDelete;
+        top.unsafeData.delimDeci=delimDeci;
+        top.unsafeData.regDelimDeci=regDelimDeci;
+        top.unsafeData.dateFormatDM=dateFormatDM;
+        top.unsafeData.dateFormatDMY=dateFormatDMY;
     }    
 }catch(err){ GM_log("ERROR\npage="+location.href+"\n"+err); }
