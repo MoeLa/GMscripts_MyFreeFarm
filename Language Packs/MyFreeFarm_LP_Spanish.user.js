@@ -1,10 +1,10 @@
-﻿// ==UserScript==
+// ==UserScript==
 // @name        MyFreeFarm LP Spanish
 // @namespace   https://github.com/BastianKanaan/GMscripts_MyFreeFarm
 // @author      BastianKanaan
 // @description Language pack "Spanish" for MyFreeFarm Scripts
-// @date        23.07.2015
-// @version     1.0.4
+// @date        17.11.2015
+// @version     1.0.5
 // @license     GPL version 3 or any later version; http://www.gnu.org/copyleft/gpl.html
 // @include     /^http:\/\/(|www\.|s\d+\.)migranjalinda\.es\/.*$/
 // @grant       GM_log
@@ -37,7 +37,7 @@ try{
     const dateFormatDMY = "day.month.year"; // The style a date is displayed. You can use the tags "day", "month" and "year".
     const timeFormatHM = "hour:min"; // The style a time is displayed. You can use the tags "hour" and "min".
     const timeFormatHMS = "hour:min:sec"; // The style a precise time is displayed. You can use the tags "hour", "min" and "sec".
-    
+
 // Take the following from the game ***********************************************************************************
     if(undefined===text[LANGUAGE]){
         text[LANGUAGE]=new Object();
@@ -56,22 +56,34 @@ try{
         text[LANGUAGE]["msgContentContractsale"]="¡(.+) ha firmado un contrato tuyo!<br><br>\\s*Los siguientes productos se han vendido:<br>([\\S\\s]*)\\s*<br>\\s*El importe del contrato de (.+?) MG se ha sumado a tu cuenta\\.";
         // - The line-pattern for the detailed selling list (equals the replaced information above).
         text[LANGUAGE]["msgContentContractsaleList"]="\\s*(\\d+)x\\s*(.*+)\\s*<br>";
+        // - A contract which was sent to you was canceld before you were able to accept it
+        text[LANGUAGE]["msgSubjectContractCancel"]="xxx";
         // *************
+        // Take the subject from a message sent if you purchased coins
+        text[LANGUAGE]["msgSubjectCoins"]="xxx";
         // Take the subject from a message sent if you won in a competition.
         text[LANGUAGE]["msgSubjectCongratulation"]="xxx";
+        // Take the subject from a message sent when you got a item due to achievements
+        text[LANGUAGE]["msgSubjectCongratulation2"]="xxx";
         // Take the subject from a message sent if somebody wants to add you as friend. The person has to be replaced by "(.+)".
         text[LANGUAGE]["msgSubjectFriend"]="xxx";
-        // Take the subject from a message sent if you reach the next level
+        // Take the subject from a message sent if somebody has canceled your friendship. The person has to be replaced by "(.+)".
+        text[LANGUAGE]["msgSubjectFriendEnd"]="xxx";
+        // Take the subject from a message sent if you reach the next level.
         text[LANGUAGE]["msgSubjectLevel"]="xxx";
+        // Take the subject from a message sent if you have to renew premium mode
+        text[LANGUAGE]["msgSubjectPremium"]="xxx";
         // Take the subject from a message sent if you got a present.
         text[LANGUAGE]["msgSubjectPresent"]="xxx";
+        // Take the subjects from messages sent if a quest was completed.
+        text[LANGUAGE]["msgSubjectQuest"]="xxx";
         // Take the subjects from messages sent if weed occurred on your field.
         text[LANGUAGE]["msgSubjectWeed1"]="xxx";
         text[LANGUAGE]["msgSubjectWeed2"]="xxx";
     
 // And all the other texts you can enter what you want ****************************************************************
         text[LANGUAGE]["above"]="above";
-        text[LANGUAGE]["absolute"]="absolute";
+        text[LANGUAGE]["absolute"]="Amount required";
         text[LANGUAGE]["accountActive"]="Account active";
         text[LANGUAGE]["accounts"]="Accounts";
         text[LANGUAGE]["activation"]="Activation";
@@ -166,6 +178,8 @@ try{
         text[LANGUAGE]["gamecurrency"]=unsafeWindow.gamecurrency;
         text[LANGUAGE]["general"]="General";
         text[LANGUAGE]["given"]="Given";
+        text[LANGUAGE]["goods"]="Goods";
+        text[LANGUAGE]["goToClothingDonation"]="Go to clothing donation";		
         text[LANGUAGE]["goToDonkey"]="Go to donkey Luke";
         text[LANGUAGE]["goToLottery"]="Go to lottery";
         text[LANGUAGE]["goToMarket"]="Go to market";
@@ -174,7 +188,6 @@ try{
         text[LANGUAGE]["goToPage"]="Go to page";
         text[LANGUAGE]["goToRank"]="Go to rank";
         text[LANGUAGE]["goToX"]="Go to %1%";
-        text[LANGUAGE]["goods"]="Goods";
         text[LANGUAGE]["hide"]="hide";
         text[LANGUAGE]["highlightProducts"]="Highlight products at market";
         text[LANGUAGE]["highlightUser"]="Highlight user at market";
@@ -182,15 +195,17 @@ try{
         text[LANGUAGE]["idle"]="idle !!";
         text[LANGUAGE]["importStorageString"]="Import storage string";
         text[LANGUAGE]["importStorageStringError"]="Sorry. Can't read the storage string.";
-        text[LANGUAGE]["inStock"]="in stock";
         text[LANGUAGE]["informationIsMissing"]="Information is missing."
         text[LANGUAGE]["ingredients"]="Ingredients";
+        text[LANGUAGE]["inStock"]="in stock";
         text[LANGUAGE]["invalidServer"]="Invalid Server";
         text[LANGUAGE]["inventory"]="Inventory";
         text[LANGUAGE]["jobIncomplete"]="Job not finished successfully";
         text[LANGUAGE]["jobComplete"]="Job finished successfully";
         text[LANGUAGE]["jobCurrent"]="Current job";
         text[LANGUAGE]["keptLots"]="Kept lots";
+        text[LANGUAGE]["lastPrice"]="Last price";
+        text[LANGUAGE]["lastQuest"]="Completed";
         text[LANGUAGE]["level"]="Level";
         text[LANGUAGE]["levelTooLow"]="Your level is too low";
         text[LANGUAGE]["levelXneeded"]="Level&nbsp;%1%&nbsp;needed";
@@ -207,8 +222,8 @@ try{
         text[LANGUAGE]["lvl"]="Lvl";
         text[LANGUAGE]["manageVariables"]="Manage variables";
         text[LANGUAGE]["market"]="Market";
-        text[LANGUAGE]["marketPrice"]="Market&nbsp;Price";
         text[LANGUAGE]["marketplace"]="Market place";
+        text[LANGUAGE]["marketPrice"]="Market&nbsp;Price";
         text[LANGUAGE]["marketstall"]="Market stall";
         text[LANGUAGE]["megafield"]="Megafield";
         text[LANGUAGE]["megafieldCurrency"]=unsafeWindow.t_megafield_currency;
@@ -230,8 +245,8 @@ try{
         text[LANGUAGE]["oldOnes"]="Old";
         text[LANGUAGE]["options"]="Options";
         text[LANGUAGE]["overNPCprice"]="over NPC-price";
-        text[LANGUAGE]["overX"]="over %1%";
         text[LANGUAGE]["overview"]="overview";
+        text[LANGUAGE]["overX"]="over %1%";
         text[LANGUAGE]["pageXNotLoaded"]="Page '%1%' is not loaded completely.";
         text[LANGUAGE]["password"]="Password";
         text[LANGUAGE]["pleaseOpenX"]="Please open %1%.";
@@ -243,22 +258,26 @@ try{
         text[LANGUAGE]["price"]="Price";
         text[LANGUAGE]["prices"]="Prices";
         text[LANGUAGE]["product"]="Product";
-        text[LANGUAGE]["productOverview"]="Product overview";
-        text[LANGUAGE]["productTimeSaving"]="%1% minutes saving for %2%";
         text[LANGUAGE]["production"]="Production";
+        text[LANGUAGE]["productOverview"]="Product overview";
         text[LANGUAGE]["products"]="Products";
+        text[LANGUAGE]["productTimeSaving"]="%1% minutes saving for %2%";
         text[LANGUAGE]["profit"]="Profit";
         text[LANGUAGE]["profitTable"]="Profit per Zone per Day";
         text[LANGUAGE]["quantity"]="Quantity";
         text[LANGUAGE]["quest_foodworld"]="Picnic area quest series";
         text[LANGUAGE]["quest_forestry"]="Series of quests (forestry)";
         text[LANGUAGE]["quest_main"]="Series of quests (farm)";
+        text[LANGUAGE]["quest_veterinary"]="Veterinary quest series";
         text[LANGUAGE]["questfoodworld1"]="Picnic area quest series";
         text[LANGUAGE]["questforestry1"]="1st series of quests (forestry)";
         text[LANGUAGE]["questforestry2"]="2nd series of quests (forestry)";
         text[LANGUAGE]["questmain1"]="1st series of quests (farm)";
         text[LANGUAGE]["questmain2"]="2nd series of quests (farm)";
+        text[LANGUAGE]["questmain3"]="3rd series of quests (farm)";
+        text[LANGUAGE]["questveterinary1"]="Veterinary quest series";
         text[LANGUAGE]["quests"]="Quests";
+        text[LANGUAGE]["questSetXToNrY"]="Setting %1% to No %2%";
         text[LANGUAGE]["rackX"]="%1%. rack";
         text[LANGUAGE]["rank"]="Rank";
         text[LANGUAGE]["readAll"]="Read all";
@@ -268,7 +287,7 @@ try{
         text[LANGUAGE]["readySinceX"]="Ready since %1%";
         text[LANGUAGE]["recipes"]="Recipes";
         text[LANGUAGE]["recursive"]="Recursive Needed";
-        text[LANGUAGE]["relative"]="relative";
+        text[LANGUAGE]["relative"]="Amount missing";
         text[LANGUAGE]["reloadInXSec"]="Reload in %1%s.";
         text[LANGUAGE]["relogin"]="Session ends soon.<br>New login in %1%.";
         text[LANGUAGE]["remaining"]="Remaining";
@@ -286,13 +305,12 @@ try{
         text[LANGUAGE]["seed"]="Seed";
         text[LANGUAGE]["seedPerField"]="Seed per field";
         text[LANGUAGE]["sendContract"]="Send contract";
-        text[LANGUAGE]["sendContractAgain"]="Send contract again";
-        text[LANGUAGE]["sentContractNrX"]="Sent contract no %1%."
         text[LANGUAGE]["sendingXObservedPricesToServer"]="Sending %1% observed prices to server ...";
+        text[LANGUAGE]["sentContractNrX"]="Sent contract no %1%."
         text[LANGUAGE]["server"]="Server";
         text[LANGUAGE]["serverTime"]="Time of server";
         text[LANGUAGE]["sessionEnd"]="End of Session at %1%<br>Click for new login";
-        text[LANGUAGE]["seedVendor"]="Seed vendor"; // Short for the seller of plants
+        text[LANGUAGE]["seedVendor"]="Seed vendor";
         text[LANGUAGE]["seedVendorShort"]="Shop"; // Short for the seller of plants
         text[LANGUAGE]["shadowboxitem"]="Shadowbox item";
         text[LANGUAGE]["shortHours"]="h";
@@ -335,12 +353,13 @@ try{
         text[LANGUAGE]["useWildcard"]= "Use * to match one or more letters.";
         text[LANGUAGE]["value"]="Value";
         text[LANGUAGE]["version"]="Version";
-        text[LANGUAGE]["veterinayLevelXNeeded"]="Veterinary level %1% needed";
+        text[LANGUAGE]["veterinary"]="Veterinary";
+        text[LANGUAGE]["veterinaryLevelXNeeded"]="Veterinary level %1% needed";
         text[LANGUAGE]["waterBonus"]="%1%% water bonus";
+        text[LANGUAGE]["wateringFeature"]="Watering feature";
         text[LANGUAGE]["waterNeeded"]="Water needed";
         text[LANGUAGE]["waterNeededAtX"]="Water needed at %1%";
         text[LANGUAGE]["waterNeededAtX_day1"]="Tomorrow water needed at %1%";
-        text[LANGUAGE]["wateringFeature"]="Watering feature";
         text[LANGUAGE]["windmill"]="Windmill";
         text[LANGUAGE]["writeMessage"]="write message";
         text[LANGUAGE]["XIsUpToDate"]="%1% is up-to-date."
@@ -354,6 +373,11 @@ try{
         text[LANGUAGE]["category_e"]="Advanced products";
         text[LANGUAGE]["category_z"]=unsafeWindow.rack_deco;
         text[LANGUAGE]["category_o"]=unsafeWindow.rack_oil;
+        text[LANGUAGE]["category_f1"]="Saplings";
+        text[LANGUAGE]["category_f2"]="Logs";
+        text[LANGUAGE]["category_f3"]="Sawmill products";
+        text[LANGUAGE]["category_f4"]="Carpentry products";
+        text[LANGUAGE]["category_f5"]="Wooden farmhouse items";
         text[LANGUAGE]["category_fw"]=unsafeWindow.rack_foodworld;
         text[LANGUAGE]["category_fw1"]="Drinks";
         text[LANGUAGE]["category_fw2"]="Food";
@@ -361,11 +385,6 @@ try{
         text[LANGUAGE]["category_fw4"]="not yet available";
         text[LANGUAGE]["category_fl"]="Flowers";
         text[LANGUAGE]["category_fla"]="Arrangements";
-        text[LANGUAGE]["category_f1"]="Saplings";
-        text[LANGUAGE]["category_f2"]="Logs";
-        text[LANGUAGE]["category_f3"]="Sawmill products";
-        text[LANGUAGE]["category_f4"]="Carpentry products";
-        text[LANGUAGE]["category_f5"]="Wooden farmhouse items";
         text[LANGUAGE]["category_hr"]="Medicinal herb";
         text[LANGUAGE]["category_md"]="Healing tincture";
         text[LANGUAGE]["category_r0"]="Recipes product";
@@ -396,11 +415,11 @@ try{
         text[LANGUAGE]["settings_valMinRackForestryFarmis"]=["Lodge farmie products","Adds the amount of the products wanted by the lodge farmies."];
         text[LANGUAGE]["settings_protectMinRack"]=["Selling protection","Prohibits to sell products at market below the minimal rackamount"];
         text[LANGUAGE]["settings_valBuyingLimitDown"]=["Bottom buy highlight",""];
-        text[LANGUAGE]["settings_valBuyingLimit"]=["Top buy limit","You can only buy products at the Market up to the limit given.  This protects you from accidentally purchasing very over-priced goods."];
+        text[LANGUAGE]["settings_valBuyingLimit"]=["Top buy limit","You can only buy products at the market up to the limit given.  This protects you from accidentally purchasing very over-priced goods."];
         text[LANGUAGE]["settings_valBuyingLimitNPC"]=["Only allow buy less than price of NPC",""];
         text[LANGUAGE]["settings_valSellingLimit"]=["Sell limits","Your sales are also protected, so that you don't price your own goods too cheaply or too highly."];
         text[LANGUAGE]["settings_valJoinPrices"]=["One input","Joins the price input fields at the market stand."];
-        text[LANGUAGE]["settings_valQuicklinks"]=["Show market quicklinks","Show Quicklinks at Market place"];
+        text[LANGUAGE]["settings_valQuicklinks"]=["Show market quicklinks","Show quicklinks at market place"];
         text[LANGUAGE]["settings_valUseObservedPrices"]=["Use observed prices","Prices are observed while clicking through the market place. A calculated price can be seen in the price list. Shall this automatically override your settings?"];
         text[LANGUAGE]["settings_valSendStatistics"]=["Send statistics","Support the <a href='http://mff.metrax.eu/' target='_blank'>Statistik-Server</a>.  No private data is sent!"];
         text[LANGUAGE]["settings_valPrivateMessages"]=["Number private messages kept","Your last private messages are kept so that a message history of one contact can be shown."];
@@ -418,9 +437,15 @@ try{
         text[LANGUAGE]["settings_hotkeymap"]={"prevPage":"previous Message, Zone, ...","nextPage":"next Message, Zone, ...","farm1":"1st farm","farm2":"2nd farm","farm3":"3rd farm","guild":"Club","city1":"First Village","city2":"Second Village","farmiLog":"Farmi-Log","help":"Help","market":"Market place","marketstand":"Market stand","messages":"Messages","options":"Options","profit":"Profit Calculation","seedVendor":"Seed retailer","overview":"Overview","contract":"Contracts","systemMessage":"(next unread) system message"};
         text[LANGUAGE]["settings_valzoneAddToGlobalTime"]=["Integrate","Shall the time be included to the global time?"];
         text[LANGUAGE]["settings_valGlobaltimeShowCroppedZone"]=["Integrate cropped zone","Shall the ready-state of the cropped zones be included in the global time?"];
-        text[LANGUAGE]["settings_cacheReset"]=["Cache reset","All information about your farms will be deleted ..."];
+        text[LANGUAGE]["settings_cacheReset"]=["Cache reset","The History and all information about your farms will be deleted ..."];
+        text[LANGUAGE]["settings_zoneReset"]=["Zones reset","All information about your farms will be deleted ..."];
+        text[LANGUAGE]["settings_setQuestMain"]=["Questseries","Main questseries are declared terminated ..."];
+        text[LANGUAGE]["settings_setQuestMain3"]=["Overwrite Questseries 3","The questnumber of main questseries 3 is set to the mff-questnumber."];
+        text[LANGUAGE]["settings_setQuestMain3_1"]=["Execute","The questnumber of main questseries 3 is set to the chosen number. Please use it carefully ..."];
+        text[LANGUAGE]["settings_megafieldSmartTimer"]=["Integrate active tour", "Megafield-Timer is set to end of the tour after a tour is started."];
+		text[LANGUAGE]["settings_clothingDonation"]=["Clothing Donation", "A blinking icon indicates, when you can donate or gamble."];
         //help
-        text[LANGUAGE]["help_0"]=[,"This is small introduction to the functions of the Adviser-Script. Not all changes are written here, go find them yourself ... Sometimes a mouse-over helps. <br>At the bottom you see a button to visit the <a href=\""+GM_Home+"\" target=\"_blank\">homepage</a>. Next to it, there is the button for the options. You should look at them and configure as you desire.<br>Generally the script only knows what you have seen. So just visit the field if something is wrong."];
+        text[LANGUAGE]["help_0"]=[,"This is a small introduction to the functions of the Adviser-Script. Not all changes are written here, go find them yourself ... Sometimes a mouse-over helps. <br>At the bottom you see a button to visit the <a href=\""+GM_Home+"\" target=\"_blank\">homepage</a>. Next to it, there is the button for the options. You should look at them and configure as you desire.<br>Generally the script only knows what you have seen. So just visit the field if something is wrong."];
         text[LANGUAGE]["help_1"]=["The Zones","The fields are observed while you see them. The script saves the plants, times and watering. So on the farm view this can be displayed. Each zone has a time counter at its top to show you when it is ready.<br>If you own the planting helper, you can access it directly from opened field. At the top of an opened zone you can navigate directly to zones of the same type."];
         text[LANGUAGE]["help_2"]=["The Overview","Click the pig on the top and you will see an overview of your complete farm. Each zone, its output (product and points) and the next time of work are displayed. Also your total crop is shown. Below you see the wishes of your farmies. You can click each zone or farmie to navigate there. If you are run out of a product, it can take you directly to the market place."];
         text[LANGUAGE]["help_3"]=["Blue Bar","Your points are kept daily. At the bottom you see a bar displaying the current and past level. Each white and red (sunday) line is a day. If you click it you get a detailed table and perhaps a hint if you are lack of a product."];
@@ -432,7 +457,7 @@ try{
         text[LANGUAGE]["help_9"]=["Messages","Your sales are kept and directly displayed - no need to open a message two times! Note the \"Read all\" and \"Log\" buttons. Your private messages are kept, too. So no need to look for the last messages of the current contact."];
         text[LANGUAGE]["help_10"]=["Contracts","They are kept, too. While creating a contact an input displays the value of the entered product. Enter first the price and then the amount to get inverse the amount. You can submit the same contract multiple times!"];
         text[LANGUAGE]["help_11"]=["Account Managing","You can save all your accounts in the options. So you can login easily in each one by the displayed buttons on the starting page. Note that you can switch directly the accounts at the same server."];
-         
+
         text[LANGUAGE]["automat"] = "Automaton";
         text[LANGUAGE]["automat_planting"] = "Planting...";
         text[LANGUAGE]["automat_waiting"] = "Waiting...";
@@ -610,6 +635,8 @@ try{
         text[LANGUAGE]["automat_title_off_farm3"] = "Show third farm only<br>+Ctrl: Hide third farm";
         text[LANGUAGE]["automat_title_on_farm4"] = "Show fourth farm only<br>+Ctrl: Show fourth farm";
         text[LANGUAGE]["automat_title_off_farm4"] = "Show fourth farm only<br>+Ctrl: Hide fourth farm";
+        text[LANGUAGE]["automat_title_on_farm5"] = "Show fifth farm only<br>+Ctrl: Show fifth farm";
+        text[LANGUAGE]["automat_title_off_farm5"] = "Show fifth farm only<br>+Ctrl: Hide fifth farm";
         text[LANGUAGE]["automat_title_on_farmersmarket"] = "Show farmersmarket only<br>+Ctrl: Show farmersmarket";
         text[LANGUAGE]["automat_title_off_farmersmarket"] = "Show farmersmarket only<br>+Ctrl: Hide farmersmarket";
         text[LANGUAGE]["automat_title_on_megafield"] = "Show megafield only<br>+Ctrl: Show megafield";
@@ -675,15 +702,15 @@ window.setTimeout(function(){
 },1000);
 */  
     if(undefined===top.unsafeData.COUNTRY){
-    top.unsafeData.LANGUAGE=LANGUAGE;
-    top.unsafeData.COUNTRY=COUNTRY;
-    top.unsafeData.delimThou=delimThou;
-    top.unsafeData.regDelimThou=regDelimThou;
-    top.unsafeData.regDelimThouShift=regDelimThouShift;
-    top.unsafeData.regDelimThouDelete=regDelimThouDelete;
-    top.unsafeData.delimDeci=delimDeci;
-    top.unsafeData.regDelimDeci=regDelimDeci;
-    top.unsafeData.dateFormatDM=dateFormatDM;
-    top.unsafeData.dateFormatDMY=dateFormatDMY;
+        top.unsafeData.LANGUAGE=LANGUAGE;
+        top.unsafeData.COUNTRY=COUNTRY;
+        top.unsafeData.delimThou=delimThou;
+        top.unsafeData.regDelimThou=regDelimThou;
+        top.unsafeData.regDelimThouShift=regDelimThouShift;
+        top.unsafeData.regDelimThouDelete=regDelimThouDelete;
+        top.unsafeData.delimDeci=delimDeci;
+        top.unsafeData.regDelimDeci=regDelimDeci;
+        top.unsafeData.dateFormatDM=dateFormatDM;
+        top.unsafeData.dateFormatDMY=dateFormatDMY;
     }    
 }catch(err){ GM_log("ERROR\npage="+location.href+"\n"+err); }
