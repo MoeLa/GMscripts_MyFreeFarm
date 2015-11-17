@@ -97,6 +97,7 @@ const CHANGELOG=[["2.0","29.05.2014",[["Migration nach openuserjs.org","Migratio
                 ,["2.5.13c","10.11.2015",[["Berater-Option \"Questnummer Questreihe 3 übernehmen\" verbessert.","Adviser option \"Gather questnumber for main questseries 3\" improoved."],["Fix: Quicklinks und beobachte Marktpreise","Fix: Quicklinks and observe market prices"]]]
                 ,["2.5.14","12.11.2015",[["Neue Berater-Option: Zone-Info löschen.","New adviser option: delete zone info."],["Fix: Marktstand-Liste führen","Fix: handle market-list"]]]
                 ,["2.6","15.11.2015",[["Neue Berater-Option \"Güterhof\": Beim Starten einer Tour wird der Güterhof-Timer auf das Ende der Tour gesetzt.","New Adviser Option \"Megafield\": Megafield-Timer is set to end of the tour after a tour is started"]]]
+                ,["2.6.1","17.11.2015",[["Kleiderspende: Ähnlich zur Waltraud und der Lotterie wird durch einen blinkenden Icon angezeigt, wenn bei der Kleiderspende gespendet oder gewürfelt werden sollte.","Clothing Donation: Blinking icon indicates, that you should donate or gamble."]]]
                 ];
 if(!VERSIONfunctionFile){
     alert("Hi, I am the Berater-Script.\nThe function-file is missing.\nPlease install me again.");
@@ -593,10 +594,10 @@ var regMsgContentMarketsale,regMsgContentContractsale,regMsgContentContractsaleL
 var valAutoWater, valWaterNeeded, valAssumeWater, valAutoCrop, valErnteMsg, valLimitEmptyFields, valStatistik, valClickErrorbox, valGlobaltimeShowCroppedZone;
 var valMoveAnimals, valMinRackMan, valMinRack, valMinRackPlantsize, valMinRackFarmis,valMinRackForestryFarmis, valMinRackGrowing, valMinRackRecursive, valFarmiLimits, valFarmiMiniInfo
 var upjersAds, buyNotePadShowBlocked, show;
-var farmiLog, farmiDailyCount, levelLog, levelLogId, lotteryLog, lotteryLogId, logSales, logSalesId, logDonkey, logDonkeyId;
+var farmiLog, farmiDailyCount, levelLog, levelLogId, lotteryLog, lotteryLogId, logSales, logSalesId, logDonkey, logDonkeyId, logClothingDonation;
 var zoneAddToGlobalTime;
 var totalAnimals, totalFarmis, totalPowerups, totalQuest, totalRecursive, totalZones, totalEndtime;
-var valKauflimit, valKauflimitNPC, highlightProducts, highlightUser, valNimmBeob, valVerkaufLimitDown, valVerkaufLimitUp, valJoinPreise, lastOffer, protectMinRack, ownMarketOffers;
+var valKauflimit, valKauflimitNPC, highlightProducts, highlightUser, valNimmBeob, valVerkaufLimitDown, valVerkaufLimitUp, valJoinPreise, lastOffer, protectMinRack, ownMarketOffers, valClothingDonation;
 var valMessagesSystemMarkRead;
 var megafieldVehicle, megafieldJob, logMegafieldJob, megafieldSmartTimer;
 top.unsafeData.autoAction=null;
@@ -1445,7 +1446,19 @@ try{
     div=null;
 }catch(err){GM_logError("goToDonkey","","",err);}
 }
-
+function goToClothingDonation(){
+    try{
+        var div=$top("speedlink_city2");
+        if (div && $top("clothingdonation_link")) {
+            top.document.addEventListener("gameCity2",function(){
+                click($top("clothingdonation_link_2"));
+                top.document.removeEventListener("gameCity2",arguments.callee,false);
+            },false);
+            click(div);
+        }
+        div=null;
+    } catch(err) {GM_logError("goToClothingDonation","","",err); }
+}
 function showGoToMarketToolTip(event,prod,add1,add2){
     var str='<table>';
     str += '<tr><th colspan="2" class="lightBg">'+getText("goToMarketOfX").replace(/%1%/,prodName[0][prod])+'</th></tr>';
@@ -6104,6 +6117,26 @@ function buildInfoPanelOptions(){
         },false);
         createElement("td",{},newtr,getText("settings_valGlobaltimeShowCroppedZone")[0]);
         createElement("td",{},newtr,getText("settings_valGlobaltimeShowCroppedZone")[1]);
+
+        // **********************************************************************
+        newtr=createElement("tr",{},newtable);
+        newtd=createElement("th",{"colspan":"3"},newtr,getText("settings_clothingDonation")[0]);
+
+        newtr=createElement("tr",{},newtable);
+        newtd=createElement("td",{"align":"center"},newtr);
+        newinput=createElement("input",{"type":"checkbox","class":"link","checked": valClothingDonation}, newtd);
+        if (USERLEVEL < 38) { newinput.disabled = true; }
+        newinput.addEventListener("click",function(){
+            valClothingDonation = this.checked;
+            if (valClothingDonation) {
+                showGoToClothingDonation();
+            } else {
+                hideGoToClothingDonation();
+            }
+            GM_setValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_valClothingDonation", valClothingDonation);
+        }, false);
+        createElement("td",{},newtr,getText("settings_clothingDonation")[0]);
+        createElement("td",{},newtr,getText("settings_clothingDonation")[1]);
 
         // **********************************************************************
         newtr=createElement("tr",{},newtable);
@@ -16958,6 +16991,8 @@ return;
                 }
                 div.innerHTML = numberFormat(unsafeWindow.clothingdonation_data.data.percent)+"%";
                 div=null; container=null;
+
+                clothingDataAvailable(unsafeWindow.clothingdonation_data.data, goodsValue);
             }catch(err){ GM_logError("showClothingDonation","","prodId="+prodId,err); }
         });
         // Recipedealer
@@ -17358,6 +17393,90 @@ return;
                 }catch(err){GM_logError("buyNewLotResponse","","",err);}
             });
         }
+
+        // Clothing Donation
+        err_trace="Clothing Donation";
+        valClothingDonation= GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_valClothingDonation", USERLEVEL >= 38);
+        logClothingDonation = explode(GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_logClothingDonation"),"do_main/logClothingDonation",[]);
+        if (!(logClothingDonation instanceof Array)){ logClothingDonation = []; }
+
+        function showGoToClothingDonation(){
+        try{
+            if(USERLEVEL >= 38 && valClothingDonation) {
+                var latestLog = logClothingDonation[0];
+                if (latestLog && latestLog["createdate"] + 6*3600 > now) {
+                    // Donated less than 6  hours ago => We do nothing
+                } else if (latestLog && latestLog["gambleInfo"][0]["gambledate"] + 6*3600 > now) {
+                    // Gambled less than 6 hours ago => We do nothing
+                } else if(!nodes["goToClothingDonation"]) {
+                    // Let's draw the quick link
+                    nodes["goToClothingDonation"]=new Object();
+                    nodes["goToClothingDonation"]["node"]=createElement("div",{"id":"divGoToClothingDonation","class":"link blinking","style":"height:70px;width:70px;background:url('"+GFX+"city/clothingdonation.jpg') 80px 1px / 150%;border:2px solid black;border-radius:35px;margin-bottom:5px;opacity:1;"},$("fixedDivRight"));
+                    nodes["goToClothingDonation"]["node"].addEventListener("mouseover",function(event){ toolTip.show(event, getText("goToClothingDonation")); },false);
+                    nodes["goToClothingDonation"]["node"].addEventListener("click",function(event){ goToClothingDonation();},false);
+                    raiseEvent("gameClothingDonationAvailable");
+                }
+            }
+        }catch(err){GM_logError("showGoToClothingDonation","","",err);}
+        }
+
+        function hideGoToClothingDonation(){
+        try{
+            if(nodes["goToClothingDonation"]){
+                if(nodes["goToClothingDonation"]["node"]) {
+                    removeElement(nodes["goToClothingDonation"]["node"]);
+                }
+                delete nodes["goToClothingDonation"];
+
+                $("clothingdonation_donatebutton").classList.remove('blinking');
+                
+                $("clothingdonation_gamblebutton").classList.remove('blinking');
+            }
+        }catch(err){GM_logError("hideGoToClothingDonation","","",err);}
+        }
+
+        function clothingDataAvailable(data, goodsValue) {
+            var needSave = false;
+            var latestLog = logClothingDonation[0];
+
+            // Is current (donation) data new?
+            if (!latestLog || latestLog["createdate"] < parseInt(data.createdate, 10)) {
+                // No log entry or new donation => insert new log entry
+                latestLog = {
+                        createdate: parseInt(data.createdate, 10),
+                        in: data.data.in,
+                        gambleInfo: [{gambledate: parseInt(data.gambledate, 10), out: data.data.out}]
+                }
+                logClothingDonation.unshift(latestLog);
+                needSave = true;
+                // console.log("No log entry or new donation => insert new log entry");
+            } else if (latestLog["createdate"] == parseInt(data.createdate, 10) && 
+                       latestLog["gambleInfo"][0]["gambledate"] < parseInt(data.gambledate, 10)) {
+                // Same (donation) data, but new gamble info => insert only gamble info
+                latestLog["gambleInfo"].unshift({gambledate: parseInt(data.gambledate, 10), out: data.data.out});
+                needSave = true;
+                // console.log("Same donation, but new gamble info => insert gamble info");
+            }
+
+            if (needSave) {
+                GM_setValueCache(COUNTRY+"_"+SERVER+"_"+USERNAME+"_logClothingDonation",implode(logClothingDonation,"clothingDataAvailable/logClothingDonation"));
+            }
+
+           if (goodsValue[0] < goodsValue[1]) {
+                // Value of donation is less than value of reward => Animate Donate-Button!
+                $("clothingdonation_donatebutton").classList.add('blinking');
+            } else if (data.gambleremain < 1) {
+                // We haven't gambled within the last six hours => Animate Gamble-Button!
+                $("clothingdonation_gamblebutton").classList.add('blinking');
+            } else {
+                // We shouldn't donate, we can't gamble, so we hide the icon
+                hideGoToClothingDonation();
+            }
+        }
+
+        // On load, check, if we need to load the 
+        showGoToClothingDonation();
+        
         // Waltraud
         err_trace="Donkey Waltraud";
         // logDonkey[]=[day,points,[received gifts]]
@@ -19670,6 +19789,7 @@ try{
         text["de"]["general"]="Allgemein";
         text["de"]["given"]="Gegeben";
         text["de"]["goods"]="Waren";
+        text["de"]["goToClothingDonation"]="Zur Kleiderspende";
         text["de"]["goToDonkey"]="Zum Goldesel Waltraud";
         text["de"]["goToLottery"]="Zur Lotterie";
         text["de"]["goToMarket"]="Zum Markt";
@@ -19933,6 +20053,7 @@ try{
         text["de"]["settings_setQuestMain3"]=["3. Farm-Questreihe nachführen","Die 3. Farm-Questreihe wird nachgeführt. Es werden die mff-Werte übernommen."];
         text["de"]["settings_setQuestMain3_1"]=["Ausführen","Die Questnummer der 3. Farm-Questreihe wird auf den eingegebenen Wert gesetzt. Bitte vorsichtig verwenden ..."];
         text["de"]["settings_megafieldSmartTimer"]=["Beachte aktive Tour", "Soll beim Starten einer Tour der Güterhof-Timer auf das Ende der Tour gesetzt werden?"];
+        text["de"]["settings_clothingDonation"]=["Kleiderspende", "Ein blinkender Icon zeigt an, wenn bei der Kleiderspende gespendet oder gewürfelt werden kann."];
         // help
         text["de"]["help_0"]=[,"This is small introduction to the functions of the Adviser-Script. Not all changes are written here, go find them yourself ... Sometimes a mouse-over helps. <br>At the bottom you see a button to visit the <a href=\""+GM_Home+"\" target=\"_blank\">homepage</a>. Next to it, there is the button for the options. You should look at them and configure as you desire.<br>Generally the script only knows what you have seen. So just visit the field if something is wrong."];
         text["de"]["help_1"]=["The Zones","The fields are observed while you see them. The script saves the plants, times and watering. So on the farm view this can be displayed. Each zone has a time counter at its top to show you when it is ready.<br>If you own the planting helper, you can access it directly from opened field. At the top of an opened zone you can navigate directly to zones of the same type."];
@@ -20064,6 +20185,7 @@ try{
         text["en"]["general"]="General";
         text["en"]["given"]="Given";
         text["en"]["goods"]="Goods";
+        text["en"]["goToClothingDonation"]="Go to clothing donation";
         text["en"]["goToDonkey"]="Go to donkey Luke";
         text["en"]["goToLottery"]="Go to lottery";
         text["en"]["goToMarket"]="Go to market";
@@ -20327,6 +20449,7 @@ try{
         text["en"]["settings_setQuestMain3"]=["Overwrite Questseries 3","The questnumber of main questseries 3 is set to the mff-questnumber."];
         text["en"]["settings_setQuestMain3_1"]=["Execute","The questnumber of main questseries 3 is set to the chosen number. Please use it carefully ..."];
         text["en"]["settings_megafieldSmartTimer"]=["Integrate active tour", "Megafield-Timer is set to end of the tour after a tour is started."];
+        text["en"]["settings_clothingDonation"]=["Clothing Donation", "A blinking icon indicates, when you can donate or gamble."];
         //help
         text["en"]["help_0"]=[,"This is a small introduction to the functions of the Adviser-Script. Not all changes are written here, go find them yourself ... Sometimes a mouse-over helps. <br>At the bottom you see a button to visit the <a href=\""+GM_Home+"\" target=\"_blank\">homepage</a>. Next to it, there is the button for the options. You should look at them and configure as you desire.<br>Generally the script only knows what you have seen. So just visit the field if something is wrong."];
         text["en"]["help_1"]=["The Zones","The fields are observed while you see them. The script saves the plants, times and watering. So on the farm view this can be displayed. Each zone has a time counter at its top to show you when it is ready.<br>If you own the planting helper, you can access it directly from opened field. At the top of an opened zone you can navigate directly to zones of the same type."];
