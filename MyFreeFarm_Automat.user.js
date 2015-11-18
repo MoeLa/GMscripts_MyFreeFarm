@@ -79,7 +79,7 @@ const CHANGELOG=[["2.0","29.05.2014",[["Migration nach openuserjs.org","Migratio
                 ,["2.5.6","31.08.2015",[["Anpassung an Spiel-Update","Fix for game update"]]]
                 ,["2.5.7","14.10.2015",[["Anpassung an Spiel-Update","Fix for game update"]]]
                 ,["2.5.8","31.10.2015",[["Anpassung an Spiel-Update: Lagerbestände 5. Farm","Fix for game update: storage 5th farm"]]]
-				,["2.5.8a","02.11.2015",[["Fix: Exotische Früchte","Fix: exotic fruit"]]]
+                ,["2.5.8a","02.11.2015",[["Fix: Exotische Früchte","Fix: exotic fruit"]]]
                 ];
 
 if(!VERSIONfunctionFile){
@@ -213,6 +213,7 @@ var botArbiter=new function(){
         case "windmill":       priority= 20;fkt=autoWindmill;       break;
         case "forestry":       priority= 10;fkt=autoForestry;       break;
         case "foodworld":      priority= 10;fkt=autoFoodworld;      break;
+        case "clothingDonation":priority= 5;fkt=autoClothingDonation; break;
         case "donkey":         priority=  5;fkt=autoDonkey;         break;
         case "lottery":        priority=  5;fkt=autoLottery;        break;
         case "activatePowerUp":priority=  5;fkt=autoActivatePowerUp;break;
@@ -319,6 +320,9 @@ var botArbiter=new function(){
             checkReadyZone(); // farm, windmill, forestry
             if(settings.get("account","botUseFarmi")&&unsafeWindow.farmisinfo && unsafeWindow.farmisinfo[0] && (settings.get("account","farmiReject") || settings.get("account","farmiAccept"))){
                 checkFarmi(1);
+            }
+            if(settings.get("account","botUseClothingDonation") && $("divGoToClothingDonation")) {
+                botArbiter.add("clothingDonation");
             }
             if(settings.get("account","botUseDonkey") && $("divGoToDonkey")) {
                 botArbiter.add("donkey");
@@ -494,7 +498,7 @@ var settings=new function(){
     var dataDefault={"global":{},
                      "country":{"pauseShort":[300,700],"pause":[2000,4000],"maxDurationBotRun":300,"maxDurationBotStep":30,"botErrorBehaviour":"reload"},
                      "server":{"botActive":false},
-                     "account":{"autoPlant":true,"autoWater":true,"autoFeed":true,"botUseFarmersmarket":false,"botUseFarmi":false,"botUseDonkey":false,"botUseLottery":false,"botUseFoodworld":false,"botUseForestry":false,"botUseWindmill":false,"disableCropFields":false,"farmiAccept":false,"farmiAcceptAboveNr":100,"farmiAcceptBelowMinValue":false,"farmiReject":false,"farmiRejectUntilNr":90,"farmiRemoveMissing":false,"farmiRemoveMissingAboveNr":10,"lotteryActivate":false,"lotteryDailyLot":false,"powerUpActivate":false,"seedWaitForCrop":30,"showQueueTime":true,"useQueueList":false}
+                     "account":{"autoPlant":true,"autoWater":true,"autoFeed":true,"botUseFarmersmarket":false,"botUseFarmi":false,"botUseClothingDonation":false,"botUseDonkey":false,"botUseLottery":false,"botUseFoodworld":false,"botUseForestry":false,"botUseWindmill":false,"disableCropFields":false,"farmiAccept":false,"farmiAcceptAboveNr":100,"farmiAcceptBelowMinValue":false,"farmiReject":false,"farmiRejectUntilNr":90,"farmiRemoveMissing":false,"farmiRemoveMissingAboveNr":10,"lotteryActivate":false,"lotteryDailyLot":false,"powerUpActivate":false,"seedWaitForCrop":30,"showQueueTime":true,"useQueueList":false}
                     };
     var require=    {"global":{},
                      "country":{},
@@ -2155,7 +2159,7 @@ try{
         var queueNum=parseInt(this.parentNode.getAttribute("queueNum"),10);
         toolTip.show(event, toolTipProductSmall(zoneNrS, zoneNrL, queueNum, this));
     },false);
-	
+    
     for(var iProd=0;iProd<unsafeData.prodName[0].length;iProd++){
         //if((unsafeData.prodTyp[0][iProd]=="v")&&!(unsafeData.prodBlock[0][iProd]&&unsafeData.prodBlock[0][iProd].match(/l/))){
         if((unsafeData.PRODUCT2BUILDING[0][iProd]==fzZoneType)&&!(unsafeData.prodBlock[0][iProd]&&unsafeData.prodBlock[0][iProd].match(/[ulq]/))){
@@ -2171,7 +2175,7 @@ try{
             } else {
                 newdiv.style.opacity=(unsafeData.prodStock[0][iProd]&&unsafeData.prodStock[0][iProd]>0)?1:0.4;
             }
-			
+            
             newdiv.addEventListener("click",function(){
                 var zoneNrS=this.parentNode.getAttribute("zoneNrS");
                 var zoneNrL=this.parentNode.getAttribute("zoneNrL");
@@ -4354,8 +4358,8 @@ try{
                 GM_logInfo("autoZoneCrop","","zoneTyp="+zoneTyp,"Cropping"); // TODO text
                 unsafeData.zones.getProduction(handled.zoneNrF)[3]=false;
                 //20151014 Linus--Tux
-				//click($("cropall").getElementsByTagName("img")[0]);
-				click($("cropall"));
+                //click($("cropall").getElementsByTagName("img")[0]);
+                click($("cropall"));
                 return true;
             }else{
                 return false;
@@ -4600,8 +4604,8 @@ try{
 function autoFarmPlantInit(runId,rackitemNr){
 try{
     GM_logInfo("autoFarmPlantInit","runId="+runId+" rackitemNr="+rackitemNr,"","Begin",1);
-	//Linus--Tux 20151102
-	var farm = (unsafeData.gameLocation.get()[1]<4)?0:5;
+    //Linus--Tux 20151102
+    var farm = (unsafeData.gameLocation.get()[1]<4)?0:5;
     if(bot.checkRun("autoFarmPlantInit",runId)){
         bot.setAction("autoFarmPlantInit");
         GM_logInfo("autoFarmPlantInit","runId="+runId+" rackitemNr="+rackitemNr,"","Initializing planting ("+rackitemNr+")");
@@ -4719,8 +4723,8 @@ try{
 function autoFarmPlantDefault(runId){
 try{
     GM_logInfo("autoFarmPlantDefault","runId="+runId,"","Begin",1);
-	//Linus--Tux 20151102
-	var farm = (unsafeData.gameLocation.get()[1]<4)?0:5;
+    //Linus--Tux 20151102
+    var farm = (unsafeData.gameLocation.get()[1]<4)?0:5;
     if(bot.checkRun("autoFarmPlantDefault",runId)){
         bot.setAction("autoFarmPlantDefault");
         GM_logInfo("autoFarmPlantDefault","runId="+runId,"","Searching other plant");
@@ -4794,8 +4798,8 @@ try{
 function autoFarmPlant(runId,v,didPlant,isBot){
 try{
     GM_logInfo("autoFarmPlant","runId="+runId+" v="+v+" didPlant="+didPlant+" isBot="+isBot,"","Begin",1);
-	//Linus--Tux 20151102
-	var farm = (unsafeData.gameLocation.get()[1]<4)?0:5;
+    //Linus--Tux 20151102
+    var farm = (unsafeData.gameLocation.get()[1]<4)?0:5;
     if(bot.checkRun("autoFarmPlant",runId,!isBot)){
         bot.setAction("autoFarmPlant");
         if(v==1){ 
@@ -4915,10 +4919,10 @@ try{
             if(v==1){
                 GM_logInfo("autoFarmWater","runId="+runId+" v="+v+" didPlant="+didPlant+" isBot="+isBot,"",getText("automat_watering"));
             }
-			//20151014 Linus--Tux waterall_inactive
-			//if($("tooltipwaterall"))
-			if(document.getElementsByClassName('waterall_inactive').length==0) {
-				bot.setAction("autoFarmWater "+v+": premium");
+            //20151014 Linus--Tux waterall_inactive
+            //if($("tooltipwaterall"))
+            if(document.getElementsByClassName('waterall_inactive').length==0) {
+                bot.setAction("autoFarmWater "+v+": premium");
                 GM_logInfo("autoFarmWater","runId="+runId+" v="+v+" didPlant="+didPlant+" isBot="+isBot,"","Water all");
                 unsafeData.zones.flagProduction(handled.zoneNrF);
                 document.addEventListener("gameFieldWatered",function(runId,v,didPlant,isBot){
@@ -4928,13 +4932,13 @@ try{
                     };
                 }(runId,v,didPlant,isBot),false);               
                 //20151014 Linus--Tux
-				//click($("waterall").getElementsByTagName("img")[0]);
-				click($("waterall"));
+                //click($("waterall").getElementsByTagName("img")[0]);
+                click($("waterall"));
             }else if(unsafeWindow.mode!="2"){
                 click($("giessen")); 
                 window.setTimeout(autoFarmWater,settings.getPause(),runId,v,didPlant,isBot);
             }else{
-				bot.setAction("autoFarmWater "+v+": non-premium");
+                bot.setAction("autoFarmWater "+v+": non-premium");
                 if(v<121){
                     if((unsafeWindow.garten_kategorie[v]=="v") && (unsafeWindow.garten_zeit[v]!="0") && (isNaN(parseInt(unsafeWindow.garten_wasser[v],10))||(parseInt(unsafeWindow.garten_wasser[v],10)+86400<unsafeWindow.Zeit.Server))){
                         bot.setAction("autoFarmWater "+v+": click ");
@@ -5513,7 +5517,7 @@ function autoMegafield(runId,step){
                         unsafeData.readyZone[handled.zoneNrL][2]=false;
                         listeningEvent="gameMegafieldPlanted";
                         action=function(){ click($("megafield_tile"+actionField[2])); };
-												//window.setTimeout(autoMegafield,settings.getPause(),runId,8);
+                                                //window.setTimeout(autoMegafield,settings.getPause(),runId,8);
                     }
                 }else{
                     // no free field to plant
@@ -6140,6 +6144,101 @@ try{
         help=null;listeningEvent=null;action=null;
     }
 }catch(err){ GM_logError("autoForestryBuilding","runId="+runId+" step="+step,"",err); }
+}
+
+function autoClothingDonation(runId, step) {
+try{
+    if (bot.checkRun("autoClothingDonation", runId)) {
+        var help, action=null, listeningEvent=null;
+        if (!step) { step=1; }
+        bot.setAction("autoClothingDonation (" + step + ")");
+        switch (step) {
+            case 1: { // go to city 2
+            if (unsafeWindow.city==2) {
+                autoClothingDonation(runId, step + 1);
+            } else {
+                listeningEvent="gameCity2";
+                action=function(){
+                    GM_logInfo("autoClothingDonation","runId="+runId+" step="+step,"","Goto City 2");
+                    click($("speedlink_city2"));
+                };
+            }
+            break; }
+        case 2: { // open clothing donation
+            if ($("clothingdonation").style.display == "block") {
+                autoClothingDonation(runId, step + 1);
+            } else {
+                listeningEvent = "gameClothingDonationResponse";
+                action = function() {
+                    GM_logInfo("autoClothingDonation","runId="+runId+" step="+step,"","Clothing Donation: Opening");
+                    click($("clothingdonation_link"));
+                };
+            }
+            break; }
+        case 3: { // donate or gamble
+            GM_logInfo("autoClothingDonation","runId="+runId+" step="+step,"","Clothing Donation: Gambling");
+            // Falls $("clothingdonation_donatebutton") blinkt => spenden
+            // Falls $("clothingdonation_gamblebutton") blinkt => gamblen
+            
+            if ($("clothingdonation_donatebutton").classList.contains("blinking")) {
+                if ($("globalbox").style.display == "block") { // Globalbox is opened
+                    autoClothingDonation(runId, step + 1);
+                } else {
+                    listeningEvent = "gameOpenGlobalCommitBox";
+                    action = function() {
+                        GM_logInfo("autoClothingDonation","runId="+runId+" step="+step,"","Clothing Donation: Gambling");
+                        click($("clothingdonation_donatebutton"));
+                    };
+                }
+            } else if ($("clothingdonation_gamblebutton").classList.contains("blinking") && unsafeWindow.clothingdonation_data.data.gambleremain < 1) {
+                if ($("globalbox").style.display == "block") { // Globalbox is opened
+                    autoClothingDonation(runId, step + 1);
+                } else {
+                    listeningEvent = "gameOpenGlobalCommitBox";
+                    action = function() {
+                        GM_logInfo("autoClothingDonation","runId="+runId+" step="+step,"","Clothing Donation: Gambling");
+                        click($("clothingdonation_gamblebutton"));
+                    };
+                }
+            } else {
+                autoClothingDonation(runId, 5);
+            }
+            
+            break;}
+        case 4: { // exit
+            GM_logInfo("autoClothingDonation","runId="+runId+" step="+step,"","Clothing Donation: Gambling End");
+            if ($("globalbox").style.display == "none") { // Globalbox is closed
+                autoClothingDonation(runId, step + 1);
+            } else {
+                listeningEvent = "gameClothingDonationResponse";
+                action = function() {
+                    GM_logInfo("autoClothingDonation","runId="+runId+" step="+step,"","Clothing Donation: Gambling End");
+                    click($("globalbox_button1"));
+                };
+            }
+            break;}
+        case 5: { // exit
+            GM_logInfo("autoClothingDonation","runId="+runId+" step="+step,"","Clothing Donation: Exiting");
+            if ($("clothingdonation").style.display == "block") { // Clothing Donation dialog is opened
+                autoZoneFinish(runId, $("clothingdonation").getElementsByClassName("mini_close")[0]);
+            } else {
+                autoZoneFinish(runId);
+            }
+            break;}
+        }
+
+        if (listeningEvent) {
+            document.addEventListener(listeningEvent, function(listeningEvent, runId, step){
+                return function() {
+                    document.removeEventListener(listeningEvent, arguments.callee, false);
+                    window.setTimeout(autoClothingDonation, settings.getPause(), runId, step+1);
+                };
+            } (listeningEvent, runId, step), false);
+        }
+        if (action) { action(); }
+        help=null; listeningEvent=null; action=null;
+    }
+}catch(err){ GM_logError("autoClothingDonation","runId="+runId+" step="+step,"",err); }
 }
 
 function autoDonkey(runId, step) {
@@ -7838,6 +7937,20 @@ function buildInfoPanelOptions(){
         }, false);
         newtd=createElement("td",{"colspan":"2"},newtr,getText("automat_settings_botUse"));
 
+        // *********** CLOTHING DONATION ***********************************
+        newtr=createElement("tr",{"style":"background-color:#b69162;"},newtable);
+        createElement("th",{"colspan":"3"},newtr,getText("settings_clothingDonation")[0]);
+
+        newtr=createElement("tr",{"style":"line-height:18px;"},newtable);
+        newtd=createElement("td",{"align":"center","width":"40"},newtr);
+        inp=createElement("input",{"class":"link","type":"checkbox","checked":settings.get("account","botUseClothingDonation")},newtd);
+        inp.addEventListener("click",function(){
+            settings.set("account", "botUseClothingDonation", this.checked);
+            // buildInfoPanelOptionsDisabling();
+            botArbiter.check();
+        }, false);
+        newtd=createElement("td",{"colspan":"2"},newtr,getText("automat_settings_botUse"));
+
         // *********** LOTTERY ************************************
         newtr=createElement("tr",{"style":"background-color:#b69162;"},newtable);
         newtd=createElement("th",{colspan:"3"},newtr,"Lottery"); // TODO text
@@ -8604,10 +8717,10 @@ try{
                     $("f"+v).setAttribute("title",v+"|kat"+unsafeWindow.garten_kategorie[v]+"|zt"+unsafeWindow.garten_zeit[v]+"|wa"+unsafeWindow.garten_wasser[v]+"|pr"+unsafeWindow.garten_prod[v]);
                 }
             }
-			//20151014 Linus--Tux
+            //20151014 Linus--Tux
             /*cand=$("cropall").getElementsByTagName("img")[0];
-			if(!cand.getAttribute("onclick")){
-				cand.setAttribute("src",GFX+"leer.gif");
+            if(!cand.getAttribute("onclick")){
+                cand.setAttribute("src",GFX+"leer.gif");
                 cand.setAttribute("onclick","parent.selectMode(1,true,top.selected);");
                 cand.addEventListener("click",function(){
                     autoFarmCrop(bot.start(),1);

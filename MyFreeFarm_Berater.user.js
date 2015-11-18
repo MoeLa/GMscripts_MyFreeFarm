@@ -12233,6 +12233,34 @@ return false;
                 GM_setValueCache(COUNTRY+"_"+SERVER+"_"+USERNAME+"_ownMarketOffers", implode(ownMarketOffers,"marketActionResponse/ownMarketOffers"));
                 doMarketoffersNotepad();
                 
+                // var minsize = [0, 1000];
+                // var maxsize = [0, 0];
+                // var x = {0: []};
+                // for (var v = 0; v < marketOffersArr.length; v++) {
+                //         if (marketOffersArr[v] === undefined) { x[0].push(prodName[0][v]); continue; }
+                //         // if (marketOffersArr[v].length < minsize[1]) {
+                //         //        minsize = [v, marketOffersArr[v].length];
+                //         // }
+                //         // if (marketOffersArr[v].length > maxsize[1]) {
+                //         //        maxsize = [v, marketOffersArr[v].length];
+                //         // }
+
+                //         var entry = x[marketOffersArr[v].length];
+                //         if (!entry) {
+                //                 entry = [v];
+                //                 x[marketOffersArr[v].length] = entry;
+                //         } else {
+                //                 entry.push(prodName[0][v]);
+                //         }
+
+                // }
+                // console.log("Min: " + prodName[0][minsize[0]] + " -> " +  minsize[1]);
+                // console.log("Max: " + prodName[0][maxsize[0]] + " -> " +  maxsize[1]);
+                // console.log(x);
+                // for (var v = 0; v < 100; v++) {
+                //         console.log(v + " -> " + x[v].join(", "));
+                // }
+
                 // Calculate all observed prices
                 err_trace="Observing prices";
                 for(var v = 0; v < prodBlock[0].length; v++) {
@@ -17398,12 +17426,15 @@ return;
 
         function showGoToClothingDonation(){
         try{
+            console.log("showGoToClothingDonation called");
             if(USERLEVEL >= 38 && valClothingDonation) {
                 var latestLog = logClothingDonation[0];
-                if (latestLog && latestLog["createdate"] + 6*3600 > now) {
+                if (latestLog && latestLog["createdate"] + 6*3600 > now &&
+                        latestLog["gambleInfo"][0]["gambledate"] + 6*3600 > now) {
                     // Donated less than 6  hours ago => We do nothing
-                } else if (latestLog && latestLog["gambleInfo"][0]["gambledate"] + 6*3600 > now) {
                     // Gambled less than 6 hours ago => We do nothing
+                    // console.log("Donated less than 6  hours ago");
+                    console.log("Gambled less than 6 hours ago ");
                 } else if(!nodes["goToClothingDonation"]) {
                     // Let's draw the quick link
                     nodes["goToClothingDonation"]=new Object();
@@ -17414,6 +17445,7 @@ return;
                 }
             } else {
                 hideGoToClothingDonation();
+                console.log("Icon hidden");
             }
         }catch(err){GM_logError("showGoToClothingDonation","","",err);}
         }
@@ -17470,6 +17502,8 @@ return;
                 // We shouldn't donate, we can't gamble, so we hide the icon
                 hideGoToClothingDonation();
             }
+
+            raiseEvent("gameClothingDonationResponse");
         }
 
         // On load, check, if we need to load the 
