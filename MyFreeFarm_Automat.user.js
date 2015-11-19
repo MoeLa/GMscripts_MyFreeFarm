@@ -6161,7 +6161,6 @@ try{
                 action=function(){
                     GM_logInfo("autoClothingDonation","runId="+runId+" step="+step,"","Goto City 2");
                     click($("speedlink_city2"));
-                    console.log("Go to City 2");
                 };
             }
             break; }
@@ -6173,24 +6172,19 @@ try{
                 action = function() {
                     GM_logInfo("autoClothingDonation","runId="+runId+" step="+step,"","Clothing Donation: Opening");
                     click($("clothingdonation_link"));
-                    console.log("Open Clothing Donation");
                 };
             }
             break; }
         case 3: { // donate or gamble
-            console.log(unsafeData.latestClothingDonationLog);
-            GM_logInfo("autoClothingDonation","runId="+runId+" step="+step,"","Clothing Donation: Gambling");
-            // Falls $("clothingdonation_donatebutton") blinkt & Gewinn positiv => spenden
-            // Falls $("clothingdonation_gamblebutton") blinkt & gratis Würfeln möglich => gamblen
+            GM_logInfo("autoClothingDonation","runId="+runId+" step="+step,"","Clothing Donation: Donating/Gambling");
             if ($("clothingdonation_donatebutton").classList.contains("blinking") && unsafeData.latestClothingDonationLog["gambleInfo"][0]["gain"] > 0) {
                 if ($("globalbox").style.display == "block") { // Globalbox is opened
                     autoClothingDonation(runId, step + 1);
                 } else {
                     listeningEvent = "gameOpenGlobalCommitBox";
                     action = function() {
-                        GM_logInfo("autoClothingDonation","runId="+runId+" step="+step,"","Clothing Donation: Gambling");
+                        GM_logInfo("autoClothingDonation","runId="+runId+" step="+step,"","Clothing Donation: Donating");
                         click($("clothingdonation_donatebutton"));
-                        console.log("Donate!");
                     };
                 }
             } else if ($("clothingdonation_gamblebutton").classList.contains("blinking") && unsafeWindow.clothingdonation_data.data.gambleremain < 1) {
@@ -6201,7 +6195,6 @@ try{
                     action = function() {
                         GM_logInfo("autoClothingDonation","runId="+runId+" step="+step,"","Clothing Donation: Gambling");
                         click($("clothingdonation_gamblebutton"));
-                        console.log("Gamble");
                     };
                 }
             } else {
@@ -6217,7 +6210,6 @@ try{
                 action = function() {
                     GM_logInfo("autoClothingDonation","runId="+runId+" step="+step,"","Clothing Donation: Gambling End");
                     click($("globalbox_button1"));
-                    console.log("Commit dialog");
                 };
             }
             break;}
@@ -6225,7 +6217,6 @@ try{
             GM_logInfo("autoClothingDonation","runId="+runId+" step="+step,"","Clothing Donation: Exiting");
             if ($("clothingdonation").style.display == "block") { // Clothing Donation dialog is opened
                 autoZoneFinish(runId, $("clothingdonation").getElementsByClassName("mini_close")[0]);
-                console.log("Finish");
             } else {
                 autoZoneFinish(runId);
             }

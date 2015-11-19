@@ -17426,27 +17426,24 @@ return;
 
         function showGoToClothingDonation(){
         try{
-            // console.log("showGoToClothingDonation called");
             if(USERLEVEL >= 38 && valClothingDonation) {
                 var latestLog = logClothingDonation[0];
                 var showIcon = !latestLog; // No log entry yet => Show icon
                 if (latestLog) {
                     var entryDate = Math.max(latestLog["createdate"], latestLog["gambleInfo"][0]["gambledate"]);
                     if (entryDate + 6*3600 < now) {
-                        console.log("Last entry older than 6 hours => Show Icon => " + new Date(entryDate*1000));
+                        // Last entry older than 6 hours => Show Icon
                         showIcon = true;
                     } else if (latestLog["gambleInfo"][0]["gain"] && latestLog["gambleInfo"][0]["gain"] > 0) {
-                        console.log("Last entry has positive gain => Show Icon");
+                        // Last entry has positive gain => Show Icon
                         showIcon = true;
                     } else {
-                        console.log("Eintrag jünger als 6 Stunden, kein (positiver) Gewinn => " + new Date(entryDate*1000));
+                        // Last entry younger than 6 hours, negative gain => Do not show icon
                     }
-                } else {
-                    console.log("No log => Show Icon");
                 }
 
                 if (showIcon && !nodes["goToClothingDonation"]) {
-                    // Let's draw the quick link
+                    // Let's draw the quick link icon
                     nodes["goToClothingDonation"]=new Object();
                     nodes["goToClothingDonation"]["node"]=createElement("div",{"id":"divGoToClothingDonation","class":"link blinking","style":"height:70px;width:70px;background:url('"+GFX+"city/clothingdonation.jpg') 80px 1px / 150%;border:2px solid black;border-radius:35px;margin-bottom:5px;opacity:1;"},$("fixedDivRight"));
                     nodes["goToClothingDonation"]["node"].addEventListener("mouseover",function(event){ toolTip.show(event, getText("goToClothingDonation")); },false);
@@ -17455,7 +17452,6 @@ return;
                 }
             } else {
                 hideGoToClothingDonation();
-                console.log("Icon hidden");
             }
         }catch(err){GM_logError("showGoToClothingDonation","","",err);}
         }
@@ -17469,7 +17465,6 @@ return;
                 delete nodes["goToClothingDonation"];
 
                 $("clothingdonation_donatebutton").classList.remove('blinking');
-                
                 $("clothingdonation_gamblebutton").classList.remove('blinking');
             }
         }catch(err){GM_logError("hideGoToClothingDonation","","",err);}
@@ -17489,42 +17484,41 @@ return;
                 }
                 logClothingDonation.unshift(latestLog);
                 needSave = true;
-                // console.log("No log entry or new donation => insert new log entry");
             } else if (latestLog["createdate"] == parseInt(data.createdate, 10) && 
                         latestLog["gambleInfo"][0]["gambledate"] < parseInt(data.gambledate, 10)) {
                 // Same (donation) data, but new gamble info => insert only gamble info
                 latestLog["gambleInfo"].unshift({gambledate: parseInt(data.gambledate, 10), out: data.data.out, gain: goodsValue[1] - goodsValue[0]});
                 needSave = true;
-                // console.log("Same donation, but new gamble info => insert gamble info");
             } else if (latestLog["createdate"] == parseInt(data.createdate, 10) &&
                         latestLog["gambleInfo"][0]["gambledate"] == parseInt(data.gambledate, 10) &&
                         (goodsValue[1] - goodsValue[0]) != latestLog["gambleInfo"][0]["gain"]) {
                 // Same (donation) data, same gamble info, different gain => update gain
                 latestLog["gambleInfo"][0]["gain"] = goodsValue[1] - goodsValue[0];
                 needSave = true;
-                // console.log("Same (donation) data, same gamble info, different gain => update gain");
             }
 
             if (needSave) {
                 GM_setValueCache(COUNTRY+"_"+SERVER+"_"+USERNAME+"_logClothingDonation",implode(logClothingDonation,"clothingDataAvailable/logClothingDonation"));
             }
-            unsafeData.latestClothingDonationLog = latestLog;
 
             if (goodsValue[0] < goodsValue[1]) {
-                // Value of donation is less than value of reward => Animate Donate-Button!
+                // Value of donation is less than value of reward => Animate (only) Donate-Button!
                 $("clothingdonation_donatebutton").classList.add('blinking');
+                $("clothingdonation_gamblebutton").classList.remove('blinking');
             } else if (data.gambleremain < 1) {
-                // We haven't gambled within the last six hours => Animate Gamble-Button!
+                // No positive gain, but we haven't gambled within the last six hours => Animate (only) Gamble-Button!
                 $("clothingdonation_gamblebutton").classList.add('blinking');
+                $("clothingdonation_donatebutton").classList.remove('blinking');
             } else {
                 // We shouldn't donate, we can't gamble, so we hide the icon
                 hideGoToClothingDonation();
             }
 
+            unsafeData.latestClothingDonationLog = latestLog; // Make latest log available for automat
             raiseEvent("gameClothingDonationResponse");
         }
 
-        // On load, check, if we need to load the 
+        // On load, check, if we need to show the icon
         showGoToClothingDonation();
         
         // Waltraud
