@@ -1,15 +1,14 @@
 // ==UserScript==
-// @name        MyFreeFarm LP Russia
+// @name        MyFreeFarm LP Hungary
 // @namespace   https://github.com/BastianKanaan/GMscripts_MyFreeFarm
 // @author      BastianKanaan
-// @description Language pack "Russia" for MyFreeFarm Scripts
-// @date        17.11.2015
+// @description Language pack "Hungary" for MyFreeFarm Scripts
+// @date        18.11.2015
 // @version     1.0.5
 // @license     GPL version 3 or any later version; http://www.gnu.org/copyleft/gpl.html
-// @include     /^http:\/\/(|www\.|s\d+\.)mojaderewnja.ru\/.*$/
+// @include     /^http:\/\/(|www\.|s\d+\.)enkicsitanyam.hu\/.*$/
 // @grant       GM_log
 // ==/UserScript==
-
 // Edit above the @include. This controls on which pages the script is called.
 try{
 // Do not edit ********************************************************************************************************
@@ -25,8 +24,8 @@ try{
     const GFX = "http://mff.wavecdn.de/mff/"; // The path to the in-game images
 
 // Important constants ************************************************************************************************
-    const COUNTRY="RU"; // The country ISO-code (2 digits)
-    const LANGUAGE="ru"; // The language ISO-code (2 digits)        
+    const COUNTRY="HU"; // The country ISO-code (2 digits)
+    const LANGUAGE="hu"; // The language ISO-code (2 digits)        
     const delimThou="."; // The separator for thousands (e.g. in 1,000).
     const regDelimThou="\\."; // = delimThou. "." has to be masked to "\\."!
     const regDelimThouShift="([\\d\\.])(\\d)\\.(\\d{1,2}\\D)"; // = "([\\d"+delimThou+"])(\\d)"+delimThou+"(\\d{1,2}\\D)"
@@ -443,7 +442,7 @@ try{
         text[LANGUAGE]["settings_setQuestMain3"]=["Overwrite Questseries 3","The questnumber of main questseries 3 is set to the mff-questnumber."];
         text[LANGUAGE]["settings_setQuestMain3_1"]=["Execute","The questnumber of main questseries 3 is set to the chosen number. Please use it carefully ..."];
         text[LANGUAGE]["settings_megafieldSmartTimer"]=["Integrate active tour", "Megafield-Timer is set to end of the tour after a tour is started."];
-		text[LANGUAGE]["settings_clothingDonation"]=["Clothing Donation", "A blinking icon indicates, when you can donate or gamble."];
+        text[LANGUAGE]["settings_clothingDonation"]=["Clothing Donation", "A blinking icon indicates, when you can donate or gamble."];
         //help
         text[LANGUAGE]["help_0"]=[,"This is a small introduction to the functions of the Adviser-Script. Not all changes are written here, go find them yourself ... Sometimes a mouse-over helps. <br>At the bottom you see a button to visit the <a href=\""+GM_Home+"\" target=\"_blank\">homepage</a>. Next to it, there is the button for the options. You should look at them and configure as you desire.<br>Generally the script only knows what you have seen. So just visit the field if something is wrong."];
         text[LANGUAGE]["help_1"]=["The Zones","The fields are observed while you see them. The script saves the plants, times and watering. So on the farm view this can be displayed. Each zone has a time counter at its top to show you when it is ready.<br>If you own the planting helper, you can access it directly from opened field. At the top of an opened zone you can navigate directly to zones of the same type."];
