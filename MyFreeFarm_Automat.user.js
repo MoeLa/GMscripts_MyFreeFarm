@@ -321,8 +321,13 @@ var botArbiter=new function(){
             if(settings.get("account","botUseFarmi")&&unsafeWindow.farmisinfo && unsafeWindow.farmisinfo[0] && (settings.get("account","farmiReject") || settings.get("account","farmiAccept"))){
                 checkFarmi(1);
             }
-            if(settings.get("account","botUseClothingDonation") && $("divGoToClothingDonation")) {
-                botArbiter.add("clothingDonation");
+            if($("divGoToClothingDonation")) {
+                var log = unsafeData.latestClothingDonationLog;
+                if (!log && (settings.get("account","botUseClothingGamble") || settings.get("account","botUseClothingDonation")) || // No log available (and at least one option is checked) => Let bot open the dialog
+                    settings.get("account","botUseClothingGamble") && unsafeWindow.clothingdonation_data.data.gambleremain < 1 || // We need to gamble
+                    settings.get("account","botUseClothingDonation") && log["gambleInfo"][0]["gain"] > 0) { // We should donate
+                    botArbiter.add("clothingDonation");
+                }
             }
             if(settings.get("account","botUseDonkey") && $("divGoToDonkey")) {
                 botArbiter.add("donkey");
@@ -498,7 +503,7 @@ var settings=new function(){
     var dataDefault={"global":{},
                      "country":{"pauseShort":[300,700],"pause":[2000,4000],"maxDurationBotRun":300,"maxDurationBotStep":30,"botErrorBehaviour":"reload"},
                      "server":{"botActive":false},
-                     "account":{"autoPlant":true,"autoWater":true,"autoFeed":true,"botUseFarmersmarket":false,"botUseFarmi":false,"botUseClothingDonation":false,"botUseDonkey":false,"botUseLottery":false,"botUseFoodworld":false,"botUseForestry":false,"botUseWindmill":false,"disableCropFields":false,"farmiAccept":false,"farmiAcceptAboveNr":100,"farmiAcceptBelowMinValue":false,"farmiReject":false,"farmiRejectUntilNr":90,"farmiRemoveMissing":false,"farmiRemoveMissingAboveNr":10,"lotteryActivate":false,"lotteryDailyLot":false,"powerUpActivate":false,"seedWaitForCrop":30,"showQueueTime":true,"useQueueList":false}
+                     "account":{"autoPlant":true,"autoWater":true,"autoFeed":true,"botUseFarmersmarket":false,"botUseFarmi":false,"botUseClothingDonation":false,"botUseClothingGamble":false,"botUseDonkey":false,"botUseLottery":false,"botUseFoodworld":false,"botUseForestry":false,"botUseWindmill":false,"disableCropFields":false,"farmiAccept":false,"farmiAcceptAboveNr":100,"farmiAcceptBelowMinValue":false,"farmiReject":false,"farmiRejectUntilNr":90,"farmiRemoveMissing":false,"farmiRemoveMissingAboveNr":10,"lotteryActivate":false,"lotteryDailyLot":false,"powerUpActivate":false,"seedWaitForCrop":30,"showQueueTime":true,"useQueueList":false}
                     };
     var require=    {"global":{},
                      "country":{},
@@ -6177,7 +6182,7 @@ try{
             break; }
         case 3: { // donate or gamble
             GM_logInfo("autoClothingDonation","runId="+runId+" step="+step,"","Clothing Donation: Donating/Gambling");
-            if ($("clothingdonation_donatebutton").classList.contains("blinking") && unsafeData.latestClothingDonationLog["gambleInfo"][0]["gain"] > 0) {
+            if (settings.get("account","botUseClothingDonation") && unsafeData.latestClothingDonationLog["gambleInfo"][0]["gain"] > 0) {
                 if ($("globalbox").style.display == "block") { // Globalbox is opened
                     autoClothingDonation(runId, step + 1);
                 } else {
@@ -6187,7 +6192,7 @@ try{
                         click($("clothingdonation_donatebutton"));
                     };
                 }
-            } else if ($("clothingdonation_gamblebutton").classList.contains("blinking") && unsafeWindow.clothingdonation_data.data.gambleremain < 1) {
+            } else if (settings.get("account","botUseClothingGamble") && unsafeWindow.clothingdonation_data.data.gambleremain < 1) {
                 if ($("globalbox").style.display == "block") { // Globalbox is opened
                     autoClothingDonation(runId, step + 1);
                 } else {
@@ -6198,7 +6203,7 @@ try{
                     };
                 }
             } else {
-                autoClothingDonation(runId, 5); // Do not donate or gamble => exit
+                autoClothingDonation(runId, 5); // Do neither donate nor gamble => exit
             }
             break;}
         case 4: { // Close dialog
@@ -7942,10 +7947,18 @@ function buildInfoPanelOptions(){
         inp=createElement("input",{"class":"link","type":"checkbox","checked":settings.get("account","botUseClothingDonation")},newtd);
         inp.addEventListener("click",function(){
             settings.set("account", "botUseClothingDonation", this.checked);
-            // buildInfoPanelOptionsDisabling();
             botArbiter.check();
         }, false);
-        newtd=createElement("td",{"colspan":"2"},newtr,getText("automat_settings_botUse"));
+        newtd=createElement("td",{"colspan":"2"},newtr,getText("automat_settings_botUse") + getText("automat_settings_donating"));
+
+        newtr=createElement("tr",{"style":"line-height:18px;"},newtable);
+        newtd=createElement("td",{"align":"center","width":"40"},newtr);
+        inp=createElement("input",{"class":"link","type":"checkbox","checked":settings.get("account","botUseClothingGamble")},newtd);
+        inp.addEventListener("click",function(){
+            settings.set("account", "botUseClothingGamble", this.checked);
+            botArbiter.check();
+        }, false);
+        newtd=createElement("td",{"colspan":"2"},newtr,getText("automat_settings_botUse") + getText("automat_settings_gambling"));
 
         // *********** LOTTERY ************************************
         newtr=createElement("tr",{"style":"background-color:#b69162;"},newtable);
@@ -9794,6 +9807,8 @@ try{
         text["de"]["automat_set18a"] = "Lösche alle Daten der Mühlen-Queue";
         text["de"]["automat_set18b"] = "Löschen erfolgreich";
         text["de"]["automat_settings_powerUpActivate"] = "Aktiviere Produkt-Powerups";
+        text["de"]["automat_settings_donating"] = " zum Spenden";
+        text["de"]["automat_settings_gambling"] = " zum Würfeln";
         text["de"]["automat_settings_lotteryActivate"] = "Aktiviere das tägliche Lotterie-Los";
         text["de"]["automat_settings_lotteryDailyLot"] = "Behalte das tägliche Lotterie-Los";
         text["de"]["automat_settings_questActivate"] = "Aktiviere den Quest to quest:";
@@ -10004,6 +10019,8 @@ try{
         text["en"]["automat_set18a"] = "Delete all mill queue data";
         text["en"]["automat_set18b"] = "Delete Completed";
         text["en"]["automat_settings_powerUpActivate"] = "Activate powerups for products";
+        text["en"]["automat_settings_donating"] = " to donate";
+        text["en"]["automat_settings_gambling"] = " to gamble";
         text["en"]["automat_settings_lotteryActivate"] = "Activate the daily lottery automatically";
         text["en"]["automat_settings_lotteryDailyLot"] = "Choose to keep the daily lot";
         text["en"]["automat_settings_questActivate"] = "Activate the Quest automatically to quest:";
