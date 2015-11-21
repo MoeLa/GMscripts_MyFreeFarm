@@ -1,9 +1,9 @@
-// ==UserScript==
+﻿// ==UserScript==
 // @name        MyFreeFarm LP Danish
 // @namespace   https://github.com/BastianKanaan/GMscripts_MyFreeFarm
 // @author      BastianKanaan
 // @description Language pack "Danish" for MyFreeFarm Scripts
-// @date        21.11.2015
+// @date        20.11.2015
 // @version     1.0.6
 // @license     GPL version 3 or any later version; http://www.gnu.org/copyleft/gpl.html
 // @include     /^http:\/\/(|www\.|s\d+\.)myfreefarm.dk\/.*$/
