@@ -3,7 +3,7 @@
 // @namespace   https://github.com/BastianKanaan/GMscripts_MyFreeFarm
 // @author      BastianKanaan
 // @description Language pack "Danish" for MyFreeFarm Scripts
-// @date        20.11.2015
+// @date        22.11.2015
 // @version     1.0.6
 // @license     GPL version 3 or any later version; http://www.gnu.org/copyleft/gpl.html
 // @include     /^http:\/\/(|www\.|s\d+\.)myfreefarm.dk\/.*$/
@@ -62,13 +62,15 @@ try{
         // Take the subject from a message sent if you purchased coins
         text[LANGUAGE]["msgSubjectCoins"]="xxx";
         // Take the subject from a message sent if you won in a competition.
-        text[LANGUAGE]["msgSubjectCongratulation"]="xxx";
+        text[LANGUAGE]["msgSubjectCongratulation"]="Tillykke";
+        // Take the subject from a message sent if you got a gift.
+        text[LANGUAGE]["msgSubjectCongratulation2"]="Gave til dig";
         // Take the subject from a message sent if somebody wants to add you as friend. The person has to be replaced by "(.+)".
-        text[LANGUAGE]["msgSubjectFriend"]="xxx";
+        text[LANGUAGE]["msgSubjectFriend"]="^(.+) dig som ven$";
         // Take the subject from a message sent if somebody has canceled your friendship. The person has to be replaced by "(.+)".
         text[LANGUAGE]["msgSubjectFriendEnd"]="xxx";
         // Take the subject from a message sent if you reach the next level.
-        text[LANGUAGE]["msgSubjectLevel"]="xxx";
+        text[LANGUAGE]["msgSubjectLevel"]="Du er steget et trin op!";
         // Take the subject from a message sent if you have to renew premium mode
         text[LANGUAGE]["msgSubjectPremium"]="xxx";
         // Take the subject from a message sent if you got a present.
@@ -354,10 +356,10 @@ try{
         text[LANGUAGE]["veterinary"]="Veterinary";
         text[LANGUAGE]["veterinaryLevelXNeeded"]="Veterinary level %1% needed";
         text[LANGUAGE]["waterBonus"]="%1%% water bonus";
+        text[LANGUAGE]["wateringFeature"]="Watering feature";
         text[LANGUAGE]["waterNeeded"]="Water needed";
         text[LANGUAGE]["waterNeededAtX"]="Water needed at %1%";
         text[LANGUAGE]["waterNeededAtX_day1"]="Tomorrow water needed at %1%";
-        text[LANGUAGE]["wateringFeature"]="Watering feature";
         text[LANGUAGE]["windmill"]="Windmill";
         text[LANGUAGE]["writeMessage"]="write message";
         text[LANGUAGE]["XIsUpToDate"]="%1% is up-to-date."
@@ -696,7 +698,7 @@ function compareObjectsExistance(obj1,obj2,pre){
 }
 window.setTimeout(function(){
     GM_log("START COMPARING");
-    compareObjectsExistance(texte,top.unsafeData.texte);
+    compareObjectsExistance(text,top.unsafeData.text);
     GM_log("END COMPARING");
 },1000);
 */  
