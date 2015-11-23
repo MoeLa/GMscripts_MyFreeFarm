@@ -1,14 +1,15 @@
-// ==UserScript==
+﻿// ==UserScript==
 // @name        MyFreeFarm LP Hungary
 // @namespace   https://github.com/BastianKanaan/GMscripts_MyFreeFarm
 // @author      BastianKanaan
 // @description Language pack "Hungary" for MyFreeFarm Scripts
-// @date        18.11.2015
-// @version     1.0.5
+// @date        22.11.2015
+// @version     1.0.6
 // @license     GPL version 3 or any later version; http://www.gnu.org/copyleft/gpl.html
 // @include     /^http:\/\/(|www\.|s\d+\.)enkicsitanyam.hu\/.*$/
 // @grant       GM_log
 // ==/UserScript==
+
 // Edit above the @include. This controls on which pages the script is called.
 try{
 // Do not edit ********************************************************************************************************
@@ -19,8 +20,8 @@ try{
     }
     var text=top.unsafeData.text;
     const GM_Home  =GM_info["script"]["namespace"];
-    const GM_Source=GM_info["script"]["namespace"];    
-    const PRODSTOP=-1;
+    const GM_Source=GM_info["script"]["namespace"];
+    const PRODSTOP =-1;
     const GFX = "http://mff.wavecdn.de/mff/"; // The path to the in-game images
 
 // Important constants ************************************************************************************************
@@ -46,7 +47,7 @@ try{
         // - The subject: Replace the variable information by ".+". Prefix brackets with "\".
         text[LANGUAGE]["msgSubjectMarketsale"]="xxx";
         // - The content: The text where the information is stated. The information has to be replaced by "(.+?)".
-        text[LANGUAGE]["msgContentMarketsale"]="(.+) har ved markedspladsen købt\\s*(\\d+)x (.+?) af dig<br>\\s*for(.+?) kD\\."; 
+        text[LANGUAGE]["msgContentMarketsale"]="(.*) bought (\\d+)x (.+?) for<br> (.+?) pD from you\\.";
         // *************
         // Take from a message sent if you sell something via contract.
         // - The subject.
@@ -54,7 +55,7 @@ try{
         // - The content: The text where the general information is stated. The information has to be replaced by "(.+?)".
         text[LANGUAGE]["msgContentContractsale"]="(.+) has signed a contract of yours!<br><br> The following products have been sold:<br>(.+?)<br> The amount of (.+?) pD has been credited to your account\\."; // The text where the general information is stated. The information has to be replaced by "(.+?)".
         // - The line-pattern for the detailed selling list (equals the replaced information above).
-        text[LANGUAGE]["msgContentContractsaleList"]="\\s*(\\d+)x\\s*(.*+)\\s*<br>";
+        text[LANGUAGE]["msgContentContractsaleList"]="\\s*(\\d+)x\\s*(.+?)\\s*<br>";
         // - A contract which was sent to you was canceld before you were able to accept it
         text[LANGUAGE]["msgSubjectContractCancel"]="xxx";
         // *************
@@ -62,7 +63,7 @@ try{
         text[LANGUAGE]["msgSubjectCoins"]="xxx";
         // Take the subject from a message sent if you won in a competition.
         text[LANGUAGE]["msgSubjectCongratulation"]="xxx";
-        // Take the subject from a message sent when you got a item due to achievements
+        // Take the subject from a message sent if you got a gift.
         text[LANGUAGE]["msgSubjectCongratulation2"]="xxx";
         // Take the subject from a message sent if somebody wants to add you as friend. The person has to be replaced by "(.+)".
         text[LANGUAGE]["msgSubjectFriend"]="xxx";
@@ -178,7 +179,7 @@ try{
         text[LANGUAGE]["general"]="General";
         text[LANGUAGE]["given"]="Given";
         text[LANGUAGE]["goods"]="Goods";
-        text[LANGUAGE]["goToClothingDonation"]="Go to clothing donation";		
+        text[LANGUAGE]["goToClothingDonation"]="Go to clothing donation";
         text[LANGUAGE]["goToDonkey"]="Go to donkey Luke";
         text[LANGUAGE]["goToLottery"]="Go to lottery";
         text[LANGUAGE]["goToMarket"]="Go to market";
@@ -224,7 +225,7 @@ try{
         text[LANGUAGE]["marketplace"]="Market place";
         text[LANGUAGE]["marketPrice"]="Market&nbsp;Price";
         text[LANGUAGE]["marketstall"]="Market stall";
-        text[LANGUAGE]["megafield"]="Megafield";
+        text[LANGUAGE]["megafield"]="Plantation";
         text[LANGUAGE]["megafieldCurrency"]=unsafeWindow.t_megafield_currency;
         text[LANGUAGE]["messages"]="Messages";
         text[LANGUAGE]["minRack"]="Min&nbsp;rack";
@@ -280,7 +281,7 @@ try{
         text[LANGUAGE]["rackX"]="%1%. rack";
         text[LANGUAGE]["rank"]="Rank";
         text[LANGUAGE]["readAll"]="Read all";
-        text[LANGUAGE]["readyAtX"]="Ready at %1%"; // %1%=2:15+text[LANGUAGE]["shortOClock"]
+        text[LANGUAGE]["readyAtX"]="Ready at %1%";
         text[LANGUAGE]["readyAtX_day1"]="Tomorrow ready at %1%";
         // text[LANGUAGE]["readyAtX_day2"]="Ready in 2days at %1%"; // comment it if not used in the language
         text[LANGUAGE]["readySinceX"]="Ready since %1%";
@@ -667,6 +668,7 @@ try{
         text[LANGUAGE]["automat_help_8"] = [text[LANGUAGE]["automat_zonePairing"],"In the \""+text[LANGUAGE]["automat_zonePairing"]+"\" menu of the Automat the radio-buttons controle the pairing of the zones. Also the general queue is extended to allow multiple general queues."];
         text[LANGUAGE]["automat_help_9"] = ["Windmill","The windmill queue works the same as the zone queue but instead of products recipes are baked.<br>As extra the mill queue has a <div class = \"queueButtonAddAll\">&nbsp;</div> button which can be used to clear and refill the queue with all available recipes that were bought and where there are enough ingredients in the rack to bake them.<br>If the background of a queue item is yellow then there are not enough products to bake all these recipes.<br><br><b>Note: </b>For first time user that have already bought recipes. Go to the miller or the trading lady screen so the bought recipes can be stored into the system."];
     }
+
 // Do not edit ********************************************************************************************************
 /*
 function compareObjectsExistance(obj1,obj2,pre){
@@ -696,10 +698,10 @@ function compareObjectsExistance(obj1,obj2,pre){
 }
 window.setTimeout(function(){
     GM_log("START COMPARING");
-    compareObjectsExistance(texte,top.unsafeData.texte);
+    compareObjectsExistance(text,top.unsafeData.text);
     GM_log("END COMPARING");
 },1000);
-*/  
+*/
     if(undefined===top.unsafeData.COUNTRY){
         top.unsafeData.LANGUAGE=LANGUAGE;
         top.unsafeData.COUNTRY=COUNTRY;

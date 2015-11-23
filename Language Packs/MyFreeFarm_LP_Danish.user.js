@@ -701,7 +701,7 @@ window.setTimeout(function(){
     compareObjectsExistance(text,top.unsafeData.text);
     GM_log("END COMPARING");
 },1000);
-*/  
+*/
     if(undefined===top.unsafeData.COUNTRY){
         top.unsafeData.LANGUAGE=LANGUAGE;
         top.unsafeData.COUNTRY=COUNTRY;
