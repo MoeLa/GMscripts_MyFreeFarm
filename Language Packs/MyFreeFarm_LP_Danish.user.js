@@ -1,10 +1,10 @@
-// ==UserScript==
+﻿// ==UserScript==
 // @name        MyFreeFarm LP Danish
 // @namespace   https://github.com/BastianKanaan/GMscripts_MyFreeFarm
 // @author      BastianKanaan
 // @description Language pack "Danish" for MyFreeFarm Scripts
-// @date        17.11.2015
-// @version     1.0.5
+// @date        22.11.2015
+// @version     1.0.6
 // @license     GPL version 3 or any later version; http://www.gnu.org/copyleft/gpl.html
 // @include     /^http:\/\/(|www\.|s\d+\.)myfreefarm.dk\/.*$/
 // @grant       GM_log
@@ -20,8 +20,8 @@ try{
     }
     var text=top.unsafeData.text;
     const GM_Home  =GM_info["script"]["namespace"];
-    const GM_Source=GM_info["script"]["namespace"];    
-    const PRODSTOP=-1;
+    const GM_Source=GM_info["script"]["namespace"];
+    const PRODSTOP =-1;
     const GFX = "http://mff.wavecdn.de/mff/"; // The path to the in-game images
 
 // Important constants ************************************************************************************************
@@ -55,22 +55,22 @@ try{
         // - The content: The text where the general information is stated. The information has to be replaced by "(.+?)".
         text[LANGUAGE]["msgContentContractsale"]="(.+) har underskrevet en kontrakt fra dig!<br><br>\\s*Følgende produkter blev solgt:<br>([\\S\\s]*)\\s*<br>\\s*Kontraktsummen på (.+?) kD blev indsat på din konto\\."; 
         // - The line-pattern for the detailed selling list (equals the replaced information above).
-        text[LANGUAGE]["msgContentContractsaleList"]="\\s*(\\d+)x\\s*(.*+)\\s*<br>";
+        text[LANGUAGE]["msgContentContractsaleList"]="\\s*(\\d+)x\\s*(.+?)\\s*<br>";
         // - A contract which was sent to you was canceld before you were able to accept it
         text[LANGUAGE]["msgSubjectContractCancel"]="xxx";
         // *************
         // Take the subject from a message sent if you purchased coins
         text[LANGUAGE]["msgSubjectCoins"]="xxx";
         // Take the subject from a message sent if you won in a competition.
-        text[LANGUAGE]["msgSubjectCongratulation"]="xxx";
-        // Take the subject from a message sent when you got a item due to achievements
-        text[LANGUAGE]["msgSubjectCongratulation2"]="xxx";
+        text[LANGUAGE]["msgSubjectCongratulation"]="Tillykke";
+        // Take the subject from a message sent if you got a gift.
+        text[LANGUAGE]["msgSubjectCongratulation2"]="Gave til dig";
         // Take the subject from a message sent if somebody wants to add you as friend. The person has to be replaced by "(.+)".
-        text[LANGUAGE]["msgSubjectFriend"]="xxx";
+        text[LANGUAGE]["msgSubjectFriend"]="^(.+) dig som ven$";
         // Take the subject from a message sent if somebody has canceled your friendship. The person has to be replaced by "(.+)".
         text[LANGUAGE]["msgSubjectFriendEnd"]="xxx";
         // Take the subject from a message sent if you reach the next level.
-        text[LANGUAGE]["msgSubjectLevel"]="xxx";
+        text[LANGUAGE]["msgSubjectLevel"]="Du er steget et trin op!";
         // Take the subject from a message sent if you have to renew premium mode
         text[LANGUAGE]["msgSubjectPremium"]="xxx";
         // Take the subject from a message sent if you got a present.
@@ -179,7 +179,7 @@ try{
         text[LANGUAGE]["general"]="General";
         text[LANGUAGE]["given"]="Given";
         text[LANGUAGE]["goods"]="Goods";
-        text[LANGUAGE]["goToClothingDonation"]="Go to clothing donation";		
+        text[LANGUAGE]["goToClothingDonation"]="Go to clothing donation";
         text[LANGUAGE]["goToDonkey"]="Go to donkey Luke";
         text[LANGUAGE]["goToLottery"]="Go to lottery";
         text[LANGUAGE]["goToMarket"]="Go to market";
@@ -225,7 +225,7 @@ try{
         text[LANGUAGE]["marketplace"]="Market place";
         text[LANGUAGE]["marketPrice"]="Market&nbsp;Price";
         text[LANGUAGE]["marketstall"]="Market stall";
-        text[LANGUAGE]["megafield"]="Megafield";
+        text[LANGUAGE]["megafield"]="Plantation";
         text[LANGUAGE]["megafieldCurrency"]=unsafeWindow.t_megafield_currency;
         text[LANGUAGE]["messages"]="Messages";
         text[LANGUAGE]["minRack"]="Min&nbsp;rack";
@@ -281,7 +281,7 @@ try{
         text[LANGUAGE]["rackX"]="%1%. rack";
         text[LANGUAGE]["rank"]="Rank";
         text[LANGUAGE]["readAll"]="Read all";
-        text[LANGUAGE]["readyAtX"]="Ready at %1%"; // %1%=2:15+text[LANGUAGE]["shortOClock"]
+        text[LANGUAGE]["readyAtX"]="Ready at %1%";
         text[LANGUAGE]["readyAtX_day1"]="Tomorrow ready at %1%";
         // text[LANGUAGE]["readyAtX_day2"]="Ready in 2days at %1%"; // comment it if not used in the language
         text[LANGUAGE]["readySinceX"]="Ready since %1%";
@@ -443,7 +443,7 @@ try{
         text[LANGUAGE]["settings_setQuestMain3"]=["Overwrite Questseries 3","The questnumber of main questseries 3 is set to the mff-questnumber."];
         text[LANGUAGE]["settings_setQuestMain3_1"]=["Execute","The questnumber of main questseries 3 is set to the chosen number. Please use it carefully ..."];
         text[LANGUAGE]["settings_megafieldSmartTimer"]=["Integrate active tour", "Megafield-Timer is set to end of the tour after a tour is started."];
-		text[LANGUAGE]["settings_clothingDonation"]=["Clothing Donation", "A blinking icon indicates, when you can donate or gamble."];
+        text[LANGUAGE]["settings_clothingDonation"]=["Clothing Donation", "A blinking icon indicates, when you can donate or gamble."];
         //help
         text[LANGUAGE]["help_0"]=[,"This is a small introduction to the functions of the Adviser-Script. Not all changes are written here, go find them yourself ... Sometimes a mouse-over helps. <br>At the bottom you see a button to visit the <a href=\""+GM_Home+"\" target=\"_blank\">homepage</a>. Next to it, there is the button for the options. You should look at them and configure as you desire.<br>Generally the script only knows what you have seen. So just visit the field if something is wrong."];
         text[LANGUAGE]["help_1"]=["The Zones","The fields are observed while you see them. The script saves the plants, times and watering. So on the farm view this can be displayed. Each zone has a time counter at its top to show you when it is ready.<br>If you own the planting helper, you can access it directly from opened field. At the top of an opened zone you can navigate directly to zones of the same type."];
@@ -668,6 +668,7 @@ try{
         text[LANGUAGE]["automat_help_8"] = [text[LANGUAGE]["automat_zonePairing"],"In the \""+text[LANGUAGE]["automat_zonePairing"]+"\" menu of the Automat the radio-buttons controle the pairing of the zones. Also the general queue is extended to allow multiple general queues."];
         text[LANGUAGE]["automat_help_9"] = ["Windmill","The windmill queue works the same as the zone queue but instead of products recipes are baked.<br>As extra the mill queue has a <div class = \"queueButtonAddAll\">&nbsp;</div> button which can be used to clear and refill the queue with all available recipes that were bought and where there are enough ingredients in the rack to bake them.<br>If the background of a queue item is yellow then there are not enough products to bake all these recipes.<br><br><b>Note: </b>For first time user that have already bought recipes. Go to the miller or the trading lady screen so the bought recipes can be stored into the system."];
     }
+
 // Do not edit ********************************************************************************************************
 /*
 function compareObjectsExistance(obj1,obj2,pre){
@@ -697,7 +698,7 @@ function compareObjectsExistance(obj1,obj2,pre){
 }
 window.setTimeout(function(){
     GM_log("START COMPARING");
-    compareObjectsExistance(texte,top.unsafeData.texte);
+    compareObjectsExistance(text,top.unsafeData.text);
     GM_log("END COMPARING");
 },1000);
 */  
