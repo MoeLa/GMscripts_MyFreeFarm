@@ -5254,7 +5254,7 @@ function buildInfoPanelFarmies(mode){
                 createElement("div",{"mouseOverText":"100%<br>Ø[>"+numberFormat(mode["limit"])+"%]"},newtd,moneyFormatInt(totalWertOk/countFarmisOk));
                 createElement("div",{"mouseOverText":" 90%<br>Ø[>"+numberFormat(mode["limit"])+"%]"},newtd,moneyFormatInt(0.9*totalWertOk/countFarmisOk));
                 createElement("div",{"mouseOverText":"100%<br>∑[>"+numberFormat(mode["limit"])+"%]/"+getText("all"),"style":"border-top:1px solid black;"},newtd,moneyFormatInt(totalWertOk/countFarmisAll));
-                createElement("div",{"mouseOverText":" 90%<br>?[>"+numberFormat(mode["limit"])+"%]/"+getText("all")},newtd,moneyFormatInt(0.9*totalWertOk/countFarmisAll));
+                createElement("div",{"mouseOverText":" 90%<br>∑[>"+numberFormat(mode["limit"])+"%]/"+getText("all")},newtd,moneyFormatInt(0.9*totalWertOk/countFarmisAll));
             newtd=createElement("td",{"style":"text-align:right;"},newtr);
                 createElement("div",{"mouseOverText":"100%"},newtd,(totalPriceOk>totalWertOk?"+":"")+moneyFormatInt((totalPriceOk-totalWertOk)/countFarmisOk));
                 createElement("div",{"mouseOverText":" 90%"},newtd,(totalPriceOk>0.9*totalWertOk?"+":"")+moneyFormatInt((totalPriceOk-0.9*totalWertOk)/countFarmisOk));
