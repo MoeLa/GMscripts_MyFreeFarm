@@ -99,8 +99,8 @@ const CHANGELOG=[["2.0","29.05.2014",[["Migration nach openuserjs.org","Migratio
                 ,["2.6","15.11.2015",[["Neue Berater-Option \"Güterhof\": Beim Starten einer Tour wird der Güterhof-Timer auf das Ende der Tour gesetzt.","New Adviser Option \"Megafield\": Megafield-Timer is set to end of the tour after a tour is started"]]]
                 ,["2.6.1","17.11.2015",[["Kleiderspende: Ähnlich zur Waltraud und der Lotterie wird durch einen blinkenden Icon angezeigt, wenn bei der Kleiderspende gespendet oder gewürfelt werden sollte.","Clothing Donation: Blinking icon indicates, that you should donate or gamble."]]]
                 ,["2.6.2","18.11.2015",[["Bugfix: Speicherung des Kleiderspende-Flags.","Bugfix: Clothing donation flag in options"]]]
-                ,["2.6.3","19.11.2015",[["Bugfix: Berater-Option Quest-Linie 3 - Zeitberechnung","Bugfix: adiser-Option main questsereis 3 - calculation of time"]]]
-                ,["2.6.4","22.11.2015",[["Bugfix: Aufbau Berater-Optionen-Liste auch für tiefe Level","Bugfix: Create Panel for adviser-options for users with low levels"]]]
+                ,["2.6.3","19.11.2015",[["Bugfix: Berater-Option Quest-Linie 3 - Zeitberechnung","Bugfix: Adviser-Option main questseries 3 - calculation of time"]]]
+                ,["2.6.4","22.11.2015",[["Bugfix: Berater-Funktionen auch für Level <8","Bugfix: Adviser-functionality for Level <8"]]]
                 ];
 if(!VERSIONfunctionFile){
     alert("Hi, I am the Berater-Script.\nThe function-file is missing.\nPlease install me again.");
@@ -272,14 +272,20 @@ unsafeData.BUILDING2PRODUCT=BUILDING2PRODUCT.clone();
             Factory          3
             Foodworld        4
             Farmersmarket    4
+			Fuelstation		 6
         */
 const BUILDINGTYPE={"0":0,"1":1,"2":2,"3":2,"4":2,"5":2,"6":0,"7":3,"8":3,"9":3,"10":3,"11":2,"12":2,"13":3,"14":3,"15":2,"16":3,"17":0,"18":0,"19":0,"20":0,"fl1":1,"fl2":4,"fl5":4,"fw1":4,"fw2":4,"fw3":4}
+// for Fuelstation
+//const BUILDINGTYPE={"0":0,"1":1,"2":2,"3":2,"4":2,"5":2,"6":0,"7":3,"8":3,"9":3,"10":3,"11":2,"12":2,"13":3,"14":3,"15":2,"16":3,"17":0,"18":0,"19":0,"20":6,"fl1":1,"fl2":4,"fl5":4,"fw1":4,"fw2":4,"fw3":4}
+
 unsafeData.BUILDINGTYPE=BUILDINGTYPE.clone();
 // task_new_building
 const BUILDING_SIZE={"1":120,"forest":25,"fl1":36,"megafield":[11,9]};
 unsafeData.BUILDING_SIZE=BUILDING_SIZE.clone();
 // task_new_building
 const BUILDING_SLOTS={"13":3,"14":3,"16":3,"windmill":2,"sawmill":3,"carpentry":3,"fw1":3,"fw2":3,"fw3":3,"fl0":17,"fl2":3,"megafield":99};
+//for Fuelstation
+//const BUILDING_SLOTS={"13":3,"14":3,"16":3,"20":3,"windmill":2,"sawmill":3,"carpentry":3,"fw1":3,"fw2":3,"fw3":3,"fl0":17,"fl2":3,"megafield":99};
 unsafeData.BUILDING_SLOTS=BUILDING_SLOTS.clone();
 // Needed input of a zone
 // BUILDING_INPUT[buildTyp]{output}[alternatives]=[[prod1,amount1||reducing time1],...]
@@ -4681,7 +4687,7 @@ function buildInfoPanelLottery(mode){
             }
             newtr1=createElement("tr",{},newtable1);
             createElement("td",{"colspan":"2"},newtr1);
-            createElement("td",{"style":"border-top:1px solid black;"},newtr1,"?");
+            createElement("td",{"style":"border-top:1px solid black;"},newtr1,"∑");
             createElement("td",{"style":"border-top:1px solid black;text-align:right;"},newtr1,moneyFormat(sum));
             newtr1=createElement("tr",{},newtable1);
             createElement("td",{"colspan":"2"},newtr1);
@@ -4968,7 +4974,7 @@ function buildInfoPanelDonkey(mode){
             }
             newtr1=createElement("tr",{},newtable1);
             createElement("td",{"colspan":"2"},newtr1);
-            createElement("td",{"style":"border-top:1px solid black;"},newtr1,"?");
+            createElement("td",{"style":"border-top:1px solid black;"},newtr1,"∑");
             createElement("td",{"style":"border-top:1px solid black;text-align:right;"},newtr1,moneyFormat(sum));
             newtr1=createElement("tr",{},newtable1);
             createElement("td",{"colspan":"2"},newtr1);
@@ -5201,12 +5207,12 @@ function buildInfoPanelFarmies(mode){
                 else{
                     newtd.addEventListener("click",function(){buildTotalProducts(1);},false);
                 }
-                newtd=createElement("td",{"class":"link hoverBgLightblue","style":"text-align:center;border-left:1px solid black;border-bottom:1px solid black;padding-left:3px;padding-right:3px;"},newtr,"?");
+                newtd=createElement("td",{"class":"link hoverBgLightblue","style":"text-align:center;border-left:1px solid black;border-bottom:1px solid black;padding-left:3px;padding-right:3px;"},newtr,"∑");
                 if (mode==2){ newtd.style.backgroundColor="lightblue"; }
                 else{
                     newtd.addEventListener("click",function(){buildTotalProducts(2);},false);
                 }
-                newtd=createElement("td",{"class":"link hoverBgLightblue","style":"text-align:center;border-left:1px solid black;border-bottom:1px solid black;padding-left:3px;padding-right:3px;"},newtr,"?/×");
+                newtd=createElement("td",{"class":"link hoverBgLightblue","style":"text-align:center;border-left:1px solid black;border-bottom:1px solid black;padding-left:3px;padding-right:3px;"},newtr,"∑/×");
                 if (mode==3){ newtd.style.backgroundColor="lightblue"; }
                 else{
                     newtd.addEventListener("click",function(){buildTotalProducts(3);},false);
@@ -5246,7 +5252,7 @@ function buildInfoPanelFarmies(mode){
             newtd=createElement("td",{"style":"text-align:right;"},newtr);
                 createElement("div",{"mouseOverText":"100%<br>Ø[>"+numberFormat(mode["limit"])+"%]"},newtd,moneyFormatInt(totalWertOk/countFarmisOk));
                 createElement("div",{"mouseOverText":" 90%<br>Ø[>"+numberFormat(mode["limit"])+"%]"},newtd,moneyFormatInt(0.9*totalWertOk/countFarmisOk));
-                createElement("div",{"mouseOverText":"100%<br>?[>"+numberFormat(mode["limit"])+"%]/"+getText("all"),"style":"border-top:1px solid black;"},newtd,moneyFormatInt(totalWertOk/countFarmisAll));
+                createElement("div",{"mouseOverText":"100%<br>∑[>"+numberFormat(mode["limit"])+"%]/"+getText("all"),"style":"border-top:1px solid black;"},newtd,moneyFormatInt(totalWertOk/countFarmisAll));
                 createElement("div",{"mouseOverText":" 90%<br>?[>"+numberFormat(mode["limit"])+"%]/"+getText("all")},newtd,moneyFormatInt(0.9*totalWertOk/countFarmisAll));
             newtd=createElement("td",{"style":"text-align:right;"},newtr);
                 createElement("div",{"mouseOverText":"100%"},newtd,(totalPriceOk>totalWertOk?"+":"")+moneyFormatInt((totalPriceOk-totalWertOk)/countFarmisOk));
@@ -5369,7 +5375,7 @@ function buildInfoPanelFormulas(mode){
                         preis=!isNaN(NPC[0][unsafeWindow.formulas[0][v][3][w][0]])?Math.min(NPC[0][unsafeWindow.formulas[0][v][3][w][0]],gut[unsafeWindow.formulas[0][v][3][w][0]]):gut[unsafeWindow.formulas[0][v][3][w][0]];
                         sum1 += unsafeWindow.formulas[0][v][3][w][1]*preis;
                         newdiv=createElement("div",{"class":"link hoverBgLightblue","prod":unsafeWindow.formulas[0][v][3][w][0],"value":preis*unsafeWindow.formulas[0][v][3][w][1]},newtd);
-                        newdiv.addEventListener("mouseover",function(event){showGoToMarketToolTip(event,this.getAttribute("prod"),null,'<tr><td>'+"?"+'</td><td style="text-align:right;">'+moneyFormatInt(parseInt(this.getAttribute("value"),10))+'</td></tr>');},false);
+                        newdiv.addEventListener("mouseover",function(event){showGoToMarketToolTip(event,this.getAttribute("prod"),null,'<tr><td>'+"∑"+'</td><td style="text-align:right;">'+moneyFormatInt(parseInt(this.getAttribute("value"),10))+'</td></tr>');},false);
                         newdiv.addEventListener("click",function(){showMarket(this.getAttribute("prod"));},false);
                         produktPic(0,unsafeWindow.formulas[0][v][3][w][0],newdiv);
                         newdiv=createElement("span",{},newdiv,numberFormat(unsafeWindow.formulas[0][v][3][w][1]));
@@ -5562,7 +5568,7 @@ function buildInfoPanelMegafield(){
                         }
                     }
                 }
-                createElement("th",{},tr[0],"?");
+                createElement("th",{},tr[0],"∑");
                 td=createElement("td",{},tr[4]);
                 createElement("div",{},td,"&nbsp;");
                 createElement("div",{},td,"&nbsp;");
@@ -8500,7 +8506,7 @@ function doMarketoffersNotepad(){
             newtr.addEventListener("mouseover",function(event){
                 var str='<table>';
                 str += '<tr><th colspan="2" class="lightBg">'+getText("goToMarketstall")+'</th></tr>';
-                str += '<tr><td>'+"?"+'</td><td style="text-align:right;">'+moneyFormatInt(parseInt(this.getAttribute("value"),10))+'</td></tr>';
+                str += '<tr><td>'+"∑"+'</td><td style="text-align:right;">'+moneyFormatInt(parseInt(this.getAttribute("value"),10))+'</td></tr>';
                 str += '</table>';
                 toolTip.show(event,str);
             },false);
@@ -8518,7 +8524,7 @@ function doMarketoffersNotepad(){
                 newtr=createElement("tr",{"class":"link hoverBgCc9"+(((oldType!=null)&&(oldType!=newType))?" borderTop1dashedBlack":""),"prod":prod,"value":(amount*price)},newtable);
                 oldType=newType;
                 newtr.addEventListener("mouseover",function(event){
-                    showGoToMarketToolTip(event,this.getAttribute("prod"),null,'<tr><td>'+"?"+'</td><td style="text-align:right;">'+moneyFormatInt(parseInt(this.getAttribute("value"),10))+'</td></tr>');
+                    showGoToMarketToolTip(event,this.getAttribute("prod"),null,'<tr><td>'+"∑"+'</td><td style="text-align:right;">'+moneyFormatInt(parseInt(this.getAttribute("value"),10))+'</td></tr>');
                 },false);
                 newtr.addEventListener("click",function(){showMarket(this.getAttribute("prod"));},false);
                 newtd=createElement("td",{},newtr);
@@ -11766,7 +11772,7 @@ return false;
             row.addEventListener("mouseover",function(event){ toolTip.show(event,$("market_amount_tt"+this.getAttribute("offerId")).innerHTML); },false);
         }
         if((unsafeWindow.market_filter_own==1)&&(userId=="")&&(unsafeWindow.market_guild_filter==0)){
-            createElement("div",{},market_beraterline.children[0],"?&nbsp;"+moneyFormatLimit(sum[1],100000));
+            createElement("div",{},market_beraterline.children[0],"∑&nbsp;"+moneyFormatLimit(sum[1],100000));
         }
         // No offers
         if(sum[0]==0){
@@ -13266,6 +13272,35 @@ return false;
                                             help="border-top:1px solid black;"
                                         }
                                     break;}
+									//for fuelstation
+									/*
+									case 6:{//const FUELSTATION_INPUT={"1":[[17,0],[31,0],[33,0],[113,0]]};
+										GM_log("Fuelstation");
+										help="";
+										var data=unsafeWindow.farms_data.farms[farmNR][zoneNr];
+										for(var slot=1;slot<=4;slot++)	{
+											if((slot==1)||(!data.data.data.slots[slot]["block"])){
+												const product = 350;
+												var slotlevel = data.data.data.slots[slot].level;
+												var iAmount=data.data.constants.slot_level[data.data.data.slots[slot].level].output;
+												var iPoints=iAmount*prodPoints[0][product];
+												var iTime=data.data.constants.slot_level[data.data.data.slots[slot].level].duration;
+												
+												tr=createElement("tr",{},table);
+												td=createElement("td",{"style":help+"padding-right:10px;"},tr);
+												createElement("div",{"style":"line-height:16px;white-space:nowrap;"},td,"Slot"+slot);
+												div=createElement("div",{"style":"line-height:16px;white-space:nowrap;"},td);
+												produktPic(0,product,div);
+												createElement("span",{},div,numberFormat(iAmount)+" "+prodName[0][product]);
+												pointsFormat(iPoints,"span",td);
+												createElement("span",{"style":"line-height:16px;white-space:nowrap;"},td,"  "+getTimeStr(iTime));
+		
+											}
+											help="border-top:1px solid black;"
+										}
+										break;
+										}*/
+									
                                     }
                                     table=null;tr=null;td=null;div=null;
                                 }
@@ -14223,15 +14258,77 @@ return false;
     });
     
     
+	//buildFuelstation(a)
     //a: Zone-Nummer
-    unsafeOverwriteFunction("buildFuelstation",function(a){
+   unsafeOverwriteFunction("buildFuelstation",function(a){
         try{
             unsafeWindow._buildFuelstation(a);
         }catch(err){GM_logError("_buildFuelstation","","",err);}
-        try{
-            GM_log("buildFuelstation "+"a"+a);
-        
-            raiseEvent("buildFuelstation");
+        try{ 
+			GM_log("buildFuelstation "+"a"+a);
+			//alert("1");
+			/*
+			var zoneNr=a;
+            var zoneNrF=zoneNr+6*gameLocation.get()[1];
+            var zoneNrS;
+            showBlase(zoneNrF);
+            drawZoneNavi(zoneNrF,$("innermaincontainer"));
+            var newDiv,newDiv1;
+            var tempZoneProductionData=[[{}],0,0,true];
+            var tempZoneProductionDataSlot;
+            var data=unsafeWindow.farms_data.farms[unsafeWindow.farm][zoneNr];
+			for(var slot=1;slot<=4;slot++){
+                zoneNrS=zoneNrF+"."+slot;
+                if((slot==1)||(!data.data.data.slots[slot]["block"])){
+                    zones.setBlock(zoneNrS,"");
+                    tempZoneProductionDataSlot=[[{}],0,0,true];
+                    tempZoneProductionData[1]++;
+                    tempZoneProductionData[2]++;
+                    tempZoneProductionDataSlot[1]++;
+                    tempZoneProductionDataSlot[2]++;
+                    if(data.data.data.slots[slot]){
+                        var iPrTyp=0;
+                        var iProd;
+						var iTime;
+						for(var v in data.production){	
+							if(!data.production.hasOwnProperty(v)){ continue; }
+							//wenn nicht vorhanden, dann Slot geerntet
+							if (data.production[v].slot==slot)	{
+								iProd=data.production[v].pid;
+								iTime=now+data.production[v].remain;
+							}
+						}
+                        if(iProd){
+							var iAmount=data.data.constants.slot_level[data.data.data.slots[slot].level].output;
+                            var iPoints=iAmount*prodPoints[iPrTyp][iProd];
+							newDiv=$("fuelstation_slot"+slot).children[1];
+							newDiv1=createElement("div",{"style":"position:relative;top:75px;left:85px"},newDiv);
+                            pointsFormat(iPoints,"div",newDiv1);
+                            tempZoneProductionData[1]--;
+                            if(!tempZoneProductionData[0][iPrTyp][iProd]){ tempZoneProductionData[0][iPrTyp][iProd]=[]; }
+                            tempZoneProductionData[0][iPrTyp][iProd].push([iAmount,iPoints,iTime,NEVER]);
+                            tempZoneProductionDataSlot[1]--;
+                            if(!tempZoneProductionDataSlot[0][iPrTyp][iProd]){ tempZoneProductionDataSlot[0][iPrTyp][iProd]=[]; }
+                            tempZoneProductionDataSlot[0][iPrTyp][iProd].push([iAmount,iPoints,iTime,NEVER]);
+                            //auto-cropping
+                            if((iTime<now)&&(top.unsafeData.autoAction==null)&&valAutoCrop["farm"]&&(newDiv=$("fuelstation_slot"+slot))){
+                                top.unsafeData.autoAction="berater: fuelstation crop";
+                                window.setTimeout(function(div){
+                                    click(div.children[3]);
+                                    top.unsafeData.autoAction=null;
+                                },500,newDiv);
+                            }
+                        }
+                    }
+                    zones.setProduction(zoneNrF+"."+slot,tempZoneProductionDataSlot.clone());
+                } else {
+					//wenn geerntet Fehler???
+                    zones.setBlock(zoneNrS,"b");
+                }
+            }
+            zones.setProduction(zoneNrF,tempZoneProductionData.clone());
+            var tempZoneProductionData=null;newDiv=null;newDiv1=null;*/
+			raiseEvent("buildFuelstation");			
         }catch(err){GM_logError("buildFuelstation","","",err);}
     });
     
@@ -14250,10 +14347,8 @@ return false;
         }catch(err){GM_logError("calcPointsFuelstation","","",err);}
     });
     
-    //calcPointsFuelstation
-    //h:
-    //m:
-    //e:
+	//fuelstationStats()
+	/*
     unsafeOverwriteFunction("fuelstationStats",function(){
         try{
             unsafeWindow._fuelstationStats();
@@ -14263,7 +14358,10 @@ return false;
             raiseEvent("fuelstationStats");
         }catch(err){GM_logError("fuelstationStats","","",err);}
     });
-    /*unsafeOverwriteFunction("updateFuelstation",function(){
+	*/
+	//updateFuelstation()
+	/*
+    unsafeOverwriteFunction("updateFuelstation",function(){
         try{
             unsafeWindow._updateFuelstation();
         }catch(err){GM_logError("_updateFuelstation","","",err);}
@@ -14277,8 +14375,6 @@ return false;
     //openFuelstationHelp()
     //setFuelstationHelp(a)
     //fuelstationCheckLevelAdd(a, d)
-    //fuelstationStats()
-    //updateFuelstation()
     //updateFuelstationLevel(e, n)
     
     unsafeOverwriteFunction("innerInfosResponse",function(zoneNr){
@@ -16705,7 +16801,7 @@ return;
                 if(cand.length>15){ cand[15].style.borderBottom="1px solid black"; }
                 if(cand.length>50){ cand[50].style.borderBottom="1px solid black"; }
                 newdiv=null;
-                $("localwbwproductname").innerHTML += "&nbsp;(?&nbsp;"+numberFormat(sum)+")";
+                $("localwbwproductname").innerHTML += "&nbsp;(∑&nbsp;"+numberFormat(sum)+")";
                 if(result[1]['open']!=1){
                     nextproduct=parseInt(result[1]['wettbewerb_produkt'],10);
                     if(nextproduct>0){
@@ -17609,7 +17705,9 @@ return;
             raiseEvent("gameNewDay");
         }
 
-        showGoToClothingDonation();
+        if(USERLEVEL>=38){
+            showGoToClothingDonation();
+        }
 
         // clock
         nodes["serverTime"]["node"].innerHTML=todayServerStr+"&nbsp;"+getDaytimeStr(nowServerOff);
