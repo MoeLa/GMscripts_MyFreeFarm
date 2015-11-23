@@ -20192,6 +20192,7 @@ try{
         text["en"]["msgContentMarketsale"]="(.*) bought (\\d+)x (.+?) for<br> (.+?) pD from you\\."; // The text where the information is stated. The information has to be replaced by "(.+?)".
         text["en"]["msgSubjectCoins"]="xxx tbd: you got coins xxx";
         text["en"]["msgSubjectCongratulation"]="Congratulations";
+		text["en"]["msgSubjectCongratulation2"]="xxx";
         text["en"]["msgSubjectContractReject"]="A contract has been withdrawn";
         text["en"]["msgSubjectContractsale"]="A contract has been accepted";
         text["en"]["msgSubjectContractCancel"]="A contract has been xxx tbd xxx";
