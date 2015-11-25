@@ -13761,6 +13761,16 @@ return false;
                 case "megafield_vehicle_buy": raiseEvent("gameMegafieldVehicleBought"); break;
                 case "nursery_harvest": raiseEvent("gameFarmersmarketCropped"); break;
                 case "nursery_startproduction": raiseEvent("gameFarmersmarketStarted"); break;
+                case "pony_buy": 
+                case "pony_setfarmi": 
+                case "pony_crop": 
+                case "pony_feed": 
+                case "pony_speedup": {
+                        // console.log("Moe, neue pony_data");
+                        // console.log(unsafeWindow.pony_data);
+                        doPony(zoneNr);
+                        break;
+                }
                 case "reallocatebuilding":{
                     // B=='farm1,zone1,farm2,zone2'
                     var set=B.split(",");
@@ -14073,6 +14083,32 @@ return false;
         showBlase(zoneNrF);
         drawZoneNavi(zoneNrF,$("innermaincontainer"));
         raiseEvent("gameOpenFactoryOil");
+    }
+    function doPony(zoneNr){
+        //GM_log("doFactoryOil "+unsafeWindow.currentposition);
+        var zoneNrF=zoneNr+6*gameLocation.get()[1];
+        console.log("Moe, neue pony_data: " + zoneNr);
+
+
+        var pony_data = unsafeWindow.pony_data;
+        console.log(pony_data["farmis"]);
+        for (var fId in pony_data["farmis"]) {
+            if (pony_data["farmis"].hasOwnProperty(fId)) { 
+                var pfarmi = pony_data["farmis"][fId];
+                // console.log(pfarmi["data"]);
+                if (pfarmi["data"]["remain"]) {
+                    console.log("Farmi fertig um " + new Date((now+pfarmi["data"]["remain"])*1000));
+                }
+            }
+        }
+
+        // // console.log(array);
+        // for (var f in Object.keys(pony_data["farmis"])) {
+        //     console.log("Moe: " + f);
+        // //     console.log(pony_data["farmis"][f]);
+        // }
+
+        raiseEvent("gameOpenPony");
     }
     unsafeOverwriteFunction("buildOilpressInner",function(position,buildingid,info){
         try{
@@ -14392,7 +14428,7 @@ return false;
                 case "14": doFactoryOil(zoneNr); break; // Special Oil
                 case "16":  // Knitting
                 case "17":  // Carpentry
-                case "18":  // Pony
+                case 18: doPony(zoneNr); break; // Pony, 
                 case "19":  // Megafield
                 case "20":  // Fuelstation
                 default:
