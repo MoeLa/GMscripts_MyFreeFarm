@@ -288,6 +288,8 @@ unsafeData.BUILDING_SIZE=BUILDING_SIZE.clone();
 const BUILDING_SLOTS={"13":3,"14":3,"16":3,"windmill":2,"sawmill":3,"carpentry":3,"fw1":3,"fw2":3,"fw3":3,"fl0":17,"fl2":3,"megafield":99};
 //for Fuelstation
 //const BUILDING_SLOTS={"13":3,"14":3,"16":3,"20":4,"windmill":2,"sawmill":3,"carpentry":3,"fw1":3,"fw2":3,"fw3":3,"fl0":17,"fl2":3,"megafield":99};
+//for Pony and Fuelstation
+//const BUILDING_SLOTS={"13":3,"14":3,"16":3,"19":3,"20":4,"windmill":2,"sawmill":3,"carpentry":3,"fw1":3,"fw2":3,"fw3":3,"fl0":17,"fl2":3,"megafield":99};
 unsafeData.BUILDING_SLOTS=BUILDING_SLOTS.clone();
 // Needed input of a zone
 // BUILDING_INPUT[buildTyp]{output}[alternatives]=[[prod1,amount1||reducing time1],...]
@@ -1791,7 +1793,7 @@ var zones=new function(){
             15          Angora shed             Stable
             16          Knitting mill           Factory
             17          Architectural office
-            18          Pony farm
+            18          Pony farm               Factory
             19          Megafield               Factory
             20          Fuelstation             Factory
             fw1         Soda stall              Foodworld
@@ -13438,6 +13440,7 @@ return false;
                             currBonusSpecial=[parseInt(data.product,10),10]; // the id of special plant, additional bonus for special plant
                         }
                     }
+                    // console.log("farmBuildPositions: " + zoneNrF);
                     zones.setBuilding(zoneNrF,currZoneType);
                     zones.setBlock(zoneNrF,currBlock);
                     zones.setBonus(zoneNrF,currBonus);
@@ -14085,28 +14088,38 @@ return false;
         raiseEvent("gameOpenFactoryOil");
     }
     function doPony(zoneNr){
-        //GM_log("doFactoryOil "+unsafeWindow.currentposition);
         var zoneNrF=zoneNr+6*gameLocation.get()[1];
         console.log("Moe, neue pony_data: " + zoneNr);
 
-
         var pony_data = unsafeWindow.pony_data;
-        console.log(pony_data["farmis"]);
+        console.log(pony_data);
+        // var anzahlFreigeschaltet = 0;
+        // for (var pId in pony_data["ponys"]) {
+        //     if (pony_data["ponys"].hasOwnProperty(pId)) { 
+        //         var pony = pony_data["ponys"][pId];
+        //         // console.log(pfarmi["data"]);
+        //         if (!pony["block"]) {
+        //             anzahlFreigeschaltet++;
+        //             // console.log("Farmi fertig um " + new Date((now+pfarmi["data"]["remain"])*1000));
+        //         }
+        //     }
+        // }
+        // console.log("Anzahl Ponys: " + anzahlFreigeschaltet);
+
+        var endtime = NEVER;
         for (var fId in pony_data["farmis"]) {
             if (pony_data["farmis"].hasOwnProperty(fId)) { 
                 var pfarmi = pony_data["farmis"][fId];
-                // console.log(pfarmi["data"]);
                 if (pfarmi["data"]["remain"]) {
-                    console.log("Farmi fertig um " + new Date((now+pfarmi["data"]["remain"])*1000));
+                    // console.log("Farmi fertig um " + new Date((now+pfarmi["data"]["remain"])*1000));
+                    var zeit = pfarmi["data"]["start"] + pfarmi["data"]["duration"];
+                    console.log("Ende um: " + new Date(zeit*1000));
+                    endtime = Math.min(zeit, endtime);
                 }
             }
         }
-
-        // // console.log(array);
-        // for (var f in Object.keys(pony_data["farmis"])) {
-        //     console.log("Moe: " + f);
-        // //     console.log(pony_data["farmis"][f]);
-        // }
+        zones.setEndtime(zoneNrF, endtime);
+        console.log("Ponyzeit: "+new Date(1000*zones.getEndtime(zoneNrF)));
 
         raiseEvent("gameOpenPony");
     }
