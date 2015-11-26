@@ -81,7 +81,7 @@ const CHANGELOG=[["2.0","29.05.2014",[["Migration nach openuserjs.org","Migratio
                 ,["2.5.8","31.10.2015",[["Anpassung an Spiel-Update: Lagerbestände 5. Farm","Fix for game update: storage 5th farm"]]]
                 ,["2.5.8a","02.11.2015",[["Fix: Exotische Früchte","Fix: exotic fruit"]]]
                 ,["2.5.9","23.11.2015",[["Kleiderspende: Bot kann in den Optionen aktiviert werden","Bot for clothing donation. Check your options!"]]]
-				,["2.6.0","25.11.2015",[["Bugfix: Kräuter und exotische Früchte für Nichtpremium","Bugfix: Herbs and exotic fruits for nonpremium."]]]
+                ,["2.6.0","25.11.2015",[["Bugfix: Kräuter und exotische Früchte für Nichtpremium","Bugfix: Herbs and exotic fruits for nonpremium."]]]
                 ];
 
 if(!VERSIONfunctionFile){
@@ -1522,7 +1522,14 @@ try {
                     drawFactoryChooseItemBox(zoneNrS, zoneNrL,$("divChooseBoxInner"));
                 }
                 break;
-            case 4: 
+            case 4: break;
+            case 5: // Pony
+                if(settings.get("account","useQueueList")){
+                    redrawQueueBox(zoneNrS, zoneNrL, $("divQueueBoxInner"));
+                }else{
+                    drawQueueChooseItemBox(zoneNrS, zoneNrL, 0, $("divChooseBoxInner"));
+                }
+                break;
             case "windmill":
             case "forest":case "sawmill":case "carpentry":
             case "megafield":
@@ -9014,6 +9021,20 @@ try{
                 zoneNrS=zoneNrF+"."+slot;
                 if(!unsafeData.zones.getBlock(zoneNrS)){
                     drawAutomatIcon(zoneNrS,zoneNrS,$("strickerei_slot"+slot),"left:-10px;");
+                }
+            }
+        }catch(err){GM_logError("eventListener:gameOpenFactoryKnitting ","","",err);}
+        },false);
+        err_trace="listener gameOpenPony";
+        document.addEventListener("gameOpenPony",function(){ // pony open
+        try{
+            var zoneNrF=getFarmZone(unsafeWindow.currentposition);
+            var zoneNrS;
+            for(var slot=1;slot<=3;slot++){
+                zoneNrS=zoneNrF+"."+slot;
+                // console.log("Pony " + zoneNrS + ": " + unsafeData.zones.getBlock(zoneNrS));
+                if(!unsafeData.zones.getBlock(zoneNrS)){
+                    drawAutomatIcon(zoneNrS,zoneNrS,$("pony" + slot +"_feed"),"left:2px;top:-50px");
                 }
             }
         }catch(err){GM_logError("eventListener:gameOpenFactoryKnitting ","","",err);}

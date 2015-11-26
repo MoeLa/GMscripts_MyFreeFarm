@@ -240,7 +240,7 @@ const ANIMAL_MOVE=[,,[false,0,0,255,10,10,505],[false,0,0,280,1,0,525],[false,0,
             15          Angora shed             Stable
             16          Knitting mill           Factory
             17          Architectural office
-            18          Pony farm
+            18          Pony farm               Factory
             19          Megafield               Factory
             20          Fuelstation             Factory
             fw1         Soda stall              Foodworld
@@ -274,22 +274,23 @@ unsafeData.BUILDING2PRODUCT=BUILDING2PRODUCT.clone();
             Factory          3
             Foodworld        4
             Farmersmarket    4
+            Pony             5
             Fuelstation      6
         */
-const BUILDINGTYPE={"0":0,"1":1,"2":2,"3":2,"4":2,"5":2,"6":0,"7":3,"8":3,"9":3,"10":3,"11":2,"12":2,"13":3,"14":3,"15":2,"16":3,"17":0,"18":0,"19":0,"20":0,"fl1":1,"fl2":4,"fl5":4,"fw1":4,"fw2":4,"fw3":4}
+// const BUILDINGTYPE={"0":0,"1":1,"2":2,"3":2,"4":2,"5":2,"6":0,"7":3,"8":3,"9":3,"10":3,"11":2,"12":2,"13":3,"14":3,"15":2,"16":3,"17":0,"18":0,"19":0,"20":0,"fl1":1,"fl2":4,"fl5":4,"fw1":4,"fw2":4,"fw3":4}
+const BUILDINGTYPE={"0":0,"1":1,"2":2,"3":2,"4":2,"5":2,"6":0,"7":3,"8":3,"9":3,"10":3,"11":2,"12":2,"13":3,"14":3,"15":2,"16":3,"17":0,"18":5,"19":0,"20":0,"fl1":1,"fl2":4,"fl5":4,"fw1":4,"fw2":4,"fw3":4}
 // for Fuelstation
-//const BUILDINGTYPE={"0":0,"1":1,"2":2,"3":2,"4":2,"5":2,"6":0,"7":3,"8":3,"9":3,"10":3,"11":2,"12":2,"13":3,"14":3,"15":2,"16":3,"17":0,"18":0,"19":0,"20":6,"fl1":1,"fl2":4,"fl5":4,"fw1":4,"fw2":4,"fw3":4}
+// const BUILDINGTYPE={"0":0,"1":1,"2":2,"3":2,"4":2,"5":2,"6":0,"7":3,"8":3,"9":3,"10":3,"11":2,"12":2,"13":3,"14":3,"15":2,"16":3,"17":0,"18":0,"19":0,"20":6,"fl1":1,"fl2":4,"fl5":4,"fw1":4,"fw2":4,"fw3":4}
 
 unsafeData.BUILDINGTYPE=BUILDINGTYPE.clone();
 // task_new_building
 const BUILDING_SIZE={"1":120,"forest":25,"fl1":36,"megafield":[11,9]};
 unsafeData.BUILDING_SIZE=BUILDING_SIZE.clone();
 // task_new_building
-const BUILDING_SLOTS={"13":3,"14":3,"16":3,"windmill":2,"sawmill":3,"carpentry":3,"fw1":3,"fw2":3,"fw3":3,"fl0":17,"fl2":3,"megafield":99};
+// const BUILDING_SLOTS={"13":3,"14":3,"16":3,"windmill":2,"sawmill":3,"carpentry":3,"fw1":3,"fw2":3,"fw3":3,"fl0":17,"fl2":3,"megafield":99};
+const BUILDING_SLOTS={"13":3,"14":3,"16":3,"18":3,"windmill":2,"sawmill":3,"carpentry":3,"fw1":3,"fw2":3,"fw3":3,"fl0":17,"fl2":3,"megafield":99};
 //for Fuelstation
 //const BUILDING_SLOTS={"13":3,"14":3,"16":3,"20":4,"windmill":2,"sawmill":3,"carpentry":3,"fw1":3,"fw2":3,"fw3":3,"fl0":17,"fl2":3,"megafield":99};
-//for Pony and Fuelstation
-//const BUILDING_SLOTS={"13":3,"14":3,"16":3,"19":3,"20":4,"windmill":2,"sawmill":3,"carpentry":3,"fw1":3,"fw2":3,"fw3":3,"fl0":17,"fl2":3,"megafield":99};
 unsafeData.BUILDING_SLOTS=BUILDING_SLOTS.clone();
 // Needed input of a zone
 // BUILDING_INPUT[buildTyp]{output}[alternatives]=[[prod1,amount1||reducing time1],...]
@@ -1687,6 +1688,7 @@ var zones=new function(){
         // s: status
         // t: type (not handled)
         try{
+            // console.log("Set block: " + zoneNr + " -> " + value);
             zoneNr=zoneNr.toString();
             var slot=(zoneNr.match(/\.(\d+)$/)?parseInt(/\.(\d+)$/.exec(zoneNr)[1],10):null);
             var zoneNrF=zoneNr.replace(/\.\d+$/g,"");
@@ -1694,7 +1696,10 @@ var zones=new function(){
                 zones.create(zoneNrF);
             }
             if(slot){
+                // console.log("Moe, slot!");
+                // console.log(data[zoneNrF]);
                 if(undefined===data[zoneNrF]["slots"][slot]){
+                    // console.log('data[zoneNrF]["slots"][slot] war undefined');
                     data[zoneNrF]["slots"][slot]=INIT_zoneSlotItem.clone();
                 }
                 if(data[zoneNrF]["slots"][slot]["block"]!=value){
@@ -1809,6 +1814,7 @@ var zones=new function(){
             }
             if(data[zoneNrF]["building"]!=value){
                 data[zoneNrF]["building"]=value;
+                 // + zoneNrF + " -> " + BUILDING_SLOTS[value]);
                 if(BUILDING_SLOTS[value]){
                     data[zoneNrF]["slots"]=[];
                     for(var i=BUILDING_SLOTS[value];i>=1;i--){
@@ -2092,7 +2098,10 @@ var zones=new function(){
                 var zT=zones.getEndtime(zoneNrS);
                 var zTw=zones.getWatertime(zoneNrS);
                 var div;
-
+                // if (zoneNrF == 24) {
+                // zT = NEVER;
+                // }
+                // console.log(zoneNrS);
                 // We gonna set the megafield timer to the end of the tour, if we can't/needn't to plant anything
                 if (megafieldSmartTimer && zoneNrF == "megafield") {
                     // Do we have the data AND is a harvest tour running (and the job hasn't timed out already)?
@@ -2187,6 +2196,10 @@ var zones=new function(){
                 }
                 div=null;
             }
+            if (readyZoneAdded) {
+                console.log("Ready: " + zoneNrF);
+            }
+
             return readyZoneAdded;
         }catch(err){GM_logError("zones.checkReady","zoneNrS="+zoneNrS,"",err);}
     }
@@ -14089,39 +14102,109 @@ return false;
     }
     function doPony(zoneNr){
         var zoneNrF=zoneNr+6*gameLocation.get()[1];
-        console.log("Moe, neue pony_data: " + zoneNr);
+        // console.log("Moe, neue pony_data: " + zoneNr);
 
         var pony_data = unsafeWindow.pony_data;
-        console.log(pony_data);
-        // var anzahlFreigeschaltet = 0;
+
+        var zoneNrS;
+        var tempZoneProductionData=[[{}],0,0,true];
+        var tempZoneProductionDataSlot;
+        for (var slot=1; slot<=3; slot++) {
+            zoneNrS=zoneNrF+"." + slot;
+            if (slot==1 || !pony_data["ponys"][slot]["block"]) {
+                zones.setBlock(zoneNrS,"");
+                tempZoneProductionDataSlot=[[{}],0,0,true];
+                tempZoneProductionData[1]++;
+                tempZoneProductionData[2]++;
+                tempZoneProductionDataSlot[1]++;
+                tempZoneProductionDataSlot[2]++;
+                var farmi = pony_data["farmis"][pony_data["ponys"][slot]["data"]["farmi"]];
+                // console.log(farmi);
+
+                var iPrTyp=0;
+                var iProd=1;
+                var iAmount=0;
+                var iPoints=farmi["data"]["points"];
+                if(farmi["data"]["ready"]){
+                    var iTime=Math.min(now-unsafeWindow.Zeit.Verschiebung,zones.getEndtime(zoneNrS));
+                } else{
+                    var iTime=now+farmi["data"]["remain"]-unsafeWindow.Zeit.Verschiebung;
+                }
+                newDiv=$("pony" + slot).children[1];
+                // newDiv1=createElement("div",{},newDiv);
+                // pointsFormat(iPoints,"div",newDiv1);
+                tempZoneProductionData[1]--;
+                if (!tempZoneProductionData[0][iPrTyp][iProd]) {
+                    tempZoneProductionData[0][iPrTyp][iProd]=[];
+                }
+                tempZoneProductionData[0][iPrTyp][iProd].push([iAmount,iPoints,iTime,NEVER]);
+                
+                tempZoneProductionDataSlot[1]--;
+                if (!tempZoneProductionDataSlot[0][iPrTyp][iProd]) {
+                    tempZoneProductionDataSlot[0][iPrTyp][iProd]=[];
+                }
+                tempZoneProductionDataSlot[0][iPrTyp][iProd].push([iAmount,iPoints,iTime,NEVER]);
+                
+                //auto-cropping
+                // if (data.slots[slot].ready && (top.unsafeData.autoAction==null) && valAutoCrop["farm"] && (newDiv=$("strickerei_slot"+slot))) {
+                //     top.unsafeData.autoAction="berater: knitting crop";
+                //     window.setTimeout(function(div){
+                //         click(div);
+                //         top.unsafeData.autoAction=null;
+                //     },500,newDiv);
+                // }
+
+                zones.setProduction(zoneNrF+"."+slot,tempZoneProductionDataSlot.clone());
+            } else {
+                zones.setBlock(zoneNrS, "b");
+            }
+            // console.log(zones.getProduction(zoneNrS));
+            // console.log("Block Pony: " + zoneNrS + " -> " + zones.getBlock(zoneNrS));
+        }
+        zones.setProduction(zoneNrF,tempZoneProductionData.clone());
+        // zones.setEndtime(zoneNrF, NEVER);
+        // console.log(new Date(1000*zones.getEndtime(zoneNrF)));
+
+
+
+        // console.log(pony_data);
+        // // var anzahlFreigeschaltet = 0;
         // for (var pId in pony_data["ponys"]) {
         //     if (pony_data["ponys"].hasOwnProperty(pId)) { 
         //         var pony = pony_data["ponys"][pId];
         //         // console.log(pfarmi["data"]);
         //         if (!pony["block"]) {
-        //             anzahlFreigeschaltet++;
+        //             zones.setBlock(zoneNrS,"b");
+        //             // anzahlFreigeschaltet++;
         //             // console.log("Farmi fertig um " + new Date((now+pfarmi["data"]["remain"])*1000));
         //         }
         //     }
         // }
         // console.log("Anzahl Ponys: " + anzahlFreigeschaltet);
 
-        var endtime = NEVER;
-        for (var fId in pony_data["farmis"]) {
-            if (pony_data["farmis"].hasOwnProperty(fId)) { 
-                var pfarmi = pony_data["farmis"][fId];
-                if (pfarmi["data"]["remain"]) {
-                    // console.log("Farmi fertig um " + new Date((now+pfarmi["data"]["remain"])*1000));
-                    var zeit = pfarmi["data"]["start"] + pfarmi["data"]["duration"];
-                    console.log("Ende um: " + new Date(zeit*1000));
-                    endtime = Math.min(zeit, endtime);
-                }
-            }
-        }
-        zones.setEndtime(zoneNrF, endtime);
-        console.log("Ponyzeit: "+new Date(1000*zones.getEndtime(zoneNrF)));
+        // var endtime = NEVER;
+        // for (var fId in pony_data["farmis"]) {
+        //     if (pony_data["farmis"].hasOwnProperty(fId)) { 
+        //         var pfarmi = pony_data["farmis"][fId];
+        //         if (pfarmi["data"]["remain"]) {
+        //             // console.log("Farmi fertig um " + new Date((now+pfarmi["data"]["remain"])*1000));
+        //             var zeit = pfarmi["data"]["start"] + pfarmi["data"]["duration"];
+        //             console.log("Ende um: " + new Date(zeit*1000));
+        //             endtime = Math.min(zeit, endtime);
+        //         }
+        //     }
+        // }
+        // zones.setEndtime(zoneNrF, endtime);
+        // console.log("Ponyzeit: "+new Date(1000*zones.getEndtime(zoneNrF)));
 
-        raiseEvent("gameOpenPony");
+        // console.log(ALL_SLOTS);
+        // for(var i in ALL_SLOTS){
+        //     if(!ALL_SLOTS.hasOwnProperty(i)){ continue; }
+        //     console.log("Block for " + i + ": " + zones.getBlock(i));
+        //     if(!zones.getBlock(i)){
+        //         readyZoneAdded+=zones.checkReady(i);
+        //     }
+        // }
     }
     unsafeOverwriteFunction("buildOilpressInner",function(position,buildingid,info){
         try{
@@ -14441,7 +14524,7 @@ return false;
                 case "14": doFactoryOil(zoneNr); break; // Special Oil
                 case "16":  // Knitting
                 case "17":  // Carpentry
-                case 18: doPony(zoneNr); break; // Pony, 
+                case 18: doPony(zoneNr); raiseEvent("gameOpenPony"); break; // Pony, 
                 case "19":  // Megafield
                 case "20":  // Fuelstation
                 default:
@@ -17801,6 +17884,7 @@ return;
         var readyZoneAdded=0;
         for(var i in ALL_SLOTS){
             if(!ALL_SLOTS.hasOwnProperty(i)){ continue; }
+            // console.log("Block for " + i + ": " + zones.getBlock(i));
             if(!zones.getBlock(i)){
                 readyZoneAdded+=zones.checkReady(i);
             }
