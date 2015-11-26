@@ -13777,14 +13777,12 @@ return false;
                 case "megafield_vehicle_buy": raiseEvent("gameMegafieldVehicleBought"); break;
                 case "nursery_harvest": raiseEvent("gameFarmersmarketCropped"); break;
                 case "nursery_startproduction": raiseEvent("gameFarmersmarketStarted"); break;
+                case "pony_crop": doPony(zoneNr); raiseEvent("gamePonyCropped"); console.log("gamePonyCropped"); break;
+                case "pony_feed": doPony(zoneNr); raiseEvent("gamePonyFed"); console.log("gamePonyFed"); break;
+                case "pony_setfarmi": doPony(zoneNr); raiseEvent("gamePonyFarmiSet"); console.log("gamePonyFarmiSet"); break;
                 case "pony_buy": 
-                case "pony_setfarmi": 
-                case "pony_crop": 
-                case "pony_feed": 
                 case "pony_speedup": {
-                        // console.log("Moe, neue pony_data");
-                        // console.log(unsafeWindow.pony_data);
-                        doPony(zoneNr);
+                        // doPony(zoneNr);
                         break;
                 }
                 case "reallocatebuilding":{
@@ -13858,6 +13856,15 @@ return false;
                 raiseEvent("gameFieldCropped");
             }
         }catch(err){GM_logError("ErnteResponse","","",err);}
+    });
+    unsafeOverwriteFunction("ponySelectFarmi",function(farmiId){
+        try{
+            unsafeWindow._ponySelectFarmi(farmiId);
+        }catch(err){GM_logError("_ponySelectFarmi","","",err);}
+        try{
+            raiseEvent("gamePonyFarmiSelected");
+            console.log("gamePonyFarmiSelected: " + farmiId);
+        }catch(err){GM_logError("ponySelectFarmi","","",err);}
     });
     unsafeOverwriteFunction("AbrissResponse",function(request){
         try{
@@ -14109,6 +14116,7 @@ return false;
         var zoneNrS;
         var tempZoneProductionData=[[{}],0,0,true];
         var tempZoneProductionDataSlot;
+        // console.log(pony_data);
         for (var slot=1; slot<=3; slot++) {
             zoneNrS=zoneNrF+"." + slot;
             if (slot==1 || !pony_data["ponys"][slot]["block"]) {
@@ -14119,7 +14127,6 @@ return false;
                 tempZoneProductionDataSlot[1]++;
                 tempZoneProductionDataSlot[2]++;
                 var farmi = pony_data["farmis"][pony_data["ponys"][slot]["data"]["farmi"]];
-                // console.log(farmi);
 
                 var iPrTyp=0;
                 var iProd=1;
@@ -14146,13 +14153,13 @@ return false;
                 tempZoneProductionDataSlot[0][iPrTyp][iProd].push([iAmount,iPoints,iTime,NEVER]);
                 
                 //auto-cropping
-                // if (data.slots[slot].ready && (top.unsafeData.autoAction==null) && valAutoCrop["farm"] && (newDiv=$("strickerei_slot"+slot))) {
-                //     top.unsafeData.autoAction="berater: knitting crop";
-                //     window.setTimeout(function(div){
-                //         click(div);
-                //         top.unsafeData.autoAction=null;
-                //     },500,newDiv);
-                // }
+                if (farmi["data"]["remain"] < 1 && (top.unsafeData.autoAction==null) && valAutoCrop["farm"] && (newDiv=$("pony"+ slot + "_crop"))) {
+                    top.unsafeData.autoAction="berater: pony crop";
+                    window.setTimeout(function(div){
+                        click(div);
+                        top.unsafeData.autoAction=null;
+                    },500,newDiv);
+                }
 
                 zones.setProduction(zoneNrF+"."+slot,tempZoneProductionDataSlot.clone());
             } else {
