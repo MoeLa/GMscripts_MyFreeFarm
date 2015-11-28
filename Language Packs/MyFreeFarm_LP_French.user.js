@@ -3,8 +3,8 @@
 // @namespace   https://github.com/BastianKanaan/GMscripts_MyFreeFarm
 // @author      BastianKanaan
 // @description Language pack "French" for MyFreeFarm Scripts
-// @date        22.11.2015
-// @version     1.0.6
+// @date        26.11.2015
+// @version     1.0.7
 // @license     GPL version 3 or any later version; http://www.gnu.org/copyleft/gpl.html
 // @include     /^http:\/\/(|www\.|s\d+\.)mabelleferme.fr\/.*$/
 // @grant       GM_log
@@ -153,8 +153,8 @@ try{
         text[LANGUAGE]["farmX"]="%1%. farm";
         text[LANGUAGE]["farmi"]="Farmie";
         text[LANGUAGE]["farmis"]="Farmies";
-        text[LANGUAGE]["farmpedia"]="FarmPedia";
-        text[LANGUAGE]["farmpediaUrl"]="http://farmpedia.myfreefarm.de/";
+        text[LANGUAGE]["farmpedia"]="Forum";
+        text[LANGUAGE]["farmpediaUrl"]="http://forum.mabelleferme.fr/";
         text[LANGUAGE]["farmzone"]="Building place %1% of %2%. farm";
         text[LANGUAGE]["feed"]="Feed";
         text[LANGUAGE]["fields"]="Fields";
@@ -510,6 +510,8 @@ try{
         text[LANGUAGE]["automat_settings_autoFeed"] = "Shall the feeding machine be displayed?";
         text[LANGUAGE]["automat_settings_botUse"] = "Use bot";
         text[LANGUAGE]["automat_settings_disableCropFields"]="Block the cropping of sleeping fields.";
+        text[LANGUAGE]["automat_settings_donating"] = " to automatically donate in case the exchange is favorable.";
+        text[LANGUAGE]["automat_settings_gambling"] = " to automatically gamble in case the exchange isn't favorable.";
         text[LANGUAGE]["automat_settings_pauseShortMin"] = "Minimal clicking delay of the automaton";
         text[LANGUAGE]["automat_settings_pauseShortMax"] = "Maximal clicking delay of the automaton";
         text[LANGUAGE]["automat_settings_pauseMin"] = "Minimal waiting delay of the automaton";
