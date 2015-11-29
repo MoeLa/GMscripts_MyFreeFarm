@@ -2173,6 +2173,9 @@ var zones=new function(){
                             }
                             // otherwise we don't do anything until the empty fields are planted
                         }
+                    } else if (unsafeWindow.megafield_data) {
+                        console.log("Megatime: " + new Date(1000*zT));
+                        console.log(unsafeWindow.megafield_data);
                     }
                 }
                 
