@@ -3,8 +3,8 @@
 // @namespace   https://github.com/BastianKanaan/GMscripts_MyFreeFarm
 // @author      BastianKanaan
 // @description Language pack "Bulgarian" for MyFreeFarm Scripts
-// @date        22.11.2015
-// @version     1.0.6
+// @date        26.11.2015
+// @version     1.0.7
 // @license     GPL version 3 or any later version; http://www.gnu.org/copyleft/gpl.html
 // @include     /^http:\/\/(|www\.|s\d+\.)veselaferma.com\/.*$/
 // @grant       GM_log
@@ -153,8 +153,8 @@ try{
         text[LANGUAGE]["farmX"]="%1%. ферма";
         text[LANGUAGE]["farmi"]="Фермерче";
         text[LANGUAGE]["farmis"]="Фермерчета";
-        text[LANGUAGE]["farmpedia"]="FarmPedia";
-        text[LANGUAGE]["farmpediaUrl"]="http://farmpedia.myfreefarm.de/";
+        text[LANGUAGE]["farmpedia"]="Forum";
+        text[LANGUAGE]["farmpediaUrl"]="http://forum.veselaferma.com/";
         text[LANGUAGE]["farmzone"]="Място %1% от %2%. ферма";
         text[LANGUAGE]["feed"]="Хранене";
         text[LANGUAGE]["fields"]="Полета";
@@ -510,6 +510,8 @@ try{
         text[LANGUAGE]["automat_settings_autoFeed"] = "Да се покаже ли хранилката?";
         text[LANGUAGE]["automat_settings_botUse"] = "Използвай бот";
         text[LANGUAGE]["automat_settings_disableCropFields"]="Блокирай прибирането на спящите (закрити) полета.";
+        text[LANGUAGE]["automat_settings_donating"] = " to automatically donate in case the exchange is favorable.";
+        text[LANGUAGE]["automat_settings_gambling"] = " to automatically gamble in case the exchange isn't favorable.";
         text[LANGUAGE]["automat_settings_pauseShortMin"] = "Минимален работен интервал на бота";
         text[LANGUAGE]["automat_settings_pauseShortMax"] = "Максимален работен интервал на бота";
         text[LANGUAGE]["automat_settings_pauseMin"] = "Минимално изчакване на бота";

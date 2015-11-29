@@ -3,8 +3,8 @@
 // @namespace   https://github.com/BastianKanaan/GMscripts_MyFreeFarm
 // @author      BastianKanaan
 // @description Language pack "Polish" for MyFreeFarm Scripts
-// @date        22.11.2015
-// @version     1.0.6
+// @date        26.11.2015
+// @version     1.0.7
 // @license     GPL version 3 or any later version; http://www.gnu.org/copyleft/gpl.html
 // @include     /^http:\/\/(|www\.|s\d+\.)wolnifarmerzy.pl\/.*$/
 // @grant       GM_log
@@ -153,8 +153,8 @@ try{
         text[LANGUAGE]["farmX"] = "%1%. farme"; 
         text[LANGUAGE]["farmi"] = "Klient";
         text[LANGUAGE]["farmis"] = "Klienci";
-        text[LANGUAGE]["farmpedia"] = "Do Niemieckiej FarmPedii";
-        text[LANGUAGE]["farmpediaUrl"] = "http://farmpedia.myfreefarm.de/";
+        text[LANGUAGE]["farmpedia"] = "Forum";
+        text[LANGUAGE]["farmpediaUrl"] = "http://forum.wolnifarmerzy.pl/";
         text[LANGUAGE]["farmzone"] = "%1% miejsce pod zabudowe na %2% farmie";  
         text[LANGUAGE]["feed"] = "Karmienie";
         text[LANGUAGE]["fields"]="Fields";
@@ -510,6 +510,8 @@ try{
         text[LANGUAGE]["automat_settings_autoFeed"] = "Czy wyswietlac ikony automatyzacji karmienia?";
         text[LANGUAGE]["automat_settings_botUse"] = "Uzyj bota";
         text[LANGUAGE]["automat_settings_disableCropFields"]="Blokuj zbiory na uspionych polach";
+        text[LANGUAGE]["automat_settings_donating"] = " to automatically donate in case the exchange is favorable.";
+        text[LANGUAGE]["automat_settings_gambling"] = " to automatically gamble in case the exchange isn't favorable.";
         text[LANGUAGE]["automat_settings_pauseShortMin"] = "Minimalna zwloka dla automatyzacji siewu";
         text[LANGUAGE]["automat_settings_pauseShortMax"] = "Maksymalna zwloka dla automatyzacji siewu";
         text[LANGUAGE]["automat_settings_pauseMin"] = "Minimalny czas oczekiwania miedzy operacjami";
