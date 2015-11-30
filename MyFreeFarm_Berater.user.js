@@ -14159,49 +14159,50 @@ return false;
         var zoneNrF=zoneNr+6*gameLocation.get()[1];
 
         var pony_data = unsafeWindow.pony_data;
+        unsafeData.pony_data = pony_data;
         // console.log(pony_data);
 
         var zoneNrS;
-        var tempZoneProductionData=[[{}],0,0,true];
-        var tempZoneProductionDataSlot;
+        var prodData=[[{}],0,0,true]; // Proddata für komplette Pony-Farm
+        var dataSlot;
         for (var slot=1; slot<=3; slot++) {
-            zoneNrS=zoneNrF+"." + slot;
+            zoneNrS=zoneNrF+"." + slot; // 24.1 bzw. 24.2
             if (slot==1 || !pony_data["ponys"][slot]["block"]) {
-                zones.setBlock(zoneNrS,"");
-                tempZoneProductionDataSlot=[[{}],0,0,true];
-                tempZoneProductionData[1]++;
-                tempZoneProductionData[2]++;
-                tempZoneProductionDataSlot[1]++;
-                tempZoneProductionDataSlot[2]++;
-                var farmiId = pony_data["ponys"][slot]["data"]["farmi"];
+                zones.setBlock(zoneNrS,""); // Unblock slot
+                dataSlot=[[{}],0,0,true]; // Proddata für den aktuellen Slot
+                prodData[1]++; // Wir nehmen an, dass ein weiterer/dieser Platz frei ist 
+                prodData[2]++; // Wir nehmen an, dass ein weiterer/dieser Platz freigeschaltet ist
+                dataSlot[1]++; // Inkrementiere freien Platz in diesem Slot
+                dataSlot[2]++; // Ein freier Platz in diesem Slot
+                var farmiId = pony_data["ponys"][slot]["data"]["farmi"]; // FarmiId des aktuellen Reiters in Slot
                 if (farmiId) {
-                    var farmi = pony_data["farmis"][farmiId];
-                    var iPrTyp=0;
-                    var iProd=1;
-                    var iAmount=0;
-                    var iTime = NEVER;
-                    var iPoints=farmi["data"]["points"];
+                    var farmi = pony_data["farmis"][farmiId]; // Hole Infos über aktuellen Reiter
+                    var iPrTyp=0; // Produkttyp
+                    var iProd=0;  // Produkt "0" sind zwar Coins, aber mal sehen
+                    var iAmount=0;// Es werden 0 Einheiten hergestellt
+                    var iPoints=farmi["data"]["points"]; // Punkte für aktuellen Ritt
+                    var iTime = NEVER; // Endzeit des aktuellen Ritts
                     if(farmi["data"]["ready"]){
-                        iTime=Math.min(now-unsafeWindow.Zeit.Verschiebung,zones.getEndtime(zoneNrS));
+                        iTime = Math.min(now - unsafeWindow.Zeit.Verschiebung, zones.getEndtime(zoneNrS));
                     } else{
-                        iTime=now+farmi["data"]["remain"]-unsafeWindow.Zeit.Verschiebung;
+                        iTime = now + farmi["data"]["remain"] - unsafeWindow.Zeit.Verschiebung;
                     }
-                    newDiv=$("pony" + slot).children[1];
-                    // newDiv1=createElement("div",{},newDiv);
-                    // pointsFormat(iPoints,"div",newDiv1);
-                    tempZoneProductionData[1]--;
-                    if (!tempZoneProductionData[0][iPrTyp][iProd]) {
-                        tempZoneProductionData[0][iPrTyp][iProd]=[];
+                    prodData[1]--; // Platz ist nicht frei (Komplette Farm)
+                    if (!prodData[0][iPrTyp][iProd]) {
+                        prodData[0][iPrTyp][iProd]=[]; // prodData[0][0][0] anlegen
                     }
-                    tempZoneProductionData[0][iPrTyp][iProd].push([iAmount,iPoints,iTime,NEVER]);
+                    // Packe Infos für aktuellen Slot in Proddata der ganzen Farm
+                    prodData[0][iPrTyp][iProd].push([iAmount,iPoints,iTime,NEVER]);
                     
-                    tempZoneProductionDataSlot[1]--;
-                    if (!tempZoneProductionDataSlot[0][iPrTyp][iProd]) {
-                        tempZoneProductionDataSlot[0][iPrTyp][iProd]=[];
+                    dataSlot[1]--; // Platz ist nicht frei (Slot)
+                    if (!dataSlot[0][iPrTyp][iProd]) {
+                        dataSlot[0][iPrTyp][iProd]=[];
                     }
-                    tempZoneProductionDataSlot[0][iPrTyp][iProd].push([iAmount,iPoints,iTime,NEVER]);
+                    // Packe Infos für aktuellen Slot in Proddata des aktuellen SLots
+                    dataSlot[0][iPrTyp][iProd].push([iAmount,iPoints,iTime,NEVER]);
                      
                     //auto-cropping
+                    newDiv=$("pony" + slot).children[1];
                     if (farmi["data"]["remain"] < 1 && (top.unsafeData.autoAction==null) && valAutoCrop["farm"] && (newDiv=$("pony"+ slot + "_crop"))) {
                         top.unsafeData.autoAction="berater: pony crop";
                         window.setTimeout(function(div){
@@ -14209,61 +14210,18 @@ return false;
                             top.unsafeData.autoAction=null;
                         },500,newDiv);
                     }
-
-                    zones.setProduction(zoneNrF+"."+slot,tempZoneProductionDataSlot.clone());
                 } else {
-                    console.log("Keine farmiId -> FERTIG");
+                    // Nichts, da keine Infos vorhanden sind
+                    console.log("Keine FarmiId -> Slot ist leer/geerntet");
                 }
+
+                // Setze Production-Info für Slot
+                zones.setProduction(zoneNrF+"."+slot,dataSlot.clone());
             } else {
                 zones.setBlock(zoneNrS, "b");
             }
-            // console.log(zones.getProduction(zoneNrS));
-            // console.log("Block Pony: " + zoneNrS + " -> " + zones.getBlock(zoneNrS));
         }
-        zones.setProduction(zoneNrF,tempZoneProductionData.clone());
-        // zones.setEndtime(zoneNrF, NEVER);
-        // console.log(new Date(1000*zones.getEndtime(zoneNrF)));
-
-
-
-        // console.log(pony_data);
-        // // var anzahlFreigeschaltet = 0;
-        // for (var pId in pony_data["ponys"]) {
-        //     if (pony_data["ponys"].hasOwnProperty(pId)) { 
-        //         var pony = pony_data["ponys"][pId];
-        //         // console.log(pfarmi["data"]);
-        //         if (!pony["block"]) {
-        //             zones.setBlock(zoneNrS,"b");
-        //             // anzahlFreigeschaltet++;
-        //             // console.log("Farmi fertig um " + new Date((now+pfarmi["data"]["remain"])*1000));
-        //         }
-        //     }
-        // }
-        // console.log("Anzahl Ponys: " + anzahlFreigeschaltet);
-
-        // var endtime = NEVER;
-        // for (var fId in pony_data["farmis"]) {
-        //     if (pony_data["farmis"].hasOwnProperty(fId)) { 
-        //         var pfarmi = pony_data["farmis"][fId];
-        //         if (pfarmi["data"]["remain"]) {
-        //             // console.log("Farmi fertig um " + new Date((now+pfarmi["data"]["remain"])*1000));
-        //             var zeit = pfarmi["data"]["start"] + pfarmi["data"]["duration"];
-        //             console.log("Ende um: " + new Date(zeit*1000));
-        //             endtime = Math.min(zeit, endtime);
-        //         }
-        //     }
-        // }
-        // zones.setEndtime(zoneNrF, endtime);
-        // console.log("Ponyzeit: "+new Date(1000*zones.getEndtime(zoneNrF)));
-
-        // console.log(ALL_SLOTS);
-        // for(var i in ALL_SLOTS){
-        //     if(!ALL_SLOTS.hasOwnProperty(i)){ continue; }
-        //     console.log("Block for " + i + ": " + zones.getBlock(i));
-        //     if(!zones.getBlock(i)){
-        //         readyZoneAdded+=zones.checkReady(i);
-        //     }
-        // }
+        zones.setProduction(zoneNrF,prodData.clone());
     }
     unsafeOverwriteFunction("buildOilpressInner",function(position,buildingid,info){
         try{
