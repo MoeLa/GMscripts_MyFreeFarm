@@ -5362,7 +5362,7 @@ function autoFarmPony(runId,step){
             }
         break;}
         case 3: { // feed pony
-            if (unsafeWindow.pony_data["ponys"][handled.slot]["data"]["feed"] < 8) {
+            if (unsafeData.pony_data["ponys"][handled.slot]["data"]["feed"] < 8) {
                 GM_logInfo("autoFarmPony","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Feed Pony" + handled.slot);
                 console.log("Klicke Futterbox -> Dialog geöffnet");
                 listeningEvent="gamePonyFeedDialogOpened";
@@ -5411,9 +5411,9 @@ function autoFarmPony(runId,step){
                 action=function(){
                     var i = 1;
                     console.log("Nehme i=1 an");
-                    for (var fId in unsafeWindow.pony_data["farmis"]) {
-                        var f = unsafeWindow.pony_data["farmis"][fId];
-                        // if (!unsafeWindow.pony_data["farmis"].hasOwnProperty(f)) {
+                    for (var fId in unsafeData.pony_data["farmis"]) {
+                        var f = unsafeData.pony_data["farmis"][fId];
+                        // if (!unsafeData.pony_data["farmis"].hasOwnProperty(f)) {
                         //     continue;
                         // } else
 
