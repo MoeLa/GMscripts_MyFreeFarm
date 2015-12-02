@@ -5308,6 +5308,7 @@ function autoFarmPony(runId,step){
         var action=null,listeningEvent=null;
         switch(step){
         case 1:{ // init
+            console.log(handled);
             console.log("autoFarmPony ("+handled.zoneNrL+"/"+handled.zoneNrS+"/"+handled.slot+"): " + step);
             // TODO check required products earlier (recalcQueue)
             if(unsafeData.zones.getBlock(handled.zoneNrS)){
@@ -5362,12 +5363,15 @@ function autoFarmPony(runId,step){
             }
         break;}
         case 3: { // feed pony
-            if (unsafeData.pony_data["ponys"][handled.slot]["data"]["feed"] < 8) {
+            var div = $("pony" + handled.slot + "_feed");
+            if (!unsafeData.pony_data || !div || div.style.display != "block") {
+                window.setTimeout(autoFarmPony,settings.getPause(),runId,step);
+            } else if (unsafeData.pony_data["ponys"][handled.slot]["data"]["feed"] < 8) {
                 GM_logInfo("autoFarmPony","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Feed Pony" + handled.slot);
                 console.log("Klicke Futterbox -> Dialog geöffnet");
                 listeningEvent="gamePonyFeedDialogOpened";
                 action=function(){
-                    click($("pony" + handled.slot + "_feed"));
+                    click(div);
                     window.setTimeout(autoFarmPony,3*settings.getPause(),runId,step+1);
                 };
             } else {
@@ -5395,11 +5399,12 @@ function autoFarmPony(runId,step){
             // if(!unsafeData.readyZone[handled.zoneNrS]){
             //     console.log("Exit, da Zone nicht in readyZone");
             //         autoFarmPony(runId,5);
-            // }else if((unsafeData.readyZone[handled.zoneNrS][1]!="e")||!unsafeData.readyZone[handled.zoneNrS][2]){
-            //     // wait for response
-            //     console.log("Wait for response");
-            //     window.setTimeout(autoFarmPony,settings.getPause(),runId,step);
-            if (zoneList[handled.zoneNrL][0][0] == PRODSTOP) {
+            // }else 
+            if((unsafeData.readyZone[handled.zoneNrS][1]!="e")||!unsafeData.readyZone[handled.zoneNrS][2]|| !unsafeData.pony_data){
+                // wait for response
+                console.log("Wait for response");
+                window.setTimeout(autoFarmPony,settings.getPause(),runId,step);
+            } else if (zoneList[handled.zoneNrL][0][0] == PRODSTOP) {
                 GM_logInfo("autoFarmPony","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Production stop");
                 autoFarmPony(runId,8); // PRODSTOP => Exit
             } else {
@@ -5470,17 +5475,21 @@ function autoFarmPony(runId,step){
         break;}
         case 8:{ // start other slot or exit
             var zoneNrS,zoneNrL,help,next=false;
-            // for(var slot=1;slot<=3;slot++){
-            //     zoneNrS=handled.zoneNrF+"."+slot;
-            //     if((help=unsafeData.readyZone[zoneNrS])&&help[2]){
-            //         zoneNrL=getZoneListId(zoneNrS);
-            //         if(((help[1]=="r")&&((zoneList[zoneNrL][0][0]!=PRODSTOP)||!settings.get("account","disableCropFields")))||((help[1]=="e")&&(zoneList[zoneNrL][0][0]!=PRODSTOP))){
-            //             next=true;
-            //             handled.set(zoneNrS);
-            //             break;
-            //         }
-            //     }
-            // }
+            for(var slot=1;slot<=3;slot++){
+                zoneNrS=handled.zoneNrF+"."+slot;
+                console.log(zoneNrS);
+                console.log(unsafeData.readyZone[zoneNrS]);
+                if((help=unsafeData.readyZone[zoneNrS])&&help[2]){
+                    zoneNrL=getZoneListId(zoneNrS);
+                    if(((help[1]=="r")&&((zoneList[zoneNrL][0][0]!=PRODSTOP)||!settings.get("account","disableCropFields")))||((help[1]=="e")&&(zoneList[zoneNrL][0][0]!=PRODSTOP))){
+                        next=true;
+                        handled.set(zoneNrS);
+                        console.log("Setze handled manuell");
+                        console.log(handled);
+                        break;
+                    }
+                }
+            }
             if(next){
                 autoFarmPony(runId,1);
             }else{
