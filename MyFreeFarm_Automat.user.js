@@ -671,7 +671,7 @@ function stopCloseWindowTimer(){
         try{ window.clearInterval(closeWindowTimer); }catch(err){}
         closeWindowTimer=null;
         //closeWindowTime=CLOSETIME;
-		closeWindowTime=settings.get("country","valCloseWindowTimer");
+        closeWindowTime=settings.get("country","valCloseWindowTimer");
         if($("divCloseWindowLayer")){ $("divCloseWindowLayer").style.display="none";}
         if($("divCloseWindow")){ $("divCloseWindow").style.display="none";}
         GM_logInfo("stopCloseWindowTimer","","closeWindowTimer="+closeWindowTimer,"End",1);
@@ -5310,7 +5310,6 @@ function autoFarmPony(runId,step){
     try{
     if(!step){ step=1; }
     if(bot.checkRun("autoFarmPony",runId)){
-        // console.log(handled);
         bot.setAction("autoFarmPony ("+step+")");
         var action=null,listeningEvent=null;
         switch(step){
@@ -5342,7 +5341,7 @@ function autoFarmPony(runId,step){
                     GM_logInfo("autoFarmPony","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Pony can be cropped");
                     window.setTimeout(autoFarmPony,settings.getPause(),runId,step+1);
                 }else{ // busy
-                    console.log("autoFarmPony: BEschäftigt Zone => Exit");
+                    console.log("autoFarmPony: Beschäftigt Zone => Exit");
                     GM_logInfo("autoFarmPony","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Pony" + handled.slot + " is busy");
                     window.setTimeout(autoFarmPony,settings.getPause(),runId,8); // => Exit
                 }
@@ -5373,7 +5372,7 @@ function autoFarmPony(runId,step){
             var div = $("pony" + handled.slot + "_feed");
             if (!unsafeData.pony_data || !div || div.style.display != "block") {
                 window.setTimeout(autoFarmPony,settings.getPause(),runId,step);
-            } else if (unsafeData.pony_data["ponys"][handled.slot]["data"]["feed"] < 8) {
+            } else if (unsafeData.pony_data["ponys"][handled.slot]["data"]["feed"] < 8 && unsafeData.prodStock[0][159] > 0) {
                 GM_logInfo("autoFarmPony","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Feed Pony" + handled.slot);
                 console.log("Klicke Futterbox -> Dialog geöffnet");
                 listeningEvent="gamePonyFeedDialogOpened";
@@ -5383,7 +5382,7 @@ function autoFarmPony(runId,step){
                 };
             } else {
                 GM_logInfo("autoFarmPony","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Pony" + handled.slot + " doesn't need to be fed (anymore)");
-                console.log("Voll gefüttert -> Selektiere Farmi");
+                console.log("Voll gefüttert oder kein Ponyfutter mehr -> Selektiere Farmi");
                 autoFarmPony(runId,step+2); // Jump to 'set farmi'
             }
             break;
@@ -5422,22 +5421,23 @@ function autoFarmPony(runId,step){
                 listeningEvent="gamePonyFarmiSelected";
                 action=function(){
                     var i = 1;
-                    console.log("Nehme i=1 an");
                     for (var fId in unsafeData.pony_data["farmis"]) {
                         var f = unsafeData.pony_data["farmis"][fId];
-                        // if (!unsafeData.pony_data["farmis"].hasOwnProperty(f)) {
-                        //     continue;
-                        // } else
-
                         if (f["status"] == 1) {
-                            console.log("Folgender Farmi ist am Reiten");
-                            console.log(f);
                             continue;
                         }
                         console.log("Vergleiche " + f["type"] + " mit " + zoneList[handled.zoneNrL][0][0]);
                         if (f["type"] == zoneList[handled.zoneNrL][0][0]) {
                             // GM_logInfo("autoFarmPony","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Klicke Farmi " + i);
-                            click($("pony_farmi"+i));
+
+                            // Noch genügend Futter?
+                            if (f["type"] <= unsafeData.pony_data["ponys"][handled.slot]["data"]["feed"]) {
+                                click($("pony_farmi"+i));
+                            } else {
+                                zoneList[handled.zoneNrL].unshift(DEFAULT_ZONELIST_ITEM.clone());
+                                updateQueueBox(handled.zoneNrS);
+                                window.setTimeout(autoFarmPony,3*settings.getPause(),runId,8);
+                            }
                             break;
                         } else {
                             // GM_logInfo("autoFarmPony","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Farmi " + i + " war falsch");
@@ -9417,9 +9417,12 @@ try{
             var zoneNrS;
             for(var slot=1;slot<=3;slot++){
                 zoneNrS=zoneNrF+"."+slot;
-                // console.log("Pony " + zoneNrS + ": " + unsafeData.zones.getBlock(zoneNrS));
                 if(!unsafeData.zones.getBlock(zoneNrS)){
-                    drawAutomatIcon(zoneNrS,zoneNrS,$("pony" + slot +"_feed"),"left:2px;top:-50px");
+                    var topV="left:-16px;top:70px;";
+                    if (slot == 1) {
+                        topV="left:34px;top:70px;";
+                    }
+                    drawAutomatIcon(zoneNrS,zoneNrS,$("pony_ponys").children[slot-1],topV);
                 }
             }
         }catch(err){GM_logError("eventListener:gameOpenPony ","","",err);}

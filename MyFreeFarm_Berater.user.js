@@ -14160,7 +14160,7 @@ return false;
 
         var pony_data = unsafeWindow.pony_data;
         unsafeData.pony_data = pony_data;
-        // console.log(pony_data);
+        console.log(unsafeData.pony_data);
 
         var zoneNrS;
         var prodData=[[{}],0,0,true]; // Proddata für komplette Pony-Farm
