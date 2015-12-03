@@ -103,7 +103,7 @@ const CHANGELOG=[["2.0","29.05.2014",[["Migration nach openuserjs.org","Migratio
                 ,["2.6.4","22.11.2015",[["Bugfix: Berater-Funktionen auch für Level <8","Bugfix: Adviser-functionality for Level <8"]]]
                 ,["2.6.5","23.11.2015",[["Kleiderspende: Anpassung für Bot","Clothing Donation: Adjustments for bot"]]]
                 ,["2.7","24.11.2015",[["Anpassung an Spiel-Update 24.11.2015","Fix for game-update 24.11.2015"]]]
-                ,["2.7.1","27.11.2015",[["Bugfix: Defaultwerte Deklarieren","Bugfix: declare default-values"]]]
+                ,["2.7.1","30.11.2015",[["Bugfix: Defaultwerte Deklarieren","Bugfix: declare default-values"]]]
                 ];
 if(!VERSIONfunctionFile){
     alert("Hi, I am the Berater-Script.\nThe function-file is missing.\nPlease install me again.");
@@ -6564,7 +6564,7 @@ function buildInfoPanelOptions(){
 
         newtr=createElement("tr",{},newtable);
         newtd=createElement("td",{"align":"center"},newtr);
-        newinput=createElement("input",{"id":"inputvalNimmBeob","type":"checkbox","class":"link","checked":GM_getValue(COUNTRY+"_"+SERVER+"_valNimmBeob",false)},newtd);
+        newinput=createElement("input",{"id":"inputvalNimmBeob","type":"checkbox","class":"link","checked":GM_getValue(COUNTRY+"_"+SERVER+"_valNimmBeob",true)},newtd);
         newinput.addEventListener("click",function(){ GM_setValue2(COUNTRY+"_"+SERVER+"_valNimmBeob",this.checked,44); },false);
         createElement("td",{},newtr,getText("settings_valUseObservedPrices")[0]);
         createElement("td",{},newtr,getText("settings_valUseObservedPrices")[1]);
