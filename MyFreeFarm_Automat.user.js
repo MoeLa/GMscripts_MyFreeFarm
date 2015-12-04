@@ -5408,6 +5408,7 @@ function autoFarmPony(runId,step){
             // }else 
             if((unsafeData.readyZone[handled.zoneNrS][1]!="e")||!unsafeData.readyZone[handled.zoneNrS][2]|| !unsafeData.pony_data){
                 // wait for response
+                GM_logInfo("autoFarmPony","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Waiting for pony data to be ready");
                 console.log("Wait for response");
                 window.setTimeout(autoFarmPony,settings.getPause(),runId,step);
             } else if (zoneList[handled.zoneNrL][0][0] == PRODSTOP) {
@@ -5436,7 +5437,7 @@ function autoFarmPony(runId,step){
                             } else {
                                 zoneList[handled.zoneNrL].unshift(DEFAULT_ZONELIST_ITEM.clone());
                                 updateQueueBox(handled.zoneNrS);
-                                window.setTimeout(autoFarmPony,3*settings.getPause(),runId,8);
+                                window.setTimeout(autoFarmPony,Math.min(1000, 3*settings.getPause()),runId,8);
                             }
                             break;
                         } else {
@@ -5461,7 +5462,7 @@ function autoFarmPony(runId,step){
                 // console.log("Klicke ");
                 // console.log($("pony" + handled.slot));
                 click($("pony" + handled.slot));
-                window.setTimeout(autoFarmPony,3*settings.getPause(),runId,step+1);
+                window.setTimeout(autoFarmPony,Math.min(1000, 3*settings.getPause()),runId,step+1);
             };
         break;}
         case 7:{ // Confirm set farmi
@@ -5474,7 +5475,7 @@ function autoFarmPony(runId,step){
                     // console.log("Klicke " + $("globalbox_button1"));
                     click(div);
                     setNextQueueItem(handled.zoneNrS);
-                    window.setTimeout(autoFarmPony,settings.getPause(),runId,step+1);
+                    window.setTimeout(autoFarmPony,Math.min(1000, 3*settings.getPause()),runId,step+1);
                 };
             } else {
                 autoFarmPony(runId,step+1); // Exit

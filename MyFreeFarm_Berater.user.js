@@ -2174,8 +2174,8 @@ var zones=new function(){
                             // otherwise we don't do anything until the empty fields are planted
                         }
                     } else if (unsafeWindow.megafield_data) {
-                        console.log("Megatime: " + new Date(1000*zT));
-                        console.log(unsafeWindow.megafield_data);
+                        // console.log("Megatime: " + new Date(1000*zT));
+                        // console.log(unsafeWindow.megafield_data);
                     }
                 }
                 
@@ -9462,7 +9462,24 @@ try{
             result=null;
         }catch(err){GM_logError("foodworldActionResponse","","",err);}
     });
-
+    unsafeOverwriteFunction("entryCityXmasEvent",function(c){
+        try{
+            if(!c) c = 'v';
+            unsafeWindow._entryCityXmasEvent(c);
+        }catch(err){GM_logError("_entryCityXmasEvent","","",err);}
+        try{
+            var children = $("xmasbox_entry_products").getElementsByClassName("xmasbox_entry_item"); // xmasbox_entry_item
+            for (var c in children) {
+                if (!children.hasOwnProperty(c)) { continue; }
+                var pId = children[c].getElementsByClassName("xmasbox_entry_item_img")[0].className.replace("xmasbox_entry_item_img tt", "");
+                var points = children[c].getElementsByClassName("xmasbox_entry_item_points")[0].innerHTML;
+                var ratio = (gut[pId]/points).toFixed(2); //String.format("%1$5s", (gut[pId]/points).toFixed(2));
+                createElement("div", {
+                        "style":"position: absolute; bottom: -15px; left: 8px;border: 2px solid rgb(255, 114, 0); background-color: white;width: 70px;text-align: center;"
+                },children[c], ratio + " kT/P.");
+            }
+        }catch(err){GM_logError("entryCityXmasEvent","","",err);}
+    });
     unsafeOverwriteFunction("openMemoryResponse", function(s){
         /*
          * Contribution/Author: Moe
