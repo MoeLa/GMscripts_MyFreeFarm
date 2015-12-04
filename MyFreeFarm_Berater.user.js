@@ -9463,24 +9463,6 @@ try{
             result=null;
         }catch(err){GM_logError("foodworldActionResponse","","",err);}
     });
-    unsafeOverwriteFunction("entryCityXmasEvent",function(c){
-        try{
-            if(!c) c = 'v';
-            unsafeWindow._entryCityXmasEvent(c);
-        }catch(err){GM_logError("_entryCityXmasEvent","","",err);}
-        try{
-            var children = $("xmasbox_entry_products").getElementsByClassName("xmasbox_entry_item"); // xmasbox_entry_item
-            for (var c in children) {
-                if (!children.hasOwnProperty(c)) { continue; }
-                var pId = children[c].getElementsByClassName("xmasbox_entry_item_img")[0].className.replace("xmasbox_entry_item_img tt", "");
-                var points = children[c].getElementsByClassName("xmasbox_entry_item_points")[0].innerHTML;
-                var ratio = (gut[pId]/points).toFixed(2); //String.format("%1$5s", (gut[pId]/points).toFixed(2));
-                createElement("div", {
-                        "style":"position: absolute; bottom: -15px; left: 8px;border: 2px solid rgb(255, 114, 0); background-color: white;width: 70px;text-align: center;"
-                },children[c], ratio + " kT/P.");
-            }
-        }catch(err){GM_logError("entryCityXmasEvent","","",err);}
-    });
     unsafeOverwriteFunction("openMemoryResponse", function(s){
         /*
          * Contribution/Author: Moe
@@ -9497,8 +9479,8 @@ try{
         } catch(err) {GM_logError("openFoodworldBuildingSelect","","",err); }
     });
 
-	//entryCityXmasEvent by Moe
-	unsafeOverwriteFunction("entryCityXmasEvent",function(c){
+    // EntryCityXmasEvent by Moe
+    unsafeOverwriteFunction("entryCityXmasEvent",function(c){
         try{
             if(!c) c = 'v';
             unsafeWindow._entryCityXmasEvent(c);
@@ -9516,7 +9498,7 @@ try{
             }
         }catch(err){GM_logError("entryCityXmasEvent","","",err);}
     });
-	
+        
     unsafeOverwriteFunction("contractsDialog", function(b, productId){
         /*
          * Is called, when User clicks a product in "New Contract" dialog to add that product to the cart.
@@ -13809,18 +13791,18 @@ return false;
                     return false;
                 }
             break;}
-			case "fuelstation_entry": {
-					//Ausgelöst durch Button "Einwerfen"
-					//function(mode,farm,position,s,d,b,a)
-	
-					//mode: 'fuelstation_entry', s: Slot, d:Produkt, b: undefined, a:undefined
-					//GM_log("farmAction: mode:"+ mode + " s:"+s+" d:"+d+" b:"+b+" a:"+a);
-				}
-			break;
+                        case "fuelstation_entry": {
+                                        //Ausgelöst durch Button "Einwerfen"
+                                        //function(mode,farm,position,s,d,b,a)
+        
+                                        //mode: 'fuelstation_entry', s: Slot, d:Produkt, b: undefined, a:undefined
+                                        //GM_log("farmAction: mode:"+ mode + " s:"+s+" d:"+d+" b:"+b+" a:"+a);
+                                }
+                        break;
             }
         }catch(err){GM_logError("farmAction","mode="+mode,"","(pre) "+err);}
         try{
-			//GM_log("farmAction: mode:"+ mode + " s:"+s+" d:"+d+" b:"+b+" a:"+a);
+                        //GM_log("farmAction: mode:"+ mode + " s:"+s+" d:"+d+" b:"+b+" a:"+a);
             unsafeWindow._farmAction(mode,farm,position,s,d,b,a);
         }catch(err){GM_logError("_farmAction","mode="+mode,"",err);}
     });
