@@ -1,11 +1,11 @@
-﻿// ==UserScript==
+// ==UserScript==
 // @name           MyFreeFarm Berater
 // @namespace      https://github.com/BastianKanaan/GMscripts_MyFreeFarm
 // @author         BastianKanaan
 // @description    Extends MyFreeFarm
 // @icon           data:image/png;base64,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
 // @date           04.12.2015
-// @version        2.7.2
+// @version        2.7.3
 // @license        GPL version 3 or any later version; http://www.gnu.org/copyleft/gpl.html
 // @include        /^http:\/\/(|www\.|s\d+\.)au\.myfreefarm\.com\/.*$/
 // @include        /^http:\/\/(|www\.|s\d+\.)veselaferma\.com\/.*$/
@@ -104,7 +104,8 @@ const CHANGELOG=[["2.0","29.05.2014",[["Migration nach openuserjs.org","Migratio
                 ,["2.6.5","23.11.2015",[["Kleiderspende: Anpassung für Bot","Clothing Donation: Adjustments for bot"]]]
                 ,["2.7","24.11.2015",[["Anpassung an Spiel-Update 24.11.2015","Fix for game-update 24.11.2015"]]]
                 ,["2.7.1","30.11.2015",[["Bugfix: Defaultwerte Deklarieren","Bugfix: declare default-values"]]]
-                ,["2.7.2","04.12.2015",[["Addon:: Hilfestellung fürs Einwerfen beim Knabbermarathon","Addon:: help for city christmas game"]]]
+                ,["2.7.2","04.12.2015",[["Addon: Hilfestellung für Weihnachts-Knabbermarathon","Addon: Assistance for X-Mas ebvent"]]]
+                ,["2.7.3","04.12.2015",[["Neue Berater-Option: Questnummer Baumerei 2 manuell übernehmen","New adviser option: Set questnumber for questserie forestry 2"]]]
                 ];
 if(!VERSIONfunctionFile){
     alert("Hi, I am the Berater-Script.\nThe function-file is missing.\nPlease install me again.");
@@ -278,18 +279,18 @@ unsafeData.BUILDING2PRODUCT=BUILDING2PRODUCT.clone();
             Farmersmarket    4
             Fuelstation      6
         */
-const BUILDINGTYPE={"0":0,"1":1,"2":2,"3":2,"4":2,"5":2,"6":0,"7":3,"8":3,"9":3,"10":3,"11":2,"12":2,"13":3,"14":3,"15":2,"16":3,"17":0,"18":0,"19":0,"20":0,"fl1":1,"fl2":4,"fl5":4,"fw1":4,"fw2":4,"fw3":4}
+//const BUILDINGTYPE={"0":0,"1":1,"2":2,"3":2,"4":2,"5":2,"6":0,"7":3,"8":3,"9":3,"10":3,"11":2,"12":2,"13":3,"14":3,"15":2,"16":3,"17":0,"18":0,"19":0,"20":0,"fl1":1,"fl2":4,"fl5":4,"fw1":4,"fw2":4,"fw3":4}
 // for Fuelstation
-//const BUILDINGTYPE={"0":0,"1":1,"2":2,"3":2,"4":2,"5":2,"6":0,"7":3,"8":3,"9":3,"10":3,"11":2,"12":2,"13":3,"14":3,"15":2,"16":3,"17":0,"18":0,"19":0,"20":6,"fl1":1,"fl2":4,"fl5":4,"fw1":4,"fw2":4,"fw3":4}
+const BUILDINGTYPE={"0":0,"1":1,"2":2,"3":2,"4":2,"5":2,"6":0,"7":3,"8":3,"9":3,"10":3,"11":2,"12":2,"13":3,"14":3,"15":2,"16":3,"17":0,"18":0,"19":0,"20":6,"fl1":1,"fl2":4,"fl5":4,"fw1":4,"fw2":4,"fw3":4}
 
 unsafeData.BUILDINGTYPE=BUILDINGTYPE.clone();
 // task_new_building
 const BUILDING_SIZE={"1":120,"forest":25,"fl1":36,"megafield":[11,9]};
 unsafeData.BUILDING_SIZE=BUILDING_SIZE.clone();
 // task_new_building
-const BUILDING_SLOTS={"13":3,"14":3,"16":3,"windmill":2,"sawmill":3,"carpentry":3,"fw1":3,"fw2":3,"fw3":3,"fl0":17,"fl2":3,"megafield":99};
+//const BUILDING_SLOTS={"13":3,"14":3,"16":3,"windmill":2,"sawmill":3,"carpentry":3,"fw1":3,"fw2":3,"fw3":3,"fl0":17,"fl2":3,"megafield":99};
 //for Fuelstation
-//const BUILDING_SLOTS={"13":3,"14":3,"16":3,"20":4,"windmill":2,"sawmill":3,"carpentry":3,"fw1":3,"fw2":3,"fw3":3,"fl0":17,"fl2":3,"megafield":99};
+const BUILDING_SLOTS={"13":3,"14":3,"16":3,"20":4,"windmill":2,"sawmill":3,"carpentry":3,"fw1":3,"fw2":3,"fw3":3,"fl0":17,"fl2":3,"megafield":99};
 unsafeData.BUILDING_SLOTS=BUILDING_SLOTS.clone();
 // Needed input of a zone
 // BUILDING_INPUT[buildTyp]{output}[alternatives]=[[prod1,amount1||reducing time1],...]
@@ -616,7 +617,6 @@ var valMessagesSystemMarkRead;
 var megafieldVehicle, megafieldJob, logMegafieldJob, megafieldSmartTimer;
 top.unsafeData.autoAction=null;
 
-// /*
 // animierte Hintergründe ausblenden code by Harry 24.11.2015
 if (GM_getValue("valAnimateStartscreen",false)){
     var divdel1 = document.getElementById("clouds1");
@@ -633,7 +633,6 @@ if (GM_getValue("valAnimateStartscreen",false)){
     }
 }
 // animierte Hintergründe ausblenden
-// */
 
 //***********************************************************************************************************
 // developer functions
@@ -941,7 +940,7 @@ function updateProductDataFarm(){
         GM_log(implode(new_prodBlock));
         */
 
-        //Linus-Tux 20151015 
+        //Linus-Tux 20151015
         var help={"v":[],"e":[],"o":[],"fw1":[],"fw2":[],"fw3":[],"fw4":[],"z":[],"fl":[],"fla":[],"hr":[],"md":[],"ex":[]};
         // for(var v=1;v<unsafeWindow.produkt_name.length;v++){
         //*task_fix_growtime*/ var newProductGrowtime={};
@@ -950,10 +949,10 @@ function updateProductDataFarm(){
         if(unsafeWindow.vet_data&&unsafeWindow.vet_data.info&&unsafeWindow.vet_data.drugs){
             vet_data=unsafeWindow.vet_data;
         }
-        
+
         //Linus--Tux 20151028 Rack Farm 5
         if(!prodStock[5]||!(prodStock[5] instanceof Array)){ prodStock[5]=[]; }
-        
+
         var prodStockTemp=new Array();    //Stock Farm 1
         for(var i in unsafeWindow.rackobj) {
             for(var j in unsafeWindow.rackobj[i]) {
@@ -984,7 +983,7 @@ function updateProductDataFarm(){
             //Linus--Tux 20151020
             var c=(prodStockTemp[v])?prodStockTemp[v]:0;
             prodStock[0][v]=(c?parseInt(c,10):0);
-            
+
             prodYield[0][v]=(unsafeWindow.produkt_ernte[v]?parseInt(unsafeWindow.produkt_ernte[v],10):0);
             prodTyp[0][v]=unsafeWindow.produkt_category[v];
             prodRequire[0][v]=PRODUCT_REQUIRE[0][v];
@@ -2139,7 +2138,7 @@ var zones=new function(){
                             // Iterate over needed products for current job
                             for (var i = 0; i < unsafeWindow.megafield_data.job.products.length; i++) {
                                 var product = unsafeWindow.megafield_data.job.products[i];
-                                
+
                                 // If the product can be planted...
                                 if (product.duration) { // Only check plants: Cheese/Milk/Honey/... don't have a duration
                                     // ... we add the total needed amount minus the amount we have minus the amount currently growing
@@ -2165,7 +2164,7 @@ var zones=new function(){
                         }
                     }
                 }
-                
+
                 if (zT==NEVER){ // empty
                     if(unsafeData.readyZone[zoneNrS]&&(unsafeData.readyZone[zoneNrS][1]=="e")){
                         if(!unsafeData.readyZone[zoneNrS][2]){ unsafeData.readyZone[zoneNrS][2]=true; }
@@ -6737,9 +6736,9 @@ function buildInfoPanelOptions(){
         createElement("td",{},newtr,getText("settings_cacheReset")[1]);
 */
 
-        /*    
+        /*
          *    Option added by georgvr
-         *    Option deletes all zones-related settings.  
+         *    Option deletes all zones-related settings.
          *    Option is needed in case that buildings have been teared down and new building isn't recognized properly
          */
         newtr=createElement("tr",{},newtable);
@@ -6755,7 +6754,7 @@ function buildInfoPanelOptions(){
         },false);
         createElement("td",{},newtr,getText("settings_zoneReset")[1]);
 
-        /*    
+        /*
          *    Option added by georgvr & Linus--Tux
          *    if all main-questlines are achieved the in-game variable "quest_status" has no properties and values can't be copied by the bot.
          *    This option sets the quest-number to the max-quest-number of a line plus 1 and therefore releases the products which are related to quest-achievement.
@@ -6765,8 +6764,8 @@ function buildInfoPanelOptions(){
         newinput=createElement("button",{"type":"button","class":"link"},newtd,getText("settings_setQuestMain")[0]);
         newinput.addEventListener("click",function(){
             alert2(getText("settings_setQuestMain")[1],getText("yes"),getText("no"),function(){
-                if (unsafeWindow.quests_status.hasOwnProperty("main")) { 
-                    if (!unsafeWindow.quests_status["main"].hasOwnProperty("1")){ 
+                if (unsafeWindow.quests_status.hasOwnProperty("main")) {
+                    if (!unsafeWindow.quests_status["main"].hasOwnProperty("1")){
                         questData["main"][1] = INIT_questData["main"][1].clone();
                         questData["main"][1]["nr"] = QUESTS["main"][1].length;
                         questData["main"][1]["given"] = new Object();
@@ -6774,7 +6773,7 @@ function buildInfoPanelOptions(){
                         GM_setValueCache(COUNTRY+"_"+SERVER+"_"+USERNAME+"_questData",implode(questData,"handleQuestData/questData"));
                         unsafeData.questData=questData.clone();
                     }
-                    if (!unsafeWindow.quests_status["main"].hasOwnProperty("2")) { 
+                    if (!unsafeWindow.quests_status["main"].hasOwnProperty("2")) {
                         questData["main"][2] = INIT_questData["main"][2].clone();
                         questData["main"][2]["nr"] = QUESTS["main"][2].length;
                         questData["main"][2]["given"] = new Object();
@@ -6782,7 +6781,7 @@ function buildInfoPanelOptions(){
                         GM_setValueCache(COUNTRY+"_"+SERVER+"_"+USERNAME+"_questData",implode(questData,"handleQuestData/questData"));
                         unsafeData.questData=questData.clone();
                     }
-                    if (!unsafeWindow.quests_status["main"].hasOwnProperty("3")){ 
+                    if (!unsafeWindow.quests_status["main"].hasOwnProperty("3")){
                         questData["main"][3] = INIT_questData["main"][3].clone();
                         questData["main"][3]["nr"] = QUESTS["main"][3].length;
                         questData["main"][3]["given"] = new Object();
@@ -6794,12 +6793,12 @@ function buildInfoPanelOptions(){
             });
         },false);
         createElement("td",{},newtr,getText("settings_setQuestMain")[1]);
-    
+
         /*
          *    Option added by georgvr
-         *    Option sets the questnumber of mainseries 3 to the mff-questnumber. 
+         *    Option sets the questnumber of mainseries 3 to the mff-questnumber.
          *    Option is needed in case that the quest has been solved by an other device and cooldown-time is active
-         *    - Button is only executable if questseries 3 exists (linked to presence of Farm 5), 
+         *    - Button is only executable if questseries 3 exists (linked to presence of Farm 5),
          *      and Questseries 3 is not accessible because cooldown-time is active (sandglass is visible)
          */
         newtr=createElement("tr",{},newtable);
@@ -6826,6 +6825,36 @@ function buildInfoPanelOptions(){
             });
         },false);
         createElement("td",{},newtr,(getText("settings_setQuestMain3")[1]));
+        help_q=null;
+
+        /*
+         *    Option added by georgvr
+         *    Option sets the questnumber of Forestseries 2 to the mff-questnumber.
+         *    Option is needed in case that the quest has been solved by an other device and cooldown-time is active
+         *    - Button is only executable if Forestseries 2 exists and ist nor accessible because cooldown-time is active (sandglass is visible)
+         */
+        newtr=createElement("tr",{},newtable);
+        newtd=createElement("td",{"colspan":"2","align":"center"},newtr);
+        newinput=createElement("button",{"type":"button","class":"link"},newtd,getText("settings_setQuestForest2")[0]);
+        if(USERLEVEL<20 || !unsafeWindow.quests_status["forestry"].hasOwnProperty("2") || isNaN(parseInt(unsafeWindow.quests_status["forestry"][2]["remain"],10))){newinput.disabled=true;}
+        newinput.addEventListener("click",function(){
+            alert2(getText("settings_setQuestForest2")[1],getText("yes"),getText("no"),function(){
+                GM_log(implode(unsafeWindow.quests_status));
+                if (unsafeWindow.quests_status["forestry"].hasOwnProperty("2")){
+                    questData["forestry"][2] = INIT_questData["forestry"][2].clone();
+                    questData["forestry"][2]["nr"] = 1+parseInt(unsafeWindow.quests_status["forestry"][2]["questid"],10);
+                    questData["forestry"][2]["time"] = (parseInt(unsafeWindow.Zeit.Server,10) + parseInt(unsafeWindow.quests_status["forestry"][2]["remain"],10));
+                    questData["forestry"][2]["given"] = new Object();
+                    questData["forestry"][2]["data"] = QUESTS["forestry"][2][(questData["forestry"][2]["nr"])];
+                    for (var v=0; v<(QUESTS["forestry"][2][(questData["forestry"][2]["nr"])].length-1); v++){
+                        questData["forestry"][2]["data"][0][v][3]=true;
+                    }
+                    GM_setValueCache(COUNTRY+"_"+SERVER+"_"+USERNAME+"_questData",implode(questData,"handleQuestData/questData"));
+                    unsafeData.questData=questData.clone();
+                }
+            });
+        },false);
+        createElement("td",{},newtr,(getText("settings_setQuestForest2")[1]));
         help_q=null;
 
 /*
@@ -8034,7 +8063,7 @@ function quicklinks(){
                             newdiv1=createElement("div",{"prodId":v,"style":"position:relative;top:-48px;width:24px;height:24px;background-color:blue;border-radius:8px;opacity:0;"},newdiv);
                         }else{
                             newdiv1=createElement("div",{"prodId":v,"style":"position:relative;top:-24px;width:24px;height:24px;background-color:blue;border-radius:8px;opacity:0;"},newdiv);
-                        }                            
+                        }
                         newdiv1.addEventListener("click",function(event){
                             event.stopPropagation ? event.stopPropagation() : (event.cancelBubble=true); // stop bubbling
                             showMarket(this.getAttribute("prodId"));
@@ -8902,7 +8931,7 @@ try{
     // $("questbarcontrol").parentNode;
     // removeElement(newdiv1.firstElementChild);
     newdiv=createElement("td",{"id":"divRightBorder","style":"padding:0px 100px 0px 20px;"},newdiv1);
-    
+
     err_trace="Container - divMiddleBorder";
     /*
     if(container=$("gamearea_spacer")){
@@ -9448,9 +9477,9 @@ try{
 
     unsafeOverwriteFunction("openMemoryResponse", function(s){
         /*
-         * Contribution/Author: Moe
+         * Contribution/Author of function "openMemoryResponse": Moe
          */
-    try{
+        try{
             unsafeWindow._openMemoryResponse(s);
         } catch(err) { GM_logError("_openMemoryResponse","","",err); }
         try{
@@ -9462,8 +9491,10 @@ try{
         } catch(err) {GM_logError("openFoodworldBuildingSelect","","",err); }
     });
 
-	//entryCityXmasEvent by Moe
-	unsafeOverwriteFunction("entryCityXmasEvent",function(c){
+    unsafeOverwriteFunction("entryCityXmasEvent",function(c){
+        /*
+         * Contribution/Author of function "entryCityXmasEvent": Moe
+         */
         try{
             if(!c) c = 'v';
             unsafeWindow._entryCityXmasEvent(c);
@@ -9481,7 +9512,7 @@ try{
             }
         }catch(err){GM_logError("entryCityXmasEvent","","",err);}
     });
-	
+
     unsafeOverwriteFunction("contractsDialog", function(b, productId){
         /*
          * Is called, when User clicks a product in "New Contract" dialog to add that product to the cart.
@@ -9499,12 +9530,12 @@ try{
 
             // Draw radio buttons saved-value/market-value
             var parent = $("contracts_button_add_cart").parentNode;
-            
+
             var div = createElement("div", {
                 "style":"margin-bottom: 5px; text-align: left; padding-left: 50px;"
             }, false, false);
             parent.insertBefore(div, $("contracts_button_add_cart"));
-            
+
             var radioPriceSaved = createElement("input", {
                 "id": "contractPriceSaved",
                 "type":"radio",
@@ -9599,7 +9630,7 @@ try{
             var cartDiv = $("contracts_new_cart");
             var cartDivNextSibling = cartDiv.nextElementSibling;
             cartDiv.parentNode.removeChild(cartDiv);
-            
+
             var cartForm = createElement("form", {
                 "id": "contracts_new_cart",
                 "autocomplete": "on"
@@ -9616,7 +9647,7 @@ try{
             cartDivNextSibling.parentNode.insertBefore(cartForm, cartDivNextSibling);
         } catch(err) {GM_logError("contractsNew","","",err); }
     });
-    
+
     unsafeOverwriteFunction("openFoodworldBuildingSelect",function(position,slot){
         try{
             unsafeWindow._openFoodworldBuildingSelect(position,slot);
@@ -10912,24 +10943,24 @@ try{
             var msgText=null;
             try{
                 switch(questType){
-                case "main":{ 
-                    msgText = getText("informationIsMissing")+" "+getText("pleaseOpenX").replace(/%1%/,getText("quest"+questType+campaign)); 
+                case "main":{
+                    msgText = getText("informationIsMissing")+" "+getText("pleaseOpenX").replace(/%1%/,getText("quest"+questType+campaign));
                 break;}
-                case "forestry":{ 
-                    msgText = (getText("informationIsMissing")+" "+getText("pleaseOpenX").replace(/%1%/,getText("lodge"))); 
+                case "forestry":{
+                    msgText = (getText("informationIsMissing")+" "+getText("pleaseOpenX").replace(/%1%/,getText("lodge")));
                 break;}
-                case "foodworld":{ 
-                    msgText = (getText("informationIsMissing")+" "+getText("pleaseOpenX").replace(/%1%/,getText("foodworld"))); 
+                case "foodworld":{
+                    msgText = (getText("informationIsMissing")+" "+getText("pleaseOpenX").replace(/%1%/,getText("foodworld")));
                 break;}
                 }
                 if(msgText){
                     GM_logWarning("questLineMouseOver","","err="+err,msgText);
-                    return msgText; 
+                    return msgText;
                 }else{
                     throw(err);
                 }
-            }catch(err){ 
-                GM_logError("questLineMouseOver","","",err); 
+            }catch(err){
+                GM_logError("questLineMouseOver","","",err);
                 return null;
             }
         }
@@ -12216,7 +12247,7 @@ return false;
             }
         }catch(err){ GM_logError("marketAction","","",err); }
     });
-    
+
     // Revised by Moe
     unsafeOverwriteFunction("marketActionResponse",function(request,action,id,open){
         try{
@@ -12251,7 +12282,7 @@ return false;
                     // No => Add the missing ones to ownOffersMap. We take them from the old ownMarketOffers-Array. It's not 100% correct, but a very good guess!
                     for (var v = 0; v < ownMarketOffers.length; v++) {
                         row = ownMarketOffers[v]; // An "old" offer
-                        
+
                         // Check, if we know its product_id and if it isn't already in ownOffersMap. Check for product_id is neccessary because of migration :-)
                         if (row[3] && !ownOffersMap[row[3]]) {
                             ownOffersMap[row[3]] = {id: row[3], prod: row[0], preis: row[1], menge: row[2], typ: row[4]};
@@ -12268,7 +12299,7 @@ return false;
                         ownMarketOffers.push([o["prod"], o["preis"], o["menge"], o["id"], o["typ"]]);
                     }
                 }
-                
+
                 // Sort ownMarketOffers-data
                 var TYP2NUMBER = {"c":0,"v":1,"e":2,"o":3,"fw1":4,"fw2":5,"fw3":6,"fw4":7,"z":8, "fl": 9, "fla": 10};
                 ownMarketOffers.sort(function(a, b) {
@@ -12299,7 +12330,7 @@ return false;
                                 return a[1]==b[1] ? a[2]-b[2] : a[1]-b[1];
                             });
                             marketOffersArr[v]=marketOffersArr[v].slice(0,18); // Take cheapest 18 offers
-                            
+
                             menge_sum = 0; // Total amount of product v offered at market (within the cheapest 18 offers)
                             // Iterate over those (at most) 18 offers of product v
                             for(var w = 0; w < marketOffersArr[v].length; w++){
@@ -12626,7 +12657,7 @@ return false;
     newdiv=createElement("div",{"style":"display:none;"},$("lager_info"));//position:absolute;top:50px;left:58px;display:none;
     createElement("img",{"src":GFX+"adtime.gif","style":"float:left;width:14px;height:14px;margin-left:5px;"},newdiv);
     createElement("div",{"id":"lager_zeit_ziel","class":"tnormal","style":"float:left;margin-left:5px;"},newdiv);
-    //Linus--Tux: Icon "contract to yourself" fade out  
+    //Linus--Tux: Icon "contract to yourself" fade out
     newdiv=createElement("div",{"id":"sendStockingContract","class":"link playerContract","style":"position:absolute;top:155px;left:10px;display:none;"},$("lager").firstElementChild);
     createElement("div",{},newdiv);
     newdiv.addEventListener("mouseover",function(event){
@@ -12755,7 +12786,7 @@ return false;
         //Linus--Tux 20151020
         var c=(prodStockTemp[v])?prodStockTemp[v]:0;
         prodStock[0][v]=(c?parseInt(c,10):0);
-                
+
         /*if(unsafeWindow.farm==5){continue; } //Linus--Tux 20151028
         if (!unsafeWindow.rackElement[v]){ prodStock[0][v]=0; } // not available
         // else if ("undefined" === typeof(unsafeWindow.rackElement[v].id)){ prodStock[0][v]=0; } // empty elements
@@ -13088,7 +13119,7 @@ return false;
                 }else{
                     GM_logWarning("messagesSystem","","messages_data["+i+"]:\n"+print_r(unsafeWindow.messages_data[i],"",true,"\n"),"Could not parse content of a market sale message.");
                 }
-            }else if (getText("msgSubjectContractsale")==currMsg.subject){ 
+            }else if (getText("msgSubjectContractsale")==currMsg.subject){
                 // Contract sale
                 if (help2=regMsgContentContractsale.exec(help)){
                     // help2[1] = Sender
@@ -13328,7 +13359,7 @@ return false;
                                         }
                                     break;}
                                     //for fuelstation
-                                    /*
+
                                     case 6:{//const FUELSTATION_INPUT={"1":[[17,0],[31,0],[33,0],[113,0]]};
                                         GM_log("Fuelstation");
                                         help="";
@@ -13340,7 +13371,7 @@ return false;
                                                 var iAmount=data.data.constants.slot_level[data.data.data.slots[slot].level].output;
                                                 var iPoints=iAmount*prodPoints[0][product];
                                                 var iTime=data.data.constants.slot_level[data.data.data.slots[slot].level].duration;
-                                                
+
                                                 tr=createElement("tr",{},table);
                                                 td=createElement("td",{"style":help+"padding-right:10px;"},tr);
                                                 createElement("div",{"style":"line-height:16px;white-space:nowrap;"},td,"Slot"+slot);
@@ -13349,13 +13380,13 @@ return false;
                                                 createElement("span",{},div,numberFormat(iAmount)+" "+prodName[0][product]);
                                                 pointsFormat(iPoints,"span",td);
                                                 createElement("span",{"style":"line-height:16px;white-space:nowrap;"},td,"  "+getTimeStr(iTime));
-        
+
                                             }
                                             help="border-top:1px solid black;"
                                         }
                                         break;
-                                        }*/
-                                    
+                                        }
+
                                     }
                                     table=null;tr=null;td=null;div=null;
                                 }
@@ -13773,18 +13804,18 @@ return false;
                     return false;
                 }
             break;}
-			case "fuelstation_entry": {
-					//Ausgelöst durch Button "Einwerfen"
-					//function(mode,farm,position,s,d,b,a)
-	
-					//mode: 'fuelstation_entry', s: Slot, d:Produkt, b: undefined, a:undefined
-					//GM_log("farmAction: mode:"+ mode + " s:"+s+" d:"+d+" b:"+b+" a:"+a);
-				}
-			break;
+            case "fuelstation_entry": {
+                    //Ausgelöst durch Button "Einwerfen"
+                    //function(mode,farm,position,s,d,b,a)
+
+                    //mode: 'fuelstation_entry', s: Slot, d:Produkt, b: undefined, a:undefined
+                    //GM_log("farmAction: mode:"+ mode + " s:"+s+" d:"+d+" b:"+b+" a:"+a);
+                }
+            break;
             }
         }catch(err){GM_logError("farmAction","mode="+mode,"","(pre) "+err);}
         try{
-			//GM_log("farmAction: mode:"+ mode + " s:"+s+" d:"+d+" b:"+b+" a:"+a);
+            //GM_log("farmAction: mode:"+ mode + " s:"+s+" d:"+d+" b:"+b+" a:"+a);
             unsafeWindow._farmAction(mode,farm,position,s,d,b,a);
         }catch(err){GM_logError("_farmAction","mode="+mode,"",err);}
     });
@@ -13830,7 +13861,7 @@ return false;
                     var building2=(6*parseInt(set[2],10))+parseInt(set[3],10);
                     zones.swap(building1,building2);
                     unsafeData.reallocateBuildingSet=[building1,building2];
-                    raiseEvent("gameReallocateBuilding");                    
+                    raiseEvent("gameReallocateBuilding");
                 break;}
                 case "sellfarmi":{
                     calcFarmiCost();
@@ -14304,7 +14335,7 @@ return false;
     });
 
     //Fuelstation
-    
+
     //Div id fuelstation_product_select_inner
     //n: product_select
     //z: Zonenummer
@@ -14320,18 +14351,17 @@ return false;
             raiseEvent("gameFactoryFuelstationDialogStarted");
         }catch(err){GM_logError("dialogFuelstation","","",err);}
     });
-    
-    
+
+
     //buildFuelstation(a)
     //a: Zone-Nummer
    unsafeOverwriteFunction("buildFuelstation",function(a){
         try{
             unsafeWindow._buildFuelstation(a);
         }catch(err){GM_logError("_buildFuelstation","","",err);}
-        try{ 
+        try{
             GM_log("buildFuelstation "+"a"+a);
             //alert("1");
-            /*
             var zoneNr=a;
             var zoneNrF=zoneNr+6*gameLocation.get()[1];
             var zoneNrS;
@@ -14391,12 +14421,12 @@ return false;
                 }
             }
             zones.setProduction(zoneNrF,tempZoneProductionData.clone());
-            var tempZoneProductionData=null;newDiv=null;newDiv1=null;*/
-            raiseEvent("buildFuelstation");    
+            var tempZoneProductionData=null;newDiv=null;newDiv1=null;
+            raiseEvent("buildFuelstation");
         }catch(err){GM_logError("buildFuelstation","","",err);}
     });
-    
-    
+
+
     //calcPointsFuelstation
     //h:
     //m:
@@ -14410,7 +14440,7 @@ return false;
             raiseEvent("calcPointsFuelstation");
         }catch(err){GM_logError("calcPointsFuelstation","","",err);}
     });
-    
+
     //fuelstationStats()
     /*
     unsafeOverwriteFunction("fuelstationStats",function(){
@@ -14440,7 +14470,7 @@ return false;
     //setFuelstationHelp(a)
     //fuelstationCheckLevelAdd(a, d)
     //updateFuelstationLevel(e, n)
-    
+
     unsafeOverwriteFunction("innerInfosResponse",function(zoneNr){
     // oil, knitting, factory, pony, megafield, fuelstation
         try{
@@ -17616,7 +17646,7 @@ return;
                 }
                 logClothingDonation.unshift(latestLog);
                 needSave = true;
-            } else if (latestLog["createdate"] == parseInt(data.createdate, 10) && 
+            } else if (latestLog["createdate"] == parseInt(data.createdate, 10) &&
                         latestLog["gambleInfo"][0]["gambledate"] < parseInt(data.gambledate, 10)) {
                 // Same (donation) data, but new gamble info => insert only gamble info
                 latestLog["gambleInfo"].unshift({gambledate: parseInt(data.gambledate, 10), out: data.data.out, gain: goodsValue[1] - goodsValue[0]});
@@ -17652,7 +17682,7 @@ return;
 
         // On load, check, if we need to show the icon
         showGoToClothingDonation();
-        
+
         // Donkey Waltraud
         err_trace="Donkey Waltraud";
         // logDonkey[]=[day,points,[received gifts]]
@@ -19243,7 +19273,7 @@ try{
         .rackcat60md:hover{background-position:-26px -39px;}\
         .rackcat60md_active{background-position:-26px -78px;};"
     );
-    
+
     // temporary hack
     // GM_addStyle(
         // "#farm_speedlinks{width:600px;height:40px; top:-20px;background:none;}\
@@ -20231,8 +20261,9 @@ try{
         text["de"]["settings_cacheReset"]=["Cache reset","Die History und alle Informationen über die Zonen werden gelöscht ..."];
         text["de"]["settings_zoneReset"]=["Zones reset","Alle Informationen über deine Zonen werden gelöscht ..."];
         text["de"]["settings_setQuestMain"]=["Korrigiere Farm-Questreihen ","Abgeschlossene Farm-Questreihen werden entsprechend übernommen und abgespeichert."];
-        text["de"]["settings_setQuestMain3"]=["3. Farm-Questreihe nachführen","Die 3. Farm-Questreihe wird nachgeführt. Es werden die mff-Werte übernommen."];
+        text["de"]["settings_setQuestMain3"]=["3. Farm-Questreihe","Die Questnummer wird von mff übernommen und die dazugehörenden Werte der 3. Farm-Questreihe gesetzt."];
         text["de"]["settings_setQuestMain3_1"]=["Ausführen","Die Questnummer der 3. Farm-Questreihe wird auf den eingegebenen Wert gesetzt. Bitte vorsichtig verwenden ..."];
+        text["de"]["settings_setQuestForest2"]=["2. Baumerei-Questreihe","Die Questnummer wird von mff übernommen und die dazugehörenden Werte der 2. Baumerei-Questreihe gesetzt."];
         text["de"]["settings_megafieldSmartTimer"]=["Beachte aktive Tour", "Soll beim Starten einer Tour der Güterhof-Timer auf das Ende der Tour gesetzt werden?"];
         text["de"]["settings_clothingDonation"]=["Kleiderspende", "Ein blinkender Icon zeigt an, wenn bei der Kleiderspende gespendet oder gewürfelt werden kann."];
         // help
@@ -20269,7 +20300,7 @@ try{
         text["en"]["msgSubjectPresent"]="A present for you";
         text["en"]["msgSubjectQuest"]="^.+ completed$";
         text["en"]["msgSubjectWeed1"]="Oh no!";
-        text["en"]["msgSubjectWeed2"]="Au Weia!";        
+        text["en"]["msgSubjectWeed2"]="Au Weia!";
         text["en"]["above"]="above";
         text["en"]["absolute"]="Amount required";
         text["en"]["accountActive"]="Account active";
@@ -20631,6 +20662,7 @@ try{
         text["en"]["settings_setQuestMain"]=["Questseries","Main questseries are declared terminated ..."];
         text["en"]["settings_setQuestMain3"]=["Overwrite Questseries 3","The questnumber of main questseries 3 is set to the mff-questnumber."];
         text["en"]["settings_setQuestMain3_1"]=["Execute","The questnumber of main questseries 3 is set to the chosen number. Please use it carefully ..."];
+        text["en"]["settings_setQuestForest2"]=["Overwrite quest Forestry 2","The questnumber of forestry series 2 is set to the mff-questnumber."];
         text["en"]["settings_megafieldSmartTimer"]=["Integrate active tour", "Megafield-Timer is set to end of the tour after a tour is started."];
         text["en"]["settings_clothingDonation"]=["Clothing Donation", "A blinking icon indicates, when you can donate or gamble."];
         //help
@@ -20699,7 +20731,7 @@ try{
         allEvents.push("gameFarmiResponse");                // a farmi is been rejected or accepted.
 
         allEvents.push("buildFuelstation");                 //Fuelstation
-        allEvents.push("gameFactoryFuelstationDialogStarted");  
+        allEvents.push("gameFactoryFuelstationDialogStarted");
 
         allEvents.push("gameMegafieldDialogStarted");       // the megafield view has been moved
         allEvents.push("gameMegafieldMoved");               // a megafield vehicle has been bought
