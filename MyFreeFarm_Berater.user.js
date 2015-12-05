@@ -104,13 +104,10 @@ const CHANGELOG=[["2.0","29.05.2014",[["Migration nach openuserjs.org","Migratio
                 ,["2.6.5","23.11.2015",[["Kleiderspende: Anpassung für Bot","Clothing Donation: Adjustments for bot"]]]
                 ,["2.7","24.11.2015",[["Anpassung an Spiel-Update 24.11.2015","Fix for game-update 24.11.2015"]]]
                 ,["2.7.1","30.11.2015",[["Bugfix: Defaultwerte Deklarieren","Bugfix: declare default-values"]]]
-<<<<<<< HEAD
                 ,["2.7.2","04.12.2015",[["Addon: Hilfestellung für Weihnachts-Knabbermarathon","Addon: Assistance for X-Mas ebvent"]]]
                 ,["2.7.3","04.12.2015",[["Neue Berater-Option: Questnummer Baumerei 2 manuell übernehmen","New adviser option: Set questnumber for questserie forestry 2"]]]
-=======
                 ,["2.7.2","04.12.2015",[["Addon: Hilfestellung für Weihnachts-Knabbermarathon","Addon: Assistance for X-Mas event"]]]
                 ,["2.7.3","04.12.2015",[["Neue Berater-Option: Questnummer der 2. Baumerei-Questreihe manuell übernehmen","New adviser option: Set questnumber for 2nd series of quests (forestry)"]]]
->>>>>>> refs/remotes/origin/master
                 ];
 if(!VERSIONfunctionFile){
     alert("Hi, I am the Berater-Script.\nThe function-file is missing.\nPlease install me again.");
@@ -638,11 +635,8 @@ if (GM_getValue("valAnimateStartscreen",false)){
     }
 }
 // animierte Hintergründe ausblenden
-<<<<<<< HEAD
-=======
 
 console.log("Game-Currency: " + unsafeWindow.gamecurrency)
->>>>>>> refs/remotes/origin/master
 
 //***********************************************************************************************************
 // developer functions
@@ -6841,11 +6835,7 @@ function buildInfoPanelOptions(){
          *    Option added by georgvr
          *    Option sets the questnumber of Forestseries 2 to the mff-questnumber.
          *    Option is needed in case that the quest has been solved by an other device and cooldown-time is active
-<<<<<<< HEAD
-         *    - Button is only executable if Forestseries 2 exists and ist nor accessible because cooldown-time is active (sandglass is visible)
-=======
          *    - Button is only executable if Forestseries 2 exists and is not accessible because cooldown-time is active (sandglass is visible)
->>>>>>> refs/remotes/origin/master
          */
         newtr=createElement("tr",{},newtable);
         newtd=createElement("td",{"colspan":"2","align":"center"},newtr);
@@ -13377,39 +13367,35 @@ return false;
                                     break;}
                                     //for fuelstation
 
-                                    case 6:{//const FUELSTATION_INPUT={"1":[[17,0],[31,0],[33,0],[113,0]]};
-                                        GM_log("Fuelstation");
-                                        help="";
-                                        var data=unsafeWindow.farms_data.farms[farmNR][zoneNr];
-                                        for(var slot=1;slot<=4;slot++)    {
-                                            if((slot==1)||(!data.data.data.slots[slot]["block"])){
-                                                const product = 350;
-                                                var slotlevel = data.data.data.slots[slot].level;
-                                                var iAmount=data.data.constants.slot_level[data.data.data.slots[slot].level].output;
-                                                var iPoints=iAmount*prodPoints[0][product];
-                                                var iTime=data.data.constants.slot_level[data.data.data.slots[slot].level].duration;
+                                   case 6:{//const FUELSTATION_INPUT={"1":[[17,0],[31,0],[33,0],[113,0]]};
+                                       GM_log("Fuelstation");
+                                       help="";
+                                       var data=unsafeWindow.farms_data.farms[farmNR][zoneNr];
+                                       for(var slot=1;slot<=4;slot++)    {
+                                           if((slot==1)||(!data.data.data.slots[slot]["block"])){
+                                               const product = 350;
+                                               var slotlevel = data.data.data.slots[slot].level;
+                                               var iAmount=data.data.constants.slot_level[data.data.data.slots[slot].level].output;
+                                               var iPoints=iAmount*prodPoints[0][product];
+                                               var iTime=data.data.constants.slot_level[data.data.data.slots[slot].level].duration;
 
-                                                tr=createElement("tr",{},table);
-                                                td=createElement("td",{"style":help+"padding-right:10px;"},tr);
-                                                createElement("div",{"style":"line-height:16px;white-space:nowrap;"},td,"Slot"+slot);
-                                                div=createElement("div",{"style":"line-height:16px;white-space:nowrap;"},td);
-                                                produktPic(0,product,div);
-                                                createElement("span",{},div,numberFormat(iAmount)+" "+prodName[0][product]);
-                                                pointsFormat(iPoints,"span",td);
-                                                createElement("span",{"style":"line-height:16px;white-space:nowrap;"},td,"  "+getTimeStr(iTime));
+                                               tr=createElement("tr",{},table);
+                                               td=createElement("td",{"style":help+"padding-right:10px;"},tr);
+                                               createElement("div",{"style":"line-height:16px;white-space:nowrap;"},td,"Slot"+slot);
+                                               div=createElement("div",{"style":"line-height:16px;white-space:nowrap;"},td);
+                                               produktPic(0,product,div);
+                                               createElement("span",{},div,numberFormat(iAmount)+" "+prodName[0][product]);
+                                               pointsFormat(iPoints,"span",td);
+                                               createElement("span",{"style":"line-height:16px;white-space:nowrap;"},td,"  "+getTimeStr(iTime));
 
-                                            }
-                                            help="border-top:1px solid black;"
-                                        }
-                                        break;
-<<<<<<< HEAD
-                                        }
-=======
-                                        }*/
->>>>>>> refs/remotes/origin/master
+                                           }
+                                           help="border-top:1px solid black;"
+                                       }
+                                       break;
+                                       }
 
-                                    }
-                                    table=null;tr=null;td=null;div=null;
+                                   }
+                                   table=null;tr=null;td=null;div=null;
                                 }
                                 toolTip.show(event,buildinginfo.innerHTML,this);
                                 buildinginfo=null;
@@ -14442,11 +14428,7 @@ return false;
                 }
             }
             zones.setProduction(zoneNrF,tempZoneProductionData.clone());
-<<<<<<< HEAD
             var tempZoneProductionData=null;newDiv=null;newDiv1=null;
-=======
-            var tempZoneProductionData=null;newDiv=null;newDiv1=null;*/
->>>>>>> refs/remotes/origin/master
             raiseEvent("buildFuelstation");
         }catch(err){GM_logError("buildFuelstation","","",err);}
     });
