@@ -282,30 +282,18 @@ unsafeData.BUILDING2PRODUCT=BUILDING2PRODUCT.clone();
             Pony             5
             Fuelstation      6
         */
-<<<<<<< HEAD
 //const BUILDINGTYPE={"0":0,"1":1,"2":2,"3":2,"4":2,"5":2,"6":0,"7":3,"8":3,"9":3,"10":3,"11":2,"12":2,"13":3,"14":3,"15":2,"16":3,"17":0,"18":0,"19":0,"20":0,"fl1":1,"fl2":4,"fl5":4,"fw1":4,"fw2":4,"fw3":4}
 // for Fuelstation
-const BUILDINGTYPE={"0":0,"1":1,"2":2,"3":2,"4":2,"5":2,"6":0,"7":3,"8":3,"9":3,"10":3,"11":2,"12":2,"13":3,"14":3,"15":2,"16":3,"17":0,"18":0,"19":0,"20":6,"fl1":1,"fl2":4,"fl5":4,"fw1":4,"fw2":4,"fw3":4}
-=======
-// const BUILDINGTYPE={"0":0,"1":1,"2":2,"3":2,"4":2,"5":2,"6":0,"7":3,"8":3,"9":3,"10":3,"11":2,"12":2,"13":3,"14":3,"15":2,"16":3,"17":0,"18":0,"19":0,"20":0,"fl1":1,"fl2":4,"fl5":4,"fw1":4,"fw2":4,"fw3":4}
-const BUILDINGTYPE={"0":0,"1":1,"2":2,"3":2,"4":2,"5":2,"6":0,"7":3,"8":3,"9":3,"10":3,"11":2,"12":2,"13":3,"14":3,"15":2,"16":3,"17":0,"18":5,"19":0,"20":0,"fl1":1,"fl2":4,"fl5":4,"fw1":4,"fw2":4,"fw3":4}
-// for Fuelstation
-// const BUILDINGTYPE={"0":0,"1":1,"2":2,"3":2,"4":2,"5":2,"6":0,"7":3,"8":3,"9":3,"10":3,"11":2,"12":2,"13":3,"14":3,"15":2,"16":3,"17":0,"18":0,"19":0,"20":6,"fl1":1,"fl2":4,"fl5":4,"fw1":4,"fw2":4,"fw3":4}
->>>>>>> 9b965b1599e55425db17ebd0bd9e41e675188732
+const BUILDINGTYPE={"0":0,"1":1,"2":2,"3":2,"4":2,"5":2,"6":0,"7":3,"8":3,"9":3,"10":3,"11":2,"12":2,"13":3,"14":3,"15":2,"16":3,"17":0,"18":5,"19":0,"20":6,"fl1":1,"fl2":4,"fl5":4,"fw1":4,"fw2":4,"fw3":4};
 
 unsafeData.BUILDINGTYPE=BUILDINGTYPE.clone();
 // task_new_building
 const BUILDING_SIZE={"1":120,"forest":25,"fl1":36,"megafield":[11,9]};
 unsafeData.BUILDING_SIZE=BUILDING_SIZE.clone();
 // task_new_building
-<<<<<<< HEAD
 //const BUILDING_SLOTS={"13":3,"14":3,"16":3,"windmill":2,"sawmill":3,"carpentry":3,"fw1":3,"fw2":3,"fw3":3,"fl0":17,"fl2":3,"megafield":99};
-=======
-// const BUILDING_SLOTS={"13":3,"14":3,"16":3,"windmill":2,"sawmill":3,"carpentry":3,"fw1":3,"fw2":3,"fw3":3,"fl0":17,"fl2":3,"megafield":99};
-const BUILDING_SLOTS={"13":3,"14":3,"16":3,"18":3,"windmill":2,"sawmill":3,"carpentry":3,"fw1":3,"fw2":3,"fw3":3,"fl0":17,"fl2":3,"megafield":99};
->>>>>>> 9b965b1599e55425db17ebd0bd9e41e675188732
 //for Fuelstation
-const BUILDING_SLOTS={"13":3,"14":3,"16":3,"20":4,"windmill":2,"sawmill":3,"carpentry":3,"fw1":3,"fw2":3,"fw3":3,"fl0":17,"fl2":3,"megafield":99};
+const BUILDING_SLOTS={"13":3,"14":3,"16":3,"18":3,"20":4,"windmill":2,"sawmill":3,"carpentry":3,"fw1":3,"fw2":3,"fw3":3,"fl0":17,"fl2":3,"megafield":99};
 unsafeData.BUILDING_SLOTS=BUILDING_SLOTS.clone();
 // Needed input of a zone
 // BUILDING_INPUT[buildTyp]{output}[alternatives]=[[prod1,amount1||reducing time1],...]
@@ -9522,15 +9510,10 @@ try{
         } catch(err) {GM_logError("openFoodworldBuildingSelect","","",err); }
     });
 
-<<<<<<< HEAD
     unsafeOverwriteFunction("entryCityXmasEvent",function(c){
         /*
          * Contribution/Author of function "entryCityXmasEvent": Moe
          */
-=======
-    // EntryCityXmasEvent by Moe
-    unsafeOverwriteFunction("entryCityXmasEvent",function(c){
->>>>>>> 9b965b1599e55425db17ebd0bd9e41e675188732
         try{
             if(!c) c = 'v';
             unsafeWindow._entryCityXmasEvent(c);
@@ -9549,11 +9532,7 @@ try{
             }
         }catch(err){GM_logError("entryCityXmasEvent","","",err);}
     });
-<<<<<<< HEAD
 
-=======
-        
->>>>>>> 9b965b1599e55425db17ebd0bd9e41e675188732
     unsafeOverwriteFunction("contractsDialog", function(b, productId){
         /*
          * Is called, when User clicks a product in "New Contract" dialog to add that product to the cart.
@@ -13838,6 +13817,7 @@ return false;
             checkFieldTimes();
         }catch(err){GM_logError("getGardenInfoResponse","","",err);}
     });
+
     unsafeOverwriteFunction("farmAction",function(mode,farm,position,s,d,b,a){
         try{
             switch(mode){
@@ -13848,24 +13828,10 @@ return false;
                     return false;
                 }
             break;}
-<<<<<<< HEAD
-            case "fuelstation_entry": {
-                    //Ausgelöst durch Button "Einwerfen"
-                    //function(mode,farm,position,s,d,b,a)
-
-                    //mode: 'fuelstation_entry', s: Slot, d:Produkt, b: undefined, a:undefined
-                    //GM_log("farmAction: mode:"+ mode + " s:"+s+" d:"+d+" b:"+b+" a:"+a);
-                }
-            break;
-            }
-        }catch(err){GM_logError("farmAction","mode="+mode,"","(pre) "+err);}
-        try{
-            //GM_log("farmAction: mode:"+ mode + " s:"+s+" d:"+d+" b:"+b+" a:"+a);
-=======
                         case "fuelstation_entry": {
                                         //Ausgelöst durch Button "Einwerfen"
                                         //function(mode,farm,position,s,d,b,a)
-        
+
                                         //mode: 'fuelstation_entry', s: Slot, d:Produkt, b: undefined, a:undefined
                                         //GM_log("farmAction: mode:"+ mode + " s:"+s+" d:"+d+" b:"+b+" a:"+a);
                                 }
@@ -13874,10 +13840,10 @@ return false;
         }catch(err){GM_logError("farmAction","mode="+mode,"","(pre) "+err);}
         try{
                         //GM_log("farmAction: mode:"+ mode + " s:"+s+" d:"+d+" b:"+b+" a:"+a);
->>>>>>> 9b965b1599e55425db17ebd0bd9e41e675188732
             unsafeWindow._farmAction(mode,farm,position,s,d,b,a);
         }catch(err){GM_logError("_farmAction","mode="+mode,"",err);}
     });
+
     unsafeOverwriteFunction("farmActionResponse",function(request,mode,farmNR,zoneNr,B,d,b,a){
         try{
             unsafeWindow._farmActionResponse(request,mode,farmNR,zoneNr,B,d,b,a);
@@ -13916,7 +13882,7 @@ return false;
                 case "pony_crop": doPony(zoneNr); raiseEvent("gamePonyCropped"); console.log("gamePonyCropped"); break;
                 case "pony_feed": doPony(zoneNr); raiseEvent("gamePonyFed"); console.log("gamePonyFed"); break;
                 case "pony_setfarmi": doPony(zoneNr); raiseEvent("gamePonyFarmiSet"); console.log("gamePonyFarmiSet"); break;
-                case "pony_buy": 
+                case "pony_buy":
                 case "pony_speedup": {
                         // doPony(zoneNr);
                         break;
@@ -14271,7 +14237,7 @@ return false;
             if (slot==1 || !pony_data["ponys"][slot]["block"]) {
                 zones.setBlock(zoneNrS,""); // Unblock slot
                 dataSlot=[[{}],0,0,true]; // Proddata für den aktuellen Slot
-                prodData[1]++; // Wir nehmen an, dass ein weiterer/dieser Platz frei ist 
+                prodData[1]++; // Wir nehmen an, dass ein weiterer/dieser Platz frei ist
                 prodData[2]++; // Wir nehmen an, dass ein weiterer/dieser Platz freigeschaltet ist
                 dataSlot[1]++; // Inkrementiere freien Platz in diesem Slot
                 dataSlot[2]++; // Ein freier Platz in diesem Slot
@@ -14294,14 +14260,14 @@ return false;
                     }
                     // Packe Infos für aktuellen Slot in Proddata der ganzen Farm
                     prodData[0][iPrTyp][iProd].push([iAmount,iPoints,iTime,NEVER]);
-                    
+
                     dataSlot[1]--; // Platz ist nicht frei (Slot)
                     if (!dataSlot[0][iPrTyp][iProd]) {
                         dataSlot[0][iPrTyp][iProd]=[];
                     }
                     // Packe Infos für aktuellen Slot in Proddata des aktuellen SLots
                     dataSlot[0][iPrTyp][iProd].push([iAmount,iPoints,iTime,NEVER]);
-                     
+
                     //auto-cropping
                     newDiv=$("pony" + slot).children[1];
                     if (farmi["data"]["remain"] < 1 && (top.unsafeData.autoAction==null) && valAutoCrop["farm"] && (newDiv=$("pony"+ slot + "_crop"))) {
@@ -14641,7 +14607,7 @@ return false;
                 case "14": doFactoryOil(zoneNr); break; // Special Oil
                 case "16":  // Knitting
                 case "17": break; // Carpentry
-                case 18: doPony(zoneNr); raiseEvent("gameOpenPony"); break; // Pony, 
+                case 18: doPony(zoneNr); raiseEvent("gameOpenPony"); break; // Pony,
                 case "19":  // Megafield
                 case "20":  // Fuelstation
                 default:
@@ -17839,13 +17805,9 @@ return;
 
         // On load, check, if we need to show the icon
         if (USERLEVEL >= 38) {
-        showGoToClothingDonation();
-<<<<<<< HEAD
-
-=======
+          showGoToClothingDonation();
         }
-        
->>>>>>> 9b965b1599e55425db17ebd0bd9e41e675188732
+
         // Donkey Waltraud
         err_trace="Donkey Waltraud";
         // logDonkey[]=[day,points,[received gifts]]

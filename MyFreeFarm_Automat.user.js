@@ -876,15 +876,14 @@ function calcProductScore(product, zoneNrF, amount, endtime){
         if(amount==null || amount===undefined){ amount=1; }
         return unsafeData.prodPoints[0][product]*unsafeData.prodYield[0][product]*amount;
     break;
-<<<<<<< HEAD
-	case 6: //Fuelstation
-		if(amount==null || amount===undefined){ amount=1; }
-		zoneNrF=zoneNrF.split(".");
-		var data=unsafeWindow.farms_data.farms[unsafeWindow.farm][zoneNrF[0]];
-        return data.data.constants.slot_level[data.data.data.slots[zoneNrF[1]].level].output*unsafeData.prodPoints[0][350];
-		break;
-=======
-    case 5:
+
+	  case 6: //Fuelstation
+    		if(amount==null || amount===undefined){ amount=1; }
+    		zoneNrF=zoneNrF.split(".");
+    		var data=unsafeWindow.farms_data.farms[unsafeWindow.farm][zoneNrF[0]];
+            return data.data.constants.slot_level[data.data.data.slots[zoneNrF[1]].level].output*unsafeData.prodPoints[0][350];
+    break;
+    case 5: //Ponyfarm
         var data = unsafeData.pony_data;
         if (data) {
             for (var fId in data["farmis"]) {
@@ -897,9 +896,8 @@ function calcProductScore(product, zoneNrF, amount, endtime){
                 }
             }
         }
-
         return 3500*product; // We guess the amount of points
->>>>>>> 9b965b1599e55425db17ebd0bd9e41e675188732
+    break;
     case "megafield":
         return unsafeData.prodPoints[4][product];
     break;
@@ -936,16 +934,15 @@ function calcProductAmount(product, zoneNrF, amount, endtime, minPlanted){
     case 3:
         return unsafeData.prodYield[0][product];
     break;
-<<<<<<< HEAD
-	case 6: //Fuelstation
-		zoneNrF=zoneNrF.split(".");
-		var data=unsafeWindow.farms_data.farms[unsafeWindow.farm][zoneNrF[0]];
-        return data.data.constants.slot_level[data.data.data.slots[zoneNrF[1]].level].output;
-		break;
-=======
+	  case 6: //Fuelstation
+    		zoneNrF=zoneNrF.split(".");
+    		var data=unsafeWindow.farms_data.farms[unsafeWindow.farm][zoneNrF[0]];
+            return data.data.constants.slot_level[data.data.data.slots[zoneNrF[1]].level].output;
+    		break;
+
     case 5:
         return 1340; // TODO: Was bei rauskommt
->>>>>>> 9b965b1599e55425db17ebd0bd9e41e675188732
+    break;
     case "megafield":
         return unsafeData.prodYield[4][product];
     break;
@@ -1119,19 +1116,18 @@ try{
         time=(product==PRODSTOP?0:unsafeData.prodGrowTime[0][product]*60);
         time*=bonus;
         break;
-<<<<<<< HEAD
-	//Fuelstation
-	case 6:
-		var s=zoneNrF.split(".");
-		var data=unsafeWindow.farms_data.farms[unsafeWindow.farm][s[0]];
-		time=data.data.constants.slot_level[data.data.data.slots[s[1]].level].duration;
-		break;
-
-=======
     case 5: // Pony
         time = product == PRODSTOP ? 0 : 3600*product; // product is either 2, 4 or 8
         break;
->>>>>>> 9b965b1599e55425db17ebd0bd9e41e675188732
+
+	  //Fuelstation
+	  case 6:
+  		var s=zoneNrF.split(".");
+  		var data=unsafeWindow.farms_data.farms[unsafeWindow.farm][s[0]];
+  		time=data.data.constants.slot_level[data.data.data.slots[s[1]].level].duration;
+  		break;
+
+
     case "megafield":
         time=(product==PRODSTOP?0:unsafeData.prodGrowTime[4][product]*60);
         break;
@@ -1593,8 +1589,6 @@ try {
                     drawFactoryChooseItemBox(zoneNrS, zoneNrL,$("divChooseBoxInner"));
                 }
                 break;
-<<<<<<< HEAD
-=======
             case 5: // Pony does not support Queues
                 // if(settings.get("account","useQueueList")){
                 //     redrawQueueBox(zoneNrS, zoneNrL, $("divQueueBoxInner"));
@@ -1602,7 +1596,7 @@ try {
                     drawChooseItemBoxPony(zoneNrS, zoneNrL, 0, $("divChooseBoxInner"));
                 // }
                 break;
->>>>>>> 9b965b1599e55425db17ebd0bd9e41e675188732
+
             case 4:
             case "windmill":
             case "forest":case "sawmill":case "carpentry":
@@ -3384,36 +3378,34 @@ try{
             }
             zoneFeedCurr=null;zoneProdCurr=null;
         break;}
-<<<<<<< HEAD
+
 		case 6:{ // Fuelstation
+          $("divChooseItem"+zoneNrL+"Q"+queueNum+"I"+PRODSTOP).style.border=((zoneList[zoneNrL][queueNum][0]==PRODSTOP)?"2px solid black":"");
+  			  /*
+  				for(var v in unsafeData.BUILDING_INPUT[fzZoneType]){
+  					if(!unsafeData.BUILDING_INPUT[fzZoneType].hasOwnProperty(v)){ continue; }
+  					if(unsafeData.prodBlock[0][v]){ continue; }
+  					$("divChooseItem"+zoneNrL+"Q"+queueNum+"I"+v).style.border=((zoneList[zoneNrL][queueNum][0]==v)?"2px solid black":"");
+  				}*/
+          if(settings.get("account","showQueueTime"))  {
+  			     divChooseEndTimeCurr.parentNode.setAttribute("zoneBeginTime",implode(zoneTimes,"updateQueueBox/chooseBox/zoneTimes"));
+             divChooseEndTimeCurr.style.display=lShowTime?"block":"none";
+             if(lShowTime){
+               var fz=getLowestTimeFarmZone(zoneTimes);
+               var endTime=zoneTimes[fz] + calcProductionTime(zoneList[zoneNrL][queueNum][0],fz);
+               divChooseEndTimeCurr.style.color=noTime? "#DD0000":"black";
+               divChooseEndTimeCurr.innerHTML=(foundStop?getText("automat_QueDontWork"):(($("divChooseBoxInner")==divChooseEndTimeCurr.parentNode)?getText("automat_QueTimeFirstReady"):getText("automat_QueTimeReady")) + " " + getDateText(endTime,0) + "&nbsp;"+ getDaytimeStr(endTime,true));
+               fz=null;endTime=null;
+             }
+           }
+  		    zoneFeedCurr=null;zoneProdCurr=null;
+      break;}
 
-			 $("divChooseItem"+zoneNrL+"Q"+queueNum+"I"+PRODSTOP).style.border=((zoneList[zoneNrL][queueNum][0]==PRODSTOP)?"2px solid black":"");
-			 /*
-				for(var v in unsafeData.BUILDING_INPUT[fzZoneType]){
-					if(!unsafeData.BUILDING_INPUT[fzZoneType].hasOwnProperty(v)){ continue; }
-					if(unsafeData.prodBlock[0][v]){ continue; }
-					$("divChooseItem"+zoneNrL+"Q"+queueNum+"I"+v).style.border=((zoneList[zoneNrL][queueNum][0]==v)?"2px solid black":"");
-				}*/
-			if(settings.get("account","showQueueTime")){
-				divChooseEndTimeCurr.parentNode.setAttribute("zoneBeginTime",implode(zoneTimes,"updateQueueBox/chooseBox/zoneTimes"));
-				divChooseEndTimeCurr.style.display=lShowTime?"block":"none";
-				if(lShowTime){
-					var fz=getLowestTimeFarmZone(zoneTimes);
-					var endTime=zoneTimes[fz] + calcProductionTime(zoneList[zoneNrL][queueNum][0],fz);
-					divChooseEndTimeCurr.style.color=noTime? "#DD0000":"black";
-					divChooseEndTimeCurr.innerHTML=(foundStop?getText("automat_QueDontWork"):(($("divChooseBoxInner")==divChooseEndTimeCurr.parentNode)?getText("automat_QueTimeFirstReady"):getText("automat_QueTimeReady")) + " " + getDateText(endTime,0) + "&nbsp;"+ getDaytimeStr(endTime,true));
-						fz=null;endTime=null;
-				}
-			}
-		    zoneFeedCurr=null;zoneProdCurr=null;
-        break;}
-
-=======
         case 5: { //Pony
             console.log("Moe, keine Ahnung! Irgendwo in updateQueueBox");
             break;
         }
->>>>>>> 9b965b1599e55425db17ebd0bd9e41e675188732
+
         case "windmill":{ // (fzWindmill)
             if(settings.get("account","showQueueTime")){
                 divChooseEndTimeCurr.parentNode.setAttribute("zoneBeginTime",implode(zoneTimes,"updateQueueBox/chooseBox/zoneBeginTimes"));
@@ -3529,12 +3521,7 @@ try{
             var iProd=(zoneList[zoneNrL][0][0]==PRODSTOP?PRODSTOP:unsafeData.BUILDING2PRODUCT[getZoneType(zoneNrF)][0]);
         // }else if(fzType==3){
         //  var iProd=(zoneList[zoneNrL][0][0]==PRODSTOP?PRODSTOP:zoneList[zoneNrL][0][0]);
-        }
-		//Fuelstation
-		else if (fzType==6){
-			var iProd=(zoneList[zoneNrL][0][0]==PRODSTOP?PRODSTOP:unsafeData.BUILDING2PRODUCT[getZoneType(zoneNrF)][0]);
-		}
-		else{
+        }else{
             var iProd=zoneList[zoneNrL][0][0];
         }
         if(settings.get("account","showQueueTime")) var zoneBeginTime=explode(parent.getAttribute("zoneBeginTime"),"toopTipProductSmall/[0]/zoneBeginTime",{});
@@ -3560,24 +3547,18 @@ try{
     }else if(fzPowerUp){//parseInt(parent.getAttribute("class").replace("divChooseItem link r",""),10)>0){
         var iProd=parseInt(parent.getAttribute("class").replace("divChooseItem link r",""),10);
         if(settings.get("account","showQueueTime")) var zoneBeginTime=explode(parent.parentNode.getAttribute("zoneBeginTime"),"toopTipProductSmall/[3]/zoneBeginTime",{});
-<<<<<<< HEAD
-
-	}
-	//Fuelstation Test kann vermutlich gelöscht werden
-	else if(fzType==6){//parseInt(parent.getAttribute("class").replace("divChooseItem link r",""),10)>0){
-        var iProd=parseInt(parent.getAttribute("class").replace("divChooseItem link v",""),10);
-
-	    if(settings.get("account","showQueueTime")) var zoneBeginTime=explode(parent.parentNode.getAttribute("zoneBeginTime"),"toopTipProductSmall/[2]/zoneBeginTime",{});
-	}
-	else{ // Field, Factory
-=======
     }else if(fzPony) {
         if(settings.get("account","showQueueTime")) {
             var zoneBeginTime=explode(parent.parentNode.getAttribute("zoneBeginTime"),"toopTipProductSmall/[4]/zoneBeginTime",{});
         }
         var iProd=159; // Pferdefutter
-    }else{ // Field, Factory
->>>>>>> 9b965b1599e55425db17ebd0bd9e41e675188732
+    }
+	  else if(fzType==6){//parseInt(parent.getAttribute("class").replace("divChooseItem link r",""),10)>0){
+          var iProd=parseInt(parent.getAttribute("class").replace("divChooseItem link v",""),10);
+
+        if(settings.get("account","showQueueTime")) var zoneBeginTime=explode(parent.parentNode.getAttribute("zoneBeginTime"),"toopTipProductSmall/[2]/zoneBeginTime",{});
+    }
+	  else{ // Field, Factory
         var iProd=parseInt(parent.getAttribute("class").replace("divChooseItem link v",""),10);
         if(settings.get("account","showQueueTime")) var zoneBeginTime=explode(parent.parentNode.getAttribute("zoneBeginTime"),"toopTipProductSmall/[4]/zoneBeginTime",{});
     }
@@ -4606,15 +4587,13 @@ TypeError: can't convert undefined to object
                     },settings.getPause(),runId);
                 }catch(err){GM_logError("autoZoneHandle (case 3)","","handled.zoneNrF="+handled.zoneNrF+" readyZone:"+implode(unsafeData.readyZone,"autoZoneHandle/readyZone"),err);}
                 break;
-<<<<<<< HEAD
-			case 6:	//Fuelstation
+            case 6:	//Fuelstation
                 //-- GM_log("autoZoneHandle run nextFkt case:3");
                 try{
 
                 }catch(err){GM_logError("autoZoneHandle (case 3)","","handled.zoneNrF="+handled.zoneNrF+" readyZone:"+implode(unsafeData.readyZone,"autoZoneHandle/readyZone"),err);}
-=======
+                break;
             case 5: // Pony
->>>>>>> 9b965b1599e55425db17ebd0bd9e41e675188732
                 break;
             /*
             case "windmill":
@@ -5534,7 +5513,7 @@ function autoFarmPony(runId,step){
                 if (div.style.display == "block") {
                     GM_logInfo("autoFarmPony","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Crop Pony" + handled.slot);
                     listeningEvent="gamePonyCropped";
-                    action=function(){ 
+                    action=function(){
                         unsafeData.readyZone[handled.zoneNrS][2] = false;
                         click(div);
                         window.setTimeout(autoFarmPony,3*settings.getPause(),runId,step+1);
@@ -5586,7 +5565,7 @@ function autoFarmPony(runId,step){
             // if(!unsafeData.readyZone[handled.zoneNrS]){
             //     console.log("Exit, da Zone nicht in readyZone");
             //         autoFarmPony(runId,5);
-            // }else 
+            // }else
             if((unsafeData.readyZone[handled.zoneNrS][1]!="e")||!unsafeData.readyZone[handled.zoneNrS][2]|| !unsafeData.pony_data){
                 // wait for response
                 GM_logInfo("autoFarmPony","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Waiting for pony data to be ready");
@@ -9592,9 +9571,7 @@ try{
             }
         }catch(err){GM_logError("eventListener:gameOpenFactoryKnitting ","","",err);}
         },false);
-<<<<<<< HEAD
 
-=======
         err_trace="listener gameOpenPony";
         document.addEventListener("gameOpenPony",function(){ // pony open
         try{
@@ -9612,8 +9589,7 @@ try{
             }
         }catch(err){GM_logError("eventListener:gameOpenPony ","","",err);}
         },false);
-        
->>>>>>> 9b965b1599e55425db17ebd0bd9e41e675188732
+
         function drawFarmIcons(){
         try{
             var farmNR,zoneNr,zoneNrF;
