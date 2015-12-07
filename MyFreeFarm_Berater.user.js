@@ -7746,7 +7746,7 @@ function goToZone(zoneNrF){
         var div;
         switch(currLocation.location){
         case "farm":{
-            if(gameLocation.check(currLocation.location,currLocation.farmNr)){
+            if((gameLocation.check(currLocation.location,currLocation.farmNr))&&(unsafeWindow.farm==1+currLocation.farmNr)){
                 if(div=$("farm"+(1+currLocation.farmNr)+"_pos"+currLocation.zoneNr+"_click")){
                     click(div);
                 }
