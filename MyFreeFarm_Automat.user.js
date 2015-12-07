@@ -3402,16 +3402,10 @@ try{
       break;}
 
         case 5: { //Pony
-<<<<<<< HEAD
             console.log("Moe, keine Ahnung! Irgendwo in updateQueueBox");
             break;
         }
 
-=======
-            // Im Queue-Modus, wenn neuer Eintrag ausgewählt werden soll, die Endtime setzen
-            console.log("Moe, Queue-Modus/Eintrag auswählen/Endzeit! Irgendwo in updateQueueBox");
-        break;}
->>>>>>> f3e5acf06ebb51684140e02cd7bc04a1bd41f3dd
         case "windmill":{ // (fzWindmill)
             if(settings.get("account","showQueueTime")){
                 divChooseEndTimeCurr.parentNode.setAttribute("zoneBeginTime",implode(zoneTimes,"updateQueueBox/chooseBox/zoneBeginTimes"));
@@ -5599,7 +5593,7 @@ function autoFarmPony(runId,step){
                         }
 
                         // Find correct farmi
-                        if (f["type"] == zoneList[handled.zoneNrL][0][0]) { 
+                        if (f["type"] == zoneList[handled.zoneNrL][0][0]) {
                             // GM_logInfo("autoFarmPony","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Klicke Farmi " + i);
 
                             // Check food of pony in 'handled.slot'
@@ -9616,7 +9610,7 @@ try{
         document.addEventListener("gamePonyFarmiSet",function(){ // pony farmi set on pony
             drawPonyIcons();
         },false);
-        
+
         function drawPonyIcons() {
         try{
             var zoneNrF=getFarmZone(unsafeWindow.currentposition);
@@ -9631,12 +9625,8 @@ try{
                     drawAutomatIcon(zoneNrS,zoneNrS,$("pony_ponys").children[slot-1],topV);
                 }
             }
-        }catch(err){GM_logError("eventListener:gameOpenPony ","","",err);}
-<<<<<<< HEAD
-        },false);
-=======
-        }
->>>>>>> f3e5acf06ebb51684140e02cd7bc04a1bd41f3dd
+          }catch(err){GM_logError("eventListener:gameOpenPony ","","",err);}
+          }
 
         function drawFarmIcons(){
         try{
