@@ -1558,8 +1558,8 @@ try {
         break;
         case 5:
             // Moe, hier nichts machen. ProdStop-Icon passt
-            console.log("Moe, drawAutomatIcon, name: " + name);
-            console.log("Male PRODSTOP");
+            // console.log("Moe, drawAutomatIcon, name: " + name);
+            // console.log("Male PRODSTOP");
             // console.log("drawAutomatIcon");
             // console.log(automatIcons[name]);
         default:
@@ -3402,10 +3402,16 @@ try{
       break;}
 
         case 5: { //Pony
+<<<<<<< HEAD
             console.log("Moe, keine Ahnung! Irgendwo in updateQueueBox");
             break;
         }
 
+=======
+            // Im Queue-Modus, wenn neuer Eintrag ausgewählt werden soll, die Endtime setzen
+            console.log("Moe, Queue-Modus/Eintrag auswählen/Endzeit! Irgendwo in updateQueueBox");
+        break;}
+>>>>>>> f3e5acf06ebb51684140e02cd7bc04a1bd41f3dd
         case "windmill":{ // (fzWindmill)
             if(settings.get("account","showQueueTime")){
                 divChooseEndTimeCurr.parentNode.setAttribute("zoneBeginTime",implode(zoneTimes,"updateQueueBox/chooseBox/zoneBeginTimes"));
@@ -5474,14 +5480,15 @@ function autoFarmPony(runId,step){
         var action=null,listeningEvent=null;
         switch(step){
         case 1:{ // init
-            console.log(handled);
-            console.log("autoFarmPony ("+handled.zoneNrL+"/"+handled.zoneNrS+"/"+handled.slot+"): " + step);
+            // console.log(handled);
+            // console.log("autoFarmPony ("+handled.zoneNrL+"/"+handled.zoneNrS+"/"+handled.slot+"): " + step);
             // TODO check required products earlier (recalcQueue)
             if(unsafeData.zones.getBlock(handled.zoneNrS)){
-                console.log("autoFarmPony: Geblockte Zone => Exit");
+                // console.log("autoFarmPony: Geblockte Zone => Exit");
                 zoneList[handled.zoneNrL].unshift(DEFAULT_ZONELIST_ITEM.clone());
                 updateQueueBox(handled.zoneNrS);
-                autoFarmPony(runId, 8); // => Exit
+                // autoFarmPony(runId, 8); // => Exit
+                window.setTimeout(autoFarmPony,settings.getPause(),runId,8);
             }else{
                 // if(zoneList[handled.zoneNrL][0][0]!=PRODSTOP){
                 //     console.log("autoFarmPony: KEIN ProdStop => Hamma no genug Futter?");
@@ -5493,15 +5500,15 @@ function autoFarmPony(runId,step){
                 //     }
                 // }
                 if(unsafeData.zones.getEndtime(handled.zoneNrS)==NEVER){ // empty
-                    console.log("autoFarmPony: Leere Zone => Füttern");
+                    // console.log("autoFarmPony: Leere Zone => Füttern");
                     GM_logInfo("autoFarmPony","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Empty pony found");
                     window.setTimeout(autoFarmPony,settings.getPause(),runId,3);
                 }else if(unsafeData.zones.getEndtime(handled.zoneNrS)<=unsafeWindow.Zeit.Server){ // cropable
-                    console.log("autoFarmPony: Croppable Zone => Crop");
+                    // console.log("autoFarmPony: Croppable Zone => Crop");
                     GM_logInfo("autoFarmPony","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Pony can be cropped");
                     window.setTimeout(autoFarmPony,settings.getPause(),runId,step+1);
                 }else{ // busy
-                    console.log("autoFarmPony: Beschäftigt Zone => Exit");
+                    // console.log("autoFarmPony: Beschäftigt Zone => Exit");
                     GM_logInfo("autoFarmPony","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Pony" + handled.slot + " is busy");
                     window.setTimeout(autoFarmPony,settings.getPause(),runId,8); // => Exit
                 }
@@ -5521,20 +5528,23 @@ function autoFarmPony(runId,step){
                     };
                 } else {
                     GM_logInfo("autoFarmPony","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Pony" + handled.slot + " doesn't need to be cropped (anymore)");
-                    console.log("Kein Farmi zum Ernten -> Füttern");
-                    autoFarmPony(runId,step+1);
+                    // console.log("Kein Farmi zum Ernten -> Füttern");
+                    // autoFarmPony(runId,step+1);
+                    window.setTimeout(autoFarmPony,settings.getPause(),runId,step+1);
                 }
             } else {
-                autoFarmPony(runId,8); // Crop-button doesn't exit => Something is very wrong => Exit
+                // autoFarmPony(runId,8); // Crop-button doesn't exit => Something is very wrong => Exit
+                window.setTimeout(autoFarmPony,settings.getPause(),runId,8);
             }
         break;}
         case 3: { // feed pony
             var div = $("pony" + handled.slot + "_feed");
             if (!unsafeData.pony_data || !div || div.style.display != "block") {
+                GM_logInfo("autoFarmPony","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Feed Pony" + handled.slot + " (Waiting)");
                 window.setTimeout(autoFarmPony,settings.getPause(),runId,step);
             } else if (unsafeData.pony_data["ponys"][handled.slot]["data"]["feed"] < 8 && unsafeData.prodStock[0][159] > 0) {
                 GM_logInfo("autoFarmPony","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Feed Pony" + handled.slot);
-                console.log("Klicke Futterbox -> Dialog geöffnet");
+                // console.log("Klicke Futterbox -> Dialog geöffnet");
                 listeningEvent="gamePonyFeedDialogOpened";
                 action=function(){
                     click(div);
@@ -5542,22 +5552,24 @@ function autoFarmPony(runId,step){
                 };
             } else {
                 GM_logInfo("autoFarmPony","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Pony" + handled.slot + " doesn't need to be fed (anymore)");
-                console.log("Voll gefüttert oder kein Ponyfutter mehr -> Selektiere Farmi");
-                autoFarmPony(runId,step+2); // Jump to 'set farmi'
+                // console.log("Voll gefüttert oder kein Ponyfutter mehr -> Selektiere Farmi");
+                // autoFarmPony(runId,step+2); // Jump to 'set farmi'
+                window.setTimeout(autoFarmPony,settings.getPause(),runId,step+2);
             }
             break;
         }
         case 4: { // confirm feeding dialog
             var div = $("globalbox");
             if (div.style.display == "block") { // Is dialog visible?
-                console.log("Bestätige Dialog -> Selektiere Farmi");
+                // console.log("Bestätige Dialog -> Selektiere Farmi");
                 listeningEvent="gamePonyFed";
                 action=function(){
                     click(div.querySelector("button"));
                     window.setTimeout(autoFarmPony,3*settings.getPause(),runId,step+1);
                 };
             } else {
-                autoFarmPony(runId,step-1); // Redo feeding. If not necessary anymore, it will be skipped automatically
+                window.setTimeout(autoFarmPony,settings.getPause(),runId,step-1);
+                // autoFarmPony(runId,step-1); // Redo feeding. If not necessary anymore, it will be skipped automatically
             }
             break;
         }
@@ -5567,63 +5579,74 @@ function autoFarmPony(runId,step){
             //         autoFarmPony(runId,5);
             // }else
             if((unsafeData.readyZone[handled.zoneNrS][1]!="e")||!unsafeData.readyZone[handled.zoneNrS][2]|| !unsafeData.pony_data){
-                // wait for response
+                // Wait for response
                 GM_logInfo("autoFarmPony","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Waiting for pony data to be ready");
-                console.log("Wait for response");
                 window.setTimeout(autoFarmPony,settings.getPause(),runId,step);
-            } else if (zoneList[handled.zoneNrL][0][0] == PRODSTOP) {
+            } else if (zoneList[handled.zoneNrL][0][0] == PRODSTOP || !unsafeData.readyZone[handled.zoneNrS]) {
+                // PRODSTOP or zone not ready anymore => exit
                 GM_logInfo("autoFarmPony","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Production stop");
-                autoFarmPony(runId,8); // PRODSTOP => Exit
+                // autoFarmPony(runId,8);
+                window.setTimeout(autoFarmPony,settings.getPause(),runId,8);
             } else {
                 GM_logInfo("autoFarmPony","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Select farmi");
-                GM_logInfo("autoFarmPony","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"" + zoneList[handled.zoneNrL][0][0]);
-                console.log("Selektiere Farmi -> Setze ihn auf Pony");
-                console.log(zoneList[handled.zoneNrL]);
                 listeningEvent="gamePonyFarmiSelected";
                 action=function(){
                     var i = 1;
                     for (var fId in unsafeData.pony_data["farmis"]) {
-                        var f = unsafeData.pony_data["farmis"][fId];
-                        if (f["status"] == 1) {
+                        var f = unsafeData.pony_data["farmis"][fId]; // Get Farmi-Data
+                        if (f["status"] == 1) { // Skip farmis on ponys
                             continue;
                         }
-                        console.log("Vergleiche " + f["type"] + " mit " + zoneList[handled.zoneNrL][0][0]);
-                        if (f["type"] == zoneList[handled.zoneNrL][0][0]) {
+
+                        // Find correct farmi
+                        if (f["type"] == zoneList[handled.zoneNrL][0][0]) { 
                             // GM_logInfo("autoFarmPony","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Klicke Farmi " + i);
 
-                            // Noch genügend Futter?
+                            // Check food of pony in 'handled.slot'
                             if (f["type"] <= unsafeData.pony_data["ponys"][handled.slot]["data"]["feed"]) {
                                 click($("pony_farmi"+i));
+                                window.setTimeout(autoFarmPony,Math.max(1000, 3*settings.getPause()),runId,step+1);
                             } else {
+                                // Not enough food => Insert PRODSTOP and exit
                                 zoneList[handled.zoneNrL].unshift(DEFAULT_ZONELIST_ITEM.clone());
                                 updateQueueBox(handled.zoneNrS);
-                                window.setTimeout(autoFarmPony,Math.min(1000, 3*settings.getPause()),runId,8);
+                                GM_logInfo("autoFarmPony","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Nicht genügend Futter");
+                                window.setTimeout(autoFarmPony,settings.getPause(),runId,8);
                             }
                             break;
                         } else {
-                            // GM_logInfo("autoFarmPony","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Farmi " + i + " war falsch");
-                            // GM_logInfo("autoFarmPony","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"" + f["type"]);
+                            // This is not the farmi you're looking for
                             i++;
                         }
                     }
 
-                    // click($("pony_farmi3")); // TODO: Nächsten Farmi aus Queue nehmen!
-                    // zoneList[handled.zoneNrL][0][0]
-                    window.setTimeout(autoFarmPony,300*settings.getPause(),runId,step+1);
+                    // window.setTimeout(autoFarmPony,300*settings.getPause(),runId,step+1);
                 };
             }
         break;}
         case 6:{ // select pony aka set farmi on pony
             // TODO Nur, wenn dialog nicht geöffnet und pony noch frei
-            GM_logInfo("autoFarmPony","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Select Pony" + handled.slot);
-            console.log("Pony" + handled.slot + " gewählt -> Dialog geöffnet");
-            listeningEvent="gamePonySetDialogOpened";
-            action=function(){
-                // console.log("Klicke ");
-                // console.log($("pony" + handled.slot));
-                click($("pony" + handled.slot));
-                window.setTimeout(autoFarmPony,Math.min(1000, 3*settings.getPause()),runId,step+1);
-            };
+            if(unsafeWindow.pony_sel_farmi === undefined){
+                // Wait for response
+                GM_logInfo("autoFarmPony","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Waiting (Step" + step + ")");
+                window.setTimeout(autoFarmPony,settings.getPause(),runId,step);
+            } else if (unsafeWindow.pony_sel_farmi) { // Is a farmi selected?
+                GM_logInfo("autoFarmPony","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Select Pony" + handled.slot);
+                console.log("Pony" + handled.slot + " gewählt -> Dialog geöffnet");
+                listeningEvent="gamePonySetDialogOpened";
+                action=function(){
+                    // console.log("Klicke ");
+                    // console.log($("pony" + handled.slot));
+                    click($("pony" + handled.slot));
+                    window.setTimeout(autoFarmPony,Math.max(1000, 3*settings.getPause()),runId,step+1);
+                };
+            } else {
+                // No farmi selected => Exit
+                GM_logInfo("autoFarmPony","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"No farmi selected (Step" + step + ")");
+                console.log("Kein Farmi selektiert => Exit");
+                // autoFarmPony(runId,8);
+                window.setTimeout(autoFarmPony,settings.getPause(),runId,8);
+            }
         break;}
         case 7:{ // Confirm set farmi
             var div = $("globalbox_button1");
@@ -5635,10 +5658,14 @@ function autoFarmPony(runId,step){
                     // console.log("Klicke " + $("globalbox_button1"));
                     click(div);
                     setNextQueueItem(handled.zoneNrS);
-                    window.setTimeout(autoFarmPony,Math.min(1000, 3*settings.getPause()),runId,step+1);
+                    window.setTimeout(autoFarmPony,Math.max(1000, 3*settings.getPause()),runId,step+1);
                 };
             } else {
-                autoFarmPony(runId,step+1); // Exit
+                // No dialog visible => Exit
+                GM_logInfo("autoFarmPony","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"No dialog visible (Step" + step + ")");
+                console.log("No dialog visible => Exit");
+                // autoFarmPony(runId,8);
+                window.setTimeout(autoFarmPony,settings.getPause(),runId,8);
             }
         break;}
         case 8:{ // start other slot or exit
@@ -5659,7 +5686,8 @@ function autoFarmPony(runId,step){
                 }
             }
             if(next){
-                autoFarmPony(runId,1);
+                // autoFarmPony(runId,1);
+                window.setTimeout(autoFarmPony,Math.max(1000, 3*settings.getPause()),runId,1);
             }else{
                 autoZoneFinish(runId,$("innercontent").getElementsByClassName("big_close")[0]);
             }
@@ -9574,6 +9602,22 @@ try{
 
         err_trace="listener gameOpenPony";
         document.addEventListener("gameOpenPony",function(){ // pony open
+            drawPonyIcons();
+        },false);
+        err_trace="listener gamePonyCropped";
+        document.addEventListener("gamePonyCropped",function(){ // pony fed
+            drawPonyIcons();
+        },false);
+        err_trace="listener gamePonyFed";
+        document.addEventListener("gamePonyFed",function(){ // pony fed
+            drawPonyIcons();
+        },false);
+        err_trace="listener gamePonyFarmiSet";
+        document.addEventListener("gamePonyFarmiSet",function(){ // pony farmi set on pony
+            drawPonyIcons();
+        },false);
+        
+        function drawPonyIcons() {
         try{
             var zoneNrF=getFarmZone(unsafeWindow.currentposition);
             var zoneNrS;
@@ -9588,7 +9632,11 @@ try{
                 }
             }
         }catch(err){GM_logError("eventListener:gameOpenPony ","","",err);}
+<<<<<<< HEAD
         },false);
+=======
+        }
+>>>>>>> f3e5acf06ebb51684140e02cd7bc04a1bd41f3dd
 
         function drawFarmIcons(){
         try{
