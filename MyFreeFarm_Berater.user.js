@@ -2224,9 +2224,9 @@ var zones=new function(){
                 }
                 div=null;
             }
-            if (readyZoneAdded) {
-                console.log("Ready: " + zoneNrF);
-            }
+            // if (readyZoneAdded) {
+            //     console.log("Ready: " + zoneNrF);
+            // }
 
             return readyZoneAdded;
         }catch(err){GM_logError("zones.checkReady","zoneNrS="+zoneNrS,"",err);}
@@ -13846,7 +13846,7 @@ return false;
                 case "pony_setfarmi": doPony(zoneNr); raiseEvent("gamePonyFarmiSet"); console.log("gamePonyFarmiSet"); break;
                 case "pony_buy": 
                 case "pony_speedup": {
-                        // doPony(zoneNr);
+                        doPony(zoneNr);
                         break;
                 }
                 case "reallocatebuilding":{
@@ -13928,6 +13928,10 @@ return false;
         try{
             raiseEvent("gamePonyFarmiSelected");
             console.log("gamePonyFarmiSelected: " + farmiId);
+
+            console.log(unsafeWindow.pony_sel_farmi);
+
+
         }catch(err){GM_logError("ponySelectFarmi","","",err);}
     });
     unsafeOverwriteFunction("ponyDialog",function(h, b, n){
