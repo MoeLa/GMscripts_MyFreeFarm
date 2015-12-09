@@ -13926,12 +13926,13 @@ return false;
             unsafeWindow._ponySelectFarmi(farmiId);
         }catch(err){GM_logError("_ponySelectFarmi","","",err);}
         try{
-            raiseEvent("gamePonyFarmiSelected");
-            console.log("gamePonyFarmiSelected: " + farmiId);
-
-            console.log(unsafeWindow.pony_sel_farmi);
-
-
+            if (unsafeWindow.pony_sel_farmi) {
+                raiseEvent("gamePonyFarmiSelected");
+                console.log("gamePonyFarmiSelected: " + farmiId);
+            } else {
+                console.log("Farmi unselected");
+            }
+            // console.log(unsafeWindow.pony_sel_farmi);
         }catch(err){GM_logError("ponySelectFarmi","","",err);}
     });
     unsafeOverwriteFunction("ponyDialog",function(h, b, n){
