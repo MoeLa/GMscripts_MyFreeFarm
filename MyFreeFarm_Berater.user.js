@@ -1,11 +1,11 @@
-﻿// ==UserScript==
+// ==UserScript==
 // @name           MyFreeFarm Berater
 // @namespace      https://github.com/BastianKanaan/GMscripts_MyFreeFarm
 // @author         BastianKanaan
 // @description    Extends MyFreeFarm
 // @icon           data:image/png;base64,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
 // @date           04.12.2015
-// @version        2.7.2
+// @version        2.7.3
 // @license        GPL version 3 or any later version; http://www.gnu.org/copyleft/gpl.html
 // @include        /^http:\/\/(|www\.|s\d+\.)au\.myfreefarm\.com\/.*$/
 // @include        /^http:\/\/(|www\.|s\d+\.)veselaferma\.com\/.*$/
@@ -104,7 +104,8 @@ const CHANGELOG=[["2.0","29.05.2014",[["Migration nach openuserjs.org","Migratio
                 ,["2.6.5","23.11.2015",[["Kleiderspende: Anpassung für Bot","Clothing Donation: Adjustments for bot"]]]
                 ,["2.7","24.11.2015",[["Anpassung an Spiel-Update 24.11.2015","Fix for game-update 24.11.2015"]]]
                 ,["2.7.1","30.11.2015",[["Bugfix: Defaultwerte Deklarieren","Bugfix: declare default-values"]]]
-                ,["2.7.2","04.12.2015",[["Addon:: Hilfestellung fürs Einwerfen beim Knabbermarathon","Addon:: help for city christmas game"]]]
+                ,["2.7.2","04.12.2015",[["Addon: Hilfestellung für Weihnachts-Knabbermarathon","Addon: Assistance for X-Mas event"]]]
+                ,["2.7.3","04.12.2015",[["Neue Berater-Option: Questnummer der 2. Baumerei-Questreihe manuell übernehmen","New adviser option: Set questnumber for 2nd series of quests (forestry)"]]]
                 ];
 if(!VERSIONfunctionFile){
     alert("Hi, I am the Berater-Script.\nThe function-file is missing.\nPlease install me again.");
@@ -327,11 +328,11 @@ const FARMISIZE=[,[40,60,-1,-5],[30,40,0,0],[30,40,2,0],[33,45,2,0],[33,45,4,2],
 // [11,number of additional farmi slots]
 // [12,id of gained farmhouse item]
 // [13,id of gained gift]
-// [14,shorter treatment-time in %]
-// [15,shorter production-time in %]
-// [16,reward - more patches in %]
-// [17,reward - more kT in %]
-// [18,reward - more points in %]
+// [14,reduce treatment-time in %]
+// [15,reduce production-time in %]
+// [16,reward: more bandages in %]
+// [17,reward: more money in %]
+// [18,reward: more points in %]
 // task_new_quest
 const QUESTS = {"main":{"1":[,[[[0,17,43],[0,9,1]],1,142,[[0,54]]],[[[0,1,173],[0,9,2]],1,348,[[0,145]]],[[[0,18,192],[0,17,288]],1,255,[[0,73]]],[[[0,18,672],[0,9,10]],1,1883,[[0,608]]],[[[0,17,922],[0,9,19]],1,2304,[[0,890]]],[[[0,20,360],[0,18,960]],1,3300],[[[0,19,540],[0,20,720]],1,6413],[[[0,2,240],[0,21,245]],1,2895],[[[0,20,1440],[0,9,24]],1,11700,[[1,0,47,1]]],[[[0,21,1152],[0,9,48]],1,16200],[[[0,9,72],[0,22,1037]],1,16202],[[[0,20,3456],[0,10,27]],1,25476],[[[0,18,8064],[0,10,48]],1,15660],[[[0,23,3110],[0,9,144]],1,57240],[[[0,10,96],[0,9,180]],1,33930,[[1,0,59,1]]],[[[0,9,240],[0,6,1836]],1,62190],[[[0,10,384],[0,9,144]],1,70920],[[[0,10,192],[0,23,6739]],1,116280,[[2,2]]],[[[0,22,7518],[0,9,216]],1,108956],[[[0,11,150],[[0,10,272],[0,110,112]]],1,34650],[[[0,7,1350],[0,12,50]],1,78375,[[1,0,63,1]]],[[[0,23,15552],[0,9,1008]],1,318600],[[[0,29,6552],[0,25,130]],1,373645,[[3,2]]],[[[0,1,51840],[[0,27,55],[0,111,51]]],1,60579],[[[0,11,280],[0,12,210]],1,138705],[[[[0,10,672],[0,110,276]],[0,12,210]],1,169785],[[[0,1,75600],[0,2,25000]],1,42131,[[1,0,90,1]]],[[[0,11,480],[0,12,272]],1,206760],[[[0,9,2688],[[0,10,1024],[0,110,420]]],1,448320],[[[0,12,320],[0,11,560]],1,242160],[[[0,29,14742],[[0,27,194],[0,111,180]]],1,836328,[[2,3]]],[[[0,20,77760],[0,12,383]],1,620831,[[1,0,78,1]]],[[[0,12,540],[0,32,14600]],1,449550],[[[0,32,50400],[0,25,432]],1,1208880],[[[[0,10,1760],[0,110,722]],[0,11,1000]],1,481800,[[3,3]]],[[[0,9,4800],[0,12,595]],1,749738],[[[0,26,46550],[[0,27,216],[0,111,201]]],1,933756,[[1,0,77,1]]],[[[0,1,259200],[0,30,216]],1,252960],[[[0,23,51840],[0,28,230]],1,856800],[[[0,9,5280],[[0,10,1795],[0,110,736]]],1,849816],[[[0,25,475],[0,30,238]],1,1665576,[[1,0,80,1]]],[[[0,34,64152],[0,28,253]],1,1704780],[[[0,11,1320],[0,12,880]],1,615120],[[[[0,27,238],[0,111,221]],[0,24,30294]],1,576923,[[1,0,76,1]]],[[[[0,10,2304],[0,110,945]],[0,30,259]],1,538272],[[[0,9,5760],[[0,10,2304],[0,110,945]]],1,976320],[[[0,37,13800],[0,25,518]],1,5559806,[[1,0,61,1]]],[[[0,9,5760],[[0,10,1958],[0,110,803]]],1,927072],[[[0,28,276],[0,30,259]],1,417312],[[[0,12,1040],[0,30,281]],1,376253,[[1,0,52,1]]],[[[0,20,72000],[0,12,800]],1,732000,[[4,0,23,15]]],[[[0,12,4000],[[0,10,1920],[0,110,787]]],1,1683600],[[[0,23,64800],[0,9,4800]],1,1395000],[[[0,25,432],[0,28,230]],1,373680,[[4,0,24,15]]],[[[0,24,72000],[[0,27,216],[0,111,201]]],1,1135800],[[[0,7,18000],[[0,10,1920],[0,110,787]]],1,1083600],[[[[0,27,216],[0,111,201]],[0,11,1200]],1,423000,[[4,0,31,15]]],[[[0,31,103700],[0,30,216]],1,2965498],[[[0,11,1200],[0,25,432]],1,478080,[[4,0,21,10]]],[[[0,21,57600],[[0,10,1920],[0,110,787]]],1,813600],[[[0,12,800],[[0,27,216],[0,111,201]]],1,427800,[[4,0,29,15]]],[[[0,29,27300],[0,25,432]],1,1506635],[[[0,4,48000],[0,9,4800]],1,855000],[[[0,28,230],[[0,27,216],[0,111,201]]],1,318600,[[4,0,33,15]]],[[[0,33,43200],[0,25,432]],1,1685880,[[5,1]]],[[[0,9,4800],[0,12,800]],1,822000,[[4,0,22,10]]],[[[0,8,18000],[0,28,230]],1,1792800],[[[[0,10,1920],[0,110,787]],[0,11,1200]],1,550800,[[4,0,34,15]]],[[[0,34,64800],[0,30,216]],1,1704960],[[[0,6,10800],[0,28,230]],1,207000],[[[0,11,1200],[[0,10,1920],[0,110,787]]],1,550800,[[4,0,35,20]]],[[[0,35,12950],[[0,27,216],[0,111,201]]],1,932692],[[[0,25,432],[0,11,1200]],1,478080],[[[0,32,72000],[0,12,800]],1,1722000,[[4,0,36,15]]],[[[0,36,24500],[0,9,4800]],1,3235000],[[[[0,27,216],[0,111,201]],[0,30,216]],1,320760,[[4,0,7,10]]],[[[0,26,66500],[0,28,230]],1,1298451],[[[0,12,800],[[0,10,1920],[0,110,787]]],1,555600,[[4,0,37,30]]],[[[0,37,3833],[0,9,4800]],1,2017431],[[[0,28,230],[0,25,432]],1,373680],[[[0,33,43200],[0,12,800]],1,1767000,[[4,0,38,15]]],[[[0,38,108000],[0,30,216]],1,3594960],[[[0,9,4800],[0,28,230]],1,712800,[[4,0,19,5]]],[[[0,5,72000],[[0,10,1920],[0,110,787]]],1,963600],[[[0,30,216],[0,9,4800]],1,714960,[[4,0,39,30]]],[[[0,39,2867],[0,12,800]],1,1834778],[[[[0,10,1920],[0,110,787]],[0,25,432]],1,474480],[[[0,32,72000],[[0,27,216],[0,111,201]]],1,1585800,[[4,0,40,30]]],[[[0,40,2250],[0,12,800]],1,1782000],[[[0,25,432],[0,11,1200]],1,478080,[[4,0,20,10]]],[[[0,3,64000],[0,30,216]],1,374960],[[[[0,27,216],[0,111,201]],[0,11,1200]],1,423000,[[4,0,41,30]]],[[[0,41,1975],[[0,10,1920],[0,110,787]]],1,1819998],[[[0,11,1200],[[0,27,216],[0,111,201]]],1,423000,[[4,0,8,15]]],[[[0,24,72000],[[0,10,1280],[0,110,787]]],1,1172400,[[5,1]]],[[[0,12,800],[0,9,4800]],1,822000,[[4,0,26,15]]],[[[0,36,24500],[0,28,230]],1,2867800],[[[0,31,103700],[[0,10,1920],[0,110,787]]],1,3064138,[[4,0,42,30]]],[[[0,28,230],[0,25,432]],1,373680],[[[0,42,1680],[0,30,216]],1,1693960,[[4,0,33,15]]],[[[0,4,80000],[0,30,210]],2,722800],[[[0,6,48000],[0,12,300]],2,854400],[[[0,1,800000],[0,25,320]],2,998400,[[4,0,32,10]]],[[[0,35,64000],[0,32,12000]],2,1629600],[[[0,26,108000],[0,11,540]],2,1452600],[[[0,39,12000],[0,9,5600]],2,2160000,[[4,0,43,30]]],[[[0,43,10000],[[0,27,600],[0,111,558]]],2,2556000],[[[0,24,184000],[0,25,480]],2,2248000],[[[0,9,10200],[[0,10,24000],[0,110,9840]]],2,2205600],[[[0,23,108000],[0,91,250]],2,1359600,[[12,105]]],[[[0,34,36936],[0,37,10580]],2,1959726],[[[0,29,78624],[0,26,5200]],2,2164176],[[[0,44,2016],[0,28,1600]],2,2059245],[[[[0,10,12000],[0,110,4920]],[0,12,1200]],2,1536000],[[[0,30,840]],2,906800,[[12,123]]],[[[0,40,3240],[0,36,9800]],2,1265312],[[[0,91,750],[0,31,72590]],2,1233972],[[[0,26,113050],[[0,27,600],[0,111,558]]],2,1874430],[[[0,38,7020],[0,42,2352]],2,2134942],[[[0,41,9480],[0,9,28800]],2,1886172,[[5,1]]],[[[0,23,174960],[0,22,98515]],2,2267541],[[[0,8,5040],[0,7,3780]],2,2022804],[[[0,32,27000],[[0,10,24000],[0,110,9840]]],2,2357400],[[[0,39,2580],[0,37,7935]],2,1525641,[[1,0,99,1]]],[[[0,33,51840],[0,35,20720]],2,2464720],[[[0,43,5000],[0,21,146880]],2,2139910],[[[0,31,60664],[0,26,100520]],2,1945541],[[[0,20,100800],[0,9,15360]],2,1216320,[[4,0,44,20]]],[[[[0,10,10080],[0,110,4132]],[0,11,4500]],2,1571400],[[[0,7,18900],[0,38,5400]],2,2239480],[[[0,40,3500],[0,35,12000]],2,1168200],[[[0,91,1000]],2,600000,[[12,137]]],[[[0,44,4400],[0,26,22400]],2,1284560],[[[0,3,280000],[0,31,40000]],2,1328000],[[[0,12,1200],[0,39,3900]],2,1228860],[[[0,7,9800],[0,2,240000]],2,1003320],[[[0,26,60000],[0,1,275000]],2,1031000],[[[0,11,6400]],2,1088000],[[[0,6,14444],[0,33,34000]],2,1158911],[[[[0,27,625],[0,111,581]]],2,1078125],[[[0,38,8600],[0,41,2900]],2,1056220],[[[0,43,4050],[0,7,5250]],2,1133280],[[[0,9,16200]],2,453600,[[5,1]]],[[[0,25,900],[[0,10,5400],[0,110,2214]]],2,990000],[[[0,37,8600]],2,1016520],[[[0,28,300],[[0,10,7500],[0,110,3075]]],2,1050000],[[[0,30,400],[0,42,3600]],2,1096880],[[[0,29,51000],[0,9,3600]],2,1069800],[[[0,91,175],[0,8,18200]],2,1087560],[[[0,36,10300],[0,41,3800]],2,1312700],[[[0,24,90000],[[0,10,800],[0,110,328]]],2,1028000],[[[0,22,95500],[0,1,300000]],2,930300],[[[0,35,13000],[0,32,33000]],2,1176800],[[[0,17,155000],[0,21,99999]],2,1049993],[[[0,38,13000],[[0,27,250],[0,111,232]]],2,1104650],[[[0,37,4444],[0,39,3333]],2,1083225],[[[0,2,122000],[0,21,122000]],2,1146800],[[[0,20,112000],[[0,10,2800],[0,110,1148]]],2,1097600],[[[0,9,1111],[0,26,66000]],2,1142108],[[[0,11,2320],[0,23,72000]],2,1200800],[[[0,19,116000],[0,25,900]],2,976200,[[5,1]]],[[[0,5,220000],[0,12,720]],2,1049600],[[[0,18,240000],[0,6,50000]],2,1028000],[[[0,41,4400],[0,1,150000]],2,1076640],[[[0,40,3250],[0,30,500]],2,1069300],[[[0,29,45000],[0,20,25000]],2,1050000],[[[0,91,840],[0,1,510000]],2,1014000],[[[0,34,45000],[0,12,680]],2,1190400],[[[0,31,425000],[0,43,2800]],2,1048680],[[[[0,10,7500],[0,110,3075]],[0,3,140000]],2,1048000,[[7,5]]]]
                        ,"2":[,[[[0,8,6500],[0,12,300]],,495000],[[[0,34,18600],[0,111,75]],,496298],[[[0,33,5650],[0,30,315]],,498270],[[[0,26,15600],[0,9,11200]],,506380],[[[0,37,2150],[0,12,530]],,508530],[[[0,18,175000],[0,91,505]],,511250],[[[0,108,6350],[0,7,5400]],,505010],[[[0,35,6530],[0,110,950]],,507946],[[[0,24,19150],[0,27,412]],,511190],[[[0,23,33000],[0,25,480]],,518500,[[3,4]]],[[[0,28,366],[0,46,100]],,516000],[[[0,116,460],[0,11,1400]],,523880],[[[0,21,42000],[0,9,8000]],,534800],[[[0,32,15420],[0,10,3630]],,540204],[[[0,7,5000],[0,30,265]],,550550,[[9,0,117],[9,0,123]]],[[[0,116,480],[0,91,777]],,551640],[[[0,19,84000],[0,110,1255]],,554475],[[[0,117,917],[0,18,277000]],,559816],[[[0,12,625],[0,109,42000]],,560400],[[[0,108,12300],[0,116,670]],,559600],[[[0,5,50500],[0,26,32000]],,564800],[[[0,117,490],[0,9,16000]],,569520],[[[0,29,16600],[0,31,24000]],,574600],[[[0,33,18200],[0,11,1800]],,589560],[[[0,4,40450],[0,116,1560]],,594810,[[9,0,118],[9,0,124]]],[[[0,3,110000],[0,12,515]],,599200],[[[0,17,75000],[0,10,6800]],,605000],[[[0,91,700],[0,34,9900]],,610080],[[[0,2,155000],[0,28,305]],,615000],[[[0,37,3800],[0,118,1450]],,617360,[[8,"20"]]],[[[0,1,172350],[0,111,558]],,622350],[[[0,117,1090],[0,36,5800]],,625320],[[[0,12,900],[0,25,310]],,624400],[[[0,31,38380],[0,118,1800]],,623304],[[[0,38,9200],[0,116,840]],,623304,[[9,0,119],[9,0,125]]],[[[0,65,10],[0,27,680]],,623333],[[[0,36,7500],[0,9,8000]],,627000],[[[0,6,13150],[0,110,2214]],,626620],[[[0,37,2415],[0,11,2000]],,625453],[[[0,119,735],[0,30,360]],,626280],[[[0,21,19000],[0,10,6120]],,630200],[[[0,33,14400],[0,35,4750]],,634970],[[[0,38,8200],[0,111,116]],,640341],[[[0,73,30],[0,28,600]],,650000],[[[0,42,2980],[0,117,430]],,660324,[[9,0,120]]],[[[0,39,2250],[0,12,666]],,696030],[[[0,40,2400],[0,30,286]],,700580],[[[0,41,2200],[0,118,2275]],,702800],[[[0,20,36000],[0,23,38000]],,706400],[[[0,43,1850],[0,120,690]],,709770,[[9,0,121]]],[[[0,108,14000],[0,8,13200]],,715040],[[[0,40,1950],[0,9,14200]],,719600],[[[0,39,1900],[0,116,1540]],,729920],[[[0,27,268],[0,43,1300]],,735580],[[[0,42,2300],[0,109,34850]],,740010],[[[0,112,3300],[0,121,500]],,748000],[[[0,41,2500],[0,111,138]],,754830],[[[0,119,1000],[0,29,22750]],,760250],[[[0,112,3300],[0,22,52300]],,766260],[[[0,32,24799],[0,9,13333]],,766260,[[8,"21"]]],[[[0,113,9100],[0,27,400]],,750000],[[[0,44,1142],[0,144,790]],,755000],[[[0,154,1695],[0,111,210]],,760000],[[[0,24,39500],[0,118,2350]],,765000],[[[0,153,6250],[0,26,22650]],,765000],[[[0,23,39500],[0,28,385]],,770000],[[[0,6,34500],[0,122,37]],,770000],[[[0,32,13400],[0,10,3900]],,775000],[[[0,39,990],[0,38,8400]],,775000],[[[0,144,1150],[0,123,46]],,780000],[[[0,9,7900],[0,151,85]],,780000],[[[0,5,56200],[0,4,41500]],,785000],[[[0,64,15],[0,152,80]],,785000],[[[0,31,28500],[0,91,550]],,790000],[[[0,20,59000],[0,30,720]],,790000,[[8,"22"]]],[[[0,114,15000],[0,29,25000]],,795000],[[[0,120,400],[0,11,4500]],,795000],[[[0,2,150000],[0,6,45000]],,800000],[[[0,40,9000],[0,25,200]],,800000],[[[0,7,28000],[0,30,225]],,805000],[[[0,32,65000],[0,1,190000]],,805000],[[[0,109,125000],[0,108,65000]],,810000],[[[0,22,92000],[0,27,450]],,810000],[[[0,124,1125],[0,21,85000]],,815000],[[[0,36,9500],[0,112,6600]],,815000],[[[0,116,840],[0,24,63000]],,820000],[[[0,26,63000],[0,117,700]],,820000],[[[0,152,120],[0,44,15000]],,825000],[[[0,144,450],[0,113,30000]],,825000],[[[0,125,650],[0,151,550]],,830000,[[8,"23"]]],[[[0,115,1680],[0,10,4200]],,835000],[[[0,154,7500],[0,118,3300]],,840000],[[[0,153,18500],[0,31,22000]],,845000],[[[0,42,2250],[0,110,1450]],,850000],[[[0,43,1500],[0,1,150000]],,855000],[[[0,41,2200],[0,12,1100]],,860000],[[[0,157,550],[0,120,600]],,865000],[[[0,33,14000],[0,35,16500]],,870000],[[[0,21,29500],[0,112,11500]],,875000],[[[0,10,3500],[0,114,18200]],,880000],[[[0,22,32000],[0,123,1250]],,885000],[[[0,30,650],[0,155,350]],,890000],[[[0,91,1050],[0,7,14000]],,895000],[[[0,29,18400],[0,26,21200]],,900000],[[[0,28,650],[0,152,250]],,905000],[[[0,157,320],[0,156,410]],,910000],[[[0,121,1000],[0,9,15000]],,915000],[[[0,44,62000],[0,144,450]],,920000],[[[0,8,18000],[0,12,1350]],,925000],[[[0,113,18000],[0,27,350]],,930000],[[[0,21,42500],[0,122,1850]],,935000],[[[0,22,95000],[0,120,950]],,940000],[[[0,40,5500],[0,41,6800]],,945000],[[[0,116,2500],[0,38,18600]],,950000],[[[0,111,650],[0,119,750]],,955000],[[[0,36,18500],[0,37,12000]],,960000],[[[0,6,32500],[0,117,1450]],,965000],[[[0,34,27500],[0,32,32100]],,970000],[[[0,151,600],[0,11,1200]],,980000],[[[0,125,1000],[0,124,1600]],,985000,[[8,"24"]]]]
@@ -619,7 +620,6 @@ var valMessagesSystemMarkRead;
 var megafieldVehicle, megafieldJob, logMegafieldJob, megafieldSmartTimer;
 top.unsafeData.autoAction=null;
 
-// /*
 // animierte Hintergründe ausblenden code by Harry 24.11.2015
 if (GM_getValue("valAnimateStartscreen",false)){
     var divdel1 = document.getElementById("clouds1");
@@ -636,7 +636,8 @@ if (GM_getValue("valAnimateStartscreen",false)){
     }
 }
 // animierte Hintergründe ausblenden
-// */
+
+console.log("Game-Currency: " + unsafeWindow.gamecurrency)
 
 //***********************************************************************************************************
 // developer functions
@@ -944,7 +945,7 @@ function updateProductDataFarm(){
         GM_log(implode(new_prodBlock));
         */
 
-        //Linus-Tux 20151015 
+        //Linus-Tux 20151015
         var help={"v":[],"e":[],"o":[],"fw1":[],"fw2":[],"fw3":[],"fw4":[],"z":[],"fl":[],"fla":[],"hr":[],"md":[],"ex":[]};
         // for(var v=1;v<unsafeWindow.produkt_name.length;v++){
         //*task_fix_growtime*/ var newProductGrowtime={};
@@ -953,10 +954,10 @@ function updateProductDataFarm(){
         if(unsafeWindow.vet_data&&unsafeWindow.vet_data.info&&unsafeWindow.vet_data.drugs){
             vet_data=unsafeWindow.vet_data;
         }
-        
+
         //Linus--Tux 20151028 Rack Farm 5
         if(!prodStock[5]||!(prodStock[5] instanceof Array)){ prodStock[5]=[]; }
-        
+
         var prodStockTemp=new Array();    //Stock Farm 1
         for(var i in unsafeWindow.rackobj) {
             for(var j in unsafeWindow.rackobj[i]) {
@@ -987,7 +988,7 @@ function updateProductDataFarm(){
             //Linus--Tux 20151020
             var c=(prodStockTemp[v])?prodStockTemp[v]:0;
             prodStock[0][v]=(c?parseInt(c,10):0);
-            
+
             prodYield[0][v]=(unsafeWindow.produkt_ernte[v]?parseInt(unsafeWindow.produkt_ernte[v],10):0);
             prodTyp[0][v]=unsafeWindow.produkt_category[v];
             prodRequire[0][v]=PRODUCT_REQUIRE[0][v];
@@ -2150,7 +2151,7 @@ var zones=new function(){
                             // Iterate over needed products for current job
                             for (var i = 0; i < unsafeWindow.megafield_data.job.products.length; i++) {
                                 var product = unsafeWindow.megafield_data.job.products[i];
-                                
+
                                 // If the product can be planted...
                                 if (product.duration) { // Only check plants: Cheese/Milk/Honey/... don't have a duration
                                     // ... we add the total needed amount minus the amount we have minus the amount currently growing
@@ -2179,7 +2180,7 @@ var zones=new function(){
                         // console.log(unsafeWindow.megafield_data);
                     }
                 }
-                
+
                 if (zT==NEVER){ // empty
                     if(unsafeData.readyZone[zoneNrS]&&(unsafeData.readyZone[zoneNrS][1]=="e")){
                         if(!unsafeData.readyZone[zoneNrS][2]){ unsafeData.readyZone[zoneNrS][2]=true; }
@@ -6755,9 +6756,9 @@ function buildInfoPanelOptions(){
         createElement("td",{},newtr,getText("settings_cacheReset")[1]);
 */
 
-        /*    
+        /*
          *    Option added by georgvr
-         *    Option deletes all zones-related settings.  
+         *    Option deletes all zones-related settings.
          *    Option is needed in case that buildings have been teared down and new building isn't recognized properly
          */
         newtr=createElement("tr",{},newtable);
@@ -6773,7 +6774,7 @@ function buildInfoPanelOptions(){
         },false);
         createElement("td",{},newtr,getText("settings_zoneReset")[1]);
 
-        /*    
+        /*
          *    Option added by georgvr & Linus--Tux
          *    if all main-questlines are achieved the in-game variable "quest_status" has no properties and values can't be copied by the bot.
          *    This option sets the quest-number to the max-quest-number of a line plus 1 and therefore releases the products which are related to quest-achievement.
@@ -6783,8 +6784,8 @@ function buildInfoPanelOptions(){
         newinput=createElement("button",{"type":"button","class":"link"},newtd,getText("settings_setQuestMain")[0]);
         newinput.addEventListener("click",function(){
             alert2(getText("settings_setQuestMain")[1],getText("yes"),getText("no"),function(){
-                if (unsafeWindow.quests_status.hasOwnProperty("main")) { 
-                    if (!unsafeWindow.quests_status["main"].hasOwnProperty("1")){ 
+                if (unsafeWindow.quests_status.hasOwnProperty("main")) {
+                    if (!unsafeWindow.quests_status["main"].hasOwnProperty("1")){
                         questData["main"][1] = INIT_questData["main"][1].clone();
                         questData["main"][1]["nr"] = QUESTS["main"][1].length;
                         questData["main"][1]["given"] = new Object();
@@ -6792,7 +6793,7 @@ function buildInfoPanelOptions(){
                         GM_setValueCache(COUNTRY+"_"+SERVER+"_"+USERNAME+"_questData",implode(questData,"handleQuestData/questData"));
                         unsafeData.questData=questData.clone();
                     }
-                    if (!unsafeWindow.quests_status["main"].hasOwnProperty("2")) { 
+                    if (!unsafeWindow.quests_status["main"].hasOwnProperty("2")) {
                         questData["main"][2] = INIT_questData["main"][2].clone();
                         questData["main"][2]["nr"] = QUESTS["main"][2].length;
                         questData["main"][2]["given"] = new Object();
@@ -6800,7 +6801,7 @@ function buildInfoPanelOptions(){
                         GM_setValueCache(COUNTRY+"_"+SERVER+"_"+USERNAME+"_questData",implode(questData,"handleQuestData/questData"));
                         unsafeData.questData=questData.clone();
                     }
-                    if (!unsafeWindow.quests_status["main"].hasOwnProperty("3")){ 
+                    if (!unsafeWindow.quests_status["main"].hasOwnProperty("3")){
                         questData["main"][3] = INIT_questData["main"][3].clone();
                         questData["main"][3]["nr"] = QUESTS["main"][3].length;
                         questData["main"][3]["given"] = new Object();
@@ -6812,12 +6813,12 @@ function buildInfoPanelOptions(){
             });
         },false);
         createElement("td",{},newtr,getText("settings_setQuestMain")[1]);
-    
+
         /*
          *    Option added by georgvr
-         *    Option sets the questnumber of mainseries 3 to the mff-questnumber. 
+         *    Option sets the questnumber of mainseries 3 to the mff-questnumber.
          *    Option is needed in case that the quest has been solved by an other device and cooldown-time is active
-         *    - Button is only executable if questseries 3 exists (linked to presence of Farm 5), 
+         *    - Button is only executable if questseries 3 exists (linked to presence of Farm 5),
          *      and Questseries 3 is not accessible because cooldown-time is active (sandglass is visible)
          */
         newtr=createElement("tr",{},newtable);
@@ -6844,6 +6845,36 @@ function buildInfoPanelOptions(){
             });
         },false);
         createElement("td",{},newtr,(getText("settings_setQuestMain3")[1]));
+        help_q=null;
+
+        /*
+         *    Option added by georgvr
+         *    Option sets the questnumber of Forestseries 2 to the mff-questnumber.
+         *    Option is needed in case that the quest has been solved by an other device and cooldown-time is active
+         *    - Button is only executable if Forestseries 2 exists and is not accessible because cooldown-time is active (sandglass is visible)
+         */
+        newtr=createElement("tr",{},newtable);
+        newtd=createElement("td",{"colspan":"2","align":"center"},newtr);
+        newinput=createElement("button",{"type":"button","class":"link"},newtd,getText("settings_setQuestForest2")[0]);
+        if(USERLEVEL<20 || !unsafeWindow.quests_status["forestry"].hasOwnProperty("2") || isNaN(parseInt(unsafeWindow.quests_status["forestry"][2]["remain"],10))){newinput.disabled=true;}
+        newinput.addEventListener("click",function(){
+            alert2(getText("settings_setQuestForest2")[1],getText("yes"),getText("no"),function(){
+                GM_log(implode(unsafeWindow.quests_status));
+                if (unsafeWindow.quests_status["forestry"].hasOwnProperty("2")){
+                    questData["forestry"][2] = INIT_questData["forestry"][2].clone();
+                    questData["forestry"][2]["nr"] = 1+parseInt(unsafeWindow.quests_status["forestry"][2]["questid"],10);
+                    questData["forestry"][2]["time"] = (parseInt(unsafeWindow.Zeit.Server,10) + parseInt(unsafeWindow.quests_status["forestry"][2]["remain"],10));
+                    questData["forestry"][2]["given"] = new Object();
+                    questData["forestry"][2]["data"] = QUESTS["forestry"][2][(questData["forestry"][2]["nr"])];
+                    for (var v=0; v<(QUESTS["forestry"][2][(questData["forestry"][2]["nr"])].length-1); v++){
+                        questData["forestry"][2]["data"][0][v][3]=true;
+                    }
+                    GM_setValueCache(COUNTRY+"_"+SERVER+"_"+USERNAME+"_questData",implode(questData,"handleQuestData/questData"));
+                    unsafeData.questData=questData.clone();
+                }
+            });
+        },false);
+        createElement("td",{},newtr,(getText("settings_setQuestForest2")[1]));
         help_q=null;
 
 /*
@@ -7733,7 +7764,7 @@ function goToZone(zoneNrF){
         var div;
         switch(currLocation.location){
         case "farm":{
-            if(gameLocation.check(currLocation.location,currLocation.farmNr)){
+            if((gameLocation.check(currLocation.location,currLocation.farmNr))&&(unsafeWindow.farm==1+currLocation.farmNr)){
                 if(div=$("farm"+(1+currLocation.farmNr)+"_pos"+currLocation.zoneNr+"_click")){
                     click(div);
                 }
@@ -8052,7 +8083,7 @@ function quicklinks(){
                             newdiv1=createElement("div",{"prodId":v,"style":"position:relative;top:-48px;width:24px;height:24px;background-color:blue;border-radius:8px;opacity:0;"},newdiv);
                         }else{
                             newdiv1=createElement("div",{"prodId":v,"style":"position:relative;top:-24px;width:24px;height:24px;background-color:blue;border-radius:8px;opacity:0;"},newdiv);
-                        }                            
+                        }
                         newdiv1.addEventListener("click",function(event){
                             event.stopPropagation ? event.stopPropagation() : (event.cancelBubble=true); // stop bubbling
                             showMarket(this.getAttribute("prodId"));
@@ -8920,7 +8951,7 @@ try{
     // $("questbarcontrol").parentNode;
     // removeElement(newdiv1.firstElementChild);
     newdiv=createElement("td",{"id":"divRightBorder","style":"padding:0px 100px 0px 20px;"},newdiv1);
-    
+
     err_trace="Container - divMiddleBorder";
     /*
     if(container=$("gamearea_spacer")){
@@ -9465,7 +9496,7 @@ try{
     });
     unsafeOverwriteFunction("openMemoryResponse", function(s){
         /*
-         * Contribution/Author: Moe
+         * Contribution/Author of function "openMemoryResponse": Moe
          */
     try{
             unsafeWindow._openMemoryResponse(s);
@@ -9479,8 +9510,10 @@ try{
         } catch(err) {GM_logError("openFoodworldBuildingSelect","","",err); }
     });
 
-    // EntryCityXmasEvent by Moe
     unsafeOverwriteFunction("entryCityXmasEvent",function(c){
+        /*
+         * Contribution/Author of function "entryCityXmasEvent": Moe
+         */
         try{
             if(!c) c = 'v';
             unsafeWindow._entryCityXmasEvent(c);
@@ -9494,15 +9527,16 @@ try{
                 var ratio = (gut[pId]/points).toFixed(2);
                 createElement("div", {
                         "style":"position: absolute; bottom: -15px; left: 8px;border: 2px solid rgb(255, 114, 0); background-color: white;width: 70px;text-align: center;"
-                },children[c], ratio + " kT/P.");
+                //},children[c], ratio + " kT/P.");
+                },children[c], ratio + " " + unsafeWindow.gamecurrency + "/P.");
             }
         }catch(err){GM_logError("entryCityXmasEvent","","",err);}
     });
-        
+
     unsafeOverwriteFunction("contractsDialog", function(b, productId){
         /*
          * Is called, when User clicks a product in "New Contract" dialog to add that product to the cart.
-         * Contribution/Author: Moe
+         * Contribution/Author  of function "contractsDialog": Moe
          *
          * b = Is either 'select' or nothing happens in original "contractsDialog"
          * productId = Id of the clicked product
@@ -9516,12 +9550,12 @@ try{
 
             // Draw radio buttons saved-value/market-value
             var parent = $("contracts_button_add_cart").parentNode;
-            
+
             var div = createElement("div", {
                 "style":"margin-bottom: 5px; text-align: left; padding-left: 50px;"
             }, false, false);
             parent.insertBefore(div, $("contracts_button_add_cart"));
-            
+
             var radioPriceSaved = createElement("input", {
                 "id": "contractPriceSaved",
                 "type":"radio",
@@ -9529,7 +9563,8 @@ try{
             }, div, false);
             var labelPriceSavedText;
             if (productId == value.id) {
-                labelPriceSavedText = getText("lastPrice") + " (" + value.price + " kT)";
+                //labelPriceSavedText = getText("lastPrice") + " (" + value.price + " kT)";
+                labelPriceSavedText = getText("lastPrice") + " (" + value.price + " " + unsafeWindow.gamecurrency + ")";
             } else {
                 labelPriceSavedText = getText("lastPrice");
             }
@@ -9560,7 +9595,8 @@ try{
             var marketPrice = preisBeob[productId][2] ? preisBeob[productId][2] : NPC[0][productId];
             createElement("label", {
                 "for": "contractPriceMarket"
-            }, div, getText("marketPrice") + " (" + marketPrice + " kT)");
+            //}, div, getText("marketPrice") + " (" + marketPrice + " kT)");
+            }, div, getText("marketPrice") + " (" + marketPrice + " " + unsafeWindow.gamecurrency + ")");
             radioPriceMarket.addEventListener("click", function () {
                 $("contracts_select_price_input").value = marketPrice;
             }, false);
@@ -9616,7 +9652,7 @@ try{
             var cartDiv = $("contracts_new_cart");
             var cartDivNextSibling = cartDiv.nextElementSibling;
             cartDiv.parentNode.removeChild(cartDiv);
-            
+
             var cartForm = createElement("form", {
                 "id": "contracts_new_cart",
                 "autocomplete": "on"
@@ -9633,7 +9669,7 @@ try{
             cartDivNextSibling.parentNode.insertBefore(cartForm, cartDivNextSibling);
         } catch(err) {GM_logError("contractsNew","","",err); }
     });
-    
+
     unsafeOverwriteFunction("openFoodworldBuildingSelect",function(position,slot){
         try{
             unsafeWindow._openFoodworldBuildingSelect(position,slot);
@@ -10929,24 +10965,24 @@ try{
             var msgText=null;
             try{
                 switch(questType){
-                case "main":{ 
-                    msgText = getText("informationIsMissing")+" "+getText("pleaseOpenX").replace(/%1%/,getText("quest"+questType+campaign)); 
+                case "main":{
+                    msgText = getText("informationIsMissing")+" "+getText("pleaseOpenX").replace(/%1%/,getText("quest"+questType+campaign));
                 break;}
-                case "forestry":{ 
-                    msgText = (getText("informationIsMissing")+" "+getText("pleaseOpenX").replace(/%1%/,getText("lodge"))); 
+                case "forestry":{
+                    msgText = (getText("informationIsMissing")+" "+getText("pleaseOpenX").replace(/%1%/,getText("lodge")));
                 break;}
-                case "foodworld":{ 
-                    msgText = (getText("informationIsMissing")+" "+getText("pleaseOpenX").replace(/%1%/,getText("foodworld"))); 
+                case "foodworld":{
+                    msgText = (getText("informationIsMissing")+" "+getText("pleaseOpenX").replace(/%1%/,getText("foodworld")));
                 break;}
                 }
                 if(msgText){
                     GM_logWarning("questLineMouseOver","","err="+err,msgText);
-                    return msgText; 
+                    return msgText;
                 }else{
                     throw(err);
                 }
-            }catch(err){ 
-                GM_logError("questLineMouseOver","","",err); 
+            }catch(err){
+                GM_logError("questLineMouseOver","","",err);
                 return null;
             }
         }
@@ -12233,7 +12269,7 @@ return false;
             }
         }catch(err){ GM_logError("marketAction","","",err); }
     });
-    
+
     // Revised by Moe
     unsafeOverwriteFunction("marketActionResponse",function(request,action,id,open){
         try{
@@ -12268,7 +12304,7 @@ return false;
                     // No => Add the missing ones to ownOffersMap. We take them from the old ownMarketOffers-Array. It's not 100% correct, but a very good guess!
                     for (var v = 0; v < ownMarketOffers.length; v++) {
                         row = ownMarketOffers[v]; // An "old" offer
-                        
+
                         // Check, if we know its product_id and if it isn't already in ownOffersMap. Check for product_id is neccessary because of migration :-)
                         if (row[3] && !ownOffersMap[row[3]]) {
                             ownOffersMap[row[3]] = {id: row[3], prod: row[0], preis: row[1], menge: row[2], typ: row[4]};
@@ -12285,7 +12321,7 @@ return false;
                         ownMarketOffers.push([o["prod"], o["preis"], o["menge"], o["id"], o["typ"]]);
                     }
                 }
-                
+
                 // Sort ownMarketOffers-data
                 var TYP2NUMBER = {"c":0,"v":1,"e":2,"o":3,"fw1":4,"fw2":5,"fw3":6,"fw4":7,"z":8, "fl": 9, "fla": 10};
                 ownMarketOffers.sort(function(a, b) {
@@ -12316,7 +12352,7 @@ return false;
                                 return a[1]==b[1] ? a[2]-b[2] : a[1]-b[1];
                             });
                             marketOffersArr[v]=marketOffersArr[v].slice(0,18); // Take cheapest 18 offers
-                            
+
                             menge_sum = 0; // Total amount of product v offered at market (within the cheapest 18 offers)
                             // Iterate over those (at most) 18 offers of product v
                             for(var w = 0; w < marketOffersArr[v].length; w++){
@@ -12643,7 +12679,7 @@ return false;
     newdiv=createElement("div",{"style":"display:none;"},$("lager_info"));//position:absolute;top:50px;left:58px;display:none;
     createElement("img",{"src":GFX+"adtime.gif","style":"float:left;width:14px;height:14px;margin-left:5px;"},newdiv);
     createElement("div",{"id":"lager_zeit_ziel","class":"tnormal","style":"float:left;margin-left:5px;"},newdiv);
-    //Linus--Tux: Icon "contract to yourself" fade out  
+    //Linus--Tux: Icon "contract to yourself" fade out
     newdiv=createElement("div",{"id":"sendStockingContract","class":"link playerContract","style":"position:absolute;top:155px;left:10px;display:none;"},$("lager").firstElementChild);
     createElement("div",{},newdiv);
     newdiv.addEventListener("mouseover",function(event){
@@ -12772,7 +12808,7 @@ return false;
         //Linus--Tux 20151020
         var c=(prodStockTemp[v])?prodStockTemp[v]:0;
         prodStock[0][v]=(c?parseInt(c,10):0);
-                
+
         /*if(unsafeWindow.farm==5){continue; } //Linus--Tux 20151028
         if (!unsafeWindow.rackElement[v]){ prodStock[0][v]=0; } // not available
         // else if ("undefined" === typeof(unsafeWindow.rackElement[v].id)){ prodStock[0][v]=0; } // empty elements
@@ -13105,7 +13141,7 @@ return false;
                 }else{
                     GM_logWarning("messagesSystem","","messages_data["+i+"]:\n"+print_r(unsafeWindow.messages_data[i],"",true,"\n"),"Could not parse content of a market sale message.");
                 }
-            }else if (getText("msgSubjectContractsale")==currMsg.subject){ 
+            }else if (getText("msgSubjectContractsale")==currMsg.subject){
                 // Contract sale
                 if (help2=regMsgContentContractsale.exec(help)){
                     // help2[1] = Sender
@@ -13357,7 +13393,7 @@ return false;
                                                 var iAmount=data.data.constants.slot_level[data.data.data.slots[slot].level].output;
                                                 var iPoints=iAmount*prodPoints[0][product];
                                                 var iTime=data.data.constants.slot_level[data.data.data.slots[slot].level].duration;
-                                                
+
                                                 tr=createElement("tr",{},table);
                                                 td=createElement("td",{"style":help+"padding-right:10px;"},tr);
                                                 createElement("div",{"style":"line-height:16px;white-space:nowrap;"},td,"Slot"+slot);
@@ -13366,13 +13402,13 @@ return false;
                                                 createElement("span",{},div,numberFormat(iAmount)+" "+prodName[0][product]);
                                                 pointsFormat(iPoints,"span",td);
                                                 createElement("span",{"style":"line-height:16px;white-space:nowrap;"},td,"  "+getTimeStr(iTime));
-        
+
                                             }
                                             help="border-top:1px solid black;"
                                         }
                                         break;
                                         }*/
-                                    
+
                                     }
                                     table=null;tr=null;td=null;div=null;
                                 }
@@ -13791,18 +13827,18 @@ return false;
                     return false;
                 }
             break;}
-                        case "fuelstation_entry": {
-                                        //Ausgelöst durch Button "Einwerfen"
-                                        //function(mode,farm,position,s,d,b,a)
-        
-                                        //mode: 'fuelstation_entry', s: Slot, d:Produkt, b: undefined, a:undefined
-                                        //GM_log("farmAction: mode:"+ mode + " s:"+s+" d:"+d+" b:"+b+" a:"+a);
-                                }
-                        break;
+            case "fuelstation_entry": {
+                    //Ausgelöst durch Button "Einwerfen"
+                    //function(mode,farm,position,s,d,b,a)
+
+                    //mode: 'fuelstation_entry', s: Slot, d:Produkt, b: undefined, a:undefined
+                    //GM_log("farmAction: mode:"+ mode + " s:"+s+" d:"+d+" b:"+b+" a:"+a);
+                }
+            break;
             }
         }catch(err){GM_logError("farmAction","mode="+mode,"","(pre) "+err);}
         try{
-                        //GM_log("farmAction: mode:"+ mode + " s:"+s+" d:"+d+" b:"+b+" a:"+a);
+            //GM_log("farmAction: mode:"+ mode + " s:"+s+" d:"+d+" b:"+b+" a:"+a);
             unsafeWindow._farmAction(mode,farm,position,s,d,b,a);
         }catch(err){GM_logError("_farmAction","mode="+mode,"",err);}
     });
@@ -13856,7 +13892,7 @@ return false;
                     var building2=(6*parseInt(set[2],10))+parseInt(set[3],10);
                     zones.swap(building1,building2);
                     unsafeData.reallocateBuildingSet=[building1,building2];
-                    raiseEvent("gameReallocateBuilding");                    
+                    raiseEvent("gameReallocateBuilding");
                 break;}
                 case "sellfarmi":{
                     calcFarmiCost();
@@ -14425,7 +14461,7 @@ return false;
     });
 
     //Fuelstation
-    
+
     //Div id fuelstation_product_select_inner
     //n: product_select
     //z: Zonenummer
@@ -14441,15 +14477,15 @@ return false;
             raiseEvent("gameFactoryFuelstationDialogStarted");
         }catch(err){GM_logError("dialogFuelstation","","",err);}
     });
-    
-    
+
+
     //buildFuelstation(a)
     //a: Zone-Nummer
    unsafeOverwriteFunction("buildFuelstation",function(a){
         try{
             unsafeWindow._buildFuelstation(a);
         }catch(err){GM_logError("_buildFuelstation","","",err);}
-        try{ 
+        try{
             GM_log("buildFuelstation "+"a"+a);
             //alert("1");
             /*
@@ -14513,11 +14549,11 @@ return false;
             }
             zones.setProduction(zoneNrF,tempZoneProductionData.clone());
             var tempZoneProductionData=null;newDiv=null;newDiv1=null;*/
-            raiseEvent("buildFuelstation");    
+            raiseEvent("buildFuelstation");
         }catch(err){GM_logError("buildFuelstation","","",err);}
     });
-    
-    
+
+
     //calcPointsFuelstation
     //h:
     //m:
@@ -14531,7 +14567,7 @@ return false;
             raiseEvent("calcPointsFuelstation");
         }catch(err){GM_logError("calcPointsFuelstation","","",err);}
     });
-    
+
     //fuelstationStats()
     /*
     unsafeOverwriteFunction("fuelstationStats",function(){
@@ -14561,7 +14597,7 @@ return false;
     //setFuelstationHelp(a)
     //fuelstationCheckLevelAdd(a, d)
     //updateFuelstationLevel(e, n)
-    
+
     unsafeOverwriteFunction("innerInfosResponse",function(zoneNr){
     // oil, knitting, factory, pony, megafield, fuelstation
         try{
@@ -17737,7 +17773,7 @@ return;
                 }
                 logClothingDonation.unshift(latestLog);
                 needSave = true;
-            } else if (latestLog["createdate"] == parseInt(data.createdate, 10) && 
+            } else if (latestLog["createdate"] == parseInt(data.createdate, 10) &&
                         latestLog["gambleInfo"][0]["gambledate"] < parseInt(data.gambledate, 10)) {
                 // Same (donation) data, but new gamble info => insert only gamble info
                 latestLog["gambleInfo"].unshift({gambledate: parseInt(data.gambledate, 10), out: data.data.out, gain: goodsValue[1] - goodsValue[0]});
@@ -19367,7 +19403,7 @@ try{
         .rackcat60md:hover{background-position:-26px -39px;}\
         .rackcat60md_active{background-position:-26px -78px;};"
     );
-    
+
     // temporary hack
     // GM_addStyle(
         // "#farm_speedlinks{width:600px;height:40px; top:-20px;background:none;}\
@@ -20355,8 +20391,9 @@ try{
         text["de"]["settings_cacheReset"]=["Cache reset","Die History und alle Informationen über die Zonen werden gelöscht ..."];
         text["de"]["settings_zoneReset"]=["Zones reset","Alle Informationen über deine Zonen werden gelöscht ..."];
         text["de"]["settings_setQuestMain"]=["Korrigiere Farm-Questreihen ","Abgeschlossene Farm-Questreihen werden entsprechend übernommen und abgespeichert."];
-        text["de"]["settings_setQuestMain3"]=["3. Farm-Questreihe nachführen","Die 3. Farm-Questreihe wird nachgeführt. Es werden die mff-Werte übernommen."];
+        text["de"]["settings_setQuestMain3"]=["3. Farm-Questreihe","Die Questnummer wird von mff übernommen und die dazugehörenden Werte der 3. Farm-Questreihe gesetzt."];
         text["de"]["settings_setQuestMain3_1"]=["Ausführen","Die Questnummer der 3. Farm-Questreihe wird auf den eingegebenen Wert gesetzt. Bitte vorsichtig verwenden ..."];
+        text["de"]["settings_setQuestForest2"]=["2. Baumerei-Questreihe","Die Questnummer wird von mff übernommen und die dazugehörenden Werte der 2. Baumerei-Questreihe gesetzt."];
         text["de"]["settings_megafieldSmartTimer"]=["Beachte aktive Tour", "Soll beim Starten einer Tour der Güterhof-Timer auf das Ende der Tour gesetzt werden?"];
         text["de"]["settings_clothingDonation"]=["Kleiderspende", "Ein blinkender Icon zeigt an, wenn bei der Kleiderspende gespendet oder gewürfelt werden kann."];
         // help
@@ -20393,7 +20430,7 @@ try{
         text["en"]["msgSubjectPresent"]="A present for you";
         text["en"]["msgSubjectQuest"]="^.+ completed$";
         text["en"]["msgSubjectWeed1"]="Oh no!";
-        text["en"]["msgSubjectWeed2"]="Au Weia!";        
+        text["en"]["msgSubjectWeed2"]="Au Weia!";
         text["en"]["above"]="above";
         text["en"]["absolute"]="Amount required";
         text["en"]["accountActive"]="Account active";
@@ -20755,6 +20792,7 @@ try{
         text["en"]["settings_setQuestMain"]=["Questseries","Main questseries are declared terminated ..."];
         text["en"]["settings_setQuestMain3"]=["Overwrite Questseries 3","The questnumber of main questseries 3 is set to the mff-questnumber."];
         text["en"]["settings_setQuestMain3_1"]=["Execute","The questnumber of main questseries 3 is set to the chosen number. Please use it carefully ..."];
+        text["en"]["settings_setQuestForest2"]=["Overwrite quest Forestry 2","The questnumber of forestry series 2 is set to the mff-questnumber."];
         text["en"]["settings_megafieldSmartTimer"]=["Integrate active tour", "Megafield-Timer is set to end of the tour after a tour is started."];
         text["en"]["settings_clothingDonation"]=["Clothing Donation", "A blinking icon indicates, when you can donate or gamble."];
         //help
@@ -20823,7 +20861,7 @@ try{
         allEvents.push("gameFarmiResponse");                // a farmi is been rejected or accepted.
 
         allEvents.push("buildFuelstation");                 //Fuelstation
-        allEvents.push("gameFactoryFuelstationDialogStarted");  
+        allEvents.push("gameFactoryFuelstationDialogStarted");
 
         allEvents.push("gameMegafieldDialogStarted");       // the megafield view has been moved
         allEvents.push("gameMegafieldMoved");               // a megafield vehicle has been bought
