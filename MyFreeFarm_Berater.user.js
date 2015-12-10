@@ -1,11 +1,12 @@
 // ==UserScript==
+// ==UserScript==
 // @name           MyFreeFarm Berater
 // @namespace      https://github.com/BastianKanaan/GMscripts_MyFreeFarm
 // @author         BastianKanaan
 // @description    Extends MyFreeFarm
 // @icon           data:image/png;base64,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
-// @date           04.12.2015
-// @version        2.7.3
+// @date           08.12.2015
+// @version        2.7.4
 // @license        GPL version 3 or any later version; http://www.gnu.org/copyleft/gpl.html
 // @include        /^http:\/\/(|www\.|s\d+\.)au\.myfreefarm\.com\/.*$/
 // @include        /^http:\/\/(|www\.|s\d+\.)veselaferma\.com\/.*$/
@@ -106,6 +107,7 @@ const CHANGELOG=[["2.0","29.05.2014",[["Migration nach openuserjs.org","Migratio
                 ,["2.7.1","30.11.2015",[["Bugfix: Defaultwerte Deklarieren","Bugfix: declare default-values"]]]
                 ,["2.7.2","04.12.2015",[["Addon: Hilfestellung für Weihnachts-Knabbermarathon","Addon: Assistance for X-Mas event"]]]
                 ,["2.7.3","04.12.2015",[["Neue Berater-Option: Questnummer der 2. Baumerei-Questreihe manuell übernehmen","New adviser option: Set questnumber for 2nd series of quests (forestry)"]]]
+                ,["2.7.4","08.12.2015",[["Berater-Option: \"Questnummer Übernehmen\" zu einer Funktion sammengefasst.","Adviser-Option: \"set questnumber\" consolidated to one function."],["Bugfix: kleinere Optimierungen","Bugfix: small improvements"]]]
                 ];
 if(!VERSIONfunctionFile){
     alert("Hi, I am the Berater-Script.\nThe function-file is missing.\nPlease install me again.");
@@ -6751,149 +6753,223 @@ function buildInfoPanelOptions(){
                 GM_deleteValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_zones");
                 GM_deleteValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_zoneList");
                 GM_deleteValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_zoneSettings");
-                GM_deleteValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_zoneToLists");
+                GM_deleteValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_zoneToList");
             });
         },false);
         createElement("td",{},newtr,getText("settings_zoneReset")[1]);
 
         /*
-         *    Option added by georgvr & Linus--Tux
-         *    if all main-questlines are achieved the in-game variable "quest_status" has no properties and values can't be copied by the bot.
-         *    This option sets the quest-number to the max-quest-number of a line plus 1 and therefore releases the products which are related to quest-achievement.
+         *    Option added by georgvr
+         *    This option sets the quest-number of main-questseries and forestry-questseries to either the mff-questnumber, or to the max quest-number of each line
+         *    This releases products which are related to progression of quests.
+         *    This function is needed:
+         *    -  After new installation of scripts or clearing zones-info and main-questseries are accomplished (var "quest_status" has no properties)
+         *    -  Or cooldown-time of remaining questseries is active and values are not accessible for been automatically gathered by the bot.
          */
         newtr=createElement("tr",{},newtable);
         newtd=createElement("td",{"colspan":"2","align":"center"},newtr);
-        newinput=createElement("button",{"type":"button","class":"link"},newtd,getText("settings_setQuestMain")[0]);
+        newinput=createElement("button",{"type":"button","class":"link"},newtd,getText("settings_setQuestAll")[0]);
         newinput.addEventListener("click",function(){
-            alert2(getText("settings_setQuestMain")[1],getText("yes"),getText("no"),function(){
-                if (unsafeWindow.quests_status.hasOwnProperty("main")) {
-                    if (!unsafeWindow.quests_status["main"].hasOwnProperty("1")){
-                        questData["main"][1] = INIT_questData["main"][1].clone();
-                        questData["main"][1]["nr"] = QUESTS["main"][1].length;
-                        questData["main"][1]["given"] = new Object();
-                        questData["main"][1]["time"] = 0;
-                        GM_setValueCache(COUNTRY+"_"+SERVER+"_"+USERNAME+"_questData",implode(questData,"handleQuestData/questData"));
-                        unsafeData.questData=questData.clone();
-                    }
-                    if (!unsafeWindow.quests_status["main"].hasOwnProperty("2")) {
-                        questData["main"][2] = INIT_questData["main"][2].clone();
-                        questData["main"][2]["nr"] = QUESTS["main"][2].length;
-                        questData["main"][2]["given"] = new Object();
-                        questData["main"][2]["time"] = 0;
-                        GM_setValueCache(COUNTRY+"_"+SERVER+"_"+USERNAME+"_questData",implode(questData,"handleQuestData/questData"));
-                        unsafeData.questData=questData.clone();
-                    }
-                    if (!unsafeWindow.quests_status["main"].hasOwnProperty("3")){
+            alert2(getText("settings_setQuestAll")[1],getText("yes"),getText("no"),function(){
+                // Data are taken from ingame var quests_status (questseries for veterinary are not in the same var)
+                /* structure of ingame-var quests_status
+                 *     "main":
+                 *          "1" , "2" , "3"
+                 *              "cooldown" // total waiting time between two quests
+                 *              "remain"   // remaining waiting time until release of next quest
+                 *              "questid"  // questnumber
+                 *              "data"     // quest related information (products needed, rewards and text)
+                 *     "forestry"
+                 *          "1" , "2"
+                 *     "foodworld"
+                 *          "1"
+                 *
+                 * Conditions to release Quest-Series
+                 *     main 1:     ???
+                 *     main 2:     Level 31
+                 *     main 3:     Level 40 and Farm 5 exists
+                 *     forestry 1: Level 20 and "unsafeWindow.forestry_unlock" is "1" (and not "undefined")
+                 *     forestry 2: quest 35 of forestry 1 completed
+                 *
+                 */
+                console.log(implode(unsafeWindow.quests_status));
+                var help = "setQuestAll "
+                var help = help + "MAIN ";
+                if (USERLEVEL >= 40
+                    && unsafeWindow.quests_status.hasOwnProperty("main")
+                    && unsafeWindow.quests_status["main"].hasOwnProperty("3")
+                    && speedlink_farm5.style.display=="block" ) {
+                    // main questseries 3 exists and is not accomplished
+                    var help = help + "3_NotAccomplished";
+                    if (!isNaN(parseInt(unsafeWindow.quests_status["main"][3]["remain"],10))) {
+                        // cooldown-time is active - quest is not accessible
+                        var help = help + "_cooldown:_SetValues ";
                         questData["main"][3] = INIT_questData["main"][3].clone();
-                        questData["main"][3]["nr"] = QUESTS["main"][3].length;
+                        questData["main"][3]["nr"] = unsafeWindow.quests_status["main"][3]["questid"];
+                        questData["main"][3]["time"] = (parseInt(unsafeWindow.Zeit.Server,10) + parseInt(unsafeWindow.quests_status["main"][3]["remain"],10));
                         questData["main"][3]["given"] = new Object();
-                        questData["main"][3]["time"] = 0;
+                        questData["main"][3]["data"] = QUESTS["main"][3][(questData["main"][3]["nr"])];
+                        questData["main"][3]["data"][0][0][3]=true;
+                        questData["main"][3]["data"][0][1][3]=true;
                         GM_setValueCache(COUNTRY+"_"+SERVER+"_"+USERNAME+"_questData",implode(questData,"handleQuestData/questData"));
                         unsafeData.questData=questData.clone();
+                    } else {
+                        // main questseries 3 is accessible - do nothing
+                        var help = help + "_accessible:_DoNothing ";
                     }
-                }
-            });
-        },false);
-        createElement("td",{},newtr,getText("settings_setQuestMain")[1]);
-
-        /*
-         *    Option added by georgvr
-         *    Option sets the questnumber of mainseries 3 to the mff-questnumber.
-         *    Option is needed in case that the quest has been solved by an other device and cooldown-time is active
-         *    - Button is only executable if questseries 3 exists (linked to presence of Farm 5),
-         *      and Questseries 3 is not accessible because cooldown-time is active (sandglass is visible)
-         */
-        newtr=createElement("tr",{},newtable);
-        newtd=createElement("td",{"colspan":"2","align":"center"},newtr);
-        newinput=createElement("button",{"type":"button","class":"link"},newtd,getText("settings_setQuestMain3")[0]);
-        if(USERLEVEL<40 || !unsafeWindow.quests_status["main"].hasOwnProperty("3") || speedlink_farm5.style.display!="block" || isNaN(parseInt(unsafeWindow.quests_status["main"][3]["remain"],10))){newinput.disabled=true;}
-        newinput.addEventListener("click",function(){
-            alert2(getText("settings_setQuestMain3")[1],getText("yes"),getText("no"),function(){
-                GM_log(implode(unsafeWindow.quests_status));
-                if (unsafeWindow.quests_status["main"].hasOwnProperty("3")){
+                } else if (USERLEVEL >= 40
+                    && speedlink_farm5.style.display=="block"
+                    && (!unsafeWindow.quests_status.hasOwnProperty("main")
+                        || !unsafeWindow.quests_status["main"].hasOwnProperty("3"))) {
+                    // no main questseries - or main questseries 3 has no properties: questseries must be accomplished
+                    var help = help + "3_Accomplished: SetLastQuestNumber ";
                     questData["main"][3] = INIT_questData["main"][3].clone();
-                    questData["main"][3]["nr"] = unsafeWindow.quests_status["main"][3]["questid"];
-                    questData["main"][3]["time"] = (parseInt(unsafeWindow.Zeit.Server,10) + parseInt(unsafeWindow.quests_status["main"][3]["remain"],10));
+                    questData["main"][3]["nr"] = QUESTS["main"][3].length;
                     questData["main"][3]["given"] = new Object();
-                    questData["main"][3]["data"] = QUESTS["main"][3][(questData["main"][3]["nr"])];
-                    // available data-string in QUESTS (e.g. quest #3): "data\":[[[0,12,251],[0,9,826]],null,1401540,[[1,0,352,5],[9,0,352]]]
-                    // required syntax of data string for mouseover   : "data\":[[[0,12,251,true],[0,9,826,true]],null,1401540,[[1,0,352,5],[9,0,352]]]
-                    // difference from available data to required data: additional "true" within the product-array (missing true leads to display-style "strike through")
-                    questData["main"][3]["data"][0][0][3]=true;
-                    questData["main"][3]["data"][0][1][3]=true;
+                    questData["main"][3]["time"] = 0;
                     GM_setValueCache(COUNTRY+"_"+SERVER+"_"+USERNAME+"_questData",implode(questData,"handleQuestData/questData"));
                     unsafeData.questData=questData.clone();
+                } else if (USERLEVEL >= 40
+                    && speedlink_farm5.style.display!="block"){
+                    // Farm 5 is not released - main questseries 3 is not accessible - do nothing
+                    var help = help + "3_NoFarm5:_DoNothing ";
                 }
-            });
-        },false);
-        createElement("td",{},newtr,(getText("settings_setQuestMain3")[1]));
-        help_q=null;
-
-        /*
-         *    Option added by georgvr
-         *    Option sets the questnumber of Forestseries 2 to the mff-questnumber.
-         *    Option is needed in case that the quest has been solved by an other device and cooldown-time is active
-         *    - Button is only executable if Forestseries 2 exists and is not accessible because cooldown-time is active (sandglass is visible)
-         */
-        newtr=createElement("tr",{},newtable);
-        newtd=createElement("td",{"colspan":"2","align":"center"},newtr);
-        newinput=createElement("button",{"type":"button","class":"link"},newtd,getText("settings_setQuestForest2")[0]);
-        if(USERLEVEL<20 || !unsafeWindow.quests_status["forestry"].hasOwnProperty("2") || isNaN(parseInt(unsafeWindow.quests_status["forestry"][2]["remain"],10))){newinput.disabled=true;}
-        newinput.addEventListener("click",function(){
-            alert2(getText("settings_setQuestForest2")[1],getText("yes"),getText("no"),function(){
-                GM_log(implode(unsafeWindow.quests_status));
-                if (unsafeWindow.quests_status["forestry"].hasOwnProperty("2")){
-                    questData["forestry"][2] = INIT_questData["forestry"][2].clone();
-                    questData["forestry"][2]["nr"] = 1+parseInt(unsafeWindow.quests_status["forestry"][2]["questid"],10);
-                    questData["forestry"][2]["time"] = (parseInt(unsafeWindow.Zeit.Server,10) + parseInt(unsafeWindow.quests_status["forestry"][2]["remain"],10));
-                    questData["forestry"][2]["given"] = new Object();
-                    questData["forestry"][2]["data"] = QUESTS["forestry"][2][(questData["forestry"][2]["nr"])];
-                    for (var v=0; v<(QUESTS["forestry"][2][(questData["forestry"][2]["nr"])].length-1); v++){
-                        questData["forestry"][2]["data"][0][v][3]=true;
+                if (USERLEVEL >= 31
+                    && unsafeWindow.quests_status.hasOwnProperty("main")
+                    && unsafeWindow.quests_status["main"].hasOwnProperty("2")){
+                    // main questseries 2 exists and is not accomplished
+                    var help = help + "2_NotAccomplished";
+                    if (!isNaN(parseInt(unsafeWindow.quests_status["main"][2]["remain"],10))){
+                        // cooldown-time is active - quest is not accessible
+                        var help = help + "_cooldown:_SetValues ";
+                        questData["main"][2] = INIT_questData["main"][2].clone();
+                        questData["main"][2]["nr"] = unsafeWindow.quests_status["main"][2]["questid"];
+                        questData["main"][2]["time"] = (parseInt(unsafeWindow.Zeit.Server,10) + parseInt(unsafeWindow.quests_status["main"][2]["remain"],10));
+                        questData["main"][2]["given"] = new Object();
+                        questData["main"][2]["data"] = QUESTS["main"][2][(questData["main"][2]["nr"])];
+                        GM_setValueCache(COUNTRY+"_"+SERVER+"_"+USERNAME+"_questData",implode(questData,"handleQuestData/questData"));
+                        unsafeData.questData=questData.clone();
+                        // toDo: validate products in case of alternatives and mark best alternative "true"
+                    } else {
+                        // main questseries 2 is accessible - do nothing
+                        var help = help + "_accessible:_DoNothing ";
                     }
+                } else if (USERLEVEL >= 31
+                    && (!unsafeWindow.quests_status.hasOwnProperty("main")
+                        || !unsafeWindow.quests_status["main"].hasOwnProperty("2"))) {
+                    // no main questseries - or main questseries 2 has no properties: questseries must be accomplished
+                    var help = help + "2_Accomplished:_SetLastQuestNumber ";
+                    questData["main"][2] = INIT_questData["main"][2].clone();
+                    questData["main"][2]["nr"] = QUESTS["main"][2].length;
+                    questData["main"][2]["given"] = new Object();
+                    questData["main"][2]["time"] = 0;
                     GM_setValueCache(COUNTRY+"_"+SERVER+"_"+USERNAME+"_questData",implode(questData,"handleQuestData/questData"));
                     unsafeData.questData=questData.clone();
                 }
+                if (USERLEVEL >= 10
+                    && unsafeWindow.quests_status.hasOwnProperty("main")
+                    && unsafeWindow.quests_status["main"].hasOwnProperty("1")) {
+                    // main questseries 1 exists and is not accomplished
+                    var help = help + "1_NotAccomplished";
+                    if (!isNaN(parseInt(unsafeWindow.quests_status["main"][1]["remain"],10))) {
+                        // cooldown-time is active - quest is not accessible
+                        var help = help + "_cooldown:_SetValues ";
+                        questData["main"][1] = INIT_questData["main"][1].clone();
+                        questData["main"][1]["nr"] = unsafeWindow.quests_status["main"][1]["questid"];
+                        questData["main"][1]["time"] = (parseInt(unsafeWindow.Zeit.Server,10) + parseInt(unsafeWindow.quests_status["main"][1]["remain"],10));
+                        questData["main"][1]["given"] = new Object();
+                        questData["main"][1]["data"] = QUESTS["main"][1][(questData["main"][1]["nr"])];
+                        GM_setValueCache(COUNTRY+"_"+SERVER+"_"+USERNAME+"_questData",implode(questData,"handleQuestData/questData"));
+                        unsafeData.questData=questData.clone();
+                        // toDo: validate products in case of alternatives and mark best alternative "true"
+                    } else {
+                        // main questseries 1 is accessible - do nothing
+                        var help = help + "_accessible:_DoNothing ";
+                    }
+                } else if (USERLEVEL >= 10
+                    && (!unsafeWindow.quests_status.hasOwnProperty("main")
+                        || !unsafeWindow.quests_status["main"].hasOwnProperty("1"))) {
+                    // no main questseries - or main questseries 1 has no properties: questseries must be accomplished
+                    var help = help + "1_Accomplished:_SetLastQuestNumber ";
+                    questData["main"][1] = INIT_questData["main"][1].clone();
+                    questData["main"][1]["nr"] = QUESTS["main"][1].length;
+                    questData["main"][1]["given"] = new Object();
+                    questData["main"][1]["time"] = 0;
+                    GM_setValueCache(COUNTRY+"_"+SERVER+"_"+USERNAME+"_questData",implode(questData,"handleQuestData/questData"));
+                    unsafeData.questData=questData.clone();
+                }
+                var help = help + "FORESTRY ";
+                if (USERLEVEL>20
+                    && unsafeWindow.quests_status.hasOwnProperty("forestry")
+                    && unsafeWindow.quests_status["forestry"].hasOwnProperty("1")) {
+                    // forestry questseries 1 exists and is not accomplished
+                    var help = help + "1_NotAccomplished";
+                    if (!isNaN(parseInt(unsafeWindow.quests_status["forestry"][1]["remain"],10))){
+                        // cooldown-time is active - quest is not accessible
+                        var help = help + "_cooldown:_SetValues ";
+                        questData["forestry"][1] = INIT_questData["forestry"][1].clone();
+                        questData["forestry"][1]["nr"] = questData["forestry"][1]["nr"] = 1+parseInt(unsafeWindow.quests_status["forestry"][1]["questid"],10);
+                        questData["forestry"][1]["time"] = (parseInt(unsafeWindow.Zeit.Server,10) + parseInt(unsafeWindow.quests_status["forestry"][1]["remain"],10));
+                        questData["forestry"][1]["given"] = new Object();
+                        questData["forestry"][1]["data"] = QUESTS["forestry"][2][(questData["forestry"][1]["nr"])];
+                        for (var v=0; v<(QUESTS["forestry"][1][(questData["forestry"][1]["nr"])].length-1); v++){
+                            questData["forestry"][1]["data"][0][v][3]=true;
+                        }
+                        GM_setValueCache(COUNTRY+"_"+SERVER+"_"+USERNAME+"_questData",implode(questData,"handleQuestData/questData"));
+                        unsafeData.questData=questData.clone();
+                    } else {
+                        // forestry questseries 1 is accessible - do nothing
+                        var help = help + "_accessible:_DoNothing ";
+                    }
+                } else if (USERLEVEL>20
+                    && (!unsafeWindow.quests_status.hasOwnProperty("forestry")
+                        || !unsafeWindow.quests_status["forestry"].hasOwnProperty("1"))) {
+                    // no forestry questseries - or forestry questseries 1 has no properties: questseries must be accomplished
+                    var help = help + "1_Accomplished:_SetLastQuestNumber ";
+                    questData["forestry"][1] = INIT_questData["forestry"][1].clone();
+                    questData["forestry"][1]["nr"] = QUESTS["forestry"][1].length;
+                    questData["forestry"][1]["given"] = new Object();
+                    questData["forestry"][1]["time"] = 0;
+                    GM_setValueCache(COUNTRY+"_"+SERVER+"_"+USERNAME+"_questData",implode(questData,"handleQuestData/questData"));
+                    unsafeData.questData=questData.clone();
+                }
+                if (USERLEVEL>20
+                    && unsafeWindow.quests_status.hasOwnProperty("forestry")
+                    && unsafeWindow.quests_status["forestry"].hasOwnProperty("2")) {
+                    var help = help + "2_NotAccomplished";
+                    if (!isNaN(parseInt(unsafeWindow.quests_status["forestry"][2]["remain"],10))){
+                        // cooldown-time is active - quest is not accessible
+                        var help = help + "_cooldown:_SetValues ";
+                        questData["forestry"][2] = INIT_questData["forestry"][2].clone();
+                        questData["forestry"][2]["nr"] = 1+parseInt(unsafeWindow.quests_status["forestry"][2]["questid"],10);
+                        questData["forestry"][2]["time"] = (parseInt(unsafeWindow.Zeit.Server,10) + parseInt(unsafeWindow.quests_status["forestry"][2]["remain"],10));
+                        questData["forestry"][2]["given"] = new Object();
+                        questData["forestry"][2]["data"] = QUESTS["forestry"][2][(questData["forestry"][2]["nr"])];
+                        for (var v=0; v<(QUESTS["forestry"][2][(questData["forestry"][2]["nr"])].length-1); v++){
+                            questData["forestry"][2]["data"][0][v][3]=true;
+                        }
+                        GM_setValueCache(COUNTRY+"_"+SERVER+"_"+USERNAME+"_questData",implode(questData,"handleQuestData/questData"));
+                        unsafeData.questData=questData.clone();
+                    } else {
+                        // forestry questseries 2 is accessible - do nothing
+                        var help = help + "_accessible:_DoNothing ";
+                    }
+                } else if (USERLEVEL>20
+                    && (!unsafeWindow.quests_status.hasOwnProperty("forestry")
+                        || !unsafeWindow.quests_status["forestry"].hasOwnProperty("2"))) {
+                    // no forestry questseries - or forestry questseries 2 has no properties: questseries must be accomplished
+                    var help = help + "2_Accomplished:_SetLastQuestNumber ";
+                    questData["forestry"][2] = INIT_questData["forestry"][2].clone();
+                    questData["forestry"][2]["nr"] = QUESTS["forestry"][2].length;
+                    questData["forestry"][2]["given"] = new Object();
+                    questData["forestry"][2]["time"] = 0;
+                    GM_setValueCache(COUNTRY+"_"+SERVER+"_"+USERNAME+"_questData",implode(questData,"handleQuestData/questData"));
+                    unsafeData.questData=questData.clone();
+                }
+                console.log(help);
             });
         },false);
-        createElement("td",{},newtr,(getText("settings_setQuestForest2")[1]));
-        help_q=null;
-
-/*
-        // Option added by georgvr 20151104 - Alternative mit Option um den Quest-Wert selber setzen zu können
-        // Is only shown, if Questseries 3 is available
-        if(unsafeWindow.quests_status["main"].hasOwnProperty("3") && speedlink_farm5.style.display=="block") {
-            newtr=createElement("tr",{},newtable);
-            newtd=createElement("td",{"align":"center"},newtr);
-            var newsel = createElement("select",{"id":"SetQuestMain3To","style":"width:auto;height:18px;margin-left:5px;"},newtd);
-                createElement("option",{"value":-1},newsel,getText("hide"));
-                for(var i=1;i<QUESTS["main"][3].length;i++){
-                    createElement("option",{"value":i},newsel,i);
-                }
-                createElement("option",{"value":(QUESTS["main"][3].length)++},newsel,getText("lastQuest"));
-            newsel.selectedIndex = questData["main"][3]["nr"];
-            var help_q=parseInt(questData["main"][3]["nr"],10);
-            newsel.addEventListener("change",function(){
-                if(isNaN(this.value)){return false;}
-                help_q=parseInt(this.value,10);
-            },false);
-            newtd=createElement("td",{"align":"center"},newtr);
-            newinput=createElement("button",{"type":"button","class":"link"},newtd,getText("settings_setQuestMain3_1")[0]);
-            newinput.addEventListener("click",function(){
-                alert2(getText("settings_setQuestMain3_1")[1],getText("yes"),getText("no"),function(){
-                    // Questnumber is set to the selected value - regardless whether the value is reasonable or not
-                    questData["main"][3]["nr"] = help_q;
-                    questData["main"][3]["time"] = now;
-                    questData["main"][3]["given"] = new Object();
-                    questData["main"][3]["data"] = QUESTS["main"][3][help_q];
-                    GM_setValueCache(COUNTRY+"_"+SERVER+"_"+USERNAME+"_questData",implode(questData,"handleQuestData/questData"));
-                    unsafeData.questData=questData.clone();
-                });
-            },false);
-            createElement("td",{},newtr,getText("settings_setQuestMain3_1")[1]);
-            newsel=null;i=null;
-        }
-*/
+        createElement("td",{},newtr,getText("settings_setQuestAll")[1]);
 
         // *********************************************************************
         newtr=createElement("tr",{},newtable);
@@ -9510,8 +9586,7 @@ try{
                 var ratio = (gut[pId]/points).toFixed(2);
                 createElement("div", {
                         "style":"position: absolute; bottom: -15px; left: 8px;border: 2px solid rgb(255, 114, 0); background-color: white;width: 70px;text-align: center;"
-                //},children[c], ratio + " kT/P.");
-                },children[c], ratio + " " + unsafeWindow.gamecurrency + "/P.");
+                },children[c], ratio + " " + getText("gamecurrency") + "/P.");
             }
         }catch(err){GM_logError("entryCityXmasEvent","","",err);}
     });
@@ -9546,8 +9621,7 @@ try{
             }, div, false);
             var labelPriceSavedText;
             if (productId == value.id) {
-                //labelPriceSavedText = getText("lastPrice") + " (" + value.price + " kT)";
-                labelPriceSavedText = getText("lastPrice") + " (" + value.price + " " + unsafeWindow.gamecurrency + ")";
+                labelPriceSavedText = getText("lastPrice") + " (" + value.price + " " + getText("gamecurrency") + ")";
             } else {
                 labelPriceSavedText = getText("lastPrice");
             }
@@ -9578,8 +9652,7 @@ try{
             var marketPrice = preisBeob[productId][2] ? preisBeob[productId][2] : NPC[0][productId];
             createElement("label", {
                 "for": "contractPriceMarket"
-            //}, div, getText("marketPrice") + " (" + marketPrice + " kT)");
-            }, div, getText("marketPrice") + " (" + marketPrice + " " + unsafeWindow.gamecurrency + ")");
+            }, div, getText("marketPrice") + " (" + marketPrice + " " + getText("gamecurrency") + ")");
             radioPriceMarket.addEventListener("click", function () {
                 $("contracts_select_price_input").value = marketPrice;
             }, false);
@@ -9979,7 +10052,7 @@ try{
                 var err_trace="init";
                 if (!unsafeWindow.premium){
                     unsafeWindow.showDiv("farm_speedlinks");
-                    var a = ["farm1", "farm2", "farm3", "farm4", "city1", "city2", "guild", "forestry", "foodworld", "megafield"];
+                    var a = ["farm1", "farm2", "farm3", "farm4", "farm5", "city1", "city2", "guild", "forestry", "foodworld", "megafield"];
                     for (var b = 0; b <= a.length; b++) {
                         if ($("speedlink_" + a[b])) {
                             unsafeWindow.hideDiv($("speedlink_" + a[b]));
@@ -14347,13 +14420,26 @@ return false;
     //d: Slot
     //s: Produkt
     //y:
-    unsafeOverwriteFunction("dialogFuelstation",function(n, z, d, s, y){
-        try{
+	unsafeOverwriteFunction("dialogFuelstation",function(n, z, d, s, y){
+		try{
             unsafeWindow._dialogFuelstation(n, z, d, s, y);
-        }catch(err){GM_logError("dialogFuelstation","","",err);}
-        try{
-            GM_log("dialogFuelstation "+"n"+n+"z"+z+"d"+d+"s"+s+"y"+y);
-            raiseEvent("gameFactoryFuelstationDialogStarted");
+        }catch(err){GM_logError("_dialogFuelstation","","",err);}
+
+		try{
+			var zoneNr=z;
+			var data=unsafeWindow.farms_data.farms[unsafeWindow.farm][zoneNr];
+			var iLimit=data.data.constants.slot_level[data.data.data.slots[d].level].limit;
+            var children = $('fuelstation_product_select_inner').getElementsByClassName("fuelstation_product_select_item");
+            for (var c in children) {
+                if (!children.hasOwnProperty(c)) { continue; }
+                var pId_parent=children[c].getElementsByClassName("fuelstation_product_select_item_img")[0].childNodes;
+				var pId = pId_parent[1].className.replace("tt", "");
+                var points = children[c].getElementsByClassName("fuelstation_product_select_item_points")[0].innerHTML.replace(".","");
+                var ratio = (gut[pId]*iLimit/points).toFixed(2);
+                createElement("div", {
+                        "style":"position: absolute; bottom: -15px; left: 8px;border: 2px solid rgb(255, 114, 0); background-color: white;width: 85px;text-align: center;"
+                },children[c], ratio + " " + unsafeWindow.gamecurrency);
+            }
         }catch(err){GM_logError("dialogFuelstation","","",err);}
     });
 
@@ -20266,10 +20352,7 @@ try{
         text["de"]["settings_valGlobaltimeShowCroppedZone"]=["Beachte geerntete Zonen","Sollen geerntete Zonen in die globale Zeit einbezogen werden?"];
         text["de"]["settings_cacheReset"]=["Cache reset","Die History und alle Informationen über die Zonen werden gelöscht ..."];
         text["de"]["settings_zoneReset"]=["Zones reset","Alle Informationen über deine Zonen werden gelöscht ..."];
-        text["de"]["settings_setQuestMain"]=["Korrigiere Farm-Questreihen ","Abgeschlossene Farm-Questreihen werden entsprechend übernommen und abgespeichert."];
-        text["de"]["settings_setQuestMain3"]=["3. Farm-Questreihe","Die Questnummer wird von mff übernommen und die dazugehörenden Werte der 3. Farm-Questreihe gesetzt."];
-        text["de"]["settings_setQuestMain3_1"]=["Ausführen","Die Questnummer der 3. Farm-Questreihe wird auf den eingegebenen Wert gesetzt. Bitte vorsichtig verwenden ..."];
-        text["de"]["settings_setQuestForest2"]=["2. Baumerei-Questreihe","Die Questnummer wird von mff übernommen und die dazugehörenden Werte der 2. Baumerei-Questreihe gesetzt."];
+        text["de"]["settings_setQuestAll"]=["Korrigiere Questreihen ","Werte der Questreihen werden wenn nötig übernommen und abgespeichert. Dies wirkt bei abgeschlossenen Questreihen oder Questreihen, bei denen die Sanduhr den Zugriff auf das Quest-Fenster verhindert."];
         text["de"]["settings_megafieldSmartTimer"]=["Beachte aktive Tour", "Soll beim Starten einer Tour der Güterhof-Timer auf das Ende der Tour gesetzt werden?"];
         text["de"]["settings_clothingDonation"]=["Kleiderspende", "Ein blinkender Icon zeigt an, wenn bei der Kleiderspende gespendet oder gewürfelt werden kann."];
         // help
@@ -20665,10 +20748,7 @@ try{
         text["en"]["settings_valGlobaltimeShowCroppedZone"]=["Integrate cropped zone","Shall the ready-state of the cropped zones be included in the global time?"];
         text["en"]["settings_cacheReset"]=["Cache reset","The History and all information about your farms will be deleted ..."];
         text["en"]["settings_zoneReset"]=["Zones reset","All information about your farms will be deleted ..."];
-        text["en"]["settings_setQuestMain"]=["Questseries","Main questseries are declared terminated ..."];
-        text["en"]["settings_setQuestMain3"]=["Overwrite Questseries 3","The questnumber of main questseries 3 is set to the mff-questnumber."];
-        text["en"]["settings_setQuestMain3_1"]=["Execute","The questnumber of main questseries 3 is set to the chosen number. Please use it carefully ..."];
-        text["en"]["settings_setQuestForest2"]=["Overwrite quest Forestry 2","The questnumber of forestry series 2 is set to the mff-questnumber."];
+        text["en"]["settings_setQuestAll"]=["fix questseries","If neccessary values of questseries are taiken from the game. This is applicable for achieved questseries or questseries not accessible due to activated sandglass."];
         text["en"]["settings_megafieldSmartTimer"]=["Integrate active tour", "Megafield-Timer is set to end of the tour after a tour is started."];
         text["en"]["settings_clothingDonation"]=["Clothing Donation", "A blinking icon indicates, when you can donate or gamble."];
         //help
