@@ -5548,19 +5548,7 @@ function autoFarmPony(runId,step){
             break;
         }
         case 5:{ // select farmi
-<<<<<<< HEAD
-            // if(!unsafeData.readyZone[handled.zoneNrS]){
-            //     console.log("Exit, da Zone nicht in readyZone");
-            //         autoFarmPony(runId,5);
-            // }else
-            if((unsafeData.readyZone[handled.zoneNrS][1]!="e")||!unsafeData.readyZone[handled.zoneNrS][2]|| !unsafeData.pony_data){
-                // Wait for response
-                GM_logInfo("autoFarmPony","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Waiting for pony data to be ready");
-                window.setTimeout(autoFarmPony,settings.getPause(),runId,step);
-            } else if (zoneList[handled.zoneNrL][0][0] == PRODSTOP || !unsafeData.readyZone[handled.zoneNrS]) {
-=======
             if (zoneList[handled.zoneNrL][0][0] == PRODSTOP || !unsafeData.readyZone[handled.zoneNrS]) {
->>>>>>> 3ce5e56e0ecbb112b3cf68c9cd2891ccd060d4b3
                 // PRODSTOP or zone not ready anymore => exit
                 GM_logInfo("autoFarmPony","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Pony production stop");
                 autoFarmPony(runId, 8);
@@ -5569,7 +5557,7 @@ function autoFarmPony(runId,step){
                 // Wait for response
                 GM_logInfo("autoFarmPony","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Select Farmi for Pony" + handled.slot + " (Waiting)");
                 window.setTimeout(autoFarmPony, settings.getPause(), runId, step); // => Wait some milliseconds
-            } 
+            }
             else {
                 GM_logInfo("autoFarmPony","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Select Farmi");
                 listeningEvent="gamePonyFarmiSelected";
@@ -5582,14 +5570,9 @@ function autoFarmPony(runId,step){
                         }
 
                         // Find correct farmi
-<<<<<<< HEAD
+                        // Find correct farmi
                         if (f["type"] == zoneList[handled.zoneNrL][0][0]) {
-                            // GM_logInfo("autoFarmPony","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Klicke Farmi " + i);
-
-=======
-                        if (f["type"] == zoneList[handled.zoneNrL][0][0]) { 
->>>>>>> 3ce5e56e0ecbb112b3cf68c9cd2891ccd060d4b3
-                            // Check food of pony in 'handled.slot'
+                          // Check food of pony in 'handled.slot'
                             if (f["type"] <= unsafeData.pony_data["ponys"][handled.slot]["data"]["feed"]) {
                                 click($("pony_farmi"+i));
                             } else {

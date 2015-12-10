@@ -13901,20 +13901,6 @@ return false;
                     return false;
                 }
             break;}
-<<<<<<< HEAD
-                        case "fuelstation_entry": {
-                                        //Ausgelöst durch Button "Einwerfen"
-                                        //function(mode,farm,position,s,d,b,a)
-
-                                        //mode: 'fuelstation_entry', s: Slot, d:Produkt, b: undefined, a:undefined
-                                        //GM_log("farmAction: mode:"+ mode + " s:"+s+" d:"+d+" b:"+b+" a:"+a);
-                                }
-                        break;
-            }
-        }catch(err){GM_logError("farmAction","mode="+mode,"","(pre) "+err);}
-        try{
-                        //GM_log("farmAction: mode:"+ mode + " s:"+s+" d:"+d+" b:"+b+" a:"+a);
-=======
             case "fuelstation_entry": {
                     //Ausgelöst durch Button "Einwerfen"
                     //function(mode,farm,position,s,d,b,a)
@@ -13927,7 +13913,6 @@ return false;
         }catch(err){GM_logError("farmAction","mode="+mode,"","(pre) "+err);}
         try{
             //GM_log("farmAction: mode:"+ mode + " s:"+s+" d:"+d+" b:"+b+" a:"+a);
->>>>>>> 3ce5e56e0ecbb112b3cf68c9cd2891ccd060d4b3
             unsafeWindow._farmAction(mode,farm,position,s,d,b,a);
         }catch(err){GM_logError("_farmAction","mode="+mode,"",err);}
     });
@@ -17911,15 +17896,9 @@ return;
 
         // On load, check, if we need to show the icon
         if (USERLEVEL >= 38) {
-<<<<<<< HEAD
           showGoToClothingDonation();
         }
 
-=======
-        showGoToClothingDonation();
-        }
-        
->>>>>>> 3ce5e56e0ecbb112b3cf68c9cd2891ccd060d4b3
         // Donkey Waltraud
         err_trace="Donkey Waltraud";
         // logDonkey[]=[day,points,[received gifts]]
