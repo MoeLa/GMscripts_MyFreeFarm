@@ -14555,7 +14555,7 @@ return false;
             for (var c in children) {
                 if (!children.hasOwnProperty(c)) { continue; }
                 var pId_parent=children[c].getElementsByClassName("fuelstation_product_select_item_img")[0].childNodes;
-				var pId = pId_parent[1].className.replace("tt", "");
+                var pId = pId_parent[1].className.replace("tt", "");
                 var points = children[c].getElementsByClassName("fuelstation_product_select_item_points")[0].innerHTML.replace(".","");
                 var ratio = (gut[pId]*iLimit/points).toFixed(2);
                 createElement("div", {
@@ -14635,7 +14635,7 @@ return false;
             }
             zones.setProduction(zoneNrF,tempZoneProductionData.clone());
             var tempZoneProductionData=null;newDiv=null;newDiv1=null;
-            raiseEvent("buildFuelstation");
+            raiseEvent("gameOpenFuelstation");
         }catch(err){GM_logError("buildFuelstation","","",err);}
     });
 

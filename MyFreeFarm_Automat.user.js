@@ -9594,6 +9594,20 @@ try{
         }catch(err){GM_logError("eventListener:gameOpenFactoryKnitting ","","",err);}
         },false);
 
+        err_trace="listener gameOpenFuelstation";
+        document.addEventListener("gameOpenFuelstation",function(){ // Fuelstation factory open
+        try{
+            var zoneNrF=getFarmZone(unsafeWindow.currentposition);
+            var zoneNrS;
+            for(var slot=1;slot<=4;slot++){
+                zoneNrS=zoneNrF+"."+slot;
+                if(!unsafeData.zones.getBlock(zoneNrS)){
+                    drawAutomatIcon(zoneNrS,zoneNrS,$("fuelstation_slot"+slot),"left:-10px;");
+                }
+            }
+        }catch(err){GM_logError("eventListener:gameOpenFuelstation ","","",err);}
+        },false);
+
         err_trace="listener gameOpenPony";
         document.addEventListener("gameOpenPony",function(){ // pony open
             drawPonyIcons();
