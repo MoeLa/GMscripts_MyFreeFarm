@@ -281,20 +281,18 @@ unsafeData.BUILDING2PRODUCT=BUILDING2PRODUCT.clone();
             Pony             5
             Fuelstation      6
         */
-// const BUILDINGTYPE={"0":0,"1":1,"2":2,"3":2,"4":2,"5":2,"6":0,"7":3,"8":3,"9":3,"10":3,"11":2,"12":2,"13":3,"14":3,"15":2,"16":3,"17":0,"18":0,"19":0,"20":0,"fl1":1,"fl2":4,"fl5":4,"fw1":4,"fw2":4,"fw3":4}
 const BUILDINGTYPE={"0":0,"1":1,"2":2,"3":2,"4":2,"5":2,"6":0,"7":3,"8":3,"9":3,"10":3,"11":2,"12":2,"13":3,"14":3,"15":2,"16":3,"17":0,"18":5,"19":0,"20":0,"fl1":1,"fl2":4,"fl5":4,"fw1":4,"fw2":4,"fw3":4}
-// for Fuelstation
-// const BUILDINGTYPE={"0":0,"1":1,"2":2,"3":2,"4":2,"5":2,"6":0,"7":3,"8":3,"9":3,"10":3,"11":2,"12":2,"13":3,"14":3,"15":2,"16":3,"17":0,"18":0,"19":0,"20":6,"fl1":1,"fl2":4,"fl5":4,"fw1":4,"fw2":4,"fw3":4}
+// for Fuelstation (incl. Pony)
+// const BUILDINGTYPE={"0":0,"1":1,"2":2,"3":2,"4":2,"5":2,"6":0,"7":3,"8":3,"9":3,"10":3,"11":2,"12":2,"13":3,"14":3,"15":2,"16":3,"17":0,"18":5,"19":0,"20":6,"fl1":1,"fl2":4,"fl5":4,"fw1":4,"fw2":4,"fw3":4}
 
 unsafeData.BUILDINGTYPE=BUILDINGTYPE.clone();
 // task_new_building
 const BUILDING_SIZE={"1":120,"forest":25,"fl1":36,"megafield":[11,9]};
 unsafeData.BUILDING_SIZE=BUILDING_SIZE.clone();
 // task_new_building
-// const BUILDING_SLOTS={"13":3,"14":3,"16":3,"windmill":2,"sawmill":3,"carpentry":3,"fw1":3,"fw2":3,"fw3":3,"fl0":17,"fl2":3,"megafield":99};
 const BUILDING_SLOTS={"13":3,"14":3,"16":3,"18":3,"windmill":2,"sawmill":3,"carpentry":3,"fw1":3,"fw2":3,"fw3":3,"fl0":17,"fl2":3,"megafield":99};
-//for Fuelstation
-//const BUILDING_SLOTS={"13":3,"14":3,"16":3,"20":4,"windmill":2,"sawmill":3,"carpentry":3,"fw1":3,"fw2":3,"fw3":3,"fl0":17,"fl2":3,"megafield":99};
+//for Fuelstation (incl. Pony)
+//const BUILDING_SLOTS={"13":3,"14":3,"16":3,"18":3,"20":4,"windmill":2,"sawmill":3,"carpentry":3,"fw1":3,"fw2":3,"fw3":3,"fl0":17,"fl2":3,"megafield":99};
 unsafeData.BUILDING_SLOTS=BUILDING_SLOTS.clone();
 // Needed input of a zone
 // BUILDING_INPUT[buildTyp]{output}[alternatives]=[[prod1,amount1||reducing time1],...]
@@ -1715,7 +1713,6 @@ var zones=new function(){
         // s: status
         // t: type (not handled)
         try{
-            // console.log("Set block: " + zoneNr + " -> " + value);
             zoneNr=zoneNr.toString();
             var slot=(zoneNr.match(/\.(\d+)$/)?parseInt(/\.(\d+)$/.exec(zoneNr)[1],10):null);
             var zoneNrF=zoneNr.replace(/\.\d+$/g,"");
@@ -1841,7 +1838,6 @@ var zones=new function(){
             }
             if(data[zoneNrF]["building"]!=value){
                 data[zoneNrF]["building"]=value;
-                 // + zoneNrF + " -> " + BUILDING_SLOTS[value]);
                 if(BUILDING_SLOTS[value]){
                     data[zoneNrF]["slots"]=[];
                     for(var i=BUILDING_SLOTS[value];i>=1;i--){
@@ -2125,10 +2121,6 @@ var zones=new function(){
                 var zT=zones.getEndtime(zoneNrS);
                 var zTw=zones.getWatertime(zoneNrS);
                 var div;
-                // if (zoneNrF == 24) {
-                // zT = NEVER;
-                // }
-                // console.log(zoneNrS);
                 // We gonna set the megafield timer to the end of the tour, if we can't/needn't to plant anything
                 if (megafieldSmartTimer && zoneNrF == "megafield") {
                     // Do we have the data AND is a harvest tour running (and the job hasn't timed out already)?
@@ -2176,9 +2168,6 @@ var zones=new function(){
                             }
                             // otherwise we don't do anything until the empty fields are planted
                         }
-                    } else if (unsafeWindow.megafield_data) {
-                        // console.log("Megatime: " + new Date(1000*zT));
-                        // console.log(unsafeWindow.megafield_data);
                     }
                 }
 
@@ -2226,9 +2215,6 @@ var zones=new function(){
                 }
                 div=null;
             }
-            // if (readyZoneAdded) {
-            //     console.log("Ready: " + zoneNrF);
-            // }
 
             return readyZoneAdded;
         }catch(err){GM_logError("zones.checkReady","zoneNrS="+zoneNrS,"",err);}
@@ -13618,7 +13604,6 @@ return false;
                             currBonusSpecial=[parseInt(data.product,10),10]; // the id of special plant, additional bonus for special plant
                         }
                     }
-                    // console.log("farmBuildPositions: " + zoneNrF);
                     zones.setBuilding(zoneNrF,currZoneType);
                     zones.setBlock(zoneNrF,currBlock);
                     zones.setBonus(zoneNrF,currBonus);
@@ -13951,14 +13936,11 @@ return false;
                 case "megafield_vehicle_buy": raiseEvent("gameMegafieldVehicleBought"); break;
                 case "nursery_harvest": raiseEvent("gameFarmersmarketCropped"); break;
                 case "nursery_startproduction": raiseEvent("gameFarmersmarketStarted"); break;
-                case "pony_crop": doPony(zoneNr); raiseEvent("gamePonyCropped"); console.log("gamePonyCropped"); break;
-                case "pony_feed": doPony(zoneNr); raiseEvent("gamePonyFed"); console.log("gamePonyFed"); break;
-                case "pony_setfarmi": doPony(zoneNr); raiseEvent("gamePonyFarmiSet"); console.log("gamePonyFarmiSet"); break;
+                case "pony_crop": doPony(zoneNr); raiseEvent("gamePonyCropped"); break;
+                case "pony_feed": doPony(zoneNr); raiseEvent("gamePonyFed"); break;
+                case "pony_setfarmi": doPony(zoneNr); raiseEvent("gamePonyFarmiSet"); break;
                 case "pony_buy": 
-                case "pony_speedup": {
-                        doPony(zoneNr);
-                        break;
-                }
+                case "pony_speedup": doPony(zoneNr); break; // No events thrown since not needed for automat
                 case "reallocatebuilding":{
                     // B=='farm1,zone1,farm2,zone2'
                     var set=B.split(",");
@@ -14036,18 +14018,14 @@ return false;
             unsafeWindow._ponySelectFarmi(farmiId);
         }catch(err){GM_logError("_ponySelectFarmi","","",err);}
         try{
-            if (unsafeWindow.pony_sel_farmi) {
+            if (unsafeWindow.pony_sel_farmi) { // if unsafeWindow.pony_sel_farmi == 0 => Farmi has been unselected
                 raiseEvent("gamePonyFarmiSelected");
-                console.log("gamePonyFarmiSelected: " + farmiId);
-            } else {
-                console.log("Farmi unselected");
             }
-            // console.log(unsafeWindow.pony_sel_farmi);
         }catch(err){GM_logError("ponySelectFarmi","","",err);}
     });
     unsafeOverwriteFunction("ponyDialog",function(h, b, n){
         try{
-            unsafeWindow._ponyDialog(h, b, n); // 'feed', pony_slot, undefined
+            unsafeWindow._ponyDialog(h, b, n); // 'feed' | 'setfarmi', pony_slot, undefined
         }catch(err){GM_logError("_ponyDialog","","",err);}
         try{
             if (h == "feed") {
@@ -14055,7 +14033,6 @@ return false;
             } else if (h == "setfarmi") {
                 raiseEvent("gamePonySetDialogOpened");
             }
-            // console.log("ponyDialog: " + h + "/" + b + "/" + n);
         }catch(err){GM_logError("ponyDialog","","",err);}
     });
     unsafeOverwriteFunction("AbrissResponse",function(request){
@@ -14301,71 +14278,65 @@ return false;
     }
     function doPony(zoneNr){
         var zoneNrF=zoneNr+6*gameLocation.get()[1];
-
         var pony_data = unsafeWindow.pony_data;
         unsafeData.pony_data = pony_data;
-        console.log(unsafeData.pony_data);
 
         var zoneNrS;
-        var prodData=[[{}],0,0,true]; // Proddata für komplette Pony-Farm
+        var prodData=[[{}],0,0,true]; // Proddata for complete building
         var dataSlot;
         for (var slot=1; slot<=3; slot++) {
-            zoneNrS=zoneNrF+"." + slot; // 24.1 bzw. 24.2
+            zoneNrS=zoneNrF+"." + slot; // 24.1 or 24.2 responsivly
             if (slot==1 || !pony_data["ponys"][slot]["block"]) {
                 zones.setBlock(zoneNrS,""); // Unblock slot
-                dataSlot=[[{}],0,0,true]; // Proddata für den aktuellen Slot
-                prodData[1]++; // Wir nehmen an, dass ein weiterer/dieser Platz frei ist 
-                prodData[2]++; // Wir nehmen an, dass ein weiterer/dieser Platz freigeschaltet ist
-                dataSlot[1]++; // Inkrementiere freien Platz in diesem Slot
-                dataSlot[2]++; // Ein freier Platz in diesem Slot
-                var farmiId = pony_data["ponys"][slot]["data"]["farmi"]; // FarmiId des aktuellen Reiters in Slot
+                dataSlot=[[{}],0,0,true]; // Proddata for current slot
+                prodData[1]++; // Assume, there is this/a further production possibility available
+                prodData[2]++; // Assume, there is this/a further production possibility unlocked
+                dataSlot[1]++; // Increment available production possibility in current slot
+                dataSlot[2]++; // Increment unlocked production possibility in current slot
+                var farmiId = pony_data["ponys"][slot]["data"]["farmi"]; // Id of farmi riding in current slot
                 if (farmiId) {
-                    var farmi = pony_data["farmis"][farmiId]; // Hole Infos über aktuellen Reiter
-                    var iPrTyp=0; // Produkttyp
-                    var iProd=0;  // Produkt "0" sind zwar Coins, aber mal sehen
-                    var iAmount=0;// Es werden 0 Einheiten hergestellt
-                    var iPoints=farmi["data"]["points"]; // Punkte für aktuellen Ritt
-                    var iTime = NEVER; // Endzeit des aktuellen Ritts
-                    if(farmi["data"]["ready"]){
+                    var farmi = pony_data["farmis"][farmiId]; // Get that farmi's data
+                    var iPrTyp=0; // Type of product => Since we don't produce anything, we just take zero
+                    var iProd=0;  // Product '0' is 'Coins' => We need to set this value some how
+                    var iAmount=0;// We produce '0' units
+                    var iPoints=farmi["data"]["points"]; // Amount of points for current production
+                    var iTime = NEVER; // End time
+                    if(farmi["data"]["ready"]){ // Production has finished
                         iTime = Math.min(now - unsafeWindow.Zeit.Verschiebung, zones.getEndtime(zoneNrS));
-                    } else{
+                    } else{ // Production still running
                         iTime = now + farmi["data"]["remain"] - unsafeWindow.Zeit.Verschiebung;
                     }
-                    prodData[1]--; // Platz ist nicht frei (Komplette Farm)
+                    prodData[1]--; // Production possibility currently not available (building)
                     if (!prodData[0][iPrTyp][iProd]) {
-                        prodData[0][iPrTyp][iProd]=[]; // prodData[0][0][0] anlegen
+                        prodData[0][iPrTyp][iProd]=[]; // Create prodData[0][0][0]
                     }
-                    // Packe Infos für aktuellen Slot in Proddata der ganzen Farm
+                    // Put this slot's info into building's proddata
                     prodData[0][iPrTyp][iProd].push([iAmount,iPoints,iTime,NEVER]);
                     
-                    dataSlot[1]--; // Platz ist nicht frei (Slot)
+                    dataSlot[1]--; // Production possibility currently not available (slot)
                     if (!dataSlot[0][iPrTyp][iProd]) {
                         dataSlot[0][iPrTyp][iProd]=[];
                     }
-                    // Packe Infos für aktuellen Slot in Proddata des aktuellen SLots
+                    // Put this slot's info into slots's proddata
                     dataSlot[0][iPrTyp][iProd].push([iAmount,iPoints,iTime,NEVER]);
                      
-                    //auto-cropping
+                    // Add auto-cropping on open building
                     newDiv=$("pony" + slot).children[1];
                     if (farmi["data"]["remain"] < 1 && (top.unsafeData.autoAction==null) && valAutoCrop["farm"] && (newDiv=$("pony"+ slot + "_crop"))) {
-                        top.unsafeData.autoAction="berater: pony crop";
+                        top.unsafeData.autoAction="Berater: Pony crop";
                         window.setTimeout(function(div){
                             click(div);
                             top.unsafeData.autoAction=null;
-                        },500,newDiv);
+                        }, 500, newDiv);
                     }
-                } else {
-                    // Nichts, da keine Infos vorhanden sind
-                    console.log("Keine FarmiId -> Slot ist leer/geerntet");
                 }
 
-                // Setze Production-Info für Slot
-                zones.setProduction(zoneNrF+"."+slot,dataSlot.clone());
+                zones.setProduction(zoneNrF+"."+slot,dataSlot.clone()); // Set proddata for slot
             } else {
-                zones.setBlock(zoneNrS, "b");
+                zones.setBlock(zoneNrS, "b");  // Block slot
             }
         }
-        zones.setProduction(zoneNrF,prodData.clone());
+        zones.setProduction(zoneNrF, prodData.clone()); // Set proddata for building
     }
     unsafeOverwriteFunction("buildOilpressInner",function(position,buildingid,info){
         try{
@@ -17895,7 +17866,7 @@ return;
 
         // On load, check, if we need to show the icon
         if (USERLEVEL >= 38) {
-        showGoToClothingDonation();
+            showGoToClothingDonation();
         }
         
         // Donkey Waltraud
@@ -18057,7 +18028,6 @@ return;
         var readyZoneAdded=0;
         for(var i in ALL_SLOTS){
             if(!ALL_SLOTS.hasOwnProperty(i)){ continue; }
-            // console.log("Block for " + i + ": " + zones.getBlock(i));
             if(!zones.getBlock(i)){
                 readyZoneAdded+=zones.checkReady(i);
             }
@@ -20943,6 +20913,12 @@ try{
         allEvents.push("buildFuelstation");                 //Fuelstation
         allEvents.push("gameFactoryFuelstationDialogStarted");
 
+        allEvents.push("gamePonyCropped");                  // a pony has been cropped
+        allEvents.push("gamePonyFed");                      // a pony has been fed (after confirmation)
+        allEvents.push("gamePonyFarmiSet");                 // a pony farmi has been set on a pony (after confirmation)
+        allEvents.push("gamePonyFarmiSelected");            // a pony farmi has been selected (not unselected)
+        allEvents.push("gamePonyFeedDialogOpened");         // a pony's food box has been opened (before confirmation)
+        allEvents.push("gamePonySetDialogOpened");          // a pony farmi has been set on a pony (before confirmation)
         allEvents.push("gameMegafieldDialogStarted");       // the megafield view has been moved
         allEvents.push("gameMegafieldMoved");               // a megafield vehicle has been bought
         allEvents.push("gameMegafieldTourStarted");         // a megafield tour has been started

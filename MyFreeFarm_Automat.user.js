@@ -5318,20 +5318,16 @@ function autoFarmPony(runId,step){
                 zoneList[handled.zoneNrL].unshift(DEFAULT_ZONELIST_ITEM.clone());
                 updateQueueBox(handled.zoneNrS);
                 autoFarmPony(runId, 8); // Pony slot blocked => Exit
-                // window.setTimeout(autoFarmPony,settings.getPause(),runId,8);
             }else{
                 if(unsafeData.zones.getEndtime(handled.zoneNrS)==NEVER){ // Empty
                     GM_logInfo("autoFarmPony","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Pony is cropped");
                     autoFarmPony(runId, step+2); // Skip cropping => Feed
-                    // window.setTimeout(autoFarmPony,settings.getPause(),runId,3);
                 }else if(unsafeData.zones.getEndtime(handled.zoneNrS)<=unsafeWindow.Zeit.Server){ // Cropable
                     GM_logInfo("autoFarmPony","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Pony must be cropped");
                     autoFarmPony(runId, step+1); // => Crop
-                    // window.setTimeout(autoFarmPony,settings.getPause(),runId,step+1);
                 }else{ // Busy
                     GM_logInfo("autoFarmPony","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Pony" + handled.slot + " is busy");
                     autoFarmPony(runId, 8); // => Exit
-                    // window.setTimeout(autoFarmPony,settings.getPause(),runId,8); // => Exit
                 }
             }
         break;}
@@ -5349,11 +5345,9 @@ function autoFarmPony(runId,step){
                 } else {
                     GM_logInfo("autoFarmPony","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"No need to crop Pony" + handled.slot + " (anymore)");
                     autoFarmPony(runId, step+1); // => Feed
-                    // window.setTimeout(autoFarmPony,settings.getPause(),runId,step+1);
                 }
             } else {
                 autoFarmPony(runId, 8); // Crop-button doesn't exit => Something is very wrong => Exit
-                // window.setTimeout(autoFarmPony,settings.getPause(),runId,8);
             }
         break;}
         case 3: { // feed pony
@@ -5371,7 +5365,6 @@ function autoFarmPony(runId,step){
             } else {
                 GM_logInfo("autoFarmPony","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"No need to feed Pony" + handled.slot + " (anymore)");
                 autoFarmPony(runId, step+2); // Jump to 'set farmi'
-                // window.setTimeout(autoFarmPony,settings.getPause(),runId,step+2);
             }
             break;
         }
@@ -5392,13 +5385,11 @@ function autoFarmPony(runId,step){
                 // PRODSTOP or zone not ready anymore => exit
                 GM_logInfo("autoFarmPony","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Pony production stop");
                 autoFarmPony(runId, 8);
-                // window.setTimeout(autoFarmPony,settings.getPause(),runId,8);
             } else if((unsafeData.readyZone[handled.zoneNrS][1]!="e")||!unsafeData.readyZone[handled.zoneNrS][2]|| !unsafeData.pony_data){ // Data not ready yet
                 // Wait for response
                 GM_logInfo("autoFarmPony","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Select Farmi for Pony" + handled.slot + " (Waiting)");
                 window.setTimeout(autoFarmPony, settings.getPause(), runId, step); // => Wait some milliseconds
-            } 
-            else {
+            } else {
                 GM_logInfo("autoFarmPony","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Select Farmi");
                 listeningEvent="gamePonyFarmiSelected";
                 action=function(){
@@ -5430,7 +5421,6 @@ function autoFarmPony(runId,step){
             }
         break;}
         case 6:{ // select pony aka set farmi on pony
-            // TODO Nur, wenn dialog nicht geöffnet und pony noch frei
             if(typeof unsafeWindow.pony_sel_farmi === 'undefined' || unsafeWindow.pony_sel_farmi == null){ // Data not ready yet
                 // Wait for response
                 GM_logInfo("autoFarmPony","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Set Farmi on Pony" + handled.slot + " (Waiting)");
