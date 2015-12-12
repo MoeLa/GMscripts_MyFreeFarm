@@ -1519,12 +1519,7 @@ try {
         case 4:
             automatIcons[name][1]=createElement("div",{"id":"divAutomatIcon_"+name,"class":"link divFoodworldIcon","product":PRODSTOP,"zoneNrS":zoneNrS,"style":style},appendTo);
         break;
-        case 5:
-            // Moe, hier nichts machen. ProdStop-Icon passt
-            // console.log("Moe, drawAutomatIcon, name: " + name);
-            // console.log("Male PRODSTOP");
-            // console.log("drawAutomatIcon");
-            // console.log(automatIcons[name]);
+        case 5: // Pony is fine with standard PRODSTOP icon
         default:
             automatIcons[name][1]=createElement("div",{"id":"divAutomatIcon_"+name,"class":"link divZoneIcon v"+PRODSTOP,"product":PRODSTOP,"zoneNrS":zoneNrS,"style":style},appendTo);
         }
@@ -1782,7 +1777,6 @@ try{
         },false);
     }
 
-    console.log("Moe, fzType: " + fzType);
     createElement("div",{id:"divAutoMatQueueBox"+zoneNrL,"class":"queueBoxerQueueBox"},appendTo);
     for(queueNum=0;queueNum<zoneList[zoneNrL].length; queueNum++){
         drawQueueItemBox(zoneNrS, zoneNrL, queueNum, $("divAutoMatQueueBox"+zoneNrL));
@@ -1915,9 +1909,7 @@ try{
         case 4:
             drawFoodworldChooseItemBox(zoneNrS, zoneNrL, queueNum, $("divChooseBoxInner"));
         break;
-        case 5:
-            // console.log("Moe, drawChooseItemBoxPony");
-            // console.log("zoneNrS: " + zoneNrS + "; zoneNrL: " + zoneNrL + "; queueNum: " + queueNum);
+        case 5: // Pony
             drawChooseItemBoxPony(zoneNrS, zoneNrL, queueNum, $("divChooseBoxInner"));
         break;
         case "megafield":
@@ -2086,7 +2078,6 @@ try{
         if(zoneNrS=="windmill"){
             zoneList[zoneNrL].splice(queueNum,0,DEFAULT_ZONELIST_MILL.clone());
         }else{
-            console.log("Moe, add button: " + zoneNrS);
             zoneList[zoneNrL].splice(queueNum,0,DEFAULT_ZONELIST_ITEM.clone());
             zoneList[zoneNrL][queueNum][0]=zoneList[zoneNrL][queueNum+1][0];
         }
@@ -2167,6 +2158,8 @@ function drawQueueListSmall(zoneNrF, zoneNrL, appendTo){
                 createElement("div",{"class":"fmm"+zoneList[zoneNrL][queueNum][0],style:"position:relative;"},newdiv);
             }else if(fzType=="sawmill"||fzType=="carpentry"||fzType=="forest"){
                 newdiv=createElement("div",{id:"divQueueItemListList"+zoneNrL+"Q"+queueNum+"Item","class":"divQueueItemListChooseItem f_symbol"+zoneList[zoneNrL][queueNum][0]},appendTo);
+            }else if (fzType==5) {
+                newdiv=createElement("div",{id:"divQueueItemListList"+zoneNrL+"Q"+queueNum+"Item","class":"divQueueItemListChooseItem divZonePonyIcon pony_farmi"+zoneList[zoneNrL][queueNum][0]},appendTo);
             }else{
                 newdiv=createElement("div",{id:"divQueueItemListList"+zoneNrL+"Q"+queueNum+"Item","class":"divQueueItemListChooseItem v"+zoneList[zoneNrL][queueNum][0]},appendTo);
             }
@@ -2735,6 +2728,7 @@ try{
             }
             updateQueueBox(zoneNrF, zoneNrL);
         },false);
+        // TODO: Integrate Tooltip
         // newdiv.addEventListener("mouseover", function(event){
         //     var zoneNrS=this.parentNode.getAttribute("zoneNrS");
         //     var zoneNrL=this.parentNode.getAttribute("zoneNrL");
@@ -2826,11 +2820,8 @@ try{
     if(zoneNrS===undefined){ return; }
     var err_trace="init";
     if(zoneNrL===undefined || zoneNrL==null){ zoneNrL=getZoneListId(zoneNrS); }
-    // console.log("Moe, updateQueueBox: " + zoneNrS + "/" + zoneNrL); // 24.1/24.1
     var fzType=getBuildingTyp(zoneNrS);
-    // console.log("Moe, updateQueueBox, fzType: " + fzType);
     var fzZoneType=getZoneType(zoneNrS);
-    // console.log("Moe, updateQueueBox, fzZoneType: " + fzZoneType);
     var fzForestry=(fzType=="forest"||fzType=="sawmill"||fzType=="carpentry");
     var fzMegafield=(fzType=="megafield");
     var fzWindmill=(fzType=="windmill");
@@ -3274,9 +3265,7 @@ try{
             }
             zoneFeedCurr=null;zoneProdCurr=null;
         break;}
-        case 5: { //Pony
-            // Im Queue-Modus, wenn neuer Eintrag ausgewählt werden soll, die Endtime setzen
-            console.log("Moe, Queue-Modus/Eintrag auswählen/Endzeit! Irgendwo in updateQueueBox");
+        case 5: { // Pony - No queue mode support
         break;}
         case "windmill":{ // (fzWindmill)
             if(settings.get("account","showQueueTime")){
@@ -3423,7 +3412,7 @@ try{
         if(settings.get("account","showQueueTime")) {
             var zoneBeginTime=explode(parent.parentNode.getAttribute("zoneBeginTime"),"toopTipProductSmall/[4]/zoneBeginTime",{});
         }
-        var iProd=159; // Pferdefutter
+        var iProd=parent.classList.contains("v-1") ? PRODSTOP : 159; // Pferdefutter
     }else{ // Field, Factory
         var iProd=parseInt(parent.getAttribute("class").replace("divChooseItem link v",""),10);
         if(settings.get("account","showQueueTime")) var zoneBeginTime=explode(parent.parentNode.getAttribute("zoneBeginTime"),"toopTipProductSmall/[4]/zoneBeginTime",{});
@@ -3438,12 +3427,10 @@ try{
         // console.log(zoneBeginTime);
         var fz=getLowestTimeFarmZone(zoneBeginTime);
     }else{
-        // console.log("Moe, blubb1");
         var fz=zoneNrS;
     }
     var productTime;
     if(!iStop){productTime=calcProductionTime(iProd,fz);}
-    // console.log("Moe, " + iProd + "/" + fz + " => " + productTime);
     var content=createElement("div");
     var newrow,newdiv,newspan;
     // GM_log("toolTipProductSmall fz:"+fz);
@@ -3556,7 +3543,6 @@ try{
             createElement("div",{style:""},content,fzWindmill?getText("automat_MillDoWork"):getText("automat_QueDoWork"));
         }
     }
-    // console.log("Moe, 50");
 
     var thisTitle=content.innerHTML;
     content=null;fz=null;zoneBeginTime=null;newrow=null;newdiv=null;productTime=null;
@@ -7637,7 +7623,6 @@ try{
         newtd.addEventListener("click",function(){
         try{
             var zoneNrL=this.getAttribute("lz");
-            console.log("Moe, drawZoneListTable: " + zoneNrL);
             switch(getBuildingTyp(zoneNrL)){
             case 1:
                 if(settings.get("account","useQueueList")){
@@ -7659,8 +7644,8 @@ try{
             case "windmill": case 4:
                 redrawQueueBox(zoneNrL, zoneNrL, $("divQueueBoxInner"));
                 break;
-            case 5:
-                console.log("Moe, drawZoneListTable (Case 5)");
+            case 5: // Pony - What ever it is...
+                drawChooseItemBoxPony(zoneNrL, zoneNrL, 0, $("divChooseBoxInner"));
                 break;
             }
         }catch(err){GM_logError("drawZoneListTable/table1/td.click","","zoneNrL="+zoneNrL,err);}
@@ -7940,9 +7925,15 @@ function buildInfoPanelOverview(mode){
                     }                       
                 }
             break;}
-            case 5:
-                console.log("Moe, buildInfoPanelOverview (Case 5)");
-                // Zeige Automatenübersicht in Optionen
+            case 5:{ // Pony
+                // We use the factory category for filter
+                if((mode["filterType"].search("3,")!=-1) && !$("tdAutoMatOverview_"+zoneNrL)){
+                    newtr=createElement("tr",{},newtable);
+                    newtd=createElement("td",{"id":"tdAutoMatOverview_"+zoneNrL},newtr);
+                    drawChooseItemBoxPony(zoneNrS, null, 0, newtd);
+                }
+
+            break;}
             default:{
                 if(!$("tdAutoMatOverview_"+zoneNrL)){
                     newtr=createElement("tr",{},newtable);

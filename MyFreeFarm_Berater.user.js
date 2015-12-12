@@ -636,7 +636,7 @@ if (GM_getValue("valAnimateStartscreen",false)){
 }
 // animierte Hintergründe ausblenden
 
-console.log("Game-Currency: " + unsafeWindow.gamecurrency)
+// console.log("Game-Currency: " + unsafeWindow.gamecurrency)
 
 //***********************************************************************************************************
 // developer functions
@@ -1372,7 +1372,7 @@ function checkRequest(request){
 function checkRequest(request, mode) {
 try{
     if (request.readyState == 4 && request.status == 200) {
-        response = request.responseText;
+        var response = request.responseText;
         if ((response!="failed") && (response!="maintenance") && (response!=0)) {
             var result = eval("(" + response + ")");
             if (result.datablock) {
@@ -2504,7 +2504,7 @@ function calcTotalEndtime(){
         for(var i in ALL_ZONES){
             if(!ALL_ZONES.hasOwnProperty(i)){ continue; }
             for(var j=0;j<ALL_ZONES[i].length;j++){
-                zoneNrF=ALL_ZONES[i][j];
+                var zoneNrF=ALL_ZONES[i][j];
                 if((!zones.getBlock(zoneNrF))&&(zones.getBuilding(zoneNrF)!=0)&&((i=="farm")||zoneAddToGlobalTime[zoneNrF])){
                     help=zones.getEndtime(zoneNrF);
                     if(help==NEVER){
