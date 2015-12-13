@@ -671,7 +671,7 @@ function stopCloseWindowTimer(){
         try{ window.clearInterval(closeWindowTimer); }catch(err){}
         closeWindowTimer=null;
         //closeWindowTime=CLOSETIME;
-		closeWindowTime=settings.get("country","valCloseWindowTimer");
+        closeWindowTime=settings.get("country","valCloseWindowTimer");
         if($("divCloseWindowLayer")){ $("divCloseWindowLayer").style.display="none";}
         if($("divCloseWindow")){ $("divCloseWindow").style.display="none";}
         GM_logInfo("stopCloseWindowTimer","","closeWindowTimer="+closeWindowTimer,"End",1);
@@ -877,6 +877,21 @@ function calcProductScore(product, zoneNrF, amount, endtime){
         if(amount==null || amount===undefined){ amount=1; }
         return unsafeData.prodPoints[0][product]*unsafeData.prodYield[0][product]*amount;
     break;
+    case 5:
+        var data = unsafeData.pony_data;
+        if (data) {
+            for (var fId in data["farmis"]) {
+                var f = data["farmis"][fId];
+                if (f["status"] == 1) {
+                    continue;
+                }
+                if (f["type"] == product) {
+                    return f["data"]["points"];
+                }
+            }
+        }
+
+        return 3500*product; // We guess the amount of points
     case "megafield":
         return unsafeData.prodPoints[4][product];
     break;    
@@ -913,6 +928,8 @@ function calcProductAmount(product, zoneNrF, amount, endtime, minPlanted){
     case 3:
         return unsafeData.prodYield[0][product];
     break;
+    case 5:
+        return 1340; // TODO: Was bei rauskommt
     case "megafield":
         return unsafeData.prodYield[4][product];
     break;
@@ -1074,6 +1091,9 @@ try{
     case 3:
         time=(product==PRODSTOP?0:unsafeData.prodGrowTime[0][product]*60);
         time*=bonus;
+        break;
+    case 5: // Pony
+        time = product == PRODSTOP ? 0 : 3600*product; // product is either 2, 4 or 8
         break;
     case "megafield":
         time=(product==PRODSTOP?0:unsafeData.prodGrowTime[4][product]*60);
@@ -1499,6 +1519,7 @@ try {
         case 4:
             automatIcons[name][1]=createElement("div",{"id":"divAutomatIcon_"+name,"class":"link divFoodworldIcon","product":PRODSTOP,"zoneNrS":zoneNrS,"style":style},appendTo);
         break;
+        case 5: // Pony is fine with standard PRODSTOP icon
         default:
             automatIcons[name][1]=createElement("div",{"id":"divAutomatIcon_"+name,"class":"link divZoneIcon v"+PRODSTOP,"product":PRODSTOP,"zoneNrS":zoneNrS,"style":style},appendTo);
         }
@@ -1526,7 +1547,14 @@ try {
                     drawFactoryChooseItemBox(zoneNrS, zoneNrL,$("divChooseBoxInner"));
                 }
                 break;
-            case 4: 
+            case 5: // Pony does not support Queues
+                // if(settings.get("account","useQueueList")){
+                //     redrawQueueBox(zoneNrS, zoneNrL, $("divQueueBoxInner"));
+                // }else{
+                    drawChooseItemBoxPony(zoneNrS, zoneNrL, 0, $("divChooseBoxInner"));
+                // }
+                break;
+            case 4:
             case "windmill":
             case "forest":case "sawmill":case "carpentry":
             case "megafield":
@@ -1881,6 +1909,9 @@ try{
         case 4:
             drawFoodworldChooseItemBox(zoneNrS, zoneNrL, queueNum, $("divChooseBoxInner"));
         break;
+        case 5: // Pony
+            drawChooseItemBoxPony(zoneNrS, zoneNrL, queueNum, $("divChooseBoxInner"));
+        break;
         case "megafield":
             drawChooseItemBoxMegafield(zoneNrS, zoneNrL, queueNum, $("divChooseBoxInner"));
         break;
@@ -2127,6 +2158,8 @@ function drawQueueListSmall(zoneNrF, zoneNrL, appendTo){
                 createElement("div",{"class":"fmm"+zoneList[zoneNrL][queueNum][0],style:"position:relative;"},newdiv);
             }else if(fzType=="sawmill"||fzType=="carpentry"||fzType=="forest"){
                 newdiv=createElement("div",{id:"divQueueItemListList"+zoneNrL+"Q"+queueNum+"Item","class":"divQueueItemListChooseItem f_symbol"+zoneList[zoneNrL][queueNum][0]},appendTo);
+            }else if (fzType==5) {
+                newdiv=createElement("div",{id:"divQueueItemListList"+zoneNrL+"Q"+queueNum+"Item","class":"divQueueItemListChooseItem divZonePonyIcon pony_farmi"+zoneList[zoneNrL][queueNum][0]},appendTo);
             }else{
                 newdiv=createElement("div",{id:"divQueueItemListList"+zoneNrL+"Q"+queueNum+"Item","class":"divQueueItemListChooseItem v"+zoneList[zoneNrL][queueNum][0]},appendTo);
             }
@@ -2650,6 +2683,68 @@ try{
     // GM_log("End drawFoodworldChooseItemBox :" + zoneNrL);
 }catch(err){GM_logError("drawFoodworldChooseItemBox ","","",err);}
 }
+function drawChooseItemBoxPony(zoneNrS, zoneNrL, queueNum, appendTo){
+try{
+    var zoneNrF=zoneNrS.toString().replace(/\.\d+$/,"");
+    if(zoneNrL===undefined || zoneNrL==null){ zoneNrL=getZoneListId(zoneNrS); }
+    if(queueNum===undefined){ queueNum=0; }
+    appendTo.innerHTML="";
+    appendTo.setAttribute("zoneNrS",zoneNrS);
+    appendTo.setAttribute("zoneNrF",zoneNrF);
+    appendTo.setAttribute("zoneNrL",zoneNrL);
+    appendTo.setAttribute("queueNum",queueNum);
+    var fzZoneType=getZoneType(zoneNrS); // 18
+    createElement("div",{"id":"divChooseTitle"+zoneNrL,"class":"queueTitle"},appendTo, getZoneName(0,zoneNrS,zoneNrL, ($("divChooseBoxInner")==appendTo)?queueNum:null, 20, true, true));
+    createElement("div",{"id":"divChooseEndTime"+zoneNrL,"class":"queueTime"},appendTo);
+    createElement("div",{"style":"clear:both;"},appendTo);
+    newdiv=createElement("div",{"class":"divChooseItem link v"+PRODSTOP,"id":"divChooseItem"+zoneNrL+"Q0I"+PRODSTOP},appendTo);
+    if(zoneList[zoneNrL][0][0]==PRODSTOP){ newdiv.style.border="2px solid black"; }
+    newdiv.addEventListener("click",function(){
+        var zoneNrF=this.parentNode.getAttribute("zoneNrF");
+        var zoneNrL=this.parentNode.getAttribute("zoneNrL");
+        zoneList[zoneNrL]=DEFAULT_ZONELIST_ITEM_ARRAY.clone();
+        if(this.parentNode==$("divChooseBoxInner")){ click($("divChooseBoxClose")); }
+        updateQueueBox(zoneNrF, zoneNrL);
+    },false);
+    newdiv.addEventListener("mouseover", function(event){
+        var zoneNrF=this.parentNode.getAttribute("zoneNrF");
+        var zoneNrL=this.parentNode.getAttribute("zoneNrL");
+        toolTip.show(event, toolTipProductSmall(zoneNrF, zoneNrL, 0, this));
+    },false);
+
+    for(var i=2; i<=8; i=i*2){
+        newdiv=createElement("div",{
+            "class":"divChooseItem divZonePonyIcon link pony_farmi"+i,
+            "id":"divChooseItem"+zoneNrL+"Q0I"+i
+        },appendTo);
+        if(zoneList[zoneNrL][0][0]==i){ newdiv.style.border="2px solid black"; }
+        newdiv.addEventListener("click",function(){
+            var zoneNrF=this.parentNode.getAttribute("zoneNrF");
+            var zoneNrL=this.parentNode.getAttribute("zoneNrL");
+            zoneList[zoneNrL]=DEFAULT_ZONELIST_ITEM_ARRAY.clone();
+            zoneList[zoneNrL][0][0]=parseInt(/Q0I(.*)$/.exec(this.id)[1],10);
+            if (this.parentNode==$("divChooseBoxInner")) {
+                click($("divChooseBoxClose"));
+            }
+            updateQueueBox(zoneNrF, zoneNrL);
+        },false);
+        // TODO: Integrate Tooltip
+        // newdiv.addEventListener("mouseover", function(event){
+        //     var zoneNrS=this.parentNode.getAttribute("zoneNrS");
+        //     var zoneNrL=this.parentNode.getAttribute("zoneNrL");
+        //     toolTip.show(event, toolTipProductSmall(zoneNrS, zoneNrL, 0, this));
+        // },false);
+    }
+    if(appendTo==$("divChooseBoxInner")){
+        $("divChooseBox").style.display="block";
+        $("divChooseBox").style.top=Math.round(255 - $("divChooseBox").offsetHeight/2)+"px";
+    }
+    updateQueueBox(zoneNrF, zoneNrL);
+    zoneFeedCurr=null;zoneProdCurr=null;
+    newdiv=null;appendTo=null;
+}catch(err){GM_logError("drawChooseItemBoxPony ","","",err);}
+}
+
 function drawChooseItemBoxMegafield(zoneNrS, zoneNrL, queueNum, appendTo){
 try{
     // GM_log("Begin drawChooseItemBoxMegafield zoneNrS="+zoneNrS+" zoneNrL="+zoneNrL+" queueNum="+queueNum+" appendTo.id="+appendTo.id);
@@ -2759,6 +2854,13 @@ try{
             case "megafield": // Megafield
                 automatIcons[i][1].setAttribute("class","link divZoneIcon v"+zoneList[zoneNrL][0][0]);
             break;
+            case 5:
+                if (zoneList[zoneNrL][0][0] == PRODSTOP) {
+                    automatIcons[i][1].setAttribute("class","link divZoneIcon v"+zoneList[zoneNrL][0][0]);
+                } else {
+                    automatIcons[i][1].setAttribute("class","link divZonePonyIcon divZoneIcon pony_farmi"+zoneList[zoneNrL][0][0]);
+                }
+                break;
             case 2: // Stable
                 //catch wrong feed
                 var futter1=BUILDING2FEED[fzZoneType][0];
@@ -3163,6 +3265,8 @@ try{
             }
             zoneFeedCurr=null;zoneProdCurr=null;
         break;}
+        case 5: { // Pony - No queue mode support
+        break;}
         case "windmill":{ // (fzWindmill)
             if(settings.get("account","showQueueTime")){
                 divChooseEndTimeCurr.parentNode.setAttribute("zoneBeginTime",implode(zoneTimes,"updateQueueBox/chooseBox/zoneBeginTimes"));
@@ -3266,10 +3370,11 @@ try{
     var isTimeLine=(parent.parentNode.id.indexOf("lineZone")==0);
     var lZonesAmount=getZonesFromList(zoneNrL).length;
     var lShowTime=(lZonesAmount > 0);
+    var fzPony= (fzType == 5);
     var fzWindmill=(fzType=="windmill");
     var fzForestry=(fzType=="sawmill"||fzType=="carpentry"||fzType=="forest");
     var fzPowerUp=(fzType=="powerup");//TODO powerup
-    var iType=(fzWindmill?3:(fzForestry?1:0));
+    var iType=(fzWindmill ? 3 : (fzForestry ? 1 : (fzPony ? 5 : 0)));
     var noTime=false;
     // GM_log("toolTipProductSmall 0 zoneNrF:" + zoneNrF + " zoneNrL:" + zoneNrL + " queueNum:" + queueNum + " isIcon:" + isIcon +" fzType:"+ fzType + " zoneTyp:"+getZoneType(zoneNrF)+ " parent:"+parent.innerHTML);
     if(isIcon){
@@ -3303,6 +3408,11 @@ try{
     }else if(fzPowerUp){//parseInt(parent.getAttribute("class").replace("divChooseItem link r",""),10)>0){
         var iProd=parseInt(parent.getAttribute("class").replace("divChooseItem link r",""),10);
         if(settings.get("account","showQueueTime")) var zoneBeginTime=explode(parent.parentNode.getAttribute("zoneBeginTime"),"toopTipProductSmall/[3]/zoneBeginTime",{});
+    }else if(fzPony) {
+        if(settings.get("account","showQueueTime")) {
+            var zoneBeginTime=explode(parent.parentNode.getAttribute("zoneBeginTime"),"toopTipProductSmall/[4]/zoneBeginTime",{});
+        }
+        var iProd=parent.classList.contains("v-1") ? PRODSTOP : 159; // Pferdefutter
     }else{ // Field, Factory
         var iProd=parseInt(parent.getAttribute("class").replace("divChooseItem link v",""),10);
         if(settings.get("account","showQueueTime")) var zoneBeginTime=explode(parent.parentNode.getAttribute("zoneBeginTime"),"toopTipProductSmall/[4]/zoneBeginTime",{});
@@ -3312,7 +3422,9 @@ try{
     for(var i=0;i<queueNum;i++){
         if(foundStop=zoneList[zoneNrL][i][0]==PRODSTOP) break;
     }
-    if(settings.get("account","showQueueTime") && !isTimeLine && lShowTime && !isIcon){ //this is to find the first field that is ready.
+    if(settings.get("account","showQueueTime") && !isTimeLine && lShowTime && !isIcon){
+        //this is to find the first field that is ready.
+        // console.log(zoneBeginTime);
         var fz=getLowestTimeFarmZone(zoneBeginTime);
     }else{
         var fz=zoneNrS;
@@ -3338,8 +3450,10 @@ try{
                 newrow=createElement("div",{style:"display:table-row;width:100%;"},content);
                 createElement("div",{"class":"tableTd1"},newrow, getText("automat_QueGives"));
                 newdiv=createElement("div",{"class":"tableTd2"},newrow);
-                produktPic(iType,iProd,newdiv);
-                createElement("span",{},newdiv, calcProductAmount(iProd, zoneNrL)+"&nbsp;" + unsafeData.prodName[iType][iProd]);
+                if (!fzPony) {
+                    produktPic(iType,iProd,newdiv);
+                    createElement("span",{},newdiv, calcProductAmount(iProd, zoneNrL)+"&nbsp;" + unsafeData.prodName[iType][iProd]);
+                }
                 newdiv=createElement("div",{style:"display:table-row;width:100%;"},content);
                 createElement("div",{"class":"tableTd1"},newdiv,"");
                 pointsFormat(calcProductScore(iProd, zoneNrL),"span",createElement("div",{"class":"tableTd2"},newdiv));
@@ -4243,7 +4357,7 @@ TypeError: can't convert undefined to object
     GM_logInfo("autoZoneHandle","runId="+runId,"","Begin",1);
     bot.setAction("autoZoneHandle");
     window.setTimeout(function(){
-        switch(handled.zoneBuildingTyp){
+        switch(handled.zoneBuildingTyp){ // As defined in Berater's "const BUILDINGTYPE"
             case 1:
                 //-- GM_log("autoZoneHandle run nextFkt case:1");
                 try{
@@ -4304,6 +4418,8 @@ TypeError: can't convert undefined to object
                         }
                     },settings.getPause(),runId);
                 }catch(err){GM_logError("autoZoneHandle (case 3)","","handled.zoneNrF="+handled.zoneNrF+" readyZone:"+implode(unsafeData.readyZone,"autoZoneHandle/readyZone"),err);}
+                break;
+            case 5: // Pony
                 break;
             /*
             case "windmill":
@@ -4512,7 +4628,12 @@ function autoFarm(runId){
                         }else if($("innermaincontainer").style.display=="block"){
                             bot.setAction("autoFarm: farm opened, close innermaincontainer");
                             GM_logInfo("autoFarm","runId="+runId,"farmNr="+farmNr+" zoneNrS="+zoneNrS,getText("automat_closingFactoryContainer"));
-                            click($("cancelscreen").getElementsByClassName("link")[0]);
+                            var btn = $("cancelscreen").getElementsByClassName("link")[0];
+                            if (!btn) { // Try this button, eg. on pony factory
+                                btn = $("innercontent").getElementsByClassName("big_close")[0];
+                            }
+                            click(btn);
+                            // click($("cancelscreen").getElementsByClassName("link")[0]);
                             window.setTimeout(autoFarm,settings.getPause(),runId);
                         }else if($("building_inner").style.display=="block"){
                             bot.setAction("autoFarm: farm opened, close building_inner");
@@ -4570,6 +4691,16 @@ function autoFarm(runId){
                                     }
                                     click($("farm"+handled.farmNr+"_pos"+handled.zoneNr+"_click"));
                                 break;}
+                                case 5: {
+                                    document.addEventListener("gameOpenPony",function(runId){
+                                        return function(){
+                                            document.removeEventListener("gameOpenPony",arguments.callee,false);
+                                            window.setTimeout(autoFarmPony,settings.getPause(),runId,1);
+                                        }
+                                    }(runId),false);
+                                    click($("farm"+handled.farmNr+"_pos"+handled.zoneNr+"_click"));
+                                    break;
+                                }
                             }
                         }
                     }else{
@@ -5160,6 +5291,184 @@ function autoFarmFactory(runId,step){
         listeningEvent=null;action=null;
     }
     }catch(err){ GM_logError("autoFarmFactory","runId="+runId+" step="+step,"",err); }
+}
+function autoFarmPony(runId,step){
+    try{
+    if(!step){ step=1; }
+    if(bot.checkRun("autoFarmPony",runId)){
+        bot.setAction("autoFarmPony ("+step+")");
+        var action=null,listeningEvent=null;
+        switch(step){
+        case 1:{ // init
+            if(unsafeData.zones.getBlock(handled.zoneNrS)){
+                zoneList[handled.zoneNrL].unshift(DEFAULT_ZONELIST_ITEM.clone());
+                updateQueueBox(handled.zoneNrS);
+                autoFarmPony(runId, 8); // Pony slot blocked => Exit
+            }else{
+                if(unsafeData.zones.getEndtime(handled.zoneNrS)==NEVER){ // Empty
+                    GM_logInfo("autoFarmPony","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Pony is cropped");
+                    autoFarmPony(runId, step+2); // Skip cropping => Feed
+                }else if(unsafeData.zones.getEndtime(handled.zoneNrS)<=unsafeWindow.Zeit.Server){ // Cropable
+                    GM_logInfo("autoFarmPony","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Pony must be cropped");
+                    autoFarmPony(runId, step+1); // => Crop
+                }else{ // Busy
+                    GM_logInfo("autoFarmPony","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Pony" + handled.slot + " is busy");
+                    autoFarmPony(runId, 8); // => Exit
+                }
+            }
+        break;}
+        case 2:{ // crop pony
+            var div = $("pony"+ handled.slot + "_crop");
+            if (div) {
+                if (div.style.display == "block") {
+                    GM_logInfo("autoFarmPony","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Crop Pony" + handled.slot);
+                    listeningEvent="gamePonyCropped";
+                    action=function(){ 
+                        unsafeData.readyZone[handled.zoneNrS][2] = false;
+                        click(div);
+                        div = null;
+                    };
+                } else {
+                    GM_logInfo("autoFarmPony","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"No need to crop Pony" + handled.slot + " (anymore)");
+                    autoFarmPony(runId, step+1); // => Feed
+                }
+            } else {
+                autoFarmPony(runId, 8); // Crop-button doesn't exit => Something is very wrong => Exit
+            }
+        break;}
+        case 3: { // feed pony
+            var div = $("pony" + handled.slot + "_feed");
+            if (!unsafeData.pony_data || !div || div.style.display != "block") { // Data not ready yet
+                GM_logInfo("autoFarmPony","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Feed Pony" + handled.slot + " (Waiting)");
+                window.setTimeout(autoFarmPony, settings.getPause(), runId, step); // => Wait some milliseconds
+            } else if (unsafeData.pony_data["ponys"][handled.slot]["data"]["feed"] < 8 && unsafeData.prodStock[0][159] > 0) {
+                // Pony's food stock not full and pony food is in our stock available
+                GM_logInfo("autoFarmPony","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Feed Pony" + handled.slot);
+                listeningEvent="gamePonyFeedDialogOpened";
+                action=function(){
+                    click(div);
+                };
+            } else {
+                GM_logInfo("autoFarmPony","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"No need to feed Pony" + handled.slot + " (anymore)");
+                autoFarmPony(runId, step+2); // Jump to 'set farmi'
+            }
+            break;
+        }
+        case 4: { // confirm feeding dialog
+            var div = $("globalbox");
+            if (div.style.display == "block") { // Is dialog visible?
+                listeningEvent="gamePonyFed";
+                action=function(){
+                    click(div.querySelector("button"));
+                };
+            } else { // Dialog not visible yet
+                window.setTimeout(autoFarmPony, settings.getPause(), runId, step); // => Wait some milliseconds
+            }
+            break;
+        }
+        case 5:{ // select farmi
+            if (zoneList[handled.zoneNrL][0][0] == PRODSTOP || !unsafeData.readyZone[handled.zoneNrS]) {
+                // PRODSTOP or zone not ready anymore => exit
+                GM_logInfo("autoFarmPony","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Pony production stop");
+                autoFarmPony(runId, 8);
+            } else if((unsafeData.readyZone[handled.zoneNrS][1]!="e")||!unsafeData.readyZone[handled.zoneNrS][2]|| !unsafeData.pony_data){ // Data not ready yet
+                // Wait for response
+                GM_logInfo("autoFarmPony","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Select Farmi for Pony" + handled.slot + " (Waiting)");
+                window.setTimeout(autoFarmPony, settings.getPause(), runId, step); // => Wait some milliseconds
+            } else {
+                GM_logInfo("autoFarmPony","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Select Farmi");
+                listeningEvent="gamePonyFarmiSelected";
+                action=function(){
+                    var i = 1;
+                    for (var fId in unsafeData.pony_data["farmis"]) {
+                        var f = unsafeData.pony_data["farmis"][fId]; // Get Farmi-Data
+                        if (f["status"] == 1) { // Skip farmis on ponys
+                            continue;
+                        }
+
+                        // Find correct farmi
+                        if (f["type"] == zoneList[handled.zoneNrL][0][0]) { 
+                            // Check food of pony in 'handled.slot'
+                            if (f["type"] <= unsafeData.pony_data["ponys"][handled.slot]["data"]["feed"]) {
+                                click($("pony_farmi"+i));
+                            } else {
+                                // Not enough food => Insert PRODSTOP and exit
+                                zoneList[handled.zoneNrL].unshift(DEFAULT_ZONELIST_ITEM.clone());
+                                updateQueueBox(handled.zoneNrS);
+                                GM_logInfo("autoFarmPony","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Not enough food");
+                                autoFarmPony(runId, 8);
+                            }
+                            break;
+                        } else {
+                            i++; // This is not the farmi you're looking for
+                        }
+                    }
+                };
+            }
+        break;}
+        case 6:{ // select pony aka set farmi on pony
+            if(typeof unsafeWindow.pony_sel_farmi === 'undefined' || unsafeWindow.pony_sel_farmi == null){ // Data not ready yet
+                // Wait for response
+                GM_logInfo("autoFarmPony","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Set Farmi on Pony" + handled.slot + " (Waiting)");
+                window.setTimeout(autoFarmPony, settings.getPause(), runId, step);  // => Wait some milliseconds
+            } else if (unsafeWindow.pony_sel_farmi) { // Is a farmi selected?
+                GM_logInfo("autoFarmPony","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Select Pony" + handled.slot);
+                listeningEvent="gamePonySetDialogOpened";
+                action=function(){
+                    click($("pony" + handled.slot));
+                };
+            } else {
+                // No farmi selected => Exit
+                GM_logInfo("autoFarmPony","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"No Farmi selected");
+                autoFarmPony(runId, 8);
+            }
+        break;}
+        case 7:{ // Confirm set farmi
+            var div = $("globalbox_button1");
+            if (div && div.style.display != "none") { // Is dialog visible?
+                listeningEvent="gamePonyFarmiSet";
+                action=function(){
+                    click(div);
+                    setNextQueueItem(handled.zoneNrS);
+                };
+            } else {
+                // No dialog visible => Exit
+                GM_logInfo("autoFarmPony","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"No dialog to confirm");
+                autoFarmPony(runId, 8);
+            }
+        break;}
+        case 8:{ // start other slot or exit
+            var zoneNrS,zoneNrL,help,next=false;
+            for(var slot=1;slot<=3;slot++){
+                zoneNrS=handled.zoneNrF+"."+slot;
+                if((help=unsafeData.readyZone[zoneNrS])&&help[2]){
+                    zoneNrL=getZoneListId(zoneNrS);
+                    if(((help[1]=="r")&&((zoneList[zoneNrL][0][0]!=PRODSTOP)||!settings.get("account","disableCropFields")))||((help[1]=="e")&&(zoneList[zoneNrL][0][0]!=PRODSTOP))){
+                        next=true;
+                        handled.set(zoneNrS);
+                        break;
+                    }
+                }
+            }
+            if(next){
+                autoFarmPony(runId, 1);
+            }else{
+                autoZoneFinish(runId, $("innercontent").getElementsByClassName("big_close")[0]);
+            }
+        break;}
+        }
+        if(listeningEvent){
+            document.addEventListener(listeningEvent,function(listeningEvent,runId,step){
+                return function(){
+                    document.removeEventListener(listeningEvent,arguments.callee,false);
+                    window.setTimeout(autoFarmPony,settings.getPause(),runId,step+1);
+                };
+            }(listeningEvent,runId,step),false);
+        }
+        if(action){ action(); }
+        listeningEvent=null;action=null;
+    }
+    }catch(err){ GM_logError("autoFarmPony","runId="+runId+" step="+step,"",err); }
 }
 function autoFarmFactoryOil(runId,step){
     try{
@@ -7335,6 +7644,9 @@ try{
             case "windmill": case 4:
                 redrawQueueBox(zoneNrL, zoneNrL, $("divQueueBoxInner"));
                 break;
+            case 5: // Pony - What ever it is...
+                drawChooseItemBoxPony(zoneNrL, zoneNrL, 0, $("divChooseBoxInner"));
+                break;
             }
         }catch(err){GM_logError("drawZoneListTable/table1/td.click","","zoneNrL="+zoneNrL,err);}
         },false);
@@ -7612,6 +7924,15 @@ function buildInfoPanelOverview(mode){
                         drawFactoryChooseItemBox(zoneNrS,null,newtd);
                     }                       
                 }
+            break;}
+            case 5:{ // Pony
+                // We use the factory category for filter
+                if((mode["filterType"].search("3,")!=-1) && !$("tdAutoMatOverview_"+zoneNrL)){
+                    newtr=createElement("tr",{},newtable);
+                    newtd=createElement("td",{"id":"tdAutoMatOverview_"+zoneNrL},newtr);
+                    drawChooseItemBoxPony(zoneNrS, null, 0, newtd);
+                }
+
             break;}
             default:{
                 if(!$("tdAutoMatOverview_"+zoneNrL)){
@@ -8595,6 +8916,7 @@ try{
             ".rotate270 {-webkit-transform: rotate(270deg);-moz-transform: rotate(270deg);filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);}"+
             "#buildinginfo0, #buildinginfo1, #buildinginfo2, #buildinginfo3, #buildinginfo4, #buildinginfo5, #buildinginfo6 {top:52px; !important;}\n"+
             ".divZoneIcon {position:absolute;bottom:0;right:5px;z-index:3;border:2px solid black;border-radius:10px;background-color:#000000;}\n"+
+            ".divZonePonyIcon {width: 30px; height: 30px; background-size: 100%; background-color: white;}\n"+
             "#divAutomatIconContainer {position:absolute;top:125px;left:1001px;width:76px;margin:2px 0px;}\n"+
             ".divWindmillIcon {position:relative;float:left;height:26px;width:26px;border:2px solid black;border-radius:10px;background-color:#CBAD85;margin:2px;padding:2px;}\n"+
             ".divForestryIcon {position:relative;float:left;height:25px;width:25px;border:2px solid black;border-radius:10px;background-color:#FFFFFF;margin:2px;padding:2.5px;}\n"+
@@ -9046,7 +9368,40 @@ try{
             }
         }catch(err){GM_logError("eventListener:gameOpenFactoryKnitting ","","",err);}
         },false);
+        err_trace="listener gameOpenPony";
+        document.addEventListener("gameOpenPony",function(){ // pony open
+            drawPonyIcons();
+        },false);
+        err_trace="listener gamePonyCropped";
+        document.addEventListener("gamePonyCropped",function(){ // pony fed
+            drawPonyIcons();
+        },false);
+        err_trace="listener gamePonyFed";
+        document.addEventListener("gamePonyFed",function(){ // pony fed
+            drawPonyIcons();
+        },false);
+        err_trace="listener gamePonyFarmiSet";
+        document.addEventListener("gamePonyFarmiSet",function(){ // pony farmi set on pony
+            drawPonyIcons();
+        },false);
         
+        function drawPonyIcons() {
+        try{
+            var zoneNrF=getFarmZone(unsafeWindow.currentposition);
+            var zoneNrS;
+            for(var slot=1;slot<=3;slot++){
+                zoneNrS=zoneNrF+"."+slot;
+                if(!unsafeData.zones.getBlock(zoneNrS)){
+                    var topV="left:-16px;top:70px;";
+                    if (slot == 1) {
+                        topV="left:34px;top:70px;";
+                    }
+                    drawAutomatIcon(zoneNrS,zoneNrS,$("pony_ponys").children[slot-1],topV);
+                }
+            }
+        }catch(err){GM_logError("eventListener:gameOpenPony ","","",err);}
+        }
+
         function drawFarmIcons(){
         try{
             var farmNR,zoneNr,zoneNrF;
@@ -9820,7 +10175,7 @@ try{
         text["de"]["automat_settings_autoWater"] = "Sollen die Äcker gegossen werden?";
         text["de"]["automat_settings_autoFeed"] = "Soll der Futter-Automat angezeigt werden?";
         text["de"]["automat_settings_botUse"] = "Verwende Bot";
-        text["de"]["automat_settings_closeWindowTimer"] = "Timer: Zeit die der Bot wartet um ein offenes Fenster zu schliessen.";
+        text["de"]["automat_settings_closeWindowTimer"] = "Timer: Zeit, die der Bot wartet um ein offenes Fenster zu schließen.";
         text["de"]["automat_settings_disableCropFields"]="Block the cropping of sleeping fields.";
         text["de"]["automat_settings_pauseShortMin"] = "Minimale Klickzeit der Automaten";
         text["de"]["automat_settings_pauseShortMax"] = "Maximale Klickzeit der Automaten";
@@ -10033,7 +10388,7 @@ try{
         text["en"]["automat_settings_autoWater"] = "Shall the fields be watered?";
         text["en"]["automat_settings_autoFeed"] = "Shall the feeding machine be displayed?";
         text["en"]["automat_settings_botUse"] = "Use bot";
-        text["en"]["automat_settings_closeWindowTimer"] = "Timer: waiting time to close an open window.";
+        text["en"]["automat_settings_closeWindowTimer"] = "Timer: Waiting time to close an open window.";
         text["en"]["automat_settings_disableCropFields"]="Block the cropping of sleeping fields.";
         text["en"]["automat_settings_pauseShortMin"] = "Minimal clicking delay of the automaton";
         text["en"]["automat_settings_pauseShortMax"] = "Maximal clicking delay of the automaton";
