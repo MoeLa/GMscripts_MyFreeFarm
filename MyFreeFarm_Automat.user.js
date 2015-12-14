@@ -81,16 +81,10 @@ const CHANGELOG=[["2.0","29.05.2014",[["Migration nach openuserjs.org","Migratio
                 ,["2.5.8","31.10.2015",[["Anpassung an Spiel-Update: Lagerbestände 5. Farm","Fix for game update: storage 5th farm"]]]
                 ,["2.5.8a","02.11.2015",[["Fix: Exotische Früchte","Fix: exotic fruit"]]]
                 ,["2.5.9","23.11.2015",[["Kleiderspende: Bot kann in den Optionen aktiviert werden","Bot for clothing donation. Check your options!"]]]
-<<<<<<< HEAD
-				,["2.6.0","25.11.2015",[["Bugfix: Kräuter und exotische Früchte für Nichtpremium","Bugfix: Herbs and exotic fruits for nonpremium."]]]
-				,["2.6.1","30.11.2015",[["Bugfix: Exotische Früchte Feld 26 ","Bugfix: exotic fruits Field 26."]]]
-				,["2.6.2","01.12.2015",[["Neue Option: Timeout zum Schliessen von offenen Fenstern ist nun einstellbar.","New Option: Timeout for closing an open window can now be set."]]]
-=======
                 ,["2.6.0","25.11.2015",[["Bugfix: Kräuter und exotische Früchte für Nichtpremium","Bugfix: Herbs and exotic fruits for nonpremium."]]]
                 ,["2.6.1","30.11.2015",[["Bugfix: Exotische Früchte Feld 26 ","Bugfix: exotic fruits Field 26."]]]
                 ,["2.6.2","01.12.2015",[["Neue Option: Timeout zum Schliessen von offenen Fenstern ist nun einstellbar.","New Option: Timeout for closing an open window can now be set."]]]
-				,["2.7.0","13.12.2015",[["Neu: Ponyhof","New: Ponyfarm"]]]
->>>>>>> master
+                ,["2.7.0","13.12.2015",[["Neu: Ponyhof","New: Ponyfarm"]]]
                 ];
 
 if(!VERSIONfunctionFile){
@@ -884,11 +878,11 @@ function calcProductScore(product, zoneNrF, amount, endtime){
         return unsafeData.prodPoints[0][product]*unsafeData.prodYield[0][product]*amount;
     break;
 
-	  case 6: //Fuelstation
-    		if(amount==null || amount===undefined){ amount=1; }
-    		zoneNrF=zoneNrF.split(".");
-    		var data=unsafeWindow.farms_data.farms[unsafeWindow.farm][zoneNrF[0]];
-            return data.data.constants.slot_level[data.data.data.slots[zoneNrF[1]].level].output*unsafeData.prodPoints[0][350];
+    case 6: //Fuelstation
+      		if(amount==null || amount===undefined){ amount=1; }
+      		zoneNrF=zoneNrF.split(".");
+      		var data=unsafeWindow.farms_data.farms[unsafeWindow.farm][unsafeData.zones.getLocation(zoneNrF[0]).zoneNr];
+              return data.data.constants.slot_level[data.data.data.slots[zoneNrF[1]].level].output*unsafeData.prodPoints[0][350];
     break;
     case 5: //Ponyfarm
         var data = unsafeData.pony_data;
@@ -941,11 +935,11 @@ function calcProductAmount(product, zoneNrF, amount, endtime, minPlanted){
     case 3:
         return unsafeData.prodYield[0][product];
     break;
-	  case 6: //Fuelstation
-    		zoneNrF=zoneNrF.split(".");
-    		var data=unsafeWindow.farms_data.farms[unsafeWindow.farm][zoneNrF[0]];
-            return data.data.constants.slot_level[data.data.data.slots[zoneNrF[1]].level].output;
-    		break;
+    case 6: //Fuelstation
+        zoneNrF=zoneNrF.split(".");
+      	var data=unsafeWindow.farms_data.farms[unsafeWindow.farm][unsafeData.zones.getLocation(zoneNrF[0]).zoneNr];
+        return data.data.constants.slot_level[data.data.data.slots[zoneNrF[1]].level].output;
+    break;
 
     case 5:
         return 1340; // TODO: Was bei rauskommt
@@ -1126,14 +1120,11 @@ try{
     case 5: // Pony
         time = product == PRODSTOP ? 0 : 3600*product; // product is either 2, 4 or 8
         break;
-
-	  //Fuelstation
-	  case 6:
-  		var s=zoneNrF.split(".");
-  		var data=unsafeWindow.farms_data.farms[unsafeWindow.farm][s[0]];
-  		time=data.data.constants.slot_level[data.data.data.slots[s[1]].level].duration;
-  		break;
-
+    case 6: //Fuelstation
+        zoneNrF=zoneNrF.split(".");
+    		var data=unsafeWindow.farms_data.farms[unsafeWindow.farm][unsafeData.zones.getLocation(zoneNrF[0]).zoneNr];
+    		time=data.data.constants.slot_level[data.data.data.slots[zoneNrF[1]].level].duration;
+    break;
 
     case "megafield":
         time=(product==PRODSTOP?0:unsafeData.prodGrowTime[4][product]*60);
@@ -1521,8 +1512,8 @@ try{
                 }
                 break;
 
-			case 6: //Fuelstation
-				break;
+			      case 6: //Fuelstation
+				        break;
             default:
                 if(showBonus && unsafeData.zones.getBonus(zoneNrF)>0){
                     txt=unsafeData.zones.getBonus(zoneNrF)+"%";
@@ -1605,9 +1596,9 @@ try {
             case "megafield":
                 redrawQueueBox(zoneNrS, zoneNrL, $("divQueueBoxInner"));
                 break;
-			case 6:
-				drawFuelstationChooseItemBox(zoneNrS, zoneNrL,$("divChooseBoxInner"));
-				break;
+			      case 6: //Fuelstation
+				        drawFuelstationChooseItemBox(zoneNrS, zoneNrL,$("divChooseBoxInner"));
+				    break;
             default:
                 throw("Building type '"+getBuildingTyp(zoneNrS)+"' unknown.");
             }
@@ -2442,7 +2433,6 @@ try{
 }
 
 
-
 function drawStableChooseFeedBox(zoneNrF, zoneNrL, appendTo){
 try{
     // GM_log("Begin drawStableChooseFeedBox zoneNrF:" + zoneNrF + " zoneNrL:"+zoneNrL);
@@ -2984,8 +2974,8 @@ try{
                 queueNum=null;
                 automatIcons[i][1].setAttribute("class","link divZoneIcon v"+zoneList[zoneNrL][0][0]);
             break;
-			//Fuelstation
-			case 6: automatIcons[i][1].setAttribute("class","link divZoneIcon v"+zoneList[zoneNrL][0][0]);
+			      //Fuelstation
+			      case 6: automatIcons[i][1].setAttribute("class","link divZoneIcon v"+zoneList[zoneNrL][0][0]);
             }
             automatIcons[i][1].setAttribute("product",zoneList[zoneNrL][0][0]);
             automatIcons[i][1].setAttribute("zoneBeginTime",implode(zoneTimes,"updateQueueBox/zoneTimes"));
@@ -3376,39 +3366,30 @@ try{
             }
             zoneFeedCurr=null;zoneProdCurr=null;
         break;}
-<<<<<<< HEAD
 
-		case 6:{ // Fuelstation
-          $("divChooseItem"+zoneNrL+"Q"+queueNum+"I"+PRODSTOP).style.border=((zoneList[zoneNrL][queueNum][0]==PRODSTOP)?"2px solid black":"");
-  			  /*
-  				for(var v in unsafeData.BUILDING_INPUT[fzZoneType]){
-  					if(!unsafeData.BUILDING_INPUT[fzZoneType].hasOwnProperty(v)){ continue; }
-  					if(unsafeData.prodBlock[0][v]){ continue; }
-  					$("divChooseItem"+zoneNrL+"Q"+queueNum+"I"+v).style.border=((zoneList[zoneNrL][queueNum][0]==v)?"2px solid black":"");
-  				}*/
-          if(settings.get("account","showQueueTime"))  {
-  			     divChooseEndTimeCurr.parentNode.setAttribute("zoneBeginTime",implode(zoneTimes,"updateQueueBox/chooseBox/zoneTimes"));
-             divChooseEndTimeCurr.style.display=lShowTime?"block":"none";
-             if(lShowTime){
-               var fz=getLowestTimeFarmZone(zoneTimes);
-               var endTime=zoneTimes[fz] + calcProductionTime(zoneList[zoneNrL][queueNum][0],fz);
-               divChooseEndTimeCurr.style.color=noTime? "#DD0000":"black";
-               divChooseEndTimeCurr.innerHTML=(foundStop?getText("automat_QueDontWork"):(($("divChooseBoxInner")==divChooseEndTimeCurr.parentNode)?getText("automat_QueTimeFirstReady"):getText("automat_QueTimeReady")) + " " + getDateText(endTime,0) + "&nbsp;"+ getDaytimeStr(endTime,true));
-               fz=null;endTime=null;
-             }
-           }
-  		    zoneFeedCurr=null;zoneProdCurr=null;
-      break;}
-
-        case 5: { //Pony
-            console.log("Moe, keine Ahnung! Irgendwo in updateQueueBox");
-            break;
-        }
-
-=======
+        case 6:{ // Fuelstation
+              $("divChooseItem"+zoneNrL+"Q"+queueNum+"I"+PRODSTOP).style.border=((zoneList[zoneNrL][queueNum][0]==PRODSTOP)?"2px solid black":"");
+      			  /*
+      				for(var v in unsafeData.BUILDING_INPUT[fzZoneType]){
+      					if(!unsafeData.BUILDING_INPUT[fzZoneType].hasOwnProperty(v)){ continue; }
+      					if(unsafeData.prodBlock[0][v]){ continue; }
+      					$("divChooseItem"+zoneNrL+"Q"+queueNum+"I"+v).style.border=((zoneList[zoneNrL][queueNum][0]==v)?"2px solid black":"");
+      				}*/
+              if(settings.get("account","showQueueTime"))  {
+      			     divChooseEndTimeCurr.parentNode.setAttribute("zoneBeginTime",implode(zoneTimes,"updateQueueBox/chooseBox/zoneTimes"));
+                 divChooseEndTimeCurr.style.display=lShowTime?"block":"none";
+                 if(lShowTime){
+                   var fz=getLowestTimeFarmZone(zoneTimes);
+                   var endTime=zoneTimes[fz] + calcProductionTime(zoneList[zoneNrL][queueNum][0],fz);
+                   divChooseEndTimeCurr.style.color=noTime? "#DD0000":"black";
+                   divChooseEndTimeCurr.innerHTML=(foundStop?getText("automat_QueDontWork"):(($("divChooseBoxInner")==divChooseEndTimeCurr.parentNode)?getText("automat_QueTimeFirstReady"):getText("automat_QueTimeReady")) + " " + getDateText(endTime,0) + "&nbsp;"+ getDaytimeStr(endTime,true));
+                   fz=null;endTime=null;
+                 }
+              }
+      		    zoneFeedCurr=null;zoneProdCurr=null;
+        break;}
         case 5: { // Pony - No queue mode support
         break;}
->>>>>>> master
         case "windmill":{ // (fzWindmill)
             if(settings.get("account","showQueueTime")){
                 divChooseEndTimeCurr.parentNode.setAttribute("zoneBeginTime",implode(zoneTimes,"updateQueueBox/chooseBox/zoneBeginTimes"));
@@ -3551,25 +3532,22 @@ try{
         var iProd=parseInt(parent.getAttribute("class").replace("divChooseItem link r",""),10);
         if(settings.get("account","showQueueTime")) var zoneBeginTime=explode(parent.parentNode.getAttribute("zoneBeginTime"),"toopTipProductSmall/[3]/zoneBeginTime",{});
     }else if(fzPony) {
-        if(settings.get("account","showQueueTime")) {
-            var zoneBeginTime=explode(parent.parentNode.getAttribute("zoneBeginTime"),"toopTipProductSmall/[4]/zoneBeginTime",{});
-        }
-<<<<<<< HEAD
-        var iProd=159; // Pferdefutter
-    }
-	  else if(fzType==6){//parseInt(parent.getAttribute("class").replace("divChooseItem link r",""),10)>0){
-          var iProd=parseInt(parent.getAttribute("class").replace("divChooseItem link v",""),10);
+          if(settings.get("account","showQueueTime")) {
+              var zoneBeginTime=explode(parent.parentNode.getAttribute("zoneBeginTime"),"toopTipProductSmall/[4]/zoneBeginTime",{});
+          }
+          var iProd=parent.classList.contains("v-1") ? PRODSTOP : 159; // Pferdefutter
+      }
+  	else if(fzType==6){//parseInt(parent.getAttribute("class").replace("divChooseItem link r",""),10)>0){
+            var iProd=parseInt(parent.getAttribute("class").replace("divChooseItem link v",""),10);
 
-        if(settings.get("account","showQueueTime")) var zoneBeginTime=explode(parent.parentNode.getAttribute("zoneBeginTime"),"toopTipProductSmall/[2]/zoneBeginTime",{});
-    }
-	  else{ // Field, Factory
-=======
-        var iProd=parent.classList.contains("v-1") ? PRODSTOP : 159; // Pferdefutter
-    }else{ // Field, Factory
->>>>>>> master
-        var iProd=parseInt(parent.getAttribute("class").replace("divChooseItem link v",""),10);
-        if(settings.get("account","showQueueTime")) var zoneBeginTime=explode(parent.parentNode.getAttribute("zoneBeginTime"),"toopTipProductSmall/[4]/zoneBeginTime",{});
-    }
+          if(settings.get("account","showQueueTime")) var zoneBeginTime=explode(parent.parentNode.getAttribute("zoneBeginTime"),"toopTipProductSmall/[2]/zoneBeginTime",{});
+      }
+  	  else{ // Field, Factory
+          var iProd=parseInt(parent.getAttribute("class").replace("divChooseItem link v",""),10);
+          if(settings.get("account","showQueueTime")) var zoneBeginTime=explode(parent.parentNode.getAttribute("zoneBeginTime"),"toopTipProductSmall/[4]/zoneBeginTime",{});
+      }
+
+
     var iStop=(iProd==PRODSTOP);
     var foundStop=false;
     for(var i=0;i<queueNum;i++){
@@ -3643,8 +3621,7 @@ try{
                     createElement("span",{},newdiv, numberFormat(unsafeData.BUILDING_INPUT[getZoneType(zoneNrL)][iProd][0][i][1]) + "&nbsp;" + unsafeData.prodName[0][unsafeData.BUILDING_INPUT[getZoneType(zoneNrL)][iProd][0][i][0]]);
                 }
             } else if(fzType==6){ //Fuelstation
-
-				newrow=createElement("div",{style:"display:table-row;width:100%;"},content);
+                newrow=createElement("div",{style:"display:table-row;width:100%;"},content);
                 /*createElement("div",{"class":"tableTd1"},newrow,i==0?getText("automat_QueUses"):"");
                 newdiv=createElement("div",{"class":"tableTd2"},newrow);*/
 				/*
@@ -3662,7 +3639,7 @@ try{
 
 				}*/
 
-			}
+			     }
         }
         if(fzType==2){
             if(isIcon || isTimeLine){ createElement("div",{"class":"tableSeperater"},content);createElement("div",{"class":"tableSeperater"},content);}
@@ -4880,6 +4857,16 @@ function autoFarm(runId){
                                     click($("farm"+handled.farmNr+"_pos"+handled.zoneNr+"_click"));
                                     break;
                                 }
+                                case 6: { //Fuelstation
+                                    document.addEventListener("gameOpenFuelstation",function(runId){
+                                        return function(){
+                                            document.removeEventListener("gameOpenFuelstation",arguments.callee,false);
+                                            window.setTimeout(autoFarmFuelstation,settings.getPause(),runId,1);
+                                        }
+                                    }(runId),false);
+                                    click($("farm"+handled.farmNr+"_pos"+handled.zoneNr+"_click"));
+                                    break;
+                                }
                             }
                         }
                     }else{
@@ -5554,12 +5541,7 @@ function autoFarmPony(runId,step){
                 // Wait for response
                 GM_logInfo("autoFarmPony","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Select Farmi for Pony" + handled.slot + " (Waiting)");
                 window.setTimeout(autoFarmPony, settings.getPause(), runId, step); // => Wait some milliseconds
-<<<<<<< HEAD
-            }
-            else {
-=======
             } else {
->>>>>>> master
                 GM_logInfo("autoFarmPony","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Select Farmi");
                 listeningEvent="gamePonyFarmiSelected";
                 action=function(){
@@ -5886,6 +5868,143 @@ function autoFarmFactoryKnitting(runId,step){
         listeningEvent=null;action=null;
     }
     }catch(err){ GM_logError("autoFarmFactoryKnitting","runId="+runId+" step="+step,"",err); }
+}
+
+function autoFarmFuelstation(runId,step){
+    try{
+    if(!step){ step=1; }
+    if(bot.checkRun("autoFarmFuelstation",runId)){
+        bot.setAction("autoFarmFuelstation ("+step+")");
+        var action=null,listeningEvent=null;
+		    switch(step){
+        case 1:{ // init
+            GM_logInfo("autoFarmFuelstation","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Fuelstation_Init");
+            if(unsafeData.zones.getBlock(handled.zoneNrS)){
+              zoneList[handled.zoneNrL].unshift(DEFAULT_ZONELIST_ITEM.clone());
+              updateQueueBox(handled.zoneNrS);
+              autoFarmFuelstation(runId,6);
+            }else{
+                /*if(zoneList[handled.zoneNrL][0][0]!=PRODSTOP){
+                    var req=unsafeData.BUILDING_INPUT[getZoneType(handled.zoneNrS)][zoneList[handled.zoneNrL][0][0]][0];
+                    for(var i=0;i<req.length;i++){
+                        if(unsafeData.prodStock[0][req[i][0]]<req[i][1]){
+                            zoneList[handled.zoneNrL].unshift(DEFAULT_ZONELIST_ITEM.clone());
+                            updateQueueBox(handled.zoneNrS);
+                        }
+                    }
+                }*/
+      				if(zoneList[handled.zoneNrL][0][0]!=PRODSTOP){
+      					const FUELSTATION_INPUT={"1":[[17,0],[31,0],[33,0],[113,0]]};
+      					for(var v in FUELSTATION_INPUT["1"]){//FUELSTATION_INPUT["1"][v][0]
+      						if(!FUELSTATION_INPUT["1"].hasOwnProperty(v)){ continue; }
+      					}
+      				}
+              if(unsafeData.zones.getEndtime(handled.zoneNrS)==NEVER){ // empty
+                window.setTimeout(autoFarmFuelstation,settings.getPause(),runId,3);
+              }else if(unsafeData.zones.getEndtime(handled.zoneNrS)<=unsafeWindow.Zeit.Server){ // cropable
+                window.setTimeout(autoFarmFuelstation,settings.getPause(),runId,step+1);
+              }else{ // busy
+                window.setTimeout(autoFarmFuelstation,settings.getPause(),runId,6);
+              }
+            }
+    break;}
+
+		case 2:{ // Ernten
+			   GM_logInfo("autoFarmFuelstation","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Fuelstation_Ernten");
+        var div=$("fuelstation_slot"+handled.slot);
+        if(div){
+          unsafeData.readyZone[handled.zoneNrS][2]=false;
+          click(div.children[3]);
+          div=null;
+          window.setTimeout(autoFarmFuelstation,settings.getPause(),runId,step+1);
+        }else{
+          autoFarmFuelstation(runId,step+1);
+        }
+    break;}
+
+		case 3:{ // click slot
+        GM_logInfo("autoFarmFuelstation","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Open_Slot");
+          if(unsafeData.readyZone[handled.zoneNrS]){
+            if(unsafeData.readyZone[handled.zoneNrS][2]&&(unsafeData.readyZone[handled.zoneNrS][1]=="e")){
+              if(zoneList[handled.zoneNrL][0][0]==PRODSTOP){
+                autoFarmFuelstation(runId,6);
+              }else{
+						    var div=$("fuelstation_slot"+handled.slot);
+						    click(div.children[3]);
+                div=null;
+                window.setTimeout(autoFarmFuelstation,settings.getPause(),runId,step+1);
+              }
+            } else {
+              // wait for response
+              window.setTimeout(autoFarmFuelstation,settings.getPause(),runId,step);
+                }
+          }else{
+            autoFarmFuelstation(runId,6);
+          }
+    break;}
+		case 4:{ // Produkt wählen
+		    GM_logInfo("autoFarmFuelstation","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Produkt wählen");
+        var div = $("globalbox");
+				GM_log("req"+zoneList[handled.zoneNrL][0][0]);
+        if(div&&(div.style.display=="block")){
+				      var children = $('fuelstation_product_select_inner').getElementsByClassName("fuelstation_product_select_item");
+				      for (var c in children) {
+                if (!children.hasOwnProperty(c)) { continue; }
+					      var pId_parent=children[c].getElementsByClassName("fuelstation_product_select_item_img")[0].childNodes;
+					      var pId = pId_parent[1].className.replace("tt", "");
+                if(pId==zoneList[handled.zoneNrL][0][0] )	{
+                  listeningEvent="autoFarmFuelstation";
+                  div=children[c].getElementsByClassName("link")[0];
+                  GM_log("children"+pId_parent.id);
+                  action=function(){
+							             click(div);
+							            div=null;
+						      };
+                }
+				      }
+          } else {
+            window.setTimeout(autoFarmFactoryKnitting,settings.getPause(),runId,step);
+          }
+    break;}
+
+		case 5: { //Produkt einwerfen
+			GM_logInfo("autoFarmFuelstation","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Produkt einwerfen");
+		break;}
+
+        case 6:{ // start other slot or exit
+			GM_logInfo("autoFarmFuelstation","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"start other slot or exit");
+			alert("step5");
+            var zoneNrS,zoneNrL,help,next=false;
+            for(var slot=1;slot<=3;slot++){
+                zoneNrS=handled.zoneNrF+"."+slot;
+                if((help=unsafeData.readyZone[zoneNrS])&&help[2]){
+                    zoneNrL=getZoneListId(zoneNrS);
+                    if(((help[1]=="r")&&((zoneList[zoneNrL][0][0]!=PRODSTOP)||!settings.get("account","disableCropFields")))||((help[1]=="e")&&(zoneList[zoneNrL][0][0]!=PRODSTOP))){
+                        next=true;
+                        handled.set(zoneNrS);
+                        break;
+                    }
+                }
+            }
+            if(next){
+                autoFarmFuelstation(runId,1);
+            }else{
+                autoZoneFinish(runId,$("cancelscreen").getElementsByClassName("link")[0]);
+            }
+        break;}
+        }
+        if(listeningEvent){
+            document.addEventListener(listeningEvent,function(listeningEvent,runId,step){
+                return function(){
+                    document.removeEventListener(listeningEvent,arguments.callee,false);
+                    window.setTimeout(autoFarmPony,settings.getPause(),runId,step+1);
+                };
+            }(listeningEvent,runId,step),false);
+        }
+        if(action){ action(); }
+        listeningEvent=null;action=null;
+    }
+    }catch(err){ GM_logError("autoFarmFuelstation","runId="+runId+" step="+step,"",err); }
 }
 
 function autoMegafield(runId,step){

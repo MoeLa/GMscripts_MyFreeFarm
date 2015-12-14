@@ -284,30 +284,18 @@ unsafeData.BUILDING2PRODUCT=BUILDING2PRODUCT.clone();
             Pony             5
             Fuelstation      6
         */
-<<<<<<< HEAD
 //const BUILDINGTYPE={"0":0,"1":1,"2":2,"3":2,"4":2,"5":2,"6":0,"7":3,"8":3,"9":3,"10":3,"11":2,"12":2,"13":3,"14":3,"15":2,"16":3,"17":0,"18":0,"19":0,"20":0,"fl1":1,"fl2":4,"fl5":4,"fw1":4,"fw2":4,"fw3":4}
 // for Fuelstation
 const BUILDINGTYPE={"0":0,"1":1,"2":2,"3":2,"4":2,"5":2,"6":0,"7":3,"8":3,"9":3,"10":3,"11":2,"12":2,"13":3,"14":3,"15":2,"16":3,"17":0,"18":5,"19":0,"20":6,"fl1":1,"fl2":4,"fl5":4,"fw1":4,"fw2":4,"fw3":4};
-=======
-const BUILDINGTYPE={"0":0,"1":1,"2":2,"3":2,"4":2,"5":2,"6":0,"7":3,"8":3,"9":3,"10":3,"11":2,"12":2,"13":3,"14":3,"15":2,"16":3,"17":0,"18":5,"19":0,"20":0,"fl1":1,"fl2":4,"fl5":4,"fw1":4,"fw2":4,"fw3":4}
-// for Fuelstation (incl. Pony)
-// const BUILDINGTYPE={"0":0,"1":1,"2":2,"3":2,"4":2,"5":2,"6":0,"7":3,"8":3,"9":3,"10":3,"11":2,"12":2,"13":3,"14":3,"15":2,"16":3,"17":0,"18":5,"19":0,"20":6,"fl1":1,"fl2":4,"fl5":4,"fw1":4,"fw2":4,"fw3":4}
->>>>>>> master
 
 unsafeData.BUILDINGTYPE=BUILDINGTYPE.clone();
 // task_new_building
 const BUILDING_SIZE={"1":120,"forest":25,"fl1":36,"megafield":[11,9]};
 unsafeData.BUILDING_SIZE=BUILDING_SIZE.clone();
 // task_new_building
-<<<<<<< HEAD
 //const BUILDING_SLOTS={"13":3,"14":3,"16":3,"windmill":2,"sawmill":3,"carpentry":3,"fw1":3,"fw2":3,"fw3":3,"fl0":17,"fl2":3,"megafield":99};
 //for Fuelstation
 const BUILDING_SLOTS={"13":3,"14":3,"16":3,"18":3,"20":4,"windmill":2,"sawmill":3,"carpentry":3,"fw1":3,"fw2":3,"fw3":3,"fl0":17,"fl2":3,"megafield":99};
-=======
-const BUILDING_SLOTS={"13":3,"14":3,"16":3,"18":3,"windmill":2,"sawmill":3,"carpentry":3,"fw1":3,"fw2":3,"fw3":3,"fl0":17,"fl2":3,"megafield":99};
-//for Fuelstation (incl. Pony)
-//const BUILDING_SLOTS={"13":3,"14":3,"16":3,"18":3,"20":4,"windmill":2,"sawmill":3,"carpentry":3,"fw1":3,"fw2":3,"fw3":3,"fl0":17,"fl2":3,"megafield":99};
->>>>>>> master
 unsafeData.BUILDING_SLOTS=BUILDING_SLOTS.clone();
 // Needed input of a zone
 // BUILDING_INPUT[buildTyp]{output}[alternatives]=[[prod1,amount1||reducing time1],...]
@@ -13953,22 +13941,11 @@ return false;
                 case "megafield_vehicle_buy": raiseEvent("gameMegafieldVehicleBought"); break;
                 case "nursery_harvest": raiseEvent("gameFarmersmarketCropped"); break;
                 case "nursery_startproduction": raiseEvent("gameFarmersmarketStarted"); break;
-<<<<<<< HEAD
-                case "pony_crop": doPony(zoneNr); raiseEvent("gamePonyCropped"); console.log("gamePonyCropped"); break;
-                case "pony_feed": doPony(zoneNr); raiseEvent("gamePonyFed"); console.log("gamePonyFed"); break;
-                case "pony_setfarmi": doPony(zoneNr); raiseEvent("gamePonyFarmiSet"); console.log("gamePonyFarmiSet"); break;
-                case "pony_buy":
-                case "pony_speedup": {
-                        doPony(zoneNr);
-                        break;
-                }
-=======
                 case "pony_crop": doPony(zoneNr); raiseEvent("gamePonyCropped"); break;
                 case "pony_feed": doPony(zoneNr); raiseEvent("gamePonyFed"); break;
                 case "pony_setfarmi": doPony(zoneNr); raiseEvent("gamePonyFarmiSet"); break;
-                case "pony_buy": 
+                case "pony_buy":
                 case "pony_speedup": doPony(zoneNr); break; // No events thrown since not needed for automat
->>>>>>> master
                 case "reallocatebuilding":{
                     // B=='farm1,zone1,farm2,zone2'
                     var set=B.split(",");
@@ -14315,22 +14292,13 @@ return false;
         for (var slot=1; slot<=3; slot++) {
             zoneNrS=zoneNrF+"." + slot; // 24.1 or 24.2 responsivly
             if (slot==1 || !pony_data["ponys"][slot]["block"]) {
-                zones.setBlock(zoneNrS,""); // Unblock slot
-<<<<<<< HEAD
-                dataSlot=[[{}],0,0,true]; // Proddata für den aktuellen Slot
-                prodData[1]++; // Wir nehmen an, dass ein weiterer/dieser Platz frei ist
-                prodData[2]++; // Wir nehmen an, dass ein weiterer/dieser Platz freigeschaltet ist
-                dataSlot[1]++; // Inkrementiere freien Platz in diesem Slot
-                dataSlot[2]++; // Ein freier Platz in diesem Slot
-                var farmiId = pony_data["ponys"][slot]["data"]["farmi"]; // FarmiId des aktuellen Reiters in Slot
-=======
-                dataSlot=[[{}],0,0,true]; // Proddata for current slot
-                prodData[1]++; // Assume, there is this/a further production possibility available
-                prodData[2]++; // Assume, there is this/a further production possibility unlocked
-                dataSlot[1]++; // Increment available production possibility in current slot
-                dataSlot[2]++; // Increment unlocked production possibility in current slot
-                var farmiId = pony_data["ponys"][slot]["data"]["farmi"]; // Id of farmi riding in current slot
->>>>>>> master
+              zones.setBlock(zoneNrS,""); // Unblock slot
+              dataSlot=[[{}],0,0,true]; // Proddata for current slot
+              prodData[1]++; // Assume, there is this/a further production possibility available
+              prodData[2]++; // Assume, there is this/a further production possibility unlocked
+              dataSlot[1]++; // Increment available production possibility in current slot
+              dataSlot[2]++; // Increment unlocked production possibility in current slot
+              var farmiId = pony_data["ponys"][slot]["data"]["farmi"]; // Id of farmi riding in current slot
                 if (farmiId) {
                     var farmi = pony_data["farmis"][farmiId]; // Get that farmi's data
                     var iPrTyp=0; // Type of product => Since we don't produce anything, we just take zero
@@ -14349,25 +14317,15 @@ return false;
                     }
                     // Put this slot's info into building's proddata
                     prodData[0][iPrTyp][iProd].push([iAmount,iPoints,iTime,NEVER]);
-<<<<<<< HEAD
 
-                    dataSlot[1]--; // Platz ist nicht frei (Slot)
-=======
-                    
                     dataSlot[1]--; // Production possibility currently not available (slot)
->>>>>>> master
                     if (!dataSlot[0][iPrTyp][iProd]) {
                         dataSlot[0][iPrTyp][iProd]=[];
                     }
                     // Put this slot's info into slots's proddata
                     dataSlot[0][iPrTyp][iProd].push([iAmount,iPoints,iTime,NEVER]);
-<<<<<<< HEAD
 
-                    //auto-cropping
-=======
-                     
                     // Add auto-cropping on open building
->>>>>>> master
                     newDiv=$("pony" + slot).children[1];
                     if (farmi["data"]["remain"] < 1 && (top.unsafeData.autoAction==null) && valAutoCrop["farm"] && (newDiv=$("pony"+ slot + "_crop"))) {
                         top.unsafeData.autoAction="Berater: Pony crop";
@@ -14652,11 +14610,7 @@ return false;
             }
             zones.setProduction(zoneNrF,tempZoneProductionData.clone());
             var tempZoneProductionData=null;newDiv=null;newDiv1=null;
-<<<<<<< HEAD
             raiseEvent("gameOpenFuelstation");
-=======
-            raiseEvent("gameOpenFuelstation");*/
->>>>>>> master
         }catch(err){GM_logError("buildFuelstation","","",err);}
     });
 
@@ -17916,11 +17870,7 @@ return;
 
         // On load, check, if we need to show the icon
         if (USERLEVEL >= 38) {
-<<<<<<< HEAD
-          showGoToClothingDonation();
-=======
             showGoToClothingDonation();
->>>>>>> master
         }
 
         // Donkey Waltraud
@@ -20963,10 +20913,6 @@ try{
         allEvents.push("gameFarmersmarketDialogCommit");    // the farmersmarket building has requested for commit of a dialogue
         allEvents.push("gameFarmiNew");                     // a new farmi is appeared
         allEvents.push("gameFarmiResponse");                // a farmi is been rejected or accepted.
-
-        allEvents.push("buildFuelstation");                 //Fuelstation
-        allEvents.push("gameFactoryFuelstationDialogStarted");
-
         allEvents.push("gamePonyCropped");                  // a pony has been cropped
         allEvents.push("gamePonyFed");                      // a pony has been fed (after confirmation)
         allEvents.push("gamePonyFarmiSet");                 // a pony farmi has been set on a pony (after confirmation)
