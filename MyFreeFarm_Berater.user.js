@@ -1,12 +1,11 @@
 // ==UserScript==
-// ==UserScript==
 // @name           MyFreeFarm Berater
 // @namespace      https://github.com/BastianKanaan/GMscripts_MyFreeFarm
 // @author         BastianKanaan
 // @description    Extends MyFreeFarm
 // @icon           data:image/png;base64,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
-// @date           08.12.2015
-// @version        2.7.4
+// @date           13.12.2015
+// @version        2.8.0
 // @license        GPL version 3 or any later version; http://www.gnu.org/copyleft/gpl.html
 // @include        /^http:\/\/(|www\.|s\d+\.)au\.myfreefarm\.com\/.*$/
 // @include        /^http:\/\/(|www\.|s\d+\.)veselaferma\.com\/.*$/
@@ -109,7 +108,8 @@ const CHANGELOG=[["2.0","29.05.2014",[["Migration nach openuserjs.org","Migratio
                 ,["2.7.3","04.12.2015",[["Neue Berater-Option: Questnummer Baumerei 2 manuell übernehmen","New adviser option: Set questnumber for questserie forestry 2"]]]
                 ,["2.7.2","04.12.2015",[["Addon: Hilfestellung für Weihnachts-Knabbermarathon","Addon: Assistance for X-Mas event"]]]
                 ,["2.7.3","04.12.2015",[["Neue Berater-Option: Questnummer der 2. Baumerei-Questreihe manuell übernehmen","New adviser option: Set questnumber for 2nd series of quests (forestry)"]]]
-                ,["2.7.4","08.12.2015",[["Berater-Option: \"Questnummer Übernehmen\" zu einer Funktion sammengefasst.","Adviser-Option: \"set questnumber\" consolidated to one function."],["Bugfix: kleinere Optimierungen","Bugfix: small improvements"]]]
+                ,["2.7.4","10.12.2015",[["Berater-Option: \"Questnummer Übernehmen\" zu einer Funktion zusammengefasst.","Adviser-Option: \"set questnumber\" consolidated to one function."],["Bugfix: kleinere Optimierungen","Bugfix: small improvements"]]]
+                ,["2.8.0","13.12.2015",[["Neu: Ponyhof","New: Ponyfarm"]]]
                 ];
 if(!VERSIONfunctionFile){
     alert("Hi, I am the Berater-Script.\nThe function-file is missing.\nPlease install me again.");
@@ -284,18 +284,30 @@ unsafeData.BUILDING2PRODUCT=BUILDING2PRODUCT.clone();
             Pony             5
             Fuelstation      6
         */
+<<<<<<< HEAD
 //const BUILDINGTYPE={"0":0,"1":1,"2":2,"3":2,"4":2,"5":2,"6":0,"7":3,"8":3,"9":3,"10":3,"11":2,"12":2,"13":3,"14":3,"15":2,"16":3,"17":0,"18":0,"19":0,"20":0,"fl1":1,"fl2":4,"fl5":4,"fw1":4,"fw2":4,"fw3":4}
 // for Fuelstation
 const BUILDINGTYPE={"0":0,"1":1,"2":2,"3":2,"4":2,"5":2,"6":0,"7":3,"8":3,"9":3,"10":3,"11":2,"12":2,"13":3,"14":3,"15":2,"16":3,"17":0,"18":5,"19":0,"20":6,"fl1":1,"fl2":4,"fl5":4,"fw1":4,"fw2":4,"fw3":4};
+=======
+const BUILDINGTYPE={"0":0,"1":1,"2":2,"3":2,"4":2,"5":2,"6":0,"7":3,"8":3,"9":3,"10":3,"11":2,"12":2,"13":3,"14":3,"15":2,"16":3,"17":0,"18":5,"19":0,"20":0,"fl1":1,"fl2":4,"fl5":4,"fw1":4,"fw2":4,"fw3":4}
+// for Fuelstation (incl. Pony)
+// const BUILDINGTYPE={"0":0,"1":1,"2":2,"3":2,"4":2,"5":2,"6":0,"7":3,"8":3,"9":3,"10":3,"11":2,"12":2,"13":3,"14":3,"15":2,"16":3,"17":0,"18":5,"19":0,"20":6,"fl1":1,"fl2":4,"fl5":4,"fw1":4,"fw2":4,"fw3":4}
+>>>>>>> master
 
 unsafeData.BUILDINGTYPE=BUILDINGTYPE.clone();
 // task_new_building
 const BUILDING_SIZE={"1":120,"forest":25,"fl1":36,"megafield":[11,9]};
 unsafeData.BUILDING_SIZE=BUILDING_SIZE.clone();
 // task_new_building
+<<<<<<< HEAD
 //const BUILDING_SLOTS={"13":3,"14":3,"16":3,"windmill":2,"sawmill":3,"carpentry":3,"fw1":3,"fw2":3,"fw3":3,"fl0":17,"fl2":3,"megafield":99};
 //for Fuelstation
 const BUILDING_SLOTS={"13":3,"14":3,"16":3,"18":3,"20":4,"windmill":2,"sawmill":3,"carpentry":3,"fw1":3,"fw2":3,"fw3":3,"fl0":17,"fl2":3,"megafield":99};
+=======
+const BUILDING_SLOTS={"13":3,"14":3,"16":3,"18":3,"windmill":2,"sawmill":3,"carpentry":3,"fw1":3,"fw2":3,"fw3":3,"fl0":17,"fl2":3,"megafield":99};
+//for Fuelstation (incl. Pony)
+//const BUILDING_SLOTS={"13":3,"14":3,"16":3,"18":3,"20":4,"windmill":2,"sawmill":3,"carpentry":3,"fw1":3,"fw2":3,"fw3":3,"fl0":17,"fl2":3,"megafield":99};
+>>>>>>> master
 unsafeData.BUILDING_SLOTS=BUILDING_SLOTS.clone();
 // Needed input of a zone
 // BUILDING_INPUT[buildTyp]{output}[alternatives]=[[prod1,amount1||reducing time1],...]
@@ -639,7 +651,7 @@ if (GM_getValue("valAnimateStartscreen",false)){
 }
 // animierte Hintergründe ausblenden
 
-console.log("Game-Currency: " + unsafeWindow.gamecurrency)
+// console.log("Game-Currency: " + unsafeWindow.gamecurrency)
 
 //***********************************************************************************************************
 // developer functions
@@ -1375,7 +1387,7 @@ function checkRequest(request){
 function checkRequest(request, mode) {
 try{
     if (request.readyState == 4 && request.status == 200) {
-        response = request.responseText;
+        var response = request.responseText;
         if ((response!="failed") && (response!="maintenance") && (response!=0)) {
             var result = eval("(" + response + ")");
             if (result.datablock) {
@@ -1716,7 +1728,6 @@ var zones=new function(){
         // s: status
         // t: type (not handled)
         try{
-            // console.log("Set block: " + zoneNr + " -> " + value);
             zoneNr=zoneNr.toString();
             var slot=(zoneNr.match(/\.(\d+)$/)?parseInt(/\.(\d+)$/.exec(zoneNr)[1],10):null);
             var zoneNrF=zoneNr.replace(/\.\d+$/g,"");
@@ -1842,7 +1853,6 @@ var zones=new function(){
             }
             if(data[zoneNrF]["building"]!=value){
                 data[zoneNrF]["building"]=value;
-                 // + zoneNrF + " -> " + BUILDING_SLOTS[value]);
                 if(BUILDING_SLOTS[value]){
                     data[zoneNrF]["slots"]=[];
                     for(var i=BUILDING_SLOTS[value];i>=1;i--){
@@ -2126,10 +2136,6 @@ var zones=new function(){
                 var zT=zones.getEndtime(zoneNrS);
                 var zTw=zones.getWatertime(zoneNrS);
                 var div;
-                // if (zoneNrF == 24) {
-                // zT = NEVER;
-                // }
-                // console.log(zoneNrS);
                 // We gonna set the megafield timer to the end of the tour, if we can't/needn't to plant anything
                 if (megafieldSmartTimer && zoneNrF == "megafield") {
                     // Do we have the data AND is a harvest tour running (and the job hasn't timed out already)?
@@ -2177,9 +2183,6 @@ var zones=new function(){
                             }
                             // otherwise we don't do anything until the empty fields are planted
                         }
-                    } else if (unsafeWindow.megafield_data) {
-                        // console.log("Megatime: " + new Date(1000*zT));
-                        // console.log(unsafeWindow.megafield_data);
                     }
                 }
 
@@ -2227,9 +2230,6 @@ var zones=new function(){
                 }
                 div=null;
             }
-            // if (readyZoneAdded) {
-            //     console.log("Ready: " + zoneNrF);
-            // }
 
             return readyZoneAdded;
         }catch(err){GM_logError("zones.checkReady","zoneNrS="+zoneNrS,"",err);}
@@ -2519,7 +2519,7 @@ function calcTotalEndtime(){
         for(var i in ALL_ZONES){
             if(!ALL_ZONES.hasOwnProperty(i)){ continue; }
             for(var j=0;j<ALL_ZONES[i].length;j++){
-                zoneNrF=ALL_ZONES[i][j];
+                var zoneNrF=ALL_ZONES[i][j];
                 if((!zones.getBlock(zoneNrF))&&(zones.getBuilding(zoneNrF)!=0)&&((i=="farm")||zoneAddToGlobalTime[zoneNrF])){
                     help=zones.getEndtime(zoneNrF);
                     if(help==NEVER){
@@ -6926,11 +6926,11 @@ function buildInfoPanelOptions(){
                         // cooldown-time is active - quest is not accessible
                         var help = help + "_cooldown:_SetValues ";
                         questData["forestry"][1] = INIT_questData["forestry"][1].clone();
-                        questData["forestry"][1]["nr"] = questData["forestry"][1]["nr"] = 1+parseInt(unsafeWindow.quests_status["forestry"][1]["questid"],10);
+                        questData["forestry"][1]["nr"] = 1+parseInt(unsafeWindow.quests_status["forestry"][1]["questid"],10);
                         questData["forestry"][1]["time"] = (parseInt(unsafeWindow.Zeit.Server,10) + parseInt(unsafeWindow.quests_status["forestry"][1]["remain"],10));
                         questData["forestry"][1]["given"] = new Object();
                         questData["forestry"][1]["data"] = QUESTS["forestry"][2][(questData["forestry"][1]["nr"])];
-                        for (var v=0; v<(QUESTS["forestry"][1][(questData["forestry"][1]["nr"])].length-1); v++){
+                        for (var v=0; v<(QUESTS["forestry"][1][(questData["forestry"][1]["nr"])].length); v++){
                             questData["forestry"][1]["data"][0][v][3]=true;
                         }
                         GM_setValueCache(COUNTRY+"_"+SERVER+"_"+USERNAME+"_questData",implode(questData,"handleQuestData/questData"));
@@ -6963,7 +6963,7 @@ function buildInfoPanelOptions(){
                         questData["forestry"][2]["time"] = (parseInt(unsafeWindow.Zeit.Server,10) + parseInt(unsafeWindow.quests_status["forestry"][2]["remain"],10));
                         questData["forestry"][2]["given"] = new Object();
                         questData["forestry"][2]["data"] = QUESTS["forestry"][2][(questData["forestry"][2]["nr"])];
-                        for (var v=0; v<(QUESTS["forestry"][2][(questData["forestry"][2]["nr"])].length-1); v++){
+                        for (var v=0; v<(QUESTS["forestry"][2][(questData["forestry"][2]["nr"])].length); v++){
                             questData["forestry"][2]["data"][0][v][3]=true;
                         }
                         GM_setValueCache(COUNTRY+"_"+SERVER+"_"+USERNAME+"_questData",implode(questData,"handleQuestData/questData"));
@@ -6985,6 +6985,8 @@ function buildInfoPanelOptions(){
                     unsafeData.questData=questData.clone();
                 }
                 console.log(help);
+                console.log(implode(unsafeData.questData));
+                help=null;
             });
         },false);
         createElement("td",{},newtr,getText("settings_setQuestAll")[1]);
@@ -13617,7 +13619,6 @@ return false;
                             currBonusSpecial=[parseInt(data.product,10),10]; // the id of special plant, additional bonus for special plant
                         }
                     }
-                    // console.log("farmBuildPositions: " + zoneNrF);
                     zones.setBuilding(zoneNrF,currZoneType);
                     zones.setBlock(zoneNrF,currBlock);
                     zones.setBonus(zoneNrF,currBonus);
@@ -13952,6 +13953,7 @@ return false;
                 case "megafield_vehicle_buy": raiseEvent("gameMegafieldVehicleBought"); break;
                 case "nursery_harvest": raiseEvent("gameFarmersmarketCropped"); break;
                 case "nursery_startproduction": raiseEvent("gameFarmersmarketStarted"); break;
+<<<<<<< HEAD
                 case "pony_crop": doPony(zoneNr); raiseEvent("gamePonyCropped"); console.log("gamePonyCropped"); break;
                 case "pony_feed": doPony(zoneNr); raiseEvent("gamePonyFed"); console.log("gamePonyFed"); break;
                 case "pony_setfarmi": doPony(zoneNr); raiseEvent("gamePonyFarmiSet"); console.log("gamePonyFarmiSet"); break;
@@ -13960,6 +13962,13 @@ return false;
                         doPony(zoneNr);
                         break;
                 }
+=======
+                case "pony_crop": doPony(zoneNr); raiseEvent("gamePonyCropped"); break;
+                case "pony_feed": doPony(zoneNr); raiseEvent("gamePonyFed"); break;
+                case "pony_setfarmi": doPony(zoneNr); raiseEvent("gamePonyFarmiSet"); break;
+                case "pony_buy": 
+                case "pony_speedup": doPony(zoneNr); break; // No events thrown since not needed for automat
+>>>>>>> master
                 case "reallocatebuilding":{
                     // B=='farm1,zone1,farm2,zone2'
                     var set=B.split(",");
@@ -14037,18 +14046,14 @@ return false;
             unsafeWindow._ponySelectFarmi(farmiId);
         }catch(err){GM_logError("_ponySelectFarmi","","",err);}
         try{
-            if (unsafeWindow.pony_sel_farmi) {
+            if (unsafeWindow.pony_sel_farmi) { // if unsafeWindow.pony_sel_farmi == 0 => Farmi has been unselected
                 raiseEvent("gamePonyFarmiSelected");
-                console.log("gamePonyFarmiSelected: " + farmiId);
-            } else {
-                console.log("Farmi unselected");
             }
-            // console.log(unsafeWindow.pony_sel_farmi);
         }catch(err){GM_logError("ponySelectFarmi","","",err);}
     });
     unsafeOverwriteFunction("ponyDialog",function(h, b, n){
         try{
-            unsafeWindow._ponyDialog(h, b, n); // 'feed', pony_slot, undefined
+            unsafeWindow._ponyDialog(h, b, n); // 'feed' | 'setfarmi', pony_slot, undefined
         }catch(err){GM_logError("_ponyDialog","","",err);}
         try{
             if (h == "feed") {
@@ -14056,7 +14061,6 @@ return false;
             } else if (h == "setfarmi") {
                 raiseEvent("gamePonySetDialogOpened");
             }
-            // console.log("ponyDialog: " + h + "/" + b + "/" + n);
         }catch(err){GM_logError("ponyDialog","","",err);}
     });
     unsafeOverwriteFunction("AbrissResponse",function(request){
@@ -14302,71 +14306,84 @@ return false;
     }
     function doPony(zoneNr){
         var zoneNrF=zoneNr+6*gameLocation.get()[1];
-
         var pony_data = unsafeWindow.pony_data;
         unsafeData.pony_data = pony_data;
-        console.log(unsafeData.pony_data);
 
         var zoneNrS;
-        var prodData=[[{}],0,0,true]; // Proddata für komplette Pony-Farm
+        var prodData=[[{}],0,0,true]; // Proddata for complete building
         var dataSlot;
         for (var slot=1; slot<=3; slot++) {
-            zoneNrS=zoneNrF+"." + slot; // 24.1 bzw. 24.2
+            zoneNrS=zoneNrF+"." + slot; // 24.1 or 24.2 responsivly
             if (slot==1 || !pony_data["ponys"][slot]["block"]) {
                 zones.setBlock(zoneNrS,""); // Unblock slot
+<<<<<<< HEAD
                 dataSlot=[[{}],0,0,true]; // Proddata für den aktuellen Slot
                 prodData[1]++; // Wir nehmen an, dass ein weiterer/dieser Platz frei ist
                 prodData[2]++; // Wir nehmen an, dass ein weiterer/dieser Platz freigeschaltet ist
                 dataSlot[1]++; // Inkrementiere freien Platz in diesem Slot
                 dataSlot[2]++; // Ein freier Platz in diesem Slot
                 var farmiId = pony_data["ponys"][slot]["data"]["farmi"]; // FarmiId des aktuellen Reiters in Slot
+=======
+                dataSlot=[[{}],0,0,true]; // Proddata for current slot
+                prodData[1]++; // Assume, there is this/a further production possibility available
+                prodData[2]++; // Assume, there is this/a further production possibility unlocked
+                dataSlot[1]++; // Increment available production possibility in current slot
+                dataSlot[2]++; // Increment unlocked production possibility in current slot
+                var farmiId = pony_data["ponys"][slot]["data"]["farmi"]; // Id of farmi riding in current slot
+>>>>>>> master
                 if (farmiId) {
-                    var farmi = pony_data["farmis"][farmiId]; // Hole Infos über aktuellen Reiter
-                    var iPrTyp=0; // Produkttyp
-                    var iProd=0;  // Produkt "0" sind zwar Coins, aber mal sehen
-                    var iAmount=0;// Es werden 0 Einheiten hergestellt
-                    var iPoints=farmi["data"]["points"]; // Punkte für aktuellen Ritt
-                    var iTime = NEVER; // Endzeit des aktuellen Ritts
-                    if(farmi["data"]["ready"]){
+                    var farmi = pony_data["farmis"][farmiId]; // Get that farmi's data
+                    var iPrTyp=0; // Type of product => Since we don't produce anything, we just take zero
+                    var iProd=0;  // Product '0' is 'Coins' => We need to set this value some how
+                    var iAmount=0;// We produce '0' units
+                    var iPoints=farmi["data"]["points"]; // Amount of points for current production
+                    var iTime = NEVER; // End time
+                    if(farmi["data"]["ready"]){ // Production has finished
                         iTime = Math.min(now - unsafeWindow.Zeit.Verschiebung, zones.getEndtime(zoneNrS));
-                    } else{
+                    } else{ // Production still running
                         iTime = now + farmi["data"]["remain"] - unsafeWindow.Zeit.Verschiebung;
                     }
-                    prodData[1]--; // Platz ist nicht frei (Komplette Farm)
+                    prodData[1]--; // Production possibility currently not available (building)
                     if (!prodData[0][iPrTyp][iProd]) {
-                        prodData[0][iPrTyp][iProd]=[]; // prodData[0][0][0] anlegen
+                        prodData[0][iPrTyp][iProd]=[]; // Create prodData[0][0][0]
                     }
-                    // Packe Infos für aktuellen Slot in Proddata der ganzen Farm
+                    // Put this slot's info into building's proddata
                     prodData[0][iPrTyp][iProd].push([iAmount,iPoints,iTime,NEVER]);
+<<<<<<< HEAD
 
                     dataSlot[1]--; // Platz ist nicht frei (Slot)
+=======
+                    
+                    dataSlot[1]--; // Production possibility currently not available (slot)
+>>>>>>> master
                     if (!dataSlot[0][iPrTyp][iProd]) {
                         dataSlot[0][iPrTyp][iProd]=[];
                     }
-                    // Packe Infos für aktuellen Slot in Proddata des aktuellen SLots
+                    // Put this slot's info into slots's proddata
                     dataSlot[0][iPrTyp][iProd].push([iAmount,iPoints,iTime,NEVER]);
+<<<<<<< HEAD
 
                     //auto-cropping
+=======
+                     
+                    // Add auto-cropping on open building
+>>>>>>> master
                     newDiv=$("pony" + slot).children[1];
                     if (farmi["data"]["remain"] < 1 && (top.unsafeData.autoAction==null) && valAutoCrop["farm"] && (newDiv=$("pony"+ slot + "_crop"))) {
-                        top.unsafeData.autoAction="berater: pony crop";
+                        top.unsafeData.autoAction="Berater: Pony crop";
                         window.setTimeout(function(div){
                             click(div);
                             top.unsafeData.autoAction=null;
-                        },500,newDiv);
+                        }, 500, newDiv);
                     }
-                } else {
-                    // Nichts, da keine Infos vorhanden sind
-                    console.log("Keine FarmiId -> Slot ist leer/geerntet");
                 }
 
-                // Setze Production-Info für Slot
-                zones.setProduction(zoneNrF+"."+slot,dataSlot.clone());
+                zones.setProduction(zoneNrF+"."+slot,dataSlot.clone()); // Set proddata for slot
             } else {
-                zones.setBlock(zoneNrS, "b");
+                zones.setBlock(zoneNrS, "b");  // Block slot
             }
         }
-        zones.setProduction(zoneNrF,prodData.clone());
+        zones.setProduction(zoneNrF, prodData.clone()); // Set proddata for building
     }
     unsafeOverwriteFunction("buildOilpressInner",function(position,buildingid,info){
         try{
@@ -14543,15 +14560,14 @@ return false;
     //d: Slot
     //s: Produkt
     //y:
-	unsafeOverwriteFunction("dialogFuelstation",function(n, z, d, s, y){
-		try{
+    unsafeOverwriteFunction("dialogFuelstation",function(n, z, d, s, y){
+        try{
             unsafeWindow._dialogFuelstation(n, z, d, s, y);
-        }catch(err){GM_logError("_dialogFuelstation","","",err);}
-
-		try{
-			var zoneNr=z;
-			var data=unsafeWindow.farms_data.farms[unsafeWindow.farm][zoneNr];
-			var iLimit=data.data.constants.slot_level[data.data.data.slots[d].level].limit;
+        }catch(err){GM_logError("dialogFuelstation","","",err);}
+        try{
+            var zoneNr=z;
+            var data=unsafeWindow.farms_data.farms[unsafeWindow.farm][zoneNr];
+            var iLimit=data.data.constants.slot_level[data.data.data.slots[d].level].limit;
             var children = $('fuelstation_product_select_inner').getElementsByClassName("fuelstation_product_select_item");
             for (var c in children) {
                 if (!children.hasOwnProperty(c)) { continue; }
@@ -14561,7 +14577,7 @@ return false;
                 var ratio = (gut[pId]*iLimit/points).toFixed(2);
                 createElement("div", {
                         "style":"position: absolute; bottom: -15px; left: 8px;border: 2px solid rgb(255, 114, 0); background-color: white;width: 85px;text-align: center;"
-                },children[c], ratio + " " + unsafeWindow.gamecurrency);
+                },children[c], ratio + " " + getText("gamecurrency"));
             }
         }catch(err){GM_logError("dialogFuelstation","","",err);}
     });
@@ -14636,7 +14652,11 @@ return false;
             }
             zones.setProduction(zoneNrF,tempZoneProductionData.clone());
             var tempZoneProductionData=null;newDiv=null;newDiv1=null;
+<<<<<<< HEAD
             raiseEvent("gameOpenFuelstation");
+=======
+            raiseEvent("gameOpenFuelstation");*/
+>>>>>>> master
         }catch(err){GM_logError("buildFuelstation","","",err);}
     });
 
@@ -17896,7 +17916,11 @@ return;
 
         // On load, check, if we need to show the icon
         if (USERLEVEL >= 38) {
+<<<<<<< HEAD
           showGoToClothingDonation();
+=======
+            showGoToClothingDonation();
+>>>>>>> master
         }
 
         // Donkey Waltraud
@@ -18058,7 +18082,6 @@ return;
         var readyZoneAdded=0;
         for(var i in ALL_SLOTS){
             if(!ALL_SLOTS.hasOwnProperty(i)){ continue; }
-            // console.log("Block for " + i + ": " + zones.getBlock(i));
             if(!zones.getBlock(i)){
                 readyZoneAdded+=zones.checkReady(i);
             }
@@ -20944,6 +20967,12 @@ try{
         allEvents.push("buildFuelstation");                 //Fuelstation
         allEvents.push("gameFactoryFuelstationDialogStarted");
 
+        allEvents.push("gamePonyCropped");                  // a pony has been cropped
+        allEvents.push("gamePonyFed");                      // a pony has been fed (after confirmation)
+        allEvents.push("gamePonyFarmiSet");                 // a pony farmi has been set on a pony (after confirmation)
+        allEvents.push("gamePonyFarmiSelected");            // a pony farmi has been selected (not unselected)
+        allEvents.push("gamePonyFeedDialogOpened");         // a pony's food box has been opened (before confirmation)
+        allEvents.push("gamePonySetDialogOpened");          // a pony farmi has been set on a pony (before confirmation)
         allEvents.push("gameMegafieldDialogStarted");       // the megafield view has been moved
         allEvents.push("gameMegafieldMoved");               // a megafield vehicle has been bought
         allEvents.push("gameMegafieldTourStarted");         // a megafield tour has been started
