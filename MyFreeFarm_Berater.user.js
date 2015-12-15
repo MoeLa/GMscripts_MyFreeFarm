@@ -253,7 +253,7 @@ const ANIMAL_MOVE=[,,[false,0,0,255,10,10,505],[false,0,0,280,1,0,525],[false,0,
             fw3         Pastry shop             Foodworld
             fl1         Flower meadow           Farmersmarket
             fl2         Flower workshop         Farmersmarket
-            fl5                                 Farmersmarket
+            fl5         Veterinary              Farmersmarket
         */
 // BUILDING_UPGRADES[zoneType][levelNr-1][needed level,buildcost,bonus,animalamount]
 // task_new_building
@@ -291,7 +291,7 @@ unsafeData.BUILDINGTYPE=BUILDINGTYPE.clone();
 const BUILDING_SIZE={"1":120,"forest":25,"fl1":36,"megafield":[11,9]};
 unsafeData.BUILDING_SIZE=BUILDING_SIZE.clone();
 // task_new_building
-const BUILDING_SLOTS={"13":3,"14":3,"16":3,"18":3,"windmill":2,"sawmill":3,"carpentry":3,"fw1":3,"fw2":3,"fw3":3,"fl0":17,"fl2":3,"megafield":99};
+const BUILDING_SLOTS={"13":3,"14":3,"16":3,"18":3,"windmill":2,"sawmill":3,"carpentry":3,"fw1":3,"fw2":3,"fw3":3,"fl0":17,"fl2":3,"fl5":4,"megafield":99};
 //for Fuelstation (incl. Pony)
 //const BUILDING_SLOTS={"13":3,"14":3,"16":3,"18":3,"20":4,"windmill":2,"sawmill":3,"carpentry":3,"fw1":3,"fw2":3,"fw3":3,"fl0":17,"fl2":3,"megafield":99};
 unsafeData.BUILDING_SLOTS=BUILDING_SLOTS.clone();
@@ -15844,6 +15844,46 @@ return false;
                                                     tempZoneProductionDataSlot[0][0][iProd].push([iAmount,iPoints,iTime,NEVER]);
                                                 }
                                             }
+                                        }
+                                        zones.setProduction(zoneNrS,tempZoneProductionDataSlot.clone());
+                                    }
+                                    zones.setProduction(zoneNrF,tempZoneProductionData.clone());
+                                }
+                            break;}
+                            case 5:{ // Vet
+                                zones.setBonus(zoneNrF,0);
+                                if((!currBlock)&&(unsafeWindow.farmersmarket_data.vet&&unsafeWindow.farmersmarket_data.vet.production)){
+                                    tempZoneProductionData=[[{},{}],0,0,true];
+                                    for(var slot=1;slot<=4;slot++){
+                                        zoneNrS=zoneNrF+"."+slot;
+                                        zones.setBlock(zoneNrS,"");
+                                        tempZoneProductionDataSlot=[[{},{}],0,0,true];
+                                        if(item=unsafeWindow.farmersmarket_data.vet.production[slot]){
+                                            console.log("Moe, Item: " + zoneNrS);
+                                            // console.log(item);
+                                            iProd=(item["pid"]?parseInt(item["pid"],10):null);
+                                            if(isNaN(iProd)){ iProd=null; }
+                                            if((iProd!=null)&&(item["ready"])){ // production ready
+                                                iTime=nowServer;
+                                            }else if((iProd!=null)&&(item["remain"])){ // production busy
+                                                iTime=nowServer+item["remain"];
+                                            }else{
+                                                iTime=NEVER;
+                                                tempZoneProductionData[1]++;
+                                                tempZoneProductionDataSlot[1]++;
+                                            }
+                                            tempZoneProductionData[2]++;
+                                            tempZoneProductionDataSlot[2]++;
+                                            if(iProd!=null){
+                                                iAmount=prodYield[0][iProd];
+                                                iPoints=iAmount*prodPoints[0][iProd];
+                                                if(!tempZoneProductionData[0][0][iProd]){ tempZoneProductionData[0][0][iProd]=[]; }
+                                                tempZoneProductionData[0][0][iProd].push([iAmount,iPoints,iTime,NEVER]);
+                                                if(!tempZoneProductionDataSlot[0][0][iProd]){ tempZoneProductionDataSlot[0][0][iProd]=[]; }
+                                                tempZoneProductionDataSlot[0][0][iProd].push([iAmount,iPoints,iTime,NEVER]);
+                                            }
+                                        } else {
+                                            zones.setBlock(zoneNrS,"b");
                                         }
                                         zones.setProduction(zoneNrS,tempZoneProductionDataSlot.clone());
                                     }
