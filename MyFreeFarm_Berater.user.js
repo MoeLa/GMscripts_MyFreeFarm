@@ -13937,6 +13937,8 @@ return false;
                 case "megafield_vehicle_buy": raiseEvent("gameMegafieldVehicleBought"); break;
                 case "nursery_harvest": raiseEvent("gameFarmersmarketCropped"); break;
                 case "nursery_startproduction": raiseEvent("gameFarmersmarketStarted"); break;
+                case "vet_harvestproduction": raiseEvent("gameFarmersmarketCropped"); break;
+                case "vet_startproduction": raiseEvent("gameFarmersmarketStarted"); break;
                 case "pony_crop": doPony(zoneNr); raiseEvent("gamePonyCropped"); break;
                 case "pony_feed": doPony(zoneNr); raiseEvent("gamePonyFed"); break;
                 case "pony_setfarmi": doPony(zoneNr); raiseEvent("gamePonyFarmiSet"); break;
@@ -15854,13 +15856,17 @@ return false;
                                 zones.setBonus(zoneNrF,0);
                                 if((!currBlock)&&(unsafeWindow.farmersmarket_data.vet&&unsafeWindow.farmersmarket_data.vet.production)){
                                     tempZoneProductionData=[[{},{}],0,0,true];
+                                    console.log(unsafeWindow.farmersmarket_data.vet);
                                     for(var slot=1;slot<=4;slot++){
                                         zoneNrS=zoneNrF+"."+slot;
                                         zones.setBlock(zoneNrS,"");
                                         tempZoneProductionDataSlot=[[{},{}],0,0,true];
-                                        if(item=unsafeWindow.farmersmarket_data.vet.production[slot]){
-                                            console.log("Moe, Item: " + zoneNrS);
-                                            // console.log(item);
+                                        item=unsafeWindow.farmersmarket_data.vet.animals.slots2[slot];
+                                        if(slot >= 3 && item["block"]) {
+                                            console.log("Moe, blocke oben Slot"+slot);
+                                            zones.setBlock(zoneNrS,"b");
+                                        } else if(item=unsafeWindow.farmersmarket_data.vet.production[slot]){
+                                            console.log("Moe, Proddata Slot"+slot);
                                             iProd=(item["pid"]?parseInt(item["pid"],10):null);
                                             if(isNaN(iProd)){ iProd=null; }
                                             if((iProd!=null)&&(item["ready"])){ // production ready
@@ -15883,7 +15889,16 @@ return false;
                                                 tempZoneProductionDataSlot[0][0][iProd].push([iAmount,iPoints,iTime,NEVER]);
                                             }
                                         } else {
-                                            zones.setBlock(zoneNrS,"b");
+                                            console.log("Moe, leerer Slot"+slot);
+                                            // iTime=NEVER;
+                                            tempZoneProductionData[1]++;
+                                            tempZoneProductionDataSlot[1]++;
+                                            // tempZoneProductionData[2]++;
+                                            // tempZoneProductionDataSlot[2]++;
+                                            // if(!tempZoneProductionData[0][0][0]){ tempZoneProductionData[0][0][0]=[]; }
+                                            // tempZoneProductionData[0][0][0].push([0,0,iTime,NEVER]);
+                                            // if(!tempZoneProductionDataSlot[0][0][0]){ tempZoneProductionDataSlot[0][0][0]=[]; }
+                                            // tempZoneProductionDataSlot[0][0][0].push([0,0,iTime,NEVER]);
                                         }
                                         zones.setProduction(zoneNrS,tempZoneProductionDataSlot.clone());
                                     }
@@ -16014,6 +16029,25 @@ return false;
             case "autoplant": raiseEvent("gameFarmersmarketDialogStart");
             }
         }catch(err){GM_logError("dialogFlowerArea","","",err);}
+    });
+    unsafeOverwriteFunction("initVet",function(){
+        try{
+            unsafeWindow._initVet();
+        }catch(err){GM_logError("_initVet","","",err);}
+        try{
+            raiseEvent("gameFarmersmarketOpened5");
+        }catch(err){GM_logError("initVet","","",err);}
+    });
+    unsafeOverwriteFunction("vetDialog",function(mode,c,t,h){
+        try{
+            unsafeWindow._vetDialog(mode,c,t,h);
+        }catch(err){GM_logError("_vetDialog","","",err);}
+        try{
+            switch(mode){
+            case "production_select": raiseEvent("gameFarmersmarketSlotOpened");
+            case "production_select_confirm": raiseEvent("gameFarmersmarketDialogCommit");
+            }
+        }catch(err){GM_logError("dialogNursery","","",err);}
     });
     // events forestry ==============================================================================
     err_trace="events forestry";
@@ -20945,6 +20979,7 @@ try{
         allEvents.push("gameFarmersmarketOpened");          // the farmersmarket is opened
         allEvents.push("gameFarmersmarketOpened1");         // the farmersmarket building 1 is opened
         allEvents.push("gameFarmersmarketOpened2");         // the farmersmarket building 2 is opened
+        allEvents.push("gameFarmersmarketOpened5");         // the farmersmarket building 5 is opened
         allEvents.push("gameFarmersmarketSlotOpened");      // the farmersmarket building slot has been opened
         allEvents.push("gameFarmersmarketDialogStart");     // the farmersmarket building has opened a dialogue
         allEvents.push("gameFarmersmarketDialogCommit");    // the farmersmarket building has requested for commit of a dialogue
