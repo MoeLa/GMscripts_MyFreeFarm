@@ -2220,6 +2220,10 @@ var zones=new function(){
                     }
                 }
                 div=null;
+                if (readyZoneAdded) {
+                    console.log("Moe, checkReady: " + zoneNrS);
+                    console.log(unsafeData.readyZone[zoneNrS]);
+                }
             }
             return readyZoneAdded;
         }catch(err){GM_logError("zones.checkReady","zoneNrS="+zoneNrS,"",err);}
@@ -15868,10 +15872,10 @@ return false;
                                         tempZoneProductionDataSlot=[[{},{}],0,0,true];
                                         item=unsafeWindow.farmersmarket_data.vet.animals.slots2[slot];
                                         if(slot >= 3 && item["block"]) {
-                                            console.log("Moe, blocke oben Slot"+slot);
+                                            // console.log("Moe, blocke oben Slot"+slot);
                                             zones.setBlock(zoneNrS,"b");
                                         } else if(item=unsafeWindow.farmersmarket_data.vet.production[slot]){
-                                            console.log("Moe, Proddata Slot"+slot);
+                                            // console.log("Moe, Proddata Slot"+slot);
                                             iProd=(item["pid"]?parseInt(item["pid"],10):null);
                                             if(isNaN(iProd)){ iProd=null; }
                                             if((iProd!=null)&&(item["ready"])){ // production ready
@@ -15894,7 +15898,7 @@ return false;
                                                 tempZoneProductionDataSlot[0][0][iProd].push([iAmount,iPoints,iTime,NEVER]);
                                             }
                                         } else {
-                                            console.log("Moe, leerer Slot"+slot);
+                                            // console.log("Moe, leerer Slot"+slot);
                                             // iTime=NEVER;
                                             tempZoneProductionData[1]++;
                                             tempZoneProductionDataSlot[1]++;

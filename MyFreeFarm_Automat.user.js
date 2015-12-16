@@ -167,6 +167,9 @@ handled.set=function(zoneNrS){
         handled.farmNr=Math.floor((handled.zoneNrF-1)/6)+1;
         handled.zoneNr=getGarden(handled.zoneNrF);
         handled.zoneNrL=getZoneListId(handled.zoneNrF);
+        if (handled.slot==null) {
+            handled.slot=(handled.zoneNrL.match(/\.(\d+)$/)?parseInt(/\.(\d+)$/.exec(handled.zoneNrL)[1],10):null);
+        }
         handled.zoneBuildingTyp=getBuildingTyp(handled.zoneNrF);
     }catch(err){GM_logError("handled.set","zoneNrS="+zoneNrS,"",err);}
 };
@@ -6882,8 +6885,10 @@ try{
     }else if(bot.checkRun("autoFarmersmarket",runId)){
         bot.setAction("autoFarmersmarket");
         var zoneNrS=getReadyZone("farmersmarket");
-        console.log("Moe, autoFarmersmarket");
+        console.log("---Moe, autoFarmersmarket---");
         console.log(zoneNrS);
+        console.log(handled);
+        console.log("-----------");
         if(zoneNrS==null){
             GM_logInfo("autoFarmersmarket","runId="+runId,"readyZone="+implode(unsafeData.readyZone,"autoFarmersmarket/readyZone"),"No ready zone");
             autoZoneFinish(runId);
@@ -6909,8 +6914,10 @@ try{
 }
 function autoFarmersmarketBuilding(runId, step, field){
 try{
-    console.log("Moe: autoFarmersmarketBuilding");
-    console.log(handled);
+    // console.log("--Moe: autoFarmersmarketBuilding--");
+    // console.log(getZoneType(handled.zoneNrF));
+    // console.log(unsafeData.BUILDING_SLOTS[getZoneType(handled.zoneNrF)]);
+    // console.log("-----------------------------");
     // GM_log("autoFarmersmarketBuilding runId="+runId+" step="+step+" handled.zoneNrS="+handled.zoneNrS);
     if(settings.get("account","botUseFarmersmarket")&&bot.checkRun("autoFarmersmarketBuilding",runId)){
         bot.setAction("autoFarmersmarketBuilding ("+step+")");
@@ -7137,7 +7144,6 @@ try{
             }
         break;}
         case 6:{
-            console.log("Moe, case 6");
             switch(handled.zoneBuildingTyp){
             case 1:{
                 if((help=$("farmersmarket_pos1_inner"))&&(help=help.querySelector(".flowerarea_button_autoplant"))){
@@ -7245,7 +7251,7 @@ try{
         case 9:{
             var zoneNrS,zoneNrL,help,next=false;
             if(unsafeData.zones.isMultiSlot(handled.zoneNrF)){
-                for(var slot=1;slot<=3;slot++){
+                for(var slot=1;slot<=unsafeData.BUILDING_SLOTS[getZoneType(handled.zoneNrF)];slot++){
                     zoneNrS=handled.zoneNrF+"."+slot;
                     if((help=unsafeData.readyZone[zoneNrS])&&help[2]){
                         zoneNrL=getZoneListId(zoneNrS);
@@ -7261,7 +7267,11 @@ try{
                 autoFarmersmarketBuilding(runId,1);
             }else{
                 help=/-(\d)$/.exec(handled.zoneNrF)[1];
-                autoZoneFinish(runId,$("farmersmarket_pos"+help+"_inner").querySelector(".big_close"));
+                var div=$("farmersmarket_pos"+help+"_inner").querySelector(".big_close");
+                if (!div) {
+                    div=$("farmersmarket_pos"+help+"_inner").querySelector(".mini_close");
+                }
+                autoZoneFinish(runId,div);
             }
         
         break;}
