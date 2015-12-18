@@ -882,7 +882,7 @@ function calcProductScore(product, zoneNrF, amount, endtime){
       		if(amount==null || amount===undefined){ amount=1; }
       		zoneNrF=zoneNrF.split(".");
       		var data=unsafeWindow.farms_data.farms[unsafeWindow.farm][unsafeData.zones.getLocation(zoneNrF[0]).zoneNr];
-              return data.data.constants.slot_level[data.data.data.slots[zoneNrF[1]].level].output*unsafeData.prodPoints[0][350];
+          return data.data.constants.slot_level[data.data.data.slots[zoneNrF[1]].level].output*unsafeData.prodPoints[0][350];
     break;
     case 5: //Ponyfarm
         var data = unsafeData.pony_data;
@@ -1598,7 +1598,7 @@ try {
                 break;
 			      case 6: //Fuelstation
 				        drawFuelstationChooseItemBox(zoneNrS, zoneNrL,$("divChooseBoxInner"));
-				    break;
+				        break;
             default:
                 throw("Building type '"+getBuildingTyp(zoneNrS)+"' unknown.");
             }
@@ -2374,62 +2374,76 @@ try{
 }
 
 function drawFuelstationChooseItemBox(zoneNrS, zoneNrL, appendTo){
-try{
-    // GM_log("Begin drawFuelstationChooseItemBox :" + zoneNrS+":"+zoneNrL);
-    var zoneNrF=zoneNrS.toString().replace(/\.\d+$/,"");
-    if(zoneNrL===undefined || zoneNrL==null){ zoneNrL=getZoneListId(zoneNrS); }
-    appendTo.innerHTML="";
-    appendTo.setAttribute("zoneNrF",zoneNrF);
-    appendTo.setAttribute("zoneNrS",zoneNrS);
-    appendTo.setAttribute("zoneNrL",zoneNrL);
-    appendTo.setAttribute("queueNum",0);
-    createElement("div",{"id":"divChooseTitle"+zoneNrL,"class":"queueTitle"},appendTo, getZoneName(0,zoneNrS,zoneNrL,null,20,true,true,true));
-    createElement("div",{"id":"divChooseEndTime"+zoneNrL,"class":"queueTime"},appendTo);
-    createElement("div",{"style":"clear:both;"},appendTo);
-    newdiv=createElement("div",{"class":"divChooseItem link v"+PRODSTOP,"id":"divChooseItem"+zoneNrL+"Q0I"+PRODSTOP},appendTo);
-    if(zoneList[zoneNrL][0][0]==PRODSTOP){ newdiv.style.border="2px solid black"; }
-    newdiv.addEventListener("click",function(){
-        var zoneNrF=this.parentNode.getAttribute("zoneNrF");
-        var zoneNrL=this.parentNode.getAttribute("zoneNrL");
-        zoneList[zoneNrL]=DEFAULT_ZONELIST_ITEM_ARRAY.clone();
-        if(this.parentNode==$("divChooseBoxInner")){ click($("divChooseBoxClose")); }
-        updateQueueBox(zoneNrF, zoneNrL);
-    },false);
-    newdiv.addEventListener("mouseover", function(event){
-        var zoneNrF=this.parentNode.getAttribute("zoneNrF");
-        var zoneNrL=this.parentNode.getAttribute("zoneNrL");
-        toolTip.show(event, toolTipProductSmall(zoneNrF, zoneNrL, 0, this));
-    },false);
-	const FUELSTATION_INPUT={"1":[[17,0],[31,0],[33,0],[113,0]]};
-	for(var v in FUELSTATION_INPUT["1"]){
-        if(!FUELSTATION_INPUT["1"].hasOwnProperty(v)){ continue; }
-        if(unsafeData.prodBlock[0][FUELSTATION_INPUT["1"][v][0]]){ continue; }
-		//alert(FUELSTATION_INPUT["1"][v][0]);
-        newdiv=createElement("div",{"class":"divChooseItem link v"+FUELSTATION_INPUT["1"][v][0],"id":"divChooseItem"+zoneNrL+"Q0I"+FUELSTATION_INPUT["1"][v][0]},appendTo);
-        if(zoneList[zoneNrL][0][0]==FUELSTATION_INPUT["1"][v][0]){ newdiv.style.border="2px solid black"; }
-        newdiv.addEventListener("click",function(){
-            var zoneNrF=this.parentNode.getAttribute("zoneNrF");
-            var zoneNrL=this.parentNode.getAttribute("zoneNrL");
-            zoneList[zoneNrL]=DEFAULT_ZONELIST_ITEM_ARRAY.clone();
-            zoneList[zoneNrL][0][0]=parseInt(/Q0I(.*)$/.exec(this.id)[1],10);
-            if(this.parentNode==$("divChooseBoxInner")){ click($("divChooseBoxClose")); }
-            updateQueueBox(zoneNrF, zoneNrL);
-        },false);
-        newdiv.addEventListener("mouseover", function(event){
-            var zoneNrS=this.parentNode.getAttribute("zoneNrS");
-            var zoneNrL=this.parentNode.getAttribute("zoneNrL");
-            toolTip.show(event, toolTipProductSmall(zoneNrS, zoneNrL, 0, this));
-        },false);
-    }
-    if(appendTo==$("divChooseBoxInner")){
-        $("divChooseBox").style.display="block";
-        $("divChooseBox").style.top=Math.round(255 - $("divChooseBox").offsetHeight/2)+"px";
-    }
-    updateQueueBox(zoneNrF, zoneNrL);
-    zoneFeedCurr=null;zoneProdCurr=null;
-    newdiv=null;appendTo=null;
-    // GM_log("End drawFuelstationChooseItemBox :" + zoneNrL);
-}catch(err){GM_logError("drawFuelstationChooseItemBox ","","",err);}
+  try{
+      // GM_log("Begin drawFuelstationChooseItemBox :" + zoneNrS+":"+zoneNrL);
+      var zoneNrF=zoneNrS.toString().replace(/\.\d+$/,"");
+      if(zoneNrL===undefined || zoneNrL==null){ zoneNrL=getZoneListId(zoneNrS); }
+      appendTo.innerHTML="";
+      appendTo.setAttribute("zoneNrF",zoneNrF);
+      appendTo.setAttribute("zoneNrS",zoneNrS);
+      appendTo.setAttribute("zoneNrL",zoneNrL);
+      appendTo.setAttribute("queueNum",0);
+      createElement("div",{"id":"divChooseTitle"+zoneNrL,"class":"queueTitle"},appendTo, getZoneName(0,zoneNrS,zoneNrL,null,20,true,true,true));
+      createElement("div",{"id":"divChooseEndTime"+zoneNrL,"class":"queueTime"},appendTo);
+      createElement("div",{"style":"clear:both;"},appendTo);
+      newdiv=createElement("div",{"class":"divChooseItem link v"+PRODSTOP,"id":"divChooseItem"+zoneNrL+"Q0I"+PRODSTOP},appendTo);
+      if(zoneList[zoneNrL][0][0]==PRODSTOP){ newdiv.style.border="2px solid black"; }
+      newdiv.addEventListener("click",function(){
+          var zoneNrF=this.parentNode.getAttribute("zoneNrF");
+          var zoneNrL=this.parentNode.getAttribute("zoneNrL");
+          zoneList[zoneNrL]=DEFAULT_ZONELIST_ITEM_ARRAY.clone();
+          if(this.parentNode==$("divChooseBoxInner")){ click($("divChooseBoxClose")); }
+          updateQueueBox(zoneNrF, zoneNrL);
+      },false);
+      newdiv.addEventListener("mouseover", function(event){
+          var zoneNrF=this.parentNode.getAttribute("zoneNrF");
+          var zoneNrL=this.parentNode.getAttribute("zoneNrL");
+          toolTip.show(event, toolTipProductSmall(zoneNrF, zoneNrL, 0, this));
+      },false);
+
+    	const FUELSTATION_INPUT=[
+    		[[17,0],[31,0],[33,0],[113,0]],
+    		[[1,0],[109,0],[108,0],[112,0]],
+    		[[18,0],[23,0],[153,0],[37,0]],
+    		[[19,0],[24,0],[29,0],[154,0]]
+  	   ];
+
+
+      var zoneNrF_h=zoneNrS.split(".");
+    	var data=unsafeWindow.farms_data.farms[unsafeWindow.farm][unsafeData.zones.getLocation(zoneNrF_h[0]).zoneNr];
+      var level=Math.min(data.data.data.slots[zoneNrF_h[1]].level,FUELSTATION_INPUT.length);
+
+    	for (var l=0;l<level;l++) {
+  		    if(!FUELSTATION_INPUT[l].hasOwnProperty(l)){ continue; }
+  		      for(var v in FUELSTATION_INPUT[l]){
+              if(!FUELSTATION_INPUT[l].hasOwnProperty(v)){ continue; }
+              if(unsafeData.prodBlock[0][FUELSTATION_INPUT[l][v][0]]){ continue; }
+              newdiv=createElement("div",{"class":"divChooseItem link v"+FUELSTATION_INPUT[l][v][0],"id":"divChooseItem"+zoneNrL+"Q0I"+FUELSTATION_INPUT[l][v][0]},appendTo);
+              if(zoneList[zoneNrL][0][0]==FUELSTATION_INPUT[l][v][0]){ newdiv.style.border="2px solid black"; }
+              newdiv.addEventListener("click",function(){
+                var zoneNrF=this.parentNode.getAttribute("zoneNrF");
+                var zoneNrL=this.parentNode.getAttribute("zoneNrL");
+                zoneList[zoneNrL]=DEFAULT_ZONELIST_ITEM_ARRAY.clone();
+                zoneList[zoneNrL][0][0]=parseInt(/Q0I(.*)$/.exec(this.id)[1],10);
+                if(this.parentNode==$("divChooseBoxInner")){ click($("divChooseBoxClose")); }
+                updateQueueBox(zoneNrF, zoneNrL);
+      			  },false);
+  			      newdiv.addEventListener("mouseover", function(event){
+                var zoneNrS=this.parentNode.getAttribute("zoneNrS");
+                var zoneNrL=this.parentNode.getAttribute("zoneNrL");
+                toolTip.show(event, toolTipProductSmall(zoneNrS, zoneNrL, 0, this));
+  			      },false);
+  		      }
+    	}
+      if(appendTo==$("divChooseBoxInner")){
+          $("divChooseBox").style.display="block";
+          $("divChooseBox").style.top=Math.round(255 - $("divChooseBox").offsetHeight/2)+"px";
+      }
+      updateQueueBox(zoneNrF, zoneNrL);
+      zoneFeedCurr=null;zoneProdCurr=null;
+      newdiv=null;appendTo=null;
+      // GM_log("End drawFuelstationChooseItemBox :" + zoneNrL);
+  }catch(err){GM_logError("drawFuelstationChooseItemBox ","","",err);}
 }
 
 
@@ -3369,12 +3383,6 @@ try{
 
         case 6:{ // Fuelstation
               $("divChooseItem"+zoneNrL+"Q"+queueNum+"I"+PRODSTOP).style.border=((zoneList[zoneNrL][queueNum][0]==PRODSTOP)?"2px solid black":"");
-      			  /*
-      				for(var v in unsafeData.BUILDING_INPUT[fzZoneType]){
-      					if(!unsafeData.BUILDING_INPUT[fzZoneType].hasOwnProperty(v)){ continue; }
-      					if(unsafeData.prodBlock[0][v]){ continue; }
-      					$("divChooseItem"+zoneNrL+"Q"+queueNum+"I"+v).style.border=((zoneList[zoneNrL][queueNum][0]==v)?"2px solid black":"");
-      				}*/
               if(settings.get("account","showQueueTime"))  {
       			     divChooseEndTimeCurr.parentNode.setAttribute("zoneBeginTime",implode(zoneTimes,"updateQueueBox/chooseBox/zoneTimes"));
                  divChooseEndTimeCurr.style.display=lShowTime?"block":"none";
@@ -3622,23 +3630,6 @@ try{
                 }
             } else if(fzType==6){ //Fuelstation
                 newrow=createElement("div",{style:"display:table-row;width:100%;"},content);
-                /*createElement("div",{"class":"tableTd1"},newrow,i==0?getText("automat_QueUses"):"");
-                newdiv=createElement("div",{"class":"tableTd2"},newrow);*/
-				/*
-				const FUELSTATION_INPUT={"1":[[17,0],[31,0],[33,0],[113,0]]};
-				for(var v in FUELSTATION_INPUT["1"]){
-					if(!FUELSTATION_INPUT["1"].hasOwnProperty(v)){ continue; }
-					if(unsafeData.prodBlock[0][FUELSTATION_INPUT["1"][v][0]]){ continue; }
-
-					newrow=createElement("div",{style:"display:table-row;width:100%;"},content);
-                    createElement("div",{"class":"tableTd1"},newrow,i==0?getText("automat_QueUses"):"");
-                    newdiv=createElement("div",{"class":"tableTd2"},newrow);
-                    produktPic(iType,FUELSTATION_INPUT["1"][v][0],newdiv);
-
-					createElement("span",{},newdiv, numberFormat(FUELSTATION_INPUT["1"][v][0]) + "&nbsp;" + unsafeData.prodName[0][FUELSTATION_INPUT["1"][v][0]]);
-
-				}*/
-
 			     }
         }
         if(fzType==2){
@@ -4570,10 +4561,6 @@ TypeError: can't convert undefined to object
                 }catch(err){GM_logError("autoZoneHandle (case 3)","","handled.zoneNrF="+handled.zoneNrF+" readyZone:"+implode(unsafeData.readyZone,"autoZoneHandle/readyZone"),err);}
                 break;
             case 6:	//Fuelstation
-                //-- GM_log("autoZoneHandle run nextFkt case:3");
-                try{
-
-                }catch(err){GM_logError("autoZoneHandle (case 3)","","handled.zoneNrF="+handled.zoneNrF+" readyZone:"+implode(unsafeData.readyZone,"autoZoneHandle/readyZone"),err);}
                 break;
             case 5: // Pony
                 break;
@@ -5871,140 +5858,150 @@ function autoFarmFactoryKnitting(runId,step){
 }
 
 function autoFarmFuelstation(runId,step){
-    try{
+  try{
     if(!step){ step=1; }
-    if(bot.checkRun("autoFarmFuelstation",runId)){
-        bot.setAction("autoFarmFuelstation ("+step+")");
-        var action=null,listeningEvent=null;
-		    switch(step){
+	  if(bot.checkRun("autoFarmFuelstation",runId)){
+      bot.setAction("autoFarmFuelstation ("+step+")");
+      var action=null,listeningEvent=null;
+		  switch(step){
         case 1:{ // init
-            GM_logInfo("autoFarmFuelstation","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Fuelstation_Init");
-            if(unsafeData.zones.getBlock(handled.zoneNrS)){
-              zoneList[handled.zoneNrL].unshift(DEFAULT_ZONELIST_ITEM.clone());
-              updateQueueBox(handled.zoneNrS);
-              autoFarmFuelstation(runId,6);
-            }else{
-                /*if(zoneList[handled.zoneNrL][0][0]!=PRODSTOP){
-                    var req=unsafeData.BUILDING_INPUT[getZoneType(handled.zoneNrS)][zoneList[handled.zoneNrL][0][0]][0];
-                    for(var i=0;i<req.length;i++){
-                        if(unsafeData.prodStock[0][req[i][0]]<req[i][1]){
-                            zoneList[handled.zoneNrL].unshift(DEFAULT_ZONELIST_ITEM.clone());
-                            updateQueueBox(handled.zoneNrS);
-                        }
-                    }
-                }*/
-      				if(zoneList[handled.zoneNrL][0][0]!=PRODSTOP){
-      					const FUELSTATION_INPUT={"1":[[17,0],[31,0],[33,0],[113,0]]};
-      					for(var v in FUELSTATION_INPUT["1"]){//FUELSTATION_INPUT["1"][v][0]
-      						if(!FUELSTATION_INPUT["1"].hasOwnProperty(v)){ continue; }
-      					}
-      				}
-              if(unsafeData.zones.getEndtime(handled.zoneNrS)==NEVER){ // empty
-                window.setTimeout(autoFarmFuelstation,settings.getPause(),runId,3);
-              }else if(unsafeData.zones.getEndtime(handled.zoneNrS)<=unsafeWindow.Zeit.Server){ // cropable
-                window.setTimeout(autoFarmFuelstation,settings.getPause(),runId,step+1);
-              }else{ // busy
-                window.setTimeout(autoFarmFuelstation,settings.getPause(),runId,6);
-              }
+          GM_logInfo("autoFarmFuelstation","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Fuelstation_Init");
+          if(unsafeData.zones.getBlock(handled.zoneNrS)){
+            zoneList[handled.zoneNrL].unshift(DEFAULT_ZONELIST_ITEM.clone());
+            updateQueueBox(handled.zoneNrS);
+            autoFarmFuelstation(runId,7);
+          }else{
+				    if(unsafeData.zones.getEndtime(handled.zoneNrS)==NEVER){ // empty
+					    window.setTimeout(autoFarmFuelstation,settings.getPause(),runId,3);
+				    }else if(unsafeData.zones.getEndtime(handled.zoneNrS)<=unsafeWindow.Zeit.Server){ // cropable
+					    window.setTimeout(autoFarmFuelstation,settings.getPause(),runId,step+1);
+				    }else{ // busy
+					    window.setTimeout(autoFarmFuelstation,settings.getPause(),runId,7);
             }
+          }
     break;}
 
 		case 2:{ // Ernten
-			   GM_logInfo("autoFarmFuelstation","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Fuelstation_Ernten");
-        var div=$("fuelstation_slot"+handled.slot);
-        if(div){
-          unsafeData.readyZone[handled.zoneNrS][2]=false;
-          click(div.children[3]);
-          div=null;
-          window.setTimeout(autoFarmFuelstation,settings.getPause(),runId,step+1);
-        }else{
-          autoFarmFuelstation(runId,step+1);
+			GM_logInfo("autoFarmFuelstation","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Fuelstation_Ernten");
+			var div=$("fuelstation_slot"+handled.slot);
+			if(div){
+				unsafeData.readyZone[handled.zoneNrS][2]=false;
+				click(div.children[3]);
+				div=null;
+				window.setTimeout(autoFarmFuelstation,settings.getPause(),runId,step+1);
+			}else{
+				//autoFarmFuelstation(runId,step+1);
+				autoFarmFuelstation(runId,7);
+			}
+		break;}
+		//{"zoneNrS":"6.2","slot":2,"zoneNrF":"6","farmNr":1,"zoneNr":6,"zoneNrL":"6.1","zoneBuildingTyp":6}
+		//{"6":[0,"r",true],"6.2":[0,"r",true],"6.3":[0,"r",true],
+		case 3:{ // open slot
+			GM_logInfo("autoFarmFuelstation","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Open_Slot0");
+			if(unsafeData.readyZone[handled.zoneNrS]){
+        if(unsafeData.readyZone[handled.zoneNrS][2]&&(unsafeData.readyZone[handled.zoneNrS][1]=="e")){
+          if(zoneList[handled.zoneNrL][0][0]==PRODSTOP){
+            autoFarmFuelstation(runId,7);
+          }else{
+					  //fuelstation_slot1_click
+						var div=$("fuelstation_slot"+handled.slot);
+						click(div.children[3]);
+						div=null;
+						window.setTimeout(autoFarmFuelstation,settings.getPause(),runId,step+1);
+          }
+        } else {
+            // wait for response
+            window.setTimeout(autoFarmFuelstation,settings.getPause(),runId,step);
         }
+      }else{
+        autoFarmFuelstation(runId,7);
+      }
     break;}
 
-		case 3:{ // click slot
-        GM_logInfo("autoFarmFuelstation","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Open_Slot");
-          if(unsafeData.readyZone[handled.zoneNrS]){
-            if(unsafeData.readyZone[handled.zoneNrS][2]&&(unsafeData.readyZone[handled.zoneNrS][1]=="e")){
-              if(zoneList[handled.zoneNrL][0][0]==PRODSTOP){
-                autoFarmFuelstation(runId,6);
-              }else{
-						    var div=$("fuelstation_slot"+handled.slot);
-						    click(div.children[3]);
-                div=null;
-                window.setTimeout(autoFarmFuelstation,settings.getPause(),runId,step+1);
-              }
-            } else {
-              // wait for response
-              window.setTimeout(autoFarmFuelstation,settings.getPause(),runId,step);
-                }
-          }else{
-            autoFarmFuelstation(runId,6);
-          }
-    break;}
-		case 4:{ // Produkt wählen
-		    GM_logInfo("autoFarmFuelstation","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Produkt wählen");
-        var div = $("globalbox");
-				GM_log("req"+zoneList[handled.zoneNrL][0][0]);
-        if(div&&(div.style.display=="block")){
-				      var children = $('fuelstation_product_select_inner').getElementsByClassName("fuelstation_product_select_item");
-				      for (var c in children) {
-                if (!children.hasOwnProperty(c)) { continue; }
-					      var pId_parent=children[c].getElementsByClassName("fuelstation_product_select_item_img")[0].childNodes;
-					      var pId = pId_parent[1].className.replace("tt", "");
-                if(pId==zoneList[handled.zoneNrL][0][0] )	{
-                  listeningEvent="autoFarmFuelstation";
-                  div=children[c].getElementsByClassName("link")[0];
-                  GM_log("children"+pId_parent.id);
-                  action=function(){
-							             click(div);
-							            div=null;
-						      };
-                }
-				      }
-          } else {
-            window.setTimeout(autoFarmFactoryKnitting,settings.getPause(),runId,step);
-          }
-    break;}
+		case 4:{ // Dialog Produkt wählen
+		  GM_logInfo("autoFarmFuelstation","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Produkt wählen");
+			var div = $("globalbox");
+			if(div&&(div.style.display=="block")){
+				var children = $('fuelstation_product_select_inner').getElementsByClassName("fuelstation_product_select_item");
+				for (var c in children) {
+					if (!children.hasOwnProperty(c)) { continue; }
+					var pId_parent=children[c].getElementsByClassName("fuelstation_product_select_item_img")[0].childNodes;
+					var pId = pId_parent[1].className.replace("tt", "");
+						if(pId==zoneList[handled.zoneNrL][0][0] )	{
+							div=children[c];
+							click(div);
+							div=null;
+							window.setTimeout(autoFarmFuelstation,settings.getPause(),runId,step+1);
+					}
+				}
+			} else {
+				window.setTimeout(autoFarmFuelstation,settings.getPause(),runId,step);
+			}
+		break;}
 
 		case 5: { //Produkt einwerfen
 			GM_logInfo("autoFarmFuelstation","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Produkt einwerfen");
+			var input=$("fuelstation_product_select_input");
+
+			var zoneNrF=handled.zoneNrL.split(".");
+			var data=unsafeWindow.farms_data.farms[unsafeWindow.farm][unsafeData.zones.getLocation(zoneNrF[0]).zoneNr];
+			var iLimit=data.data.constants.slot_level[data.data.data.slots[zoneNrF[1]].level].limit;
+			var produktPoints=$("globalbox").querySelector('.fuelstation_product_select_item_points').innerHTML.replace(".","");;
+			var max = Math.ceil(iLimit/produktPoints);
+			if(input){
+				input.value=max;
+				keyup(input);
+        input=null;
+				window.setTimeout(autoFarmFuelstation,settings.getPause(),runId,step+1);
+			} else {
+				window.setTimeout(autoFarmFuelstation,settings.getPause(),runId,step);
+			}
 		break;}
 
-        case 6:{ // start other slot or exit
+		case 6: { //Dialog beenden
+			GM_logInfo("autoFarmFuelstation","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Produkt einwerfen");
+			var buttonE=$("globalbox").querySelector('.button_new');
+			click(buttonE);
+			buttonE=null;
+			window.setTimeout(autoFarmFuelstation,settings.getPause(),runId,step+1);
+		break;}
+
+    case 7:{ // start other slot or exit
 			GM_logInfo("autoFarmFuelstation","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"start other slot or exit");
-			alert("step5");
-            var zoneNrS,zoneNrL,help,next=false;
-            for(var slot=1;slot<=3;slot++){
-                zoneNrS=handled.zoneNrF+"."+slot;
-                if((help=unsafeData.readyZone[zoneNrS])&&help[2]){
-                    zoneNrL=getZoneListId(zoneNrS);
-                    if(((help[1]=="r")&&((zoneList[zoneNrL][0][0]!=PRODSTOP)||!settings.get("account","disableCropFields")))||((help[1]=="e")&&(zoneList[zoneNrL][0][0]!=PRODSTOP))){
-                        next=true;
-                        handled.set(zoneNrS);
-                        break;
-                    }
-                }
+      var zoneNrS,zoneNrL,help,next=false;
+        for(var slot=1;slot<=4;slot++){
+            zoneNrS=handled.zoneNrF+"."+slot;
+            if((help=unsafeData.readyZone[zoneNrS])&&help[2]){
+              zoneNrL=getZoneListId(zoneNrS);
+              if(((help[1]=="r")&&((zoneList[zoneNrL][0][0]!=PRODSTOP)||!settings.get("account","disableCropFields")))||((help[1]=="e")&&(zoneList[zoneNrL][0][0]!=PRODSTOP)))  {
+                next=true;
+                handled.set(zoneNrS);
+                break;
+              }
             }
-            if(next){
-                autoFarmFuelstation(runId,1);
-            }else{
-                autoZoneFinish(runId,$("cancelscreen").getElementsByClassName("link")[0]);
-            }
+        }
+        if(next){
+          autoFarmFuelstation(runId,1);
+        }else{
+				  autoZoneFinish(runId, $("innercontent").getElementsByClassName("big_close")[0]);
+        }
         break;}
-        }
-        if(listeningEvent){
-            document.addEventListener(listeningEvent,function(listeningEvent,runId,step){
-                return function(){
-                    document.removeEventListener(listeningEvent,arguments.callee,false);
-                    window.setTimeout(autoFarmPony,settings.getPause(),runId,step+1);
-                };
-            }(listeningEvent,runId,step),false);
-        }
-        if(action){ action(); }
-        listeningEvent=null;action=null;
+  	default: {
+			alert("error"+step);
+		}
     }
-    }catch(err){ GM_logError("autoFarmFuelstation","runId="+runId+" step="+step,"",err); }
+    if(listeningEvent){
+        document.addEventListener(listeningEvent,function(listeningEvent,runId,step){
+          return function(){
+            document.removeEventListener(listeningEvent,arguments.callee,false);
+            window.setTimeout(autoFarmFuelstation,settings.getPause(),runId,step+1);
+          };
+        }(listeningEvent,runId,step),false);
+    }
+    if(action){ action(); }
+      listeningEvent=null;action=null;
+    }
+  }catch(err){ GM_logError("autoFarmFuelstation_error","runId="+runId+" step="+step,"",err); }
 }
 
 function autoMegafield(runId,step){

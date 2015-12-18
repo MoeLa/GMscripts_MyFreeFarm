@@ -13895,14 +13895,6 @@ return false;
                     return false;
                 }
             break;}
-            case "fuelstation_entry": {
-                    //Ausgelöst durch Button "Einwerfen"
-                    //function(mode,farm,position,s,d,b,a)
-
-                    //mode: 'fuelstation_entry', s: Slot, d:Produkt, b: undefined, a:undefined
-                    //GM_log("farmAction: mode:"+ mode + " s:"+s+" d:"+d+" b:"+b+" a:"+a);
-                }
-            break;
             }
         }catch(err){GM_logError("farmAction","mode="+mode,"","(pre) "+err);}
         try{
@@ -13935,6 +13927,8 @@ return false;
                 case "flowerarea_harvest_all": raiseEvent("gameFarmersmarketCropped"); break;
                 case "flowerarea_autoplant": raiseEvent("gameFarmersmarketStarted"); break;
                 case "flowerarea_water_all": raiseEvent("gameFarmersmarketWatered"); break;
+                case "fuelstation_harvest": doFuelstation(zoneNr); break; //Fuelstation geerntet
+                case "fuelstation_entry": doFuelstation(zoneNr); break;	//Produkte eingeworfen
                 case "gardeninit":{
                     var zoneNrF = zoneNr+6*(farmNR-1);
                     if(1==zones.getBuilding(zoneNrF)){
@@ -14546,77 +14540,113 @@ return false;
     });
 
 
+    function doFuelstation(zoneNr_a){
+    		try{
+                GM_log("doFuelstation "+"zoneNr_a"+zoneNr_a);
+                var zoneNr=zoneNr_a;
+                var zoneNrF=zoneNr+6*gameLocation.get()[1];
+                var zoneNrS;
+                showBlase(zoneNrF);
+                drawZoneNavi(zoneNrF,$("innermaincontainer"));
+                var newDiv,newDiv1;
+                var tempZoneProductionData=[[{}],0,0,true];
+                var tempZoneProductionDataSlot;
+                var data=unsafeWindow.farms_data.farms[unsafeWindow.farm][zoneNr];
+                for(var slot=1;slot<=4;slot++){
+                    zoneNrS=zoneNrF+"."+slot;
+                    if((slot==1)||(!data.data.data.slots[slot]["block"])){
+                        zones.setBlock(zoneNrS,"");
+                        tempZoneProductionDataSlot=[[{}],0,0,true];
+                        tempZoneProductionData[1]++;
+                        tempZoneProductionData[2]++;
+                        tempZoneProductionDataSlot[1]++;
+                        tempZoneProductionDataSlot[2]++;
+                        if(data.data.data.slots[slot]){
+                            var iPrTyp=0;
+                            var iProd=350;
+                            var iTime=NEVER;
+
+    						for(var v in data.production) {
+                                if(!data.production.hasOwnProperty(v)){ continue; }
+                                if ((data.production[v].slot==slot))   {
+                                    //iProd=data.production[v].pid;
+                                    iTime=now+data.production[v].remain;
+                                }
+                            }
+
+                            /*for(var v in data.production) {
+                                if(!data.production.hasOwnProperty(v)){ continue; }
+                                //wenn nicht vorhanden, dann Slot geerntet
+                                if ((data.production[v].slot==slot)&&(data.production[v].remain))   {
+                                    iProd=data.production[v].pid;
+                                    iTime=now+data.production[v].remain;
+                                }
+    							else{
+    								//iTime=NEVER;
+    							}
+                            }*//*
+    						alert(typeof(data.production[2-1])+" "+slot);*/
+    						GM_log(implode(data.production));
+
+    						/*
+
+    						if (typeof(data.production[slot-1]) != 'undefined') {
+    							for(var v in data.production) {
+    								if(!data.production.hasOwnProperty(v)){ continue; }
+    								if (parseInt(data.production[v].slot)==slot){
+    									iTime=now+data.production[v].remain;
+    								}
+    							}
+    						}*/
+    						/*else{
+    							iTime=NEVER;
+    						}*/
+
+                            if(iProd){
+                                var iAmount=data.data.constants.slot_level[data.data.data.slots[slot].level].output;
+                                var iPoints=iAmount*prodPoints[iPrTyp][iProd];
+                                newDiv=$("fuelstation_slot"+slot).children[1];
+                                newDiv1=createElement("div",{"style":"position:relative;top:75px;left:85px"},newDiv);
+                                pointsFormat(iPoints,"div",newDiv1);
+                                tempZoneProductionData[1]--;
+                                if(!tempZoneProductionData[0][iPrTyp][iProd]){ tempZoneProductionData[0][iPrTyp][iProd]=[]; }
+                                tempZoneProductionData[0][iPrTyp][iProd].push([iAmount,iPoints,iTime,NEVER]);
+                                tempZoneProductionDataSlot[1]--;
+                                if(!tempZoneProductionDataSlot[0][iPrTyp][iProd]){ tempZoneProductionDataSlot[0][iPrTyp][iProd]=[]; }
+                                tempZoneProductionDataSlot[0][iPrTyp][iProd].push([iAmount,iPoints,iTime,NEVER]);
+                                //auto-cropping
+                                if((iTime<now)&&(top.unsafeData.autoAction==null)&&valAutoCrop["farm"]&&(newDiv=$("fuelstation_slot"+slot))){
+                                    top.unsafeData.autoAction="berater: fuelstation crop";
+                                    window.setTimeout(function(div){
+                                        click(div.children[3]);
+                                        top.unsafeData.autoAction=null;
+                                    },500,newDiv);
+                                }
+                            }
+                        }
+                        zones.setProduction(zoneNrF+"."+slot,tempZoneProductionDataSlot.clone());
+                    } else {
+                        //wenn geerntet Fehler???
+                        zones.setBlock(zoneNrS,"b");
+                    }
+                }
+                zones.setProduction(zoneNrF,tempZoneProductionData.clone());
+                var tempZoneProductionData=null;newDiv=null;newDiv1=null;
+            }catch(err){GM_logError("doFuelstation","","",err);}
+    }
+
     //buildFuelstation(a)
     //a: Zone-Nummer
-   unsafeOverwriteFunction("buildFuelstation",function(a){
+	unsafeOverwriteFunction("buildFuelstation",function(a){
         try{
             unsafeWindow._buildFuelstation(a);
         }catch(err){GM_logError("_buildFuelstation","","",err);}
-        try{
+		try{
             GM_log("buildFuelstation "+"a"+a);
-            //alert("1");
-            var zoneNr=a;
-            var zoneNrF=zoneNr+6*gameLocation.get()[1];
-            var zoneNrS;
-            showBlase(zoneNrF);
-            drawZoneNavi(zoneNrF,$("innermaincontainer"));
-            var newDiv,newDiv1;
-            var tempZoneProductionData=[[{}],0,0,true];
-            var tempZoneProductionDataSlot;
-            var data=unsafeWindow.farms_data.farms[unsafeWindow.farm][zoneNr];
-            for(var slot=1;slot<=4;slot++){
-                zoneNrS=zoneNrF+"."+slot;
-                if((slot==1)||(!data.data.data.slots[slot]["block"])){
-                    zones.setBlock(zoneNrS,"");
-                    tempZoneProductionDataSlot=[[{}],0,0,true];
-                    tempZoneProductionData[1]++;
-                    tempZoneProductionData[2]++;
-                    tempZoneProductionDataSlot[1]++;
-                    tempZoneProductionDataSlot[2]++;
-                    if(data.data.data.slots[slot]){
-                        var iPrTyp=0;
-                        var iProd;
-                        var iTime;
-                        for(var v in data.production) {
-                            if(!data.production.hasOwnProperty(v)){ continue; }
-                            //wenn nicht vorhanden, dann Slot geerntet
-                            if (data.production[v].slot==slot)    {
-                                iProd=data.production[v].pid;
-                                iTime=now+data.production[v].remain;
-                            }
-                        }
-                        if(iProd){
-                            var iAmount=data.data.constants.slot_level[data.data.data.slots[slot].level].output;
-                            var iPoints=iAmount*prodPoints[iPrTyp][iProd];
-                            newDiv=$("fuelstation_slot"+slot).children[1];
-                            newDiv1=createElement("div",{"style":"position:relative;top:75px;left:85px"},newDiv);
-                            pointsFormat(iPoints,"div",newDiv1);
-                            tempZoneProductionData[1]--;
-                            if(!tempZoneProductionData[0][iPrTyp][iProd]){ tempZoneProductionData[0][iPrTyp][iProd]=[]; }
-                            tempZoneProductionData[0][iPrTyp][iProd].push([iAmount,iPoints,iTime,NEVER]);
-                            tempZoneProductionDataSlot[1]--;
-                            if(!tempZoneProductionDataSlot[0][iPrTyp][iProd]){ tempZoneProductionDataSlot[0][iPrTyp][iProd]=[]; }
-                            tempZoneProductionDataSlot[0][iPrTyp][iProd].push([iAmount,iPoints,iTime,NEVER]);
-                            //auto-cropping
-                            if((iTime<now)&&(top.unsafeData.autoAction==null)&&valAutoCrop["farm"]&&(newDiv=$("fuelstation_slot"+slot))){
-                                top.unsafeData.autoAction="berater: fuelstation crop";
-                                window.setTimeout(function(div){
-                                    click(div.children[3]);
-                                    top.unsafeData.autoAction=null;
-                                },500,newDiv);
-                            }
-                        }
-                    }
-                    zones.setProduction(zoneNrF+"."+slot,tempZoneProductionDataSlot.clone());
-                } else {
-                    //wenn geerntet Fehler???
-                    zones.setBlock(zoneNrS,"b");
-                }
-            }
-            zones.setProduction(zoneNrF,tempZoneProductionData.clone());
-            var tempZoneProductionData=null;newDiv=null;newDiv1=null;
+            doFuelstation(a);
             raiseEvent("gameOpenFuelstation");
         }catch(err){GM_logError("buildFuelstation","","",err);}
+
     });
 
 
@@ -14624,6 +14654,7 @@ return false;
     //h:
     //m:
     //e:
+    /*
     unsafeOverwriteFunction("calcPointsFuelstation",function(h, m, e){
         try{
             unsafeWindow._calcPointsFuelstation(h, m, e);
@@ -14633,6 +14664,7 @@ return false;
             raiseEvent("calcPointsFuelstation");
         }catch(err){GM_logError("calcPointsFuelstation","","",err);}
     });
+    */
 
     //fuelstationStats()
     /*
@@ -14678,8 +14710,8 @@ return false;
                 case "16":  // Knitting
                 case "17": break; // Carpentry
                 case 18: doPony(zoneNr); raiseEvent("gameOpenPony"); break; // Pony,
-                case "19":  // Megafield
-                case "20":  // Fuelstation
+                case "19":  break;// Megafield
+                case 20:  break;// Fuelstation
                 default:
                 }
             }else{
@@ -20934,6 +20966,7 @@ try{
         allEvents.push("gameOpenFactory");                  // a factory is opened
         allEvents.push("gameOpenFactoryOil");               // an oil factory is opened
         allEvents.push("gameOpenFactoryKnitting");          // an knitting factory is opened
+        allEvents.push("gameOpenFuelstation");               // an oil factory is opened
         allEvents.push("gameOpenMarket");                   // the market is opened
         allEvents.push("gameOpenMegafield");                // the megafield is opened
         allEvents.push("gameOpenWindmill");                 // the windmill is opened
