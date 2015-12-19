@@ -85,10 +85,7 @@ const CHANGELOG=[["2.0","29.05.2014",[["Migration nach openuserjs.org","Migratio
                 ,["2.6.1","30.11.2015",[["Bugfix: Exotische Früchte Feld 26 ","Bugfix: exotic fruits Field 26."]]]
                 ,["2.6.2","01.12.2015",[["Neue Option: Timeout zum Schliessen von offenen Fenstern ist nun einstellbar.","New Option: Timeout for closing an open window can now be set."]]]
                 ,["2.7.0","13.12.2015",[["Neu: Ponyhof","New: Ponyfarm"]]]
-<<<<<<< HEAD
-=======
                 ,["2.7.1","18.12.2015",[["Bugfix: Heilkräuter-Verfügbarkeit gemäss Tierarzt-Level","Bugfix: Selection of herbs according to veterinary level"]]]
->>>>>>> master
                 ];
 
 if(!VERSIONfunctionFile){
@@ -2249,18 +2246,9 @@ try{
 
     for(var iProd=0;iProd<unsafeData.prodName[0].length;iProd++){
         //if((unsafeData.prodTyp[0][iProd]=="v")&&!(unsafeData.prodBlock[0][iProd]&&unsafeData.prodBlock[0][iProd].match(/l/))){
-<<<<<<< HEAD
-        if((unsafeData.PRODUCT2BUILDING[0][iProd]==fzZoneType)&&!(unsafeData.prodBlock[0][iProd]&&unsafeData.prodBlock[0][iProd].match(/[ulq]/))){
-            //Linus--Tux 20151022 Feld 25 nur exotische Produkte
-            //wenn es für alle Felder auf Farm 5 gilt:
-            //if (unsafeWindow.farm==5) oder
-            //if (unsafeData.gameLocation.get()[1]==4)
-            if (zoneNrS==25||zoneNrS==26){
-=======
         if((unsafeData.PRODUCT2BUILDING[0][iProd]==fzZoneType)&&!(unsafeData.prodBlock[0][iProd]&&unsafeData.prodBlock[0][iProd].match(/[uvlq]/))){
             //Farm 5 nur exotische Produkte
             if (zoneNrS==25||zoneNrS==26||zoneNrS==27||zoneNrS==28||zoneNrS==29||zoneNrS==30){
->>>>>>> master
                 if ((unsafeData.prodTyp[0][iProd]!="ex")) {continue;}
             } else {
                 if ((unsafeData.prodTyp[0][iProd]=="ex")) {continue;}
@@ -3392,6 +3380,7 @@ try{
         break;}
 
         case 6:{ // Fuelstation
+              /*
               $("divChooseItem"+zoneNrL+"Q"+queueNum+"I"+PRODSTOP).style.border=((zoneList[zoneNrL][queueNum][0]==PRODSTOP)?"2px solid black":"");
               if(settings.get("account","showQueueTime"))  {
       			     divChooseEndTimeCurr.parentNode.setAttribute("zoneBeginTime",implode(zoneTimes,"updateQueueBox/chooseBox/zoneTimes"));
@@ -3404,7 +3393,7 @@ try{
                    fz=null;endTime=null;
                  }
               }
-      		    zoneFeedCurr=null;zoneProdCurr=null;
+      		    zoneFeedCurr=null;zoneProdCurr=null;*/
         break;}
         case 5: { // Pony - No queue mode support
         break;}
@@ -5550,14 +5539,8 @@ function autoFarmPony(runId,step){
                         }
 
                         // Find correct farmi
-<<<<<<< HEAD
-                        // Find correct farmi
                         if (f["type"] == zoneList[handled.zoneNrL][0][0]) {
                           // Check food of pony in 'handled.slot'
-=======
-                        if (f["type"] == zoneList[handled.zoneNrL][0][0]) {
-                            // Check food of pony in 'handled.slot'
->>>>>>> master
                             if (f["type"] <= unsafeData.pony_data["ponys"][handled.slot]["data"]["feed"]) {
                                 click($("pony_farmi"+i));
                             } else {
@@ -5942,7 +5925,7 @@ function autoFarmFuelstation(runId,step){
 					if (!children.hasOwnProperty(c)) { continue; }
 					var pId_parent=children[c].getElementsByClassName("fuelstation_product_select_item_img")[0].childNodes;
 					var pId = pId_parent[1].className.replace("tt", "");
-						if(pId==zoneList[handled.zoneNrL][0][0] )	{
+						if(pId==zoneList[handled.zoneNrS][0][0] )	{
 							div=children[c];
 							click(div);
 							div=null;
@@ -8249,6 +8232,13 @@ function buildInfoPanelOverview(mode){
                     drawChooseItemBoxPony(zoneNrS, null, 0, newtd);
                 }
 
+            break;}
+            case 6:{ // Fuelstation
+                if((mode["filterType"].search("3,")!=-1) && !$("tdAutoMatOverview_"+zoneNrL)){
+                  newtr=createElement("tr",{},newtable);
+                  newtd=createElement("td",{"id":"tdAutoMatOverview_"+zoneNrL},newtr);
+                  drawFuelstationChooseItemBox(zoneNrS, zoneNrL,newtd);
+                }
             break;}
             default:{
                 if(!$("tdAutoMatOverview_"+zoneNrL)){
