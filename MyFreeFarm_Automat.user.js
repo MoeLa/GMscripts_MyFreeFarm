@@ -3380,20 +3380,19 @@ try{
         break;}
 
         case 6:{ // Fuelstation
-              /*
-              $("divChooseItem"+zoneNrL+"Q"+queueNum+"I"+PRODSTOP).style.border=((zoneList[zoneNrL][queueNum][0]==PRODSTOP)?"2px solid black":"");
-              if(settings.get("account","showQueueTime"))  {
-      			     divChooseEndTimeCurr.parentNode.setAttribute("zoneBeginTime",implode(zoneTimes,"updateQueueBox/chooseBox/zoneTimes"));
-                 divChooseEndTimeCurr.style.display=lShowTime?"block":"none";
-                 if(lShowTime){
-                   var fz=getLowestTimeFarmZone(zoneTimes);
-                   var endTime=zoneTimes[fz] + calcProductionTime(zoneList[zoneNrL][queueNum][0],fz);
-                   divChooseEndTimeCurr.style.color=noTime? "#DD0000":"black";
-                   divChooseEndTimeCurr.innerHTML=(foundStop?getText("automat_QueDontWork"):(($("divChooseBoxInner")==divChooseEndTimeCurr.parentNode)?getText("automat_QueTimeFirstReady"):getText("automat_QueTimeReady")) + " " + getDateText(endTime,0) + "&nbsp;"+ getDaytimeStr(endTime,true));
-                   fz=null;endTime=null;
-                 }
-              }
-      		    zoneFeedCurr=null;zoneProdCurr=null;*/
+              	$("divChooseItem"+zoneNrL+"Q"+queueNum+"I"+PRODSTOP).style.border=((zoneList[zoneNrL][queueNum][0]==PRODSTOP)?"2px solid black":"");
+              	if(settings.get("account","showQueueTime"))  {
+    			divChooseEndTimeCurr.parentNode.setAttribute("zoneBeginTime",implode(zoneTimes,"updateQueueBox/chooseBox/zoneTimes"));
+                 	divChooseEndTimeCurr.style.display=lShowTime?"block":"none";
+                 	if(lShowTime){
+                		var fz=getLowestTimeFarmZone(zoneTimes);
+                   		var endTime=zoneTimes[fz] + calcProductionTime(zoneList[zoneNrL][queueNum][0],fz);
+                   		divChooseEndTimeCurr.style.color=noTime? "#DD0000":"black";
+                   		divChooseEndTimeCurr.innerHTML=(foundStop?getText("automat_QueDontWork"):(($("divChooseBoxInner")==divChooseEndTimeCurr.parentNode)?getText("automat_QueTimeFirstReady"):getText("automat_QueTimeReady")) + " " + getDateText(endTime,0) + "&nbsp;"+ getDaytimeStr(endTime,true));
+                   		fz=null;endTime=null;
+                 	}
+              	}
+      		zoneFeedCurr=null;zoneProdCurr=null;
         break;}
         case 5: { // Pony - No queue mode support
         break;}
