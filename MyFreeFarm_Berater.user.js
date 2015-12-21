@@ -1028,30 +1028,30 @@ function updateProductDataFarm(){
                     help[prodTyp[0][v]].push(v);
                 }
                 switch(prodTyp[0][v]){
-                case "hr":
+                  case "hr":
                     if(unsafeWindow.vet_data&&unsafeWindow.vet_data.info){
-                        if(unsafeWindow.vet_data.info.level < KRAEUTER_VETERINAER_LEVEL[0][v]){ // || unsafeWindow.vet_data.info.points==0
-                            prodBlock[0][v]+="v"+KRAEUTER_VETERINAER_LEVEL[0][v];
-                        }
+                          if(unsafeWindow.vet_data.info.level < KRAEUTER_VETERINAER_LEVEL[0][v] || unsafeWindow.vet_data.info.points==0 ){
+                                prodBlock[0][v]+="v"+KRAEUTER_VETERINAER_LEVEL[0][v];
+                          }
                     }
-                break;
-                case "md":
+                  break;
+                  case "md":
                     if(vet_data){
-                        if(vet_data.drugs[v]&&(vet_data.info.level<vet_data.drugs[v].level)){ // || unsafeWindow.vet_data.info.points==0
-                            prodBlock[0][v]+="v"+vet_data.drugs[v].level;
-                        }
+                      if(vet_data.drugs[v]&&(vet_data.info.level<vet_data.drugs[v].level) || unsafeWindow.vet_data.info.points==0 ){
+                        prodBlock[0][v]+="v"+vet_data.drugs[v].level;
+                      }
                     }
-                break;
-                case "ex":
-					if(PRODUCT_QUEST[0][v]&&(questData[PRODUCT_QUEST[0][v][0]][PRODUCT_QUEST[0][v][1]]["nr"]<=PRODUCT_QUEST[0][v][2])){
-						prodBlock[0][v]+="v";
-					}
+                  break;
+                  case "ex":
+					           if(PRODUCT_QUEST[0][v]&&(questData[PRODUCT_QUEST[0][v][0]][PRODUCT_QUEST[0][v][1]]["nr"]<=PRODUCT_QUEST[0][v][2])){
+						                 prodBlock[0][v]+="v";
+					           }
                     // do nothing - just to avoid it runs into default-check and products are blocked due to level < 99
-                break;
-                default:
-                    if(USERLEVEL<unsafeWindow.produkt_level[v]){
-                        prodBlock[0][v]+="l"+unsafeWindow.produkt_level[v];
-                    }
+                  break;
+                  default:
+                      if(USERLEVEL<unsafeWindow.produkt_level[v]){
+                          prodBlock[0][v]+="l"+unsafeWindow.produkt_level[v];
+                      }
                 }
                 if(PRODUCT_QUEST[0][v]&&(questData[PRODUCT_QUEST[0][v][0]][PRODUCT_QUEST[0][v][1]]["nr"]<=PRODUCT_QUEST[0][v][2])){
                     prodBlock[0][v]+="q";
