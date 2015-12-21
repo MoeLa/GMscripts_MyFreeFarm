@@ -7204,12 +7204,18 @@ try{
                     }
                 }else if((help=$("vet_production_filter_icon").parentNode) && (help.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.style.display == "block")){
                     var help2=help.querySelector('div[onclick*="vetDialog(\'production_select_confirm\','+handled.slot+','+zoneList[handled.zoneNrL][0][0]+')"]');
+                    var helpDown=help.querySelector(".vet_production_select_navi_down");
+                    var helpUp=help.querySelector(".vet_production_select_navi_up");
                     if(help2 && (!help2.className.match("important"))){
                         // link is visible, can be clicked on
                         action=function(){ click(help2); };
                         listeningEvent="gameFarmersmarketDialogCommit";
-                    }else if(help=help.querySelector(".vet_production_select_navi_down")){
-                        action=function(){ click(help); };
+                    }else if(helpDown){
+                        action=function(){ click(helpDown); };
+                        step--;
+                        listeningEvent="gameFarmersmarketSlotOpened";
+                    }else if(!helpDown && helpUp){
+                        action=function(){ while (help.querySelector(".vet_production_select_navi_up")) {click(help.querySelector(".vet_production_select_navi_up"));} };
                         step--;
                         listeningEvent="gameFarmersmarketSlotOpened";
                     }else{
@@ -7227,7 +7233,7 @@ try{
                     GM_logInfo("autoFarmersmarketBuilding","runId="+runId+" step="+step,"",handled.zoneNrF.capitalize()+" automat<br>Start production"); //TODO text
                     action=function(){ click(help); };
                     listeningEvent="gameFarmersmarketStarted";
-                    setNextQueueItem(handled.zoneNrS);
+                    setNextQueueItem(handled.zoneNrF+".1"); // Ugly fix: We only use Queue of Slot 1
                 }else{
                     autoFarmersmarketBuilding(runId,9); // -> exit
                 }
