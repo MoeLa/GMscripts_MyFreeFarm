@@ -14522,27 +14522,29 @@ return false;
     //s: Produkt
     //y:
     unsafeOverwriteFunction("dialogFuelstation",function(n, z, d, s, y){
-        try{
+      try{
             unsafeWindow._dialogFuelstation(n, z, d, s, y);
-        }catch(err){GM_logError("dialogFuelstation","","",err);}
-        try{
-            var zoneNr=z;
-            var data=unsafeWindow.farms_data.farms[unsafeWindow.farm][zoneNr];
-            var iLimit=data.data.constants.slot_level[data.data.data.slots[d].level].limit;
-            var children = $('fuelstation_product_select_inner').getElementsByClassName("fuelstation_product_select_item");
-            for (var c in children) {
-                if (!children.hasOwnProperty(c)) { continue; }
-                var pId_parent=children[c].getElementsByClassName("fuelstation_product_select_item_img")[0].childNodes;
-                var pId = pId_parent[1].className.replace("tt", "");
-                var points = children[c].getElementsByClassName("fuelstation_product_select_item_points")[0].innerHTML.replace(".","");
-                var ratio = (gut[pId]*iLimit/points).toFixed(2);
-                createElement("div", {
-                        "style":"position: absolute; bottom: -15px; left: 8px;border: 2px solid rgb(255, 114, 0); background-color: white;width: 85px;text-align: center;"
-                },children[c], moneyFormat(ratio));
-            }
-        }catch(err){GM_logError("dialogFuelstation","","",err);}
+      }catch(err){GM_logError("dialogFuelstation","","",err);}
+      try{
+  			GM_log("dialogFuelstation:"+ "n"+n+" z"+z+" d"+d+" s"+s+" y"+y);
+  			if ((typeof n!="undefined")&&(n!="stats")){ //n=stats => Statistik wird aufgerufen Fix Beta
+  				var zoneNr=z;
+  				var data=unsafeWindow.farms_data.farms[unsafeWindow.farm][zoneNr];
+  				var iLimit=data.data.constants.slot_level[data.data.data.slots[d].level].limit;
+  				var children = $('fuelstation_product_select_inner').getElementsByClassName("fuelstation_product_select_item");
+  				for (var c in children) {
+  					if (!children.hasOwnProperty(c)) { continue; }
+  					var pId_parent=children[c].getElementsByClassName("fuelstation_product_select_item_img")[0].childNodes;
+  					var pId = pId_parent[1].className.replace("tt", "");
+  					var points = children[c].getElementsByClassName("fuelstation_product_select_item_points")[0].innerHTML.replace(".","");
+  					var ratio = (gut[pId]*iLimit/points).toFixed(2);
+  					createElement("div", {
+  							"style":"position: absolute; bottom: -15px; left: 8px;border: 2px solid rgb(255, 114, 0); background-color: white;width: 85px;text-align: center;"
+  					},children[c], moneyFormat(ratio));
+  				}
+  			}
+      }catch(err){GM_logError("dialogFuelstation","","",err);}
     });
-
 
     function doFuelstation(zoneNr_a){
     		try{
@@ -14570,7 +14572,7 @@ return false;
                             var iProd=350;
                             var iTime=NEVER;
 
-    						for(var v in data.production) {
+    						            for(var v in data.production) {
                                 if(!data.production.hasOwnProperty(v)){ continue; }
                                 if ((data.production[v].slot==slot))   {
                                     //iProd=data.production[v].pid;
@@ -14714,13 +14716,8 @@ return false;
                 case "16": break; // Knitting
                 case "17": break; // Carpentry
                 case 18: doPony(zoneNr); raiseEvent("gameOpenPony"); break; // Pony,
-<<<<<<< HEAD
                 case "19":  break;// Megafield
                 case 20:  break;// Fuelstation
-=======
-                case "19": break; // Megafield
-                case "20":  // Fuelstation
->>>>>>> master
                 default:
                 }
             }else{

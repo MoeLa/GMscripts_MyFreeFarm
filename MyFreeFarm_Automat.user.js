@@ -1091,65 +1091,70 @@ String.prototype.splitZoneSlot= function(){
 };*/
 
 function calcProductionTime(product, zoneNrF){
-try{
-	var bonus;
-    var time;
-	GM_log("calcProductionTime:"+ " product: "+product+" zoneNrF: "+zoneNrF );
-    switch(getBuildingTyp(zoneNrF)){
-    case 1:case 4:
-		bonus = getFarmZoneBonus(zoneNrF, product);
-        time=(product==PRODSTOP?0:unsafeData.prodGrowTime[0][product]*60);
-        time=calcDauer(time,bonus);
-        break;
-    case 2:
-		bonus = getFarmZoneBonus(zoneNrF, product);
-        time=(product==PRODSTOP?0:unsafeData.prodGrowTime[0][product]*60);
-        time*=bonus;
-        var zoneNrL=getZoneListId(zoneNrF);
-        if(zoneList[zoneNrL][0][0]!=PRODSTOP){
-            time -=zoneList[zoneNrL][0][1]*FEEDBONUSTIME[zoneList[zoneNrL][0][0]]/unsafeData.zones.getAnimals(zoneNrF);
-            if(zoneList[zoneNrL][1][1]>0){
-                time -=zoneList[zoneNrL][1][1]*FEEDBONUSTIME[zoneList[zoneNrL][1][0]]/unsafeData.zones.getAnimals(zoneNrF);
-            }
-        }
-        break;
-    case 3:
-		bonus = getFarmZoneBonus(zoneNrF, product);
-        time=(product==PRODSTOP?0:unsafeData.prodGrowTime[0][product]*60);
-        time*=bonus;
-        break;
-    case 5: // Pony
-        time = product == PRODSTOP ? 0 : 3600*product; // product is either 2, 4 or 8
-        break;
-    case 6: //Fuelstation
-        zoneNrF=zoneNrF.split(".");
-    		var data=unsafeWindow.farms_data.farms[unsafeWindow.farm][unsafeData.zones.getLocation(zoneNrF[0]).zoneNr];
-    		time=data.data.constants.slot_level[data.data.data.slots[zoneNrF[1]].level].duration;
-    break;
+  try{
+  	var bonus;
+      var time;
+      GM_log("calcProductionTime:"+ " product: "+product+" zoneNrF: "+zoneNrF );
+      if (typeof zoneNrF=="undefined") {
+        GM_log("calcProductionTime:"+ " product: "+product+" zoneNrF: "+zoneNrF );
+        GM_log(calcProductionTime.caller);
+        return 0;
+      }
+      switch(getBuildingTyp(zoneNrF)){
+      case 1:case 4:
+  		bonus = getFarmZoneBonus(zoneNrF, product);
+          time=(product==PRODSTOP?0:unsafeData.prodGrowTime[0][product]*60);
+          time=calcDauer(time,bonus);
+          break;
+      case 2:
+  		bonus = getFarmZoneBonus(zoneNrF, product);
+          time=(product==PRODSTOP?0:unsafeData.prodGrowTime[0][product]*60);
+          time*=bonus;
+          var zoneNrL=getZoneListId(zoneNrF);
+          if(zoneList[zoneNrL][0][0]!=PRODSTOP){
+              time -=zoneList[zoneNrL][0][1]*FEEDBONUSTIME[zoneList[zoneNrL][0][0]]/unsafeData.zones.getAnimals(zoneNrF);
+              if(zoneList[zoneNrL][1][1]>0){
+                  time -=zoneList[zoneNrL][1][1]*FEEDBONUSTIME[zoneList[zoneNrL][1][0]]/unsafeData.zones.getAnimals(zoneNrF);
+              }
+          }
+          break;
+      case 3:
+  		bonus = getFarmZoneBonus(zoneNrF, product);
+          time=(product==PRODSTOP?0:unsafeData.prodGrowTime[0][product]*60);
+          time*=bonus;
+          break;
+      case 5: // Pony
+          time = product == PRODSTOP ? 0 : 3600*product; // product is either 2, 4 or 8
+          break;
+      case 6: //Fuelstation
+          zoneNrF=zoneNrF.split(".");
+      		var data=unsafeWindow.farms_data.farms[unsafeWindow.farm][unsafeData.zones.getLocation(zoneNrF[0]).zoneNr];
+      		time=data.data.constants.slot_level[data.data.data.slots[zoneNrF[1]].level].duration;
+      break;
 
-    case "megafield":
-        time=(product==PRODSTOP?0:unsafeData.prodGrowTime[4][product]*60);
-        break;
-    case "windmill":
-        time=(product==PRODSTOP?0:parseInt(unsafeWindow.formulas[0][product][4],10));
-        //time*=bonus;
-        break;
-    case "forest":
-        time=(product==PRODSTOP?0:unsafeData.prodGrowTime[1][product]*60);
-        time=calcDauer(time,bonus);
-        break;
-    case "sawmill":
-    case "carpentry":
-		bonus = getFarmZoneBonus(zoneNrF, product);
-        time=(product==PRODSTOP?0:unsafeData.prodGrowTime[1][product]*60);
-        time*=bonus;
-        break;
-    }
-    return time;
-}catch(err){
-    GM_logError("calcProductionTime","product="+product+" zoneNrF="+zoneNrF,"",err);
-    return 0;
-}
+      case "megafield":
+          time=(product==PRODSTOP?0:unsafeData.prodGrowTime[4][product]*60);
+          break;
+      case "windmill":
+          time=(product==PRODSTOP?0:parseInt(unsafeWindow.formulas[0][product][4],10));
+          //time*=bonus;
+          break;
+      case "forest":
+          time=(product==PRODSTOP?0:unsafeData.prodGrowTime[1][product]*60);
+          time=calcDauer(time,bonus);
+          break;
+      case "sawmill":
+      case "carpentry":
+  		bonus = getFarmZoneBonus(zoneNrF, product);
+          time=(product==PRODSTOP?0:unsafeData.prodGrowTime[1][product]*60);
+          time*=bonus;
+          break;
+      }
+      return time;
+  }catch(err){
+      GM_logError("calcProductionTime","product="+product+" zoneNrF="+zoneNrF,"",err);
+      return 0;
+  }
 }
 function isVisibleZone(zoneNr){
     if(extendedListReg.test(zoneNr)){
@@ -5876,116 +5881,116 @@ function autoFarmFuelstation(runId,step){
 					    window.setTimeout(autoFarmFuelstation,settings.getPause(),runId,7);
             }
           }
-    break;}
+		    break;}
 
-		case 2:{ // Ernten
-			GM_logInfo("autoFarmFuelstation","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Fuelstation_Ernten");
-			var div=$("fuelstation_slot"+handled.slot);
-			if(div){
-				unsafeData.readyZone[handled.zoneNrS][2]=false;
-				click(div.children[3]);
-				div=null;
-				window.setTimeout(autoFarmFuelstation,settings.getPause(),runId,step+1);
-			}else{
-				//autoFarmFuelstation(runId,step+1);
-				autoFarmFuelstation(runId,7);
-			}
-		break;}
+    		case 2:{ // Ernten
+    			GM_logInfo("autoFarmFuelstation","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Fuelstation_Ernten");
+    			var div=$("fuelstation_slot"+handled.slot);
+    			if(div){
+    				unsafeData.readyZone[handled.zoneNrS][2]=false;
+    				click(div.children[3]);
+    				div=null;
+    				window.setTimeout(autoFarmFuelstation,settings.getPause(),runId,step+1);
+    			}else{
+    				//autoFarmFuelstation(runId,step+1);
+    				autoFarmFuelstation(runId,7);
+    			}
+    		break;}
 		//{"zoneNrS":"6.2","slot":2,"zoneNrF":"6","farmNr":1,"zoneNr":6,"zoneNrL":"6.1","zoneBuildingTyp":6}
 		//{"6":[0,"r",true],"6.2":[0,"r",true],"6.3":[0,"r",true],
-		case 3:{ // open slot
-			GM_logInfo("autoFarmFuelstation","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Open_Slot0");
-			if(unsafeData.readyZone[handled.zoneNrS]){
-        if(unsafeData.readyZone[handled.zoneNrS][2]&&(unsafeData.readyZone[handled.zoneNrS][1]=="e")){
-          if(zoneList[handled.zoneNrL][0][0]==PRODSTOP){
-            autoFarmFuelstation(runId,7);
-          }else{
-					  //fuelstation_slot1_click
-						var div=$("fuelstation_slot"+handled.slot);
-						click(div.children[3]);
-						div=null;
-						window.setTimeout(autoFarmFuelstation,settings.getPause(),runId,step+1);
-          }
-        } else {
-            // wait for response
-            window.setTimeout(autoFarmFuelstation,settings.getPause(),runId,step);
-        }
-      }else{
-        autoFarmFuelstation(runId,7);
-      }
-    break;}
+    		case 3:{ // open slot
+    			GM_logInfo("autoFarmFuelstation","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Open_Slot0");
+    			if(unsafeData.readyZone[handled.zoneNrS]){
+    				if(unsafeData.readyZone[handled.zoneNrS][2]&&(unsafeData.readyZone[handled.zoneNrS][1]=="e")){
+    				  if(zoneList[handled.zoneNrL][0][0]==PRODSTOP){
+    					autoFarmFuelstation(runId,7);
+    				  }else{
+    					//fuelstation_slot1_click
+    					var div=$("fuelstation_slot"+handled.slot);
+    					click(div.children[3]);
+    					div=null;
+    					window.setTimeout(autoFarmFuelstation,settings.getPause(),runId,step+1);
+    				  }
+    				} else {
+    					// wait for response
+    					window.setTimeout(autoFarmFuelstation,settings.getPause(),runId,step);
+    				}
+    		  }else{
+    			autoFarmFuelstation(runId,7);
+    		  }
+    		break;}
 
-		case 4:{ // Dialog Produkt wählen
-		  GM_logInfo("autoFarmFuelstation","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Produkt wählen");
-			var div = $("globalbox");
-			if(div&&(div.style.display=="block")){
-				var children = $('fuelstation_product_select_inner').getElementsByClassName("fuelstation_product_select_item");
-				for (var c in children) {
-					if (!children.hasOwnProperty(c)) { continue; }
-					var pId_parent=children[c].getElementsByClassName("fuelstation_product_select_item_img")[0].childNodes;
-					var pId = pId_parent[1].className.replace("tt", "");
-						if(pId==zoneList[handled.zoneNrS][0][0] )	{
-							div=children[c];
-							click(div);
-							div=null;
-							window.setTimeout(autoFarmFuelstation,settings.getPause(),runId,step+1);
-					}
-				}
-			} else {
-				window.setTimeout(autoFarmFuelstation,settings.getPause(),runId,step);
-			}
-		break;}
+    		case 4:{ // Dialog Produkt wählen
+    		  GM_logInfo("autoFarmFuelstation","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Produkt wählen");
+    			var div = $("globalbox");
+    			if(div&&(div.style.display=="block")){
+    				var children = $('fuelstation_product_select_inner').getElementsByClassName("fuelstation_product_select_item");
+    				for (var c in children) {
+    					if (!children.hasOwnProperty(c)) { continue; }
+    					var pId_parent=children[c].getElementsByClassName("fuelstation_product_select_item_img")[0].childNodes;
+    					var pId = pId_parent[1].className.replace("tt", "");
+    						if(pId==zoneList[handled.zoneNrS][0][0] )	{
+    							div=children[c];
+    							click(div);
+    							div=null;
+    							window.setTimeout(autoFarmFuelstation,settings.getPause(),runId,step+1);
+    					}
+    				}
+    			} else {
+    				window.setTimeout(autoFarmFuelstation,settings.getPause(),runId,step);
+    			}
+    		break;}
 
-		case 5: { //Produkt einwerfen
-			GM_logInfo("autoFarmFuelstation","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Produkt einwerfen");
-			var input=$("fuelstation_product_select_input");
+    		case 5: { //Produkt einwerfen
+    			GM_logInfo("autoFarmFuelstation","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Produkt einwerfen");
+    			var input=$("fuelstation_product_select_input");
 
-			var zoneNrF=handled.zoneNrL.split(".");
-			var data=unsafeWindow.farms_data.farms[unsafeWindow.farm][unsafeData.zones.getLocation(zoneNrF[0]).zoneNr];
-			var iLimit=data.data.constants.slot_level[data.data.data.slots[zoneNrF[1]].level].limit;
-			var produktPoints=$("globalbox").querySelector('.fuelstation_product_select_item_points').innerHTML.replace(".","");;
-			var max = Math.ceil(iLimit/produktPoints);
-			if(input){
-				input.value=max;
-				keyup(input);
-        input=null;
-				window.setTimeout(autoFarmFuelstation,settings.getPause(),runId,step+1);
-			} else {
-				window.setTimeout(autoFarmFuelstation,settings.getPause(),runId,step);
-			}
-		break;}
+    			var zoneNrF=handled.zoneNrL.split(".");
+    			var data=unsafeWindow.farms_data.farms[unsafeWindow.farm][unsafeData.zones.getLocation(zoneNrF[0]).zoneNr];
+    			var iLimit=data.data.constants.slot_level[data.data.data.slots[zoneNrF[1]].level].limit;
+    			var produktPoints=$("globalbox").querySelector('.fuelstation_product_select_item_points').innerHTML.replace(".","");;
+    			var max = Math.ceil(iLimit/produktPoints);
+    			if(input){
+    				input.value=max;
+    				keyup(input);
+    				input=null;
+    				window.setTimeout(autoFarmFuelstation,settings.getPause(),runId,step+1);
+    			} else {
+    				window.setTimeout(autoFarmFuelstation,settings.getPause(),runId,step);
+    			}
+    		break;}
 
-		case 6: { //Dialog beenden
-			GM_logInfo("autoFarmFuelstation","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Produkt einwerfen");
-			var buttonE=$("globalbox").querySelector('.button_new');
-			click(buttonE);
-			buttonE=null;
-			window.setTimeout(autoFarmFuelstation,settings.getPause(),runId,step+1);
-		break;}
+    		case 6: { //Dialog beenden
+    			GM_logInfo("autoFarmFuelstation","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Produkt einwerfen");
+    			var buttonE=$("globalbox").querySelector('.button_new');
+    			click(buttonE);
+    			buttonE=null;
+    			window.setTimeout(autoFarmFuelstation,settings.getPause(),runId,step+1);
+    		break;}
 
-    case 7:{ // start other slot or exit
-			GM_logInfo("autoFarmFuelstation","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"start other slot or exit");
-      var zoneNrS,zoneNrL,help,next=false;
-        for(var slot=1;slot<=4;slot++){
-            zoneNrS=handled.zoneNrF+"."+slot;
-            if((help=unsafeData.readyZone[zoneNrS])&&help[2]){
-              zoneNrL=getZoneListId(zoneNrS);
-              if(((help[1]=="r")&&((zoneList[zoneNrL][0][0]!=PRODSTOP)||!settings.get("account","disableCropFields")))||((help[1]=="e")&&(zoneList[zoneNrL][0][0]!=PRODSTOP)))  {
-                next=true;
-                handled.set(zoneNrS);
-                break;
-              }
+        case 7:{ // start other slot or exit
+    			GM_logInfo("autoFarmFuelstation","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"start other slot or exit");
+          var zoneNrS,zoneNrL,help,next=false;
+            for(var slot=1;slot<=4;slot++){
+                zoneNrS=handled.zoneNrF+"."+slot;
+                if((help=unsafeData.readyZone[zoneNrS])&&help[2]){
+                  zoneNrL=getZoneListId(zoneNrS);
+                  if(((help[1]=="r")&&((zoneList[zoneNrL][0][0]!=PRODSTOP)||!settings.get("account","disableCropFields")))||((help[1]=="e")&&(zoneList[zoneNrL][0][0]!=PRODSTOP)))  {
+                    next=true;
+                    handled.set(zoneNrS);
+                    break;
+                  }
+                }
             }
-        }
-        if(next){
-          autoFarmFuelstation(runId,1);
-        }else{
-				  autoZoneFinish(runId, $("innercontent").getElementsByClassName("big_close")[0]);
-        }
-        break;}
-  	default: {
-			alert("error"+step);
-		}
+            if(next){
+              autoFarmFuelstation(runId,1);
+            }else{
+    				  autoZoneFinish(runId, $("innercontent").getElementsByClassName("big_close")[0]);
+            }
+            break;}
+      	default: {
+    			alert("error"+step);
+    		}
     }
     if(listeningEvent){
         document.addEventListener(listeningEvent,function(listeningEvent,runId,step){
