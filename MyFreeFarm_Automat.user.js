@@ -2651,6 +2651,9 @@ try{
         if(fzZoneType==unsafeData.PRODUCT2BUILDING[0][iProd]){ // display only appropriate products for current building
         if(!unsafeData.prodBlock[0][iProd].match(/[uvlq]/)){
             newdiv=createElement("div",{"id":"divChooseItem"+zoneNrL+"Q"+queueNum+"I"+iProd,"class":"divChooseItem link v"+iProd,"product":iProd},appendTo);
+            // TODO: Opacity von 0.4 ist ok, wenn Ertragsprodukt=benötiges Produkt.
+            //       Aber bei bspw. Fabriken oder Tinkturen macht das keinen Sinn!
+            //       Hier sollten vllt. die benötigten Produkte gecheckt werden
             newdiv.style.opacity=(unsafeData.prodStock[0][iProd]&&unsafeData.prodStock[0][iProd]>0)?1:0.4;
             newdiv.addEventListener("click",function(){
                 var zoneNrS=this.parentNode.getAttribute("zoneNrS");
@@ -7233,7 +7236,7 @@ try{
                     GM_logInfo("autoFarmersmarketBuilding","runId="+runId+" step="+step,"",handled.zoneNrF.capitalize()+" automat<br>Start production"); //TODO text
                     action=function(){ click(help); };
                     listeningEvent="gameFarmersmarketStarted";
-                    setNextQueueItem(handled.zoneNrF+".1"); // Ugly fix: We only use Queue of Slot 1
+                    setNextQueueItem(handled.zoneNrS); // handled.zoneNrF+"."+handled.slot Ugly fix: We only use Queue of Slot 1
                 }else{
                     autoFarmersmarketBuilding(runId,9); // -> exit
                 }
@@ -9256,7 +9259,10 @@ try{
             // Automat icons
             for(var v=1;v<=4;v++){
                 if(!unsafeData.zones.getBlock("foodworld-"+v+".1")){
-                    drawAutomatIcon("foodworld-"+v,"foodworld-"+v+".1",$("food_pos"+v),"position:absolute;right:-10px;bottom:-10px;");
+                    drawAutomatIcon("foodworld-"+v,
+                                    "foodworld-"+v+".1",
+                                    $("food_pos"+v),
+                                    "position:absolute;right:-10px;bottom:-10px;");
                 }
             }
         }catch(err){GM_logError("eventListener:gameFoodworldOpened ","","",err);}
@@ -9647,12 +9653,41 @@ try{
             // Automat icons
             for(var v=1;v<=6;v++){
                 if(!unsafeData.zones.getBlock("farmersmarket-"+v)){
-                    drawAutomatIcon("farmersmarket-"+v,"farmersmarket-"+v+(unsafeData.zones.isMultiSlot("farmersmarket-"+v)?".1":""),$("farmersmarket_pos"+v),"position:absolute;right:0;bottom:0;");
+                    drawAutomatIcon("farmersmarket-"+v,
+                                    "farmersmarket-"+v+(unsafeData.zones.isMultiSlot("farmersmarket-"+v)?".1":""),
+                                    $("farmersmarket_pos"+v),
+                                    "position:absolute;right:0;bottom:0;");
                 }
             }
         }catch(err){GM_logError("eventListener:gameFarmersmarketOpened ","","",err);}
         },false);
-
+        for(var v=1;v<=6;v++){
+            err_trace="listener gameFarmersmarketOpened"+v;
+            document.addEventListener("gameFarmersmarketOpened"+v,function(id){
+                return function(){
+                try{
+                    var zoneNrF="farmersmarket-"+id;
+                    var zoneNrS;
+                    var container,help;
+                    for(var slot=1;slot<=unsafeData.BUILDING_SLOTS[getZoneType(zoneNrF)];slot++){
+                        zoneNrS=zoneNrF+"."+slot;
+                        switch(id) {
+                            case 2: container=$("nursery_slot_item"+slot); break;
+                            case 5: container=$("vet_production_slot"+slot); break;
+                            default: container=null;
+                        }
+                        if(container && (help=container.querySelector(".divZoneIcon"))){
+                            removeElement(help);
+                        }
+                        if(container && !unsafeData.zones.getBlock(zoneNrS)){
+                            drawAutomatIcon(zoneNrS,zoneNrS,container,"left:-10px;");
+                        }
+                    }
+                    container=null;help=null;
+                }catch(err){GM_logError("eventListener:gameFarmersmarketOpened"+id+"","","",err);}
+                }
+            }(v),false);
+        }
         //Bot Start-Stop-Button
         err_trace="Start-Stop-Button";
         newdiv=createElement("div",{"id":"divAutomatButtonBot","class":"link beraterButtonIcon hoverBgGreen"},$("divBeraterButtons"));
