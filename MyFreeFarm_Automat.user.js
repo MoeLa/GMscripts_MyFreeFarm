@@ -2404,7 +2404,7 @@ function drawFuelstationChooseItemBox(zoneNrS, zoneNrL, appendTo){
           toolTip.show(event, toolTipProductSmall(zoneNrF, zoneNrL, 0, this));
       },false);
 
-    	const FUELSTATION_INPUT=[
+      const FUELSTATION_INPUT=[
     		[[17,0],[31,0],[33,0],[113,0]],
     		[[1,0],[109,0],[108,0],[112,0]],
     		[[18,0],[23,0],[153,0],[37,0]],
@@ -2413,7 +2413,7 @@ function drawFuelstationChooseItemBox(zoneNrS, zoneNrL, appendTo){
 
 
       var zoneNrF_h=zoneNrS.split(".");
-    	var data=unsafeWindow.farms_data.farms[unsafeWindow.farm][unsafeData.zones.getLocation(zoneNrF_h[0]).zoneNr];
+      var data=unsafeWindow.farms_data.farms[unsafeWindow.farm][unsafeData.zones.getLocation(zoneNrF_h[0]).zoneNr];
       var level=Math.min(data.data.data.slots[zoneNrF_h[1]].level,FUELSTATION_INPUT.length);
 
     	for (var l=0;l<level;l++) {
@@ -2446,7 +2446,9 @@ function drawFuelstationChooseItemBox(zoneNrS, zoneNrL, appendTo){
       zoneFeedCurr=null;zoneProdCurr=null;
       newdiv=null;appendTo=null;
       // GM_log("End drawFuelstationChooseItemBox :" + zoneNrL);
-  }catch(err){GM_logError("drawFuelstationChooseItemBox ","","",err);}
+  }catch(err){
+	  GM_logError("drawFuelstationChooseItemBox","zoneNrS="+zoneNrS+" zoneNrF="+zoneNrF,"",err);
+  }
 }
 
 
@@ -8239,9 +8241,11 @@ function buildInfoPanelOverview(mode){
             break;}
             case 6:{ // Fuelstation
                 if((mode["filterType"].search("3,")!=-1) && !$("tdAutoMatOverview_"+zoneNrL)){
-                  newtr=createElement("tr",{},newtable);
-                  newtd=createElement("td",{"id":"tdAutoMatOverview_"+zoneNrL},newtr);
-                  drawFuelstationChooseItemBox(zoneNrS, zoneNrL,newtd);
+					if ((typeof zoneNrS!="undefined")&&(typeof zoneNrL!="undefined") ){
+					  newtr=createElement("tr",{},newtable);
+					  newtd=createElement("td",{"id":"tdAutoMatOverview_"+zoneNrL},newtr);
+					  drawFuelstationChooseItemBox(zoneNrS, zoneNrL,newtd);
+					}
                 }
             break;}
             default:{
