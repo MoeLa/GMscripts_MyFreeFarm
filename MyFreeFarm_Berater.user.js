@@ -111,7 +111,7 @@ const CHANGELOG=[["2.0","29.05.2014",[["Migration nach openuserjs.org","Migratio
                 ,["2.8.1","15.12.2015",[["Bugfix: Exotische Produkte","Bugfix: Exotic products"]]]
                 ,["2.8.2","19.12.2015",[["Bugfix: Berechnung fehlende Produkte","Bugfix: Calculation of missing products"]]]
                 ,["2.8.3","23.12.2015",[["Bugfix: Berechnung fehlende Produkte","Bugfix: Calculation of missing products"]]]
-                ,["2.8.3","24.12.2015",[["Frohe Weihnachten","Merry Christmas"],["Bugfix: Berechnung fehlende Produkte","Bugfix: Calculation of missing products"]]]
+                                ,["2.8.3","24.12.2015",[["Frohe Weihnachten","Merry Christmas"],["Bugfix: Berechnung fehlende Produkte","Bugfix: Calculation of missing products"]]]
                 ];
 if(!VERSIONfunctionFile){
     alert("Hi, I am the Berater-Script.\nThe function-file is missing.\nPlease install me again.");
