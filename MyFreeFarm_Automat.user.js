@@ -6932,12 +6932,9 @@ try{
     autoZoneFinish(runId);
 }
 }
+var directionDown = true;
 function autoFarmersmarketBuilding(runId, step, field){
 try{
-    // console.log("--Moe: autoFarmersmarketBuilding--");
-    // console.log(getZoneType(handled.zoneNrF));
-    // console.log(unsafeData.BUILDING_SLOTS[getZoneType(handled.zoneNrF)]);
-    // console.log("-----------------------------");
     // GM_log("autoFarmersmarketBuilding runId="+runId+" step="+step+" handled.zoneNrS="+handled.zoneNrS);
     if(settings.get("account","botUseFarmersmarket")&&bot.checkRun("autoFarmersmarketBuilding",runId)){
         bot.setAction("autoFarmersmarketBuilding ("+step+")");
@@ -6979,9 +6976,6 @@ try{
             }
         break;}
         case 3:{ // open farmersmarket building
-            // console.log("autoFarmersmarketBuilding, step" + step);
-            // console.log(handled);
-            // console.log(unsafeData.readyZone[handled.zoneNrS]);
             if((help=unsafeData.readyZone[handled.zoneNrS])&&help[2]&&(((help[1]=="r")&&((zoneList[handled.zoneNrL][0][0]!=PRODSTOP)||(!settings.get("account","disableCropFields"))))||((help[1]=="e")&&(zoneList[handled.zoneNrL][0][0]!=PRODSTOP)))){
                 GM_logInfo("autoFarmersmarketBuilding","runId="+runId+" step="+step,"",handled.zoneNrF.capitalize()+" automat<br>Opening"); //TODO text
                 help=/-(\d)$/.exec(handled.zoneNrF)[1]; // determine which building to work on
@@ -7002,8 +6996,6 @@ try{
             help=unsafeData.readyZone[handled.zoneNrS];
             if((unsafeData.readyZone[handled.zoneNrS][1]=="r")&&((zoneList[handled.zoneNrL][0][0]!=PRODSTOP)||(!settings.get("account","disableCropFields")))){
                 GM_logInfo("autoFarmersmarketBuilding","runId="+runId+" step="+step,"",handled.zoneNrF.capitalize()+" automat<br>Cropping"); //TODO text
-                // console.log("autoFarmersmarketBuilding, step" + step);
-                // console.log(handled);
                 switch(handled.zoneBuildingTyp){
                 case 1:{
                     // TODO manual crop                  
@@ -7146,8 +7138,6 @@ try{
                     }
                 break;}
                 case 4:{ // open slot
-                    console.log("Moe, open slot" + handled.slot);
-                    console.log(handled);
                     GM_logInfo("autoFarmersmarketBuilding","runId="+runId+" step="+step,"",handled.zoneNrF.capitalize()+" automat<br>Opening slot"); //TODO text
                     if(help=$("nursery_slot_item" + handled.slot)){
                         action=function(){ click(help); };
@@ -7209,16 +7199,25 @@ try{
                     var help2=help.querySelector('div[onclick*="vetDialog(\'production_select_confirm\','+handled.slot+','+zoneList[handled.zoneNrL][0][0]+')"]');
                     var helpDown=help.querySelector(".vet_production_select_navi_down");
                     var helpUp=help.querySelector(".vet_production_select_navi_up");
-                    if(help2 && (!help2.className.match("important"))){
+
+                    if(help2 && (!help2.className.match("important"))) {
                         // link is visible, can be clicked on
                         action=function(){ click(help2); };
                         listeningEvent="gameFarmersmarketDialogCommit";
-                    }else if(helpDown){
-                        action=function(){ click(helpDown); };
-                        step--;
-                        listeningEvent="gameFarmersmarketSlotOpened";
-                    }else if(!helpDown && helpUp){
-                        action=function(){ while (help.querySelector(".vet_production_select_navi_up")) {click(help.querySelector(".vet_production_select_navi_up"));} };
+                    }else if(helpDown || helpUp) {
+                        // link not visible, we need to scroll
+                        if (directionDown && !helpDown) { // Scroll-Down-Mode, but at bottom?
+                            directionDown = false; // Switch to Scroll-Up-Mode
+                        } else if (!directionDown && !helpUp) { // Scroll-Up-Mode, but at top?
+                            directionDown = true; // Switch to Scroll-Down-Mode
+                        }
+                        action=function(){
+                            if (directionDown) { // In Scroll-Down-Mode?
+                                click(helpDown); // Scroll down
+                            } else {
+                                click(helpUp);   // Scroll up
+                            }
+                        };
                         step--;
                         listeningEvent="gameFarmersmarketSlotOpened";
                     }else{
@@ -7236,7 +7235,7 @@ try{
                     GM_logInfo("autoFarmersmarketBuilding","runId="+runId+" step="+step,"",handled.zoneNrF.capitalize()+" automat<br>Start production"); //TODO text
                     action=function(){ click(help); };
                     listeningEvent="gameFarmersmarketStarted";
-                    setNextQueueItem(handled.zoneNrS); // handled.zoneNrF+"."+handled.slot Ugly fix: We only use Queue of Slot 1
+                    setNextQueueItem(handled.zoneNrS);
                 }else{
                     autoFarmersmarketBuilding(runId,9); // -> exit
                 }
