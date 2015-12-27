@@ -526,6 +526,7 @@ const VARIABLES = {
                     "valStatistikTime":["Option",5],
                     "valVerkaufLimitDown":["Option",3],
                     "valVerkaufLimitUp":["Option",3],
+                    "valVet":["Option",3],
                     "valWaterNeeded":["Option",3],
                     "vertraegeIn":["Contracts received",1],
                     "vertraegeOut":["Contracts sent",1],
@@ -621,7 +622,7 @@ var upjersAds, buyNotePadShowBlocked, show;
 var farmiLog, farmiDailyCount, levelLog, levelLogId, lotteryLog, lotteryLogId, logSales, logSalesId, logDonkey, logDonkeyId, logClothingDonation;
 var zoneAddToGlobalTime;
 var totalAnimals, totalFarmis, totalPowerups, totalQuest, totalRecursive, totalZones, totalEndtime;
-var valKauflimit, valKauflimitNPC, highlightProducts, highlightUser, valNimmBeob, valVerkaufLimitDown, valVerkaufLimitUp, valJoinPreise, lastOffer, protectMinRack, ownMarketOffers, valClothingDonation;
+var valKauflimit, valKauflimitNPC, highlightProducts, highlightUser, valNimmBeob, valVerkaufLimitDown, valVerkaufLimitUp, valJoinPreise, lastOffer, protectMinRack, ownMarketOffers, valClothingDonation, valVet;
 var valAnimateStartscreen, valAutoLogin;
 var valMessagesSystemMarkRead;
 var megafieldVehicle, megafieldJob, logMegafieldJob, megafieldSmartTimer;
@@ -1515,6 +1516,23 @@ function goToClothingDonation(){
         }
         div=null;
     } catch(err) {GM_logError("goToClothingDonation","","",err); }
+}
+function goToVet(){
+try{
+    var div;
+    if(gameLocation.check("farmersmarket",0)){
+        if(div=$("farmersmarket_pos5_click")){
+            click(div);
+        }
+    }else if(div=$("speedlink_farmersmarket")){
+        document.addEventListener("gameFarmersmarketOpened",function(){
+            document.removeEventListener("gameFarmersmarketOpened",arguments.callee,false);
+            window.setTimeout(goToVet,100);
+        },false);
+        click(div);
+    }
+    div=null;
+}catch(err){GM_logError("goToVet","","",err);}
 }
 function showGoToMarketToolTip(event,prod,add1,add2){
     var str='<table>';
@@ -5946,6 +5964,21 @@ function buildInfoPanelOptions(){
         createElement("td",{},newtr,getText("settings_valGlobaltimeShowCroppedZone")[0]);
         createElement("td",{},newtr,getText("settings_valGlobaltimeShowCroppedZone")[1]);
 
+        // ***************Veterinary (Treatment of sick animals)*****************
+        newtr=createElement("tr",{},newtable);
+        newtd=createElement("th",{"colspan":"3"},newtr,getText("settings_vet")[0]);
+
+        newtr=createElement("tr",{},newtable);
+        newtd=createElement("td",{"align":"center"},newtr);
+        newinput=createElement("input",{"type":"checkbox","class":"link","checked": valVet}, newtd);
+        if (!unsafeWindow.farmersmarket_data.vet) { newinput.disabled = true; }
+        newinput.addEventListener("click",function(){
+            valVet = this.checked;
+            GM_setValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_valVet", valVet);
+        }, false);
+        createElement("td",{},newtr,getText("veterinary") + "<br/>" + getText("reloadRequired"));
+        createElement("td",{},newtr,getText("settings_vet")[1]);
+
         // ***********************************************************************
 
         newtr=createElement("tr",{},newtable);
@@ -6179,7 +6212,7 @@ function buildInfoPanelOptions(){
         createElement("td",{},newtr,getText("settings_valGlobaltimeShowCroppedZone")[0]);
         createElement("td",{},newtr,getText("settings_valGlobaltimeShowCroppedZone")[1]);
 
-        // **********************************************************************
+        // ***************Clothing Donation***************************************
         newtr=createElement("tr",{},newtable);
         newtd=createElement("th",{"colspan":"3"},newtr,getText("settings_clothingDonation")[0]);
 
@@ -15905,20 +15938,14 @@ return false;
                                                 tempZoneProductionDataSlot[0][0][iProd].push([iAmount,iPoints,iTime,NEVER]);
                                             }
                                         } else {
-                                            // console.log("Moe, leerer Slot"+slot);
-                                            // iTime=NEVER;
                                             tempZoneProductionData[1]++;
                                             tempZoneProductionDataSlot[1]++;
-                                            // tempZoneProductionData[2]++;
-                                            // tempZoneProductionDataSlot[2]++;
-                                            // if(!tempZoneProductionData[0][0][0]){ tempZoneProductionData[0][0][0]=[]; }
-                                            // tempZoneProductionData[0][0][0].push([0,0,iTime,NEVER]);
-                                            // if(!tempZoneProductionDataSlot[0][0][0]){ tempZoneProductionDataSlot[0][0][0]=[]; }
-                                            // tempZoneProductionDataSlot[0][0][0].push([0,0,iTime,NEVER]);
                                         }
                                         zones.setProduction(zoneNrS,tempZoneProductionDataSlot.clone());
                                     }
                                     zones.setProduction(zoneNrF,tempZoneProductionData.clone());
+
+                                    showGoToVetFarmi(); // Determine, if Discharge-Sick-Animals-Icon is shown
                                 }
                             break;}
                             default:{
@@ -17850,6 +17877,48 @@ return;
                     }
                 }catch(err){GM_logError("buyNewLotResponse","","",err);}
             });
+        }
+
+        // Veterinary (Treatment of sick animals)
+        err_trace="Vet Farmi";
+        valVet= GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_valVet", unsafeWindow.farmersmarket_data.vet);
+        function showGoToVetFarmi(){
+            try{
+                var showIcon = false;
+                if (unsafeWindow.farmersmarket_data.vet) {
+                    var farmis = unsafeWindow.farmersmarket_data.vet.animals.slots;
+                    for(var i = 1; i <= 3; i++) {
+                        if (farmis[i] && farmis[i]["remain"] < 0) {
+                            showIcon = true;
+                            break;
+                        }
+                    }
+                }
+
+                if(valVet && showIcon){
+                    if(!nodes["goToVetFarmi"]){
+                        nodes["goToVetFarmi"]=new Object();
+                        nodes["goToVetFarmi"]["node"]=createElement("div",{
+                            "id":"goToVetFarmi",
+                            "style":"height:70px;width:70px;background:url('"+GFX+"vet_cashup.png') -13px -10px / 270%;border:2px solid black;border-radius:35px;margin-bottom:5px;opacity:1;",
+                            "class":"link blinking"
+                        },$("fixedDivRight"));
+                        nodes["goToVetFarmi"]["node"].addEventListener("mouseover",function(event){ toolTip.show(event,getText("goToVet")); },false);
+                        nodes["goToVetFarmi"]["node"].addEventListener("click",function(event){ goToVet(); },false);
+                        raiseEvent("gameVetFarmiAvailable");
+                    }
+                } else {
+                    hideGoToVetFarmi();
+                }
+            }catch(err){GM_logError("showGoToVetFarmi","","",err);}
+        }
+        function hideGoToVetFarmi(){
+            try{
+                if(nodes["goToVetFarmi"]){
+                    if(nodes["goToVetFarmi"]["node"]){ removeElement(nodes["goToVetFarmi"]["node"]); }
+                    delete nodes["goToVetFarmi"];
+                }
+            }catch(err){GM_logError("hideGoToVetFarmi","","",err);}
         }
 
         // Clothing Donation
@@ -20284,6 +20353,7 @@ try{
         text["de"]["goToMarketstall"]="Zum Marktstand";
         text["de"]["goToPage"]="Gehe nach Seite";
         text["de"]["goToRank"]="Gehe nach Platz";
+        text["de"]["goToVet"]="Zum Tierarzt";
         text["de"]["goToX"]="Gehe nach %1%";
         text["de"]["hide"]="ausblenden";
         text["de"]["highlightProducts"]="Produkte am Markt markieren";
@@ -20386,6 +20456,7 @@ try{
         text["de"]["recursive"]="Rekursiv benötigt";
         text["de"]["relative"]="Menge fehlt";
         text["de"]["reloadInXSec"]="Neu laden in %1%s.";
+        text["de"]["reloadRequired"]="(Reload benötigt)";
         text["de"]["relogin"]="Session endet bald.<br>Neuer Login in %1%.";
         text["de"]["remaining"]="Verbleibend";
         text["de"]["requestingUpdateInfoOfX"]="Fordere Update-Informationen für %1% an ..."
@@ -20540,6 +20611,7 @@ try{
         text["de"]["settings_setQuestAll"]=["Korrigiere Questreihen ","Werte der Questreihen werden wenn nötig übernommen und abgespeichert. Dies wirkt bei abgeschlossenen Questreihen oder Questreihen, bei denen die Sanduhr den Zugriff auf das Quest-Fenster verhindert."];
         text["de"]["settings_megafieldSmartTimer"]=["Beachte aktive Tour", "Soll beim Starten einer Tour der Güterhof-Timer auf das Ende der Tour gesetzt werden?"];
         text["de"]["settings_clothingDonation"]=["Kleiderspende", "Ein blinkender Icon zeigt an, wenn bei der Kleiderspende gespendet oder gewürfelt werden kann."];
+        text["de"]["settings_vet"]=["Tierarzt (Behandlung kranker Tiere)", "Ein blinkender Icon zeigt an, wenn ein geheiltes Tier entlassen werden kann."];
         // help
         text["de"]["help_0"]=[,"This is small introduction to the functions of the Adviser-Script. Not all changes are written here, go find them yourself ... Sometimes a mouse-over helps. <br>At the bottom you see a button to visit the <a href=\""+GM_Home+"\" target=\"_blank\">homepage</a>. Next to it, there is the button for the options. You should look at them and configure as you desire.<br>Generally the script only knows what you have seen. So just visit the field if something is wrong."];
         text["de"]["help_1"]=["The Zones","The fields are observed while you see them. The script saves the plants, times and watering. So on the farm view this can be displayed. Each zone has a time counter at its top to show you when it is ready.<br>If you own the planting helper, you can access it directly from opened field. At the top of an opened zone you can navigate directly to zones of the same type."];
@@ -20680,6 +20752,7 @@ try{
         text["en"]["goToMarketstall"]="Go to market stall";
         text["en"]["goToPage"]="Go to page";
         text["en"]["goToRank"]="Go to rank";
+        text["en"]["goToVet"]="Go to veterinary";
         text["en"]["goToX"]="Go to %1%";
         text["en"]["hide"]="hide";
         text["en"]["highlightProducts"]="Highlight products at market";
@@ -20782,6 +20855,7 @@ try{
         text["en"]["recursive"]="Recursive Needed";
         text["en"]["relative"]="Amount missing";
         text["en"]["reloadInXSec"]="Reload in %1%s.";
+        text["en"]["reloadRequired"]="(Reload required)";
         text["en"]["relogin"]="Session ends soon.<br>New login in %1%.";
         text["en"]["remaining"]="Remaining";
         text["en"]["requestingUpdateInfoOfX"]="Requesting update information for %1% ..."
@@ -20936,6 +21010,7 @@ try{
         text["en"]["settings_setQuestAll"]=["fix questseries","If neccessary values of questseries are taiken from the game. This is applicable for achieved questseries or questseries not accessible due to activated sandglass."];
         text["en"]["settings_megafieldSmartTimer"]=["Integrate active tour", "Megafield-Timer is set to end of the tour after a tour is started."];
         text["en"]["settings_clothingDonation"]=["Clothing Donation", "A blinking icon indicates, when you can donate or gamble."];
+        text["en"]["settings_vet"]=["Veterinary (Treatment of sick animals)", "A blinking icon indicates, when a cured animal can be discharged."];
         //help
         text["en"]["help_0"]=[,"This is a small introduction to the functions of the Adviser-Script. Not all changes are written here, go find them yourself ... Sometimes a mouse-over helps. <br>At the bottom you see a button to visit the <a href=\""+GM_Home+"\" target=\"_blank\">homepage</a>. Next to it, there is the button for the options. You should look at them and configure as you desire.<br>Generally the script only knows what you have seen. So just visit the field if something is wrong."];
         text["en"]["help_1"]=["The Zones","The fields are observed while you see them. The script saves the plants, times and watering. So on the farm view this can be displayed. Each zone has a time counter at its top to show you when it is ready.<br>If you own the planting helper, you can access it directly from opened field. At the top of an opened zone you can navigate directly to zones of the same type."];
