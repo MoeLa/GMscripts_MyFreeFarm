@@ -168,6 +168,9 @@ handled.set=function(zoneNrS){
         handled.farmNr=Math.floor((handled.zoneNrF-1)/6)+1;
         handled.zoneNr=getGarden(handled.zoneNrF);
         handled.zoneNrL=getZoneListId(handled.zoneNrF);
+        if (handled.slot==null) {
+            handled.slot=(handled.zoneNrL.match(/\.(\d+)$/)?parseInt(/\.(\d+)$/.exec(handled.zoneNrL)[1],10):null);
+        }
         handled.zoneBuildingTyp=getBuildingTyp(handled.zoneNrF);
     }catch(err){GM_logError("handled.set","zoneNrS="+zoneNrS,"",err);}
 };
@@ -2648,6 +2651,9 @@ try{
         if(fzZoneType==unsafeData.PRODUCT2BUILDING[0][iProd]){ // display only appropriate products for current building
         if(!unsafeData.prodBlock[0][iProd].match(/[uvlq]/)){
             newdiv=createElement("div",{"id":"divChooseItem"+zoneNrL+"Q"+queueNum+"I"+iProd,"class":"divChooseItem link v"+iProd,"product":iProd},appendTo);
+            // TODO: Opacity von 0.4 ist ok, wenn Ertragsprodukt=benötiges Produkt.
+            //       Aber bei bspw. Fabriken oder Tinkturen macht das keinen Sinn!
+            //       Hier sollten vllt. die benötigten Produkte gecheckt werden
             newdiv.style.opacity=(unsafeData.prodStock[0][iProd]&&unsafeData.prodStock[0][iProd]>0)?1:0.4;
             newdiv.addEventListener("click",function(){
                 var zoneNrS=this.parentNode.getAttribute("zoneNrS");
@@ -6884,7 +6890,18 @@ try{
             GM_logInfo("autoFarmersmarket","runId="+runId,"readyZone="+implode(unsafeData.readyZone,"autoFarmersmarket/readyZone"),"No ready zone");
             autoZoneFinish(runId);
         }else{
+            if (zoneNrS.lastIndexOf(".") == -1) {
+                for (var i in unsafeData.readyZone) {
+                    if (!unsafeData.readyZone.hasOwnProperty(i)) {continue;}
+                    if (i.startsWith(zoneNrS) && i != zoneNrS) {
+                        zoneNrS=i;
+                        break;
+                    }
+                }
+            }
             handled.set(zoneNrS);
+
+
             try{ unsafeWindow.jsTimeStamp=unsafeWindow.Zeit.Client - unsafeWindow.Zeit.Verschiebung; }catch(err){}
             autoFarmersmarketBuilding(runId,1);
             // if(unsafeData.readyZone[handled.zoneNrS][2]){
@@ -6903,6 +6920,7 @@ try{
     autoZoneFinish(runId);
 }
 }
+var directionDown = true;
 function autoFarmersmarketBuilding(runId, step, field){
 try{
     // GM_log("autoFarmersmarketBuilding runId="+runId+" step="+step+" handled.zoneNrS="+handled.zoneNrS);
@@ -6968,7 +6986,7 @@ try{
                 GM_logInfo("autoFarmersmarketBuilding","runId="+runId+" step="+step,"",handled.zoneNrF.capitalize()+" automat<br>Cropping"); //TODO text
                 switch(handled.zoneBuildingTyp){
                 case 1:{
-// TODO manual crop
+                    // TODO manual crop                  
                     if((help=$("flowerarea_buttons"))&&(help=help.querySelector(".flowerarea_modus_harvest_all"))){
                         action=function(){ click(help); };
                         listeningEvent="gameFarmersmarketCropped";
@@ -6978,6 +6996,9 @@ try{
                 break;}
                 case 4:{
                     if(help=$("nursery_slot_item" + handled.slot)){
+                        action=function(){ click(help); };
+                        listeningEvent="gameFarmersmarketCropped";
+                    }else if(help=$("vet_production_slot" + handled.slot)){
                         action=function(){ click(help); };
                         listeningEvent="gameFarmersmarketCropped";
                     }else{
@@ -7109,6 +7130,9 @@ try{
                     if(help=$("nursery_slot_item" + handled.slot)){
                         action=function(){ click(help); };
                         listeningEvent="gameFarmersmarketSlotOpened";
+                    }else if(help=$("vet_production_slot" + handled.slot)){
+                        action=function(){ click(help); };
+                        listeningEvent="gameFarmersmarketSlotOpened";
                     }else{
                         autoFarmersmarketBuilding(runId,9); // -> exit
                     }
@@ -7154,6 +7178,34 @@ try{
                         listeningEvent="gameFarmersmarketDialogCommit";
                     }else if(help=$("nursery_production_navi").querySelector(".nursery_production_navi_next")){
                         action=function(){ click(help); };
+                        step--;
+                        listeningEvent="gameFarmersmarketSlotOpened";
+                    }else{
+                        autoFarmersmarketBuilding(runId,9); // -> exit
+                    }
+                }else if((help=$("vet_production_filter_icon").parentNode) && (help.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.style.display == "block")){
+                    var help2=help.querySelector('div[onclick*="vetDialog(\'production_select_confirm\','+handled.slot+','+zoneList[handled.zoneNrL][0][0]+')"]');
+                    var helpDown=help.querySelector(".vet_production_select_navi_down");
+                    var helpUp=help.querySelector(".vet_production_select_navi_up");
+
+                    if(help2 && (!help2.className.match("important"))) {
+                        // link is visible, can be clicked on
+                        action=function(){ click(help2); };
+                        listeningEvent="gameFarmersmarketDialogCommit";
+                    }else if(helpDown || helpUp) {
+                        // link not visible, we need to scroll
+                        if (directionDown && !helpDown) { // Scroll-Down-Mode, but at bottom?
+                            directionDown = false; // Switch to Scroll-Up-Mode
+                        } else if (!directionDown && !helpUp) { // Scroll-Up-Mode, but at top?
+                            directionDown = true; // Switch to Scroll-Down-Mode
+                        }
+                        action=function(){
+                            if (directionDown) { // In Scroll-Down-Mode?
+                                click(helpDown); // Scroll down
+                            } else {
+                                click(helpUp);   // Scroll up
+                            }
+                        };
                         step--;
                         listeningEvent="gameFarmersmarketSlotOpened";
                     }else{
@@ -7215,7 +7267,7 @@ try{
         case 9:{
             var zoneNrS,zoneNrL,help,next=false;
             if(unsafeData.zones.isMultiSlot(handled.zoneNrF)){
-                for(var slot=1;slot<=3;slot++){
+                for(var slot=1;slot<=unsafeData.BUILDING_SLOTS[getZoneType(handled.zoneNrF)];slot++){
                     zoneNrS=handled.zoneNrF+"."+slot;
                     if((help=unsafeData.readyZone[zoneNrS])&&help[2]){
                         zoneNrL=getZoneListId(zoneNrS);
@@ -7231,7 +7283,11 @@ try{
                 autoFarmersmarketBuilding(runId,1);
             }else{
                 help=/-(\d)$/.exec(handled.zoneNrF)[1];
-                autoZoneFinish(runId,$("farmersmarket_pos"+help+"_inner").querySelector(".big_close"));
+                var div=$("farmersmarket_pos"+help+"_inner").querySelector(".big_close");
+                if (!div) {
+                    div=$("farmersmarket_pos"+help+"_inner").querySelector(".mini_close");
+                }
+                autoZoneFinish(runId,div);
             }
 
         break;}
@@ -9190,7 +9246,10 @@ try{
             // Automat icons
             for(var v=1;v<=4;v++){
                 if(!unsafeData.zones.getBlock("foodworld-"+v+".1")){
-                    drawAutomatIcon("foodworld-"+v,"foodworld-"+v+".1",$("food_pos"+v),"position:absolute;right:-10px;bottom:-10px;");
+                    drawAutomatIcon("foodworld-"+v,
+                                    "foodworld-"+v+".1",
+                                    $("food_pos"+v),
+                                    "position:absolute;right:-10px;bottom:-10px;");
                 }
             }
         }catch(err){GM_logError("eventListener:gameFoodworldOpened ","","",err);}
@@ -9581,12 +9640,41 @@ try{
             // Automat icons
             for(var v=1;v<=6;v++){
                 if(!unsafeData.zones.getBlock("farmersmarket-"+v)){
-                    drawAutomatIcon("farmersmarket-"+v,"farmersmarket-"+v+(unsafeData.zones.isMultiSlot("farmersmarket-"+v)?".1":""),$("farmersmarket_pos"+v),"position:absolute;right:0;bottom:0;");
+                    drawAutomatIcon("farmersmarket-"+v,
+                                    "farmersmarket-"+v+(unsafeData.zones.isMultiSlot("farmersmarket-"+v)?".1":""),
+                                    $("farmersmarket_pos"+v),
+                                    "position:absolute;right:0;bottom:0;");
                 }
             }
         }catch(err){GM_logError("eventListener:gameFarmersmarketOpened ","","",err);}
         },false);
-
+        for(var v=1;v<=6;v++){
+            err_trace="listener gameFarmersmarketOpened"+v;
+            document.addEventListener("gameFarmersmarketOpened"+v,function(id){
+                return function(){
+                try{
+                    var zoneNrF="farmersmarket-"+id;
+                    var zoneNrS;
+                    var container,help;
+                    for(var slot=1;slot<=unsafeData.BUILDING_SLOTS[getZoneType(zoneNrF)];slot++){
+                        zoneNrS=zoneNrF+"."+slot;
+                        switch(id) {
+                            case 2: container=$("nursery_slot_item"+slot); break;
+                            case 5: container=$("vet_production_slot"+slot); break;
+                            default: container=null;
+                        }
+                        if(container && (help=container.querySelector(".divZoneIcon"))){
+                            removeElement(help);
+                        }
+                        if(container && !unsafeData.zones.getBlock(zoneNrS)){
+                            drawAutomatIcon(zoneNrS,zoneNrS,container,"left:-10px;");
+                        }
+                    }
+                    container=null;help=null;
+                }catch(err){GM_logError("eventListener:gameFarmersmarketOpened"+id+"","","",err);}
+                }
+            }(v),false);
+        }
         //Bot Start-Stop-Button
         err_trace="Start-Stop-Button";
         newdiv=createElement("div",{"id":"divAutomatButtonBot","class":"link beraterButtonIcon hoverBgGreen"},$("divBeraterButtons"));
