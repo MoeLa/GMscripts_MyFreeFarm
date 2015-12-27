@@ -4208,7 +4208,6 @@ function getReadyZone(location){
     if(!bot.isActive()){
         return null;
     }else{
-        console.log("Starte Suche, Moe :D");
         for(var zoneNrS in unsafeData.readyZone){
             if(!unsafeData.readyZone.hasOwnProperty(zoneNrS)){ continue; }
             if((help=unsafeData.readyZone[zoneNrS])&&help[2]&&((location===undefined)||(location==help[0]))){
@@ -4222,7 +4221,6 @@ function getReadyZone(location){
                 }
             }
         }
-        console.log("Nichts gefunden, Moe :D");
     }
     GM_logInfo("getReadyZone","location="+location,"return="+null,"End",1);
     return null;
@@ -6888,11 +6886,6 @@ try{
     }else if(bot.checkRun("autoFarmersmarket",runId)){
         bot.setAction("autoFarmersmarket");
         var zoneNrS=getReadyZone("farmersmarket");
-        console.log("---Moe, autoFarmersmarket---");
-        console.log(zoneNrS);
-        console.log(handled);
-        console.log(unsafeData.readyZone);
-        console.log("-----------");
         if(zoneNrS==null){
             GM_logInfo("autoFarmersmarket","runId="+runId,"readyZone="+implode(unsafeData.readyZone,"autoFarmersmarket/readyZone"),"No ready zone");
             autoZoneFinish(runId);
@@ -6900,16 +6893,11 @@ try{
             if (zoneNrS.lastIndexOf(".") == -1) {
                 for (var i in unsafeData.readyZone) {
                     if (!unsafeData.readyZone.hasOwnProperty(i)) {continue;}
-                    console.log("Gefunden: "+i);
                     if (i.startsWith(zoneNrS) && i != zoneNrS) {
                         zoneNrS=i;
-                        console.log("Gepasst: " + i);
                         break;
                     }
-                    console.log("Nicht gepasst: " + i);
                 }
-            // } else {
-            //     handled.set(zoneNrS);
             }
             handled.set(zoneNrS);
 

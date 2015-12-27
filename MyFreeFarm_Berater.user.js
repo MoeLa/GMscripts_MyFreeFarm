@@ -2254,7 +2254,7 @@ var zones=new function(){
                 }
                 div=null;
                 if (readyZoneAdded) {
-                    console.log("Moe, checkReady: " + zoneNrS);
+                    console.log("Ready Zones: " + zoneNrS);
                     console.log(unsafeData.readyZone[zoneNrS]);
                 }
             }
