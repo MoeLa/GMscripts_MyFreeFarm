@@ -884,10 +884,11 @@ function calcProductScore(product, zoneNrF, amount, endtime){
     break;
 
     case 6: //Fuelstation
-      		if(amount==null || amount===undefined){ amount=1; }
-      		zoneNrF=zoneNrF.split(".");
-      		var data=unsafeWindow.farms_data.farms[unsafeWindow.farm][unsafeData.zones.getLocation(zoneNrF[0]).zoneNr];
-          return data.data.constants.slot_level[data.data.data.slots[zoneNrF[1]].level].output*unsafeData.prodPoints[0][350];
+      	if(amount==null || amount===undefined){ amount=1; }
+		zoneNrF=zoneNrF.split(".");
+		var farmNR=Math.floor((zoneNrF[0]-1)/6)+1;
+      	var data=unsafeWindow.farms_data.farms[farmNR][unsafeData.zones.getLocation(zoneNrF[0]).zoneNr];
+        return data.data.constants.slot_level[data.data.data.slots[zoneNrF[1]].level].output*unsafeData.prodPoints[0][350];
     break;
     case 5: //Ponyfarm
         var data = unsafeData.pony_data;
@@ -941,8 +942,9 @@ function calcProductAmount(product, zoneNrF, amount, endtime, minPlanted){
         return unsafeData.prodYield[0][product];
     break;
     case 6: //Fuelstation
-        zoneNrF=zoneNrF.split(".");
-      	var data=unsafeWindow.farms_data.farms[unsafeWindow.farm][unsafeData.zones.getLocation(zoneNrF[0]).zoneNr];
+		zoneNrF=zoneNrF.split(".");
+		var farmNR=Math.floor((zoneNrF[0]-1)/6)+1;
+      	var data=unsafeWindow.farms_data.farms[farmNR][unsafeData.zones.getLocation(zoneNrF[0]).zoneNr];
         return data.data.constants.slot_level[data.data.data.slots[zoneNrF[1]].level].output;
     break;
 
@@ -1131,8 +1133,9 @@ function calcProductionTime(product, zoneNrF){
           time = product == PRODSTOP ? 0 : 3600*product; // product is either 2, 4 or 8
           break;
       case 6: //Fuelstation
-          zoneNrF=zoneNrF.split(".");
-      		var data=unsafeWindow.farms_data.farms[unsafeWindow.farm][unsafeData.zones.getLocation(zoneNrF[0]).zoneNr];
+			zoneNrF=zoneNrF.split(".");
+			var farmNR=Math.floor((zoneNrF[0]-1)/6)+1;
+			var data=unsafeWindow.farms_data.farms[farmNR][unsafeData.zones.getLocation(zoneNrF[0]).zoneNr];
       		time=data.data.constants.slot_level[data.data.data.slots[zoneNrF[1]].level].duration;
       break;
 
@@ -1522,8 +1525,8 @@ try{
                 }
                 break;
 
-			      case 6: //Fuelstation
-				        break;
+			case 6: //Fuelstation
+				break;
             default:
                 if(showBonus && unsafeData.zones.getBonus(zoneNrF)>0){
                     txt=unsafeData.zones.getBonus(zoneNrF)+"%";
@@ -1606,9 +1609,9 @@ try {
             case "megafield":
                 redrawQueueBox(zoneNrS, zoneNrL, $("divQueueBoxInner"));
                 break;
-			      case 6: //Fuelstation
-				        drawFuelstationChooseItemBox(zoneNrS, zoneNrL,$("divChooseBoxInner"));
-				        break;
+			case 6: //Fuelstation
+				drawFuelstationChooseItemBox(zoneNrS, zoneNrL,$("divChooseBoxInner"));
+				break;
             default:
                 throw("Building type '"+getBuildingTyp(zoneNrS)+"' unknown.");
             }
@@ -2417,10 +2420,12 @@ function drawFuelstationChooseItemBox(zoneNrS, zoneNrL, appendTo){
 
 
       var zoneNrF_h=zoneNrS.split(".");
-      var data=unsafeWindow.farms_data.farms[unsafeWindow.farm][unsafeData.zones.getLocation(zoneNrF_h[0]).zoneNr];
-      var level=Math.min(data.data.data.slots[zoneNrF_h[1]].level,FUELSTATION_INPUT.length);
+	  var farmNR=Math.floor((zoneNrF_h[0]-1)/6)+1;
 
-    	for (var l=0;l<level;l++) {
+      var data=unsafeWindow.farms_data.farms[farmNR][unsafeData.zones.getLocation(zoneNrF_h[0]).zoneNr];
+	  var level=Math.min(data.data.data.slots[zoneNrF_h[1]].level,FUELSTATION_INPUT.length);
+
+		for (var l=0;l<level;l++) {
   		    if(!FUELSTATION_INPUT[l].hasOwnProperty(l)){ continue; }
   		      for(var v in FUELSTATION_INPUT[l]){
               if(!FUELSTATION_INPUT[l].hasOwnProperty(v)){ continue; }
@@ -5955,7 +5960,8 @@ function autoFarmFuelstation(runId,step){
     			var input=$("fuelstation_product_select_input");
 
     			var zoneNrF=handled.zoneNrL.split(".");
-    			var data=unsafeWindow.farms_data.farms[unsafeWindow.farm][unsafeData.zones.getLocation(zoneNrF[0]).zoneNr];
+				var farmNR=Math.floor((zoneNrF[0]-1)/6)+1;
+				var data=unsafeWindow.farms_data.farms[farmNR][unsafeData.zones.getLocation(zoneNrF[0]).zoneNr];
     			var iLimit=data.data.constants.slot_level[data.data.data.slots[zoneNrF[1]].level].limit;
     			var produktPoints=$("globalbox").querySelector('.fuelstation_product_select_item_points').innerHTML.replace(".","");;
     			var max = Math.ceil(iLimit/produktPoints);
