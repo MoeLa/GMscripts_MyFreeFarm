@@ -1136,7 +1136,9 @@ function calcProductionTime(product, zoneNrF){
 			zoneNrF=zoneNrF.split(".");
 			var farmNR=Math.floor((zoneNrF[0]-1)/6)+1;
 			var data=unsafeWindow.farms_data.farms[farmNR][unsafeData.zones.getLocation(zoneNrF[0]).zoneNr];
-      		time=data.data.constants.slot_level[data.data.data.slots[zoneNrF[1]].level].duration;
+      		//time=data.data.constants.slot_level[data.data.data.slots[zoneNrF[1]].level].duration;
+			//Beta
+			time = product == PRODSTOP ? 0 : data.data.constants.slot_level[data.data.data.slots[zoneNrF[1]].level].duration;
       break;
 
       case "megafield":
@@ -3006,7 +3008,8 @@ try{
                 automatIcons[i][1].setAttribute("class","link divZoneIcon v"+zoneList[zoneNrL][0][0]);
             break;
 			      //Fuelstation
-			      case 6: automatIcons[i][1].setAttribute("class","link divZoneIcon v"+zoneList[zoneNrL][0][0]);
+			case 6: automatIcons[i][1].setAttribute("class","link divZoneIcon v"+zoneList[zoneNrL][0][0]);
+			break;
             }
             automatIcons[i][1].setAttribute("product",zoneList[zoneNrL][0][0]);
             automatIcons[i][1].setAttribute("zoneBeginTime",implode(zoneTimes,"updateQueueBox/zoneTimes"));
@@ -3530,7 +3533,10 @@ try{
             var iProd=(zoneList[zoneNrL][0][0]==PRODSTOP?PRODSTOP:unsafeData.BUILDING2PRODUCT[getZoneType(zoneNrF)][0]);
         // }else if(fzType==3){
         //  var iProd=(zoneList[zoneNrL][0][0]==PRODSTOP?PRODSTOP:zoneList[zoneNrL][0][0]);
-        }else{
+        }else if (fzType==6) {
+			var iProd=(zoneList[zoneNrL][0][0]==PRODSTOP?PRODSTOP:unsafeData.BUILDING2PRODUCT[getZoneType(zoneNrF)][0]);
+		} else
+			{
             var iProd=zoneList[zoneNrL][0][0];
         }
         if(settings.get("account","showQueueTime")) var zoneBeginTime=explode(parent.getAttribute("zoneBeginTime"),"toopTipProductSmall/[0]/zoneBeginTime",{});
@@ -3562,15 +3568,14 @@ try{
           }
           var iProd=parent.classList.contains("v-1") ? PRODSTOP : 159; // Pferdefutter
       }
-  	else if(fzType==6){//parseInt(parent.getAttribute("class").replace("divChooseItem link r",""),10)>0){
-            var iProd=parseInt(parent.getAttribute("class").replace("divChooseItem link v",""),10);
-
-          if(settings.get("account","showQueueTime")) var zoneBeginTime=explode(parent.parentNode.getAttribute("zoneBeginTime"),"toopTipProductSmall/[2]/zoneBeginTime",{});
-      }
-  	  else{ // Field, Factory
-          var iProd=parseInt(parent.getAttribute("class").replace("divChooseItem link v",""),10);
-          if(settings.get("account","showQueueTime")) var zoneBeginTime=explode(parent.parentNode.getAttribute("zoneBeginTime"),"toopTipProductSmall/[4]/zoneBeginTime",{});
-      }
+  	else if(fzType==6){
+		var iProd=(zoneList[zoneNrL][0][0]==PRODSTOP?PRODSTOP:unsafeData.BUILDING2PRODUCT[getZoneType(zoneNrF)][0]);
+        if(settings.get("account","showQueueTime")) var zoneBeginTime=explode(parent.parentNode.getAttribute("zoneBeginTime"),"toopTipProductSmall/[2]/zoneBeginTime",{});
+    }
+  	else{ // Field, Factory
+		var iProd=parseInt(parent.getAttribute("class").replace("divChooseItem link v",""),10);
+		if(settings.get("account","showQueueTime")) var zoneBeginTime=explode(parent.parentNode.getAttribute("zoneBeginTime"),"toopTipProductSmall/[4]/zoneBeginTime",{});
+	}
 
 
     var iStop=(iProd==PRODSTOP);
@@ -3602,7 +3607,7 @@ try{
         if(iStop){
             createElement("div",{style:""},content,getText("automat_stop").toTitleCase());
         }else{
-            if((fzType!=2 && fzType!=6)|| isIcon || isTimeLine ){
+            if((fzType!=2)|| isIcon || isTimeLine ){
                 newrow=createElement("div",{style:"display:table-row;width:100%;"},content);
                 createElement("div",{"class":"tableTd1"},newrow, getText("automat_QueGives"));
                 newdiv=createElement("div",{"class":"tableTd2"},newrow);
@@ -3647,7 +3652,8 @@ try{
                 }
             } else if(fzType==6){ //Fuelstation
                 newrow=createElement("div",{style:"display:table-row;width:100%;"},content);
-			     }
+				createElement("div",{"class":"tableTd1"},newrow, "tette");
+			}
         }
         if(fzType==2){
             if(isIcon || isTimeLine){ createElement("div",{"class":"tableSeperater"},content);createElement("div",{"class":"tableSeperater"},content);}
@@ -8304,11 +8310,14 @@ function buildInfoPanelOverview(mode){
             break;}
             case 6:{ // Fuelstation
                 if((mode["filterType"].search("3,")!=-1) && !$("tdAutoMatOverview_"+zoneNrL)){
-					if ((typeof zoneNrS!="undefined")&&(typeof zoneNrL!="undefined") ){
+					/*if ((typeof zoneNrS!="undefined")&&(typeof zoneNrL!="undefined") ){
 					  newtr=createElement("tr",{},newtable);
 					  newtd=createElement("td",{"id":"tdAutoMatOverview_"+zoneNrL},newtr);
 					  drawFuelstationChooseItemBox(zoneNrS, zoneNrL,newtd);
-					}
+					}*/
+					newtr=createElement("tr",{},newtable);
+					newtd=createElement("td",{"id":"tdAutoMatOverview_"+zoneNrL},newtr);
+					drawFuelstationChooseItemBox(zoneNrS, zoneNrL,newtd);
                 }
             break;}
             default:{
