@@ -4528,7 +4528,7 @@ try{
                         if (parseInt(unsafeWindow.forestry_area[i]["productid"],10)<=5) { // TODO: use PRODUCT_MAP instead of hard-coding the offset
                             var prodoffset=20;
                         } else {
-                            var prodoffset=21;
+                            var prodoffset=19;
                         }
                         var prod=parseInt(prodoffset,10)+parseInt(unsafeWindow.forestry_area[i]["productid"],10);
                         if(unsafeData.prodStock[1][prod]+unsafeData.prodYield[1][prod]<=unsafeData.prodStockMax[1][prod]){
@@ -6235,7 +6235,7 @@ try{
                         if (parseInt(unsafeWindow.forestry_area[i]["productid"],10)<=5) { // TODO: use PRODUCT_MAP instead of hard-coding the offset
                             var prodoffset=20;
                         } else {
-                            var prodoffset=21;
+                            var prodoffset=19;
                         }
                         var prod=parseInt(prodoffset,10)+parseInt(unsafeWindow.forestry_area[i]["productid"],10);
                         if(unsafeData.prodStock[1][prod]+unsafeData.prodYield[1][prod]<=unsafeData.prodStockMax[1][prod]){
