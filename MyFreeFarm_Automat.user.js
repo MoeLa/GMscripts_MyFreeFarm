@@ -5922,15 +5922,15 @@ function autoFarmFuelstation(runId,step){
     	case 2:{ // Ernten
 			GM_logInfo("autoFarmFuelstation","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Fuelstation_Ernten");
 			var div=$("fuelstation_slot"+handled.slot);
-			//if(div){
-			if(div && !$("fuelstation_slot"+handled.slot+"_fill_text").firstChild.innerHTML.match(/\d+/g)){
+			if(div){
+			//if(div && !$("fuelstation_slot"+handled.slot+"_fill_text").firstChild.innerHTML.match(/\d+/g)){
 				unsafeData.readyZone[handled.zoneNrS][2]=false;
 				click(div.children[3]);
 				div=null;
 				window.setTimeout(autoFarmFuelstation,settings.getPause(),runId,step+1);
 			}else{
 				//Zeiten sind nicht synchron
-				window.setTimeout(autoFarmFuelstation,settings.getPause(),runId,8);
+				window.setTimeout(autoFarmFuelstation,settings.getPause(),runId,7);
 			}
     	break;}
 
