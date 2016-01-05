@@ -4,8 +4,8 @@
 // @author         BastianKanaan
 // @description    Extends MyFreeFarm
 // @icon           data:image/png;base64,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
-// @date           04.01.2016
-// @version        2.9.1
+// @date           05.01.2016
+// @version        2.9.2
 // @license        GPL version 3 or any later version; http://www.gnu.org/copyleft/gpl.html
 // @include        /^http:\/\/(|www\.|s\d+\.)au\.myfreefarm\.com\/.*$/
 // @include        /^http:\/\/(|www\.|s\d+\.)veselaferma\.com\/.*$/
@@ -113,6 +113,7 @@ const CHANGELOG=[["2.0","29.05.2014",[["Migration nach openuserjs.org","Migratio
                 ,["2.8.3","24.12.2015",[["Frohe Weihnachten","Merry Christmas"],["Bugfix: Berechnung fehlende Produkte","Bugfix: Calculation of missing products"]]]
                 ,["2.9.0","27.12.2015",[["Neu: Tinkturen","new: tinctures"],["Spendenempfänger:wikipedia","Donation recipients: wikipedia"]]]
                 ,["2.9.1","04.01.2016",[["Bugfix: Quest 47 Quest-Linie 3","Bugfix: Quest 47 of mainseries 3"]]]
+                ,["2.9.2","05.01.2016",[["Bugfix: Berechnung der besseren Produkt-Alternative (bei Quests).","Bugfix: Calculation of best product-alternative (for Quests)."]]]
                 ];
 if(!VERSIONfunctionFile){
     alert("Hi, I am the Berater-Script.\nThe function-file is missing.\nPlease install me again.");
@@ -223,10 +224,10 @@ const PRODUCT_LEVEL={"veterinary":{"250":1,"251":1,"252":1,"253":2,"254":3,"255"
 const PRODUCT_REQUIRE=[{"25":[[0,9,30]],"27":[[0,10,12]],"28":[[0,11,8]],"30":[[0,12,5]],"111":[[0,110,5]],"116":[[0,2,1980]],"117":[[0,7,550]],"118":[[0,4,1020]],"119":[[0,38,650]],"120":[[0,42,110]],"121":[[0,43,100]],"122":[[0,112,130],[0,116,35]],"123":[[0,113,220],[0,117,35]],"124":[[0,114,345],[0,118,35]],"125":[[0,115,80],[0,119,35]],"130":[[0,17,400]],"131":[[0,21,150]],"132":[[0,20,100],[0,10,2]],"133":[[0,19,100],[0,10,2]],"134":[[0,17,400],[0,6,25]],"135":[[0,21,150],[0,6,25]],"136":[[0,2,120]],"137":[[0,1,200]],"138":[[0,1,200],[0,23,30]],"139":[[0,18,150],[0,22,30]],"140":[[0,21,150],[0,22,30]],"141":[[0,26,100],[0,144,3]],"142":[[0,26,100],[0,25,3]],"143":[[0,26,100],[0,25,3],[0,144,3]],"144":[[0,21,450]],"145":[[0,33,300],[0,12,2]],"146":[[0,35,200],[0,10,4],[0,12,2]],"147":[[0,37,60],[0,12,2]],"148":[[0,31,250],[0,26,150],[0,27,7]],"149":[[0,21,300],[0,43,10],[0,22,50],[0,121,4]],"150":[[0,38,60],[0,119,6],[0,17,50]],"152":[[0,151,5]],"155":[[0,152,5],[0,28,6]],"156":[[0,152,8],[0,28,5]],"157":[[0,152,2],[0,28,9]],"161":[[0,1,300],[0,17,150]],"162":[[0,1,250],[0,20,200]],"163":[[0,22,190],[0,26,120]],"164":[[0,1,150],[0,10,30]],"165":[[0,10,10],[0,12,5]],"166":[[0,10,10],[0,27,7]],"167":[[0,40,60],[0,111,10]],"168":[[0,10,10],[0,42,25]],"169":[[0,6,300],[0,9,15],[0,121,3]],"170":[[0,1,200],[0,43,20],[0,121,4]],"200":[[-1,1200],[0,171,24],[0,172,20],[0,173,12]],"201":[[-1,1400],[0,171,25],[0,172,18],[0,174,15]],"202":[[-1,1500],[0,172,22],[0,173,19],[0,174,16]],"203":[[-1,1460],[0,172,19],[0,173,16],[0,175,29]],"204":[[-1,1510],[0,171,7],[0,173,18],[0,174,8],[0,176,21]],"205":[[-1,1622],[0,171,14],[0,173,22],[0,176,10],[0,177,12]],"206":[[-1,1787],[0,174,16],[0,176,9],[0,177,10],[0,178,9]],"207":[[-1,1894],[0,173,15],[0,175,10],[0,177,11],[0,179,8]],"208":[[-1,1950],[0,173,12],[0,175,13],[0,178,15],[0,180,18]],"209":[[-1,2110],[0,171,12],[0,176,21],[0,179,7],[0,181,9]],"210":[[-1,2250],[0,171,12],[0,175,5],[0,179,34],[0,182,11]],"211":[[-1,2357],[0,172,9],[0,176,12],[0,181,22],[0,183,18]],"212":[[-1,2488],[0,171,13],[0,182,13],[0,183,16],[0,184,6]],"213":[[-1,2595],[0,171,3],[0,179,8],[0,185,7],[0,186,9],[0,187,7]],"214":[[0,0,2],[0,171,10],[0,172,14],[0,173,13],[0,174,18]],"215":[[0,0,2],[0,171,12],[0,172,22],[0,174,10],[0,175,19]],"216":[[0,0,2],[0,173,14],[0,175,8],[0,177,19],[0,178,16]],"217":[[0,0,3],[0,171,19],[0,177,5],[0,178,17],[0,180,13]],"218":[[0,0,3],[0,180,9],[0,181,8],[0,182,9],[0,183,9]],"219":[[0,0,3],[0,179,4],[0,182,1],[0,185,6],[0,186,15],[0,187,7]],"220":[[-1,1500],[0,171,70],[0,172,180],[0,173,80],[0,174,80],[0,188,1]],"221":[[-1,1500],[0,171,80],[0,172,50],[0,173,65],[0,174,140],[0,189,1]],"300":[[-1,100],[0,250,240],[0,251,210]],"301":[[-1,200],[0,251,160],[0,252,200]],"302":[[-1,300],[0,252,230],[0,250,210]],"303":[[-1,400],[0,253,220],[0,252,150]],"304":[[-1,500],[0,253,150],[0,254,110]],"305":[[0,0,1],[0,254,90],[0,255,100]],"306":[[0,0,1],[0,256,80],[0,255,80]],"307":[[-1,600],[0,257,210],[0,256,160]],"308":[[0,0,1],[0,258,130],[0,257,160]],"309":[[-1,700],[0,259,190],[0,258,140]],"310":[[0,0,2],[0,260,90],[0,259,90]],"311":[[-1,800],[0,261,390],[0,260,390]],"312":[[0,0,2],[0,262,130],[0,261,150]],"313":[[-1,900],[0,263,180],[0,262,230]],"314":[[0,0,2],[0,264,90],[0,263,80]],"315":[[-1,1000],[0,265,100],[0,264,130]],"316":[[0,0,3],[0,266,130],[0,265,90]],"317":[[-1,1100],[0,267,290],[0,266,260]],"318":[[0,0,3],[0,268,160],[0,267,170]],"319":[[-1,1200],[0,269,130],[0,268,180]],"320":[[-1,1300],[0,270,90],[0,269,80]],"321":[[0,0,3],[0,271,50],[0,270,100]],"322":[[-1,1400],[0,272,380],[0,271,320]],"323":[[0,0,4],[0,273,190],[0,272,160]]}
                       ,{"41":[[1,21,1]],"42":[[1,21,1]],"43":[[1,21,1]],"44":[[1,22,1]],"45":[[1,22,1]],"46":[[1,22,1]],"47":[[1,23,1]],"48":[[1,23,1]],"49":[[1,23,1]],"50":[[1,24,1]],"51":[[1,24,1]],"52":[[1,24,1]],"53":[[1,25,1]],"54":[[1,25,1]],"55":[[1,25,1]],"56":[[1,26,1]],"57":[[1,26,1]],"58":[[1,26,1]],"59":[[1,27,1]],"60":[[1,27,1]],"61":[[1,27,1]],"62":[[1,28,1]],"63":[[1,28,1]],"64":[[1,28,1]],"101":[[1,41,4]],"102":[[1,41,18],[1,42,2]],"103":[[1,44,11]],"104":[[1,42,1],[1,43,5]],"105":[[1,44,20],[1,45,50],[1,46,70]],"106":[[1,49,1]],"107":[[1,46,1]],"108":[[1,47,125],[1,48,65],[1,49,32]],"109":[[1,47,5]],"110":[[1,50,9],[1,51,4]],"111":[[1,52,4]],"112":[[1,50,12],[1,51,7],[1,52,6]],"113":[[1,42,1]],"114":[[1,41,1],[1,43,1]],"115":[[1,53,8],[1,55,2]],"116":[[1,53,120],[1,54,40],[1,55,40]],"117":[[1,53,80],[1,54,65],[1,55,125]],"118":[[1,53,6],[1,54,8]],"119":[[1,54,20],[1,55,25]],"120":[[1,54,35],[1,55,40]],"121":[[1,56,7],[1,57,4]],"122":[[1,58,9]],"123":[[1,57,4],[1,58,5]],"124":[[1,56,9],[1,57,4]],"125":[[1,58,3]],"126":[[1,61,5]],"127":[[1,60,3]],"128":[[1,60,6],[1,61,5]],"129":[[1,59,10],[1,60,8],[1,61,5]],"130":[[1,60,9],[1,61,8]],"131":[[1,59,6],[1,61,12]],"132":[[1,59,10],[1,60,8],[1,61,5]],"133":[[1,42,1]],"134":[[1,62,21],[1,63,15]],"143":[[1,62,21],[1,63,22],[1,64,15]],"144":[[1,64,15]],"146":[[1,45,12],[1,63,12],[1,46,6],[1,64,6]],"148":[[1,64,15],[1,63,10]]}
                       ];
-// Foresstry: Mapping of saplings to trees
+// Mapping between original material and final good, e.g. sapling with tree
 // task_new_product
-const PRODUCT_MAP=[{"1":21,"2":22,"3":23,"4":24,"5":25,"7":26,"8":27,"9":28}
-                  ];
+const PRODUCT_MAP={"forestry":{"1":21,"2":22,"3":23,"4":24,"5":25,"7":26,"8":27,"9":28}
+                  };
 // Yielded amount of forestry production
 // task_new_product
 const PRODUCT_YIELD=[,{"1":1,"2":1,"3":1,"4":1,"5":1,"7":1,"8":1,"9":1,"21":1,"22":1,"23":1,"24":1,"25":1,"26":1,"27":1,"28":1,"41":5,"42":3,"43":3,"44":4,"45":2,"46":2,"47":7,"48":3,"49":3,"50":3,"51":2,"52":2,"53":8,"54":4,"55":4,"56":5,"57":3,"58":5,"59":6,"60":4,"61":3,"62":7,"63":5,"64":5,"101":1,"102":1,"103":1,"104":1,"105":1,"106":1,"107":1,"108":1,"109":1,"110":1,"111":1,"112":1,"113":1,"114":1,"115":1,"116":1,"117":1,"118":1,"119":1,"120":1,"121":1,"122":1,"123":1,"124":1,"125":1,"126":1,"127":1,"128":1,"129":1,"130":1,"131":1,"132":1,"133":1,"134":1,"143":1,"144":1,"146":1,"148":1,"250":1,"251":1,"252":1,"253":1,"254":1,"255":1,"256":1,"257":1,"258":1,"259":1,"260":1,"261":1,"262":1,"263":1,"264":1,"265":1,"266":1,"267":1,"268":1,"269":1,"270":1,"271":1,"272":1,"273":1,"351":1,"352":1,"353":1,"354":1,"355":1,"356":1,"357":1,"358":1,"359":1,"360":1,"361":1}];
@@ -2787,38 +2788,40 @@ function gatherQuestData(type,campaign,nr) {
 try {
     if(QUESTS[type] && QUESTS[type][campaign] && QUESTS[type][campaign][nr] && questData[type][campaign]){
         var questCurr=QUESTS[type][campaign][nr];
+        // console.log("questCurr_Entry: "+implode(questCurr));
         var help = 0;
         var questCalc = new Array();
         questCalc = [["",""],""];
+        // Quest Main/3/47
+        // questCurr_Entry: [[[[0,144,342],[0,141,241]],[0,25,248]],null,5826402]
+        // questCalc_Exit: [[[0,144,342,true,100640.34],[0,141,241,false,190609.31],[0,25,248,true]],"",5826402]
         for(var j=0;j<questCurr[0].length;j++){
             if(typeof questCurr[0][j][0]=="object"){
-                console.log("gatherQuestData_typeof object, j="+j+", help="+help);
+                // console.log("gatherQuestData_typeof object, j="+j+", help="+help);
                 for(var k=0;k<questCurr[0][j].length;k++){
-                    console.log("gatherQuestData_typeof object, length="+questCurr[0][j].length+", help="+help);
+                    // console.log("gatherQuestData_typeof object, length="+questCurr[0][j].length+", k="+k);
                     if(isNaN(NPC[questCurr[0][j][k][0]][questCurr[0][j][k][1]])){
-                        questCurr[0][j][k][3]=Math.round(questCurr[0][j][k][2]*gut[questCurr[0][j][k][1]]*100)/100;
+                        questCurr[0][j][k][4]=Math.round(questCurr[0][j][k][2]*gut[questCurr[0][j][k][1]]*100)/100;
                     } else {
-                        questCurr[0][j][k][3]=Math.round(questCurr[0][j][k][2]*Math.min(gut[questCurr[0][j][k][1]],NPC[questCurr[0][j][k][0]][questCurr[0][j][k][1]])*100)/100;
+                        questCurr[0][j][k][4]=Math.round(questCurr[0][j][k][2]*Math.min(gut[questCurr[0][j][k][1]],NPC[questCurr[0][j][k][0]][questCurr[0][j][k][1]])*100)/100;
                     }
-                    questCurr[0][j][k][4]=true;
-                    for(var l=0;l<k;l++){
-                        if(questCurr[0][j][l][3]>questCurr[0][j][k][3]){
-                            questCurr[0][j][l][4]=false;
+                    questCurr[0][j][k][3]=true; // Default: every alternative gets status true
+                    for(var l=0;l<k;l++){ // works only, if there are never more than 2 alternatives
+                        if(questCurr[0][j][l][4]>questCurr[0][j][k][4]){
+                            questCurr[0][j][l][3]=false;
                         } else {
-                            questCurr[0][j][k][4]=false;
+                            questCurr[0][j][k][3]=false;
                         }
                     }
+                }
+                for(var k=0;k<questCurr[0][j].length;k++){
+                    // console.log("gatherQuestData_typeof object, length="+questCurr[0][j].length+", k="+k+", help="+help);
                     questCalc[0][help]=questCurr[0][j][k];
                     help++;
                 }
             } else {
-                console.log("gatherQuestData_typeof NON-object, j="+j+", help="+help);
-                if(isNaN(NPC[questCurr[0][j][0]][questCurr[0][j][1]])){
-                    questCurr[0][j][3]=Math.round(questCurr[0][j][2]*gut[questCurr[0][j][1]]*100)/100;
-                } else {
-                    questCurr[0][j][3]=Math.round(questCurr[0][j][2]*Math.min(gut[questCurr[0][j][1]],NPC[questCurr[0][j][0]][questCurr[0][j][1]])*100)/100;
-                }
-                questCurr[0][j][4]=true;
+                // console.log("gatherQuestData_typeof NON-object, j="+j+", help="+help);
+                questCurr[0][j][3]=true;
                 questCalc[0][help]=questCurr[0][j];
                 help++;
             }
@@ -2826,7 +2829,7 @@ try {
         if(questCurr[1]){questCalc[1]=questCurr[1];}
         if(questCurr[2]){questCalc[2]=questCurr[2];}
         if(questCurr[3]){questCalc[3]=questCurr[3];}
-        console.log("questCalc_imploded "+implode(questCalc));
+        // console.log("questCalc_Exit: "+implode(questCalc));
         return questCalc;
         questCalc=null; questCurr=null;
     } else {
@@ -7118,7 +7121,7 @@ function buildInfoPanelOptions(){
                     help_q=parseInt(this.value,10);
                 },false);
                 newtd=createElement("td",{"align":"center"},newtr);
-                newinput=createElement("button",{"type":"button","class":"link"},newtd,"Quest Main 3");
+                newinput=createElement("button",{"type":"button","class":"link"},newtd,"Execute (Main 3)");
                 newinput.addEventListener("click",function(){
                     alert2("Sets the quest-number to the selected value - regardless whether the value is reasonable or not!",getText("yes"),getText("no"),function(){
                         questData["main"][3]["nr"] = help_q;
