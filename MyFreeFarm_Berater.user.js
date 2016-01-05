@@ -307,17 +307,10 @@ unsafeData.BUILDINGTYPE=BUILDINGTYPE.clone();
 const BUILDING_SIZE={"1":120,"forest":25,"fl1":36,"megafield":[11,9]};
 unsafeData.BUILDING_SIZE=BUILDING_SIZE.clone();
 // task_new_building
-<<<<<<< HEAD
 
 //const BUILDING_SLOTS={"13":3,"14":3,"16":3,"18":3,"windmill":2,"sawmill":3,"carpentry":3,"fw1":3,"fw2":3,"fw3":3,"fl0":17,"fl2":3,"fl5":4,"megafield":99};
 //for Fuelstation
 const BUILDING_SLOTS={"13":3,"14":3,"16":3,"18":3,"20":4,"windmill":2,"sawmill":3,"carpentry":3,"fw1":3,"fw2":3,"fw3":3,"fl0":17,"fl2":3,"fl5":4,"megafield":99};
-
-=======
-const BUILDING_SLOTS={"13":3,"14":3,"16":3,"18":3,"windmill":2,"sawmill":3,"carpentry":3,"fw1":3,"fw2":3,"fw3":3,"fl0":17,"fl2":3,"fl5":4,"megafield":99};
-//for Fuelstation
-//const BUILDING_SLOTS={"13":3,"14":3,"16":3,"18":3,"20":4,"windmill":2,"sawmill":3,"carpentry":3,"fw1":3,"fw2":3,"fw3":3,"fl0":17,"fl2":3,"megafield":99};
->>>>>>> master
 unsafeData.BUILDING_SLOTS=BUILDING_SLOTS.clone();
 // Needed input of a zone
 // BUILDING_INPUT[buildTyp]{output}[alternatives]=[[prod1,amount1||reducing time1],...]
@@ -13610,7 +13603,7 @@ return false;
                                     break;}
                                     //for fuelstation
 
-                                   case 6:{//const FUELSTATION_INPUT={"1":[[17,0],[31,0],[33,0],[113,0]]};
+                                   case 6:{
                                        GM_log("Fuelstation");
                                        help="";
                                        var data=unsafeWindow.farms_data.farms[farmNR][zoneNr];
@@ -14680,139 +14673,138 @@ return false;
     //s: Produkt
     //y:
     unsafeOverwriteFunction("dialogFuelstation",function(n, z, d, s, y){
-      try{
-            unsafeWindow._dialogFuelstation(n, z, d, s, y);
-      }catch(err){GM_logError("dialogFuelstation","","",err);}
-      try{
-  			GM_log("dialogFuelstation:"+ "n"+n+" z"+z+" d"+d+" s"+s+" y"+y);
-  			if ((typeof n!="undefined")&&(n!="stats")){ //n=stats => Statistik wird aufgerufen Fix Beta
-  				var zoneNr=z;
-  				var data=unsafeWindow.farms_data.farms[unsafeWindow.farm][zoneNr];
-  				var iLimit=data.data.constants.slot_level[data.data.data.slots[d].level].limit;
-  				var children = $('fuelstation_product_select_inner').getElementsByClassName("fuelstation_product_select_item");
-  				for (var c in children) {
-  					if (!children.hasOwnProperty(c)) { continue; }
-  					var pId_parent=children[c].getElementsByClassName("fuelstation_product_select_item_img")[0].childNodes;
-  					var pId = pId_parent[1].className.replace("tt", "");
-  					var points = children[c].getElementsByClassName("fuelstation_product_select_item_points")[0].innerHTML.replace(".","");
-  					var ratio = (gut[pId]*iLimit/points).toFixed(2);
-  					createElement("div", {
-  							"style":"position: absolute; bottom: -15px; left: 8px;border: 2px solid rgb(255, 114, 0); background-color: white;width: 85px;text-align: center;"
-  					},children[c], moneyFormat(ratio));
-  				}
-  			}
-      }catch(err){GM_logError("dialogFuelstation","","",err);}
+		try{
+			unsafeWindow._dialogFuelstation(n, z, d, s, y);
+		}catch(err){GM_logError("dialogFuelstation","","",err);}
+		try{
+		GM_log("dialogFuelstation:"+ "n"+n+" z"+z+" d"+d+" s"+s+" y"+y);
+		if ((typeof n!="undefined")&&(n!="stats")&&(n!="add_level")&&(n!="buy")&&(n!="product_select_pid")) {
+    //n=stats => Statistik wird aufgerufen Fix Beta
+			var zoneNr=z;
+			var data=unsafeWindow.farms_data.farms[unsafeWindow.farm][zoneNr];
+			var iLimit=data.data.constants.slot_level[data.data.data.slots[d].level].limit;
+			var children = $('fuelstation_product_select_inner').getElementsByClassName("fuelstation_product_select_item");
+			for (var c in children) {
+				if (!children.hasOwnProperty(c)) { continue; }
+				var pId_parent=children[c].getElementsByClassName("fuelstation_product_select_item_img")[0].childNodes;
+				var pId = pId_parent[1].className.replace("tt", "");
+				var points = children[c].getElementsByClassName("fuelstation_product_select_item_points")[0].innerHTML.replace(".","");
+				var ratio = (gut[pId]*iLimit/points).toFixed(2);
+				createElement("div", {
+						"style":"position: absolute; bottom: -15px; left: 8px;border: 2px solid rgb(255, 114, 0); background-color: white;width: 85px;text-align: center;"
+				},children[c], moneyFormat(ratio));
+			}
+		}
+		}catch(err){GM_logError("dialogFuelstation","","",err);}
     });
 
     function doFuelstation(zoneNr_a){
-    		try{
-                GM_log("doFuelstation "+"zoneNr_a"+zoneNr_a);
-                var zoneNr=zoneNr_a;
-                var zoneNrF=zoneNr+6*gameLocation.get()[1];
-                var zoneNrS;
-                showBlase(zoneNrF);
-                drawZoneNavi(zoneNrF,$("innermaincontainer"));
-                var newDiv,newDiv1;
-                var tempZoneProductionData=[[{}],0,0,true];
-                var tempZoneProductionDataSlot;
-                var data=unsafeWindow.farms_data.farms[unsafeWindow.farm][zoneNr];
-                for(var slot=1;slot<=4;slot++){
-                    zoneNrS=zoneNrF+"."+slot;
-                    if((slot==1)||(!data.data.data.slots[slot]["block"])){
-                        zones.setBlock(zoneNrS,"");
-                        tempZoneProductionDataSlot=[[{}],0,0,true];
-                        tempZoneProductionData[1]++;
-                        tempZoneProductionData[2]++;
-                        tempZoneProductionDataSlot[1]++;
-                        tempZoneProductionDataSlot[2]++;
-                        if(data.data.data.slots[slot]){
-                            var iPrTyp=0;
-                            var iProd=350;
-                            var iTime=NEVER;
+		try{
+			GM_log("doFuelstation "+"zoneNr_a"+zoneNr_a);
+			var zoneNr=zoneNr_a;
+			var zoneNrF=zoneNr+6*gameLocation.get()[1];
+			var zoneNrS;
+			showBlase(zoneNrF);
+			drawZoneNavi(zoneNrF,$("innermaincontainer"));
+			var newDiv,newDiv1;
+			var tempZoneProductionData=[[{}],0,0,true];
+			var tempZoneProductionDataSlot;
+			var data=unsafeWindow.farms_data.farms[unsafeWindow.farm][zoneNr];
 
-    						            for(var v in data.production) {
-                                if(!data.production.hasOwnProperty(v)){ continue; }
-                                if ((data.production[v].slot==slot))   {
-                                    //iProd=data.production[v].pid;
-                                    iTime=now+data.production[v].remain;
-                                }
-                            }
+			for(var slot=1;slot<=4;slot++){
+				zoneNrS=zoneNrF+"."+slot;
+				if((slot==1)||(!data.data.data.slots[slot]["block"])){
+					zones.setBlock(zoneNrS,"");
+					tempZoneProductionDataSlot=[[{}],0,0,true];
+					tempZoneProductionData[1]++;
+					tempZoneProductionData[2]++;
+					tempZoneProductionDataSlot[1]++;
+					tempZoneProductionDataSlot[2]++;
+					if(data.data.data.slots[slot]){
+						var iPrTyp=0;
+						var iProd=350;
+						var iTime=NEVER;
 
-                            /*for(var v in data.production) {
-                                if(!data.production.hasOwnProperty(v)){ continue; }
-                                //wenn nicht vorhanden, dann Slot geerntet
-                                if ((data.production[v].slot==slot)&&(data.production[v].remain))   {
-                                    iProd=data.production[v].pid;
-                                    iTime=now+data.production[v].remain;
-                                }
-    							else{
-    								//iTime=NEVER;
-    							}
-                            }*//*
-    						alert(typeof(data.production[2-1])+" "+slot);*/
-    						GM_log(implode(data.production));
+						for(var v in data.production) {
+							if(!data.production.hasOwnProperty(v)){ continue; }
+							if ((data.production[v].slot==slot))   {
+								//iProd=data.production[v].pid;
+								iTime=now+data.production[v].remain;
+							}
+						}
 
-    						/*
+						/*for(var v in data.production) {
+							if(!data.production.hasOwnProperty(v)){ continue; }
+							//wenn nicht vorhanden, dann Slot geerntet
+							if ((data.production[v].slot==slot)&&(data.production[v].remain))   {
+								iProd=data.production[v].pid;
+								iTime=now+data.production[v].remain;
+							}
+							else{
+								//iTime=NEVER;
+							}
+						}*/
+						//GM_log(implode(data.production));
 
-    						if (typeof(data.production[slot-1]) != 'undefined') {
-    							for(var v in data.production) {
-    								if(!data.production.hasOwnProperty(v)){ continue; }
-    								if (parseInt(data.production[v].slot)==slot){
-    									iTime=now+data.production[v].remain;
-    								}
-    							}
-    						}*/
-    						/*else{
-    							iTime=NEVER;
-    						}*/
+						/*
 
-                            if(iProd){
-                                var iAmount=data.data.constants.slot_level[data.data.data.slots[slot].level].output;
-                                var iPoints=iAmount*prodPoints[iPrTyp][iProd];
-                                newDiv=$("fuelstation_slot"+slot).children[1];
-                                newDiv1=createElement("div",{"style":"position:relative;top:75px;left:85px"},newDiv);
-                                pointsFormat(iPoints,"div",newDiv1);
-                                tempZoneProductionData[1]--;
-                                if(!tempZoneProductionData[0][iPrTyp][iProd]){ tempZoneProductionData[0][iPrTyp][iProd]=[]; }
-                                tempZoneProductionData[0][iPrTyp][iProd].push([iAmount,iPoints,iTime,NEVER]);
-                                tempZoneProductionDataSlot[1]--;
-                                if(!tempZoneProductionDataSlot[0][iPrTyp][iProd]){ tempZoneProductionDataSlot[0][iPrTyp][iProd]=[]; }
-                                tempZoneProductionDataSlot[0][iPrTyp][iProd].push([iAmount,iPoints,iTime,NEVER]);
-                                //auto-cropping
-                                if((iTime<now)&&(top.unsafeData.autoAction==null)&&valAutoCrop["farm"]&&(newDiv=$("fuelstation_slot"+slot))){
-                                    top.unsafeData.autoAction="berater: fuelstation crop";
-                                    window.setTimeout(function(div){
-                                        click(div.children[3]);
-                                        top.unsafeData.autoAction=null;
-                                    },500,newDiv);
-                                }
-                            }
-                        }
-                        zones.setProduction(zoneNrF+"."+slot,tempZoneProductionDataSlot.clone());
-                    } else {
-                        //wenn geerntet Fehler???
-                        zones.setBlock(zoneNrS,"b");
-                    }
-                }
-                zones.setProduction(zoneNrF,tempZoneProductionData.clone());
-                var tempZoneProductionData=null;newDiv=null;newDiv1=null;
-            }catch(err){GM_logError("doFuelstation","","",err);}
+						if (typeof(data.production[slot-1]) != 'undefined') {
+							for(var v in data.production) {
+								if(!data.production.hasOwnProperty(v)){ continue; }
+								if (parseInt(data.production[v].slot)==slot){
+									iTime=now+data.production[v].remain;
+								}
+							}
+						}*/
+						/*else{
+							iTime=NEVER;
+						}*/
+
+						if(iProd){
+							var iAmount=data.data.constants.slot_level[data.data.data.slots[slot].level].output;
+							var iPoints=iAmount*prodPoints[iPrTyp][iProd];
+							newDiv=$("fuelstation_slot"+slot).children[1];
+							newDiv1=createElement("div",{"style":"position:relative;top:75px;left:85px"},newDiv);
+							pointsFormat(iPoints,"div",newDiv1);
+							tempZoneProductionData[1]--;
+							if(!tempZoneProductionData[0][iPrTyp][iProd]){ tempZoneProductionData[0][iPrTyp][iProd]=[]; }
+							tempZoneProductionData[0][iPrTyp][iProd].push([iAmount,iPoints,iTime,NEVER]);
+							tempZoneProductionDataSlot[1]--;
+							if(!tempZoneProductionDataSlot[0][iPrTyp][iProd]){ tempZoneProductionDataSlot[0][iPrTyp][iProd]=[]; }
+							tempZoneProductionDataSlot[0][iPrTyp][iProd].push([iAmount,iPoints,iTime,NEVER]);
+							//auto-cropping
+							if((iTime<now)&&(top.unsafeData.autoAction==null)&&valAutoCrop["farm"]&&(newDiv=$("fuelstation_slot"+slot))){
+								top.unsafeData.autoAction="berater: fuelstation crop";
+								window.setTimeout(function(div){
+									click(div.children[3]);
+									top.unsafeData.autoAction=null;
+								},500,newDiv);
+							}
+						}
+					}
+					zones.setProduction(zoneNrF+"."+slot,tempZoneProductionDataSlot.clone());
+				} else {
+					//wenn geerntet Fehler???
+					zones.setBlock(zoneNrS,"b");
+				}
+			}
+			zones.setProduction(zoneNrF,tempZoneProductionData.clone());
+			var tempZoneProductionData=null;newDiv=null;newDiv1=null;
+		}catch(err){GM_logError("doFuelstation","","",err);}
     }
 
     //buildFuelstation(a)
     //a: Zone-Nummer
-	unsafeOverwriteFunction("buildFuelstation",function(a){
-        try{
-            unsafeWindow._buildFuelstation(a);
-        }catch(err){GM_logError("_buildFuelstation","","",err);}
-		try{
-            GM_log("buildFuelstation "+"a"+a);
-            doFuelstation(a);
-            raiseEvent("gameOpenFuelstation");
-        }catch(err){GM_logError("buildFuelstation","","",err);}
-
+  	unsafeOverwriteFunction("buildFuelstation",function(a){
+      try{
+        unsafeWindow._buildFuelstation(a);
+      }catch(err){GM_logError("_buildFuelstation","","",err);}
+  		try{
+        GM_log("buildFuelstation "+"a"+a);
+        doFuelstation(a);
+        raiseEvent("gameOpenFuelstation");
+      }catch(err){GM_logError("buildFuelstation","","",err);}
     });
-
 
     //calcPointsFuelstation
     //h:
