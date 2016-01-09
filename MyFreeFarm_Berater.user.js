@@ -4,8 +4,8 @@
 // @author         BastianKanaan
 // @description    Extends MyFreeFarm
 // @icon           data:image/png;base64,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
-// @date           05.01.2016
-// @version        2.9.2
+// @date           07.01.2016
+// @version        2.9.3
 // @license        GPL version 3 or any later version; http://www.gnu.org/copyleft/gpl.html
 // @include        /^http:\/\/(|www\.|s\d+\.)au\.myfreefarm\.com\/.*$/
 // @include        /^http:\/\/(|www\.|s\d+\.)veselaferma\.com\/.*$/
@@ -114,6 +114,7 @@ const CHANGELOG=[["2.0","29.05.2014",[["Migration nach openuserjs.org","Migratio
                 ,["2.9.0","27.12.2015",[["Neu: Tinkturen","new: tinctures"],["Spendenempfänger:wikipedia","Donation recipients: wikipedia"]]]
                 ,["2.9.1","04.01.2016",[["Bugfix: Quest 47 Quest-Linie 3","Bugfix: Quest 47 of mainseries 3"]]]
                 ,["2.9.2","05.01.2016",[["Bugfix: Berechnung der besseren Produkt-Alternative (bei Quests).","Bugfix: Calculation of best product-alternative (for Quests)."]]]
+                ,["2.9.3","07.01.2016",[["Neu: Exotische Pflanzen nun auch in der Übersicht \"Profit pro Zone pro Tag\" und bei \"Fehlende Produkte\".","New: Exotic plants are added to overview \"Profit per Zone per Day\" and to \"Missing products\"."]]]
                 ];
 if(!VERSIONfunctionFile){
     alert("Hi, I am the Berater-Script.\nThe function-file is missing.\nPlease install me again.");
@@ -397,8 +398,7 @@ GM_log("new_PRODUCT_QUEST:\n"+implode(new_PRODUCT_QUEST));
 //Nummer, Krankheitslevel, Tinktur1, Zeit in Minuten, Tinktur2, Zeit in Minuten
 const KRANKHEITEN_TINKTUR_ZEIT= [{"1":[[1,300,135],[1,301,195]],"2":[[1,301,240],[1,302,270]],"3":[[1,300,195],[1,302,225]],"4":[[2,303,150],[2,305,75]],"5":[[2,303,165],[2,306,82.5]],"6":[[3,305,180],[3,304,210]],"7":[[3,304,225],[3,306,112.5]],"8":[[6,307,285],[6,308,142.5]],"9":[[6,307,180],[6,310,90]],"10":[[8,309,165],[8,308,82.5]],"11":[[8,309,170],[8,312,85]],"12":[[10,311,135],[10,310,67.5]],"13":[[10,311,225],[10,312,112.5]],"14":[[10,311,285],[10,314,142.5]],"15":[[12,313,150],[12,314,75]],"16":[[12,313,255],[12,321,127.5]],"17":[[14,315,275],[14,316,137]],"18":[[14,315,270],[14,318,135]],"19":[[18,317,135],[18,318,67.5]],"20":[[18,317,150],[18,318,75]],"21":[[22,319,135],[22,321,67.5]],"22":[[24,320,285],[24,323,142.5]],"23":[[28,322,255],[28,321,127.5]],"24":[[28,322,210],[28,323,105]]}];
 // Default values for Mimimum stock-amount of goods
-// georgvr: limit for "ex" can not be added to "INIT_valMinRack", since description "category_ex" does not exists. This creates an warning when opening the adviser-options
-const INIT_valMinRack={"v":200,"e":50,"o":10,"z":0,"f1":25,"f2":10,"f3":10,"f4":0,"fw1":10,"fw2":10,"fw3":10,"hr":1000,"md":10};
+const INIT_valMinRack={"v":200,"ex":200,"e":50,"o":10,"z":0,"f1":25,"f2":10,"f3":10,"f4":0,"fw1":10,"fw2":10,"fw3":10,"hr":1000,"md":10};
 // task_new_level
 const LEVEL_POINTS=[0,0,58,2420,6620,15620,27900,58700,101700,163100,211900
                    ,276900,359000,467000,730000,1190000,1750000,2680000,3900000,5660000,7850000
@@ -963,7 +963,7 @@ function updateProductDataFarm(){
         */
 
         //Linus-Tux 20151015
-        var help={"v":[],"e":[],"o":[],"fw1":[],"fw2":[],"fw3":[],"fw4":[],"z":[],"fl":[],"fla":[],"hr":[],"md":[],"ex":[]};
+        var help={"v":[],"ex":[],"hr":[],"e":[],"o":[],"fw1":[],"fw2":[],"fw3":[],"fw4":[],"z":[],"fl":[],"fla":[],"md":[]};
         // for(var v=1;v<unsafeWindow.produkt_name.length;v++){
         //*task_fix_growtime*/ var newProductGrowtime={};
         //*task_fix_points*/ var newProductPoints={};
@@ -1085,8 +1085,7 @@ function updateProductDataFarm(){
         //*task_fix_points*/ GM_logInfo("updateProductDataFarm","","","newProductPoints="+implode(newProductPoints,1));
         prodTyp[0][0]="c";
         try{ prodStock[0][0]=parseInt($("coins").innerHTML,10); }catch(err){}
-        //Linus-Tux 20151015
-        prodNameSort[0]=[0].concat(help["v"],help["e"],help["o"],help["fw1"],help["fw2"],help["fw3"],help["fw4"],help["fl"],help["fla"],help["hr"],help["md"],help["ex"],help["z"]);
+        prodNameSort[0]=[0].concat(help["v"],help["ex"],help["e"],help["o"],help["fw1"],help["fw2"],help["fw3"],help["fw4"],help["fl"],help["fla"],help["hr"],help["md"],help["z"]);
         // quest boni
         for(var v=1;v<questData["main"]["1"]["nr"];v++){
             if(QUESTS["main"]["1"][v]&&QUESTS["main"]["1"][v][3]){
@@ -1129,7 +1128,9 @@ function updateProductDataForestry(){
             // prodStock
             // prodStockMax
             prodYield[1][v]=PRODUCT_YIELD[1][v];
-            if([105,108,116,117,119,120,148].contains[v]){ prodTyp[1][v]="f5"; } // farmhouse-items from carpentry
+            if(v==300){ prodTyp[1][v]="f1"; }
+            //else if([105,108,116,117,119,120,148].contains[v]){ prodTyp[1][v]="f5"; } // farmhouse-items from carpentry
+            else if(v==105||v==108||v==116||v==117||v==119||v==120||v==148){ prodTyp[1][v]="f5"; } // farmhouse-items from carpentry
             else if(v<20){ prodTyp[1][v]="f1"; } // saplings
             else if(v<40){ prodTyp[1][v]="f2"; } // logs
             else if(v<100){ prodTyp[1][v]="f3"; } // sawmill-products
@@ -1147,6 +1148,7 @@ function updateProductDataForestry(){
                     prodBlock[1][v]+="q";
                 }
                 if(v==113||v==114||v==133){ prodBlock[1][v]+="s"; }
+                if(v==300) { prodBlock[1][v]+="sq"; } // workaround to get special-product 300 out of the queue-List
                 if(help[prodTyp[1][v]]){
                     help[prodTyp[1][v]].push(v);
                 }
@@ -3252,7 +3254,7 @@ try{
     }}(mode["filterCategory"]),false);
     switch(mode["prodType"]){
     case 0:{
-        createElement("div",{"class":"link rackcat1v"+(mode["filterCategory"]["v"]?"_active":""),"filter":'["v"]',"mouseOverText":getText("category_v"),"style":"float:left;"},newdiv);
+        createElement("div",{"class":"link rackcat1v"+(mode["filterCategory"]["v","ex"]?"_active":""),"filter":'["v","ex"]',"mouseOverText":getText("category_v"),"style":"float:left;"},newdiv);
         createElement("div",{"class":"link rackcat1e"+(mode["filterCategory"]["e"]?"_active":""),"filter":'["e"]',"mouseOverText":getText("category_e"),"style":"float:left;"},newdiv);
         createElement("div",{"class":"link rackcat6"+(mode["filterCategory"]["o"]?"_active":""),"filter":'["o"]',"mouseOverText":getText("category_o"),"style":"float:left;"},newdiv);
         createElement("div",{"class":"link rackcat10"+(mode["filterCategory"]["c"]||mode["filterCategory"]["z"]?"_active":""),"filter":'["c","z"]',"mouseOverText":getText("category_c")+"<br>"+getText("category_z"),"style":"float:left;"},newdiv);
@@ -3744,7 +3746,7 @@ try{
             buildInfoPanelProfit({"filterCategory":filterCategory});
         }
     }}(mode["filterCategory"]),false);
-    createElement("div",{"class":"link rackcat1v"+(mode["filterCategory"]["v"]?"_active":""),"filter":'["v"]',"mouseOverText":getText("category_v"),"style":"float:left;"},newdiv);
+    createElement("div",{"class":"link rackcat1v"+(mode["filterCategory"]["v","ex"]?"_active":""),"filter":'["v","ex"]',"mouseOverText":getText("category_v"),"style":"float:left;"},newdiv);
     createElement("div",{"class":"link rackcat1e"+(mode["filterCategory"]["e"]?"_active":""),"filter":'["e"]',"mouseOverText":getText("category_e"),"style":"float:left;"},newdiv);
     createElement("div",{"class":"link rackcat6"+(mode["filterCategory"]["o"]?"_active":""),"filter":'["o"]',"mouseOverText":getText("category_o"),"style":"float:left;"},newdiv);
     newdiv1=createElement("div",{"style":"float:left;width:53px;"},newdiv);
@@ -8227,7 +8229,7 @@ function showMarket(pid){
             //unsafeWindow.market_guild_filter=0;
             //Linus--Tux 20151110
             //unsafeWindow.showOffers();
-            var help={"v":1,"e":2,"o":3,"fw1":4,"fw2":4,"fw3":4,"fw4":4,"z":5,"fl":7,"fla":7,"hr":1,"md":7,"ex":1,"c":0};
+            var help={"v":1,"ex":1,"e":2,"o":3,"fw1":4,"fw2":4,"fw3":4,"fw4":4,"z":5,"fl":7,"fla":7,"hr":1,"md":7,"c":0};
             unsafeWindow.market_nav=help[prodTyp[0][parseInt(pid,10)]];
             unsafeWindow.filterMarket();
         }
@@ -8567,7 +8569,7 @@ try{
             if(prodTyp[0][a[0]]==prodTyp[0][b[0]]){
                 return(b[1][0]-a[1][0]);
             }else{
-                return({"c":0,"v":1,"e":2,"o":3,"fw1":4,"fw2":5,"fw3":6,"fw4":7,"z":8}[prodTyp[0][a[0]]]-{"c":0,"v":1,"e":2,"o":3,"fw1":4,"fw2":5,"fw3":6,"fw4":7,"z":8}[prodTyp[0][b[0]]]);
+                return({"c":0,"v":1,"ex":2,"e":3,"o":4,"fw1":5,"fw2":6,"fw3":7,"fw4":8,"z":9}[prodTyp[0][a[0]]]-{"c":0,"v":1,"ex":2,"e":3,"o":4,"fw1":5,"fw2":6,"fw3":7,"fw4":8,"z":9}[prodTyp[0][b[0]]]);
             }
         }); break;
         case 2: drawProductLines=true;
@@ -8575,7 +8577,7 @@ try{
             if(prodTyp[0][a[0]]==prodTyp[0][b[0]]){
                 return(a[1][0]-b[1][0]);
             }else{
-                return({"c":0,"v":1,"e":2,"o":3,"fw1":4,"fw2":5,"fw3":6,"fw4":7,"z":8}[prodTyp[0][a[0]]]-{"c":0,"v":1,"e":2,"o":3,"fw1":4,"fw2":5,"fw3":6,"fw4":7,"z":8}[prodTyp[0][b[0]]]);
+                return({"c":0,"v":1,"ex":2,"e":3,"o":4,"fw1":5,"fw2":6,"fw3":7,"fw4":8,"z":9}[prodTyp[0][a[0]]]-{"c":0,"v":1,"ex":2,"e":3,"o":4,"fw1":5,"fw2":6,"fw3":7,"fw4":8,"z":9}[prodTyp[0][b[0]]]);
             }
         }); break;
         case 3: prodMissing.sort(function(a,b){return (a[1][0]-b[1][0]);}); break;
@@ -8702,7 +8704,7 @@ try{
             if(prodTyp[1][a[0]]==prodTyp[1][b[0]]){
                 return(a[0]-b[0]);
             }else{
-                return({"c":0,"v":1,"e":2,"o":3,"fw1":4,"fw2":5,"fw3":6,"fw4":7,"z":8}[prodTyp[1][a[0]]]-{"c":0,"v":1,"e":2,"o":3,"fw1":4,"fw2":5,"fw3":6,"fw4":7,"z":8}[prodTyp[1][b[0]]]);
+                return({"c":0,"v":1,"ex":2,"e":3,"o":4,"fw1":5,"fw2":6,"fw3":7,"fw4":8,"z":9}[prodTyp[1][a[0]]]-{"c":0,"v":1,"ex":2,"e":3,"o":4,"fw1":5,"fw2":6,"fw3":7,"fw4":8,"z":9}[prodTyp[1][b[0]]]);
             }
         }); break;
         case 1: drawProductLines=true;
@@ -20641,6 +20643,7 @@ try{
         // category
         text["de"]["category_c"]=text["de"]["coins"];
         text["de"]["category_v"]="Pflanzen";
+        text["de"]["category_ex"]="Exotische Pflanzen";
         text["de"]["category_e"]="Fortgeschrittene Produkte";
         text["de"]["category_z"]=unsafeWindow.rack_deco;
         text["de"]["category_o"]=unsafeWindow.rack_oil;
@@ -21040,6 +21043,7 @@ try{
         // category
         text["en"]["category_c"]=text["en"]["coins"];
         text["en"]["category_v"]="Plants";
+        text["en"]["category_ex"]="Exotic plants";
         text["en"]["category_e"]="Advanced products";
         text["en"]["category_z"]=unsafeWindow.rack_deco;
         text["en"]["category_o"]=unsafeWindow.rack_oil;
