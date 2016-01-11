@@ -1,11 +1,11 @@
 // ==UserScript==
 // @name           MyFreeFarm Berater
-// @namespace      https://github.com/linus--tux/GMscripts_MyFreeFarm
+// @namespace      https://github.com/BastianKanaan/GMscripts_MyFreeFarm
 // @author         BastianKanaan
 // @description    Extends MyFreeFarm
 // @icon           data:image/png;base64,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
-// @date           11.01.2016
-// @version        2.10.1
+// @date           10.01.2016
+// @version        2.10.0
 // @license        GPL version 3 or any later version; http://www.gnu.org/copyleft/gpl.html
 // @include        /^http:\/\/(|www\.|s\d+\.)au\.myfreefarm\.com\/.*$/
 // @include        /^http:\/\/(|www\.|s\d+\.)veselaferma\.com\/.*$/
@@ -46,7 +46,7 @@
 // @grant          GM_setValue
 // @grant          GM_xmlhttpRequest
 // @grant          unsafeWindow
-// @require        https://raw.githubusercontent.com/linus--tux/GMscripts_MyFreeFarm/master/MyFreeFarm_Common_functions.user.js
+// @require        https://raw.githubusercontent.com/BastianKanaan/GMscripts_MyFreeFarm/master/MyFreeFarm_Common_functions.user.js
 // ==/UserScript==
 
 //***********************************************************************************************************
@@ -115,8 +115,7 @@ const CHANGELOG=[["2.0","29.05.2014",[["Migration nach openuserjs.org","Migratio
                 ,["2.9.1","04.01.2016",[["Bugfix: Quest 47 Quest-Linie 3","Bugfix: Quest 47 of mainseries 3"]]]
                 ,["2.9.2","05.01.2016",[["Bugfix: Berechnung der besseren Produkt-Alternative (bei Quests).","Bugfix: Calculation of best product-alternative (for Quests)."]]]
                 ,["2.9.3","07.01.2016",[["Neu: Exotische Pflanzen nun auch in der Übersicht \"Profit pro Zone pro Tag\" und bei \"Fehlende Produkte\".","New: Exotic plants are added to overview \"Profit per Zone per Day\" and to \"Missing products\"."]]]
-                ,["2.10.0","10.01.2016",[["Neu: Biospritanlage","New: Fuelstation"]]]
-                ,["2.10.1","11.01.2016",[["Neu: Biosprit nun auch in der Übersicht \"Profit pro Zone pro Tag\".","New: Fuel shown to overview \"Profit per Zone per Day\"."]]]
+                ,["2.10.0","10.01.2016",[["Neu: Biospritanlage","Bugfix: Fuelstation"]]]
                 ];
 if(!VERSIONfunctionFile){
     alert("Hi, I am the Berater-Script.\nThe function-file is missing.\nPlease install me again.");
@@ -274,11 +273,8 @@ const ANIMAL_MOVE=[,,[false,0,0,255,10,10,505],[false,0,0,280,1,0,525],[false,0,
             fl6         Speed eating            Farmersmarket
         */
 // BUILDING_UPGRADES[zoneType][levelNr-1][needed level,buildcost,bonus,animalamount]
-//     for Fuelstation: [needed level,buildcost,bonus=1,animalamount=1,yield per slot,duration]
 // task_new_building
-const BUILDING_UPGRADES={"1":[[1,2000,0.95,0],[15,21500,0.9,0],[21,76000,0.85,0],[27,192300,0.8,0],[33,"c20",0.8,0]],"2":[[2,2500,1,5],[7,15200,1,10],[12,32500,1,15],[23,134500,0.9,20],[29,350800,0.8,20]],"3":[[11,3400,1,2],[13,16300,1,3],[17,50200,1,4],[25,159600,0.9,5],[32,441000,0.8,6]],"4":[[14,6200,1,2],[18,33500,1,3],[20,76000,1,4],[28,210500,0.9,5],[34,482000,0.8,6]],"5":[[19,6800,1,1],[22,44800,1,2],[26,128200,1,3],[31,230600,0.9,4],[35,482000,0.8,4]],"7":[[16,5200,1,1],[19,33500,0.95,1],[25,106400,0.9,1],[30,230600,0.85,1],[33,441000,0.8,1]],"8":[[18,6800,1,1],[21,38000,0.95,1],[27,128200,0.9,1],[31,230600,0.85,1],[35,482000,0.8,1]],"9":[[27,8100,1,1],[30,53200,0.95,1],[33,140300,0.9,1],[36,264600,0.85,1],[38,597200,0.8,1]],"10":[[30,9700,1,1],[33,70200,0.95,1],[34,153700,0.9,1],[37,289200,0.85,1],[39,626300,0.8,1]],"11":[[16,10000,1,1],[20,85000,1,3],[24,200000,1,5],[28,"c22",0.9,6],[32,"c38",0.8,6]],"12":[[15,38000,1,2],[17,17200,1,3],[23,54600,1,4],[29,168800,0.9,5],[38,472400,0.8,6]],"13":[[31,16800,1,1],[32,86400,0.95,1],[34,174200,0.9,1],[36,362800,0.85,1],[38,796300,0.8,1]],"14":[[35,19400,1,1],[37,97100,0.95,1],[39,218400,0.9,1],[40,509800,0.85,1],[41,1388600,0.8,1]],"15":[[37,23000,1,1],[37,95300,1,2],[38,198500,1,3],[38,391700,0.9,4],[39,842200,0.8,5]],"16":[[38,97100,1,1],[39,209736,0.95,1],[40,467711,0.9,1],[41,1080413,0.85,1],[42,2538970,0.8,1]],"17":[[10,1000,1,1]],"18":[[10,5000,1,1]],"19":[[28,250000,1,1]],"20":[[40,421500,1,1,1,360],[40,0,1,1,2,420],[40,0,1,1,3,480],[40,0,1,1,4,510],[40,0,1,1,5,540],[40,0,1,1,6,570],[40,0,1,1,7,600],[40,0,1,1,8,660],[40,0,1,1,9,690],[40,0,1,1,10,720]]
-                         ,"fw1":[[11,7000,1,1],[11,24600,0.95,1],[11,64200,0.9,1],[11,114400,0.85,1],[11,186300,0.8,1]],"fw2":[[12,8400,1,1],[12,32500,0.95,1],[12,68900,0.9,1],[12,122400,0.85,1],[12,178600,0.8,1]],"fw3":[[12,11200,1,1],[12,43300,0.95,1],[12,91900,0.9,1],[12,163200,0.85,1],[12,238100,0.8,1]],"fl1":[[23,85000,0.95,36]],"fl2":[[23,75000,1,1]],"fl3":[[31,900000,1,1]],"fl5":[[36,1000000,1,1]],"fl6":[[31,900000,1,1]]
-                        };
+const BUILDING_UPGRADES={"1":[[1,2000,0.95,0],[15,21500,0.9,0],[21,76000,0.85,0],[27,192300,0.8,0],[33,"c20",0.8,0]],"2":[[2,2500,1,5],[7,15200,1,10],[12,32500,1,15],[23,134500,0.9,20],[29,350800,0.8,20]],"3":[[11,3400,1,2],[13,16300,1,3],[17,50200,1,4],[25,159600,0.9,5],[32,441000,0.8,6]],"4":[[14,6200,1,2],[18,33500,1,3],[20,76000,1,4],[28,210500,0.9,5],[34,482000,0.8,6]],"5":[[19,6800,1,1],[22,44800,1,2],[26,128200,1,3],[31,230600,0.9,4],[35,482000,0.8,4]],"7":[[16,5200,1,1],[19,33500,0.95,1],[25,106400,0.9,1],[30,230600,0.85,1],[33,441000,0.8,1]],"8":[[18,6800,1,1],[21,38000,0.95,1],[27,128200,0.9,1],[31,230600,0.85,1],[35,482000,0.8,1]],"9":[[27,8100,1,1],[30,53200,0.95,1],[33,140300,0.9,1],[36,264600,0.85,1],[38,597200,0.8,1]],"10":[[30,9700,1,1],[33,70200,0.95,1],[34,153700,0.9,1],[37,289200,0.85,1],[39,626300,0.8,1]],"11":[[16,10000,1,1],[20,85000,1,3],[24,200000,1,5],[28,"c22",0.9,6],[32,"c38",0.8,6]],"12":[[15,38000,1,2],[17,17200,1,3],[23,54600,1,4],[29,168800,0.9,5],[38,472400,0.8,6]],"13":[[31,16800,1,1],[32,86400,0.95,1],[34,174200,0.9,1],[36,362800,0.85,1],[38,796300,0.8,1]],"14":[[35,19400,1,1],[37,97100,0.95,1],[39,218400,0.9,1],[40,509800,0.85,1],[41,1388600,0.8,1]],"15":[[37,23000,1,1],[37,95300,1,2],[38,198500,1,3],[38,391700,0.9,4],[39,842200,0.8,5]],"16":[[38,97100,1,1],[39,209736,0.95,1],[40,467711,0.9,1],[41,1080413,0.85,1],[42,2538970,0.8,1]],"17":[[10,1000,1,1]],"18":[[10,5000,1,1]],"19":[[28,250000,1,1]],"fw1":[[11,7000,1,1],[11,24600,0.95,1],[11,64200,0.9,1],[11,114400,0.85,1],[11,186300,0.8,1]],"fw2":[[12,8400,1,1],[12,32500,0.95,1],[12,68900,0.9,1],[12,122400,0.85,1],[12,178600,0.8,1]],"fw3":[[12,11200,1,1],[12,43300,0.95,1],[12,91900,0.9,1],[12,163200,0.85,1],[12,238100,0.8,1]],"fl1":[[23,85000,0.95,36]],"fl2":[[23,75000,1,1]],"fl3":[[31,900000,1,1]],"fl5":[[36,1000000,1,1]],"fl6":[[31,900000,1,1]]};
 // produced thing -> production area
 // task_new_plant task_new_product
 const PRODUCT2BUILDING=[[,1,1,1,1,1,1,1,1,2,3,4,5,,,,,1,1,1,1,1,1,1,1,7,1,8,9,1,10,1,1,1,1,1,1,1,1,1,1,1,1,1,1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,11,,,,,,1,,,,,,,1,,,1,1,1,12,8,1,1,1,1,13,13,13,13,13,13,14,14,14,14,1,1,1,1,"fw1","fw1","fw1","fw1","fw1","fw1","fw2","fw2","fw2","fw2","fw2","fw2","fw2","fw2",7,"fw1","fw1","fw1","fw2","fw2","fw2",15,9,1,1,16,16,16,1,,,"fw3","fw3","fw3","fw3","fw3","fw3","fw3","fw3","fw3","fw3","fl1","fl1","fl1","fl1","fl1","fl1","fl1","fl1","fl1","fl1","fl1","fl1","fl1","fl1","fl1","fl1","fl1","fl1","fl1",,,,,,,,,,,"fl2","fl2","fl2","fl2","fl2","fl2","fl2","fl2","fl2","fl2","fl2","fl2","fl2","fl2","fl2","fl2","fl2","fl2","fl2","fl2","fl2","fl2",,,,,,,,,,,,,,,,,,,,,,,,,,,,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,,,,,,,,,,,,,,,,,,,,,,,,,,,"fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5",,,,,,,,,,,,,,,,,,,,,,,,,,,20,1,1,1,1,1,1,1,1,1,1,1]
@@ -414,13 +410,6 @@ const LEVEL_POINTS=[0,0,58,2420,6620,15620,27900,58700,101700,163100,211900
                    ,43096227000,45373962000,47727432000,50157733000,52665958000,55253195000,57920530000,60669042000,63499810000,66413907000
                    ,69412404000,72496369000,75666864000,78924952000,82271688000,85708127000,89235321000,92854318000,96566163000,100371897000
                    ];
-// Description of Stored GM-Data
-// VARIABLES = {CATEGORY:{VAR:[Description, Type]}}
-//      1 = historic data - not reproducible!
-//      2 = collectable data
-//      3 = options, settings
-//      4 = temporary data
-//      5 = useless, old data
 const VARIABLES = {
             "USER":{"bargeld":["Cash amount",2],
                     "calcToLodgeCampaign":["Target lodge campaign",5],
@@ -3696,24 +3685,6 @@ try{
                         profit[c]["punkte"]= profit[c]["menge"]*prodPoints[0][v];
                         help=profit[c]["input"][0][0];
                     break;}
-                    case 6:{ // Fuelstation
-                        //BUILDING_UPGRADES : [needed level,buildcost,bonus=1=nA,animalamount=1=nA,yield per slot,duration in min]
-                        profit[c]["input"]=[];
-                        profit[c]["input"][0]=[[]];
-                        profit[c]["dauer"] = 60*parseInt(BUILDING_UPGRADES[currBuilding][profit[c]["level"]-1][5],10); // Value in seconds
-                        profit[c]["runs"]  = 86400/profit[c]["dauer"];
-                        profit[c]["menge"] = profit[c]["runs"]*BUILDING_UPGRADES[currBuilding][profit[c]["level"]-1][4];
-                        profit[c]["punkte"]= profit[c]["menge"]*prodPoints[0][v];
-                        help=profit[c]["input"][0][0];
-                    break;}
-                    default:
-                        profit[c]["input"]=[];
-                        profit[c]["input"][0]=[[]];
-                        profit[c]["dauer"] =24*60*60;
-                        profit[c]["runs"]  = 1;
-                        profit[c]["menge"] = 1;
-                        profit[c]["punkte"]= 0;
-                        help=profit[c]["input"][0][0];
                     }
                     menge=profit[c]["menge"];
                     preis=mode["perc"]*gut[v];
@@ -5813,11 +5784,11 @@ unsafeWindow.buildInfoPanelMenu=function(mode){
         }
         createElement("div",{"id":"infoPanelR","style":"position:absolute;left:115px;width:480px;overflow:auto;height:515px;"},container);
         // paypal
-        //newdiv=createElement("div",{"style":"position:absolute;left:0;bottom:0;"},container);
+    		//newdiv=createElement("div",{"style":"position:absolute;left:0;bottom:0;"},container);
         //newdiv1=createElement("form",{"id":"paypalForm","target":"_blank","action":"https://www.paypal.com/cgi-bin/webscr","method":"post"},newdiv);
         //createElement("input",{"type":"hidden","name":"cmd","value":"_donations"},newdiv1);
         //createElement("input",{"type":"hidden","name":"business","value":"jessicakanaan@web.de"},newdiv1);
-        //createElement("input",{"type":"hidden","name":"lc","value":((LANGUAGE=="de")?"DE":"US")},newdiv1);
+    		//createElement("input",{"type":"hidden","name":"lc","value":((LANGUAGE=="de")?"DE":"US")},newdiv1);
         //createElement("input",{"type":"hidden","name":"item_name","value":"MyFreeFarm Script"},newdiv1);
         //createElement("input",{"type":"hidden","name":"no_note","value":"0"},newdiv1);
         //createElement("input",{"type":"hidden","name":"currency_code","value":"EUR"},newdiv1);
@@ -5825,8 +5796,8 @@ unsafeWindow.buildInfoPanelMenu=function(mode){
         //createElement("input",{"type":"image","style":"border:none;background:transparent;","src":"https://www.paypalobjects.com/"+((LANGUAGE=="de")?"de_DE/DE":"en_US")+"/i/btn/btn_donate_LG.gif","name":"submit","alt":"PayPal"},newdiv1);
         //createElement("img",{"alt":"","border":"0","src":"https://www.paypalobjects.com/en_US/i/scr/pixel.gif","width":"1","height":"1"},newdiv1);
 
-        //Spenden Wikipedia
-        newdiv=createElement("div",{"style":"position:absolute;left:0;bottom:0;"},container);
+    		//Spenden Wikipedia
+    		newdiv=createElement("div",{"style":"position:absolute;left:0;bottom:0;"},container);
         newdiv1=createElement("a",{"href":"https://spenden.wikimedia.de/spenden/","target":"_blank","class":"link"},newdiv);
         createElement("img",{"style":"border:none;","src":"https://www.paypalobjects.com/"+((LANGUAGE=="de")?"de_DE/DE":"en_US")+"/i/btn/btn_donate_LG.gif"},newdiv1);
 
@@ -6914,10 +6885,10 @@ function buildInfoPanelOptions(){
         newinput=createElement("button",{"type":"button","class":"link"},newtd,getText("settings_zoneReset")[0]);
         newinput.addEventListener("click",function(){
             alert2(getText("settings_zoneReset")[1],getText("yes"),getText("no"),function(){
-                GM_deleteValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_zones"); // Berater
-                GM_deleteValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_zoneList"); // Automat
-                GM_deleteValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_zoneSettings"); // Automat
-                GM_deleteValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_zoneToList"); // Automat
+                GM_deleteValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_zones");
+                GM_deleteValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_zoneList");
+                GM_deleteValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_zoneSettings");
+                GM_deleteValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_zoneToList");
             });
         },false);
         createElement("td",{},newtr,getText("settings_zoneReset")[1]);
@@ -14111,7 +14082,7 @@ return false;
                 case "flowerarea_autoplant": raiseEvent("gameFarmersmarketStarted"); break;
                 case "flowerarea_water_all": raiseEvent("gameFarmersmarketWatered"); break;
                 case "fuelstation_harvest": doFuelstation(zoneNr); raiseEvent("gameFuelstationHarvest"); break; //Fuelstation geerntet
-                case "fuelstation_entry": doFuelstation(zoneNr); raiseEvent("gameFuelstationEntry"); break; //Produkte eingeworfen
+                case "fuelstation_entry": doFuelstation(zoneNr); raiseEvent("gameFuelstationEntry"); break;	//Produkte eingeworfen
                 case "gardeninit":{
                     var zoneNrF = zoneNr+6*(farmNR-1);
                     if(1==zones.getBuilding(zoneNrF)){
@@ -14703,116 +14674,117 @@ return false;
     //s: Produkt
     //y:
     unsafeOverwriteFunction("dialogFuelstation",function(n, z, d, s, y){
-        try{
-            unsafeWindow._dialogFuelstation(n, z, d, s, y);
-        }catch(err){GM_logError("dialogFuelstation","","",err);}
-        try{
-            GM_log("dialogFuelstation:"+ "n"+n+" z"+z+" d"+d+" s"+s+" y"+y);
-            if ((typeof n!="undefined")&&(n!="stats")&&(n!="add_level")&&(n!="buy")&&(n!="product_select_pid")) {
-            //n=stats => Statistik wird aufgerufen
-                var zoneNr=z;
-                var data=unsafeWindow.farms_data.farms[unsafeWindow.farm][zoneNr];
-                var iLimit=data.data.constants.slot_level[data.data.data.slots[d].level].limit;
-                var children = $('fuelstation_product_select_inner').getElementsByClassName("fuelstation_product_select_item");
-                for (var c in children) {
-                    if (!children.hasOwnProperty(c)) { continue; }
-                    var pId_parent=children[c].getElementsByClassName("fuelstation_product_select_item_img")[0].childNodes;
-                    var pId = pId_parent[1].className.replace("tt", "");
-                    var points = children[c].getElementsByClassName("fuelstation_product_select_item_points")[0].innerHTML.replace(".","");
-                    var ratio = (gut[pId]*iLimit/points).toFixed(2);
-                    createElement("div", {
-                        "style":"position: absolute; bottom: -15px; left: 8px;border: 2px solid rgb(255, 114, 0); background-color: white;width: 85px;text-align: center;"
-                    },children[c], moneyFormat(ratio));
-                }
-            }
-            if ((typeof n!="undefined")&&(n=="product_select")){
-                raiseEvent("gameFuelstationOpenDialogProdukt");
-            } else if ((typeof n!="undefined")&&(n=="product_select_pid")) {
-                raiseEvent("gameFuelstationOpenDialogPID");
-            }
-        }catch(err){GM_logError("dialogFuelstation","","",err);}
+		try{
+			unsafeWindow._dialogFuelstation(n, z, d, s, y);
+		}catch(err){GM_logError("dialogFuelstation","","",err);}
+		try{
+		GM_log("dialogFuelstation:"+ "n"+n+" z"+z+" d"+d+" s"+s+" y"+y);
+		if ((typeof n!="undefined")&&(n!="stats")&&(n!="add_level")&&(n!="buy")&&(n!="product_select_pid")) {
+    //n=stats => Statistik wird aufgerufen
+			var zoneNr=z;
+			var data=unsafeWindow.farms_data.farms[unsafeWindow.farm][zoneNr];
+			var iLimit=data.data.constants.slot_level[data.data.data.slots[d].level].limit;
+			var children = $('fuelstation_product_select_inner').getElementsByClassName("fuelstation_product_select_item");
+			for (var c in children) {
+				if (!children.hasOwnProperty(c)) { continue; }
+				var pId_parent=children[c].getElementsByClassName("fuelstation_product_select_item_img")[0].childNodes;
+				var pId = pId_parent[1].className.replace("tt", "");
+				var points = children[c].getElementsByClassName("fuelstation_product_select_item_points")[0].innerHTML.replace(".","");
+				var ratio = (gut[pId]*iLimit/points).toFixed(2);
+				createElement("div", {
+						"style":"position: absolute; bottom: -15px; left: 8px;border: 2px solid rgb(255, 114, 0); background-color: white;width: 85px;text-align: center;"
+				},children[c], moneyFormat(ratio));
+			}
+		}
+		if ((typeof n!="undefined")&&(n=="product_select")){
+			raiseEvent("gameFuelstationOpenDialogProdukt");
+		} else if ((typeof n!="undefined")&&(n=="product_select_pid")) {
+			raiseEvent("gameFuelstationOpenDialogPID");
+		}
+
+		}catch(err){GM_logError("dialogFuelstation","","",err);}
     });
 
     function doFuelstation(zoneNr_a){
-        try{
-            GM_log("doFuelstation "+"zoneNr_a"+zoneNr_a);
-            var zoneNr=zoneNr_a;
-            var zoneNrF=zoneNr+6*gameLocation.get()[1];
-            var zoneNrS;
-            showBlase(zoneNrF);
-            drawZoneNavi(zoneNrF,$("innermaincontainer"));
-            var newDiv,newDiv1;
-            var tempZoneProductionData=[[{}],0,0,true];
-            var tempZoneProductionDataSlot;
-            var data=unsafeWindow.farms_data.farms[unsafeWindow.farm][zoneNr];
+		try{
+			GM_log("doFuelstation "+"zoneNr_a"+zoneNr_a);
+			var zoneNr=zoneNr_a;
+			var zoneNrF=zoneNr+6*gameLocation.get()[1];
+			var zoneNrS;
+			showBlase(zoneNrF);
+			drawZoneNavi(zoneNrF,$("innermaincontainer"));
+			var newDiv,newDiv1;
+			var tempZoneProductionData=[[{}],0,0,true];
+			var tempZoneProductionDataSlot;
+			var data=unsafeWindow.farms_data.farms[unsafeWindow.farm][zoneNr];
 
-            for(var slot=1;slot<=4;slot++){
-                zoneNrS=zoneNrF+"."+slot;
-                if((slot==1)||(!data.data.data.slots[slot]["block"])){
-                    zones.setBlock(zoneNrS,"");
-                    tempZoneProductionDataSlot=[[{}],0,0,true];
-                    tempZoneProductionData[1]++;
-                    tempZoneProductionData[2]++;
-                    tempZoneProductionDataSlot[1]++;
-                    tempZoneProductionDataSlot[2]++;
-                    if(data.data.data.slots[slot]){
-                        var iPrTyp=0;
-                        var iProd=350;
-                        var iTime=NEVER;
+			for(var slot=1;slot<=4;slot++){
+				zoneNrS=zoneNrF+"."+slot;
+				if((slot==1)||(!data.data.data.slots[slot]["block"])){
+					zones.setBlock(zoneNrS,"");
+					tempZoneProductionDataSlot=[[{}],0,0,true];
+					tempZoneProductionData[1]++;
+					tempZoneProductionData[2]++;
+					tempZoneProductionDataSlot[1]++;
+					tempZoneProductionDataSlot[2]++;
+					if(data.data.data.slots[slot]){
+						var iPrTyp=0;
+						var iProd=350;
+						var iTime=NEVER;
 
-                        for(var v in data.production) {
-                            if(!data.production.hasOwnProperty(v)){ continue; }
-                            if ((data.production[v].slot==slot)) {
-                                //iProd=data.production[v].pid;
-                                iTime=now+data.production[v].remain;
-                            }
-                        }
+						for(var v in data.production) {
+							if(!data.production.hasOwnProperty(v)){ continue; }
+							if ((data.production[v].slot==slot))   {
+								//iProd=data.production[v].pid;
+								iTime=now+data.production[v].remain;
+							}
+						}
 
-                        if(iProd){
-                            var iAmount=data.data.constants.slot_level[data.data.data.slots[slot].level].output;
-                            var iPoints=iAmount*prodPoints[iPrTyp][iProd];
+						if(iProd){
+							var iAmount=data.data.constants.slot_level[data.data.data.slots[slot].level].output;
+							var iPoints=iAmount*prodPoints[iPrTyp][iProd];
                             if (!$("fuelstation_slot"+slot+"_points")){
                                 newDiv=$("fuelstation_slot"+slot).children[1];
                                 newDiv1=createElement("div",{"id":"fuelstation_slot"+slot+"_points","style":"position:relative;top:75px;left:85px"},newDiv);
                                 pointsFormat(iPoints,"div",newDiv1);
                             }
-                            tempZoneProductionData[1]--;
-                            if(!tempZoneProductionData[0][iPrTyp][iProd]){ tempZoneProductionData[0][iPrTyp][iProd]=[]; }
-                            tempZoneProductionData[0][iPrTyp][iProd].push([iAmount,iPoints,iTime,NEVER]);
-                            tempZoneProductionDataSlot[1]--;
-                            if(!tempZoneProductionDataSlot[0][iPrTyp][iProd]){ tempZoneProductionDataSlot[0][iPrTyp][iProd]=[]; }
-                            tempZoneProductionDataSlot[0][iPrTyp][iProd].push([iAmount,iPoints,iTime,NEVER]);
-                            //auto-cropping
-                            if((iTime<now)&&(top.unsafeData.autoAction==null)&&valAutoCrop["farm"]&&(newDiv=$("fuelstation_slot"+slot))){
-                                top.unsafeData.autoAction="berater: fuelstation crop";
-                                window.setTimeout(function(div){
-                                    click(div.children[3]);
-                                    top.unsafeData.autoAction=null;
-                                },500,newDiv);
-                            }
-                        }
-                    }
-                    zones.setProduction(zoneNrF+"."+slot,tempZoneProductionDataSlot.clone());
-                } else {
-                    zones.setBlock(zoneNrS,"b");
-                }
-            }
-            zones.setProduction(zoneNrF,tempZoneProductionData.clone());
-            var tempZoneProductionData=null;newDiv=null;newDiv1=null;
-        }catch(err){GM_logError("doFuelstation","","",err);}
+							tempZoneProductionData[1]--;
+							if(!tempZoneProductionData[0][iPrTyp][iProd]){ tempZoneProductionData[0][iPrTyp][iProd]=[]; }
+							tempZoneProductionData[0][iPrTyp][iProd].push([iAmount,iPoints,iTime,NEVER]);
+							tempZoneProductionDataSlot[1]--;
+							if(!tempZoneProductionDataSlot[0][iPrTyp][iProd]){ tempZoneProductionDataSlot[0][iPrTyp][iProd]=[]; }
+							tempZoneProductionDataSlot[0][iPrTyp][iProd].push([iAmount,iPoints,iTime,NEVER]);
+							//auto-cropping
+							if((iTime<now)&&(top.unsafeData.autoAction==null)&&valAutoCrop["farm"]&&(newDiv=$("fuelstation_slot"+slot))){
+								top.unsafeData.autoAction="berater: fuelstation crop";
+								window.setTimeout(function(div){
+									click(div.children[3]);
+									top.unsafeData.autoAction=null;
+								},500,newDiv);
+							}
+						}
+					}
+					zones.setProduction(zoneNrF+"."+slot,tempZoneProductionDataSlot.clone());
+				} else {
+					zones.setBlock(zoneNrS,"b");
+				}
+			}
+			zones.setProduction(zoneNrF,tempZoneProductionData.clone());
+			var tempZoneProductionData=null;newDiv=null;newDiv1=null;
+		}catch(err){GM_logError("doFuelstation","","",err);}
     }
 
     //buildFuelstation(a)
     //a: Zone-Nummer
-    unsafeOverwriteFunction("buildFuelstation",function(a){
-        try{
-            unsafeWindow._buildFuelstation(a);
-        }catch(err){GM_logError("_buildFuelstation","","",err);}
-        try{
-            GM_log("buildFuelstation "+"a"+a);
-            doFuelstation(a);
-            raiseEvent("gameOpenFuelstation");
-        }catch(err){GM_logError("buildFuelstation","","",err);}
+  	unsafeOverwriteFunction("buildFuelstation",function(a){
+      try{
+        unsafeWindow._buildFuelstation(a);
+      }catch(err){GM_logError("_buildFuelstation","","",err);}
+  		try{
+        GM_log("buildFuelstation "+"a"+a);
+        doFuelstation(a);
+        raiseEvent("gameOpenFuelstation");
+      }catch(err){GM_logError("buildFuelstation","","",err);}
     });
 
     //calcPointsFuelstation
@@ -21229,11 +21201,11 @@ try{
         allEvents.push("gameFarmersmarketDialogCommit");    // the farmersmarket building has requested for commit of a dialogue
         allEvents.push("gameFarmiNew");                     // a new farmi is appeared
         allEvents.push("gameFarmiResponse");                // a farmi is been rejected or accepted.
-        allEvents.push("gameFuelstationEntry");             // Fuelstation Product entry
-        allEvents.push("gameFuelstationHarvest");           // Fuelstation Slot cropped
-        allEvents.push("gameFuelstationOpenDialogProdukt"); // Fuelstation Product choose
-        allEvents.push("gameFuelstationOpenDialogPID");     // Fuelstation Product amout
-        allEvents.push("gamePonyCropped");                  // a pony has been cropped
+		allEvents.push("gameFuelstationEntry");				// Fuelstation Product entry
+        allEvents.push("gameFuelstationHarvest");			// Fuelstation Slot cropped
+		allEvents.push("gameFuelstationOpenDialogProdukt"); // Fuelstation Product choose
+		allEvents.push("gameFuelstationOpenDialogPID"); 	// Fuelstation Product amout
+		allEvents.push("gamePonyCropped");                  // a pony has been cropped
         allEvents.push("gamePonyFed");                      // a pony has been fed (after confirmation)
         allEvents.push("gamePonyFarmiSet");                 // a pony farmi has been set on a pony (after confirmation)
         allEvents.push("gamePonyFarmiSelected");            // a pony farmi has been selected (not unselected)
