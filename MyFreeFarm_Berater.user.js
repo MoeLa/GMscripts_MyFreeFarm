@@ -13396,6 +13396,7 @@ return false;
                         window.setTimeout(unsafeWindow.messagesAction,500*(++countRequest),"unread",i);
                     }
                     if(div=$("messages_list_subject"+currMsg.nnr)){
+                        div.setAttribute('style', 'width:385px !important');
                         div.setAttribute("j",j);
                         div.addEventListener("mouseover",function(event){
                             toolTip.show(event,toolTipSales(this.getAttribute("j")));
@@ -13461,6 +13462,7 @@ return false;
                         window.setTimeout(unsafeWindow.messagesAction,500*(++countRequest),"unread",i);
                     }
                     if(div=$("messages_list_subject"+currMsg.nnr)){
+                        div.setAttribute('style', 'width:385px !important');
                         div.setAttribute("j",j);
                         div.addEventListener("mouseover",function(event){
                             toolTip.show(event,toolTipSales(this.getAttribute("j")));
@@ -19910,7 +19912,6 @@ try{
         .farm_button_tt{width:150px!important;}\
         .farm_button_tt{display:none!important;}\
         .quests_status_bar_item_tt{display:none!important;}\
-        .messages_list_subject{width:385px!important;}\
         .farm_production_timer{opacity:1!important;}\
         .farmersmarket_pos_timer{opacity:1!important;}\
         #cartsubmit{font-weight:bold!important;}\
