@@ -9444,13 +9444,13 @@ try{
             ".queueBoxClose {float:right;top:3px;width:15px;height:15px;margin-right:1px;padding:2px 2px 2px 2px;}\n"+
 
             ".fieldlinks {height:25px;right:0;position:absolute;top:0;}\n"+
-            ".fieldlinkitem1,.fieldlinkitem2,.fieldlinkitem3,.fieldlinkitemactivate1,.fieldlinkitemactivate2,.fieldlinkitemactivate3{float:right;color:#FFFFFF;font-size:16px;font-weight:bold;height:29px;margin-left:5px;padding-top:2px;text-align:center;height:34px;width:54px;}\n"+
-            ".fieldlinkitem1{background:url("+IMAGES["zone_off_1"]+") no-repeat scroll 2px 0px transparent;}\n"+
-            ".fieldlinkitemactivate1{background:url("+IMAGES["zone_on_1"]+") no-repeat scroll left top transparent;}\n"+
-            ".fieldlinkitem2{background:url("+IMAGES["zone_off_2"]+") no-repeat scroll 2px 0px transparent;}\n"+
-            ".fieldlinkitemactivate2{background:url("+IMAGES["zone_on_2"]+") no-repeat scroll left top transparent;}\n"+
-            ".fieldlinkitem3 {background:url("+IMAGES["zone_off_3"]+") no-repeat scroll 2px 0px transparent;}\n"+
-            ".fieldlinkitemactivate3{background:url("+IMAGES["zone_on_3"]+") no-repeat scroll left top transparent;}\n"+
+            ".fieldlinkitem1,.fieldlinkitem2,.fieldlinkitem3,.fieldlinkitemactivate1,.fieldlinkitemactivate2,.fieldlinkitemactivate3{float:right;color:#FFFFFF;font-size:16px;font-weight:bold;margin-left:5px;margin-top:5px;padding-top:2px;text-align:center;height:34px;width:40px;}\n"+
+            ".fieldlinkitem1{background:url("+IMAGES["zone_off_1"]+") no-repeat scroll 2px 0px transparent;background-size: 40px 30px;}\n"+
+            ".fieldlinkitemactivate1{background:url("+IMAGES["zone_on_1"]+") no-repeat scroll left top transparent;background-size: 40px 30px;}\n"+
+            ".fieldlinkitem2{background:url("+IMAGES["zone_off_2"]+") no-repeat scroll 2px 0px transparent;background-size: 40px 30px;}\n"+
+            ".fieldlinkitemactivate2{background:url("+IMAGES["zone_on_2"]+") no-repeat scroll left top transparent;background-size: 40px 30px;}\n"+
+            ".fieldlinkitem3 {background:url("+IMAGES["zone_off_3"]+") no-repeat scroll 2px 0px transparent;background-size: 40px 30px;}\n"+
+            ".fieldlinkitemactivate3{background:url("+IMAGES["zone_on_3"]+") no-repeat scroll left top transparent;background-size: 40px 30px;}\n"+
 
             ".lineZoneItem {border-radius:3px;margin:1px 0px 1px 1px;display:inline-block;height:15px;overflow:hidden;}\n"+
             ".lineZoneItem:hover {background-color:red;}\n"+
