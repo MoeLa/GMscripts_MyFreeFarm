@@ -4,8 +4,8 @@
 // @author         BastianKanaan
 // @description    Extends MyFreeFarm
 // @icon           data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAYAAAA6/NlyAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB94BGgo6NO+u5q4AAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAS0ElEQVRo3t2aeYxl11ngf+fub3+172t3V1cv7sVuJ3bs7jh2QtoMDoHEwRlCbMJEATRiSaKBQTNBCKGwBwSDNAyTQVGCYJIMEINjxrFix3E73mO7TW/V1VXVtS+v6i13v+ee+aNvQSXDaCTS7W7nSE/v3veuzrm/8y3nO9934Dq08cE+APv9E/1//tDN+16/9+hNJ/l+bXv3jAHw4zf1P/sLdx5TRqXyc++fHPvsGzW+/kbC5vMOyyvrfOSDJz99eM/gj+09fkK9Na/fW8sVzr86NfOl7ydgB+iK46TnVz75wJNtHZX3rcuUI8dvFS9cnuHQ7YcOWprTfvb8pUe/H4BzwH7g0H/59INfq3Z09++ZHBPHbn8LpVKF3WNdWPlOdeIdd962MDf/8vSl+XPX8mW0awxrAiPAgd/4xXf+wdaG74yP7BL9w/vp7x2h1WrRM3SYwf5+8cLz31Yf/w8f/fK1nn3tGkt2D3AE6J7o6xoc7Cjyq//pt3ntm88wMzvDhfMX+dmP/AJJnDKxe0j09HQZDzzwns+9GVW6CBwGjgIdhbz91vfdffjg6soWrhcwf+p5Cu7L3DwhWTkdYvVWCeOEQsFm//5dY1/4wld+880kYQeYBG4CqoD23uMTk0mcQJTQF9R4/48PM3mwDU2HDz5Y5dk/+VPc5YuErZpKooZ9LSVsXOX+BNAB7AUK2X1yx97C7oXpNQb7Nrn5pw5hOA6FthLFYh4hdD7+B8NceHGKi2eqYmTfmAGwb3I3Z85O3fAS1oHubckC6IZ9uGCWCruHN6lWHNIwQRc6BjqkGpqCNEkZPTTG0aFZtuqBPjQ08NPXAvZaAJtA2w7NUQ+9c/Lt5XQOWh5hrY5yfbQoRAYBKvRJ4xgZxcReQD5vMaK9yu9+5j//iWEY4s2g0nYGvO0MxX9/9PTnT1R6P1UqCVJDR/kJdiIQrsIqRghT4KEIpCSNJAuLa3zm7179qJaibnRgDejJgP9JOp3thZueOJvygwdTND0lcFuEWhEtdTALvTTXlmikCV4ScHFhixefXEHSuStKkxveadnAQOas/qm1vHhlq5Uwta6rsUosiCWuVsfJF2itzNMKY+a36sxsNXnhYkI5LLBSWz71ZvDSCkiz739eoyyjMI81VV7Vd6skYLSasrK4gWnnWKt7PL+4wbwbcv6yRKsrZDHXSGqbr74ZAg8t89D9O/stWNbuTS+8+Mzs2hfqstBNnPYOdRpcXNjg4VeXeOqSz/RcghuIb6zr5m+2omQ1NZ2/q7da4c7O+3u6abruDQWsA0PfDTzSVji26QZWJOWFxbr73OTuwcPfeL1ezhcNljydlmdDW+XJ8zPzd/lRsr6vo/xbtkjW26qVwzKJb7INo6OtWl1fWl2LbkQvnQJxJm0NEKZh6yptpNvx9fmt5MXjk72DD798meFyldHDY6xeuMi79nYpJWXqJJH2ajOaqW3UHtvudMsLGOjtYWF55YZahwUggRngEuAC6txa7XHNMF/Z9txRLJNATxnuG2Civ5ORgS56nPTtaPrpr03V9DDwGztht9vVgL0WwBpwGXgKeAVwoyiqNf1gbXtC2goWInLYZUG1UqH25JP4iTr32JnlQ4D92OJm5f83UG93xw2h0gKwsusGcDZbl8eziVADXe33juXlD0QrDRWWcqK2sIDSneSx80sngX6E8IZ7OvvCIPx5Kwnu6eru7J1fWPLLPQMvrtc2v+XknadMzXhdIlr79k2kZ86cv67AaQbqZtd+di8Bdctw9ZerVb3njjvGeOyvT4tG1zD27GX8vqH/wfmlxf6eronRnJqKIt/RCqCcrjNzm+7Nq6GaX52bzxb1K166v7e7HIeRByTXEzgCpjKnlX5HgG3ak+++d39PwcirNAzEsZN38sg/rvPAJ3+WwTb7o3rs3xPWVsYKhQKRq3GmqR2bvrjwIkBfZztL67XvGGhxebVxoyQAomzWLaAL2AVU/u29t9y/d3Skc31pXcTSQG6sENpF3nLLfkwh1ckfua991/4J8fpzL4jXaukTtWbTLBdL7e3t1bzQ9Uaj2Ypv1M3Ddoi5F9iH0Mf/6Jfu/3hff2/n8uqaGpk8KjQErcYmt/YNUe7sxVCJiBPFI5//K0bGB5UoNnNffGL5z8BNLNNMhRDb/uGqbCautoS1LPh4i2ZYRz54fOxT02cv5A/ceozugWFh6RrDh46RMxX9g33IyOeRv36EXYfeQhi02FhaIG9pg1uxuVDbrD8p0zSQUsrvNpEbCTiXpXZGH7xj6NerxTIqidk9Ocljjz6Bcuv09HfxyFe+Stxy6R4a5IlHHuXlp75O4jbxo0jEErW3r3Ty3LL/a2EYXFXYqwksssTdGLC3krf3j7XlbtPRcEyTrz/9Eh0lm5X1TVIl2FxZZGpmjqVLM7SVHSqlAghFEkuWN13hWCb5fOH3Li2sRlwDFbwasJ3AMeCtQLtjm/vcZsDK0ipx4DMx2EGpYGPmHGYvnKVUKVCpFMmZkKQphbxFqlL8WHLq9ByXV+tYmnr4Rk3xlLKU7AGgAmiDbcXROI7xIonne4g0xrYMOtqKKB0sXWekr51c3sa2DNAExZyDbgiUUrx8YYGiKd9+cM/I0I0GrGe7o7EsPQsIYywXTUgF9Uhi6ALimJxlolKJY1uEcYRKFbahUcw5yCQlUQpN03jv8UnZ3T/6e4+/PM14d+F1gIN7x24YYCMLH/PbP1QKdpvrxtQiVHfBVK6fgoypbTZJZYqUkqYb0Gq51BsegecjU4Vp6FimSVuloPte0xsYHHnu+bNzxfvu2P/S6XOXtR86cdMNAWzuyD8DcGig7cFFTzLl6YslS6AZEEcRtVod3wuo111818P3ApIgIooTfM9ndnkLw9AJooR7Dvf/yumZpeMyFY3ZxfUj9905ceGpqcR49+0Hrjuwk9mwBqj+jvKEX6/1zSVO0JeT3cLURck2SJXACTxi10PFCaam02h4+J5HqxnQagUIDUzLIJKSYs7S9/ZXz69uNqtz6631raY7/s4J89w/PPM6B/eOXzdgLfPO5Svxslm9Y9D52DyVxDKNhW4rNUxDo5wzKBo6XqpI/AAZxsRxQj5no3QTJRSWbdBRLWFbFn2dbSgUd9/UN9zd1XVpq+l1P/Pa5ZnaVn38/e84/Nrpc9OMDQ1cF2Anc1gOkPzAwYFfPr0hieL46YG86u0pWMLUBW4sidDo6KzS0dlGV3cbpUKOaql4ZWnK5wmimDSVOI6FF0TIVKGhiYqVjpRLxc/t37/vyEtT66cCzzv4Y3cfefzS5QV2jY2+oYHHdv7qIKAf29VzX1vJmVgMrItFgkP1ZsserFg4to6tGygFVr5AgiBVYDsWmiEIY4lMU8rlIqZloJRASYmuCYIwYrS3Kp77x7nDfhAuOI716GpLqo5c+p5Dk2NDT7905itvFPB2wewo0FMpFQffc3Tgoadn/MgPAtMKG/nx9jwVxyDvGPihBNNB6Dq6YWCaJkLXcf0QhcJ2TDTdQEMgUZiGRhgmxHFCznHQdNT5uZUfHBgc/JlarXYp1osHunPpe7p7B+szC8vfeiNUusCVIwx9QO1Hjw3/4jcvNVLXD6OBkjDiVKiSdaXbpp+gmRapEDTDmI2WS8P1EAIKeQfbsdhqeDRaTYI4wnV9kFBrtIhlSsv1OTTeJ0p5G5toutFonlrf2Lzv23PuZncu/AzkR/fsGrumwGYWZIwD0Vv39LxrvRU4F5fr2sbm5meDVqs43u4IKSFNFZoSRGGEIaCQc+hpr2KYOkopQGEaBuVino5yBamg1fLZaLYo5hyUglimmJbJiSPjTM0utR05eji/Xqutu2H03hdeX/jGB06MPn3h4qVrBiyyRPu+LNAwBkvmQ6emNnyU+l89He0fyosUSxOkKiWIU/woIQgTGq0Av9EijWMsXYNUIVNoNT1sU6fp+bgND5mmyFjh+REKsC2Tjc06HaUcmoCVxaUBgHIhf07Y+enZ5fp/vf/43qeulQ0XM7sdAtI793R96HI9Km648fkkkSqvJUuDRXO8aOvkTAOlFJoQCAFJClbOQaBQQoMkxTINdEPH9ULCMMaxbaRUpGlKkqRX4FVKGEs620rUtpq4CV9yXW/2ns0t99spX0U3/02QiNroYF+nqZuvbDVbV03COjDMlRM5EjTVXS3fvpFYsZTyrKZp+ZxObzVvYusGhi4wdZ04VSRSIYDID2h5Ic2mT8sLCMOYzS2XVKZoCKIoQUMjjCVC10gVFPN5ysU8XpCwf9cAtdpGEeB/AqWCE11aWP7EesM/ZSfNP7+0EHbs3TV+1YArwO4MfOnEnvaPnpqubTbr9dO6pr3X8/2/7ygX26p5k0SlCK5ItmKbWLqGKQSJTFFSoWRK04+4vLKB6wW03ABTNwjDmCCKiRKJkXltL4yRSiA0TSGgo1rdzn2ztLoOwOziyudn17x77z7onD13cfqqAJvAKFeOMWzkC6UeX5jdbpRsaZro8Tz/V1WaunHghVGicEyNSKboQqMZJRhCQ8oEmUjcIKTpBshEUrBtio6NLgQtPyBOJE3PRyaStVodqRQqVTRavmr4sTB041LLC+0slP3OF9T1+a3Zxc7b9u/5yPcKLID2TJ0DYPX43p6fu7AWrIF6rOV6f6ZQAhCJZtYNTRBn2z5Ng7a8RStO0DVBkkiUlGi6Rhgl+F5IFMbouo7rRfhhTN62UUJQLhexLRs3DIklIkpk0PCT11zPS7JMaG7nS55fXDu9VR34xNTy+tr3Cmxly1AB8Hs622/ZjNJ+HYoykT+j69r2wMKP5GyqaypOwLEM5SWSVigpWgZ+IgmTBJRCi2NKtoFhGtRaHp4fYZk6OcfCDyLiRBJEEW4Y4waKWKGaftR0/fCroF7Jgp7hnQ53fGyE6csLv79e23z4e/HSItvrTmSJtODmfYMfO3NhfmKr5eaKxcIXPM9f2t4a6kKj3TZuacmUMFGiu+SIWCriVF7J7pk6ptAIAZWCbuhoAhQCzdBBaTiOQy6XI4xT5YYRKCXcIDntOPYDj3/r9N9mWtYF9ALrWXWDza36VVmW8lw5OlgE6sBpLySuNVo/Cnw7CAK5Q0NEmKZJTpMHLMtWUYq26SW6VGAYembTOoapkyqNOE2xHQelG0gEXpiAptEKY7XphuFGoyXbndic7BPKFP7//vIT5/44G0ftSDq4wObViqVFthPalu4isOD5/rcy9R7LbHv7WdJUxUut+JRlaL2aprXphrB9qVQrlFiGLrw4JVUQK5AIEqHjBpFKFEITBoFENfx4c2WjuXDrUNJ727jBSIcSBwaMwx1tldwLF7a+lgG7mQC2MolflUjLzuykLftUdjwbA142+P91liqX16MH7yqWBroMqmUDLyFtxiKN0NKtKEn9SKogTNRGvaWabkCqNLXa9NKl9a2VMzOrXx+vhGNv321zebaBYRpcXvTV0b74lz58ct/bdpRzljLoq1ZqcTKYy0AtK3L72X9JVhVMMg1RgJbP5wuHxjoO//xxcef0vMvJm6ts+Zp4/KWafmbRXdts+m5k5J93DJkbK5vHUxkJITQ1t7gcN1Nz5vLa5peUgnfd1/e+szMe3zzbYs9EiaWkcvTcc3NfvevW4tc+98+5s3912eX/BexnBe04m1G5YxC5Q52sTPLDcRTd8sl71Nv+8kXdPTMTBz/dGXacXTPCMNbCT93f1fWhP579Q2j6dWClxhPZZBmZr6gCb2svO3t6qpZ6/Fm/dWoxfPIDLflDDz8z99vnloK/3dW38e/+4/tGf/fTX5755LVI8YSZymzXYHfOqMqkvpVd54CxA4P5vlAvqi89PfP3F5brS3aq+Jvn1pcfPb124fSFRnrylp77d5RNkmwyrcwploD8B2/r3qOEEb+0Lv8QWEsTpW6f7MkpmWivzYfrR4btT0B+ZHJ88A1P8TSA2UzKGmD+8B5zNPRD0dtWHsrplE3L5qETvWVQ0aKr+x97R+Ew6IVsIs8BLwELmafdyplGZbIUGlEYGWut8NfzjjNpxam4a1QdB9Z1jbwfSH7nJ4f+/dnp+TccOM7sei3TgvLMuplsLgUEUsnJ7lLBqwUM5pI2YLrDTpwwEtxztKcGPAGcAp4HngXmgKYhlIg2EzYWWkRReELCVlKLWF2MASzdE4G35qnVmfrw9aoP17OKfwGQX359/excq1TYajSfnUqdNNoKT/zDlHgYaOnNRHlrLqbSXgGmd5jI+Uyte5qRrD06Q9Nqb/sw1NbCIFj64gWTFaUfA37kken6oyA/HHUMfwqWuV6tANwJ/BrwF9le+W7gs6OVwnYq4k9vGuy8cP/+8jPQb/4L6/0w8BPAFxHi+I7//puZyx/YMc5f2MXKEa5z07Ii2k8AN2c7KwG8e8czd+Rs+wN2tTM33Nv9L/XRA9wP3PVdGpf7rue6rsYL/x8HbwtumjbAVwAAAABJRU5ErkJggg==
-// @date           10.01.2016
-// @version        2.10.0
+// @date           19.01.2016
+// @version        2.10.4
 // @license        GPL version 3 or any later version; http://www.gnu.org/copyleft/gpl.html
 // @include        /^http:\/\/(|www\.|s\d+\.)au\.myfreefarm\.com\/.*$/
 // @include        /^http:\/\/(|www\.|s\d+\.)veselaferma\.com\/.*$/
@@ -115,7 +115,11 @@ const CHANGELOG=[["2.0","29.05.2014",[["Migration nach openuserjs.org","Migratio
                 ,["2.9.1","04.01.2016",[["Bugfix: Quest 47 Quest-Linie 3","Bugfix: Quest 47 of mainseries 3"]]]
                 ,["2.9.2","05.01.2016",[["Bugfix: Berechnung der besseren Produkt-Alternative (bei Quests).","Bugfix: Calculation of best product-alternative (for Quests)."]]]
                 ,["2.9.3","07.01.2016",[["Neu: Exotische Pflanzen nun auch in der Übersicht \"Profit pro Zone pro Tag\" und bei \"Fehlende Produkte\".","New: Exotic plants are added to overview \"Profit per Zone per Day\" and to \"Missing products\"."]]]
-                ,["2.10.0","10.01.2016",[["Neu: Biospritanlage","Bugfix: Fuelstation"]]]
+                ,["2.10.0","10.01.2016",[["Neu: Biospritanlage","New: Fuelstation"]]]
+                ,["2.10.1","12.01.2016",[["Neu: Biosprit nun auch in der Übersicht \"Profit pro Zone pro Tag\".","New: Fuel shown to overview \"Profit per Zone per Day\"."]]]
+                ,["2.10.2","13.01.2016",[["Bugfix: Picknick und Blumenwiese Nicht-Premium-Accounts","Bugfix: Picknick and fields of flower for non premium accounts "]]]
+                ,["2.10.3","15.01.2016",[["Bugfix: Biosprit","Bugfix: Fuelstation"]]]
+                ,["2.10.4","19.01.2016",[["Anpassung an Spiel-Update 19.01.2016","Adaptation for game update 19.01.2016"],["Bugfix: NPC-Preis für Biosprit","Bugfix: NPC-price for Fuel"]]]
                 ];
 if(!VERSIONfunctionFile){
     alert("Hi, I am the Berater-Script.\nThe function-file is missing.\nPlease install me again.");
@@ -186,7 +190,7 @@ const IMAGES={"leftarrow":"data:image/gif;base64,R0lGODlhIwAaAPcAAEQWBLyCVIROJKR
              };
 // cases(%=number): %=money, "c%"=coins, "f%"=fictive money
 // task_new_plant task_new_product
-const NPC=[[,0.5,1.1,1.34,2.75,3.95,8.05,17.8,18.5,"f85","f110","f180","f280",,,,,0.16,0.52,1.02,1.44,1.96,2.28,3.8,3.69,"f340",4.38,"f510","f590",12.4,"f650",3.49,5.19,8.75,6,15.63,16.88,37.5,3.9,52.44,51.75,60.25,58.13,66.19,18.2,"c79",150,,1200,,1200,,,,,4500,,14400,1200,,"c125",,"c23",,4800,4200,,,,,,,,750,2100,"c25",,,,,,,10800,12000,,1500,3300,,,,,"f650","f1500","f1500",5000,12000,"c10",,"c20",,"c5","c5","c5","c5",,"c5",,,10.12,3.72,"f155.1","f545.7",37.42,23.32,7.44,82.36,"f106.8","f148.8","f69.6","f196.8","f278.4","f408","f240","f324","f250","f864",47.15,140.56,125.88,,"f12.8","f73.5","f127","f106","f53.05","f113.75","f44","f33.33","f71.3","f73.2","f181.2","f321","f316","f491","f350","f484.2","f906.5","f421.7","f473.5","f749.98","f237.1","f675","f975",12.25,37.5,"f1025","f1100","f810",,"f231","f6500","f58","f137.67","f197.67","f342.5","f830","f700.5","f1063.2","f704.42","f734","f339.53",3.1,3.15,3.27,7.3,4.9,5.92,6.61,6.1,7.3,5.6,5.2,3.6,10,8.1,23.5,7.8,8.2,,,,,,,,,,,,,"f410","f490","f503","f589","f469","f1312","f598","f533","f480","f420","f1620","f1030","f675","f950","f2350","f2400","f2450","f3550","f3600","f3650","f8000","f8000",,,,,,,,,,,,,,,,,,,,,,,,,,,,,3.7,3,3.3,3.45,5.1,8.20,2.1,4.3,1.95,8.85,1.4,2.1,4.8,4.85,7.4,5,5.1,2.3,3.95,10.6,11,3.5,2.9,3.6,,,,,,,,,,,,,,,,,,,,,,,,,,,"f1618","f1340","f1836","f1654","f1579",,,"f1839",,"f2655",,"f2165",,"f2877",,"f2462",,"f3093",,"f3289","f3138",,"f3622",,,,,,,,,,,,,,,,,,,,,,,,,,,,600,14.5,9,42,22,24,185,7.5,92.5,9.9,12.8,12.5],{},[],[]];
+const NPC=[[,0.5,1.1,1.34,2.75,3.95,8.05,17.8,18.5,"f85","f110","f180","f280",,,,,0.16,0.52,1.02,1.44,1.96,2.28,3.8,3.69,"f340",4.38,"f510","f590",12.4,"f650",3.49,5.19,8.75,6,15.63,16.88,37.5,3.9,52.44,51.75,60.25,58.13,66.19,18.2,"c79",150,,1200,,1200,,,,,4500,,14400,1200,,"c125",,"c23",,4800,4200,,,,,,,,750,2100,"c25",,,,,,,10800,12000,,1500,3300,,,,,"f650","f1500","f1500",5000,12000,"c10",,"c20",,"c5","c5","c5","c5",,"c5",,,10.12,3.72,"f155.1","f545.7",37.42,23.32,7.44,82.36,"f106.8","f148.8","f69.6","f196.8","f278.4","f408","f240","f324","f250","f864",47.15,140.56,125.88,,"f12.8","f73.5","f127","f106","f53.05","f113.75","f44","f33.33","f71.3","f73.2","f181.2","f321","f316","f491","f350","f484.2","f906.5","f421.7","f473.5","f749.98","f237.1","f675","f975",12.25,37.5,"f1025","f1100","f810",,"f231","f6500","f58","f137.67","f197.67","f342.5","f830","f700.5","f1063.2","f704.42","f734","f339.53",3.1,3.15,3.27,7.3,4.9,5.92,6.61,6.1,7.3,5.6,5.2,3.6,10,8.1,23.5,7.8,8.2,,,,,,,,,,,,,"f410","f490","f503","f589","f469","f1312","f598","f533","f480","f420","f1620","f1030","f675","f950","f2350","f2400","f2450","f3550","f3600","f3650","f8000","f8000",,,,,,,,,,,,,,,,,,,,,,,,,,,,,3.7,3,3.3,3.45,5.1,8.20,2.1,4.3,1.95,8.85,1.4,2.1,4.8,4.85,7.4,5,5.1,2.3,3.95,10.6,11,3.5,2.9,3.6,,,,,,,,,,,,,,,,,,,,,,,,,,,"f1618","f1340","f1836","f1654","f1579",,,"f1839",,"f2655",,"f2165",,"f2877",,"f2462",,"f3093",,"f3289","f3138",,"f3622",,,,,,,,,,,,,,,,,,,,,,,,,,,,"f600",14.5,9,42,22,24,185,7.5,92.5,9.9,12.8,12.5],{},[],[]];
     /*
     var new_NPC=NPC.clone();
     new_NPC[0][350]='f8000';
@@ -224,12 +228,13 @@ const PRODUCT_LEVEL={"veterinary":{"250":1,"251":1,"252":1,"253":2,"254":3,"255"
 // Required products to produce
 // task_new_product task_new_picnic_product
 const PRODUCT_REQUIRE=[{"25":[[0,9,30]],"27":[[0,10,12]],"28":[[0,11,8]],"30":[[0,12,5]],"111":[[0,110,5]],"116":[[0,2,1980]],"117":[[0,7,550]],"118":[[0,4,1020]],"119":[[0,38,650]],"120":[[0,42,110]],"121":[[0,43,100]],"122":[[0,112,130],[0,116,35]],"123":[[0,113,220],[0,117,35]],"124":[[0,114,345],[0,118,35]],"125":[[0,115,80],[0,119,35]],"130":[[0,17,400]],"131":[[0,21,150]],"132":[[0,20,100],[0,10,2]],"133":[[0,19,100],[0,10,2]],"134":[[0,17,400],[0,6,25]],"135":[[0,21,150],[0,6,25]],"136":[[0,2,120]],"137":[[0,1,200]],"138":[[0,1,200],[0,23,30]],"139":[[0,18,150],[0,22,30]],"140":[[0,21,150],[0,22,30]],"141":[[0,26,100],[0,144,3]],"142":[[0,26,100],[0,25,3]],"143":[[0,26,100],[0,25,3],[0,144,3]],"144":[[0,21,450]],"145":[[0,33,300],[0,12,2]],"146":[[0,35,200],[0,10,4],[0,12,2]],"147":[[0,37,60],[0,12,2]],"148":[[0,31,250],[0,26,150],[0,27,7]],"149":[[0,21,300],[0,43,10],[0,22,50],[0,121,4]],"150":[[0,38,60],[0,119,6],[0,17,50]],"152":[[0,151,5]],"155":[[0,152,5],[0,28,6]],"156":[[0,152,8],[0,28,5]],"157":[[0,152,2],[0,28,9]],"161":[[0,1,300],[0,17,150]],"162":[[0,1,250],[0,20,200]],"163":[[0,22,190],[0,26,120]],"164":[[0,1,150],[0,10,30]],"165":[[0,10,10],[0,12,5]],"166":[[0,10,10],[0,27,7]],"167":[[0,40,60],[0,111,10]],"168":[[0,10,10],[0,42,25]],"169":[[0,6,300],[0,9,15],[0,121,3]],"170":[[0,1,200],[0,43,20],[0,121,4]],"200":[[-1,1200],[0,171,24],[0,172,20],[0,173,12]],"201":[[-1,1400],[0,171,25],[0,172,18],[0,174,15]],"202":[[-1,1500],[0,172,22],[0,173,19],[0,174,16]],"203":[[-1,1460],[0,172,19],[0,173,16],[0,175,29]],"204":[[-1,1510],[0,171,7],[0,173,18],[0,174,8],[0,176,21]],"205":[[-1,1622],[0,171,14],[0,173,22],[0,176,10],[0,177,12]],"206":[[-1,1787],[0,174,16],[0,176,9],[0,177,10],[0,178,9]],"207":[[-1,1894],[0,173,15],[0,175,10],[0,177,11],[0,179,8]],"208":[[-1,1950],[0,173,12],[0,175,13],[0,178,15],[0,180,18]],"209":[[-1,2110],[0,171,12],[0,176,21],[0,179,7],[0,181,9]],"210":[[-1,2250],[0,171,12],[0,175,5],[0,179,34],[0,182,11]],"211":[[-1,2357],[0,172,9],[0,176,12],[0,181,22],[0,183,18]],"212":[[-1,2488],[0,171,13],[0,182,13],[0,183,16],[0,184,6]],"213":[[-1,2595],[0,171,3],[0,179,8],[0,185,7],[0,186,9],[0,187,7]],"214":[[0,0,2],[0,171,10],[0,172,14],[0,173,13],[0,174,18]],"215":[[0,0,2],[0,171,12],[0,172,22],[0,174,10],[0,175,19]],"216":[[0,0,2],[0,173,14],[0,175,8],[0,177,19],[0,178,16]],"217":[[0,0,3],[0,171,19],[0,177,5],[0,178,17],[0,180,13]],"218":[[0,0,3],[0,180,9],[0,181,8],[0,182,9],[0,183,9]],"219":[[0,0,3],[0,179,4],[0,182,1],[0,185,6],[0,186,15],[0,187,7]],"220":[[-1,1500],[0,171,70],[0,172,180],[0,173,80],[0,174,80],[0,188,1]],"221":[[-1,1500],[0,171,80],[0,172,50],[0,173,65],[0,174,140],[0,189,1]],"300":[[-1,100],[0,250,240],[0,251,210]],"301":[[-1,200],[0,251,160],[0,252,200]],"302":[[-1,300],[0,252,230],[0,250,210]],"303":[[-1,400],[0,253,220],[0,252,150]],"304":[[-1,500],[0,253,150],[0,254,110]],"305":[[0,0,1],[0,254,90],[0,255,100]],"306":[[0,0,1],[0,256,80],[0,255,80]],"307":[[-1,600],[0,257,210],[0,256,160]],"308":[[0,0,1],[0,258,130],[0,257,160]],"309":[[-1,700],[0,259,190],[0,258,140]],"310":[[0,0,2],[0,260,90],[0,259,90]],"311":[[-1,800],[0,261,390],[0,260,390]],"312":[[0,0,2],[0,262,130],[0,261,150]],"313":[[-1,900],[0,263,180],[0,262,230]],"314":[[0,0,2],[0,264,90],[0,263,80]],"315":[[-1,1000],[0,265,100],[0,264,130]],"316":[[0,0,3],[0,266,130],[0,265,90]],"317":[[-1,1100],[0,267,290],[0,266,260]],"318":[[0,0,3],[0,268,160],[0,267,170]],"319":[[-1,1200],[0,269,130],[0,268,180]],"320":[[-1,1300],[0,270,90],[0,269,80]],"321":[[0,0,3],[0,271,50],[0,270,100]],"322":[[-1,1400],[0,272,380],[0,271,320]],"323":[[0,0,4],[0,273,190],[0,272,160]]}
-                      ,{"41":[[1,21,1]],"42":[[1,21,1]],"43":[[1,21,1]],"44":[[1,22,1]],"45":[[1,22,1]],"46":[[1,22,1]],"47":[[1,23,1]],"48":[[1,23,1]],"49":[[1,23,1]],"50":[[1,24,1]],"51":[[1,24,1]],"52":[[1,24,1]],"53":[[1,25,1]],"54":[[1,25,1]],"55":[[1,25,1]],"56":[[1,26,1]],"57":[[1,26,1]],"58":[[1,26,1]],"59":[[1,27,1]],"60":[[1,27,1]],"61":[[1,27,1]],"62":[[1,28,1]],"63":[[1,28,1]],"64":[[1,28,1]],"101":[[1,41,4]],"102":[[1,41,18],[1,42,2]],"103":[[1,44,11]],"104":[[1,42,1],[1,43,5]],"105":[[1,44,20],[1,45,50],[1,46,70]],"106":[[1,49,1]],"107":[[1,46,1]],"108":[[1,47,125],[1,48,65],[1,49,32]],"109":[[1,47,5]],"110":[[1,50,9],[1,51,4]],"111":[[1,52,4]],"112":[[1,50,12],[1,51,7],[1,52,6]],"113":[[1,42,1]],"114":[[1,41,1],[1,43,1]],"115":[[1,53,8],[1,55,2]],"116":[[1,53,120],[1,54,40],[1,55,40]],"117":[[1,53,80],[1,54,65],[1,55,125]],"118":[[1,53,6],[1,54,8]],"119":[[1,54,20],[1,55,25]],"120":[[1,54,35],[1,55,40]],"121":[[1,56,7],[1,57,4]],"122":[[1,58,9]],"123":[[1,57,4],[1,58,5]],"124":[[1,56,9],[1,57,4]],"125":[[1,58,3]],"126":[[1,61,5]],"127":[[1,60,3]],"128":[[1,60,6],[1,61,5]],"129":[[1,59,10],[1,60,8],[1,61,5]],"130":[[1,60,9],[1,61,8]],"131":[[1,59,6],[1,61,12]],"132":[[1,59,10],[1,60,8],[1,61,5]],"133":[[1,42,1]],"134":[[1,62,21],[1,63,15]],"143":[[1,62,21],[1,63,22],[1,64,15]],"144":[[1,64,15]],"146":[[1,45,12],[1,63,12],[1,46,6],[1,64,6]],"148":[[1,64,15],[1,63,10]]}
+                      ,{"41":[[1,21,1]],"42":[[1,21,1]],"43":[[1,21,1]],"44":[[1,22,1]],"45":[[1,22,1]],"46":[[1,22,1]],"47":[[1,23,1]],"48":[[1,23,1]],"49":[[1,23,1]],"50":[[1,24,1]],"51":[[1,24,1]],"52":[[1,24,1]],"53":[[1,25,1]],"54":[[1,25,1]],"55":[[1,25,1]],"56":[[1,26,1]],"57":[[1,26,1]],"58":[[1,26,1]],"59":[[1,27,1]],"60":[[1,27,1]],"61":[[1,27,1]],"62":[[1,28,1]],"63":[[1,28,1]],"64":[[1,28,1]],"101":[[1,41,4]],"102":[[1,41,18],[1,42,2]],"103":[[1,44,11]],"104":[[1,42,1],[1,43,5]],"105":[[1,44,20],[1,45,50],[1,46,70]],"106":[[1,49,1]],"107":[[1,46,1]],"108":[[1,47,125],[1,48,65],[1,49,32]],"109":[[1,47,5]],"110":[[1,50,9],[1,51,4]],"111":[[1,52,4]],"112":[[1,50,12],[1,51,7],[1,52,6]],"113":[[1,42,1]],"114":[[1,41,1],[1,43,1]],"115":[[1,53,8],[1,55,2]],"116":[[1,53,120],[1,54,40],[1,55,40]],"117":[[1,53,80],[1,54,65],[1,55,125]],"118":[[1,53,6],[1,54,8]],"119":[[1,54,20],[1,55,25]],"120":[[1,54,35],[1,55,40]],"121":[[1,56,7],[1,57,3]],"122":[[1,58,9]],"123":[[1,57,4],[1,58,5]],"124":[[1,56,9],[1,57,4]],"125":[[1,58,3]],"126":[[1,61,5]],"127":[[1,60,3]],"128":[[1,60,6],[1,61,5]],"129":[[1,59,10],[1,60,8],[1,61,5]],"130":[[1,60,9],[1,61,8]],"131":[[1,59,6],[1,61,12]],"132":[[1,59,10],[1,60,8],[1,61,5]],"133":[[1,42,1]],"134":[[1,62,21],[1,63,15]],"143":[[1,62,21],[1,63,22],[1,64,15]],"144":[[1,64,15]],"146":[[1,45,12],[1,63,12],[1,46,6],[1,64,6]],"148":[[1,64,15],[1,63,10]]}
                       ];
 // Mapping between original material and final good, e.g. sapling with tree
 // task_new_product
 const PRODUCT_MAP={"forestry":{"1":21,"2":22,"3":23,"4":24,"5":25,"7":26,"8":27,"9":28}
                   };
+unsafeData.PRODUCT_MAP=PRODUCT_MAP.clone();
 // Yielded amount of forestry production
 // task_new_product
 const PRODUCT_YIELD=[,{"1":1,"2":1,"3":1,"4":1,"5":1,"7":1,"8":1,"9":1,"21":1,"22":1,"23":1,"24":1,"25":1,"26":1,"27":1,"28":1,"41":5,"42":3,"43":3,"44":4,"45":2,"46":2,"47":7,"48":3,"49":3,"50":3,"51":2,"52":2,"53":8,"54":4,"55":4,"56":5,"57":3,"58":5,"59":6,"60":4,"61":3,"62":7,"63":5,"64":5,"101":1,"102":1,"103":1,"104":1,"105":1,"106":1,"107":1,"108":1,"109":1,"110":1,"111":1,"112":1,"113":1,"114":1,"115":1,"116":1,"117":1,"118":1,"119":1,"120":1,"121":1,"122":1,"123":1,"124":1,"125":1,"126":1,"127":1,"128":1,"129":1,"130":1,"131":1,"132":1,"133":1,"134":1,"143":1,"144":1,"146":1,"148":1,"250":1,"251":1,"252":1,"253":1,"254":1,"255":1,"256":1,"257":1,"258":1,"259":1,"260":1,"261":1,"262":1,"263":1,"264":1,"265":1,"266":1,"267":1,"268":1,"269":1,"270":1,"271":1,"272":1,"273":1,"351":1,"352":1,"353":1,"354":1,"355":1,"356":1,"357":1,"358":1,"359":1,"360":1,"361":1}];
@@ -273,12 +278,15 @@ const ANIMAL_MOVE=[,,[false,0,0,255,10,10,505],[false,0,0,280,1,0,525],[false,0,
             fl6         Speed eating            Farmersmarket
         */
 // BUILDING_UPGRADES[zoneType][levelNr-1][needed level,buildcost,bonus,animalamount]
+//     for Fuelstation: [needed level,buildcost,bonus=1,animalamount=1,yield per slot,duration]
 // task_new_building
-const BUILDING_UPGRADES={"1":[[1,2000,0.95,0],[15,21500,0.9,0],[21,76000,0.85,0],[27,192300,0.8,0],[33,"c20",0.8,0]],"2":[[2,2500,1,5],[7,15200,1,10],[12,32500,1,15],[23,134500,0.9,20],[29,350800,0.8,20]],"3":[[11,3400,1,2],[13,16300,1,3],[17,50200,1,4],[25,159600,0.9,5],[32,441000,0.8,6]],"4":[[14,6200,1,2],[18,33500,1,3],[20,76000,1,4],[28,210500,0.9,5],[34,482000,0.8,6]],"5":[[19,6800,1,1],[22,44800,1,2],[26,128200,1,3],[31,230600,0.9,4],[35,482000,0.8,4]],"7":[[16,5200,1,1],[19,33500,0.95,1],[25,106400,0.9,1],[30,230600,0.85,1],[33,441000,0.8,1]],"8":[[18,6800,1,1],[21,38000,0.95,1],[27,128200,0.9,1],[31,230600,0.85,1],[35,482000,0.8,1]],"9":[[27,8100,1,1],[30,53200,0.95,1],[33,140300,0.9,1],[36,264600,0.85,1],[38,597200,0.8,1]],"10":[[30,9700,1,1],[33,70200,0.95,1],[34,153700,0.9,1],[37,289200,0.85,1],[39,626300,0.8,1]],"11":[[16,10000,1,1],[20,85000,1,3],[24,200000,1,5],[28,"c22",0.9,6],[32,"c38",0.8,6]],"12":[[15,38000,1,2],[17,17200,1,3],[23,54600,1,4],[29,168800,0.9,5],[38,472400,0.8,6]],"13":[[31,16800,1,1],[32,86400,0.95,1],[34,174200,0.9,1],[36,362800,0.85,1],[38,796300,0.8,1]],"14":[[35,19400,1,1],[37,97100,0.95,1],[39,218400,0.9,1],[40,509800,0.85,1],[41,1388600,0.8,1]],"15":[[37,23000,1,1],[37,95300,1,2],[38,198500,1,3],[38,391700,0.9,4],[39,842200,0.8,5]],"16":[[38,97100,1,1],[39,209736,0.95,1],[40,467711,0.9,1],[41,1080413,0.85,1],[42,2538970,0.8,1]],"17":[[10,1000,1,1]],"18":[[10,5000,1,1]],"19":[[28,250000,1,1]],"fw1":[[11,7000,1,1],[11,24600,0.95,1],[11,64200,0.9,1],[11,114400,0.85,1],[11,186300,0.8,1]],"fw2":[[12,8400,1,1],[12,32500,0.95,1],[12,68900,0.9,1],[12,122400,0.85,1],[12,178600,0.8,1]],"fw3":[[12,11200,1,1],[12,43300,0.95,1],[12,91900,0.9,1],[12,163200,0.85,1],[12,238100,0.8,1]],"fl1":[[23,85000,0.95,36]],"fl2":[[23,75000,1,1]],"fl3":[[31,900000,1,1]],"fl5":[[36,1000000,1,1]],"fl6":[[31,900000,1,1]]};
+const BUILDING_UPGRADES={"1":[[1,2000,0.95,0],[15,21500,0.9,0],[21,76000,0.85,0],[27,192300,0.8,0],[33,"c20",0.8,0]],"2":[[2,2500,1,5],[7,15200,1,10],[12,32500,1,15],[23,134500,0.9,20],[29,350800,0.8,20]],"3":[[11,3400,1,2],[13,16300,1,3],[17,50200,1,4],[25,159600,0.9,5],[32,441000,0.8,6]],"4":[[14,6200,1,2],[18,33500,1,3],[20,76000,1,4],[28,210500,0.9,5],[34,482000,0.8,6]],"5":[[19,6800,1,1],[22,44800,1,2],[26,128200,1,3],[31,230600,0.9,4],[35,482000,0.8,4]],"7":[[16,5200,1,1],[19,33500,0.95,1],[25,106400,0.9,1],[30,230600,0.85,1],[33,441000,0.8,1]],"8":[[18,6800,1,1],[21,38000,0.95,1],[27,128200,0.9,1],[31,230600,0.85,1],[35,482000,0.8,1]],"9":[[27,8100,1,1],[30,53200,0.95,1],[33,140300,0.9,1],[36,264600,0.85,1],[38,597200,0.8,1]],"10":[[30,9700,1,1],[33,70200,0.95,1],[34,153700,0.9,1],[37,289200,0.85,1],[39,626300,0.8,1]],"11":[[16,10000,1,1],[20,85000,1,3],[24,200000,1,5],[28,"c22",0.9,6],[32,"c38",0.8,6]],"12":[[15,38000,1,2],[17,17200,1,3],[23,54600,1,4],[29,168800,0.9,5],[38,472400,0.8,6]],"13":[[31,16800,1,1],[32,86400,0.95,1],[34,174200,0.9,1],[36,362800,0.85,1],[38,796300,0.8,1]],"14":[[35,19400,1,1],[37,97100,0.95,1],[39,218400,0.9,1],[40,509800,0.85,1],[41,1388600,0.8,1]],"15":[[37,23000,1,1],[37,95300,1,2],[38,198500,1,3],[38,391700,0.9,4],[39,842200,0.8,5]],"16":[[38,97100,1,1],[39,209736,0.95,1],[40,467711,0.9,1],[41,1080413,0.85,1],[42,2538970,0.8,1]],"17":[[10,1000,1,1]],"18":[[10,5000,1,1]],"19":[[28,250000,1,1]],"20":[[40,421500,1,1,1,360],[40,0,1,1,2,420],[40,0,1,1,3,480],[40,0,1,1,4,510],[40,0,1,1,5,540],[40,0,1,1,6,570],[40,0,1,1,7,600],[40,0,1,1,8,660],[40,0,1,1,9,690],[40,0,1,1,10,720]]
+                         ,"fw1":[[11,7000,1,1],[11,24600,0.95,1],[11,64200,0.9,1],[11,114400,0.85,1],[11,186300,0.8,1]],"fw2":[[12,8400,1,1],[12,32500,0.95,1],[12,68900,0.9,1],[12,122400,0.85,1],[12,178600,0.8,1]],"fw3":[[12,11200,1,1],[12,43300,0.95,1],[12,91900,0.9,1],[12,163200,0.85,1],[12,238100,0.8,1]],"fl1":[[23,85000,0.95,36]],"fl2":[[23,75000,1,1]],"fl3":[[31,900000,1,1]],"fl5":[[36,1000000,1,1]],"fl6":[[31,900000,1,1]]
+                        };
 // produced thing -> production area
 // task_new_plant task_new_product
 const PRODUCT2BUILDING=[[,1,1,1,1,1,1,1,1,2,3,4,5,,,,,1,1,1,1,1,1,1,1,7,1,8,9,1,10,1,1,1,1,1,1,1,1,1,1,1,1,1,1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,11,,,,,,1,,,,,,,1,,,1,1,1,12,8,1,1,1,1,13,13,13,13,13,13,14,14,14,14,1,1,1,1,"fw1","fw1","fw1","fw1","fw1","fw1","fw2","fw2","fw2","fw2","fw2","fw2","fw2","fw2",7,"fw1","fw1","fw1","fw2","fw2","fw2",15,9,1,1,16,16,16,1,,,"fw3","fw3","fw3","fw3","fw3","fw3","fw3","fw3","fw3","fw3","fl1","fl1","fl1","fl1","fl1","fl1","fl1","fl1","fl1","fl1","fl1","fl1","fl1","fl1","fl1","fl1","fl1","fl1","fl1",,,,,,,,,,,"fl2","fl2","fl2","fl2","fl2","fl2","fl2","fl2","fl2","fl2","fl2","fl2","fl2","fl2","fl2","fl2","fl2","fl2","fl2","fl2","fl2","fl2",,,,,,,,,,,,,,,,,,,,,,,,,,,,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,,,,,,,,,,,,,,,,,,,,,,,,,,,"fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5","fl5",,,,,,,,,,,,,,,,,,,,,,,,,,,20,1,1,1,1,1,1,1,1,1,1,1]
-                       ,{"1":"forest","2":"forest","3":"forest","4":"forest","5":"forest","7":"forest","8":"forest","9":"forest","21":"forest","22":"forest","23":"forest","24":"forest","25":"forest","26":"forest","27":"forest","28":"forest","41":"sawmill","42":"sawmill","43":"sawmill","44":"sawmill","45":"sawmill","46":"sawmill","47":"sawmill","48":"sawmill","49":"sawmill","50":"sawmill","51":"sawmill","52":"sawmill","53":"sawmill","54":"sawmill","55":"sawmill","56":"sawmill","57":"sawmill","58":"sawmill","59":"sawmill","60":"sawmill","61":"sawmill","62":"sawmill","63":"sawmill","64":"sawmill","101":"carpentry","102":"carpentry","103":"carpentry","104":"carpentry","105":"carpentry","106":"carpentry","107":"carpentry","108":"carpentry","109":"carpentry","110":"carpentry","111":"carpentry","112":"carpentry","113":"carpentry","114":"carpentry","115":"carpentry","116":"carpentry","117":"carpentry","118":"carpentry","119":"carpentry","120":"carpentry","121":"carpentry","122":"carpentry","123":"carpentry","124":"carpentry","125":"carpentry","126":"carpentry","127":"carpentry","128":"carpentry","129":"carpentry","130":"carpentry","131":"carpentry","132":"carpentry","133":"carpentry","134":"carpentry","143":"carpentry","144":"carpentry","146":"carpentry","148":"carpentry","300":"forest"}
+                       ,{"1":"forest","2":"forest","3":"forest","4":"forest","5":"forest","7":"forest","8":"forest","9":"forest","21":"forest","22":"forest","23":"forest","24":"forest","25":"forest","26":"forest","27":"forest","28":"forest","41":"sawmill","42":"sawmill","43":"sawmill","44":"sawmill","45":"sawmill","46":"sawmill","47":"sawmill","48":"sawmill","49":"sawmill","50":"sawmill","51":"sawmill","52":"sawmill","53":"sawmill","54":"sawmill","55":"sawmill","56":"sawmill","57":"sawmill","58":"sawmill","59":"sawmill","60":"sawmill","61":"sawmill","62":"sawmill","63":"sawmill","64":"sawmill","101":"carpentry","102":"carpentry","103":"carpentry","104":"carpentry","105":"carpentry","106":"carpentry","107":"carpentry","108":"carpentry","109":"carpentry","110":"carpentry","111":"carpentry","112":"carpentry","113":"carpentry","114":"carpentry","115":"carpentry","116":"carpentry","117":"carpentry","118":"carpentry","119":"carpentry","120":"carpentry","121":"carpentry","122":"carpentry","123":"carpentry","124":"carpentry","125":"carpentry","126":"carpentry","127":"carpentry","128":"carpentry","129":"carpentry","130":"carpentry","131":"carpentry","132":"carpentry","133":"carpentry","134":"carpentry","143":"carpentry","144":"carpentry","146":"carpentry","148":"carpentry"}
                        ,[]
                        ,[,"windmill","windmill","windmill","windmill","windmill","windmill","windmill","windmill","windmill","windmill","windmill","windmill","windmill","windmill","windmill","windmill","windmill","windmill","windmill","windmill","windmill","windmill","windmill","windmill","windmill","windmill","windmill","windmill","windmill","windmill","windmill","windmill","windmill","windmill","windmill"]
                        ,[,"megafield","megafield","megafield","megafield","megafield","megafield","megafield","megafield","megafield","megafield","megafield","megafield",,,,,"megafield","megafield","megafield","megafield","megafield","megafield","megafield","megafield","megafield","megafield","megafield","megafield","megafield","megafield","megafield","megafield","megafield","megafield","megafield","megafield","megafield","megafield","megafield","megafield","megafield","megafield","megafield","megafield",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"megafield","megafield","megafield",,,,"megafield",,,,,,,"megafield",,,"megafield","megafield","megafield","megafield","megafield","megafield","megafield","megafield","megafield","megafield","megafield","megafield","megafield","megafield","megafield","megafield","megafield","megafield","megafield","megafield","megafield","megafield","megafield",,,,,,,,,,,,,,,"megafield",,,,,,,"megafield","megafield","megafield","megafield","megafield","megafield","megafield","megafield","megafield","megafield"]
@@ -322,6 +330,19 @@ unsafeData.BUILDING_INPUT=BUILDING_INPUT.clone();
 // Zone 11 -> "91":[[[0,92,14400]],[[0,93,28800]]]
 // Zone 12 -> "110":[[[0,108,3600]],[[0,109,1800]]]
 // Zone 15 -> "151":[[[0,153,1560]],[[0,154,3120]]]
+const FUELSTATION_INPUT=[
+                        [[17,0],[31,0],[33,0],[113,0]],
+                        [[1,0],[109,0],[108,0],[112,0]],
+                        [[18,0],[23,0],[153,0],[37,0]],
+                        [[19,0],[24,0],[29,0],[154,0]],
+                        [[2,0],[38,0],[35,0],[39,0]],
+                        [[3,0],[5,0],[36,0],[40,0]],
+                        [[20,0],[26,0],[7,0],[115,0]],
+                        [[21,0],[32,0],[44,0],[42,0],[126,0]],
+                        [[22,0],[6,0],[34,0],[41,0],[127,0]],
+                        [[4,0],[114,0],[8,0],[43,0],[128,0]]
+                        ];
+unsafeData.FUELSTATION_INPUT=FUELSTATION_INPUT.clone();
 // price of an animal. formula: cost=Math.round(ANIMALCOST[zone][0]+nr*ANIMALCOST[zone][1])
 // task_new_building
 const ANIMALCOST=[,,[309,1000/19],[419,320],[529,320],[1599,2600/3],,,,,,[999,1000],[789,320],,,[2400,1200],,,];
@@ -410,6 +431,13 @@ const LEVEL_POINTS=[0,0,58,2420,6620,15620,27900,58700,101700,163100,211900
                    ,43096227000,45373962000,47727432000,50157733000,52665958000,55253195000,57920530000,60669042000,63499810000,66413907000
                    ,69412404000,72496369000,75666864000,78924952000,82271688000,85708127000,89235321000,92854318000,96566163000,100371897000
                    ];
+// Description of Stored GM-Data
+// VARIABLES = {CATEGORY:{VAR:[Description, Type]}}
+//      1 = historic data - not reproducible!
+//      2 = collectable data
+//      3 = options, settings
+//      4 = temporary data
+//      5 = useless, old data
 const VARIABLES = {
             "USER":{"bargeld":["Cash amount",2],
                     "calcToLodgeCampaign":["Target lodge campaign",5],
@@ -434,6 +462,7 @@ const VARIABLES = {
                     "lodgeQuestData":["Lodge quest data",5],
                     "lodgeQuestNr":["Lodge quest number",5],
                     "lodgeTimeEnd":["Lodge quest time",5],
+                    "logClothingDonation":["Log-Data Clothing donation",1],
                     "logDonkey":["Log-data Donkey",1],
                     "logMegafieldJob":["Log-data Megafield Job",1],
                     "lotteryCollectForPrize":["Lottery collect data",3],
@@ -961,7 +990,6 @@ function updateProductDataFarm(){
         GM_log(implode(new_prodBlock));
         */
 
-        //Linus-Tux 20151015
         var help={"v":[],"ex":[],"hr":[],"e":[],"o":[],"fw1":[],"fw2":[],"fw3":[],"fw4":[],"z":[],"fl":[],"fla":[],"md":[]};
         // for(var v=1;v<unsafeWindow.produkt_name.length;v++){
         //*task_fix_growtime*/ var newProductGrowtime={};
@@ -971,7 +999,6 @@ function updateProductDataFarm(){
             vet_data=unsafeWindow.vet_data;
         }
 
-        //Linus--Tux 20151028 Rack Farm 5
         if(!prodStock[5]||!(prodStock[5] instanceof Array)){ prodStock[5]=[]; }
 
         var prodStockTemp=new Array();    //Stock Farm 1
@@ -1001,7 +1028,6 @@ function updateProductDataFarm(){
             }
         */
 
-            //Linus--Tux 20151020
             var c=(prodStockTemp[v])?prodStockTemp[v]:0;
             prodStock[0][v]=(c?parseInt(c,10):0);
 
@@ -1067,7 +1093,7 @@ function updateProductDataFarm(){
                     if(PRODUCT_QUEST[0][v]&&(questData[PRODUCT_QUEST[0][v][0]][PRODUCT_QUEST[0][v][1]]["nr"]<=PRODUCT_QUEST[0][v][2])){
                         prodBlock[0][v]+="v";
                     }
-                    // this is a workaround - "q" would be enough. but with "q" only, all "ex" products are shown on the market-list. Even the not released
+                    // ToDo: this is a workaround - "q" would be enough. but with "q" only, all "ex" products are shown on the market-list. Even the not released
                     // bugfix should be performed when populating the marketlist.
                 break;
                 default:
@@ -1127,9 +1153,8 @@ function updateProductDataForestry(){
             // prodStock
             // prodStockMax
             prodYield[1][v]=PRODUCT_YIELD[1][v];
-            if(v==300){ prodTyp[1][v]="f1"; }
-            //else if([105,108,116,117,119,120,148].contains[v]){ prodTyp[1][v]="f5"; } // farmhouse-items from carpentry
-            else if(v==105||v==108||v==116||v==117||v==119||v==120||v==148){ prodTyp[1][v]="f5"; } // farmhouse-items from carpentry
+            if(v==105||v==108||v==116||v==117||v==119||v==120||v==148){ prodTyp[1][v]="f5"; } // farmhouse-items from carpentry
+            else if(v==300){ prodTyp[1][v]="u"; } //if(v==300){ prodTyp[1][v]="f1"; }
             else if(v<20){ prodTyp[1][v]="f1"; } // saplings
             else if(v<40){ prodTyp[1][v]="f2"; } // logs
             else if(v<100){ prodTyp[1][v]="f3"; } // sawmill-products
@@ -1147,7 +1172,6 @@ function updateProductDataForestry(){
                     prodBlock[1][v]+="q";
                 }
                 if(v==113||v==114||v==133){ prodBlock[1][v]+="s"; }
-                if(v==300) { prodBlock[1][v]+="sq"; } // workaround to get special-product 300 out of the queue-List
                 if(help[prodTyp[1][v]]){
                     help[prodTyp[1][v]].push(v);
                 }
@@ -3685,6 +3709,25 @@ try{
                         profit[c]["punkte"]= profit[c]["menge"]*prodPoints[0][v];
                         help=profit[c]["input"][0][0];
                     break;}
+                    case 6:{ // Fuelstation
+                        //BUILDING_UPGRADES : [needed level,buildcost,bonus: nA,animalamount: nA,yield per slot,duration in min]
+                        //FUELSTATION_INPUT : [Slotlevel][[Product-Id_1,Points per product],[Product-Id_2,Points per product], ...]
+                        profit[c]["input"]=[];
+                        profit[c]["input"][0]=[[]];
+                        profit[c]["dauer"] = 60*parseInt(BUILDING_UPGRADES[currBuilding][profit[c]["level"]-1][5],10); // Value in seconds
+                        profit[c]["runs"]  = 86400/profit[c]["dauer"];
+                        profit[c]["menge"] = profit[c]["runs"]*BUILDING_UPGRADES[currBuilding][profit[c]["level"]-1][4];
+                        profit[c]["punkte"]= profit[c]["menge"]*prodPoints[0][v];
+                        help=profit[c]["input"][0][0];
+                    break;}
+                    default:
+                        profit[c]["input"]=[];
+                        profit[c]["input"][0]=[[]];
+                        profit[c]["dauer"] =24*60*60;
+                        profit[c]["runs"]  = 1;
+                        profit[c]["menge"] = 1;
+                        profit[c]["punkte"]= 0;
+                        help=profit[c]["input"][0][0];
                     }
                     menge=profit[c]["menge"];
                     preis=mode["perc"]*gut[v];
@@ -5784,11 +5827,11 @@ unsafeWindow.buildInfoPanelMenu=function(mode){
         }
         createElement("div",{"id":"infoPanelR","style":"position:absolute;left:115px;width:480px;overflow:auto;height:515px;"},container);
         // paypal
-    		//newdiv=createElement("div",{"style":"position:absolute;left:0;bottom:0;"},container);
+        //newdiv=createElement("div",{"style":"position:absolute;left:0;bottom:0;"},container);
         //newdiv1=createElement("form",{"id":"paypalForm","target":"_blank","action":"https://www.paypal.com/cgi-bin/webscr","method":"post"},newdiv);
         //createElement("input",{"type":"hidden","name":"cmd","value":"_donations"},newdiv1);
         //createElement("input",{"type":"hidden","name":"business","value":"jessicakanaan@web.de"},newdiv1);
-    		//createElement("input",{"type":"hidden","name":"lc","value":((LANGUAGE=="de")?"DE":"US")},newdiv1);
+        //createElement("input",{"type":"hidden","name":"lc","value":((LANGUAGE=="de")?"DE":"US")},newdiv1);
         //createElement("input",{"type":"hidden","name":"item_name","value":"MyFreeFarm Script"},newdiv1);
         //createElement("input",{"type":"hidden","name":"no_note","value":"0"},newdiv1);
         //createElement("input",{"type":"hidden","name":"currency_code","value":"EUR"},newdiv1);
@@ -5796,8 +5839,8 @@ unsafeWindow.buildInfoPanelMenu=function(mode){
         //createElement("input",{"type":"image","style":"border:none;background:transparent;","src":"https://www.paypalobjects.com/"+((LANGUAGE=="de")?"de_DE/DE":"en_US")+"/i/btn/btn_donate_LG.gif","name":"submit","alt":"PayPal"},newdiv1);
         //createElement("img",{"alt":"","border":"0","src":"https://www.paypalobjects.com/en_US/i/scr/pixel.gif","width":"1","height":"1"},newdiv1);
 
-    		//Spenden Wikipedia
-    		newdiv=createElement("div",{"style":"position:absolute;left:0;bottom:0;"},container);
+        //Spenden Wikipedia
+        newdiv=createElement("div",{"style":"position:absolute;left:0;bottom:0;"},container);
         newdiv1=createElement("a",{"href":"https://spenden.wikimedia.de/spenden/","target":"_blank","class":"link"},newdiv);
         createElement("img",{"style":"border:none;","src":"https://www.paypalobjects.com/"+((LANGUAGE=="de")?"de_DE/DE":"en_US")+"/i/btn/btn_donate_LG.gif"},newdiv1);
 
@@ -6885,10 +6928,11 @@ function buildInfoPanelOptions(){
         newinput=createElement("button",{"type":"button","class":"link"},newtd,getText("settings_zoneReset")[0]);
         newinput.addEventListener("click",function(){
             alert2(getText("settings_zoneReset")[1],getText("yes"),getText("no"),function(){
-                GM_deleteValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_zones");
-                GM_deleteValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_zoneList");
-                GM_deleteValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_zoneSettings");
-                GM_deleteValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_zoneToList");
+                GM_deleteValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_zones"); // Berater
+                GM_deleteValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_zoneList"); // Automat
+                GM_deleteValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_zoneSettings"); // Automat
+                GM_deleteValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_zoneToList"); // Automat
+                GM_deleteValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_autoMillStorage"); // Automat
             });
         },false);
         createElement("td",{},newtr,getText("settings_zoneReset")[1]);
@@ -10336,11 +10380,14 @@ try{
                 unsafeWindow.foodworld_quicknavi=1;
                 unsafeWindow.foodworldAction('init');
             }else{
+                unsafeWindow.mapGo2Location("picknick",1);
+                /* Beta
                 document.addEventListener("gameCity2",function(){
                     unsafeWindow.travel2foodworld();
                     document.removeEventListener("gameCity2",arguments.callee,false);
                 },false);
                 unsafeWindow.travel2City2();
+                */
             }
         }catch(err){GM_logError("travel2foodworld","","",err);}
         };
@@ -10355,7 +10402,8 @@ try{
                     unsafeWindow.travel2farmersmarket();
                     document.removeEventListener("gameFarmOpened",arguments.callee,false);
                 },false);
-                unsafeWindow.showTravel2Farm(1);
+                //unsafeWindow.showTravel2Farm(2); Beta
+                unsafeWindow.farmMove(2);
             break;}
             default:{
                 document.addEventListener("gameCity2",function(){
@@ -12735,7 +12783,7 @@ return false;
             GM_logInfo("getDailyRanking","","",getText("requestingUserStatistic"));
             GM_xmlhttpRequest({
                 method: "GET",
-                url: "http://s"+SERVER+"."+GAMEPAGES[COUNTRY]+"/city/ajax.php?mode=stats&type=pkt&page=1&findme=1&rid="+unsafeWindow.rid,
+                url: "http://s"+SERVER+"."+GAMEPAGES[COUNTRY]+"/ajax/city.php?mode=stats&type=pkt&page=1&findme=1&rid="+unsafeWindow.rid,
                 headers: {"Content-type": "application/x-www-form-urlencoded"},
                 onload: function(response){
                     try{
@@ -14082,7 +14130,7 @@ return false;
                 case "flowerarea_autoplant": raiseEvent("gameFarmersmarketStarted"); break;
                 case "flowerarea_water_all": raiseEvent("gameFarmersmarketWatered"); break;
                 case "fuelstation_harvest": doFuelstation(zoneNr); raiseEvent("gameFuelstationHarvest"); break; //Fuelstation geerntet
-                case "fuelstation_entry": doFuelstation(zoneNr); raiseEvent("gameFuelstationEntry"); break;	//Produkte eingeworfen
+                case "fuelstation_entry": doFuelstation(zoneNr); raiseEvent("gameFuelstationEntry"); break; //Produkte eingeworfen
                 case "gardeninit":{
                     var zoneNrF = zoneNr+6*(farmNR-1);
                     if(1==zones.getBuilding(zoneNrF)){
@@ -14674,117 +14722,116 @@ return false;
     //s: Produkt
     //y:
     unsafeOverwriteFunction("dialogFuelstation",function(n, z, d, s, y){
-		try{
-			unsafeWindow._dialogFuelstation(n, z, d, s, y);
-		}catch(err){GM_logError("dialogFuelstation","","",err);}
-		try{
-		GM_log("dialogFuelstation:"+ "n"+n+" z"+z+" d"+d+" s"+s+" y"+y);
-		if ((typeof n!="undefined")&&(n!="stats")&&(n!="add_level")&&(n!="buy")&&(n!="product_select_pid")) {
-    //n=stats => Statistik wird aufgerufen
-			var zoneNr=z;
-			var data=unsafeWindow.farms_data.farms[unsafeWindow.farm][zoneNr];
-			var iLimit=data.data.constants.slot_level[data.data.data.slots[d].level].limit;
-			var children = $('fuelstation_product_select_inner').getElementsByClassName("fuelstation_product_select_item");
-			for (var c in children) {
-				if (!children.hasOwnProperty(c)) { continue; }
-				var pId_parent=children[c].getElementsByClassName("fuelstation_product_select_item_img")[0].childNodes;
-				var pId = pId_parent[1].className.replace("tt", "");
-				var points = children[c].getElementsByClassName("fuelstation_product_select_item_points")[0].innerHTML.replace(".","");
-				var ratio = (gut[pId]*iLimit/points).toFixed(2);
-				createElement("div", {
-						"style":"position: absolute; bottom: -15px; left: 8px;border: 2px solid rgb(255, 114, 0); background-color: white;width: 85px;text-align: center;"
-				},children[c], moneyFormat(ratio));
-			}
-		}
-		if ((typeof n!="undefined")&&(n=="product_select")){
-			raiseEvent("gameFuelstationOpenDialogProdukt");
-		} else if ((typeof n!="undefined")&&(n=="product_select_pid")) {
-			raiseEvent("gameFuelstationOpenDialogPID");
-		}
-
-		}catch(err){GM_logError("dialogFuelstation","","",err);}
+        try{
+            unsafeWindow._dialogFuelstation(n, z, d, s, y);
+        }catch(err){GM_logError("dialogFuelstation","","",err);}
+        try{
+            GM_log("dialogFuelstation:"+ "n"+n+" z"+z+" d"+d+" s"+s+" y"+y);
+            if ((typeof n!="undefined")&&(n!="stats")&&(n!="add_level")&&(n!="buy")&&(n!="product_select_pid")) {
+            //n=stats => Statistik wird aufgerufen
+                var zoneNr=z;
+                var data=unsafeWindow.farms_data.farms[unsafeWindow.farm][zoneNr];
+                var iLimit=data.data.constants.slot_level[data.data.data.slots[d].level].limit;
+                var children = $('fuelstation_product_select_inner').getElementsByClassName("fuelstation_product_select_item");
+                for (var c in children) {
+                    if (!children.hasOwnProperty(c)) { continue; }
+                    var pId_parent=children[c].getElementsByClassName("fuelstation_product_select_item_img")[0].childNodes;
+                    var pId = pId_parent[1].className.replace("tt", "");
+                    var points = children[c].getElementsByClassName("fuelstation_product_select_item_points")[0].innerHTML.replace(".","");
+                    var ratio = (gut[pId]*iLimit/points).toFixed(2);
+                    createElement("div", {
+                        "style":"position: absolute; bottom: -15px; left: 8px;border: 2px solid rgb(255, 114, 0); background-color: white;width: 85px;text-align: center;"
+                    },children[c], moneyFormat(ratio));
+                }
+            }
+            if ((typeof n!="undefined")&&(n=="product_select")){
+                raiseEvent("gameFuelstationOpenDialogProdukt");
+            } else if ((typeof n!="undefined")&&(n=="product_select_pid")) {
+                raiseEvent("gameFuelstationOpenDialogPID");
+            }
+        }catch(err){GM_logError("dialogFuelstation","","",err);}
     });
 
     function doFuelstation(zoneNr_a){
-		try{
-			GM_log("doFuelstation "+"zoneNr_a"+zoneNr_a);
-			var zoneNr=zoneNr_a;
-			var zoneNrF=zoneNr+6*gameLocation.get()[1];
-			var zoneNrS;
-			showBlase(zoneNrF);
-			drawZoneNavi(zoneNrF,$("innermaincontainer"));
-			var newDiv,newDiv1;
-			var tempZoneProductionData=[[{}],0,0,true];
-			var tempZoneProductionDataSlot;
-			var data=unsafeWindow.farms_data.farms[unsafeWindow.farm][zoneNr];
+        try{
+            GM_log("doFuelstation "+"zoneNr_a"+zoneNr_a);
+            var zoneNr=zoneNr_a;
+            var zoneNrF=zoneNr+6*gameLocation.get()[1];
+            var zoneNrS;
+            showBlase(zoneNrF);
+            drawZoneNavi(zoneNrF,$("innermaincontainer"));
+            var newDiv,newDiv1;
+            var tempZoneProductionData=[[{}],0,0,true];
+            var tempZoneProductionDataSlot;
+            var data=unsafeWindow.farms_data.farms[unsafeWindow.farm][zoneNr];
 
-			for(var slot=1;slot<=4;slot++){
-				zoneNrS=zoneNrF+"."+slot;
-				if((slot==1)||(!data.data.data.slots[slot]["block"])){
-					zones.setBlock(zoneNrS,"");
-					tempZoneProductionDataSlot=[[{}],0,0,true];
-					tempZoneProductionData[1]++;
-					tempZoneProductionData[2]++;
-					tempZoneProductionDataSlot[1]++;
-					tempZoneProductionDataSlot[2]++;
-					if(data.data.data.slots[slot]){
-						var iPrTyp=0;
-						var iProd=350;
-						var iTime=NEVER;
+            for(var slot=1;slot<=4;slot++){
+                zoneNrS=zoneNrF+"."+slot;
+                if((slot==1)||(!data.data.data.slots[slot]["block"])){
+                    zones.setBlock(zoneNrS,"");
+                    tempZoneProductionDataSlot=[[{}],0,0,true];
+                    tempZoneProductionData[1]++;
+                    tempZoneProductionData[2]++;
+                    tempZoneProductionDataSlot[1]++;
+                    tempZoneProductionDataSlot[2]++;
+                    if(data.data.data.slots[slot]){
+                        var iPrTyp=0;
+                        var iProd=350;
+                        var iTime=NEVER;
 
-						for(var v in data.production) {
-							if(!data.production.hasOwnProperty(v)){ continue; }
-							if ((data.production[v].slot==slot))   {
-								//iProd=data.production[v].pid;
-								iTime=now+data.production[v].remain;
-							}
-						}
+                        for(var v in data.production) {
+                            if(!data.production.hasOwnProperty(v)){ continue; }
+                            if ((data.production[v].slot==slot)) {
+                                //iProd=data.production[v].pid;
+                                iTime=now+data.production[v].remain;
+                            }
+                        }
 
-						if(iProd){
-							var iAmount=data.data.constants.slot_level[data.data.data.slots[slot].level].output;
-							var iPoints=iAmount*prodPoints[iPrTyp][iProd];
+                        if(iProd){
+                            var iAmount=data.data.constants.slot_level[data.data.data.slots[slot].level].output;
+                            var iPoints=iAmount*prodPoints[iPrTyp][iProd];
                             if (!$("fuelstation_slot"+slot+"_points")){
                                 newDiv=$("fuelstation_slot"+slot).children[1];
                                 newDiv1=createElement("div",{"id":"fuelstation_slot"+slot+"_points","style":"position:relative;top:75px;left:85px"},newDiv);
                                 pointsFormat(iPoints,"div",newDiv1);
                             }
-							tempZoneProductionData[1]--;
-							if(!tempZoneProductionData[0][iPrTyp][iProd]){ tempZoneProductionData[0][iPrTyp][iProd]=[]; }
-							tempZoneProductionData[0][iPrTyp][iProd].push([iAmount,iPoints,iTime,NEVER]);
-							tempZoneProductionDataSlot[1]--;
-							if(!tempZoneProductionDataSlot[0][iPrTyp][iProd]){ tempZoneProductionDataSlot[0][iPrTyp][iProd]=[]; }
-							tempZoneProductionDataSlot[0][iPrTyp][iProd].push([iAmount,iPoints,iTime,NEVER]);
-							//auto-cropping
-							if((iTime<now)&&(top.unsafeData.autoAction==null)&&valAutoCrop["farm"]&&(newDiv=$("fuelstation_slot"+slot))){
-								top.unsafeData.autoAction="berater: fuelstation crop";
-								window.setTimeout(function(div){
-									click(div.children[3]);
-									top.unsafeData.autoAction=null;
-								},500,newDiv);
-							}
-						}
-					}
-					zones.setProduction(zoneNrF+"."+slot,tempZoneProductionDataSlot.clone());
-				} else {
-					zones.setBlock(zoneNrS,"b");
-				}
-			}
-			zones.setProduction(zoneNrF,tempZoneProductionData.clone());
-			var tempZoneProductionData=null;newDiv=null;newDiv1=null;
-		}catch(err){GM_logError("doFuelstation","","",err);}
+                            tempZoneProductionData[1]--;
+                            if(!tempZoneProductionData[0][iPrTyp][iProd]){ tempZoneProductionData[0][iPrTyp][iProd]=[]; }
+                            tempZoneProductionData[0][iPrTyp][iProd].push([iAmount,iPoints,iTime,NEVER]);
+                            tempZoneProductionDataSlot[1]--;
+                            if(!tempZoneProductionDataSlot[0][iPrTyp][iProd]){ tempZoneProductionDataSlot[0][iPrTyp][iProd]=[]; }
+                            tempZoneProductionDataSlot[0][iPrTyp][iProd].push([iAmount,iPoints,iTime,NEVER]);
+                            //auto-cropping
+                            if((iTime<now)&&(top.unsafeData.autoAction==null)&&valAutoCrop["farm"]&&(newDiv=$("fuelstation_slot"+slot))){
+                                top.unsafeData.autoAction="berater: fuelstation crop";
+                                window.setTimeout(function(div){
+                                    click(div.children[3]);
+                                    top.unsafeData.autoAction=null;
+                                },500,newDiv);
+                            }
+                        }
+                    }
+                    zones.setProduction(zoneNrF+"."+slot,tempZoneProductionDataSlot.clone());
+                } else {
+                    zones.setBlock(zoneNrS,"b");
+                }
+            }
+            zones.setProduction(zoneNrF,tempZoneProductionData.clone());
+            var tempZoneProductionData=null;newDiv=null;newDiv1=null;
+        }catch(err){GM_logError("doFuelstation","","",err);}
     }
 
     //buildFuelstation(a)
     //a: Zone-Nummer
-  	unsafeOverwriteFunction("buildFuelstation",function(a){
-      try{
-        unsafeWindow._buildFuelstation(a);
-      }catch(err){GM_logError("_buildFuelstation","","",err);}
-  		try{
-        GM_log("buildFuelstation "+"a"+a);
-        doFuelstation(a);
-        raiseEvent("gameOpenFuelstation");
-      }catch(err){GM_logError("buildFuelstation","","",err);}
+    unsafeOverwriteFunction("buildFuelstation",function(a){
+        try{
+            unsafeWindow._buildFuelstation(a);
+        }catch(err){GM_logError("_buildFuelstation","","",err);}
+        try{
+            GM_log("buildFuelstation "+"a"+a);
+            doFuelstation(a);
+            raiseEvent("gameOpenFuelstation");
+        }catch(err){GM_logError("buildFuelstation","","",err);}
     });
 
     //calcPointsFuelstation
@@ -20427,7 +20474,7 @@ try{
         text["de"]["day2"]="Übermorgen";
         text["de"]["default"]="Default";
         text["de"]["delete"]="Löschen";
-        text["de"]["deleteFollowingData"]="Löschen folgende Daten";
+        text["de"]["deleteFollowingData"]="Lösche folgende Daten";
         text["de"]["demand"]="Forderung";
         text["de"]["detail"]="Detail";
         text["de"]["difficulty"]="Schwierigkeit";
@@ -20474,8 +20521,8 @@ try{
         text["de"]["goToMarket"]="Zum Markt";
         text["de"]["goToMarketOfX"]="Zum %1%-Markt";
         text["de"]["goToMarketstall"]="Zum Marktstand";
-        text["de"]["goToPage"]="Gehe nach Seite";
-        text["de"]["goToRank"]="Gehe nach Platz";
+        text["de"]["goToPage"]="Gehe zu Seite";
+        text["de"]["goToRank"]="Gehe zu Platz";
         text["de"]["goToVet"]="Zum Tierarzt";
         text["de"]["goToX"]="Gehe nach %1%";
         text["de"]["hide"]="ausblenden";
@@ -20515,7 +20562,7 @@ try{
         text["de"]["marketplace"]="Marktplatz";
         text["de"]["marketPrice"]="Marktpreis";
         text["de"]["marketstall"]="Marktstand";
-        text["de"]["megafield"]="Güterhof";
+        text["de"]["megafield"]="Fahrzeughalle\/Güterhof";
         text["de"]["megafieldCurrency"]=unsafeWindow.t_megafield_currency;
         text["de"]["messages"]="Nachrichten";
         text["de"]["minRack"]="Min&nbsp;Lager";
@@ -20553,19 +20600,19 @@ try{
         text["de"]["products"]="Produkte";
         text["de"]["productTimeSaving"]="%1% Minuten Zeitersparnis auf %2%";
         text["de"]["profit"]="Gewinn";
-        text["de"]["profitTable"]="Profit pro Zone pro Tag";
+        text["de"]["profitTable"]="Profit pro Zone\/Produktionsplatz pro Tag";
         text["de"]["quantity"]="Menge";
-        text["de"]["quest_foodworld"]="Picknickarea-Questreihe";
-        text["de"]["quest_forestry"]="Baumerei-Questreihe";
-        text["de"]["quest_main"]="Farm-Questreihe";
-        text["de"]["quest_veterinary"]="Tierarzt-Questreihe";
-        text["de"]["questfoodworld1"]="Picknickarea-Questreihe";
-        text["de"]["questforestry1"]="1. Baumerei-Questreihe";
-        text["de"]["questforestry2"]="2. Baumerei-Questreihe";
-        text["de"]["questmain1"]="1. Farm-Questreihe";
-        text["de"]["questmain2"]="2. Farm-Questreihe";
-        text["de"]["questmain3"]="3. Farm-Questreihe";
-        text["de"]["questveterinary1"]="Tierarzt-Questreihe";
+        text["de"]["quest_foodworld"]="Picknickarea Questreihe";
+        text["de"]["quest_forestry"]="Forsthütte Questreihe";
+        text["de"]["quest_main"]="Hauptquestreihe";
+        text["de"]["quest_veterinary"]="Tierarzt Questreihe";
+        text["de"]["questfoodworld1"]="Picknickarea Questreihe";
+        text["de"]["questforestry1"]="Forsthütte Questreihe 1";
+        text["de"]["questforestry2"]="Forsthütte Questreihe 2";
+        text["de"]["questmain1"]="Hauptquestreihe 1";
+        text["de"]["questmain2"]="Hauptquestreihe 2";
+        text["de"]["questmain3"]="Hauptquestreihe 3";
+        text["de"]["questveterinary1"]="Tierarzt Questreihe";
         text["de"]["quests"]="Quests";
         text["de"]["questSetXToNrY"]="Setze %1% auf Nr %2%";
         text["de"]["rackX"]="%1%. Regal";
@@ -20660,9 +20707,9 @@ try{
         text["de"]["youAreOnRankX"]="Du bist auf Platz %1%.";
         // category
         text["de"]["category_c"]=text["de"]["coins"];
-        text["de"]["category_v"]="Pflanzen";
-        text["de"]["category_ex"]="Exotische Pflanzen";
-        text["de"]["category_e"]="Fortgeschrittene Produkte";
+        text["de"]["category_v"]="Pflanzliche Produkte";
+        text["de"]["category_ex"]="Exotische Produkte";
+        text["de"]["category_e"]="Tierische Produkte";
         text["de"]["category_z"]=unsafeWindow.rack_deco;
         text["de"]["category_o"]=unsafeWindow.rack_oil;
         text["de"]["category_f1"]="Setzlinge";
@@ -20677,8 +20724,8 @@ try{
         text["de"]["category_fw4"]="noch nicht verfügbar";
         text["de"]["category_fl"]="Blumen";
         text["de"]["category_fla"]="Gestecke";
-        text["de"]["category_hr"]="Heilkräuter";
-        text["de"]["category_md"]="Tinktur";
+        text["de"]["category_hr"]="Kräuter";
+        text["de"]["category_md"]="Medikamente";
         text["de"]["category_r0"]="Rezepte Produkt";
         text["de"]["category_r1"]="Rezepte Erhöhung Ertrag";
         text["de"]["category_r2"]="Rezepte Erhöhung Punkte";
@@ -20915,7 +20962,7 @@ try{
         text["en"]["marketplace"]="Market place";
         text["en"]["marketPrice"]="Market&nbsp;Price";
         text["en"]["marketstall"]="Market stall";
-        text["en"]["megafield"]="Plantation";
+        text["en"]["megafield"]="Plantation\/Megafield";
         text["en"]["megafieldCurrency"]=unsafeWindow.t_megafield_currency;
         text["en"]["messages"]="Messages";
         text["en"]["minRack"]="Min&nbsp;rack";
@@ -21201,11 +21248,11 @@ try{
         allEvents.push("gameFarmersmarketDialogCommit");    // the farmersmarket building has requested for commit of a dialogue
         allEvents.push("gameFarmiNew");                     // a new farmi is appeared
         allEvents.push("gameFarmiResponse");                // a farmi is been rejected or accepted.
-		allEvents.push("gameFuelstationEntry");				// Fuelstation Product entry
-        allEvents.push("gameFuelstationHarvest");			// Fuelstation Slot cropped
-		allEvents.push("gameFuelstationOpenDialogProdukt"); // Fuelstation Product choose
-		allEvents.push("gameFuelstationOpenDialogPID"); 	// Fuelstation Product amout
-		allEvents.push("gamePonyCropped");                  // a pony has been cropped
+        allEvents.push("gameFuelstationEntry");             // Fuelstation Product entry
+        allEvents.push("gameFuelstationHarvest");           // Fuelstation Slot cropped
+        allEvents.push("gameFuelstationOpenDialogProdukt"); // Fuelstation Product choose
+        allEvents.push("gameFuelstationOpenDialogPID");     // Fuelstation Product amout
+        allEvents.push("gamePonyCropped");                  // a pony has been cropped
         allEvents.push("gamePonyFed");                      // a pony has been fed (after confirmation)
         allEvents.push("gamePonyFarmiSet");                 // a pony farmi has been set on a pony (after confirmation)
         allEvents.push("gamePonyFarmiSelected");            // a pony farmi has been selected (not unselected)
