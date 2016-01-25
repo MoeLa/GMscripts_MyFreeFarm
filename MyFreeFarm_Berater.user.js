@@ -16331,9 +16331,9 @@ return false;
 							for (var v in questData["veterinary"]["1"]["data"][0]){
 								if(!questData["veterinary"]["1"]["data"][0].hasOwnProperty(v)){ continue; }
 								if (questData["veterinary"]["1"]["data"][0][v][1]==questWare)
-									menge[2]=questData["veterinary"]["1"]["data"][0][i][2];
+									menge[2]=questData["veterinary"]["1"]["data"][0][v][2];
 							}
-							menge[0]=((questData["veterinary"]["1"]["given"][i]&&questData["veterinary"]["1"]["given"][i][questWare])?parseInt(questData["veterinary"]["1"]["given"][i][questWare],10):0);
+							menge[0]=((questData["veterinary"]["1"]["given"][0]&&questData["veterinary"]["1"]["given"][0][questWare])?parseInt(questData["veterinary"]["1"]["given"][0][questWare],10):0);
 							menge[1]=Math.min(menge[2]-menge[0],prodStock[0][questWare]);
 							createElement("div",{"style":"width:"+Math.floor(200*menge[1]/menge[2])+"px;left:"+Math.floor(200*(menge[0])/menge[2])+"px;","class":"questboxbarinPoss"},cand[i]);
 						}
