@@ -2584,22 +2584,29 @@ try{
 }
 function calcTotalEndtime(){
     try{
+        if(!zones.getBlock("megafield") && zones.getBuilding("megafield")!=0 && zoneAddToGlobalTime["megafield"]){
+            GM_setValueCache(COUNTRY+"_"+SERVER+"_"+USERNAME+"_megafieldEndtime",zones.getEndtime("megafield"));
+        } else {
+            GM_setValueCache(COUNTRY+"_"+SERVER+"_"+USERNAME+"_megafieldEndtime",NEVER);
+        }
+
         totalEndtime=NEVER;
-        for(var i in ALL_ZONES){
+        for(var i in ALL_ZONES){ // Object mit Keys: city[1] -> windmill, farm[30] -> Zahlen 1-30, farmersmarket[7] -> farmersmarket-0 bis 6, foodworld[5], forestry[3], megafield[1] -> megafield
             if(!ALL_ZONES.hasOwnProperty(i)){ continue; }
             for(var j=0;j<ALL_ZONES[i].length;j++){
                 var zoneNrF=ALL_ZONES[i][j];
+                // Nicht geblockt UND Gebäude auf Bauplatz UND (Farm ODER 'In globaler Zeit'-Flag gesetzt)
                 if((!zones.getBlock(zoneNrF))&&(zones.getBuilding(zoneNrF)!=0)&&((i=="farm")||zoneAddToGlobalTime[zoneNrF])){
                     help=zones.getEndtime(zoneNrF);
-                    if(help==NEVER){
-                        if(valGlobaltimeShowCroppedZone[i]){
+                    if(help==NEVER){ // Dieses Gebäude/Farm/... ist geerntet
+                        if(valGlobaltimeShowCroppedZone[i]){ // Flag 'Geerntete Gebäude/Farm beachten' gesetzt => Auf diesem Account ist was zu machen
                             totalEndtime=-1;
                             GM_setValueCache(COUNTRY+"_"+SERVER+"_"+USERNAME+"_totalEndtime",totalEndtime);
                             return;
                         }
-                    }else{
+                    }else{ // Gebäude/Farm nicht geerntet (also in Produktion oder Produktion fertig+zu ernten). Endzeit für Produktion fertig+noch nicht geerntet liegt in Vergangenheit
                         totalEndtime=Math.min(totalEndtime,help);
-                        if(valWaterNeeded[i]){
+                        if(valWaterNeeded[i]){ // Gießen beachten?
                             totalEndtime=Math.min(totalEndtime,zones.getWatertime(zoneNrF));
                         }
                     }
@@ -10503,12 +10510,13 @@ try{
         var help2;
         for(var v=0;v<help.length;v++){
             if((help[v][4]) && (help[v][0]==COUNTRY) && (help[v][1]==SERVER)){
-                help2=[v,help[v][2],NEVER];
+                help2=[v,help[v][2],NEVER,NEVER]; // Nummer, Username, Endzeit(alles), Endzeit(Megafield)
                 if(help2[1].toLowerCase()==USERNAME){ // this account
                     help2[0]=-1;
                 }else{
                     try{
                         help2[2]=GM_getValue(help[v][0]+"_"+help[v][1]+"_"+help[v][2].toLowerCase()+"_totalEndtime");
+                        help2[3]=GM_getValue(help[v][0]+"_"+help[v][1]+"_"+help[v][2].toLowerCase()+"_megafieldEndtime");
                     }catch(err){}
                 }
                 otherAccs.push(help2);
@@ -10521,20 +10529,34 @@ try{
     function testOtherAccReady(){
     try{
         var found=null;
-        for(var v=0;v<otherAccs.length;v++){ if(otherAccs[v][0]>-1){
-            if (otherAccs[v][2]+unsafeWindow.Zeit.Verschiebung<now){
-                found=v;
-                break;
+        var isMegafield = false;
+        for(var v = 0; v < otherAccs.length; v++){
+            if(otherAccs[v][0]>-1){ // Falls nicht aktueller Account
+                if (otherAccs[v][3]+unsafeWindow.Zeit.Verschiebung<now) { // Ist Megafield auf anderem Account fertig?
+                    found=v;
+                    isMegafield = true;
+                    break;
+                }
             }
-        }}
+        }
+        if (found==null) { // Nur suchen, falls kein Megafield irgendwo fertig ist
+            for(var v = 0; v < otherAccs.length; v++){
+                if(otherAccs[v][0]>-1){ // Falls nicht aktueller Account
+                    if (otherAccs[v][2]+unsafeWindow.Zeit.Verschiebung<now) { // Ist irgendwas auf anderem Account fertig?
+                        found=v;
+                        break;
+                    }
+                }
+            }
+        }
         if(found!=null){
-            var cell=$("bubble_adtext");
-            if(!cell){ cell=$("sprcontent"); }
+            var cell=$("bubble_adtext"); // Text in Bubble neben dem Schweinchen
+            if(!cell){ cell=$("sprcontent"); } // Ggf. kompletter Inhalt des Bubbles
             cell.innerHTML="";
-            cell=createElement("a",{"id":"linkOtherAccReady","class":"link","dologin":otherAccs[found][0],"href":"#","style":"font-weight:bold;"},createElement("div",{"style":"height:50px;"},cell),farmNamen[otherAccs[found][1]]+" "+getText("finished").toLowerCase()+"!");
+            cell=createElement("a",{"id":"linkOtherAccReady","class":"link","dologin":otherAccs[found][0],"href":"#","style":"font-weight:bold;","ismegafield":isMegafield},createElement("div",{"style":"height:50px;"},cell),farmNamen[otherAccs[found][1]]+" "+getText("finished").toLowerCase()+"!");
             cell.addEventListener("click",function(){
             try{
-                var dologin=parseInt(this.getAttribute("dologin"),10);
+                var dologin=parseInt(this.getAttribute("dologin"),10); // Define function to retrieve account (number) to login
                 window.setTimeout(function(dologin){
                 try{
                     var help=explode(GM_getValue(COUNTRY+"_pagedataLogin"),"testOtherAccReady/pagedataLogin",{});
@@ -16327,24 +16349,24 @@ return false;
             switch(mode){
             case "production_select": raiseEvent("gameFarmersmarketSlotOpened");break;
             case "production_select_confirm": raiseEvent("gameFarmersmarketDialogCommit");break;
-			case "quests": {//grünen Balken (Anzeige des Lagerbestands) im Tierarzt-Questfenster
-				try{
-					var cand=$("vet_questentry_info").getElementsByClassName("questboxbarout");
-					for(var i=0;i<cand.length;i++){
-						var questWare = parseInt(cand[i].parentNode.children[1].className.replace("kp",""),10);
-						var menge = [0,0,0]; //given,stock,total
-						for (var v in questData["veterinary"]["1"]["data"][0]){
-							if(!questData["veterinary"]["1"]["data"][0].hasOwnProperty(v)){ continue; }
-								if (questData["veterinary"]["1"]["data"][0][v][1]==questWare)
-								menge[2]=questData["veterinary"]["1"]["data"][0][v][2];
-						}
-						menge[0]=((questData["veterinary"]["1"]["given"][0]&&questData["veterinary"]["1"]["given"][0][questWare])?parseInt(questData["veterinary"]["1"]["given"][0][questWare],10):0);
-						menge[1]=Math.min(menge[2]-menge[0],prodStock[0][questWare]);
-						createElement("div",{"style":"width:"+Math.floor(200*menge[1]/menge[2])+"px;left:"+Math.floor(200*(menge[0])/menge[2])+"px;","class":"questboxbarinPoss"},cand[i]);
-					}
-				}catch(err){ GM_logError("showQuestBox","","",err); }
-				break;
-				}
+                        case "quests": {//grünen Balken (Anzeige des Lagerbestands) im Tierarzt-Questfenster
+                                try{
+                                        var cand=$("vet_questentry_info").getElementsByClassName("questboxbarout");
+                                        for(var i=0;i<cand.length;i++){
+                                                var questWare = parseInt(cand[i].parentNode.children[1].className.replace("kp",""),10);
+                                                var menge = [0,0,0]; //given,stock,total
+                                                for (var v in questData["veterinary"]["1"]["data"][0]){
+                                                        if(!questData["veterinary"]["1"]["data"][0].hasOwnProperty(v)){ continue; }
+                                                                if (questData["veterinary"]["1"]["data"][0][v][1]==questWare)
+                                                                menge[2]=questData["veterinary"]["1"]["data"][0][v][2];
+                                                }
+                                                menge[0]=((questData["veterinary"]["1"]["given"][0]&&questData["veterinary"]["1"]["given"][0][questWare])?parseInt(questData["veterinary"]["1"]["given"][0][questWare],10):0);
+                                                menge[1]=Math.min(menge[2]-menge[0],prodStock[0][questWare]);
+                                                createElement("div",{"style":"width:"+Math.floor(200*menge[1]/menge[2])+"px;left:"+Math.floor(200*(menge[0])/menge[2])+"px;","class":"questboxbarinPoss"},cand[i]);
+                                        }
+                                }catch(err){ GM_logError("showQuestBox","","",err); }
+                                break;
+                                }
             }
         }catch(err){GM_logError("dialogNursery","","",err);}
     });
