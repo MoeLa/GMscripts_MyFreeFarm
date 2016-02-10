@@ -7582,6 +7582,9 @@ try{
                     }
                 }else if((help=$("vet_production_filter_icon").parentNode) && (help.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.style.display == "block")){
 					var help2=help.querySelector('div[onclick*="vetDialog(\'production_select_confirm\','+handled.slot+','+zoneList[handled.zoneNrL][0][0]+',undefined)"]');
+					if (!help2) {
+						help2=help.querySelector('div[onclick*="vetDialog(\'production_select_confirm\','+handled.slot+','+zoneList[handled.zoneNrL][0][0]+',1)"]');
+					}
                     var helpDown=help.querySelector(".vet_production_select_navi_down");
                     var helpUp=help.querySelector(".vet_production_select_navi_up");
 
