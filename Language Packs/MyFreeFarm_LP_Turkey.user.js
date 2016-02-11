@@ -1,5 +1,5 @@
 ﻿// ==UserScript==
-// @name        MyFreeFarm LP Swedish
+// @name        MyFreeFarm LP Turkey
 // @namespace   https://github.com/BastianKanaan/GMscripts_MyFreeFarm
 // @author      BastianKanaan
 // @description Language pack "Swedish" for MyFreeFarm Scripts
