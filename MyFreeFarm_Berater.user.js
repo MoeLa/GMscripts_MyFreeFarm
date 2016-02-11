@@ -10526,6 +10526,7 @@ try{
     }catch(err){GM_logError("calcOtherAccs","","",err);}
     }
     calcOtherAccs();
+    var blablablubb=null;
     function testOtherAccReady(){
     try{
         var found=null;
@@ -10558,13 +10559,14 @@ try{
             cell.innerHTML="";
             cell=createElement("a",{"id":"linkOtherAccReady","class":"link","dologin":otherAccs[found][0],"href":"#","style":"font-weight:bold;","ismegafield":isMegafield},createElement("div",{"style":"height:50px;"},cell),farmNamen[otherAccs[found][1]]+" "+getText("finished").toLowerCase()+"!");
             // TODO: Falls isMegafield==false, dann muss das Div nochmal neu gebaut/gesetzt werden, wenn Megafield auf anderem Account fertig
-            if (!isMegafield) {
+            if (!isMegafield && !blablablubb) {
                 console.log("testOtherAccReady => Nur nicht-Megafield-Accounts fertig. Starte die Show in " + ((megafieldReady-now)/1000) + " Sekunden erneut.");
                 window.setTimeout(function() {
                     var div=$("linkOtherAccReady");
                     div.parentNode.removeChild(div);
                     testOtherAccReady();
                 }, megafieldReady-now);
+                blablablubb=true;
             }
 
             cell.addEventListener("click",function(){
@@ -16178,7 +16180,7 @@ return false;
                                 zones.setBonus(zoneNrF,0);
                                 if((!currBlock)&&(unsafeWindow.farmersmarket_data.vet&&unsafeWindow.farmersmarket_data.vet.production)){
                                     tempZoneProductionData=[[{},{}],0,0,true];
-                                    console.log(unsafeWindow.farmersmarket_data.vet);
+                                    // console.log(unsafeWindow.farmersmarket_data.vet);
                                     for(var slot=1;slot<=4;slot++){
                                         zoneNrS=zoneNrF+"."+slot;
                                         zones.setBlock(zoneNrS,"");
