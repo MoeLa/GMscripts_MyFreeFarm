@@ -227,35 +227,38 @@ var botArbiter=new function(){
     this.add=function(event){
     try{
         if(LOGGING_ARBITER){ GM_logInfo("botArbiter.add","event="+event,"bot.isActive()="+bot.isActive(),"Begin"); }
-        var priority,fkt=null;
+        var priority, fkt=null;
         switch(event){
-        case "sessionEnds":             priority=999;fkt=doGameSessionEnds;     break;
-        case "megafield":               priority= 35;fkt=autoMegafield;         break;
-        case "otherAccMegafieldReady":  priority= 34;fkt=doGameOtherAccReady;   break;
-        case "farm":                    priority= 30;fkt=autoFarm;              break;
-        case "farmersmarket":           priority= 25;fkt=autoFarmersmarket;     break;
-        case "windmill":                priority= 20;fkt=autoWindmill;          break;
-        case "forestry":                priority= 10;fkt=autoForestry;          break;
-        case "foodworld":               priority= 10;fkt=autoFoodworld;         break;
-        case "clothingDonation":        priority=  5;fkt=autoClothingDonation;  break;
-        case "donkey":                  priority=  5;fkt=autoDonkey;            break;
-        case "lottery":                 priority=  5;fkt=autoLottery;           break;
-        case "activatePowerUp":         priority=  5;fkt=autoActivatePowerUp;   break;
-        case "farmi":                   priority=  5;fkt=autoFarmi;             break;
-        // case "quest":          priority=  5;fkt=autoActivateQuest;   break;
-        // case "lodgeQuest":     priority=  5;fkt=autoActivateLodgeQuest;break;
-        case "otherAccReady":           priority=  1;fkt=doGameOtherAccReady;   break;
+            case "sessionEnds":             priority=999;fkt=doGameSessionEnds;     break;
+            case "megafield":               priority= 35;fkt=autoMegafield;         break;
+            case "otherAccMegafieldReady":  priority= 34;fkt=doGameOtherAccReady;   break;
+            case "farm":                    priority= 30;fkt=autoFarm;              break;
+            case "farmersmarket":           priority= 25;fkt=autoFarmersmarket;     break;
+            case "windmill":                priority= 20;fkt=autoWindmill;          break;
+            case "forestry":                priority= 10;fkt=autoForestry;          break;
+            case "foodworld":               priority= 10;fkt=autoFoodworld;         break;
+            case "clothingDonation":        priority=  5;fkt=autoClothingDonation;  break;
+            case "donkey":                  priority=  5;fkt=autoDonkey;            break;
+            case "lottery":                 priority=  5;fkt=autoLottery;           break;
+            case "activatePowerUp":         priority=  5;fkt=autoActivatePowerUp;   break;
+            case "farmi":                   priority=  5;fkt=autoFarmi;             break;
+            // case "quest":          priority=  5;fkt=autoActivateQuest;   break;
+            // case "lodgeQuest":     priority=  5;fkt=autoActivateLodgeQuest;break;
+            case "otherAccReady":           priority=  1;fkt=doGameOtherAccReady;   break;
         }
-        if(!bot.isActive()){
+        console.log("botArbiter.add called");
+        if (!bot.isActive()) {
             GM_logWarning("botArbiter.add","event="+event,"","Bot is off");
-        }else if(fkt==null){
+        } else if (fkt==null) {
             GM_logWarning("botArbiter.add","event="+event,"","No bot-function");
-        }else{
-            if(intervalBusy){
-                window.setTimeout(botArbiter.add,100,event);
-            }else{
-                stack[event]=[priority,fkt];
-                window.setTimeout(botArbiter.start,100);
+        } else {
+            if (intervalBusy) { // Currently looping through stack. Try again in 100ms
+                window.setTimeout(botArbiter.add, 100, event);
+                console.log("--> Try again in 100ms");
+            } else {
+                stack[event]=[priority, fkt]; // Put event into stack (if not already there)
+                window.setTimeout(botArbiter.start, 100);
+                console.log(stack);
             }
         }
     }catch(err){GM_logError("botArbiter.add","event="+event,"",err);}
@@ -264,11 +267,8 @@ var botArbiter=new function(){
     try{
         if(LOGGING_ARBITER){ GM_logInfo("botArbiter.clear","event="+event,"intervalBusy="+intervalBusy,"Begin"); }
         if(stack[event]){
-            if(intervalBusy){
-                window.setTimeout(botArbiter.clear,100,event);
-                // window.setTimeout(function(){
-                //  botArbiter.clear(event);
-                // },100);
+            if(intervalBusy){ // Currently looping through stack. Try again in 100ms
+                window.setTimeout(botArbiter.clear, 100, event);
             }else{
                 delete stack[event];
             }
@@ -278,30 +278,34 @@ var botArbiter=new function(){
     }
     this.run=function(){
     try{
-        // GM_log("stack="+implode(stack));
         intervalBusy=true;
-        //if(LOGGING_ARBITER){ GM_log("interval, busy:"+busy+" zoneWaiting:"+implode(zoneWaiting)+" stack:"+implode(stack)); }
-        //if(LOGGING_ARBITER){ GM_log("interval, busy:"+busy+" zoneWaiting:"+implode(zoneWaiting)+" stack:"+print_r(stack)); }
         try{
-            if(LOGGING_ARBITER){ GM_logInfo("botArbiter.run","","stack="+implode(stack,"botArbiter.run/stack")+" readyZone="+implode(unsafeData.readyZone,"botArbiter.run/readyZone"),"Begin"); }
-            if(bot.isActive()&&(!bot.isBusy())&&checkOpenWindow()){
+            if (LOGGING_ARBITER) {
+                GM_logInfo("botArbiter.run","","stack="+implode(stack,"botArbiter.run/stack")+" readyZone="+implode(unsafeData.readyZone,"botArbiter.run/readyZone"),"Begin");
+            }
+            
+            if (bot.isActive() && !bot.isBusy() && checkOpenWindow()) {
                 var found=null;
                 var count=0;
-                for(event in stack){
-                    if(!stack.hasOwnProperty(event)){ continue; }
+                for (event in stack) { // Go through [priority,fkt]-attributes of stack
+                    if (!stack.hasOwnProperty(event)) { continue; }
                     count++;
-                    if((found==null)||(stack[found][0]<stack[event][0])){
+                    if (found==null || stack[found][0]<stack[event][0]) { // Check for priority of event
                         found=event;
                     }
                 }
-                if(LOGGING_ARBITER){ GM_logInfo("botArbiter.run","","stack="+implode(stack,"botArbiter.run/stack")+" readyZone="+implode(unsafeData.readyZone,"botArbiter.run/readyZone")+" found="+found,"After search"); }
-                if(found){
-                    stack[found][1](bot.start()); // call bot function
+                if (LOGGING_ARBITER) {
+                    GM_logInfo("botArbiter.run","","stack="+implode(stack,"botArbiter.run/stack")+" readyZone="+implode(unsafeData.readyZone,"botArbiter.run/readyZone")+" found="+found,"After search");
+                }
+                if (found) {
+                    stack[found][1](bot.start()); // Call bot function
                     delete stack[found];
                     count--;
                 }
-                if(count==0){
-                    try{ window.clearInterval(interval); }catch(err){}
+                if (count==0) {
+                    try{
+                        window.clearInterval(interval);
+                    } catch (err) {}
                     interval=null;
                 }
             }
@@ -311,29 +315,28 @@ var botArbiter=new function(){
     }
     this.start=function(){
     try{
-        // GM_log("botArbiter.start "+interval+":"+bot.isActive());
-        if(bot.isActive()&&(!interval)){
-            interval=window.setInterval(botArbiter.run,RAISETIME);
+        if(bot.isActive() && !interval) { // Bot is set to 'active' and we're currently not within an interveral
+            interval=window.setInterval(botArbiter.run,RAISETIME); // Execute botArbiter.run every RAISETIME milliseconds. Result value is needed to cancel periodical execution.
         }
     }catch(err){GM_logError("botArbiter.start","","",err);}
     }
-    this.stop=function(){ //TODO the bot is not deactivated until the timer is runS out .. after that the buttoN should change.. inbetween it should have a inbetween state.
+    this.stop=function(){ //TODO the bot is not deactivated until the timer is run out... after that the button should change... inbetween it should have an inbetween state
     try{
         if(LOGGING_ARBITER){ GM_logInfo("botArbiter.stop","","bot.isActive()="+bot.isActive(),"Begin"); }
-        if(intervalBusy){
-            window.setTimeout(botArbiter.stop,100);
-            // window.setTimeout(function(){
-            //  botArbiter.stop();
-            // },100);
+        if(intervalBusy){ // Indicates, if we're currently within an interval
+            window.setTimeout(botArbiter.stop, 100); // Call botArbiter.stop in 100ms again
         }else{
             stack=new Object();
-            try{ window.clearInterval(interval); }catch(err){}
+            try {
+                window.clearInterval(interval); // Stop periodical executement of botArbiter.run (set in botArbiter.start)
+            } catch(err) {}
             interval=null;
         }
     }catch(err){GM_logError("botArbiter.stop","","",err);}
     }
     this.check=function(){
     try{
+        console.log("botArbiter.check called!");
         if(LOGGING_ARBITER){GM_logInfo("botArbiter.check","","","Begin");}
         // Testing for actions to do
         botArbiter.stop();
@@ -356,7 +359,7 @@ var botArbiter=new function(){
             if(settings.get("account","botUseDonkey") && $("divGoToDonkey")) {
                 botArbiter.add("donkey");
             }
-            if(settings.get("account","botUseLottery")&&settings.get("account","lotteryActivate")&&$("divGoToLottery")){
+            if(settings.get("account","botUseLottery") && settings.get("account","lotteryActivate") && $("divGoToLottery")) {
                 botArbiter.add("lottery");
             }
             var cell;
@@ -365,23 +368,12 @@ var botArbiter=new function(){
                     botArbiter.add("activatePowerUp");
                 }
             }
-            cell=null;
-            /* quest-bot needs review
-            if(settings.get("account","botUseQuest")&&unsafeData.questData["farm"]["1"]["state"]){
-                if(unsafeData.questData["farm"]["1"]["state"]==1 && valQuestActivate && valQuestActivateUntilNr>=unsafeData.questData["farm"]["1"]["nr"]){
-                    botArbiter.add("quest");
-                }else if(unsafeData.questData["farm"]["1"]["state"]==2 && valQuestSolving && valQuestSolvingUntilNr>=unsafeData.questData["farm"]["1"]["nr"] && checkQuest()){
-                    botArbiter.add("quest");
-                }
-            }
-            if(settings.get("account","botUseQuest")&&valLodgeQuestSolving&&checkLodgeQuest()){
-                botArbiter.add("lodgeQuest");
-            }
-            */
-            cell = $("linkOtherAccReady");
+            
+            cell=$("linkOtherAccReady");
             if(cell){
                 if (settings.get("account","botPreferMegafield") && cell.getAttribute("ismegafield")==="true") { // String-Vergleich ohne implizite Typ-Konvertierung nötig, da das Attribut als String zurückkommt!
                     botArbiter.add("otherAccMegafieldReady");
+                    console.log("Found out that 'otherAccMegafieldReady' must be added");
                 } else {
                     botArbiter.add("otherAccReady");
                 }
@@ -7590,9 +7582,9 @@ try{
                     }
                 }else if((help=$("vet_production_filter_icon").parentNode) && (help.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.style.display == "block")){
                     var help2=help.querySelector('div[onclick*="vetDialog(\'production_select_confirm\','+handled.slot+','+zoneList[handled.zoneNrL][0][0]+',undefined)"]');
-					if (!help2) {
-						help2=help.querySelector('div[onclick*="vetDialog(\'production_select_confirm\','+handled.slot+','+zoneList[handled.zoneNrL][0][0]+',1)"]');
-					}
+                    if (!help2) {
+                        help2=help.querySelector('div[onclick*="vetDialog(\'production_select_confirm\','+handled.slot+','+zoneList[handled.zoneNrL][0][0]+',1)"]');
+                    }
                     var helpDown=help.querySelector(".vet_production_select_navi_down");
                     var helpUp=help.querySelector(".vet_production_select_navi_up");
 

@@ -10530,12 +10530,15 @@ try{
     try{
         var found=null;
         var isMegafield = false;
+        var megafieldReady = NEVER; // Timestamp, when the next megafield is ready. Only used, when none is ready right now
         for(var v = 0; v < otherAccs.length; v++){
             if(otherAccs[v][0]>-1){ // Falls nicht aktueller Account
                 if (otherAccs[v][3]+unsafeWindow.Zeit.Verschiebung<now) { // Ist Megafield auf anderem Account fertig?
                     found=v;
                     isMegafield = true;
                     break;
+                } else {
+                    megafieldReady = Math.min(megafieldReady, otherAccs[v][3]+unsafeWindow.Zeit.Verschiebung);
                 }
             }
         }
@@ -10554,6 +10557,16 @@ try{
             if(!cell){ cell=$("sprcontent"); } // Ggf. kompletter Inhalt des Bubbles
             cell.innerHTML="";
             cell=createElement("a",{"id":"linkOtherAccReady","class":"link","dologin":otherAccs[found][0],"href":"#","style":"font-weight:bold;","ismegafield":isMegafield},createElement("div",{"style":"height:50px;"},cell),farmNamen[otherAccs[found][1]]+" "+getText("finished").toLowerCase()+"!");
+            // TODO: Falls isMegafield==false, dann muss das Div nochmal neu gebaut/gesetzt werden, wenn Megafield auf anderem Account fertig
+            if (!isMegafield) {
+                console.log("testOtherAccReady => Nur nicht-Megafield-Accounts fertig. Starte die Show in " + ((megafieldReady-now)/1000) + " Sekunden erneut.");
+                window.setTimeout(function() {
+                    var div=$("linkOtherAccReady");
+                    div.parentNode.removeChild(div);
+                    testOtherAccReady();
+                }, megafieldReady-now);
+            }
+
             cell.addEventListener("click",function(){
             try{
                 var dologin=parseInt(this.getAttribute("dologin"),10); // Define function to retrieve account (number) to login
