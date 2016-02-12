@@ -246,7 +246,7 @@ var botArbiter=new function(){
             // case "lodgeQuest":     priority=  5;fkt=autoActivateLodgeQuest;break;
             case "otherAccReady":           priority=  1;fkt=doGameOtherAccReady;   break;
         }
-        console.log("botArbiter.add called");
+        // console.log("botArbiter.add called");
         if (!bot.isActive()) {
             GM_logWarning("botArbiter.add","event="+event,"","Bot is off");
         } else if (fkt==null) {
@@ -254,11 +254,11 @@ var botArbiter=new function(){
         } else {
             if (intervalBusy) { // Currently looping through stack. Try again in 100ms
                 window.setTimeout(botArbiter.add, 100, event);
-                console.log("--> Try again in 100ms");
+                // console.log("--> Try again in 100ms");
             } else {
                 stack[event]=[priority, fkt]; // Put event into stack (if not already there)
                 window.setTimeout(botArbiter.start, 100);
-                console.log(stack);
+                // console.log(stack);
             }
         }
     }catch(err){GM_logError("botArbiter.add","event="+event,"",err);}
@@ -336,7 +336,6 @@ var botArbiter=new function(){
     }
     this.check=function(){
     try{
-        console.log("botArbiter.check called!");
         if(LOGGING_ARBITER){GM_logInfo("botArbiter.check","","","Begin");}
         // Testing for actions to do
         botArbiter.stop();
@@ -373,7 +372,6 @@ var botArbiter=new function(){
             if(cell){
                 if (settings.get("account","botPreferMegafield") && cell.getAttribute("ismegafield")==="true") { // String-Vergleich ohne implizite Typ-Konvertierung nötig, da das Attribut als String zurückkommt!
                     botArbiter.add("otherAccMegafieldReady");
-                    console.log("Found out that 'otherAccMegafieldReady' must be added");
                 } else {
                     botArbiter.add("otherAccReady");
                 }
