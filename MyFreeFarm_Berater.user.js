@@ -10547,8 +10547,6 @@ try{
                 }
             }
         }
-        if (!isMegafield)
-        console.log("Ändere Link in : " + (megafieldReady-now) + "s");
         if (found==null) { // Nur suchen, falls kein Megafield irgendwo fertig ist
             for(var v = 0; v < otherAccs.length; v++){
                 if(otherAccs[v][0]>-1){ // Falls nicht aktueller Account
@@ -10558,6 +10556,9 @@ try{
                     }
                 }
             }
+        }
+        if (!isMegafield && found!=null) {
+            console.log("Ändere Link in : " + (megafieldReady-now) + "s");
         }
         if(found!=null){
             var cell=$("bubble_adtext"); // Text in Bubble neben dem Schweinchen
