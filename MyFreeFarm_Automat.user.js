@@ -337,8 +337,8 @@ var botArbiter=new function(){
     }
     this.check=function(){
     try{
-        console.log("Moe, check");
-        console.log(zoneWaiting);
+        // console.log("Moe, check");
+        // console.log(zoneWaiting);
 
         if(LOGGING_ARBITER){GM_logInfo("botArbiter.check","","","Begin");}
         // Testing for actions to do
@@ -6255,9 +6255,7 @@ function autoMegafield(runId,step){
                 },(1000*help)+settings.getPause());
                 GM_logInfo("autoMegafield","runId="+runId+" step="+step,"zoneNrF="+handled.zoneNrF+" zoneNrL="+handled.zoneNrL,getText("automat_automatMegafield")+": "+getText("automat_cropWaitingInX").replace("%1%",getTimeStr(help)));
             }
-            console.log("Verlasse Güterhof zu Farm"+handled.farmNr); // TODO: Besser, zur Farm, auf dem Güterhof steht
-            console.log(handled);
-            autoZoneFinish(runId, $("speedlink_farm"+handled.farmNr)); // Verlasse den Güterhof -> Gehe zur Farm1-4, wo der Güterhof steht
+            autoZoneFinish(runId, $("speedlink_farm1")); // Verlasse den Güterhof -> Gehe zur Farm1
         break;}
         }
         if(listeningEvent){

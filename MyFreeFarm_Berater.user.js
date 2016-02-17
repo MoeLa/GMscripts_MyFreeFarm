@@ -1933,6 +1933,7 @@ var zones=new function(){
         }catch(err){GM_logError("zones.setBuilding","zoneNrF="+zoneNrF+" value="+value,"",err);}
     }
     this.getBuilding=function(zoneNr){
+        // console.log(data);
         try{
             var zoneNrF=zoneNr.toString().replace(/\.\d+$/g,"");
             if(data[zoneNrF]){
@@ -10560,7 +10561,7 @@ try{
     function testOtherAccReady(){
     try{
         // console.log("=== Starte testOtherAccReady ===");
-        // console.log(unsafeWindow.megafield_data);
+        // console.log(zones.getLocation("megafield"));
         // console.log(unsafeData.BUILDING_SIZE);
         // console.log("Now: " + now);
         // console.log("Zeitverschiebung: " + unsafeWindow.Zeit.Verschiebung);
