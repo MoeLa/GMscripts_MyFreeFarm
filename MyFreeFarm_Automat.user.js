@@ -3772,7 +3772,7 @@ try{
     var iDoneAmount=calcProductAmount(iProd, zoneNrF, null, null, false)*iDone;
     var iDoneAmountNetto=calcProductAmount(iProd, zoneNrF, null, null, true)*iDone;
     var iDoneScore=calcProductScore(iProd, zoneNrF, null, null) * iDone;
-    var isSelfConsumingType=(["v", "fl", "hr"].indexOf(unsafeData.prodTyp[0][iProd]) >= 0);
+    var isSelfConsumingType=(["v", "fl", "hr", "ex"].indexOf(unsafeData.prodTyp[0][iProd]) >= 0);
 
     var content=createElement("div");
     createElement("div",{"class":"queueTitle"},content,iRackMode?getText("automat_QueRackMode"):(((lRepeat || iRepeat) && lShuffle)?getText("automat_QueRepeatShuffle"):(lShuffle?getText("automat_QueShuffle"):((lRepeat || iRepeat)?getText("automat_QueRepeat"):(iTot<=1?getText("automat_QueFieldInRow1"):getText("automat_QueFieldInRowX"))))));
