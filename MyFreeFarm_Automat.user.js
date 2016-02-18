@@ -3767,7 +3767,7 @@ try{
     }
     var iTogo=parseInt(parent.getAttribute("iTogo"),10);
     var iTogoAmount=parseInt(parent.getAttribute("iTogoAmount"),10);
-    var iTogoAmountNetto=parseInt(parent.getAttribute("iTogoAmount"),10)-calcProductPositions(iProd, zoneNrF); // Subtract amount of units used for planting
+    var iTogoAmountNetto=parseInt(parent.getAttribute("iTogoAmount"),10)-(calcProductPositions(iProd, zoneNrF)*iTogo); // Subtract amount of units used for planting
     var iTogoScore=parseInt(parent.getAttribute("iTogoScore"),10);
     var iDoneAmount=calcProductAmount(iProd, zoneNrF, null, null, false)*iDone;
     var iDoneAmountNetto=calcProductAmount(iProd, zoneNrF, null, null, true)*iDone;
