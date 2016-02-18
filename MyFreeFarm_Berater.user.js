@@ -20869,6 +20869,7 @@ try{
         text["de"]["XIsUpToDate"]="%1% ist up-to-date."
         text["de"]["yes"]="Ja";
         text["de"]["yield"]="Ertrag";
+        text["de"]["yield_netto"]="Nettoertrag";
         text["de"]["yieldPerProduction"]="Ertrag pro Produktion";
         text["de"]["youAreOnRankX"]="Du bist auf Platz %1%.";
         // category
@@ -21269,6 +21270,7 @@ try{
         text["en"]["XIsUpToDate"]="%1% is up-to-date."
         text["en"]["yes"]="Yes";
         text["en"]["yield"]="Yield";
+        text["en"]["yield_netto"]="Yield (netto)";
         text["en"]["yieldPerProduction"]="Yield per production";
         text["en"]["youAreOnRankX"]="You are on rank %1%.";
         // category

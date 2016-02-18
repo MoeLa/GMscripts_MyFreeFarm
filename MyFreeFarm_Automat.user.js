@@ -3767,9 +3767,12 @@ try{
     }
     var iTogo=parseInt(parent.getAttribute("iTogo"),10);
     var iTogoAmount=parseInt(parent.getAttribute("iTogoAmount"),10);
+    var iTogoAmountNetto=parseInt(parent.getAttribute("iTogoAmount"),10)-calcProductPositions(iProd, zoneNrF); // Subtract amount of units used for planting
     var iTogoScore=parseInt(parent.getAttribute("iTogoScore"),10);
-    var iDoneAmount=calcProductAmount(iProd, zoneNrF, null, null, true) * iDone;
+    var iDoneAmount=calcProductAmount(iProd, zoneNrF, null, null, false)*iDone;
+    var iDoneAmountNetto=calcProductAmount(iProd, zoneNrF, null, null, true)*iDone;
     var iDoneScore=calcProductScore(iProd, zoneNrF, null, null) * iDone;
+    var isSelfConsumingType=(["v", "fl", "hr"].indexOf(unsafeData.prodTyp[0][iProd]) >= 0);
 
     var content=createElement("div");
     createElement("div",{"class":"queueTitle"},content,iRackMode?getText("automat_QueRackMode"):(((lRepeat || iRepeat) && lShuffle)?getText("automat_QueRepeatShuffle"):(lShuffle?getText("automat_QueShuffle"):((lRepeat || iRepeat)?getText("automat_QueRepeat"):(iTot<=1?getText("automat_QueFieldInRow1"):getText("automat_QueFieldInRowX"))))));
@@ -3785,6 +3788,9 @@ try{
             var newspan=createElement("div",{style:"display:table-row;"},content);
             createElement("div",{style:"display:table-cell;padding-right:10px;"},newspan);
             createElement("div",{style:"display:table-cell;padding-right:10px;"},newspan,getText("yield"));
+            if (isSelfConsumingType) {
+                createElement("div",{style:"display:table-cell;padding-right:10px;"},newspan,getText("yield_netto"));
+            }
             createElement("div",{style:"display:table-cell;padding-right:10px;"},newspan,getText("points"));
             createElement("div",{style:"display:table-cell;padding-right:10px;"},newspan,getText("automat_fields")); //TODO text -> "fields" much be "zone" for isNaN(zoneNrF)
 
@@ -3793,6 +3799,9 @@ try{
                     var newspan=createElement("div",{style:"display:table-row;"},content);
                     createElement("div",{style:"display:table-cell;padding-right:10px;"},newspan,(lRepeat || iRepeat || lShuffle ?getText("automat_QueRoundMake"):getText("automat_QueFieldMake")));
                     createElement("div",{style:"display:table-cell;padding-right:10px;text-align:right;"},newspan, (equalTimeArray?"":" ~ ") + (iLastInf?"∞":numberFormat(iTogoAmount+iDoneAmount)+"×"));
+                    if (isSelfConsumingType) {
+                        createElement("div",{style:"display:table-cell;padding-right:10px;text-align:center;"},newspan, (equalTimeArray?"":" ~ ") + (iLastInf?"∞":numberFormat(iTogoAmountNetto+iDoneAmountNetto)+"×"));
+                    }
                     createElement("div",{style:"display:table-cell;padding-right:10px;text-align:right;"},newspan, (equalTimeArray?"":" ~ ") + (iLastInf?"∞":numberFormat(iTogoScore+iDoneScore)));
                     createElement("div",{style:"display:table-cell;padding-right:10px;text-align:right;"},newspan, (iLastInf?"∞":numberFormat(iTot)));
 
@@ -3800,15 +3809,21 @@ try{
                         var newspan=createElement("div",{style:"display:table-row;"},content);
                         createElement("div",{style:"display:table-cell;padding-right:10px;"},newspan,getText("automat_QueRoundMade"));
                         createElement("div",{style:"display:table-cell;padding-right:10px;text-align:right;"},newspan, (equalTimeArray?"":" ~ ") + numberFormat(iDoneAmount)+"×");
+                        if (isSelfConsumingType) {
+                            createElement("div",{style:"display:table-cell;padding-right:10px;text-align:center;"},newspan, (equalTimeArray?"":" ~ ") + numberFormat(iDoneAmountNetto)+"×");
+                        }
                         createElement("div",{style:"display:table-cell;padding-right:10px;text-align:right;"},newspan, (equalTimeArray?"":" ~ ") + numberFormat(iDoneScore));
                         createElement("div",{style:"display:table-cell;padding-right:10px;text-align:right;"},newspan, iDone);
                     }
                 }
             }
-            if(iTogo>0){//TOGO
+            if(iTogo>0){ //TOGO
                 var newspan=createElement("div",{style:"display:table-row;"},content);
                 createElement("div",{style:"display:table-cell;padding-right:10px;"},newspan, (lRepeat || iRepeat || lShuffle ?getText("automat_QueRoundToGo"):getText("automat_QueFieldToGo")));
                 createElement("div",{style:"display:table-cell;padding-right:10px;text-align:right;"},newspan, (settings.get("account","showQueueTime")?"":" ~ ") + (iLastInf?"∞":numberFormat(iTogoAmount)+"×"));
+                if (isSelfConsumingType) {
+                    createElement("div",{style:"display:table-cell;padding-right:10px;text-align:center;"},newspan, (settings.get("account","showQueueTime")?"":" ~ ") + (iLastInf?"∞":numberFormat(iTogoAmountNetto)+"×"));
+                }
                 createElement("div",{style:"display:table-cell;padding-right:10px;text-align:right;"},newspan, (settings.get("account","showQueueTime")?"":" ~ ") + (iLastInf?"∞":numberFormat(iTogoScore)));
                 createElement("div",{style:"display:table-cell;padding-right:10px;text-align:right;"},newspan, (iLastInf?"∞":numberFormat(iTogo)));
             }
