@@ -1933,6 +1933,7 @@ var zones=new function(){
         }catch(err){GM_logError("zones.setBuilding","zoneNrF="+zoneNrF+" value="+value,"",err);}
     }
     this.getBuilding=function(zoneNr){
+        // console.log(data);
         try{
             var zoneNrF=zoneNr.toString().replace(/\.\d+$/g,"");
             if(data[zoneNrF]){
@@ -9758,32 +9759,32 @@ try{
     }
 
     function dofoodworldFarmisBubble() {
-		try {
-			var foodWorldFarmi = unsafeWindow.foodworldfarmis;
-			for (var i=0;i<foodWorldFarmi.length;i++) {
-				if (foodWorldFarmi[i].status==0){
-					var cost=0;
-					for (var c in foodWorldFarmi[i].products) {
-						if (!foodWorldFarmi[i].products.hasOwnProperty(c)) { continue; }
-						cost+=gut[c]*foodWorldFarmi[i].products[c]
-					}
-					var rate=100*foodWorldFarmi[i].price/cost;
-					if(rate<valFarmiLimits[0]){ // unter 90%
+                try {
+                        var foodWorldFarmi = unsafeWindow.foodworldfarmis;
+                        for (var i=0;i<foodWorldFarmi.length;i++) {
+                                if (foodWorldFarmi[i].status==0){
+                                        var cost=0;
+                                        for (var c in foodWorldFarmi[i].products) {
+                                                if (!foodWorldFarmi[i].products.hasOwnProperty(c)) { continue; }
+                                                cost+=gut[c]*foodWorldFarmi[i].products[c]
+                                        }
+                                        var rate=100*foodWorldFarmi[i].price/cost;
+                                        if(rate<valFarmiLimits[0]){ // unter 90%
                         str = css_styles["farmi_price_low"][1];
                     }else if(rate<valFarmiLimits[1]){ //zwischen 90% und 100%
                         str = css_styles["farmi_price_between"][1];
                     }else{ // über 100%
                         str = css_styles["farmi_price_above"][1];
                     }
-					if ($("foodworldfarmi"+i)){
-						createElement("div",{"id":"foodworldfarmiMiniInfo"+i,"class":"foodworldfarmiMiniInfo"},$("foodworldfarmi"+i));
-						$("foodworldfarmiMiniInfo"+i).setAttribute("style",str);
-					}
-				}
-			}
-		}
-		catch(err) {GM_logError("dofoodworldFarmisBubble","","err_trace="+err_trace,err);}
-	}
+                                        if ($("foodworldfarmi"+i)){
+                                                createElement("div",{"id":"foodworldfarmiMiniInfo"+i,"class":"foodworldfarmiMiniInfo"},$("foodworldfarmi"+i));
+                                                $("foodworldfarmiMiniInfo"+i).setAttribute("style",str);
+                                        }
+                                }
+                        }
+                }
+                catch(err) {GM_logError("dofoodworldFarmisBubble","","err_trace="+err_trace,err);}
+        }
 
     unsafeOverwriteFunction("foodworldActionResponse",function(request,action,id,table,chair){
         try{
@@ -9793,7 +9794,7 @@ try{
             var result = checkRequest(request);
             if((result!=0)&&(result[0]!=0)){
                 doFoodworld();
-				dofoodworldFarmisBubble();
+                                dofoodworldFarmisBubble();
                 switch(action){
                 case "crop": raiseEvent("gameFoodworldCropped"); break;
                 case "foodworld_init": raiseEvent("gameFoodworldOpened"); break;
@@ -10559,15 +10560,17 @@ try{
     calcOtherAccs();
     function testOtherAccReady(){
     try{
-        console.log("=== Starte testOtherAccReady ===");
-        console.log("Now: " + now);
-        console.log("Zeitverschiebung: " + unsafeWindow.Zeit.Verschiebung);
+        // console.log("=== Starte testOtherAccReady ===");
+        // console.log(zones.getLocation("megafield"));
+        // console.log(unsafeData.BUILDING_SIZE);
+        // console.log("Now: " + now);
+        // console.log("Zeitverschiebung: " + unsafeWindow.Zeit.Verschiebung);
         var found=null;
         var isMegafield = false;
         var megafieldReady = NEVER; // Timestamp, when the next megafield is ready. Only used, when none is ready right now
         for(var v = 0; v < otherAccs.length; v++){
             if(otherAccs[v][0]>-1){ // Falls nicht aktueller Account
-                console.log(otherAccs[v][1] + " => " + (otherAccs[v][3]-now));
+                // console.log(otherAccs[v][1] + " => " + (otherAccs[v][3]-now));
 
                 if (otherAccs[v][3]+unsafeWindow.Zeit.Verschiebung<now) { // Ist Megafield auf anderem Account fertig?
                     found=v;
@@ -20866,6 +20869,7 @@ try{
         text["de"]["XIsUpToDate"]="%1% ist up-to-date."
         text["de"]["yes"]="Ja";
         text["de"]["yield"]="Ertrag";
+        text["de"]["yield_netto"]="Nettoertrag";
         text["de"]["yieldPerProduction"]="Ertrag pro Produktion";
         text["de"]["youAreOnRankX"]="Du bist auf Platz %1%.";
         // category
@@ -21266,6 +21270,7 @@ try{
         text["en"]["XIsUpToDate"]="%1% is up-to-date."
         text["en"]["yes"]="Yes";
         text["en"]["yield"]="Yield";
+        text["en"]["yield_netto"]="Yield (netto)";
         text["en"]["yieldPerProduction"]="Yield per production";
         text["en"]["youAreOnRankX"]="You are on rank %1%.";
         // category
