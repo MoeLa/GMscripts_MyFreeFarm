@@ -16397,6 +16397,55 @@ return false;
         }catch(err){GM_logError("_initVet","","",err);}
         try{
             raiseEvent("gameFarmersmarketOpened5");
+
+            // var div = $("vet_levelbar");
+            var div = $("vet_countbar");
+            var frame=createElement("div", {
+                "style":"position:absolute;top:40px;left:-110px;background-color:yellow;"
+            },div,"Auftrag automatisch starten: ");
+            var selectAutostart = createElement("select", {
+                "id": "vetAutostart",
+                "size":"1",
+                "name": "vetAutostart"
+            }, frame, false);
+
+            var optionNoAutostart = createElement("option", {}, selectAutostart, "Kein Autostart");
+            var optionEasy = createElement("option", {}, selectAutostart, "Einfach");
+            var optionMiddle = createElement("option", {}, selectAutostart, "Mittel");
+            var optionHeavy = createElement("option", {}, selectAutostart, "Schwer");
+            // var radioNoAutostart = createElement("input", {
+            //     "id": "radioNoAutostart",
+            //     "type":"radio",
+            //     "name": "vetAutostart"
+            // }, frame, false);
+            // var labelNoAutostart = createElement("label", {
+            //     "for": "radioNoAutostart"
+            // }, frame, "Kein Autostart");
+            // var radioEasy = createElement("input", {
+            //     "id": "radioEasy",
+            //     "type":"radio",
+            //     "name": "vetAutostart"
+            // }, frame, false);
+            // var labelEasy = createElement("label", {
+            //     "for": "radioEasy"
+            // }, frame, "Einfache Praxis");
+            // var radioMiddle = createElement("input", {
+            //     "id": "radioMiddle",
+            //     "type":"radio",
+            //     "name": "vetAutostart"
+            // }, frame, false);
+            // var labelMiddle = createElement("label", {
+            //     "for": "radioMiddle"
+            // }, frame, "Mittlere Praxis");
+            // var radioHeavy = createElement("input", {
+            //     "id": "radioHeavy",
+            //     "type":"radio",
+            //     "name": "vetAutostart"
+            // }, frame, false);
+            // var labelHeavy = createElement("label", {
+            //     "for": "radioHeavy"
+            // }, frame, "Schwere Praxis");
+
         }catch(err){GM_logError("initVet","","",err);}
     });
     unsafeOverwriteFunction("vetDialog",function(mode,c,t,h){
