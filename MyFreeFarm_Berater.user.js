@@ -571,6 +571,7 @@ const VARIABLES = {
                     "valVerkaufLimitDown":["Option",3],
                     "valVerkaufLimitUp":["Option",3],
                     "valVet":["Option",3],
+                    "valVetAutostart":["Option",3],
                     "valWaterNeeded":["Option",3],
                     "vertraegeIn":["Contracts received",1],
                     "vertraegeOut":["Contracts sent",1],
@@ -666,7 +667,7 @@ var upjersAds, buyNotePadShowBlocked, show;
 var farmiLog, farmiDailyCount, levelLog, levelLogId, lotteryLog, lotteryLogId, logSales, logSalesId, logDonkey, logDonkeyId, logClothingDonation;
 var zoneAddToGlobalTime;
 var totalAnimals, totalFarmis, totalPowerups, totalQuest, totalRecursive, totalZones, totalEndtime;
-var valKauflimit, valKauflimitNPC, highlightProducts, highlightUser, valNimmBeob, valVerkaufLimitDown, valVerkaufLimitUp, valJoinPreise, lastOffer, protectMinRack, ownMarketOffers, valClothingDonation, valVet;
+var valKauflimit, valKauflimitNPC, highlightProducts, highlightUser, valNimmBeob, valVerkaufLimitDown, valVerkaufLimitUp, valJoinPreise, lastOffer, protectMinRack, ownMarketOffers, valClothingDonation, valVet, valVetAutostart;
 var valAnimateStartscreen, valAutoLogin;
 var valMessagesSystemMarkRead;
 var megafieldVehicle, megafieldJob, logMegafieldJob, megafieldSmartTimer;
@@ -13450,6 +13451,9 @@ return false;
             calcProdMinRackInit();
         },0);
     },false);
+    document.addEventListener("gameVetEndTreatment",function(){
+        console.log("EventListener 'gameVetEndTreatment' geworfen");
+    },false);
 
     // messages
     unsafeOverwriteFunction("messagesActionResponse",function(request,mode,id){
@@ -14290,6 +14294,7 @@ return false;
                 case "megafield_vehicle_buy": raiseEvent("gameMegafieldVehicleBought"); break;
                 case "nursery_harvest": raiseEvent("gameFarmersmarketCropped"); break;
                 case "nursery_startproduction": raiseEvent("gameFarmersmarketStarted"); break;
+                case "vet_endtreatment": raiseEvent("gameVetEndTreatment"); console.log("gameVetEndTreatment: Praxis vorbei"); break;
                 case "vet_harvestproduction": raiseEvent("gameFarmersmarketCropped"); break;
                 case "vet_startproduction": raiseEvent("gameFarmersmarketStarted"); break;
                 case "pony_crop": doPony(zoneNr); raiseEvent("gamePonyCropped"); break;
@@ -16398,53 +16403,28 @@ return false;
         try{
             raiseEvent("gameFarmersmarketOpened5");
 
-            // var div = $("vet_levelbar");
+            valVetAutostart = GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_valVetAutostart", 0);
             var div = $("vet_countbar");
             var frame=createElement("div", {
                 "style":"position:absolute;top:40px;left:-110px;background-color:yellow;"
-            },div,"Auftrag automatisch starten: ");
+            },div,"Praxis-Autostart: ");
             var selectAutostart = createElement("select", {
                 "id": "vetAutostart",
                 "size":"1",
                 "name": "vetAutostart"
             }, frame, false);
 
-            var optionNoAutostart = createElement("option", {}, selectAutostart, "Kein Autostart");
-            var optionEasy = createElement("option", {}, selectAutostart, "Einfach");
-            var optionMiddle = createElement("option", {}, selectAutostart, "Mittel");
-            var optionHeavy = createElement("option", {}, selectAutostart, "Schwer");
-            // var radioNoAutostart = createElement("input", {
-            //     "id": "radioNoAutostart",
-            //     "type":"radio",
-            //     "name": "vetAutostart"
-            // }, frame, false);
-            // var labelNoAutostart = createElement("label", {
-            //     "for": "radioNoAutostart"
-            // }, frame, "Kein Autostart");
-            // var radioEasy = createElement("input", {
-            //     "id": "radioEasy",
-            //     "type":"radio",
-            //     "name": "vetAutostart"
-            // }, frame, false);
-            // var labelEasy = createElement("label", {
-            //     "for": "radioEasy"
-            // }, frame, "Einfache Praxis");
-            // var radioMiddle = createElement("input", {
-            //     "id": "radioMiddle",
-            //     "type":"radio",
-            //     "name": "vetAutostart"
-            // }, frame, false);
-            // var labelMiddle = createElement("label", {
-            //     "for": "radioMiddle"
-            // }, frame, "Mittlere Praxis");
-            // var radioHeavy = createElement("input", {
-            //     "id": "radioHeavy",
-            //     "type":"radio",
-            //     "name": "vetAutostart"
-            // }, frame, false);
-            // var labelHeavy = createElement("label", {
-            //     "for": "radioHeavy"
-            // }, frame, "Schwere Praxis");
+            var optionNoAutostart = createElement("option", {"value":0}, selectAutostart, "Kein Autostart");
+            var optionEasy = createElement("option", {"value":1}, selectAutostart, "Einfach");
+            var optionMiddle = createElement("option", {"value":2}, selectAutostart, "Mittel");
+            var optionHeavy = createElement("option", {"value":3}, selectAutostart, "Schwer");
+
+            selectAutostart.addEventListener("change", function(e) {
+                valVetAutostart = e.target.selectedIndex;
+                GM_setValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_valVetAutostart", valVetAutostart);
+            });
+            selectAutostart.value = valVetAutostart;
+            // console.log(unsafeWindow.vet_data);
 
         }catch(err){GM_logError("initVet","","",err);}
     });
@@ -21522,6 +21502,7 @@ try{
         //allEvents.push("gameQuestActive");                    // There is an activated quest
         allEvents.push("gameQuestFinished");                // Quest is finished
         allEvents.push("gameQuestSolvable");
+        allEvents.push("gameVetEndTreatment");              // vet role has finished
         allEvents.push("gameNewDay");                       // a new day started
         allEvents.push("gameWindmillStarted");              // the windmill has been started
         allEvents.push("gameWindmillCropped");              // the windmill has been cropped
