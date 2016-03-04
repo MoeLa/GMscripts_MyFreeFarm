@@ -13451,9 +13451,9 @@ return false;
             calcProdMinRackInit();
         },0);
     },false);
-    document.addEventListener("gameVetEndTreatment",function(){
-        console.log("EventListener 'gameVetEndTreatment' geworfen");
-    },false);
+    // document.addEventListener("gameVetEndTreatment",function(){
+    //     console.log("EventListener 'gameVetEndTreatment' geworfen");
+    // },false);
 
     // messages
     unsafeOverwriteFunction("messagesActionResponse",function(request,mode,id){
@@ -14294,7 +14294,7 @@ return false;
                 case "megafield_vehicle_buy": raiseEvent("gameMegafieldVehicleBought"); break;
                 case "nursery_harvest": raiseEvent("gameFarmersmarketCropped"); break;
                 case "nursery_startproduction": raiseEvent("gameFarmersmarketStarted"); break;
-                case "vet_endtreatment": raiseEvent("gameVetEndTreatment"); console.log("gameVetEndTreatment: Praxis vorbei"); break;
+                // case "vet_endtreatment": raiseEvent("gameVetEndTreatment"); console.log("gameVetEndTreatment: Praxis vorbei"); break;
                 case "vet_harvestproduction": raiseEvent("gameFarmersmarketCropped"); break;
                 case "vet_startproduction": raiseEvent("gameFarmersmarketStarted"); break;
                 case "pony_crop": doPony(zoneNr); raiseEvent("gamePonyCropped"); break;
@@ -16404,27 +16404,31 @@ return false;
             raiseEvent("gameFarmersmarketOpened5");
 
             valVetAutostart = GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_valVetAutostart", 0);
-            var div = $("vet_countbar");
+            
+            var div = $("farmersmarket_pos5_inner"); // Vet-Dialog
+
+            // Outer frame for autostart functionality
             var frame=createElement("div", {
-                "style":"position:absolute;top:40px;left:-110px;background-color:yellow;"
+                "style":"position:absolute;top:47px;left:25%;padding-left: 4px;background: url('http://mff.wavecdn.de/mff/megafruit_time_bar.png') 100% 20px / 200%;border: 1px solid black;border-radius: 5px;"
             },div,"Praxis-Autostart: ");
+            
+            // Create combobox
             var selectAutostart = createElement("select", {
-                "id": "vetAutostart",
+                "id": "vetAutostartSelect",
                 "size":"1",
                 "name": "vetAutostart"
             }, frame, false);
 
-            var optionNoAutostart = createElement("option", {"value":0}, selectAutostart, "Kein Autostart");
-            var optionEasy = createElement("option", {"value":1}, selectAutostart, "Einfach");
-            var optionMiddle = createElement("option", {"value":2}, selectAutostart, "Mittel");
-            var optionHeavy = createElement("option", {"value":3}, selectAutostart, "Schwer");
+            createElement("option", {"value":0}, selectAutostart, "Kein Autostart"); // Add 'no autostart' element to combobox
+            for (var P in unsafeWindow.vet_data.role) {
+                createElement("option", {"value":P}, selectAutostart, unsafeWindow.t_vet_role_name[P]); // Add role to combobox
+            }
 
             selectAutostart.addEventListener("change", function(e) {
                 valVetAutostart = e.target.selectedIndex;
                 GM_setValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_valVetAutostart", valVetAutostart);
             });
-            selectAutostart.value = valVetAutostart;
-            // console.log(unsafeWindow.vet_data);
+            selectAutostart.value = valVetAutostart; // Init combobox on startup
 
         }catch(err){GM_logError("initVet","","",err);}
     });
@@ -16436,24 +16440,38 @@ return false;
             switch(mode){
             case "production_select": raiseEvent("gameFarmersmarketSlotOpened");break;
             case "production_select_confirm": raiseEvent("gameFarmersmarketDialogCommit");break;
-                        case "quests": {//grünen Balken (Anzeige des Lagerbestands) im Tierarzt-Questfenster
-                                try{
-                                        var cand=$("vet_questentry_info").getElementsByClassName("questboxbarout");
-                                        for(var i=0;i<cand.length;i++){
-                                                var questWare = parseInt(cand[i].parentNode.children[1].className.replace("kp",""),10);
-                                                var menge = [0,0,0]; //given,stock,total
-                                                for (var v in questData["veterinary"]["1"]["data"][0]){
-                                                        if(!questData["veterinary"]["1"]["data"][0].hasOwnProperty(v)){ continue; }
-                                                                if (questData["veterinary"]["1"]["data"][0][v][1]==questWare)
-                                                                menge[2]=questData["veterinary"]["1"]["data"][0][v][2];
-                                                }
-                                                menge[0]=((questData["veterinary"]["1"]["given"][0]&&questData["veterinary"]["1"]["given"][0][questWare])?parseInt(questData["veterinary"]["1"]["given"][0][questWare],10):0);
-                                                menge[1]=Math.min(menge[2]-menge[0],prodStock[0][questWare]);
-                                                createElement("div",{"style":"width:"+Math.floor(200*menge[1]/menge[2])+"px;left:"+Math.floor(200*(menge[0])/menge[2])+"px;","class":"questboxbarinPoss"},cand[i]);
-                                        }
-                                }catch(err){ GM_logError("showQuestBox","","",err); }
-                                break;
-                                }
+            case "quests": { //grünen Balken (Anzeige des Lagerbestands) im Tierarzt-Questfenster
+                try {
+                    var cand=$("vet_questentry_info").getElementsByClassName("questboxbarout");
+                    for(var i=0;i<cand.length;i++){
+                        var questWare = parseInt(cand[i].parentNode.children[1].className.replace("kp",""),10);
+                        var menge = [0,0,0]; //given,stock,total
+                        for (var v in questData["veterinary"]["1"]["data"][0]) {
+                            if (!questData["veterinary"]["1"]["data"][0].hasOwnProperty(v)){ continue; }
+                            if (questData["veterinary"]["1"]["data"][0][v][1]==questWare) {
+                                menge[2]=questData["veterinary"]["1"]["data"][0][v][2];
+                            }
+                        }
+                        menge[0]=((questData["veterinary"]["1"]["given"][0]&&questData["veterinary"]["1"]["given"][0][questWare])?parseInt(questData["veterinary"]["1"]["given"][0][questWare],10):0);
+                        menge[1]=Math.min(menge[2]-menge[0],prodStock[0][questWare]);
+                        createElement("div",{"style":"width:"+Math.floor(200*menge[1]/menge[2])+"px;left:"+Math.floor(200*(menge[0])/menge[2])+"px;","class":"questboxbarinPoss"},cand[i]);
+                    }
+                } catch(err){ GM_logError("showQuestBox","","",err); }
+                break;
+                }
+            case "role_reward": {
+                var btn = $("globalbox_button1");
+                if (btn && valVetAutostart) {
+                    click(btn); // Close reward box
+                }
+                break;
+                }
+            case "selectrole": {
+                if (valVetAutostart) {
+                    unsafeWindow.vetSetRole(valVetAutostart); // Start next role
+                }
+                break;
+                }
             }
         }catch(err){GM_logError("dialogNursery","","",err);}
     });
@@ -21502,7 +21520,7 @@ try{
         //allEvents.push("gameQuestActive");                    // There is an activated quest
         allEvents.push("gameQuestFinished");                // Quest is finished
         allEvents.push("gameQuestSolvable");
-        allEvents.push("gameVetEndTreatment");              // vet role has finished
+        // allEvents.push("gameVetEndTreatment");              // vet role has finished
         allEvents.push("gameNewDay");                       // a new day started
         allEvents.push("gameWindmillStarted");              // the windmill has been started
         allEvents.push("gameWindmillCropped");              // the windmill has been cropped
