@@ -13451,9 +13451,6 @@ return false;
             calcProdMinRackInit();
         },0);
     },false);
-    // document.addEventListener("gameVetEndTreatment",function(){
-    //     console.log("EventListener 'gameVetEndTreatment' geworfen");
-    // },false);
 
     // messages
     unsafeOverwriteFunction("messagesActionResponse",function(request,mode,id){
@@ -14294,7 +14291,6 @@ return false;
                 case "megafield_vehicle_buy": raiseEvent("gameMegafieldVehicleBought"); break;
                 case "nursery_harvest": raiseEvent("gameFarmersmarketCropped"); break;
                 case "nursery_startproduction": raiseEvent("gameFarmersmarketStarted"); break;
-                // case "vet_endtreatment": raiseEvent("gameVetEndTreatment"); console.log("gameVetEndTreatment: Praxis vorbei"); break;
                 case "vet_harvestproduction": raiseEvent("gameFarmersmarketCropped"); break;
                 case "vet_startproduction": raiseEvent("gameFarmersmarketStarted"); break;
                 case "pony_crop": doPony(zoneNr); raiseEvent("gamePonyCropped"); break;
@@ -16410,7 +16406,7 @@ return false;
             // Outer frame for autostart functionality
             var frame=createElement("div", {
                 "style":"position:absolute;top:47px;left:25%;padding-left: 4px;background: url('http://mff.wavecdn.de/mff/megafruit_time_bar.png') 100% 20px / 200%;border: 1px solid black;border-radius: 5px;"
-            },div,"Praxis-Autostart: ");
+            },div,getText("veterinaryRoleAutostart")+": ");
             
             // Create combobox
             var selectAutostart = createElement("select", {
@@ -16419,7 +16415,7 @@ return false;
                 "name": "vetAutostart"
             }, frame, false);
 
-            createElement("option", {"value":0}, selectAutostart, "Kein Autostart"); // Add 'no autostart' element to combobox
+            createElement("option", {"value":0}, selectAutostart, getText("no")); // Add 'no' element to combobox
             for (var P in unsafeWindow.vet_data.role) {
                 createElement("option", {"value":P}, selectAutostart, unsafeWindow.t_vet_role_name[P]); // Add role to combobox
             }
@@ -20906,6 +20902,7 @@ try{
         text["de"]["value"]="Wert";
         text["de"]["veterinary"]="Tierarzt";
         text["de"]["veterinaryLevelXNeeded"]="Tierarztlevel %1% benötigt";
+        text["de"]["veterinaryRoleAutostart"]="Praxis-Autostart";
         text["de"]["version"]="Version";
         text["de"]["waterBonus"]="%1%% Gießbonus";
         text["de"]["wateringFeature"]="Gießfunktion";
@@ -21308,6 +21305,7 @@ try{
         text["en"]["version"]="Version";
         text["en"]["veterinary"]="Veterinary";
         text["en"]["veterinaryLevelXNeeded"]="Veterinary level %1% needed";
+        text["en"]["veterinaryRoleAutostart"]="Autostart role";
         text["en"]["waterBonus"]="%1%% water bonus";
         text["en"]["waterNeeded"]="Water needed";
         text["en"]["waterNeededAtX"]="Water needed at %1%";
@@ -21520,7 +21518,6 @@ try{
         //allEvents.push("gameQuestActive");                    // There is an activated quest
         allEvents.push("gameQuestFinished");                // Quest is finished
         allEvents.push("gameQuestSolvable");
-        // allEvents.push("gameVetEndTreatment");              // vet role has finished
         allEvents.push("gameNewDay");                       // a new day started
         allEvents.push("gameWindmillStarted");              // the windmill has been started
         allEvents.push("gameWindmillCropped");              // the windmill has been cropped
