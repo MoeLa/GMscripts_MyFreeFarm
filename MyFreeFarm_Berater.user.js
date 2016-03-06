@@ -14289,6 +14289,7 @@ return false;
                 case "megafield_plant": raiseEvent("gameMegafieldPlanted"); break;
                 case "megafield_tour": raiseEvent("gameMegafieldTourStarted"); break;
                 case "megafield_vehicle_buy": raiseEvent("gameMegafieldVehicleBought"); break;
+                case "megafield_autoplant": raiseEvent("gameMegafieldAutoplanted"); break;
                 case "nursery_harvest": raiseEvent("gameFarmersmarketCropped"); break;
                 case "nursery_startproduction": raiseEvent("gameFarmersmarketStarted"); break;
                 case "vet_harvestproduction": raiseEvent("gameFarmersmarketCropped"); break;
@@ -15293,6 +15294,9 @@ return false;
         }catch(err){GM_logError("_dialogMegafield","","",err);}
         try{
             raiseEvent("gameMegafieldDialogStarted");
+            if (mode == "autoplant") {
+                raiseEvent("gameMegafieldDialogAutoplant");
+            }
         }catch(err){GM_logError("dialogMegafield","","",err);}
     });
 
