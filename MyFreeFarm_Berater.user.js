@@ -571,6 +571,7 @@ const VARIABLES = {
                     "valVerkaufLimitDown":["Option",3],
                     "valVerkaufLimitUp":["Option",3],
                     "valVet":["Option",3],
+                    "valVetAutostart":["Option",3],
                     "valWaterNeeded":["Option",3],
                     "vertraegeIn":["Contracts received",1],
                     "vertraegeOut":["Contracts sent",1],
@@ -666,7 +667,7 @@ var upjersAds, buyNotePadShowBlocked, show;
 var farmiLog, farmiDailyCount, levelLog, levelLogId, lotteryLog, lotteryLogId, logSales, logSalesId, logDonkey, logDonkeyId, logClothingDonation;
 var zoneAddToGlobalTime;
 var totalAnimals, totalFarmis, totalPowerups, totalQuest, totalRecursive, totalZones, totalEndtime;
-var valKauflimit, valKauflimitNPC, highlightProducts, highlightUser, valNimmBeob, valVerkaufLimitDown, valVerkaufLimitUp, valJoinPreise, lastOffer, protectMinRack, ownMarketOffers, valClothingDonation, valVet;
+var valKauflimit, valKauflimitNPC, highlightProducts, highlightUser, valNimmBeob, valVerkaufLimitDown, valVerkaufLimitUp, valJoinPreise, lastOffer, protectMinRack, ownMarketOffers, valClothingDonation, valVet, valVetAutostart;
 var valAnimateStartscreen, valAutoLogin;
 var valMessagesSystemMarkRead;
 var megafieldVehicle, megafieldJob, logMegafieldJob, megafieldSmartTimer;
@@ -16397,6 +16398,34 @@ return false;
         }catch(err){GM_logError("_initVet","","",err);}
         try{
             raiseEvent("gameFarmersmarketOpened5");
+
+            valVetAutostart = GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_valVetAutostart", 0);
+            
+            var div = $("farmersmarket_pos5_inner"); // Vet-Dialog
+
+            // Outer frame for autostart functionality
+            var frame=createElement("div", {
+                "style":"position:absolute;top:47px;left:25%;padding-left: 4px;background: url('http://mff.wavecdn.de/mff/megafruit_time_bar.png') 100% 20px / 200%;border: 1px solid black;border-radius: 5px;"
+            },div,getText("veterinaryRoleAutostart")+": ");
+            
+            // Create combobox
+            var selectAutostart = createElement("select", {
+                "id": "vetAutostartSelect",
+                "size":"1",
+                "name": "vetAutostart"
+            }, frame, false);
+
+            createElement("option", {"value":0}, selectAutostart, getText("no")); // Add 'no' element to combobox
+            for (var P in unsafeWindow.vet_data.role) {
+                createElement("option", {"value":P}, selectAutostart, unsafeWindow.t_vet_role_name[P]); // Add role to combobox
+            }
+
+            selectAutostart.addEventListener("change", function(e) {
+                valVetAutostart = e.target.selectedIndex;
+                GM_setValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_valVetAutostart", valVetAutostart);
+            });
+            selectAutostart.value = valVetAutostart; // Init combobox on startup
+
         }catch(err){GM_logError("initVet","","",err);}
     });
     unsafeOverwriteFunction("vetDialog",function(mode,c,t,h){
@@ -16407,24 +16436,38 @@ return false;
             switch(mode){
             case "production_select": raiseEvent("gameFarmersmarketSlotOpened");break;
             case "production_select_confirm": raiseEvent("gameFarmersmarketDialogCommit");break;
-                        case "quests": {//grünen Balken (Anzeige des Lagerbestands) im Tierarzt-Questfenster
-                                try{
-                                        var cand=$("vet_questentry_info").getElementsByClassName("questboxbarout");
-                                        for(var i=0;i<cand.length;i++){
-                                                var questWare = parseInt(cand[i].parentNode.children[1].className.replace("kp",""),10);
-                                                var menge = [0,0,0]; //given,stock,total
-                                                for (var v in questData["veterinary"]["1"]["data"][0]){
-                                                        if(!questData["veterinary"]["1"]["data"][0].hasOwnProperty(v)){ continue; }
-                                                                if (questData["veterinary"]["1"]["data"][0][v][1]==questWare)
-                                                                menge[2]=questData["veterinary"]["1"]["data"][0][v][2];
-                                                }
-                                                menge[0]=((questData["veterinary"]["1"]["given"][0]&&questData["veterinary"]["1"]["given"][0][questWare])?parseInt(questData["veterinary"]["1"]["given"][0][questWare],10):0);
-                                                menge[1]=Math.min(menge[2]-menge[0],prodStock[0][questWare]);
-                                                createElement("div",{"style":"width:"+Math.floor(200*menge[1]/menge[2])+"px;left:"+Math.floor(200*(menge[0])/menge[2])+"px;","class":"questboxbarinPoss"},cand[i]);
-                                        }
-                                }catch(err){ GM_logError("showQuestBox","","",err); }
-                                break;
-                                }
+            case "quests": { //grünen Balken (Anzeige des Lagerbestands) im Tierarzt-Questfenster
+                try {
+                    var cand=$("vet_questentry_info").getElementsByClassName("questboxbarout");
+                    for(var i=0;i<cand.length;i++){
+                        var questWare = parseInt(cand[i].parentNode.children[1].className.replace("kp",""),10);
+                        var menge = [0,0,0]; //given,stock,total
+                        for (var v in questData["veterinary"]["1"]["data"][0]) {
+                            if (!questData["veterinary"]["1"]["data"][0].hasOwnProperty(v)){ continue; }
+                            if (questData["veterinary"]["1"]["data"][0][v][1]==questWare) {
+                                menge[2]=questData["veterinary"]["1"]["data"][0][v][2];
+                            }
+                        }
+                        menge[0]=((questData["veterinary"]["1"]["given"][0]&&questData["veterinary"]["1"]["given"][0][questWare])?parseInt(questData["veterinary"]["1"]["given"][0][questWare],10):0);
+                        menge[1]=Math.min(menge[2]-menge[0],prodStock[0][questWare]);
+                        createElement("div",{"style":"width:"+Math.floor(200*menge[1]/menge[2])+"px;left:"+Math.floor(200*(menge[0])/menge[2])+"px;","class":"questboxbarinPoss"},cand[i]);
+                    }
+                } catch(err){ GM_logError("showQuestBox","","",err); }
+                break;
+                }
+            case "role_reward": {
+                var btn = $("globalbox_button1");
+                if (btn && valVetAutostart) {
+                    click(btn); // Close reward box
+                }
+                break;
+                }
+            case "selectrole": {
+                if (valVetAutostart) {
+                    unsafeWindow.vetSetRole(valVetAutostart); // Start next role
+                }
+                break;
+                }
             }
         }catch(err){GM_logError("dialogNursery","","",err);}
     });
@@ -20859,6 +20902,7 @@ try{
         text["de"]["value"]="Wert";
         text["de"]["veterinary"]="Tierarzt";
         text["de"]["veterinaryLevelXNeeded"]="Tierarztlevel %1% benötigt";
+        text["de"]["veterinaryRoleAutostart"]="Praxis-Autostart";
         text["de"]["version"]="Version";
         text["de"]["waterBonus"]="%1%% Gießbonus";
         text["de"]["wateringFeature"]="Gießfunktion";
@@ -21261,6 +21305,7 @@ try{
         text["en"]["version"]="Version";
         text["en"]["veterinary"]="Veterinary";
         text["en"]["veterinaryLevelXNeeded"]="Veterinary level %1% needed";
+        text["en"]["veterinaryRoleAutostart"]="Autostart role";
         text["en"]["waterBonus"]="%1%% water bonus";
         text["en"]["waterNeeded"]="Water needed";
         text["en"]["waterNeededAtX"]="Water needed at %1%";
