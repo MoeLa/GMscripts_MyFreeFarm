@@ -1787,6 +1787,9 @@ var zones=new function(){
             }
         }catch(err){GM_logError("zones.getAnimals","","",err);}
     }
+    this.getData=function(zoneNrS) {
+        return data[zoneNrS];
+    }
     this.setBlock=function(zoneNr,value){
         // b: payment
         // l: level requirement
@@ -2301,7 +2304,17 @@ var zones=new function(){
                 }
                 div=null;
                 if (readyZoneAdded) {
-                    console.log("Ready Zones: " + zoneNrS);
+                    console.log("Ready Zone: " + zoneNrS);
+                    if(zoneNrS.startsWith("farmersmarket-5.3")) {
+                        console.log("=== Check Ready für Farmers... ===");
+                        console.log(zoneNrF); // farmersmarket-5 (ohne Punkt und Slot)
+                        console.log(farmNR); // NaN
+                        console.log(zoneNr); // NaN
+                        console.log(currZoneType); // fl5
+                        console.log(currLocation); // (komisches Objekt)
+                        console.log(zT); // NEVER
+                        console.log(zTw); // NEVER
+                    }
                     console.log(unsafeData.readyZone[zoneNrS]);
                 }
             }
@@ -16227,26 +16240,31 @@ return false;
                             break;}
                             case 5:{ // Vet
                                 zones.setBonus(zoneNrF,0);
+                                console.log("=== START LESE VET ===");
+                                console.log(unsafeWindow.farmersmarket_data.vet);
                                 if((!currBlock)&&(unsafeWindow.farmersmarket_data.vet&&unsafeWindow.farmersmarket_data.vet.production)){
                                     tempZoneProductionData=[[{},{}],0,0,true];
-                                    // console.log(unsafeWindow.farmersmarket_data.vet);
                                     for(var slot=1;slot<=4;slot++){
                                         zoneNrS=zoneNrF+"."+slot;
                                         zones.setBlock(zoneNrS,"");
                                         tempZoneProductionDataSlot=[[{},{}],0,0,true];
                                         item=unsafeWindow.farmersmarket_data.vet.animals.slots2[slot];
-                                        if(slot >= 3 && item["block"]) {
-                                            // console.log("Moe, blocke oben Slot"+slot);
+                                        if(slot >= 3 && item["block"]) { // slot blocked
                                             zones.setBlock(zoneNrS,"b");
-                                        } else if(item=unsafeWindow.farmersmarket_data.vet.production[slot]){
-                                            // console.log("Moe, Proddata Slot"+slot);
+                                        } else if(unsafeWindow.farmersmarket_data.vet.production[slot]){ // production running
+                                            item=unsafeWindow.farmersmarket_data.vet.production[slot]["1"];
                                             iProd=(item["pid"]?parseInt(item["pid"],10):null);
                                             if(isNaN(iProd)){ iProd=null; }
-                                            if((iProd!=null)&&(item["ready"])){ // production ready
-                                                iTime=nowServer;
-                                            }else if((iProd!=null)&&(item["remain"])){ // production busy
+                                            console.log(item);
+                                            console.log(nowServer);
+                                            if(iProd!=null && item["remain"] <= 0){ // production ready
+                                                console.log("Prod. ready");
+                                                iTime=nowServer+item["remain"];
+                                            }else if(iProd!=null && item["remain"] > 0){ // production busy
+                                                console.log("Prod. busy");
                                                 iTime=nowServer+item["remain"];
                                             }else{
+                                                console.log("Prod. empty");
                                                 iTime=NEVER;
                                                 tempZoneProductionData[1]++;
                                                 tempZoneProductionDataSlot[1]++;
@@ -16261,13 +16279,25 @@ return false;
                                                 if(!tempZoneProductionDataSlot[0][0][iProd]){ tempZoneProductionDataSlot[0][0][iProd]=[]; }
                                                 tempZoneProductionDataSlot[0][0][iProd].push([iAmount,iPoints,iTime,NEVER]);
                                             }
-                                        } else {
+                                        } else { // slot empty
                                             tempZoneProductionData[1]++;
+                                            // if(!tempZoneProductionData[0][0][0]){ tempZoneProductionData[0][0][0]=[]; }
+                                            // tempZoneProductionData[0][0][0].push([0,0,NEVER,NEVER]);
+
                                             tempZoneProductionDataSlot[1]++;
+                                            // if(!tempZoneProductionDataSlot[0][0][0]){ tempZoneProductionDataSlot[0][0][0]=[]; }
+                                            // tempZoneProductionDataSlot[0][0][0].push([0,0,NEVER,NEVER]);
+                                            tempZoneProductionData[2]++;
+                                            tempZoneProductionDataSlot[2]++;
                                         }
                                         zones.setProduction(zoneNrS,tempZoneProductionDataSlot.clone());
+                                        console.log("Set production -> zoneNrS " + zoneNrS);
+                                        console.log(tempZoneProductionDataSlot);
                                     }
                                     zones.setProduction(zoneNrF,tempZoneProductionData.clone());
+                                    console.log("Set production -> zoneNrF " + zoneNrF);
+                                    console.log(tempZoneProductionData);
+                                    console.log("=== ENDE LESE VET ===");
 
                                     showGoToVetFarmi(); // Determine, if Discharge-Sick-Animals-Icon is shown
                                 }

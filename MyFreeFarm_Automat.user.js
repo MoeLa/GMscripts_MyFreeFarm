@@ -7385,6 +7385,7 @@ try{
         break;}
         case 4:{ // harvest
             help=unsafeData.readyZone[handled.zoneNrS];
+            // zoneNrS = Welcher Slot ist ready; zoneNrL = Welche Queue gibt das nächste Item vor?
             if((unsafeData.readyZone[handled.zoneNrS][1]=="r")&&((zoneList[handled.zoneNrL][0][0]!=PRODSTOP)||(!settings.get("account","disableCropFields")))){
                 //GM_logInfo("autoFarmersmarketBuilding","runId="+runId+" step="+step,"",handled.zoneNrF.capitalize()+" automat<br>Cropping"); //TODO text
                 switch(handled.zoneBuildingTyp){
@@ -7429,11 +7430,14 @@ try{
                         action=function(){ click(help); };
                         listeningEvent="gameFarmersmarketCropped";
                     }else{
+                        console.log("Step4 -> Exiting from Harvesting");
                         autoFarmersmarketBuilding(runId,9); // -> exit
                     }
                 break;}
                 }
             }else{
+                console.log("Step4 -> Skipping Harvesting");
+                console.log(help);
                 autoFarmersmarketBuilding(runId,step+1);
             }
         break;}
@@ -7571,19 +7575,31 @@ try{
                     }
                 break;}
                 case 4:{ // open slot
+                    console.log(" - = Case 5: Open slot = -");
+                    console.log(help);
+                    console.log(handled.zoneNrS);
+                    console.log(unsafeData.readyZone);
+                    console.log(" - = blubb = -");
+
+
+                    var help2=null;
                     GM_logInfo("autoFarmersmarketBuilding","runId="+runId+" step="+step,"",handled.zoneNrF.capitalize()+" automat<br>Opening slot"); //TODO text
-                    if(help=$("nursery_slot_item" + handled.slot)){ // && handled.zoneNrF == "farmersmarket-2"
-                        action=function(){ click(help); };
+                    if(handled.zoneNrF=="farmersmarket-2" && (help2=$("nursery_slot_item" + handled.slot))){
+                        action=function(){ click(help2); };
                         listeningEvent="gameFarmersmarketSlotOpened";
-                    }else if(help=$("vet_production_slot_click" + handled.slot)){ //  && handled.zoneNrF=="farmersmarket-5"
-                        action=function(){ click(help); };
+                    }else if(handled.zoneNrF=="farmersmarket-5" && (help2=$("vet_production_slot_click" + handled.slot))){
+                        action=function(){ click(help2); };
                         listeningEvent="gameFarmersmarketSlotOpened";
                     }else{
+                        console.log("Step 5 -> Skipping to exit after 'open slot failed'");
+                        console.log(help);
                         autoFarmersmarketBuilding(runId,9); // -> exit
                     }
                 break;}
                 }
             }else{
+                console.log("Step 5 -> Skipping directly to exit");
+                console.log(help);
                 GM_logInfo("autoFarmersmarketBuilding","runId="+runId+" step="+step,"","Zone not empty."); //TODO text
                 autoFarmersmarketBuilding(runId,9); // -> exit
             }
@@ -7624,7 +7640,6 @@ try{
                 }
             break;}
             case 4:{ // click production item
-                console.log(handled);
                 if((help=$("nursery_production_box")) && (help.style.display == "block") && handled.zoneNrF == "farmersmarket-2"){
                     if((help=help.querySelector('div[onclick*="dialogNursery(\'production_commit\', '+handled.slot+', '+zoneList[handled.zoneNrL][0][0]+')"]')) && (!help.className.match("nursery_production_select_item_block"))){
                         // link is visible, can be clicked on
@@ -7731,6 +7746,9 @@ try{
                         if(((help[1]=="r")&&((zoneList[zoneNrL][0][0]!=PRODSTOP)||!settings.get("account","disableCropFields")))||((help[1]=="e")&&(zoneList[zoneNrL][0][0]!=PRODSTOP))){
                             next=true;
                             handled.set(zoneNrS);
+                            console.log("Weitermachen:");
+                            console.log(handled);
+                            console.log(help);
                             break;
                         }
                     }
@@ -7757,7 +7775,7 @@ try{
                 };
             }(listeningEvent,runId,step),false);
         }
-        if(action){ action(); }
+        if(action){ action(); console.log("Action ausgeführt -> Step"+step)}
         help=null;listeningEvent=null;action=null;
     }
  }catch(err){ GM_logError("autoFarmersmarketBuilding","runId="+runId+" step="+step,"",err); }
