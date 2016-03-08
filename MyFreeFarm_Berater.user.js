@@ -16255,14 +16255,16 @@ return false;
                                             item=unsafeWindow.farmersmarket_data.vet.production[slot]["1"];
                                             iProd=(item["pid"]?parseInt(item["pid"],10):null);
                                             if(isNaN(iProd)){ iProd=null; }
+                                            console.log("item");
                                             console.log(item);
+                                            console.log("nowServer");
                                             console.log(nowServer);
                                             if(iProd!=null && item["remain"] <= 0){ // production ready
                                                 console.log("Prod. ready");
-                                                iTime=nowServer+item["remain"];
+                                                iTime=Math.round(nowServer)+Math.round(item["remain"]);
                                             }else if(iProd!=null && item["remain"] > 0){ // production busy
                                                 console.log("Prod. busy");
-                                                iTime=nowServer+item["remain"];
+                                                iTime=Math.round(nowServer)+Math.round(item["remain"]);
                                             }else{
                                                 console.log("Prod. empty");
                                                 iTime=NEVER;
