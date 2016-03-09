@@ -11444,7 +11444,8 @@ try{
                 createElement("div",{"style":"width:"+Math.floor(200*menge[1]/menge[2])+"px;left:"+Math.floor(200*(menge[0])/menge[2])+"px;","class":"questboxbarinPoss"},cand[i]);
                 // better number-formatting
                 $("questboxobj"+questWare+"_current").innerHTML = numberFormat(menge[0]);
-                $("questboxobj"+questWare+"_need").innerHTML = numberFormat(menge[2]);
+                //erst mal auskommentiert :(
+                //$("questboxobj"+questWare+"_need").innerHTML = numberFormat(menge[2]);
             }
         }catch(err){ GM_logError("showQuestBox","","",err); }
     });
