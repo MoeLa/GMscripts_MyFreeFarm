@@ -1941,7 +1941,6 @@ var zones=new function(){
         }catch(err){GM_logError("zones.setBuilding","zoneNrF="+zoneNrF+" value="+value,"",err);}
     }
     this.getBuilding=function(zoneNr){
-        // console.log(data);
         try{
             var zoneNrF=zoneNr.toString().replace(/\.\d+$/g,"");
             if(data[zoneNrF]){
@@ -2307,17 +2306,7 @@ var zones=new function(){
                 div=null;
                 if (readyZoneAdded) {
                     console.log("Ready Zone: " + zoneNrS);
-                    if(zoneNrS.startsWith("farmersmarket-5.3")) {
-                        console.log("=== Check Ready für Farmers... ===");
-                        console.log(zoneNrF); // farmersmarket-5 (ohne Punkt und Slot)
-                        console.log(farmNR); // NaN
-                        console.log(zoneNr); // NaN
-                        console.log(currZoneType); // fl5
-                        console.log(currLocation); // (komisches Objekt)
-                        console.log(zT); // NEVER
-                        console.log(zTw); // NEVER
-                    }
-                    console.log(unsafeData.readyZone[zoneNrS]);
+                    // console.log(unsafeData.readyZone[zoneNrS]);
                 }
             }
             return readyZoneAdded;
@@ -10578,18 +10567,11 @@ try{
     calcOtherAccs();
     function testOtherAccReady(){
     try{
-        // console.log("=== Starte testOtherAccReady ===");
-        // console.log(zones.getLocation("megafield"));
-        // console.log(unsafeData.BUILDING_SIZE);
-        // console.log("Now: " + now);
-        // console.log("Zeitverschiebung: " + unsafeWindow.Zeit.Verschiebung);
         var found=null;
         var isMegafield = false;
         var megafieldReady = NEVER; // Timestamp, when the next megafield is ready. Only used, when none is ready right now
         for(var v = 0; v < otherAccs.length; v++){
             if(otherAccs[v][0]>-1){ // Falls nicht aktueller Account
-                // console.log(otherAccs[v][1] + " => " + (otherAccs[v][3]-now));
-
                 if (otherAccs[v][3]+unsafeWindow.Zeit.Verschiebung<now) { // Ist Megafield auf anderem Account fertig?
                     found=v;
                     isMegafield = true;
@@ -10609,19 +10591,13 @@ try{
                 }
             }
         }
-        if (!isMegafield && found!=null) {
-            console.log("Ändere Link in : " + (megafieldReady-now) + "s");
-        }
         if(found!=null){
             var cell=$("bubble_adtext"); // Text in Bubble neben dem Schweinchen
             if(!cell){ cell=$("sprcontent"); } // Ggf. kompletter Inhalt des Bubbles
             cell.innerHTML="";
             cell=createElement("a",{"id":"linkOtherAccReady","class":"link","dologin":otherAccs[found][0],"href":"#","style":"font-weight:bold;","ismegafield":isMegafield},createElement("div",{"style":"height:50px;"},cell),farmNamen[otherAccs[found][1]]+" "+getText("finished").toLowerCase()+"!");
-            // TODO: Falls isMegafield==false, dann muss das Div nochmal neu gebaut/gesetzt werden, wenn Megafield auf anderem Account fertig
             if (!isMegafield) {
                 var period = (megafieldReady+unsafeWindow.Zeit.Verschiebung-now)*1000;
-                console.log("testOtherAccReady => Nur nicht-Megafield-Accounts fertig. Starte die Show in " + period + "ms erneut.");
-                console.log("Jetzt: " + new Date());
                 window.setTimeout(function() {
                     var div=$("linkOtherAccReady");
                     div.parentNode.removeChild(div);
@@ -15819,24 +15795,24 @@ return false;
     });
 
     // Clubquest product submitting (Patch 08.03.2016)
-	// a = Produkt ID, b = Restmenge
-	unsafeOverwriteFunction("guildQuestAddProductsCommit",function(a,b){
+        // a = Produkt ID, b = Restmenge
+        unsafeOverwriteFunction("guildQuestAddProductsCommit",function(a,b){
         try{
             unsafeWindow._guildQuestAddProductsCommit(a,b);
         }catch(err){GM_logError("_guildQuestAddProductsCommit","","",err);}
         try{
             if($("globalbox")){
-				var input = $("dialog_entryline_number");
-				if (input) {
-					input.value=Math.max(0,Math.min(b,prodStock[0][a]-prodMinRack[0][a]));;
-					keyup(input);
-				}
-				if ($("commitboxguildLowrack")) {
-					$("commitboxguildLowrack").style.display="none";
-				} else {
-					createElement("div",{"id":"commitboxguildLowrack","class":"blackbox alertbox","style":"display:none;position:absolute;top:135px;left:0;"},$("globalbox"),getText("alertWillLowRack"));
-				}
-				input.addEventListener("keyup",function(){
+                                var input = $("dialog_entryline_number");
+                                if (input) {
+                                        input.value=Math.max(0,Math.min(b,prodStock[0][a]-prodMinRack[0][a]));;
+                                        keyup(input);
+                                }
+                                if ($("commitboxguildLowrack")) {
+                                        $("commitboxguildLowrack").style.display="none";
+                                } else {
+                                        createElement("div",{"id":"commitboxguildLowrack","class":"blackbox alertbox","style":"display:none;position:absolute;top:135px;left:0;"},$("globalbox"),getText("alertWillLowRack"));
+                                }
+                                input.addEventListener("keyup",function(){
                         // warning if more than minRack allows
                     var help=(prodStock[0][a]-parseInt(this.value,10)<prodMinRack[0][a]?"block":"none");
                     var cell=$("commitboxguildLowrack");
@@ -16273,8 +16249,8 @@ return false;
                             break;}
                             case 5:{ // Vet
                                 zones.setBonus(zoneNrF,0);
-                                console.log("=== START LESE VET ===");
-                                console.log(unsafeWindow.farmersmarket_data.vet);
+                                // console.log("=== START LESE VET ===");
+                                // console.log(print_r(unsafeWindow.farmersmarket_data.vet, "", true, "\n"));
                                 if((!currBlock)&&(unsafeWindow.farmersmarket_data.vet&&unsafeWindow.farmersmarket_data.vet.production)){
                                     tempZoneProductionData=[[{},{}],0,0,true];
                                     for(var slot=1;slot<=4;slot++){
@@ -16288,18 +16264,9 @@ return false;
                                             item=unsafeWindow.farmersmarket_data.vet.production[slot]["1"];
                                             iProd=(item["pid"]?parseInt(item["pid"],10):null);
                                             if(isNaN(iProd)){ iProd=null; }
-                                            console.log("item");
-                                            console.log(item);
-                                            console.log("nowServer");
-                                            console.log(nowServer);
-                                            if(iProd!=null && item["remain"] <= 0){ // production ready
-                                                console.log("Prod. ready");
-                                                iTime=Math.round(nowServer)+Math.round(item["remain"]);
-                                            }else if(iProd!=null && item["remain"] > 0){ // production busy
-                                                console.log("Prod. busy");
-                                                iTime=Math.round(nowServer)+Math.round(item["remain"]);
+                                            if(iProd!=null) { // production in slot is ready (item["remain"] == 0) or busy (item["remain"] > 0)
+                                                iTime=nowServer+Math.round(item["remain"]); // Math.round, because it's sometimes returned as string
                                             }else{
-                                                console.log("Prod. empty");
                                                 iTime=NEVER;
                                                 tempZoneProductionData[1]++;
                                                 tempZoneProductionDataSlot[1]++;
@@ -16316,30 +16283,18 @@ return false;
                                             }
                                         } else { // slot empty
                                             tempZoneProductionData[1]++;
-                                            // if(!tempZoneProductionData[0][0][0]){ tempZoneProductionData[0][0][0]=[]; }
-                                            // tempZoneProductionData[0][0][0].push([0,0,NEVER,NEVER]);
-
                                             tempZoneProductionDataSlot[1]++;
-                                            // if(!tempZoneProductionDataSlot[0][0][0]){ tempZoneProductionDataSlot[0][0][0]=[]; }
-                                            // tempZoneProductionDataSlot[0][0][0].push([0,0,NEVER,NEVER]);
                                             tempZoneProductionData[2]++;
                                             tempZoneProductionDataSlot[2]++;
                                         }
                                         zones.setProduction(zoneNrS,tempZoneProductionDataSlot.clone());
-                                        console.log("Set production -> zoneNrS " + zoneNrS);
-                                        console.log(tempZoneProductionDataSlot);
                                     }
                                     zones.setProduction(zoneNrF,tempZoneProductionData.clone());
-                                    console.log("Set production -> zoneNrF " + zoneNrF);
-                                    console.log(tempZoneProductionData);
-                                    console.log("=== ENDE LESE VET ===");
 
                                     showGoToVetFarmi(); // Determine, if Discharge-Sick-Animals-Icon is shown
                                 }
                             break;}
-                            default:{
-                                currBlock="blpqs";
-                            }
+                            default: currBlock="blpqs"; // Block farm
                             }
                             zones.setBlock(zoneNrF,currBlock);
                         }
