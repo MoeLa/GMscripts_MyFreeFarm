@@ -529,7 +529,7 @@ var settings=new function(){
     var dataDefault={"global":{},
                      "country":{"valCloseWindowTimer":30,"pauseShort":[300,700],"pause":[2000,4000],"maxDurationBotRun":300,"maxDurationBotStep":30,"botErrorBehaviour":"reload"},
                      "server":{"botActive":false},
-                     "account":{"autoPlant":true,"autoWater":true,"autoFeed":true,"botUseClothingDonation":false,"botUseClothingGamble":false,"botUseDonkey":false,"botUseFarmersmarket":false,"botUseFarmi":false,"botUseFoodworld":false,"botUseForestry":false,"botUseLottery":false,"botUseMegafield":false,"botPreferMegafield":true,"botUseWindmill":false,"disableCropFields":false,"farmiAccept":false,"farmiAcceptAboveNr":100,"farmiAcceptBelowMinValue":false,"farmiReject":false,"farmiRejectUntilNr":90,"farmiRemoveMissing":false,"farmiRemoveMissingAboveNr":10,"lotteryActivate":false,"lotteryDailyLot":false,"powerUpActivate":false,"seedWaitForCrop":30,"showQueueTime":true,"useQueueList":false}
+                     "account":{"autoPlant":true,"autoWater":true,"autoFeed":true,"botUseClothingDonation":false,"botUseClothingGamble":false,"botUseDonkey":false,"botUseFarmersmarket":false,"botUseFarmi":false,"botUseFoodworld":false,"botUseForestry":false,"botUseLottery":false,"botUseMegafield":false,"botPreferMegafield":true,"botUseMegafieldPremiumPlanting":true,"botUseWindmill":false,"disableCropFields":false,"farmiAccept":false,"farmiAcceptAboveNr":100,"farmiAcceptBelowMinValue":false,"farmiReject":false,"farmiRejectUntilNr":90,"farmiRemoveMissing":false,"farmiRemoveMissingAboveNr":10,"lotteryActivate":false,"lotteryDailyLot":false,"powerUpActivate":false,"seedWaitForCrop":30,"showQueueTime":true,"useQueueList":false}
                     };
     var require=    {"global":{},
                      "country":{},
@@ -6085,19 +6085,12 @@ function autoMegafield(runId,step){
                 ((("r"==help[1] || "e"==help[1]) &&  // siehe drüber => true
                   (PRODSTOP!=zoneList[handled.zoneNrL][0][0] || !settings.get("account","disableCropFields"))) || // Kein ProdStop ODER nicht-Ernten-Flag nicht gesetzt
                  ("e"==help[1] && PRODSTOP!=zoneList[handled.zoneNrL][0][0]))) { // Feld leer UND noch was anzupflanzen
-                // console.log("===Moe, autoMegafield1===");
-                // console.log(handled);
-                // console.log(zoneWaiting);
-                // console.log(help);
-                // console.log(zoneList);
-                // console.log("===Moe, autoMegafield1 ENDE===");
                 autoMegafield(runId,step+1);
             }else{
                 autoMegafield(runId,9); // exit
             }
         break;}
         case 2:{ // switch action: cropping or planting?
-            // console.log(unsafeWindow.megafield_data);
             if(("object"==typeof unsafeWindow.megafield_data.tour)&&(!unsafeWindow.megafield_data.tour.remain)){ // Tour noch aktiv, aber in Vergangenheit zu Ende gegangen
                 unsafeWindow.megafield_data.tour=0; // Das Ding auf einen Integer setzen, was wohl löschen bedeutet
             }
@@ -6119,8 +6112,6 @@ function autoMegafield(runId,step){
             }
         break;}
         case 3:{ // crop vehicle
-            // console.log("==unsafeData.gameLocation==");
-            // console.log(unsafeData.gameLocation);
             if(!unsafeData.gameLocation.check("megafield")) { // Falls wir uns nicht auf dem Megafield befinden => hinwechseln
                 // open megafield
                 GM_logInfo("autoMegafield","runId="+runId+" step="+step,"zoneNrF="+handled.zoneNrF+" zoneNrL="+handled.zoneNrL,getText("automat_automatMegafield")+": "+getText("automat_changingToX").replace("%1%",getText("megafield")));
@@ -6185,8 +6176,6 @@ function autoMegafield(runId,step){
                 action=function(){ click($("megafield_vehicle_go"+unsafeWindow.megafield_vehicle_id)); };
             }else{
                 // TODO: Falls auch nichts mehr zu pflanzen ist: Warum sind wir hier?
-                console.log("===unsafeData.readyZone["+handled.zoneNrL+"]===");
-                console.log(unsafeData.readyZone[handled.zoneNrL]);
                 GM_logWarning("autoMegafield","runId="+runId+" step="+step,"zoneNrF="+handled.zoneNrF+" zoneNrL="+handled.zoneNrL,getText("automat_automatMegafield")+": "+getText("automat_nothingToCrop"));
                 autoMegafield(runId,step+1);
             }
@@ -6195,48 +6184,56 @@ function autoMegafield(runId,step){
             if((zoneList[handled.zoneNrL][0][0]==PRODSTOP)||(!unsafeData.readyZone[handled.zoneNrS])){ // PRODSTOP ganz vorne ODER Mgeafield nicht (mehr) ready
                 autoMegafield(runId,9); // exit
             }else if(unsafeWindow.megafield_plant_pid && zoneList[handled.zoneNrL][0][0]==unsafeWindow.megafield_plant_pid){ // Ein Produkt ist angewählt UND Passt das zum Produkt in der Queue??
-                var actionField=null;
-                var area=unsafeWindow.megafield_data.area; // Komplette Area: Konkreter, nur Attribute mit bepflanzten Feldern
-                var areaFree=unsafeWindow.megafield_data.area_free; // Freigeschaltete Area: Konkreter, wann wurde das Feld freigeschaltet
-                var tour=unsafeWindow.megafield_data.tour; // Aktuell laufende Tour. Ist 0, wenn keine Tour läuft.
-                // console.log("tour");
-                // console.log(tour);
-                var tourSteps={};
-                if(tour&&tour.steps){ // Falls aktuell eine Route läuft, deren Schritte "sammeln"
-                    for(var i=0;i<tour.steps.length;i++){
-                        for(var j in tour.steps[i]){
-                            if(!tour.steps[i].hasOwnProperty(j)){continue;}
-                            tourSteps[j]=i+1;
+                var div;
+                if (unsafeWindow.premium==1 && // Premium is active
+                    settings.get("account","botUseMegafieldPremiumPlanting") && // Option is activated
+                    (div=$("megafield_products").querySelector('div[onclick*="dialogMegafield(\'autoplant\', 0, 0, 0, '+zoneList[handled.zoneNrL][0][0]+')"]'))) { // Div is visible
+                    // var div=$("megafield_products").querySelector('div[onclick*="dialogMegafield(\'autoplant\', 0, 0, 0, '+zoneList[handled.zoneNrL][0][0]+')"]');
+                    GM_logInfo("autoMegafield","runId="+runId+" step="+step,"zoneNrF="+handled.zoneNrF+" zoneNrL="+handled.zoneNrL,getText("automat_automatMegafield")+": Open autoplant dialog");
+                    listeningEvent="gameMegafieldDialogAutoplant";
+                    action=function(){ click(div); };
+                } else {
+                    var actionField=null;
+                    var area=unsafeWindow.megafield_data.area; // Komplette Area: Konkreter, nur Attribute mit bepflanzten Feldern
+                    var areaFree=unsafeWindow.megafield_data.area_free; // Freigeschaltete Area: Konkreter, wann wurde das Feld freigeschaltet
+                    var tour=unsafeWindow.megafield_data.tour; // Aktuell laufende Tour. Ist 0, wenn keine Tour läuft.
+                    var tourSteps={};
+                    if(tour&&tour.steps){ // Falls aktuell eine Route läuft, deren Schritte "sammeln"
+                        for(var i=0;i<tour.steps.length;i++){
+                            for(var j in tour.steps[i]){
+                                if(!tour.steps[i].hasOwnProperty(j)){continue;}
+                                tourSteps[j]=i+1;
+                            }
                         }
                     }
-                }
-                var i=0;
-                loop:
-                for(var r=1;r<=unsafeData.BUILDING_SIZE["megafield"][1];r++){ // Über alle 11 Zeilen des Megafields iterieren
-                    for(var c=1;c<=unsafeData.BUILDING_SIZE["megafield"][0];c++){ // Über alle 9 Spalten des Megafields iterieren
-                        if(areaFree[++i]&&(!area[i])&&(!tourSteps[i])){ // i erhöhen, i-tes Feld freigeschaltet UND nicht bepflanzt UND nicht am geerntet werden
-                            actionField=[c,r,i]; // [Zeile, Spalte, FeldNummer] kann/muss bepflanzt werden
-                            break loop;
+                    var i=0;
+                    loop:
+                    for(var r=1;r<=unsafeData.BUILDING_SIZE["megafield"][1];r++){ // Über alle 11 Zeilen des Megafields iterieren
+                        for(var c=1;c<=unsafeData.BUILDING_SIZE["megafield"][0];c++){ // Über alle 9 Spalten des Megafields iterieren
+                            if(areaFree[++i]&&(!area[i])&&(!tourSteps[i])){ // i erhöhen, i-tes Feld freigeschaltet UND nicht bepflanzt UND nicht am geerntet werden
+                                actionField=[c,r,i]; // [Zeile, Spalte, FeldNummer] kann/muss bepflanzt werden
+                                break loop;
+                            }
                         }
                     }
-                }
-                if(actionField){ // Wir ham n Feld, das bepflanzt werden muss
-                    if(!unsafeData.gameLocation.check("megafield")){ // Sind wir wieder nicht mehr auf dem Megafield?!
-                        // open megafield
-                        GM_logInfo("autoMegafield","runId="+runId+" step="+step,"zoneNrF="+handled.zoneNrF+" zoneNrL="+handled.zoneNrL,getText("automat_automatMegafield")+": "+getText("automat_changingToX").replace("%1%",getText("megafield")));
-                        step--;
-                        listeningEvent="gameOpenMegafield";
-                        action=function(){ click($("speedlink_megafield")); };
-                    }else{ // Leeres Feld bepflanzen
-                        GM_logInfo("autoMegafield","runId="+runId+" step="+step,"zoneNrF="+handled.zoneNrF+" zoneNrL="+handled.zoneNrL,getText("automat_automatMegafield")+": "+getText("automat_plantingAtX").replace("%1%",String.fromCharCode(64+actionField[0])+actionField[1]));
-                        unsafeData.readyZone[handled.zoneNrL][2]=false;
-                        listeningEvent="gameMegafieldPlanted";
-                        action=function(){ click($("megafield_tile"+actionField[2])); };
+                    if(actionField){ // Wir ham n Feld, das bepflanzt werden muss
+                        if(!unsafeData.gameLocation.check("megafield")){ // Sind wir wieder nicht mehr auf dem Megafield?!
+                            // open megafield
+                            GM_logInfo("autoMegafield","runId="+runId+" step="+step,"zoneNrF="+handled.zoneNrF+" zoneNrL="+handled.zoneNrL,getText("automat_automatMegafield")+": "+getText("automat_changingToX").replace("%1%",getText("megafield")));
+                            step--;
+                            listeningEvent="gameOpenMegafield";
+                            action=function(){ click($("speedlink_megafield")); };
+                        }else{ // Leeres Feld bepflanzen
+                            GM_logInfo("autoMegafield","runId="+runId+" step="+step,"zoneNrF="+handled.zoneNrF+" zoneNrL="+handled.zoneNrL,getText("automat_automatMegafield")+": "+getText("automat_plantingAtX").replace("%1%",String.fromCharCode(64+actionField[0])+actionField[1]));
+                            unsafeData.readyZone[handled.zoneNrL][2]=false;
+                            listeningEvent="gameMegafieldPlanted";
+                            action=function(){ click($("megafield_tile"+actionField[2])); };
+                        }
+                    }else{
+                        // no free field to plant
+                        GM_logInfo("autoMegafield","runId="+runId+" step="+step,"zoneNrF="+handled.zoneNrF+" zoneNrL="+handled.zoneNrL,getText("automat_automatMegafield")+": "+getText("automat_plantingNoFreeField"));
+                        autoMegafield(runId,9); // exit
                     }
-                }else{
-                    // no free field to plant
-                    GM_logInfo("autoMegafield","runId="+runId+" step="+step,"zoneNrF="+handled.zoneNrF+" zoneNrL="+handled.zoneNrL,getText("automat_automatMegafield")+": "+getText("automat_plantingNoFreeField"));
-                    autoMegafield(runId,9); // exit
                 }
             }else if(!unsafeData.gameLocation.check("megafield")){ // Befinden wir und noch auf dem Megafield? => zur Not: Hinwechseln!
                 // open megafield
@@ -6251,7 +6248,11 @@ function autoMegafield(runId,step){
             }
         break;}
         case 8:{ // Plant Response
-            if(unsafeData.readyZone[handled.zoneNrS]&&(!unsafeData.readyZone[handled.zoneNrS][2])){ // Megafield ist in der Liste der "ready zones", aber Wert ist "false" (wie oben bei leeres Feld bepflanzen gesetzt)
+            if (unsafeWindow.premium==1 && settings.get("account","botUseMegafieldPremiumPlanting") && (div=$("globalbox_button1"))) {
+                GM_logInfo("autoMegafield","runId="+runId+" step="+step,"zoneNrF="+handled.zoneNrF+" zoneNrL="+handled.zoneNrL,getText("automat_automatMegafield")+": Confirm autoplant dialog");
+                listeningEvent="gameMegafieldAutoplanted";
+                action=function(){ click(div); };
+            } else if(unsafeData.readyZone[handled.zoneNrS]&&(!unsafeData.readyZone[handled.zoneNrS][2])){ // Megafield ist in der Liste der "ready zones", aber Wert ist "false" (wie oben bei leeres Feld bepflanzen gesetzt)
                 GM_logInfo("autoMegafield","runId="+runId+" step="+step,"zoneNrF="+handled.zoneNrF+" zoneNrL="+handled.zoneNrL,getText("automat_automatMegafield")+": "+getText("automat_responseWaiting"));
                 window.setTimeout(autoMegafield,settings.getPause(),runId,step); // => Warten und gleich nochmal versuchen
             }else{
@@ -7374,6 +7375,7 @@ try{
         break;}
         case 4:{ // harvest
             help=unsafeData.readyZone[handled.zoneNrS];
+            // zoneNrS = Welcher Slot ist ready; zoneNrL = Welche Queue gibt das nächste Item vor?
             if((unsafeData.readyZone[handled.zoneNrS][1]=="r")&&((zoneList[handled.zoneNrL][0][0]!=PRODSTOP)||(!settings.get("account","disableCropFields")))){
                 //GM_logInfo("autoFarmersmarketBuilding","runId="+runId+" step="+step,"",handled.zoneNrF.capitalize()+" automat<br>Cropping"); //TODO text
                 switch(handled.zoneBuildingTyp){
@@ -7418,11 +7420,14 @@ try{
                         action=function(){ click(help); };
                         listeningEvent="gameFarmersmarketCropped";
                     }else{
+                        console.log("Step4 -> Exiting from Harvesting");
                         autoFarmersmarketBuilding(runId,9); // -> exit
                     }
                 break;}
                 }
             }else{
+                console.log("Step4 -> Skipping Harvesting");
+                console.log(help);
                 autoFarmersmarketBuilding(runId,step+1);
             }
         break;}
@@ -7560,19 +7565,31 @@ try{
                     }
                 break;}
                 case 4:{ // open slot
+                    console.log(" - = Case 5: Open slot = -");
+                    console.log(help);
+                    console.log(handled.zoneNrS);
+                    console.log(unsafeData.readyZone);
+                    console.log(" - = blubb = -");
+
+
+                    var help2=null;
                     GM_logInfo("autoFarmersmarketBuilding","runId="+runId+" step="+step,"",handled.zoneNrF.capitalize()+" automat<br>Opening slot"); //TODO text
-                    if(help=$("nursery_slot_item" + handled.slot)){
-                        action=function(){ click(help); };
+                    if(handled.zoneNrF=="farmersmarket-2" && (help2=$("nursery_slot_item" + handled.slot))){
+                        action=function(){ click(help2); };
                         listeningEvent="gameFarmersmarketSlotOpened";
-                    }else if(help=$("vet_production_slot_click" + handled.slot)){
-                        action=function(){ click(help); };
+                    }else if(handled.zoneNrF=="farmersmarket-5" && (help2=$("vet_production_slot_click" + handled.slot))){
+                        action=function(){ click(help2); };
                         listeningEvent="gameFarmersmarketSlotOpened";
                     }else{
+                        console.log("Step 5 -> Skipping to exit after 'open slot failed'");
+                        console.log(help);
                         autoFarmersmarketBuilding(runId,9); // -> exit
                     }
                 break;}
                 }
             }else{
+                console.log("Step 5 -> Skipping directly to exit");
+                console.log(help);
                 GM_logInfo("autoFarmersmarketBuilding","runId="+runId+" step="+step,"","Zone not empty."); //TODO text
                 autoFarmersmarketBuilding(runId,9); // -> exit
             }
@@ -7613,7 +7630,7 @@ try{
                 }
             break;}
             case 4:{ // click production item
-                if((help=$("nursery_production_box")) && (help.style.display == "block")){
+                if((help=$("nursery_production_box")) && (help.style.display == "block") && handled.zoneNrF == "farmersmarket-2"){
                     if((help=help.querySelector('div[onclick*="dialogNursery(\'production_commit\', '+handled.slot+', '+zoneList[handled.zoneNrL][0][0]+')"]')) && (!help.className.match("nursery_production_select_item_block"))){
                         // link is visible, can be clicked on
                         action=function(){ click(help); };
@@ -7625,7 +7642,7 @@ try{
                     }else{
                         autoFarmersmarketBuilding(runId,9); // -> exit
                     }
-                }else if((help=$("vet_production_filter_icon").parentNode) && (help.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.style.display == "block")){
+                }else if((help=$("vet_production_filter_icon").parentNode) && (help.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.style.display == "block") && handled.zoneNrF == "farmersmarket-5"){
                     var help2=help.querySelector('div[onclick*="vetDialog(\'production_select_confirm\','+handled.slot+','+zoneList[handled.zoneNrL][0][0]+',undefined)"]');
                     if (!help2) {
                         help2=help.querySelector('div[onclick*="vetDialog(\'production_select_confirm\','+handled.slot+','+zoneList[handled.zoneNrL][0][0]+',1)"]');
@@ -7719,6 +7736,9 @@ try{
                         if(((help[1]=="r")&&((zoneList[zoneNrL][0][0]!=PRODSTOP)||!settings.get("account","disableCropFields")))||((help[1]=="e")&&(zoneList[zoneNrL][0][0]!=PRODSTOP))){
                             next=true;
                             handled.set(zoneNrS);
+                            console.log("Weitermachen:");
+                            console.log(handled);
+                            console.log(help);
                             break;
                         }
                     }
@@ -7745,7 +7765,7 @@ try{
                 };
             }(listeningEvent,runId,step),false);
         }
-        if(action){ action(); }
+        if(action){ action(); console.log("Action ausgeführt -> Step"+step)}
         help=null;listeningEvent=null;action=null;
     }
  }catch(err){ GM_logError("autoFarmersmarketBuilding","runId="+runId+" step="+step,"",err); }
@@ -9013,6 +9033,16 @@ function buildInfoPanelOptions(){
             botArbiter.check();
         },false);
         newtd=createElement("td",{"colspan":"2", "title":getText("automat_settings_megafieldPreferenceTooltip")},newtr,getText("automat_settings_megafieldPreference"));
+
+        newtr=createElement("tr",{"style":"line-height:18px;"},newtable);
+        newtd=createElement("td",{"align":"center","width":"40"},newtr);
+        inp=createElement("input",{"class":"link","type":"checkbox","checked":settings.get("account","botUseMegafieldPremiumPlanting")},newtd);
+        inp.addEventListener("click",function(){
+            settings.set("account","botUseMegafieldPremiumPlanting",this.checked);
+        },false);
+        inp.disabled=!unsafeWindow.premium;
+        newtd=createElement("td",{"colspan":"2"},newtr,"Benutze Premium-Anpflanzen");
+        newtr.style.opacity=(inp.disabled?"0.6":"1")
 
         // *********** GENERAL *****************************************
 
