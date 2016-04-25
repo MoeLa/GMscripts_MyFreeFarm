@@ -14250,6 +14250,72 @@ return false;
         }catch(err){GM_logError("getGardenInfoResponse","","",err);}
     });
 
+    function setFarmProductionInfos() {
+        // console.log("Moe, setFarmProductionInfos called");
+        // console.trace();
+        var z,p,w,iAmount,iPoints,skip;
+        var zoneNrF, aktZone, newData, oldData;
+        // console.log(unsafeWindow.farms_data);
+        for(var farm in unsafeWindow.farms_data.farms){
+            if (!unsafeWindow.farms_data.farms.hasOwnProperty(farm)) {continue};
+
+            for(var zone in unsafeWindow.farms_data.farms[farm]){
+                if (!unsafeWindow.farms_data.farms[farm].hasOwnProperty(zone)) {continue};
+
+                console.log("Iteriere über " + farm + "/" + zone);
+                aktZone=unsafeWindow.farms_data.farms[farm][zone];
+                zoneNrF=6*(parseInt(farm, 10)-1)+parseInt(zone, 10);
+                
+                // Check, if old production data is still valid
+                oldData=zones.getProduction(zoneNrF);
+                skip=false;
+                for(var oldProdId in oldData[0][0]) {
+                    if (!oldData[0][0].hasOwnProperty(oldProdId)) {continue};
+                    skip=oldData[0][0][oldProdId][0][2]>now; // Skip renewing production data, if old production is still running
+                }
+                // Skip not-yet-enabled or blocked zones, non-fields and skippable fields
+                if (!aktZone.status || aktZone.premiumblock || aktZone.buildingid != 1 || skip) {console.log("Skippe trotzdem"); continue};
+
+                newData=[[{}],[,0,0,,0],[,120,60,,30],true];
+                if (aktZone.production) {
+                    p=aktZone.production[0].pid; // Produkt-Id
+                    // console.log("  pId: " + p);
+                    z=aktZone.production[0].remain; // In wie vielen Sekunden es fertig is?
+                    // console.log("Jetzt: " + now);
+                    // console.log(" Ende: " + z);
+                    iAmount=(prodYield[0][p]+((currentPowerup[p]&&(now+z<currentPowerup[p][0]))?currentPowerup[p][1]:0));
+                    iAmount=iAmount*120/prodPlantSize[0][p];
+
+                    iPoints=(prodPoints[0][p]+((currentPowerup[p]&&(now+z<currentPowerup[p][0]))?currentPowerup[p][2]:0));
+                    iPoints=iPoints*120/prodPlantSize[0][p];
+
+                    w=NEVER;
+                    if (aktZone.water) {
+                        for (var i=aktZone.water.length-1; i>=0; i--) {
+                            w=Math.min(w, aktZone.water[i].waterremain);
+                        }
+                        if (w<0) {w=1;} // Falls gegossen werden muss, dann in einer Sekunde
+                    }
+                    w=w<z?w+now:NEVER; // Falls vor Ende gegossen werden muss, dann sei es so, sonst NEVER
+                    // console.log("    w: " + w);
+
+                    if(!newData[0][0][p]){ newData[0][0][p]=new Array(); }
+                    newData[0][0][p].push([iAmount,iPoints,now+z,w]);
+                } else {
+                    // Field is empty
+                    newData[1]=[,120,60,,30];
+                }
+                console.log("Updating Production");
+                console.log(oldData);
+                console.log(newData);
+                zones.setProduction(zoneNrF,newData.clone());
+                newData=null;
+            }
+
+        }
+    }
+    setFarmProductionInfos();
+
     unsafeOverwriteFunction("farmAction",function(mode,farm,position,s,d,b,a){
         try{
             switch(mode){
