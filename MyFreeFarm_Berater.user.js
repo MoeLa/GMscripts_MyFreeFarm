@@ -587,6 +587,7 @@ const VARIABLES = {
                     "valVerkaufLimitUp":["Option",3],
                     "valVet":["Option",3],
                     "valVetAutostart":["Option",3],
+                    "valVetAutoSet":["Option",3],
                     "valWaterNeeded":["Option",3],
                     "vertraegeIn":["Contracts received",1],
                     "vertraegeOut":["Contracts sent",1],
@@ -682,7 +683,7 @@ var upjersAds, buyNotePadShowBlocked, show;
 var farmiLog, farmiDailyCount, levelLog, levelLogId, lotteryLog, lotteryLogId, logSales, logSalesId, logDonkey, logDonkeyId, logClothingDonation;
 var zoneAddToGlobalTime;
 var totalAnimals, totalFarmis, totalPowerups, totalQuest, totalRecursive, totalZones, totalEndtime;
-var valKauflimit, valKauflimitNPC, highlightProducts, highlightUser, valNimmBeob, valVerkaufLimitDown, valVerkaufLimitUp, valJoinPreise, lastOffer, protectMinRack, ownMarketOffers, valClothingDonation, valVet, valVetAutostart;
+var valKauflimit, valKauflimitNPC, highlightProducts, highlightUser, valNimmBeob, valVerkaufLimitDown, valVerkaufLimitUp, valJoinPreise, lastOffer, protectMinRack, ownMarketOffers, valClothingDonation, valVet, valVetAutostart, valVetAutoSet;
 var valAnimateStartscreen, valAutoLogin;
 var valMessagesSystemMarkRead;
 var megafieldVehicle, megafieldJob, logMegafieldJob, megafieldSmartTimer;
@@ -6140,6 +6141,17 @@ function buildInfoPanelOptions(){
         }, false);
         createElement("td",{},newtr,getText("veterinary") + "<br/>" + getText("reloadRequired"));
         createElement("td",{},newtr,getText("settings_vet")[1]);
+
+        newtr=createElement("tr",{},newtable);
+        newtd=createElement("td",{"align":"center"},newtr);
+        newinput=createElement("input",{"type":"checkbox","class":"link","checked": valVetAutoSet}, newtd);
+        if (!unsafeWindow.farmersmarket_data.vet) { newinput.disabled = true; }
+        newinput.addEventListener("click",function(){
+            valVetAutoSet = this.checked;
+            GM_setValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_valVetAutoSet", valVetAutoSet);
+        }, false);
+        createElement("td",{},newtr,getText("settings_vetAutoSet")[0]);
+        createElement("td",{},newtr,getText("settings_vetAutoSet")[1]);
 
         // ***************Megafield***********************************************
         newtr=createElement("tr",{},newtable);
@@ -16604,6 +16616,8 @@ return false;
         }catch(err){GM_logError("setVetAnimalQueueSelect","","",err);}
     });
 
+
+    valVetAutoSet= GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_valVetAutoSet", true);
     unsafeOverwriteFunction("showVetMedicalRecord",function(h){
         // showVetMedicalRecord is also called in vetDiseaseSetDrug
         // We need to know, if the frame is already visible (and thus only redrawn) to prevent an infinite loop
@@ -16614,7 +16628,7 @@ return false;
             unsafeWindow._showVetMedicalRecord(h);
         }catch(err){GM_logError("_showVetMedicalRecord","","",err);}
         try{
-            if(freshlyOpened) { // Only initiate setting drugs, when called for the first time
+            if(valVetAutoSet && freshlyOpened) { // Only initiate setting drugs, when called for the first time (and activated in settings)
                 var vet_data=unsafeWindow.vet_data;
                 var n = vet_data.animals.slots[h]; // {id:38226, remain: NaN}
                 var e = vet_data.animals.queue[n.id]; // {id, diseases:[{id, phase},...]}
@@ -21157,6 +21171,7 @@ try{
         text["de"]["settings_megafieldSmartTimer"]=["Beachte aktive Tour", "Soll beim Starten einer Tour der Güterhof-Timer auf das Ende der Tour gesetzt werden?"];
         text["de"]["settings_clothingDonation"]=["Kleiderspende", "Ein blinkender Icon zeigt an, wenn bei der Kleiderspende gespendet oder gewürfelt werden kann."];
         text["de"]["settings_vet"]=["Tierarzt (Behandlung kranker Tiere)", "Ein blinkender Icon zeigt an, wenn ein geheiltes Tier entlassen werden kann."];
+        text["de"]["settings_vetAutoSet"]=["Automatisches Setzen", "Wird ein krankes Tier angeklickt, wird es direkt auf eine freie Liege gelegt."];
         // help
         text["de"]["help_0"]=[,"This is small introduction to the functions of the Adviser-Script. Not all changes are written here, go find them yourself ... Sometimes a mouse-over helps. <br>At the bottom you see a button to visit the <a href=\""+GM_Home+"\" target=\"_blank\">homepage</a>. Next to it, there is the button for the options. You should look at them and configure as you desire.<br>Generally the script only knows what you have seen. So just visit the field if something is wrong."];
         text["de"]["help_1"]=["The Zones","The fields are observed while you see them. The script saves the plants, times and watering. So on the farm view this can be displayed. Each zone has a time counter at its top to show you when it is ready.<br>If you own the planting helper, you can access it directly from opened field. At the top of an opened zone you can navigate directly to zones of the same type."];
@@ -21559,6 +21574,7 @@ try{
         text["en"]["settings_megafieldSmartTimer"]=["Integrate active tour", "Megafield-Timer is set to end of the tour after a tour is started."];
         text["en"]["settings_clothingDonation"]=["Clothing Donation", "A blinking icon indicates, when you can donate or gamble."];
         text["en"]["settings_vet"]=["Veterinary (Treatment of sick animals)", "A blinking icon indicates, when a cured animal can be discharged."];
+        text["en"]["settings_vetAutoSet"]=["Auto set", "A selected sick animal is directly benched."];
         //help
         text["en"]["help_0"]=[,"This is a small introduction to the functions of the Adviser-Script. Not all changes are written here, go find them yourself ... Sometimes a mouse-over helps. <br>At the bottom you see a button to visit the <a href=\""+GM_Home+"\" target=\"_blank\">homepage</a>. Next to it, there is the button for the options. You should look at them and configure as you desire.<br>Generally the script only knows what you have seen. So just visit the field if something is wrong."];
         text["en"]["help_1"]=["The Zones","The fields are observed while you see them. The script saves the plants, times and watering. So on the farm view this can be displayed. Each zone has a time counter at its top to show you when it is ready.<br>If you own the planting helper, you can access it directly from opened field. At the top of an opened zone you can navigate directly to zones of the same type."];
