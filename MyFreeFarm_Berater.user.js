@@ -16604,14 +16604,17 @@ return false;
         }catch(err){GM_logError("setVetAnimalQueueSelect","","",err);}
     });
 
-    var activateDrugSetting=true;
     unsafeOverwriteFunction("showVetMedicalRecord",function(h){
+        // showVetMedicalRecord is also called in vetDiseaseSetDrug
+        // We need to know, if the frame is already visible (and thus only redrawn) to prevent an infinite loop
+        var vetAnimalRecord=$("vet_animal_record");
+        var freshlyOpened=vetAnimalRecord.style.display!="block";
+
         try{
             unsafeWindow._showVetMedicalRecord(h);
         }catch(err){GM_logError("_showVetMedicalRecord","","",err);}
         try{
-            if(activateDrugSetting) {
-                activateDrugSetting=false; // Deactivate autoSetting, because showVetMedicalRecord is called in vetDiseaseSetDrug
+            if(freshlyOpened) { // Only initiate setting drugs, when called for the first time
                 var vet_data=unsafeWindow.vet_data;
                 var n = vet_data.animals.slots[h]; // {id:38226, remain: NaN}
                 var e = vet_data.animals.queue[n.id]; // {id, diseases:[{id, phase},...]}
@@ -16627,7 +16630,6 @@ return false;
                         }
                     }
                 }
-                activateDrugSetting=true;
             }
         }catch(err){GM_logError("showVetMedicalRecord","","",err);}
     });
