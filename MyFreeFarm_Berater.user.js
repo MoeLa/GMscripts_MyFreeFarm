@@ -496,6 +496,7 @@ const VARIABLES = {
                     "modeBuildPreise":["Mode",4],
                     "modeBuyNotepad":["Mode",4],
                     "modeInfoPanelDonkey":["Mode",4],
+                    "modeInfoPanelClothingDonation":["Mode",4],
                     "modeInfoPanelFarmies":["Mode",4],
                     "modeInfoPanelFormulas":["Mode",4],
                     "modeInfoPanelLottery":["Mode",4],
@@ -3172,6 +3173,7 @@ try{
         if(unsafeWindow.buildInfoPanelAutomat){ unsafeWindow.buildInfoPanelAutomat(mode,mode2); }
         switch(mode){
         case "changelog": buildInfoPanelChangelog();  break;
+        case "clothingDonation":    buildInfoPanelClothingDonation();     break;
         case "donkey":    buildInfoPanelDonkey();     break;
         case "farmies":   buildInfoPanelFarmies();    break;
         case "formulas":  buildInfoPanelFormulas();   break;
@@ -5281,6 +5283,124 @@ function buildInfoPanelDonkey(mode){
         }
         container=null;newdiv=null;newtable=null;newtr=null;newtd=null;
     }catch(err){GM_logError("buildInfoPanelWaltraud","","",err);}
+}
+function buildInfoPanelClothingDonation(mode){
+    try{
+        var modeDefault={"total":false};
+        var modeOld=explode(GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_modeInfoPanelClothingDonation"),"buildInfoPanelClothingDonation/modeOld",modeDefault);
+        if(typeof modeOld!="object"){ modeOld=modeDefault; }
+        if(typeof mode!="object"){ mode=modeOld; }
+        for(var v in modeDefault){
+            if(!modeDefault.hasOwnProperty(v)){ continue; }
+            if(mode[v]===undefined){ mode[v]=(modeOld[v]===undefined?modeDefault[v]:modeOld[v]); }
+        }
+        GM_setValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_modeInfoPanelClothingDonation",implode(mode,"buildInfoPanelClothingDonation/mode"));
+        // implode data older than last month
+    // try{
+    //     var stichtag=new Date();
+    //     stichtag=Math.round(((new Date(stichtag.getFullYear(),stichtag.getMonth()-1,1)).getTime())/1000);
+    //     var month;
+    //     for(var v=logDonkey.length-1;v>=0;v--){
+    //         for(var w=logDonkey[v][2].length-1;w>=0;w--){
+    //             if(!logDonkey[v][2][w][3]){ logDonkey[v][2][w][3]=1; }
+    //         }
+    //     }
+    //     for(var v=logDonkey.length-1;v>=0;v--){
+    //         if(logDonkey[v][0].match(/\d+\.\d+\.\d+/)){
+    //             if(getTime(logDonkey[v][0])<stichtag){
+    //                 month=/\d+\.(\d+)\.(\d+)/.exec(logDonkey[v][0]);
+    //                 if(month[1].length==1){
+    //                     month=month[2]+"-0"+month[1];
+    //                 }else{
+    //                     month=month[2]+"-"+month[1];
+    //                 }
+    //                 for(var w=0;w<logDonkey.length;w++){
+    //                     if(logDonkey[w][0]==month){ break; }
+    //                 }
+    //                 if(!logDonkey[w]){
+    //                     logDonkey[w]=[month,0,[]];
+    //                 }
+    //                 logDonkey[w][1]+=logDonkey[v][1];
+    //                 for(var i=logDonkey[v][2].length-1;i>=0;i--){
+    //                     for(var j=logDonkey[w][2].length-1;j>=0;j--){
+    //                         if((logDonkey[v][2][i][0]==logDonkey[w][2][j][0])&&(logDonkey[v][2][i][1]==logDonkey[w][2][j][1])&&(logDonkey[v][2][i][2]==logDonkey[w][2][j][2])){
+    //                             logDonkey[w][2][j][3]+=logDonkey[v][2][i][3];
+    //                             break;
+    //                         }
+    //                     }
+    //                     if(j<0){
+    //                         logDonkey[w][2].push(logDonkey[v][2][i]);
+    //                     }
+    //                 }
+    //                 logDonkey.splice(v,1);
+    //             }
+    //         }
+    //     }
+    //     logDonkey.sort(sortObjFunctions["date"]);
+    //     logDonkeyId={};
+    //     for(var v=logDonkey.length-1;v>=0;v--){
+    //         logDonkeyId[logDonkey[v][0]]=v;
+    //     }
+    //     GM_setValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_logDonkey",implode(logDonkey,"buildInfoPanelWaltraud/logDonkey"));
+    // }catch(err){GM_logError("buildInfoPanelWaltraud","","v="+v,"(old data) "+err);}
+
+        var container,newdiv,newtable,newtr,newtd;
+        container=$("infoPanelInner");
+        container.innerHTML="";
+        // Head
+        newdiv=createElement("div",{"class":"borderBottom1Black","style":"height:30px;"},container);
+        newtable=createElement("table",{"class":"tnormal","style":"font-weight:bold;width:100%;"},newdiv);
+        newtr=createElement("tr",{},newtable);
+        createElement("td",{"class":"tnormal","style":"font-weight:bold;text-align:center;"},newtr,getText("logClothingDonation"));
+        newtd=createElement("td",{},newtr);
+        newdiv=createElement("div",{"class":"link naviItem"+(!mode["total"]?"Active":"")},newtd,getText("detail"));
+        newdiv.addEventListener("click",function(){
+            buildInfoPanelClothingDonation({"total":false});
+        },false);
+        newdiv=createElement("div",{"class":"link naviItem"+(mode["total"]?"Active":"")},newtd,getText("total"));
+        newdiv.addEventListener("click",function(){
+            buildInfoPanelClothingDonation({"total":true});
+        },false);
+        // Content
+        newdiv=createElement("div",{"style":"height:485px;overflow:auto;"},container);
+        newtable=createElement("table",{"style":"line-height:16px;width:100%","border":"1"},newdiv);
+        newtr=createElement("tr",{},newtable);
+        if(mode["total"]){
+            // Not yet supported
+        }else{
+            createElement("th",{"style":"white-space:nowrap;"},newtr,getText("day"));
+            createElement("th",{"style":"white-space:nowrap;"},newtr,getText("donation"));
+            createElement("th",{"style":"white-space:nowrap;"},newtr,getText("reward"));
+
+            for(var i=0;i<logClothingDonation.length;i++){
+                var v=logClothingDonation[i];
+                // console.log(v);
+                newtr=createElement("tr",{},newtable);
+                createElement("td",{},newtr,
+                        getFormattedDateStr(v.createdate)+" ("+getDaytimeStr(v.createdate,true,true)+"h)");
+                newtd=createElement("td",{},newtr);
+                for (var j in v.in) {
+                    if (!v.in.hasOwnProperty(j)) {continue;}
+
+                    newdiv=createElement("div",{"class":"hoverBgLightblue","prod":j},newtd);
+                    newdiv.classList.add("link");
+                    newdiv.addEventListener("mouseover",function(event){ showGoToMarketToolTip(event,this.getAttribute("prod")); },false);
+                    newdiv.addEventListener("click",function(){showMarket(this.getAttribute("prod"));},false);
+                    produktPic(0,j,newdiv);
+                    createElement("span",{},newdiv,numberFormat(v.in[j]["amount"])+"&nbsp;"+prodName[0][j]);
+                }
+                
+                newtd=createElement("td",{},newtr);
+
+                for(var j=0;j<v.gambleInfo.length;j++) {
+                    newdiv=createElement("div",{},newtd);
+                    var prefixDate=v.gambleInfo[j]["gambledate"]==0?v.createdate:v.gambleInfo[j]["gambledate"];
+                    createElement("span",{},newdiv,getFormattedDateStr(prefixDate)+" ("+getDaytimeStr(prefixDate,true,true)+"h): "+moneyFormat(v.gambleInfo[j]["gain"]));
+                }
+            }
+        }
+        container=null;newdiv=null;newtable=null;newtr=null;newtd=null;
+    }catch(err){GM_logError("buildInfoPanelClothingDonation","","",err);}
 }
 function buildInfoPanelFarmies(mode){
     try{
@@ -14263,10 +14383,10 @@ return false;
     });
 
     function setFarmProductionInfos() {
-        console.log("Moe, setFarmProductionInfos called");
+        console.log("setFarmProductionInfos called");
         if (!unsafeWindow.farms_data.farms) {
             window.setTimeout(setFarmProductionInfos,100);
-            console.log("Moe, setFarmProductionInfos abgebrochen");
+            console.log("setFarmProductionInfos resceduled");
             return;
         }
 
@@ -14292,7 +14412,7 @@ return false;
                     skip=oldData[0][0][oldProdId][0][2]>now; // Skip renewing production data, if old production is still running
                 }
                 // Skip not-yet-enabled or blocked zones, non-fields and skippable fields
-                if (!aktZone.status || aktZone.premiumblock || aktZone.buildingid != 1 || skip) {console.log("Skippe trotzdem"); continue};
+                if (!aktZone.status || aktZone.premiumblock || aktZone.buildingid != 1 || skip) {continue};
 
                 newData=[[{}],[,0,0,,0],[,120,60,,30],true];
                 if (aktZone.production) {
@@ -16603,6 +16723,7 @@ return false;
         }catch(err){GM_logError("dialogNursery","","",err);}
     });
 
+    valVetAutoSet= GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_valVetAutoSet", true);
     unsafeOverwriteFunction("setVetAnimalQueueSelect",function(a){
         try{
             unsafeWindow._setVetAnimalQueueSelect(a);
@@ -16610,15 +16731,13 @@ return false;
         try{
             // Get first free slot (bench)
             var div=$("vet_animal_slots").querySelector(".vet_animal_slot_hover");
-            if(div!=null) {
+            if(valVetAutoSet && div!=null) { // Check, if auto set is enabled in options
                 click(div); // CLick slot
             }
         }catch(err){GM_logError("setVetAnimalQueueSelect","","",err);}
     });
 
-
-    valVetAutoSet= GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_valVetAutoSet", true);
-    unsafeOverwriteFunction("showVetMedicalRecord",function(h){
+   unsafeOverwriteFunction("showVetMedicalRecord",function(h){
         // showVetMedicalRecord is also called in vetDiseaseSetDrug
         // We need to know, if the frame is already visible (and thus only redrawn) to prevent an infinite loop
         var vetAnimalRecord=$("vet_animal_record");
@@ -16628,7 +16747,7 @@ return false;
             unsafeWindow._showVetMedicalRecord(h);
         }catch(err){GM_logError("_showVetMedicalRecord","","",err);}
         try{
-            if(valVetAutoSet && freshlyOpened) { // Only initiate setting drugs, when called for the first time (and activated in settings)
+            if(freshlyOpened) { // Only initiate setting drugs, when called for the first time
                 var vet_data=unsafeWindow.vet_data;
                 var n = vet_data.animals.slots[h]; // {id:38226, remain: NaN}
                 var e = vet_data.animals.queue[n.id]; // {id, diseases:[{id, phase},...]}
@@ -18031,6 +18150,12 @@ return;
                 }
                 div.innerHTML = numberFormat(unsafeWindow.clothingdonation_data.data.percent)+"%";
                 div=null; container=null;
+
+                var button=createElement("button", {"class":"link button_new",
+                        "style":"position:absolute;bottom:42px;left:0px;"
+                }, $("clothingdonation_inner"), getText("clothingDonationLog"));
+                button.addEventListener("click",function(){ console.log(logDonkey); console.log(logClothingDonation); unsafeWindow.buildInfoPanel("clothingDonation"); },false);
+                button=null;
 
                 clothingDataAvailable(unsafeWindow.clothingdonation_data.data, goodsValue);
             }catch(err){ GM_logError("showClothingDonation","","prodId="+prodId,err); }
@@ -20837,6 +20962,7 @@ try{
         text["de"]["clickCtrl"]="Strg+Klick";
         text["de"]["clickDouble"]="Doppel-Klick";
         text["de"]["clickToChange"]="Klick um zu ändern";
+        text["de"]["clothingDonationLog"]="Kleiderspende Log";
         text["de"]["commission"]   = "Gebühr";
         text["de"]["coins"]=unsafeWindow.t_coins;
         text["de"]["confirmUseObservedPrices"]="Es werden die beobachteten Preise eingetragen. Die eigenen gehen dabei verloren ...";
@@ -20865,6 +20991,7 @@ try{
         text["de"]["detail"]="Detail";
         text["de"]["difficulty"]="Schwierigkeit";
         text["de"]["donkey"]="Waltraud";
+        text["de"]["donation"]="Spende";
         text["de"]["duration"]="Dauer";
         text["de"]["editPrice"]="Preis ändern";
         text["de"]["emptyField"]="Feld leer!";
@@ -21240,6 +21367,7 @@ try{
         text["en"]["clickCtrl"]="Ctrl+Click";
         text["en"]["clickDouble"]="Double-Click";
         text["en"]["clickToChange"]="Click to change";
+        text["en"]["clothingDonationLog"]="Clothing Donation Log";
         text["en"]["coins"]=unsafeWindow.t_coins;
         text["en"]["commission"]="Commission";
         text["en"]["confirmUseObservedPrices"]="The observed prices will overwrite previously saved market prices ...";
@@ -21268,6 +21396,7 @@ try{
         text["en"]["detail"]="Detail";
         text["en"]["difficulty"]="Difficulty";
         text["en"]["donkey"]="Donkey";
+        text["en"]["donation"]="Donation";
         text["en"]["duration"]="duration";
         text["en"]["editPrice"]="Edit price";
         text["en"]["emptyField"]="Empty field!";
