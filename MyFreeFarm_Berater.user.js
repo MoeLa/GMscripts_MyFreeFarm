@@ -130,7 +130,7 @@ const CHANGELOG=[["2.0","29.05.2014",[["Migration nach openuserjs.org","Migratio
                 ,["2.10.12","09.03.2016",[["1. Questreihe Tierarzt aktualisiert","1. quest series veterinary updated"],["Questeingabe Bauernclub aktualisiert","Questinput farmerclub updated"]]]
                 ,["2.10.13","10.03.2016",[["Megafield Premium Pflanzung","Megafield Premium Planting"],["Game-Update: Tierarzt Fix","Game-Update: Vet Fix"]]]
                 ,["2.10.14","17.03.2016",[["Bugfix","Bugfix"],["Game-Update: Neue Produkte (Heillräuter, Tinkturen)","Game-Update: New products (herbs, tincture)"]]]
-				,["2.10.15","29.03.2016",[["Bugfix: Profit pro Zone","Bugfix:Profit per Zone per Day"],["Questreihe 2 Baumerei aktualisiert","forestry-quests-series II updated"]]]
+                ,["2.10.15","29.03.2016",[["Bugfix: Profit pro Zone","Bugfix:Profit per Zone per Day"],["Questreihe 2 Baumerei aktualisiert","forestry-quests-series II updated"]]]
                 ,["2.10.16","18.04.2016",[["Bugfix: halbautomatische Ernten der Unkräuter, Steine, Baumstümpfe und Kakerlaken ","Bugfix: semi-automatic harvesting the weeds, stones, tree stumps and scrapers"]]]
                 ];
 if(!VERSIONfunctionFile){
@@ -1005,12 +1005,12 @@ function updateProductDataFarm(){
         // task_new_plant task_new_product
         prodBlock[0]=["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","ct","","ct","","ct","ct","","ct","","","","","","","","","","ct","ct","ct","ct","ct","ct","ct","","","","","","","ct","","ct","","","ct","","","ct","ct","ct","","","","","","","","t","","","","","","","t","","t","t","","","","","","","","","","","","","","","","","","","","","","t","","","","","","","","","","","","","","","","","","","","","","","","","","","","","t","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","ut","ut",,,,,,,,,,,"","","","","","","","","","","","","","","t","t","t","t","t","t","t","t",,,,,,,,,,,,,,,,,,,,,,,,,,,,,"","","","","","","","","","","","","","","","","","","","","","","","","","","",,,,,,,,,,,,,,,,,,,,,,,,"","","","","","t","t","","t","","t","","t","","t","","t","","t","","","t","","t","","","","","","","","t","t","","t","","","t","","t","","t","","t","t","","t","","","t","","","","","","","","","","","","",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"","t","","t"];
 
-		//patch0803
+        //patch0803
         /*
         var new_prodBlock=prodBlock[0].clone();
         new_prodBlock[400]="test";
         GM_log(implode(new_prodBlock));
-		*/
+        */
         var help={"v":[],"ex":[],"hr":[],"e":[],"o":[],"fw1":[],"fw2":[],"fw3":[],"fw4":[],"z":[],"fl":[],"fla":[],"md":[]};
         // for(var v=1;v<unsafeWindow.produkt_name.length;v++){
         //*task_fix_growtime*/ var newProductGrowtime={};
@@ -1060,7 +1060,7 @@ function updateProductDataFarm(){
             var c=(prodStockTemp[v])?prodStockTemp[v]:0;
             prodStock[0][v]=(c?parseInt(c,10):0);
             prodYield[0][v]=(unsafeWindow.produkt_ernte[v]?parseInt(unsafeWindow.produkt_ernte[v],10):0);
-			prodTyp[0][v]=unsafeWindow.produkt_category[v];
+            prodTyp[0][v]=unsafeWindow.produkt_category[v];
             prodRequire[0][v]=PRODUCT_REQUIRE[0][v];
             prodGrowTime[0][v]=(undefined!=PRODUCT_GROWTIME[0][v]?PRODUCT_GROWTIME[0][v]:(unsafeWindow.produkt_zeit[v]?Math.round(parseInt(unsafeWindow.produkt_zeit[v],10)/60):0));
             //*task_fix_growtime*/ if(prodGrowTime[0][v]&&(prodGrowTime[0][v]!=(unsafeWindow.produkt_zeit[v]?Math.round(parseInt(unsafeWindow.produkt_zeit[v],10)/60):0))){
@@ -1116,8 +1116,8 @@ function updateProductDataFarm(){
                     }else{
                         prodBlock[0][v]+="v"+PRODUCT_LEVEL["veterinary"][v];
                     }
-					//Fix Produkt Points Tinkturen
-					prodPoints[0][v]=(prodPoints[0][v]?prodPoints[0][v]/prodYield[0][v]:0);
+                    //Fix Produkt Points Tinkturen
+                    prodPoints[0][v]=(prodPoints[0][v]?prodPoints[0][v]/prodYield[0][v]:0);
                 break;
                 case "ex":
                     if(PRODUCT_QUEST[0][v]&&(questData[PRODUCT_QUEST[0][v][0]][PRODUCT_QUEST[0][v][1]]["nr"]<=PRODUCT_QUEST[0][v][2])){
@@ -14251,7 +14251,13 @@ return false;
     });
 
     function setFarmProductionInfos() {
-        // console.log("Moe, setFarmProductionInfos called");
+        console.log("Moe, setFarmProductionInfos called");
+        if (!unsafeWindow.farms_data.farms) {
+            window.setTimeout(setFarmProductionInfos,100);
+            console.log("Moe, setFarmProductionInfos abgebrochen");
+            return;
+        }
+
         // console.trace();
         var z,p,w,iAmount,iPoints,skip;
         var zoneNrF, aktZone, newData, oldData;
@@ -14262,7 +14268,7 @@ return false;
             for(var zone in unsafeWindow.farms_data.farms[farm]){
                 if (!unsafeWindow.farms_data.farms[farm].hasOwnProperty(zone)) {continue};
 
-                console.log("Iteriere über " + farm + "/" + zone);
+                // console.log("Iteriere über " + farm + "/" + zone);
                 aktZone=unsafeWindow.farms_data.farms[farm][zone];
                 zoneNrF=6*(parseInt(farm, 10)-1)+parseInt(zone, 10);
                 
@@ -14305,9 +14311,9 @@ return false;
                     // Field is empty
                     newData[1]=[,120,60,,30];
                 }
-                console.log("Updating Production");
-                console.log(oldData);
-                console.log(newData);
+                // console.log("Updating Production");
+                // console.log(oldData);
+                // console.log(newData);
                 zones.setProduction(zoneNrF,newData.clone());
                 newData=null;
             }
@@ -16583,6 +16589,47 @@ return false;
                 }
             }
         }catch(err){GM_logError("dialogNursery","","",err);}
+    });
+
+    unsafeOverwriteFunction("setVetAnimalQueueSelect",function(a){
+        try{
+            unsafeWindow._setVetAnimalQueueSelect(a);
+        }catch(err){GM_logError("_setVetAnimalQueueSelect","","",err);}
+        try{
+            // Get first free slot (bench)
+            var div=$("vet_animal_slots").querySelector(".vet_animal_slot_hover");
+            if(div!=null) {
+                click(div); // CLick slot
+            }
+        }catch(err){GM_logError("setVetAnimalQueueSelect","","",err);}
+    });
+
+    var activateDrugSetting=true;
+    unsafeOverwriteFunction("showVetMedicalRecord",function(h){
+        try{
+            unsafeWindow._showVetMedicalRecord(h);
+        }catch(err){GM_logError("_showVetMedicalRecord","","",err);}
+        try{
+            if(activateDrugSetting) {
+                activateDrugSetting=false; // Deactivate autoSetting, because showVetMedicalRecord is called in vetDiseaseSetDrug
+                var vet_data=unsafeWindow.vet_data;
+                var n = vet_data.animals.slots[h]; // {id:38226, remain: NaN}
+                var e = vet_data.animals.queue[n.id]; // {id, diseases:[{id, phase},...]}
+                for (var c = 0; c < e.diseases.length; c++) {
+                    var b = e.diseases[c].id; // b = diseaseId
+                    for (var l in vet_data.drugs) { // l = drugId
+                        // Is drug l curing disease b AND is our vet level high enough for drug l?
+                        if(unsafeWindow.in_array(b, vet_data.drugs[l].diseases) && vet_data.drugs[l].level <= vet_data.info.level) {
+                            // Enough of that drug in stock?
+                            if (prodStock[0][l]>=e.diseases[c].phase){
+                                unsafeWindow.vetDiseaseSetDrug(h, b, l);
+                            }
+                        }
+                    }
+                }
+                activateDrugSetting=true;
+            }
+        }catch(err){GM_logError("showVetMedicalRecord","","",err);}
     });
 
     // events forestry ==============================================================================
