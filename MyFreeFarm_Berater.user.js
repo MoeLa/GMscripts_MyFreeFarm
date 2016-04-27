@@ -16714,6 +16714,7 @@ return false;
                             // Enough of that drug in stock?
                             if (prodStock[0][l]>=e.diseases[c].phase){
                                 unsafeWindow.vetDiseaseSetDrug(h, b, l);
+                                break;
                             }
                         }
                     }
