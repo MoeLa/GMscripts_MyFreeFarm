@@ -5295,54 +5295,6 @@ function buildInfoPanelClothingDonation(mode){
             if(mode[v]===undefined){ mode[v]=(modeOld[v]===undefined?modeDefault[v]:modeOld[v]); }
         }
         GM_setValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_modeInfoPanelClothingDonation",implode(mode,"buildInfoPanelClothingDonation/mode"));
-        // implode data older than last month
-    // try{
-    //     var stichtag=new Date();
-    //     stichtag=Math.round(((new Date(stichtag.getFullYear(),stichtag.getMonth()-1,1)).getTime())/1000);
-    //     var month;
-    //     for(var v=logDonkey.length-1;v>=0;v--){
-    //         for(var w=logDonkey[v][2].length-1;w>=0;w--){
-    //             if(!logDonkey[v][2][w][3]){ logDonkey[v][2][w][3]=1; }
-    //         }
-    //     }
-    //     for(var v=logDonkey.length-1;v>=0;v--){
-    //         if(logDonkey[v][0].match(/\d+\.\d+\.\d+/)){
-    //             if(getTime(logDonkey[v][0])<stichtag){
-    //                 month=/\d+\.(\d+)\.(\d+)/.exec(logDonkey[v][0]);
-    //                 if(month[1].length==1){
-    //                     month=month[2]+"-0"+month[1];
-    //                 }else{
-    //                     month=month[2]+"-"+month[1];
-    //                 }
-    //                 for(var w=0;w<logDonkey.length;w++){
-    //                     if(logDonkey[w][0]==month){ break; }
-    //                 }
-    //                 if(!logDonkey[w]){
-    //                     logDonkey[w]=[month,0,[]];
-    //                 }
-    //                 logDonkey[w][1]+=logDonkey[v][1];
-    //                 for(var i=logDonkey[v][2].length-1;i>=0;i--){
-    //                     for(var j=logDonkey[w][2].length-1;j>=0;j--){
-    //                         if((logDonkey[v][2][i][0]==logDonkey[w][2][j][0])&&(logDonkey[v][2][i][1]==logDonkey[w][2][j][1])&&(logDonkey[v][2][i][2]==logDonkey[w][2][j][2])){
-    //                             logDonkey[w][2][j][3]+=logDonkey[v][2][i][3];
-    //                             break;
-    //                         }
-    //                     }
-    //                     if(j<0){
-    //                         logDonkey[w][2].push(logDonkey[v][2][i]);
-    //                     }
-    //                 }
-    //                 logDonkey.splice(v,1);
-    //             }
-    //         }
-    //     }
-    //     logDonkey.sort(sortObjFunctions["date"]);
-    //     logDonkeyId={};
-    //     for(var v=logDonkey.length-1;v>=0;v--){
-    //         logDonkeyId[logDonkey[v][0]]=v;
-    //     }
-    //     GM_setValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_logDonkey",implode(logDonkey,"buildInfoPanelWaltraud/logDonkey"));
-    // }catch(err){GM_logError("buildInfoPanelWaltraud","","v="+v,"(old data) "+err);}
 
         var container,newdiv,newtable,newtr,newtd;
         container=$("infoPanelInner");
@@ -5374,7 +5326,6 @@ function buildInfoPanelClothingDonation(mode){
 
             for(var i=0;i<logClothingDonation.length;i++){
                 var v=logClothingDonation[i];
-                // console.log(v);
                 newtr=createElement("tr",{},newtable);
                 createElement("td",{},newtr,
                         getFormattedDateStr(v.createdate)+" ("+getDaytimeStr(v.createdate,true,true)+"h)");
@@ -5395,7 +5346,22 @@ function buildInfoPanelClothingDonation(mode){
                 for(var j=0;j<v.gambleInfo.length;j++) {
                     newdiv=createElement("div",{},newtd);
                     var prefixDate=v.gambleInfo[j]["gambledate"]==0?v.createdate:v.gambleInfo[j]["gambledate"];
-                    createElement("span",{},newdiv,getFormattedDateStr(prefixDate)+" ("+getDaytimeStr(prefixDate,true,true)+"h): "+moneyFormat(v.gambleInfo[j]["gain"]));
+                    createElement("span",{},newdiv,getFormattedDateStr(prefixDate)+" ("+getDaytimeStr(prefixDate,true,true)+"h): ");
+                    var color=v.gambleInfo[j]["gain"]>0?"green":"red";
+                    createElement("span",{"style":"color:"+color+";"},newdiv,moneyFormat(v.gambleInfo[j]["gain"]));
+                    if(v.gambleInfo[j]["gain"]>0) { // Print products of donation (only)
+                        var w=v.gambleInfo[j]["out"]
+                        for (var k in w) {
+                            if (!w.hasOwnProperty(k)) {continue;}
+
+                            newdiv=createElement("div",{"class":"hoverBgLightblue","prod":k},newtd);
+                            newdiv.classList.add("link");
+                            newdiv.addEventListener("mouseover",function(event){ showGoToMarketToolTip(event,this.getAttribute("prod")); },false);
+                            newdiv.addEventListener("click",function(){showMarket(this.getAttribute("prod"));},false);
+                            produktPic(0,k,newdiv);
+                            createElement("span",{},newdiv,numberFormat(w[k]["amount"])+"&nbsp;"+prodName[0][k]);
+                        }
+                    }
                 }
             }
         }
@@ -14383,24 +14349,20 @@ return false;
     });
 
     function setFarmProductionInfos() {
-        console.log("setFarmProductionInfos called");
-        if (!unsafeWindow.farms_data.farms) {
+        // Rescedule, if data is not ready
+        if (Object.getOwnPropertyNames(unsafeWindow.farms_data.farms).length==0) {
             window.setTimeout(setFarmProductionInfos,100);
-            console.log("setFarmProductionInfos resceduled");
             return;
         }
 
-        // console.trace();
         var z,p,w,iAmount,iPoints,skip;
         var zoneNrF, aktZone, newData, oldData;
-        // console.log(unsafeWindow.farms_data);
         for(var farm in unsafeWindow.farms_data.farms){
             if (!unsafeWindow.farms_data.farms.hasOwnProperty(farm)) {continue};
 
             for(var zone in unsafeWindow.farms_data.farms[farm]){
                 if (!unsafeWindow.farms_data.farms[farm].hasOwnProperty(zone)) {continue};
 
-                // console.log("Iteriere über " + farm + "/" + zone);
                 aktZone=unsafeWindow.farms_data.farms[farm][zone];
                 zoneNrF=6*(parseInt(farm, 10)-1)+parseInt(zone, 10);
                 
@@ -14416,11 +14378,8 @@ return false;
 
                 newData=[[{}],[,0,0,,0],[,120,60,,30],true];
                 if (aktZone.production) {
-                    p=aktZone.production[0].pid; // Produkt-Id
-                    // console.log("  pId: " + p);
-                    z=aktZone.production[0].remain; // In wie vielen Sekunden es fertig is?
-                    // console.log("Jetzt: " + now);
-                    // console.log(" Ende: " + z);
+                    p=aktZone.production[0].pid; // ProductId
+                    z=aktZone.production[0].remain; // Seconds until production is ready
                     iAmount=(prodYield[0][p]+((currentPowerup[p]&&(now+z<currentPowerup[p][0]))?currentPowerup[p][1]:0));
                     iAmount=iAmount*120/prodPlantSize[0][p];
 
@@ -14432,10 +14391,9 @@ return false;
                         for (var i=aktZone.water.length-1; i>=0; i--) {
                             w=Math.min(w, aktZone.water[i].waterremain);
                         }
-                        if (w<0) {w=1;} // Falls gegossen werden muss, dann in einer Sekunde
+                        if (w<0) {w=1;} // If watering is needed, then in 1s
                     }
-                    w=w<z?w+now:NEVER; // Falls vor Ende gegossen werden muss, dann sei es so, sonst NEVER
-                    // console.log("    w: " + w);
+                    w=w<z?w+now:NEVER; // If watering is needed, then now+1s, else NEVER
 
                     if(!newData[0][0][p]){ newData[0][0][p]=new Array(); }
                     newData[0][0][p].push([iAmount,iPoints,now+z,w]);
@@ -14443,9 +14401,6 @@ return false;
                     // Field is empty
                     newData[1]=[,120,60,,30];
                 }
-                // console.log("Updating Production");
-                // console.log(oldData);
-                // console.log(newData);
                 zones.setProduction(zoneNrF,newData.clone());
                 newData=null;
             }
@@ -18151,10 +18106,8 @@ return;
                 div.innerHTML = numberFormat(unsafeWindow.clothingdonation_data.data.percent)+"%";
                 div=null; container=null;
 
-                var button=createElement("button", {"class":"link button_new",
-                        "style":"position:absolute;bottom:42px;left:0px;"
-                }, $("clothingdonation_inner"), getText("clothingDonationLog"));
-                button.addEventListener("click",function(){ console.log(logDonkey); console.log(logClothingDonation); unsafeWindow.buildInfoPanel("clothingDonation"); },false);
+                var button=createElement("button", {"class":"link button_new","style":"position:absolute;bottom:42px;left:0px;"}, $("clothingdonation_inner"), getText("clothingDonationLog"));
+                button.addEventListener("click",function(){unsafeWindow.buildInfoPanel("clothingDonation");},false);
                 button=null;
 
                 clothingDataAvailable(unsafeWindow.clothingdonation_data.data, goodsValue);
