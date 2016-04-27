@@ -7360,14 +7360,10 @@ try{
         break;}
         case 3:{ // open farmersmarket building
             if((help=unsafeData.readyZone[handled.zoneNrS])&&help[2]&&(((help[1]=="r")&&((zoneList[handled.zoneNrL][0][0]!=PRODSTOP)||(!settings.get("account","disableCropFields"))))||((help[1]=="e")&&(zoneList[handled.zoneNrL][0][0]!=PRODSTOP)))){
-                //GM_logInfo("autoFarmersmarketBuilding","runId="+runId+" step="+step,"",handled.zoneNrF.capitalize()+" automat<br>Opening Step:"); //TODO text
                 help=/-(\d)$/.exec(handled.zoneNrF)[1]; // determine which building to work on
                 if($("farmersmarket_pos"+help+"_inner").style.display != "block"){
                     action=function(){ click($("farmersmarket_pos"+help+"_click")); };
                     listeningEvent="gameFarmersmarketOpened"+help;
-                // }else if("wrong building is opened"){
-                //  GM_logInfo("autoFarmersmarketBuilding","runId="+runId+" step="+step,"","autoFarmersmarketBuilding: This is not the right building. Bailing out.")
-                //  autoFarmersmarketBuilding(runId,9); // finish (and start over)
                 }else{
                     GM_logInfo("autoFarmersmarketBuilding","runId="+runId+" step="+step,"",handled.zoneNrF.capitalize()+" automat<br>Opening Step:"); //TODO text
                     autoFarmersmarketBuilding(runId,step+1);
@@ -7378,12 +7374,11 @@ try{
         break;}
         case 4:{ // harvest
             help=unsafeData.readyZone[handled.zoneNrS];
-            // zoneNrS = Welcher Slot ist ready; zoneNrL = Welche Queue gibt das nächste Item vor?
+            // zoneNrS = Which slot is ready
+            // zoneNrL = Which queue take the next item from
             if((unsafeData.readyZone[handled.zoneNrS][1]=="r")&&((zoneList[handled.zoneNrL][0][0]!=PRODSTOP)||(!settings.get("account","disableCropFields")))){
-                //GM_logInfo("autoFarmersmarketBuilding","runId="+runId+" step="+step,"",handled.zoneNrF.capitalize()+" automat<br>Cropping"); //TODO text
                 switch(handled.zoneBuildingTyp){
                 case 1:{
-                    // TODO manual crop
                     if((help=$("flowerarea_buttons"))&&(help=help.querySelector(".flowerarea_modus_harvest_all"))&&(!help.querySelector(".bonusinfo"))){
                         GM_logInfo("autoFarmersmarketBuilding","runId="+runId+" step="+step,"",handled.zoneNrF.capitalize()+" automat<br>Cropping"); //TODO text
                         action=function(){ click(help); };
@@ -7416,21 +7411,18 @@ try{
                     }
                 break;}
                 case 4:{
-                    if(help=$("nursery_slot_item" + handled.slot)){
+                    if(handled.zoneNrF=="farmersmarket-2" && (help=$("nursery_slot_item" + handled.slot))){
                         action=function(){ click(help); };
                         listeningEvent="gameFarmersmarketCropped";
-                    }else if(help=$("vet_production_slot_click" + handled.slot)){
+                    }else if(handled.zoneNrF=="farmersmarket-5" && (help=$("vet_production_slot_click" + handled.slot))){
                         action=function(){ click(help); };
                         listeningEvent="gameFarmersmarketCropped";
                     }else{
-                        console.log("Step4 -> Exiting from Harvesting");
                         autoFarmersmarketBuilding(runId,9); // -> exit
                     }
                 break;}
                 }
             }else{
-                console.log("Step4 -> Skipping Harvesting");
-                console.log(help);
                 autoFarmersmarketBuilding(runId,step+1);
             }
         break;}

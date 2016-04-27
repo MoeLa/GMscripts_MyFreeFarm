@@ -130,7 +130,7 @@ const CHANGELOG=[["2.0","29.05.2014",[["Migration nach openuserjs.org","Migratio
                 ,["2.10.12","09.03.2016",[["1. Questreihe Tierarzt aktualisiert","1. quest series veterinary updated"],["Questeingabe Bauernclub aktualisiert","Questinput farmerclub updated"]]]
                 ,["2.10.13","10.03.2016",[["Megafield Premium Pflanzung","Megafield Premium Planting"],["Game-Update: Tierarzt Fix","Game-Update: Vet Fix"]]]
                 ,["2.10.14","17.03.2016",[["Bugfix","Bugfix"],["Game-Update: Neue Produkte (Heillräuter, Tinkturen)","Game-Update: New products (herbs, tincture)"]]]
-				,["2.10.15","29.03.2016",[["Bugfix: Profit pro Zone","Bugfix:Profit per Zone per Day"],["Questreihe 2 Baumerei aktualisiert","forestry-quests-series II updated"]]]
+                ,["2.10.15","29.03.2016",[["Bugfix: Profit pro Zone","Bugfix:Profit per Zone per Day"],["Questreihe 2 Baumerei aktualisiert","forestry-quests-series II updated"]]]
                 ,["2.10.16","18.04.2016",[["Bugfix: halbautomatische Ernten der Unkräuter, Steine, Baumstümpfe und Kakerlaken ","Bugfix: semi-automatic harvesting the weeds, stones, tree stumps and scrapers"]]]
                 ];
 if(!VERSIONfunctionFile){
@@ -496,6 +496,7 @@ const VARIABLES = {
                     "modeBuildPreise":["Mode",4],
                     "modeBuyNotepad":["Mode",4],
                     "modeInfoPanelDonkey":["Mode",4],
+                    "modeInfoPanelClothingDonation":["Mode",4],
                     "modeInfoPanelFarmies":["Mode",4],
                     "modeInfoPanelFormulas":["Mode",4],
                     "modeInfoPanelLottery":["Mode",4],
@@ -587,6 +588,7 @@ const VARIABLES = {
                     "valVerkaufLimitUp":["Option",3],
                     "valVet":["Option",3],
                     "valVetAutostart":["Option",3],
+                    "valVetAutoSet":["Option",3],
                     "valWaterNeeded":["Option",3],
                     "vertraegeIn":["Contracts received",1],
                     "vertraegeOut":["Contracts sent",1],
@@ -682,7 +684,7 @@ var upjersAds, buyNotePadShowBlocked, show;
 var farmiLog, farmiDailyCount, levelLog, levelLogId, lotteryLog, lotteryLogId, logSales, logSalesId, logDonkey, logDonkeyId, logClothingDonation;
 var zoneAddToGlobalTime;
 var totalAnimals, totalFarmis, totalPowerups, totalQuest, totalRecursive, totalZones, totalEndtime;
-var valKauflimit, valKauflimitNPC, highlightProducts, highlightUser, valNimmBeob, valVerkaufLimitDown, valVerkaufLimitUp, valJoinPreise, lastOffer, protectMinRack, ownMarketOffers, valClothingDonation, valVet, valVetAutostart;
+var valKauflimit, valKauflimitNPC, highlightProducts, highlightUser, valNimmBeob, valVerkaufLimitDown, valVerkaufLimitUp, valJoinPreise, lastOffer, protectMinRack, ownMarketOffers, valClothingDonation, valVet, valVetAutostart, valVetAutoSet;
 var valAnimateStartscreen, valAutoLogin;
 var valMessagesSystemMarkRead;
 var megafieldVehicle, megafieldJob, logMegafieldJob, megafieldSmartTimer;
@@ -1005,12 +1007,12 @@ function updateProductDataFarm(){
         // task_new_plant task_new_product
         prodBlock[0]=["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","ct","","ct","","ct","ct","","ct","","","","","","","","","","ct","ct","ct","ct","ct","ct","ct","","","","","","","ct","","ct","","","ct","","","ct","ct","ct","","","","","","","","t","","","","","","","t","","t","t","","","","","","","","","","","","","","","","","","","","","","t","","","","","","","","","","","","","","","","","","","","","","","","","","","","","t","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","ut","ut",,,,,,,,,,,"","","","","","","","","","","","","","","t","t","t","t","t","t","t","t",,,,,,,,,,,,,,,,,,,,,,,,,,,,,"","","","","","","","","","","","","","","","","","","","","","","","","","","",,,,,,,,,,,,,,,,,,,,,,,,"","","","","","t","t","","t","","t","","t","","t","","t","","t","","","t","","t","","","","","","","","t","t","","t","","","t","","t","","t","","t","t","","t","","","t","","","","","","","","","","","","",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"","t","","t"];
 
-		//patch0803
+        //patch0803
         /*
         var new_prodBlock=prodBlock[0].clone();
         new_prodBlock[400]="test";
         GM_log(implode(new_prodBlock));
-		*/
+        */
         var help={"v":[],"ex":[],"hr":[],"e":[],"o":[],"fw1":[],"fw2":[],"fw3":[],"fw4":[],"z":[],"fl":[],"fla":[],"md":[]};
         // for(var v=1;v<unsafeWindow.produkt_name.length;v++){
         //*task_fix_growtime*/ var newProductGrowtime={};
@@ -1060,7 +1062,7 @@ function updateProductDataFarm(){
             var c=(prodStockTemp[v])?prodStockTemp[v]:0;
             prodStock[0][v]=(c?parseInt(c,10):0);
             prodYield[0][v]=(unsafeWindow.produkt_ernte[v]?parseInt(unsafeWindow.produkt_ernte[v],10):0);
-			prodTyp[0][v]=unsafeWindow.produkt_category[v];
+            prodTyp[0][v]=unsafeWindow.produkt_category[v];
             prodRequire[0][v]=PRODUCT_REQUIRE[0][v];
             prodGrowTime[0][v]=(undefined!=PRODUCT_GROWTIME[0][v]?PRODUCT_GROWTIME[0][v]:(unsafeWindow.produkt_zeit[v]?Math.round(parseInt(unsafeWindow.produkt_zeit[v],10)/60):0));
             //*task_fix_growtime*/ if(prodGrowTime[0][v]&&(prodGrowTime[0][v]!=(unsafeWindow.produkt_zeit[v]?Math.round(parseInt(unsafeWindow.produkt_zeit[v],10)/60):0))){
@@ -1116,8 +1118,8 @@ function updateProductDataFarm(){
                     }else{
                         prodBlock[0][v]+="v"+PRODUCT_LEVEL["veterinary"][v];
                     }
-					//Fix Produkt Points Tinkturen
-					prodPoints[0][v]=(prodPoints[0][v]?prodPoints[0][v]/prodYield[0][v]:0);
+                    //Fix Produkt Points Tinkturen
+                    prodPoints[0][v]=(prodPoints[0][v]?prodPoints[0][v]/prodYield[0][v]:0);
                 break;
                 case "ex":
                     if(PRODUCT_QUEST[0][v]&&(questData[PRODUCT_QUEST[0][v][0]][PRODUCT_QUEST[0][v][1]]["nr"]<=PRODUCT_QUEST[0][v][2])){
@@ -3171,6 +3173,7 @@ try{
         if(unsafeWindow.buildInfoPanelAutomat){ unsafeWindow.buildInfoPanelAutomat(mode,mode2); }
         switch(mode){
         case "changelog": buildInfoPanelChangelog();  break;
+        case "clothingDonation":    buildInfoPanelClothingDonation();     break;
         case "donkey":    buildInfoPanelDonkey();     break;
         case "farmies":   buildInfoPanelFarmies();    break;
         case "formulas":  buildInfoPanelFormulas();   break;
@@ -5281,6 +5284,90 @@ function buildInfoPanelDonkey(mode){
         container=null;newdiv=null;newtable=null;newtr=null;newtd=null;
     }catch(err){GM_logError("buildInfoPanelWaltraud","","",err);}
 }
+function buildInfoPanelClothingDonation(mode){
+    try{
+        var modeDefault={"total":false};
+        var modeOld=explode(GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_modeInfoPanelClothingDonation"),"buildInfoPanelClothingDonation/modeOld",modeDefault);
+        if(typeof modeOld!="object"){ modeOld=modeDefault; }
+        if(typeof mode!="object"){ mode=modeOld; }
+        for(var v in modeDefault){
+            if(!modeDefault.hasOwnProperty(v)){ continue; }
+            if(mode[v]===undefined){ mode[v]=(modeOld[v]===undefined?modeDefault[v]:modeOld[v]); }
+        }
+        GM_setValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_modeInfoPanelClothingDonation",implode(mode,"buildInfoPanelClothingDonation/mode"));
+
+        var container,newdiv,newtable,newtr,newtd;
+        container=$("infoPanelInner");
+        container.innerHTML="";
+        // Head
+        newdiv=createElement("div",{"class":"borderBottom1Black","style":"height:30px;"},container);
+        newtable=createElement("table",{"class":"tnormal","style":"font-weight:bold;width:100%;"},newdiv);
+        newtr=createElement("tr",{},newtable);
+        createElement("td",{"class":"tnormal","style":"font-weight:bold;text-align:center;"},newtr,getText("logClothingDonation"));
+        newtd=createElement("td",{},newtr);
+        newdiv=createElement("div",{"class":"link naviItem"+(!mode["total"]?"Active":"")},newtd,getText("detail"));
+        newdiv.addEventListener("click",function(){
+            buildInfoPanelClothingDonation({"total":false});
+        },false);
+        newdiv=createElement("div",{"class":"link naviItem"+(mode["total"]?"Active":"")},newtd,getText("total"));
+        newdiv.addEventListener("click",function(){
+            buildInfoPanelClothingDonation({"total":true});
+        },false);
+        // Content
+        newdiv=createElement("div",{"style":"height:485px;overflow:auto;"},container);
+        newtable=createElement("table",{"style":"line-height:16px;width:100%","border":"1"},newdiv);
+        newtr=createElement("tr",{},newtable);
+        if(mode["total"]){
+            // Not yet supported
+        }else{
+            createElement("th",{"style":"white-space:nowrap;"},newtr,getText("day"));
+            createElement("th",{"style":"white-space:nowrap;"},newtr,getText("donation"));
+            createElement("th",{"style":"white-space:nowrap;"},newtr,getText("reward"));
+
+            for(var i=0;i<logClothingDonation.length;i++){
+                var v=logClothingDonation[i];
+                newtr=createElement("tr",{},newtable);
+                createElement("td",{},newtr,
+                        getFormattedDateStr(v.createdate)+" ("+getDaytimeStr(v.createdate,true,true)+"h)");
+                newtd=createElement("td",{},newtr);
+                for (var j in v.in) {
+                    if (!v.in.hasOwnProperty(j)) {continue;}
+
+                    newdiv=createElement("div",{"class":"hoverBgLightblue","prod":j},newtd);
+                    newdiv.classList.add("link");
+                    newdiv.addEventListener("mouseover",function(event){ showGoToMarketToolTip(event,this.getAttribute("prod")); },false);
+                    newdiv.addEventListener("click",function(){showMarket(this.getAttribute("prod"));},false);
+                    produktPic(0,j,newdiv);
+                    createElement("span",{},newdiv,numberFormat(v.in[j]["amount"])+"&nbsp;"+prodName[0][j]);
+                }
+                
+                newtd=createElement("td",{},newtr);
+
+                for(var j=0;j<v.gambleInfo.length;j++) {
+                    newdiv=createElement("div",{},newtd);
+                    var prefixDate=v.gambleInfo[j]["gambledate"]==0?v.createdate:v.gambleInfo[j]["gambledate"];
+                    createElement("span",{},newdiv,getFormattedDateStr(prefixDate)+" ("+getDaytimeStr(prefixDate,true,true)+"h): ");
+                    var color=v.gambleInfo[j]["gain"]>0?"green":"red";
+                    createElement("span",{"style":"color:"+color+";"},newdiv,moneyFormat(v.gambleInfo[j]["gain"]));
+                    if(v.gambleInfo[j]["gain"]>0) { // Print products of donation (only)
+                        var w=v.gambleInfo[j]["out"]
+                        for (var k in w) {
+                            if (!w.hasOwnProperty(k)) {continue;}
+
+                            newdiv=createElement("div",{"class":"hoverBgLightblue","prod":k},newtd);
+                            newdiv.classList.add("link");
+                            newdiv.addEventListener("mouseover",function(event){ showGoToMarketToolTip(event,this.getAttribute("prod")); },false);
+                            newdiv.addEventListener("click",function(){showMarket(this.getAttribute("prod"));},false);
+                            produktPic(0,k,newdiv);
+                            createElement("span",{},newdiv,numberFormat(w[k]["amount"])+"&nbsp;"+prodName[0][k]);
+                        }
+                    }
+                }
+            }
+        }
+        container=null;newdiv=null;newtable=null;newtr=null;newtd=null;
+    }catch(err){GM_logError("buildInfoPanelClothingDonation","","",err);}
+}
 function buildInfoPanelFarmies(mode){
     try{
         var modeDefault={"limit":95};
@@ -6140,6 +6227,17 @@ function buildInfoPanelOptions(){
         }, false);
         createElement("td",{},newtr,getText("veterinary") + "<br/>" + getText("reloadRequired"));
         createElement("td",{},newtr,getText("settings_vet")[1]);
+
+        newtr=createElement("tr",{},newtable);
+        newtd=createElement("td",{"align":"center"},newtr);
+        newinput=createElement("input",{"type":"checkbox","class":"link","checked": valVetAutoSet}, newtd);
+        if (!unsafeWindow.farmersmarket_data.vet) { newinput.disabled = true; }
+        newinput.addEventListener("click",function(){
+            valVetAutoSet = this.checked;
+            GM_setValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_valVetAutoSet", valVetAutoSet);
+        }, false);
+        createElement("td",{},newtr,getText("settings_vetAutoSet")[0]);
+        createElement("td",{},newtr,getText("settings_vetAutoSet")[1]);
 
         // ***************Megafield***********************************************
         newtr=createElement("tr",{},newtable);
@@ -14250,6 +14348,67 @@ return false;
         }catch(err){GM_logError("getGardenInfoResponse","","",err);}
     });
 
+    function setFarmProductionInfos() {
+        // Rescedule, if data is not ready
+        if (Object.getOwnPropertyNames(unsafeWindow.farms_data.farms).length==0) {
+            window.setTimeout(setFarmProductionInfos,100);
+            return;
+        }
+
+        var z,p,w,iAmount,iPoints,skip;
+        var zoneNrF, aktZone, newData, oldData;
+        for(var farm in unsafeWindow.farms_data.farms){
+            if (!unsafeWindow.farms_data.farms.hasOwnProperty(farm)) {continue};
+
+            for(var zone in unsafeWindow.farms_data.farms[farm]){
+                if (!unsafeWindow.farms_data.farms[farm].hasOwnProperty(zone)) {continue};
+
+                aktZone=unsafeWindow.farms_data.farms[farm][zone];
+                zoneNrF=6*(parseInt(farm, 10)-1)+parseInt(zone, 10);
+                
+                // Check, if old production data is still valid
+                oldData=zones.getProduction(zoneNrF);
+                skip=false;
+                for(var oldProdId in oldData[0][0]) {
+                    if (!oldData[0][0].hasOwnProperty(oldProdId)) {continue};
+                    skip=oldData[0][0][oldProdId][0][2]>now; // Skip renewing production data, if old production is still running
+                }
+                // Skip not-yet-enabled or blocked zones, non-fields and skippable fields
+                if (!aktZone.status || aktZone.premiumblock || aktZone.buildingid != 1 || skip) {continue};
+
+                newData=[[{}],[,0,0,,0],[,120,60,,30],true];
+                if (aktZone.production) {
+                    p=aktZone.production[0].pid; // ProductId
+                    z=aktZone.production[0].remain; // Seconds until production is ready
+                    iAmount=(prodYield[0][p]+((currentPowerup[p]&&(now+z<currentPowerup[p][0]))?currentPowerup[p][1]:0));
+                    iAmount=iAmount*120/prodPlantSize[0][p];
+
+                    iPoints=(prodPoints[0][p]+((currentPowerup[p]&&(now+z<currentPowerup[p][0]))?currentPowerup[p][2]:0));
+                    iPoints=iPoints*120/prodPlantSize[0][p];
+
+                    w=NEVER;
+                    if (aktZone.water) {
+                        for (var i=aktZone.water.length-1; i>=0; i--) {
+                            w=Math.min(w, aktZone.water[i].waterremain);
+                        }
+                        if (w<0) {w=1;} // If watering is needed, then in 1s
+                    }
+                    w=w<z?w+now:NEVER; // If watering is needed, then now+1s, else NEVER
+
+                    if(!newData[0][0][p]){ newData[0][0][p]=new Array(); }
+                    newData[0][0][p].push([iAmount,iPoints,now+z,w]);
+                } else {
+                    // Field is empty
+                    newData[1]=[,120,60,,30];
+                }
+                zones.setProduction(zoneNrF,newData.clone());
+                newData=null;
+            }
+
+        }
+    }
+    setFarmProductionInfos();
+
     unsafeOverwriteFunction("farmAction",function(mode,farm,position,s,d,b,a){
         try{
             switch(mode){
@@ -16519,6 +16678,51 @@ return false;
         }catch(err){GM_logError("dialogNursery","","",err);}
     });
 
+    valVetAutoSet= GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_valVetAutoSet", true);
+    unsafeOverwriteFunction("setVetAnimalQueueSelect",function(a){
+        try{
+            unsafeWindow._setVetAnimalQueueSelect(a);
+        }catch(err){GM_logError("_setVetAnimalQueueSelect","","",err);}
+        try{
+            // Get first free slot (bench)
+            var div=$("vet_animal_slots").querySelector(".vet_animal_slot_hover");
+            if(valVetAutoSet && div!=null) { // Check, if auto set is enabled in options
+                click(div); // CLick slot
+            }
+        }catch(err){GM_logError("setVetAnimalQueueSelect","","",err);}
+    });
+
+   unsafeOverwriteFunction("showVetMedicalRecord",function(h){
+        // showVetMedicalRecord is also called in vetDiseaseSetDrug
+        // We need to know, if the frame is already visible (and thus only redrawn) to prevent an infinite loop
+        var vetAnimalRecord=$("vet_animal_record");
+        var freshlyOpened=vetAnimalRecord.style.display!="block";
+
+        try{
+            unsafeWindow._showVetMedicalRecord(h);
+        }catch(err){GM_logError("_showVetMedicalRecord","","",err);}
+        try{
+            if(freshlyOpened) { // Only initiate setting drugs, when called for the first time
+                var vet_data=unsafeWindow.vet_data;
+                var n = vet_data.animals.slots[h]; // {id:38226, remain: NaN}
+                var e = vet_data.animals.queue[n.id]; // {id, diseases:[{id, phase},...]}
+                for (var c = 0; c < e.diseases.length; c++) {
+                    var b = e.diseases[c].id; // b = diseaseId
+                    for (var l in vet_data.drugs) { // l = drugId
+                        // Is drug l curing disease b AND is our vet level high enough for drug l?
+                        if(unsafeWindow.in_array(b, vet_data.drugs[l].diseases) && vet_data.drugs[l].level <= vet_data.info.level) {
+                            // Enough of that drug in stock?
+                            if (prodStock[0][l]>=e.diseases[c].phase){
+                                unsafeWindow.vetDiseaseSetDrug(h, b, l);
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }catch(err){GM_logError("showVetMedicalRecord","","",err);}
+    });
+
     // events forestry ==============================================================================
     err_trace="events forestry";
 
@@ -17902,6 +18106,10 @@ return;
                 }
                 div.innerHTML = numberFormat(unsafeWindow.clothingdonation_data.data.percent)+"%";
                 div=null; container=null;
+
+                var button=createElement("button", {"class":"link button_new","style":"position:absolute;bottom:42px;left:0px;"}, $("clothingdonation_inner"), getText("clothingDonationLog"));
+                button.addEventListener("click",function(){unsafeWindow.buildInfoPanel("clothingDonation");},false);
+                button=null;
 
                 clothingDataAvailable(unsafeWindow.clothingdonation_data.data, goodsValue);
             }catch(err){ GM_logError("showClothingDonation","","prodId="+prodId,err); }
@@ -20708,6 +20916,7 @@ try{
         text["de"]["clickCtrl"]="Strg+Klick";
         text["de"]["clickDouble"]="Doppel-Klick";
         text["de"]["clickToChange"]="Klick um zu ändern";
+        text["de"]["clothingDonationLog"]="Kleiderspende Log";
         text["de"]["commission"]   = "Gebühr";
         text["de"]["coins"]=unsafeWindow.t_coins;
         text["de"]["confirmUseObservedPrices"]="Es werden die beobachteten Preise eingetragen. Die eigenen gehen dabei verloren ...";
@@ -20736,6 +20945,7 @@ try{
         text["de"]["detail"]="Detail";
         text["de"]["difficulty"]="Schwierigkeit";
         text["de"]["donkey"]="Waltraud";
+        text["de"]["donation"]="Spende";
         text["de"]["duration"]="Dauer";
         text["de"]["editPrice"]="Preis ändern";
         text["de"]["emptyField"]="Feld leer!";
@@ -21042,6 +21252,7 @@ try{
         text["de"]["settings_megafieldSmartTimer"]=["Beachte aktive Tour", "Soll beim Starten einer Tour der Güterhof-Timer auf das Ende der Tour gesetzt werden?"];
         text["de"]["settings_clothingDonation"]=["Kleiderspende", "Ein blinkender Icon zeigt an, wenn bei der Kleiderspende gespendet oder gewürfelt werden kann."];
         text["de"]["settings_vet"]=["Tierarzt (Behandlung kranker Tiere)", "Ein blinkender Icon zeigt an, wenn ein geheiltes Tier entlassen werden kann."];
+        text["de"]["settings_vetAutoSet"]=["Automatisches Setzen", "Wird ein krankes Tier angeklickt, wird es direkt auf eine freie Liege gelegt."];
         // help
         text["de"]["help_0"]=[,"This is small introduction to the functions of the Adviser-Script. Not all changes are written here, go find them yourself ... Sometimes a mouse-over helps. <br>At the bottom you see a button to visit the <a href=\""+GM_Home+"\" target=\"_blank\">homepage</a>. Next to it, there is the button for the options. You should look at them and configure as you desire.<br>Generally the script only knows what you have seen. So just visit the field if something is wrong."];
         text["de"]["help_1"]=["The Zones","The fields are observed while you see them. The script saves the plants, times and watering. So on the farm view this can be displayed. Each zone has a time counter at its top to show you when it is ready.<br>If you own the planting helper, you can access it directly from opened field. At the top of an opened zone you can navigate directly to zones of the same type."];
@@ -21110,6 +21321,7 @@ try{
         text["en"]["clickCtrl"]="Ctrl+Click";
         text["en"]["clickDouble"]="Double-Click";
         text["en"]["clickToChange"]="Click to change";
+        text["en"]["clothingDonationLog"]="Clothing Donation Log";
         text["en"]["coins"]=unsafeWindow.t_coins;
         text["en"]["commission"]="Commission";
         text["en"]["confirmUseObservedPrices"]="The observed prices will overwrite previously saved market prices ...";
@@ -21138,6 +21350,7 @@ try{
         text["en"]["detail"]="Detail";
         text["en"]["difficulty"]="Difficulty";
         text["en"]["donkey"]="Donkey";
+        text["en"]["donation"]="Donation";
         text["en"]["duration"]="duration";
         text["en"]["editPrice"]="Edit price";
         text["en"]["emptyField"]="Empty field!";
@@ -21444,6 +21657,7 @@ try{
         text["en"]["settings_megafieldSmartTimer"]=["Integrate active tour", "Megafield-Timer is set to end of the tour after a tour is started."];
         text["en"]["settings_clothingDonation"]=["Clothing Donation", "A blinking icon indicates, when you can donate or gamble."];
         text["en"]["settings_vet"]=["Veterinary (Treatment of sick animals)", "A blinking icon indicates, when a cured animal can be discharged."];
+        text["en"]["settings_vetAutoSet"]=["Auto set", "A selected sick animal is directly benched."];
         //help
         text["en"]["help_0"]=[,"This is a small introduction to the functions of the Adviser-Script. Not all changes are written here, go find them yourself ... Sometimes a mouse-over helps. <br>At the bottom you see a button to visit the <a href=\""+GM_Home+"\" target=\"_blank\">homepage</a>. Next to it, there is the button for the options. You should look at them and configure as you desire.<br>Generally the script only knows what you have seen. So just visit the field if something is wrong."];
         text["en"]["help_1"]=["The Zones","The fields are observed while you see them. The script saves the plants, times and watering. So on the farm view this can be displayed. Each zone has a time counter at its top to show you when it is ready.<br>If you own the planting helper, you can access it directly from opened field. At the top of an opened zone you can navigate directly to zones of the same type."];
