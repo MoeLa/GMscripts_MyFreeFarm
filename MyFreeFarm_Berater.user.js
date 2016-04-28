@@ -590,6 +590,7 @@ const VARIABLES = {
                     "valVet":["Option",3],
                     "valVetAutostart":["Option",3],
                     "valVetAutoSet":["Option",3],
+                    "valVetNoCoinDrugs":["Option",3],
                     "valWaterNeeded":["Option",3],
                     "vertraegeIn":["Contracts received",1],
                     "vertraegeOut":["Contracts sent",1],
@@ -685,7 +686,7 @@ var upjersAds, buyNotePadShowBlocked, show;
 var farmiLog, farmiDailyCount, levelLog, levelLogId, lotteryLog, lotteryLogId, logSales, logSalesId, logDonkey, logDonkeyId, logClothingDonation;
 var zoneAddToGlobalTime;
 var totalAnimals, totalFarmis, totalPowerups, totalQuest, totalRecursive, totalZones, totalEndtime;
-var valKauflimit, valKauflimitNPC, highlightProducts, highlightUser, valNimmBeob, valVerkaufLimitDown, valVerkaufLimitUp, valJoinPreise, lastOffer, protectMinRack, ownMarketOffers, valClothingDonation, valVet, valVetAutostart, valVetAutoSet;
+var valKauflimit, valKauflimitNPC, highlightProducts, highlightUser, valNimmBeob, valVerkaufLimitDown, valVerkaufLimitUp, valJoinPreise, lastOffer, protectMinRack, ownMarketOffers, valClothingDonation, valVet, valVetAutostart, valVetAutoSet, valVetNoCoinDrugs;
 var valAnimateStartscreen, valAutoLogin;
 var valMessagesSystemMarkRead;
 var megafieldVehicle, megafieldJob, logMegafieldJob, megafieldSmartTimer;
@@ -6239,6 +6240,17 @@ function buildInfoPanelOptions(){
         }, false);
         createElement("td",{},newtr,getText("settings_vetAutoSet")[0]);
         createElement("td",{},newtr,getText("settings_vetAutoSet")[1]);
+
+        newtr=createElement("tr",{},newtable);
+        newtd=createElement("td",{"align":"center"},newtr);
+        newinput=createElement("input",{"type":"checkbox","class":"link","checked": valVetNoCoinDrugs}, newtd);
+        if (!unsafeWindow.farmersmarket_data.vet) { newinput.disabled = true; }
+        newinput.addEventListener("click",function(){
+            valVetNoCoinDrugs = this.checked;
+            GM_setValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_valVetNoCoinDrugs", valVetNoCoinDrugs);
+        }, false);
+        createElement("td",{},newtr,getText("settings_valVetNoCoinDrugs")[0]);
+        createElement("td",{},newtr,getText("settings_valVetNoCoinDrugs")[1]);
 
         // ***************Megafield***********************************************
         newtr=createElement("tr",{},newtable);
@@ -16433,6 +16445,7 @@ return false;
                                 zones.setBonus(zoneNrF,0);
                                 // console.log("=== START LESE VET ===");
                                 // console.log(print_r(unsafeWindow.farmersmarket_data.vet, "", true, "\n"));
+                                // console.log(unsafeWindow.farmersmarket_data.vet.production);
                                 if((!currBlock)&&(unsafeWindow.farmersmarket_data.vet&&unsafeWindow.farmersmarket_data.vet.production)){
                                     tempZoneProductionData=[[{},{}],0,0,true];
                                     for(var slot=1;slot<=4;slot++){
@@ -16487,7 +16500,8 @@ return false;
             calcTotalZones();
         }catch(err){GM_logError("doFarmersMarketData","","err_trace="+err_trace,err);}
     };
-    if(unsafeWindow.farmersmarket_data){ doFarmersMarketData(); }
+    // if(unsafeWindow.farmersmarket_data){ doFarmersMarketData(); } // Moved after showGoToVetFarmi() --Moe, 2016/04/28
+
     unsafeOverwriteFunction("farmersMarketHandler",function(response){
         try{
             unsafeWindow._farmersMarketHandler(response);
@@ -16496,6 +16510,7 @@ return false;
             doFarmersMarketData()
         }catch(err){GM_logError("farmersMarketHandler","","",err);}
     });
+
     function doFarmersMarket(){
         try{
             var div,div1,divZone;
@@ -16693,7 +16708,8 @@ return false;
         }catch(err){GM_logError("setVetAnimalQueueSelect","","",err);}
     });
 
-   unsafeOverwriteFunction("showVetMedicalRecord",function(h){
+    valVetNoCoinDrugs= GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_valVetNoCoinDrugs", true);
+    unsafeOverwriteFunction("showVetMedicalRecord",function(h){
         // showVetMedicalRecord is also called in vetDiseaseSetDrug
         // We need to know, if the frame is already visible (and thus only redrawn) to prevent an infinite loop
         var vetAnimalRecord=$("vet_animal_record");
@@ -16710,6 +16726,11 @@ return false;
                 for (var c = 0; c < e.diseases.length; c++) {
                     var b = e.diseases[c].id; // b = diseaseId
                     for (var l in vet_data.drugs) { // l = drugId
+                        // If flag is set, ignore coin drugs
+                        if(valVetNoCoinDrugs && vet_data.drugs[l].coins) {
+                            continue;
+                        }
+
                         // Is drug l curing disease b AND is our vet level high enough for drug l?
                         if(unsafeWindow.in_array(b, vet_data.drugs[l].diseases) && vet_data.drugs[l].level <= vet_data.info.level) {
                             // Enough of that drug in stock?
@@ -16722,6 +16743,65 @@ return false;
                 }
             }
         }catch(err){GM_logError("showVetMedicalRecord","","",err);}
+    });
+
+    unsafeOverwriteFunction("updateVetAnimalQueue",function(){
+        try{
+            unsafeWindow._updateVetAnimalQueue();
+        }catch(err){GM_logError("_updateVetAnimalQueue","","",err);}
+        try{
+            var vet_data=unsafeWindow.vet_data;
+            // console.log(vet_data);
+            for (var b in vet_data.animals.queue) { // b=AnimalId
+                var r = vet_data.animals.queue[b]; // r=Animal-Object
+                var div=$("vet_animal_queue_item_tt"+b);
+                if(div) { // Is div one the four queuing animals
+                    var times=[];
+                    for (var j = 0; j < r.diseases.length; j++) {
+                        var d=r.diseases[j]; // d=Disease-Object {id:int, phase:int}
+                        var disDiv=div.childNodes[j]; // Disease-div
+                        disDiv.setAttribute("style","margin-bottom:2px; width:212px;");
+                        disDiv.firstElementChild.setAttribute("style","float: left; margin-right: 5px; margin-top: 6px;");
+                        
+                        var oldChild = disDiv.removeChild(disDiv.lastChild); // Remove clear-div, we'll append that later
+                        var newDiv=createElement("div",{"style":"float:left; width:212px;"},disDiv);
+                        for (var l in vet_data.drugs) { // l = drugId
+                            // If flag is set, ignore coin drugs
+                            if(valVetNoCoinDrugs && vet_data.drugs[l].coins) {
+                                continue;
+                            }
+
+                            // Check, if drug l cures disease d AND if level is high enough
+                            if(unsafeWindow.in_array(d.id, vet_data.drugs[l].diseases) && vet_data.drugs[l].level <= vet_data.info.level) {
+                                var drugDiv=createElement("div",{"style":"margin-top:3px;"},newDiv);
+                                produktPic(0,l,drugDiv);
+                                var time=vet_data.drugs[l]["times"][d.id];
+                                // Push time of first matching drug into array
+                                if(j==times.length && prodStock[0][l]>=d.phase) {
+                                    times.push(time);
+                                }
+                                // Withdraw time bonus
+                                if (vet_data.quest && vet_data.quest.bonus_all && vet_data.quest.bonus_all.treatment_reduce) {
+                                    time=Math.ceil(time-((time/100)*vet_data.quest.bonus_all.treatment_reduce));
+                                }
+                                var style=prodStock[0][l]<d.phase?"text-decoration:line-through;":""; // Strike-through drugs that are out of stock
+                                createElement("span",{"style":style},drugDiv,prodName[0][l]+" ("+getTimeStr(time,true)+"h)");
+                            }
+                        }
+                        disDiv.appendChild(oldChild); // Reappend clear-div
+                    }
+
+                    var resDiv=div.querySelector(".vet_animal_queue_item_tt_reward");
+                    var oldChild = resDiv.removeChild(resDiv.lastChild);
+                    var sum = times.reduce(function(pv, cv) { return pv + cv; }, 0); // Sum up times
+                    if (vet_data.quest && vet_data.quest.bonus_all && vet_data.quest.bonus_all.treatment_reduce) {
+                        sum=Math.ceil(sum-((sum/100)*vet_data.quest.bonus_all.treatment_reduce));
+                    }
+                    createElement("div",{"style":"float:right;font-weight:bold;"},resDiv,"&Sigma; "+getTimeStr(sum,true)+"h");
+                    resDiv.appendChild(oldChild);
+                }
+            }
+        }catch(err){GM_logError("updateVetAnimalQueue","","",err);}
     });
 
     // events forestry ==============================================================================
@@ -17742,11 +17822,6 @@ return;
             raiseEvent("gameCity"+unsafeWindow.city);
         }catch(err){GM_logError("cityArrived","","",err);}
     });
-    // unsafeOverwriteFunction("initCity",function(e,c,d){
-    //  try{
-    //      unsafeWindow._initCity(e,c,d);
-    //  }catch(err){GM_logError("_initCity","e="+e+" c="+c+" d="+d,"",err);}
-    // });
 
     // Werbung
     unsafeOverwriteFunction("fillAdColumn",function(){
@@ -18556,6 +18631,9 @@ return;
                 }
             }catch(err){GM_logError("hideGoToVetFarmi","","",err);}
         }
+
+        // doFarmersmarketData was moved to here, so data is ready for showGoToVetFarmi
+        if(unsafeWindow.farmersmarket_data){ doFarmersMarketData(); }
 
         // Clothing Donation
         /*
@@ -21254,6 +21332,7 @@ try{
         text["de"]["settings_clothingDonation"]=["Kleiderspende", "Ein blinkender Icon zeigt an, wenn bei der Kleiderspende gespendet oder gewürfelt werden kann."];
         text["de"]["settings_vet"]=["Tierarzt (Behandlung kranker Tiere)", "Ein blinkender Icon zeigt an, wenn ein geheiltes Tier entlassen werden kann."];
         text["de"]["settings_vetAutoSet"]=["Automatisches Setzen", "Wird ein krankes Tier angeklickt, wird es direkt auf eine freie Liege gelegt."];
+        text["de"]["settings_valVetNoCoinDrugs"]=["Keine Coin-Tinkturen", "Ignoriere Tinkturen, die in der Herstellung Coins kosten."];
         // help
         text["de"]["help_0"]=[,"This is small introduction to the functions of the Adviser-Script. Not all changes are written here, go find them yourself ... Sometimes a mouse-over helps. <br>At the bottom you see a button to visit the <a href=\""+GM_Home+"\" target=\"_blank\">homepage</a>. Next to it, there is the button for the options. You should look at them and configure as you desire.<br>Generally the script only knows what you have seen. So just visit the field if something is wrong."];
         text["de"]["help_1"]=["The Zones","The fields are observed while you see them. The script saves the plants, times and watering. So on the farm view this can be displayed. Each zone has a time counter at its top to show you when it is ready.<br>If you own the planting helper, you can access it directly from opened field. At the top of an opened zone you can navigate directly to zones of the same type."];
@@ -21659,6 +21738,7 @@ try{
         text["en"]["settings_clothingDonation"]=["Clothing Donation", "A blinking icon indicates, when you can donate or gamble."];
         text["en"]["settings_vet"]=["Veterinary (Treatment of sick animals)", "A blinking icon indicates, when a cured animal can be discharged."];
         text["en"]["settings_vetAutoSet"]=["Auto set", "A selected sick animal is directly benched."];
+        text["en"]["settings_valVetNoCoinDrugs"]=["No coin drugs", "Ignore drugs needing coins to be produced."];
         //help
         text["en"]["help_0"]=[,"This is a small introduction to the functions of the Adviser-Script. Not all changes are written here, go find them yourself ... Sometimes a mouse-over helps. <br>At the bottom you see a button to visit the <a href=\""+GM_Home+"\" target=\"_blank\">homepage</a>. Next to it, there is the button for the options. You should look at them and configure as you desire.<br>Generally the script only knows what you have seen. So just visit the field if something is wrong."];
         text["en"]["help_1"]=["The Zones","The fields are observed while you see them. The script saves the plants, times and watering. So on the farm view this can be displayed. Each zone has a time counter at its top to show you when it is ready.<br>If you own the planting helper, you can access it directly from opened field. At the top of an opened zone you can navigate directly to zones of the same type."];
