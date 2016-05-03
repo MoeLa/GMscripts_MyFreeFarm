@@ -4,8 +4,8 @@
 // @author         BastianKanaan
 // @description    Extends MyFreeFarm
 // @icon           data:image/png;base64,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
-// @date           17.03.2016
-// @version        2.10.14
+// @date           28.04.2016
+// @version        2.10.18
 // @license        GPL version 3 or any later version; http://www.gnu.org/copyleft/gpl.html
 // @include        /^http:\/\/(|www\.|s\d+\.)au\.myfreefarm\.com\/.*$/
 // @include        /^http:\/\/(|www\.|s\d+\.)veselaferma\.com\/.*$/
@@ -130,6 +130,10 @@ const CHANGELOG=[["2.0","29.05.2014",[["Migration nach openuserjs.org","Migratio
                 ,["2.10.12","09.03.2016",[["1. Questreihe Tierarzt aktualisiert","1. quest series veterinary updated"],["Questeingabe Bauernclub aktualisiert","Questinput farmerclub updated"]]]
                 ,["2.10.13","10.03.2016",[["Megafield Premium Pflanzung","Megafield Premium Planting"],["Game-Update: Tierarzt Fix","Game-Update: Vet Fix"]]]
                 ,["2.10.14","17.03.2016",[["Bugfix","Bugfix"],["Game-Update: Neue Produkte (Heillräuter, Tinkturen)","Game-Update: New products (herbs, tincture)"]]]
+                ,["2.10.15","29.03.2016",[["Bugfix: Profit pro Zone","Bugfix:Profit per Zone per Day"],["Questreihe 2 Baumerei aktualisiert","forestry-quests-series II updated"]]]
+                ,["2.10.16","18.04.2016",[["Bugfix: halbautomatische Ernten der Unkräuter, Steine, Baumstümpfe und Kakerlaken ","Bugfix: semi-automatic harvesting the weeds, stones, tree stumps and scrapers"]]]
+                ,["2.10.17","27.04.2016",[["Allgemeine Verbesserungen beim Tierarzt, Kleiderspende Log, usw","improvements: veterinary, Clothing Donation Log, etc"]]]
+                ,["2.10.18","28.04.2016",[["Tierarzt: Zeitberechnung in der Vorschau, Option für keine Coins Tinkturen","Vet Sick Animals: Queued animals popup, no-coin-drug flag"]]]
                 ];
 if(!VERSIONfunctionFile){
     alert("Hi, I am the Berater-Script.\nThe function-file is missing.\nPlease install me again.");
@@ -392,7 +396,7 @@ const QUESTS = {"main":{"1":[,[[[0,17,43],[0,9,1]],1,142,[[0,54]]],[[[0,1,173],[
                        ,"3":[,[[[0,18,134862],[0,26,16011]],,1134580,[[1,0,351,5],[9,0,351]]],[[[0,351,1080],[0,31,20094]],,1268060],[[[0,12,251],[0,9,826]],,1401540,[[1,0,352,5],[9,0,352]]],[[[0,352,1440],[0,350,10]],,1535020],[[[0,1,140257],[0,25,207]],,1668500],[[[0,351,1800],[0,23,18455]],,1801980],[[[0,113,3008],[0,18,134862]],,1935460],[[[0,352,3600],[0,31,20094]],,2068940,[[1,0,353,5],[9,0,353]]],[[[0,353,360],[0,3,52335]],,2202420],[[[0,352,4320],[0,34,11689]],,2335900],[[[0,351,720],[0,352,2160]],,2469380],[[[0,29,5656],[0,36,4155]],,2602860],[[[0,352,5040],[0,350,40]],,2736340],[[[0,21,35780],[0,26,16011]],,2869820],[[[0,27,138],[0,25,207]],,3003300],[[[0,353,1200],[0,29,5656]],,3136780],[[[0,22,30758],[0,28,119]],,3270260],[[[0,352,5760],[0,21,35780]],,3403740],[[[0,30,108],[0,10,638]],,3537220],[[[0,32,13513],[0,153,1871]],,3670700],[[[0,351,3600],[0,350,60]],,3804180],[[[0,111,129],[0,37,1871]],,3937660],[[[0,91,108],[0,22,33834]],,4071140],[[[0,351,3600],[0,21,43016]],,4204620,[[8,"26"]]],[[[0,352,4320],[0,30,130]],,4338100],[[[0,110,544],[0,22,36979]],,4471580],[[[0,353,840],[0,44,4633]],,4605060],[[[0,113,3616],[0,40,1630]],,4738540],[[[0,43,1274],[0,350,77]],,4872020],[[[0,351,720],[0,352,4320]],,5005500],[[[0,2,76647],[0,23,22188]],,5138980,[[1,0,354,5],[9,0,354]]],[[[0,354,540],[0,110,544]],,5272460],[[[0,20,58550],[0,39,1608]],,5405940],[[[0,351,720],[0,353,600]],,5539420],[[[0,353,720],[0,40,1630]],,5672900],[[[0,37,2249],[0,41,1400]],,5806380],[[[0,354,1260],[0,20,58550]],,5813054],[[[0,352,3600],[0,12,302]],,5814388],[[[0,17,526942],[0,33,9636]],,5815723,[[1,0,355,5],[9,0,355]]],[[[0,355,720],[0,350,104]],,5817058],[[[0,354,900],[0,10,767]],,5818393],[[[0,355,1680],[0,152,87]],,5819728],[[[0,42,1451],[0,108,8332]],,5821062],[[[0,355,2400],[0,109,22665]],,5822397],[[[0,111,155],[0,9,992]],,5823732],[[[0,352,5040],[0,30,130]],,5825067],[[[[0,144,342],[0,141,241]],[0,25,248]],,5826402],[[[0,351,3840],[0,43,1571]],,5827736,[[8,"27"]]],[[[0,31,29780],[0,37,2772]],,5829071],[[[0,355,2160],[0,351,1320]],,5830406],[[[0,354,1350],[0,350,207]],,5831741],[[[0,353,900],[0,11,578]],,5833076],[[[0,355,1920],[0,352,1080]],,5834410],[[[0,29,8382],[0,28,177]],,5835745],[[[0,354,1890],[0,40,2009]],,5837080,[[1,0,356,5],[9,0,356]]],[[[0,356,120],[0,8,5618]],,5838415],[[[0,18,199865],[0,12,372]],,5839750],[[[0,354,1350],[0,353,360]],,5841084],[[[0,356,300],[0,1,207860]],,5842419],[[[0,353,1080],[0,34,17322]],,5843754],[[[0,154,2772],[0,115,1262]],,5845089],[[[0,354,1890],[0,36,6157]],,5846424],[[[0,355,1920],[0,44,5711]],,5847758,[[1,0,357,5],[9,0,357]]],[[[0,357,2160],[0,22,11878]],,5849093],[[[0,356,180],[0,355,720]],,5850428],[[[0,357,3360],[0,356,120]],,5851763],[[[0,21,53026],[0,19,101892]],,5853098],[[[0,355,2640],[0,32,20025]],,5854432],[[[0,356,300],[0,37,2772]],,5855767],[[[0,355,2160],[0,351,600]],,5857102],[[[0,2,94482],[0,7,5839]],,5858437],[[[0,356,480],[0,350,320]],,5859772,[[8,"28"]]],[[[0,354,1980],[0,357,2160]],,5861106],[[[0,24,27256],[0,33,11837]],,5862441],[[[0,357,9840],[0,111,190]],,5863776],[[[0,353,1200],[0,156,95]],,5865111],[[[0,357,10080],[0,155,102]],,5866446],[[[0,27,204],[0,10,942]],,5867780],[[[0,356,480],[0,12,370]],,5869115,[[1,0,358,5],[9,0,358]]],[[[0,358,360],[0,354,1440]],,5870450],[[[0,357,7200],[0,108,10235]],,5871785],[[[0,351,4320],[0,3,77291]],,5873120],[[[0,156,120],[0,6,19395]],,5874454],[[[0,352,11520],[0,350,320]],,5875789],[[[0,358,720],[0,35,6627]],,5877124],[[[0,17,647308],[0,91,160]],,5878459],[[[0,358,960],[0,30,160]],,5879794,[[1,0,359,5],[9,0,359]]],[[[0,359,2160],[0,31,29676]],,5881128],[[[0,356,360],[0,350,240]],,5882463],[[[0,36,6136],[0,32,19956]],,5883798],[[[0,357,7680],[0,353,840]],,5885133],[[[0,9,1219],[0,34,17262]],,5886468],[[[0,359,2880],[0,356,240]],,5887802],[[[0,358,840],[0,35,6627]],,5889137],[[[0,353,1680],[0,36,6136]],,5890472],[[[0,355,2400],[0,351,3000]],,5891807,[[8,"29"]]],[[[0,358,1080],[0,37,3740]],,5893142],[[[0,10,1275],[0,38,35956]],,5894476],[[[0,356,600],[0,39,2675]],,5895811],[[[0,359,6360],[0,40,2710]],,5897146],[[[0,352,12600],[0,41,2328]],,5898481],[[[0,358,1200],[0,43,2119]],,5899816],[[[0,351,4200],[0,356,180]],,5901150,[[1,0,360,5],[9,0,360]]],[[[0,360,1800],[0,42,2413]],,5902485],[[[0,12,501],[0,6,26260]],,5903820],[[[0,360,3900],[0,357,9120]],,5905155],[[[0,358,600],[0,360,3000]],,5906490],[[[0,358,1200],[0,8,7580]],,5907824],[[[0,359,7560],[0,11,780]],,5909159],[[[0,21,71545],[0,10,1275]],,5910494],[[[0,355,4320],[0,360,2400]],,5911829,[[1,0,361,5],[9,0,361]]],[[[0,361,2880],[0,359,1800]],,5913164],[[[0,358,780],[0,354,1350]],,5914498],[[[0,155,137],[0,23,36903]],,5915833],[[[0,361,12000],[0,350,400]],,5917168],[[[0,31,40180],[0,25,413]],,5918503],[[[0,360,4500],[0,361,5400]],,5919838],[[[0,354,3870],[0,26,32016]],,5921172],[[[0,360,3000],[0,361,6600]],,5922507],[[[0,359,3960],[0,361,9000]],,5923842,[[8,"30"]]]]
                        }
                ,"forestry":{"1":[,[[[0,4,3300],[0,19,4500],[0,24,1400]],,51520],[[[0,5,2600],[0,17,8000],[0,91,50]],,50360],[[[0,6,1250],[0,21,6600],[0,18,7300]],,0,[[1,1,1,5],[8,"forest"],[9,1,1],[9,1,21]]],[[[0,22,1400],[0,7,750]],,48630],[[[0,25,64],[0,3,3200],[1,21,8]],,50800],[[[0,8,650],[0,27,85],[0,4,4800],[0,91,25]],,0,[[8,"sawmill"],[9,1,41],[9,1,42],[9,1,43]]],[[[0,10,420],[0,19,1600]],,39360],[[[0,2,6000],[0,22,2100],[0,21,1800]],,38980],[[[0,24,1800],[1,21,12],[1,41,10]],,0,[[1,1,2,5],[9,1,2],[9,1,22],[9,1,44],[9,1,45],[9,1,46]]],[[[0,3,3200],[0,5,3150],[0,20,1900]],,36200],[[[0,27,40],[0,18,7700]],,39240],[[[0,91,60],[1,22,30],[1,44,12]],,0,[[8,"carpentry"],[9,1,101]]],[[[0,8,300],[0,6,2000]],,39600],[[[0,17,16000],[1,22,30],[1,42,10]],,34520],[[[0,11,90],[1,101,6],[1,22,18]],,0,[[10]]],[[[0,22,800],[0,7,430],[0,2,2200]],,32642],[[[0,10,380]],,30400],[[[0,9,460],[1,41,20]],,0,[[9,1,102]]],[[[0,19,2600],[0,3,3000],[0,18,5400],[0,4,1200]],,31740],[[[0,91,15],[0,26,1700]],,31420],[[[0,25,35],[0,5,2800],[1,102,4]],,0,[[9,1,103]]],[[[0,24,1900],[0,6,1400]],,31060],[[[0,20,1350],[0,23,1250],[0,1,4900]],,30230],[[[0,12,75],[0,21,2500],[1,45,15]],,0,[[1,1,3,5],[9,1,3],[9,1,23],[9,1,47],[9,1,48],[9,1,49]]],[[[0,8,310],[0,9,240]],,31520],[[[0,7,130],[0,6,400],[0,27,30]],,32562],[[[0,3,5400],[1,23,18],[1,103,3]],,0,[[9,1,104]]],[[[0,11,185]],,31450],[[[0,22,1900],[0,91,22],[0,2,2600]],,30940],[[[0,10,110],[1,41,32],[1,101,24]],,0,[[9,1,105]]],[[[0,25,55],[1,46,27]],,35025],[[[0,20,2300],[0,23,1350],[1,43,36]],,34485],[[[0,5,2000],[1,104,12],[1,47,72]],,0,[[9,1,106]]],[[[0,26,2100],[0,8,150]],,36600],[[[0,3,2200],[0,18,4500],[0,19,3000],[0,4,1400],[0,17,2800]],,37520],[[[0,9,600],[1,106,20]],,0,[[9,1,107]]],[[[0,7,700]],,37380],[[[0,29,1400],[0,12,40]],,42000],[[[0,1,45000],[1,107,52],[1,48,18]],,0,[[9,1,108]]],[[[0,5,3000],[0,11,240]],,44400],[[[0,3,5800],[0,9,380],[0,21,2400]],,46970],[[[0,6,1600],[1,102,12],[1,23,48]],,0,[[9,1,109]]],[[[0,25,75]],,48500],[[[0,29,1200],[0,8,1300],[0,17,20000],[0,2,5600],[1,49,24]],,50340,[[5,1]]],[[[0,20,5400],[0,10,100],[1,42,35]],,52325],[[[0,26,450],[0,25,45],[0,9,850]],,52510],[[[0,5,18000],[0,4,3600],[1,109,50]],,0,[[1,1,4,5],[9,1,4],[9,1,24],[9,1,50],[9,1,51],[9,1,52]]],[[[0,11,100],[0,3,9200],[1,45,30],[1,103,18]],,52207],[[[0,91,50],[0,22,3300],[0,18,4000],[1,46,45]],,52953],[[[1,101,40],[1,21,80],[1,48,30]],,0,[[9,1,111]]],[[[0,21,3000],[0,23,1600],[0,6,800]],,51960],[[[0,25,50],[0,24,2200],[1,43,60]],,53008],[[[1,104,70],[1,107,55],[1,24,60]],,0,[[9,1,112]]],[[[0,8,500],[0,7,450]],,50730],[[[0,91,35],[0,2,3500],[0,29,1200],[1,23,30]],,52432],[[[0,11,290],[1,52,30]],,50496,[[5,1]]],[[[0,10,360],[0,9,720],[1,106,100]],,52200],[[[0,27,75],[1,112,15]],,50049,[[11,1]]],[[[0,23,2000],[0,12,60],[1,42,50],[1,102,20]],,53630],[[[1,50,65],[1,47,30],[1,111,50]],,0,[[9,1,110]]],[[[0,109,3500],[0,24,2500],[1,48,30]],,50792],[[[0,11,275],[1,22,60]],,51934],[[[0,10,250],[0,12,100],[1,41,50],[1,23,33]],,0,[[1,1,5,5],[9,1,5],[9,1,25],[9,1,53],[9,1,54],[9,1,55]]],[[[0,9,250],[0,23,4000]],,51800],[[[0,25,90],[0,18,6400],[0,21,1000],[1,44,50]],,55282],[[[0,108,7500],[1,53,15],[1,112,5]],,0,[[9,1,115]]],[[[0,6,500],[0,22,6250]],,48650],[[[0,3,9700],[0,17,30000],[0,5,2200],[1,25,36]],,51590],[[[0,91,50],[1,115,26],[1,101,62]],,0,[[9,1,116]]],[[[0,112,2900],[0,12,80],[1,22,32]],,54505],[[[0,108,3700],[0,11,200]],,51020],[[[0,27,125],[1,115,22]],,0,[[9,1,118]]],[[[0,29,2700],[1,104,27]],,54896],[[[0,10,380],[0,19,5100],[1,50,65],[1,109,8]],,52508],[[[0,91,40],[1,118,10],[1,50,80],[1,107,65]],,0,[[9,1,117],[7,5]]]]
-                           ,"2":[,[[[0,111,45],[0,9,380]],,48150],[[[1,21,400]],,,[[6,100]]],[[[0,12,100],[0,5,315]],,49140],[[[1,24,350]],,,[[6,100]]],[[[0,26,3200],[0,9,220],[1,106,30]],,47452],[[[1,22,450]],,,[[6,100]]],[[[0,11,150],[1,111,35]],,51945],[[[1,21,600],[1,41,80]],,,[[6,100]]],[[[0,8,555],[1,44,40],[1,45,30]],,46164],[[[0,91,55],[1,23,550]],,,[[6,100]]],[[[1,25,150]],,103843],[[[1,102,22]],,276206],[[[1,115,45]],,145202],[[[1,21,650],[1,22,100]],,,[[6,100]]],[[[1,110,15]],,124977],[[[1,53,120],[1,55,50],[1,54,50]],,,[[9,1,119]]],[[[0,7,5200],[0,6,1200],[0,24,3500]],,103941],[[[1,21,350],[1,22,300]],,,[[6,100]]],[[[0,10,240],[0,27,85],[0,26,2500]],,135945],[[[1,1,125],[1,2,100],[1,3,90],[1,4,70],[1,5,50]],,138279],[[[1,109,30]],,168612],[[[0,144,40],[0,110,100],[0,12,50]],,,[[6,100]]],[[[1,103,20]],,179495],[[[1,53,210],[1,55,160]],,,[[9,1,120]]],[[[1,41,100],[1,48,75],[1,52,50]],,156645],[[[1,25,190]],,,[[6,100]]],[[[0,11,400]],,125956],[[[1,24,220],[1,47,50],[1,43,85]],,114596],[[[1,118,20]],,221544],[[[1,1,250],[1,2,200],[1,3,180],[1,4,140],[1,5,100]],,,[[6,100]]],[[[0,110,100],[0,12,80],[1,41,45],[1,53,40],[1,52,20]],,237672],[[[1,41,100],[1,21,80],[1,43,125],[1,42,75]],,257504],[[[1,46,70],[1,49,50],[1,23,60],[1,25,80]],,273176],[[[0,10,60],[1,118,5],[0,27,100],[0,26,8000]],,288144],[[[1,5,200],[1,4,200],[1,3,200]],,,[[1,1,7,5],[9,1,7],[9,1,26],[9,1,56],[9,1,57],[9,1,58],[9,1,121],[9,1,122],[13,309]]],[[[1,121,20],[1,122,5]],,288743,[[9,1,123]]],[[[1,123,15],[1,56,120]],,313426],[[[0,5,8000],[0,1,15000],[0,11,500],[1,111,40]],,346934],[[[1,24,200],[1,23,200],[1,53,100],[1,58,50]],,305630],[[[1,54,100],[1,42,150],[1,51,250]],,512943],[[[0,12,200],[0,6,3000],[0,7,2500],[1,110,20]],,382357],[[[1,109,15],[1,107,15],[1,106,4],[1,102,8]],,311131,[[9,1,124]]],[[[1,124,25]],,401729,[[9,1,125]]],[[[1,125,80]],,298927],[[[1,7,250],[1,5,200],[1,1,500]],,,[[1,1,8,5],[9,1,8],[9,1,27],[9,1,59],[9,1,60],[9,1,61],[13,310]]],[[[0,27,80],[0,26,3000],[1,27,80],[1,122,5],[1,121,10]],,337285,[[9,1,126],[9,1,127]]],[[[1,126,20],[1,127,20]],,322536,[[9,1,128],[9,1,129]]],[[[1,128,10],[1,129,5]],,377008,[[9,1,130],[9,1,131]]],[[[1,130,10],[1,131,5]],,390178,[[9,1,132]]],[[[1,132,35],[1,41,400]],,807960],[[[0,6,3000],[1,129,8],[1,128,8]],,328800,[[1,1,9,5],[9,1,9],[9,1,28],[9,1,62],[9,1,63],[9,1,64]]],[[[1,127,12],[1,126,10],[1,28,100]],,356200,[[9,1,146]]],[[[1,146,6],[1,111,5],[1,110,15]],,383600],[[[1,122,8],[1,121,12],[1,124,15]],,411000],[[[1,62,150],[1,63,150],[1,64,150]],,438400],[[[0,35,1000],[1,111,50],[1,64,150],[1,106,15]],,465800],[[[1,125,25],[1,124,10],[1,118,10]],,493200],[[[0,110,200],[0,27,45],[0,111,50]],,520600],[[[0,1,1260],[1,62,150],[1,109,50]],,548000,[[9,1,144]]],[[[1,144,25]],,575400],[[[0,10,144],[0,12,250],[1,106,100]],,602800],[[[1,102,20],[1,107,30],[1,110,10],[1,104,20]],,630200,[[9,1,143]]],[[[1,143,10],[1,112,5]],,657600],[[[1,41,250],[1,42,250],[1,43,250],[1,21,200]],,685000,[[9,1,148]]],[[[1,57,150],[1,63,100],[1,60,150]],,712400],[[[0,144,100],[0,25,40],[1,53,300],[1,50,300]],,739800],[[[0,11,450],[0,9,300],[1,49,300]],,767200,[[9,1,134]]],[[[1,134,10],[1,146,5],[1,50,15]],,794600],[[[1,44,250],[1,115,40]],,822000],[[[1,123,15],[1,132,15]],,849400]]
+                           ,"2":[,[[[0,111,45],[0,9,380]],,48150],[[[1,21,400]],,,[[6,100]]],[[[0,12,100],[0,5,315]],,49140],[[[1,24,350]],,,[[6,100]]],[[[0,26,3200],[0,9,220],[1,106,30]],,47452],[[[1,22,450]],,,[[6,100]]],[[[0,11,150],[1,111,35]],,51945],[[[1,21,600],[1,41,80]],,,[[6,100]]],[[[0,8,555],[1,44,40],[1,45,30]],,46164],[[[0,91,55],[1,23,550]],,,[[6,100]]],[[[1,25,150]],,103843],[[[1,102,22]],,276206],[[[1,115,45]],,145202],[[[1,21,650],[1,22,100]],,,[[6,100]]],[[[1,110,15]],,124977],[[[1,53,120],[1,55,50],[1,54,50]],,,[[9,1,119]]],[[[0,7,5200],[0,6,1200],[0,24,3500]],,103941],[[[1,21,350],[1,22,300]],,,[[6,100]]],[[[0,10,240],[0,27,85],[0,26,2500]],,135945],[[[1,1,125],[1,2,100],[1,3,90],[1,4,70],[1,5,50]],,138279],[[[1,109,30]],,168612],[[[0,144,40],[0,110,100],[0,12,50]],,,[[6,100]]],[[[1,103,20]],,179495],[[[1,53,210],[1,55,160]],,,[[9,1,120]]],[[[1,41,100],[1,48,75],[1,52,50]],,156645],[[[1,25,190]],,,[[6,100]]],[[[0,11,400]],,125956],[[[1,24,220],[1,47,50],[1,43,85]],,114596],[[[1,118,20]],,221544],[[[1,1,250],[1,2,200],[1,3,180],[1,4,140],[1,5,100]],,,[[6,100]]],[[[0,110,100],[0,12,80],[1,41,45],[1,53,40],[1,52,20]],,237672],[[[1,41,100],[1,21,80],[1,43,125],[1,42,75]],,257504],[[[1,46,70],[1,49,50],[1,23,60],[1,25,80]],,273176],[[[0,10,60],[1,118,5],[0,27,100],[0,26,8000]],,288144],[[[1,5,200],[1,4,200],[1,3,200]],,,[[1,1,7,5],[9,1,7],[9,1,26],[9,1,56],[9,1,57],[9,1,58],[9,1,121],[9,1,122],[13,309]]],[[[1,121,20],[1,122,5]],,288743,[[9,1,123]]],[[[1,123,15],[1,56,120]],,313426],[[[0,5,8000],[0,1,15000],[0,11,500],[1,111,40]],,346934],[[[1,24,200],[1,23,200],[1,53,100],[1,58,50]],,305630],[[[1,54,100],[1,42,150],[1,51,250]],,512943],[[[0,12,200],[0,6,3000],[0,7,2500],[1,110,20]],,382357],[[[1,109,15],[1,107,15],[1,106,4],[1,102,8]],,311131,[[9,1,124]]],[[[1,124,25]],,401729,[[9,1,125]]],[[[1,125,80]],,298927],[[[1,7,250],[1,5,200],[1,1,500]],,,[[1,1,8,5],[9,1,8],[9,1,27],[9,1,59],[9,1,60],[9,1,61],[13,310]]],[[[0,27,80],[0,26,3000],[1,27,80],[1,122,5],[1,121,10]],,337285,[[9,1,126],[9,1,127]]],[[[1,126,20],[1,127,20]],,322536,[[9,1,128],[9,1,129]]],[[[1,128,10],[1,129,5]],,377008,[[9,1,130],[9,1,131]]],[[[1,130,10],[1,131,5]],,390178,[[9,1,132]]],[[[1,132,35],[1,41,400]],,807960],[[[0,6,3000],[1,129,8],[1,128,8]],,328800,[[1,1,9,5],[9,1,9],[9,1,28],[9,1,62],[9,1,63],[9,1,64]]],[[[1,127,12],[1,126,10],[1,28,100]],,356200,[[9,1,146]]],[[[1,146,6],[1,111,5],[1,110,15]],,383600],[[[1,122,8],[1,121,12],[1,124,15]],,411000],[[[1,62,150],[1,63,150],[1,64,150]],,438400],[[[0,35,1000],[1,111,50],[1,64,150],[1,106,15]],,465800],[[[1,125,25],[1,124,10],[1,118,10]],,493200],[[[0,110,200],[0,27,45],[0,111,50]],,520600],[[[0,1,1260],[1,62,150],[1,109,50]],,548000,[[9,1,144]]],[[[1,144,25]],,575400],[[[0,10,144],[0,12,250],[1,106,100]],,602800],[[[1,102,20],[1,107,30],[1,110,10],[1,104,20]],,630200,[[9,1,143]]],[[[1,143,10],[1,112,5]],,657600],[[[1,41,250],[1,42,250],[1,43,250],[1,21,200]],,685000,[[9,1,148]]],[[[1,57,150],[1,63,100],[1,60,150]],,712400],[[[0,144,100],[0,25,40],[1,53,300],[1,50,300]],,739800],[[[0,11,450],[0,9,300],[1,49,300]],,767200,[[9,1,134]]],[[[1,134,10],[1,146,5],[1,50,15]],,794600],[[[1,44,250],[1,115,40]],,822000],[[[1,123,15],[1,132,15]],,849400],[[[1,109,20],[1,131,10],[1,44,200]],,886600]]
                            }
                ,"foodworld":{"1":[,[[[0,2,17000]],2,57800],[[[0,21,2000],[0,23,2500],[0,22,2750]],2,97800],[[[0,3,30000]],2,60000],[[[0,1,10000],[0,20,2500],[0,10,50]],2,36500],[[[0,22,6000]],2,62400],[[[0,4,8000]],2,70400],[[[0,131,40],[0,137,21],[0,140,23]],2,65400],[[[0,24,3000],[0,10,80]],2,70400],[[[0,1,6000],[0,2,4000],[0,5,2500]],2,65000],[[[0,19,2000],[0,109,3500],[0,2,7000]],2,55100],[[[0,11,50],[0,22,2500]],2,41400],[[[0,10,70],[0,110,45],[0,9,100]],2,49000],[[[0,6,2500],[0,21,2000],[0,17,9000]],2,91000],[[[0,20,4500],[0,21,3500],[0,10,30]],2,87600],[[[0,108,1500],[0,109,4000]],2,78500],[[[0,23,2000],[0,26,600],[0,9,150]],2,70660],[[[0,6,2200],[0,22,5000]],2,108320],[[[0,21,4000],[0,26,3500]],2,126000],[[[0,24,1200],[0,10,85],[0,17,20000]],2,42230],[[[0,1,20000],[0,12,35],[0,20,7500]],2,91450,[[8,"foodworld-3"]]]]
                             }
@@ -494,6 +498,7 @@ const VARIABLES = {
                     "modeBuildPreise":["Mode",4],
                     "modeBuyNotepad":["Mode",4],
                     "modeInfoPanelDonkey":["Mode",4],
+                    "modeInfoPanelClothingDonation":["Mode",4],
                     "modeInfoPanelFarmies":["Mode",4],
                     "modeInfoPanelFormulas":["Mode",4],
                     "modeInfoPanelLottery":["Mode",4],
@@ -585,6 +590,8 @@ const VARIABLES = {
                     "valVerkaufLimitUp":["Option",3],
                     "valVet":["Option",3],
                     "valVetAutostart":["Option",3],
+                    "valVetAutoSet":["Option",3],
+                    "valVetNoCoinDrugs":["Option",3],
                     "valWaterNeeded":["Option",3],
                     "vertraegeIn":["Contracts received",1],
                     "vertraegeOut":["Contracts sent",1],
@@ -680,7 +687,7 @@ var upjersAds, buyNotePadShowBlocked, show;
 var farmiLog, farmiDailyCount, levelLog, levelLogId, lotteryLog, lotteryLogId, logSales, logSalesId, logDonkey, logDonkeyId, logClothingDonation;
 var zoneAddToGlobalTime;
 var totalAnimals, totalFarmis, totalPowerups, totalQuest, totalRecursive, totalZones, totalEndtime;
-var valKauflimit, valKauflimitNPC, highlightProducts, highlightUser, valNimmBeob, valVerkaufLimitDown, valVerkaufLimitUp, valJoinPreise, lastOffer, protectMinRack, ownMarketOffers, valClothingDonation, valVet, valVetAutostart;
+var valKauflimit, valKauflimitNPC, highlightProducts, highlightUser, valNimmBeob, valVerkaufLimitDown, valVerkaufLimitUp, valJoinPreise, lastOffer, protectMinRack, ownMarketOffers, valClothingDonation, valVet, valVetAutostart, valVetAutoSet, valVetNoCoinDrugs;
 var valAnimateStartscreen, valAutoLogin;
 var valMessagesSystemMarkRead;
 var megafieldVehicle, megafieldJob, logMegafieldJob, megafieldSmartTimer;
@@ -1003,12 +1010,12 @@ function updateProductDataFarm(){
         // task_new_plant task_new_product
         prodBlock[0]=["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","ct","","ct","","ct","ct","","ct","","","","","","","","","","ct","ct","ct","ct","ct","ct","ct","","","","","","","ct","","ct","","","ct","","","ct","ct","ct","","","","","","","","t","","","","","","","t","","t","t","","","","","","","","","","","","","","","","","","","","","","t","","","","","","","","","","","","","","","","","","","","","","","","","","","","","t","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","ut","ut",,,,,,,,,,,"","","","","","","","","","","","","","","t","t","t","t","t","t","t","t",,,,,,,,,,,,,,,,,,,,,,,,,,,,,"","","","","","","","","","","","","","","","","","","","","","","","","","","",,,,,,,,,,,,,,,,,,,,,,,,"","","","","","t","t","","t","","t","","t","","t","","t","","t","","","t","","t","","","","","","","","t","t","","t","","","t","","t","","t","","t","t","","t","","","t","","","","","","","","","","","","",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"","t","","t"];
 
-		//patch0803
+        //patch0803
         /*
         var new_prodBlock=prodBlock[0].clone();
         new_prodBlock[400]="test";
         GM_log(implode(new_prodBlock));
-		*/
+        */
         var help={"v":[],"ex":[],"hr":[],"e":[],"o":[],"fw1":[],"fw2":[],"fw3":[],"fw4":[],"z":[],"fl":[],"fla":[],"md":[]};
         // for(var v=1;v<unsafeWindow.produkt_name.length;v++){
         //*task_fix_growtime*/ var newProductGrowtime={};
@@ -1058,7 +1065,7 @@ function updateProductDataFarm(){
             var c=(prodStockTemp[v])?prodStockTemp[v]:0;
             prodStock[0][v]=(c?parseInt(c,10):0);
             prodYield[0][v]=(unsafeWindow.produkt_ernte[v]?parseInt(unsafeWindow.produkt_ernte[v],10):0);
-			prodTyp[0][v]=unsafeWindow.produkt_category[v];
+            prodTyp[0][v]=unsafeWindow.produkt_category[v];
             prodRequire[0][v]=PRODUCT_REQUIRE[0][v];
             prodGrowTime[0][v]=(undefined!=PRODUCT_GROWTIME[0][v]?PRODUCT_GROWTIME[0][v]:(unsafeWindow.produkt_zeit[v]?Math.round(parseInt(unsafeWindow.produkt_zeit[v],10)/60):0));
             //*task_fix_growtime*/ if(prodGrowTime[0][v]&&(prodGrowTime[0][v]!=(unsafeWindow.produkt_zeit[v]?Math.round(parseInt(unsafeWindow.produkt_zeit[v],10)/60):0))){
@@ -1114,8 +1121,8 @@ function updateProductDataFarm(){
                     }else{
                         prodBlock[0][v]+="v"+PRODUCT_LEVEL["veterinary"][v];
                     }
-					//Fix Produkt Points Tinkturen
-					prodPoints[0][v]=(prodPoints[0][v]?prodPoints[0][v]/prodYield[0][v]:0);
+                    //Fix Produkt Points Tinkturen
+                    prodPoints[0][v]=(prodPoints[0][v]?prodPoints[0][v]/prodYield[0][v]:0);
                 break;
                 case "ex":
                     if(PRODUCT_QUEST[0][v]&&(questData[PRODUCT_QUEST[0][v][0]][PRODUCT_QUEST[0][v][1]]["nr"]<=PRODUCT_QUEST[0][v][2])){
@@ -3169,6 +3176,7 @@ try{
         if(unsafeWindow.buildInfoPanelAutomat){ unsafeWindow.buildInfoPanelAutomat(mode,mode2); }
         switch(mode){
         case "changelog": buildInfoPanelChangelog();  break;
+        case "clothingDonation":    buildInfoPanelClothingDonation();     break;
         case "donkey":    buildInfoPanelDonkey();     break;
         case "farmies":   buildInfoPanelFarmies();    break;
         case "formulas":  buildInfoPanelFormulas();   break;
@@ -3317,8 +3325,8 @@ try{
     case 0:{
         createElement("div",{"class":"link rackcat1v"+(mode["filterCategory"]["v","ex"]?"_active":""),"filter":'["v","ex"]',"mouseOverText":getText("category_v"),"style":"float:left;"},newdiv);
         createElement("div",{"class":"link rackcat1e"+(mode["filterCategory"]["e"]?"_active":""),"filter":'["e"]',"mouseOverText":getText("category_e"),"style":"float:left;"},newdiv);
-        createElement("div",{"class":"link rackcat6"+(mode["filterCategory"]["o"]?"_active":""),"filter":'["o"]',"mouseOverText":getText("category_o"),"style":"float:left;"},newdiv);
-        createElement("div",{"class":"link rackcat10"+(mode["filterCategory"]["c"]||mode["filterCategory"]["z"]?"_active":""),"filter":'["c","z"]',"mouseOverText":getText("category_c")+"<br>"+getText("category_z"),"style":"float:left;"},newdiv);
+        createElement("div",{"class":"link rackcat10"+(mode["filterCategory"]["o"]?"_active":""),"filter":'["o"]',"mouseOverText":getText("category_o"),"style":"float:left;"},newdiv);
+        createElement("div",{"class":"link rackcat15"+(mode["filterCategory"]["c"]||mode["filterCategory"]["z"]?"_active":""),"filter":'["c","z"]',"mouseOverText":getText("category_c")+"<br>"+getText("category_z"),"style":"float:left;"},newdiv);
         newdiv1=createElement("div",{"style":"float:left;width:53px;"},newdiv);
         for(var i=1;i<=4;i=i+2){
             createElement("div",{"class":"link rackcat2"+i+(mode["filterCategory"]["fw"+i]?"_active":""),"filter":'["fw'+i+'"]',"mouseOverText":getText("category_fw"+i),"style":"float:left;"},newdiv1);
@@ -3828,7 +3836,7 @@ try{
     }}(mode["filterCategory"]),false);
     createElement("div",{"class":"link rackcat1v"+(mode["filterCategory"]["v","ex"]?"_active":""),"filter":'["v","ex"]',"mouseOverText":getText("category_v"),"style":"float:left;"},newdiv);
     createElement("div",{"class":"link rackcat1e"+(mode["filterCategory"]["e"]?"_active":""),"filter":'["e"]',"mouseOverText":getText("category_e"),"style":"float:left;"},newdiv);
-    createElement("div",{"class":"link rackcat6"+(mode["filterCategory"]["o"]?"_active":""),"filter":'["o"]',"mouseOverText":getText("category_o"),"style":"float:left;"},newdiv);
+    createElement("div",{"class":"link rackcat10"+(mode["filterCategory"]["o"]?"_active":""),"filter":'["o"]',"mouseOverText":getText("category_o"),"style":"float:left;"},newdiv);
     newdiv1=createElement("div",{"style":"float:left;width:53px;"},newdiv);
     for(var i=1;i<=4;i=i+2){
         createElement("div",{"class":"link rackcat2"+i+(mode["filterCategory"]["fw"+i]?"_active":""),"filter":'["fw'+i+'"]',"mouseOverText":getText("category_fw"+i),"style":"float:left;"},newdiv1);
@@ -5279,6 +5287,90 @@ function buildInfoPanelDonkey(mode){
         container=null;newdiv=null;newtable=null;newtr=null;newtd=null;
     }catch(err){GM_logError("buildInfoPanelWaltraud","","",err);}
 }
+function buildInfoPanelClothingDonation(mode){
+    try{
+        var modeDefault={"total":false};
+        var modeOld=explode(GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_modeInfoPanelClothingDonation"),"buildInfoPanelClothingDonation/modeOld",modeDefault);
+        if(typeof modeOld!="object"){ modeOld=modeDefault; }
+        if(typeof mode!="object"){ mode=modeOld; }
+        for(var v in modeDefault){
+            if(!modeDefault.hasOwnProperty(v)){ continue; }
+            if(mode[v]===undefined){ mode[v]=(modeOld[v]===undefined?modeDefault[v]:modeOld[v]); }
+        }
+        GM_setValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_modeInfoPanelClothingDonation",implode(mode,"buildInfoPanelClothingDonation/mode"));
+
+        var container,newdiv,newtable,newtr,newtd;
+        container=$("infoPanelInner");
+        container.innerHTML="";
+        // Head
+        newdiv=createElement("div",{"class":"borderBottom1Black","style":"height:30px;"},container);
+        newtable=createElement("table",{"class":"tnormal","style":"font-weight:bold;width:100%;"},newdiv);
+        newtr=createElement("tr",{},newtable);
+        createElement("td",{"class":"tnormal","style":"font-weight:bold;text-align:center;"},newtr,getText("logClothingDonation"));
+        newtd=createElement("td",{},newtr);
+        newdiv=createElement("div",{"class":"link naviItem"+(!mode["total"]?"Active":"")},newtd,getText("detail"));
+        newdiv.addEventListener("click",function(){
+            buildInfoPanelClothingDonation({"total":false});
+        },false);
+        newdiv=createElement("div",{"class":"link naviItem"+(mode["total"]?"Active":"")},newtd,getText("total"));
+        newdiv.addEventListener("click",function(){
+            buildInfoPanelClothingDonation({"total":true});
+        },false);
+        // Content
+        newdiv=createElement("div",{"style":"height:485px;overflow:auto;"},container);
+        newtable=createElement("table",{"style":"line-height:16px;width:100%","border":"1"},newdiv);
+        newtr=createElement("tr",{},newtable);
+        if(mode["total"]){
+            // Not yet supported
+        }else{
+            createElement("th",{"style":"white-space:nowrap;"},newtr,getText("day"));
+            createElement("th",{"style":"white-space:nowrap;"},newtr,getText("donation"));
+            createElement("th",{"style":"white-space:nowrap;"},newtr,getText("reward"));
+
+            for(var i=0;i<logClothingDonation.length;i++){
+                var v=logClothingDonation[i];
+                newtr=createElement("tr",{},newtable);
+                createElement("td",{},newtr,
+                        getFormattedDateStr(v.createdate)+" ("+getDaytimeStr(v.createdate,true,true)+"h)");
+                newtd=createElement("td",{},newtr);
+                for (var j in v.in) {
+                    if (!v.in.hasOwnProperty(j)) {continue;}
+
+                    newdiv=createElement("div",{"class":"hoverBgLightblue","prod":j},newtd);
+                    newdiv.classList.add("link");
+                    newdiv.addEventListener("mouseover",function(event){ showGoToMarketToolTip(event,this.getAttribute("prod")); },false);
+                    newdiv.addEventListener("click",function(){showMarket(this.getAttribute("prod"));},false);
+                    produktPic(0,j,newdiv);
+                    createElement("span",{},newdiv,numberFormat(v.in[j]["amount"])+"&nbsp;"+prodName[0][j]);
+                }
+
+                newtd=createElement("td",{},newtr);
+
+                for(var j=0;j<v.gambleInfo.length;j++) {
+                    newdiv=createElement("div",{},newtd);
+                    var prefixDate=v.gambleInfo[j]["gambledate"]==0?v.createdate:v.gambleInfo[j]["gambledate"];
+                    createElement("span",{},newdiv,getFormattedDateStr(prefixDate)+" ("+getDaytimeStr(prefixDate,true,true)+"h): ");
+                    var color=v.gambleInfo[j]["gain"]>0?"green":"red";
+                    createElement("span",{"style":"color:"+color+";"},newdiv,moneyFormat(v.gambleInfo[j]["gain"]));
+                    if(v.gambleInfo[j]["gain"]>0) { // Print products of donation (only)
+                        var w=v.gambleInfo[j]["out"]
+                        for (var k in w) {
+                            if (!w.hasOwnProperty(k)) {continue;}
+
+                            newdiv=createElement("div",{"class":"hoverBgLightblue","prod":k},newtd);
+                            newdiv.classList.add("link");
+                            newdiv.addEventListener("mouseover",function(event){ showGoToMarketToolTip(event,this.getAttribute("prod")); },false);
+                            newdiv.addEventListener("click",function(){showMarket(this.getAttribute("prod"));},false);
+                            produktPic(0,k,newdiv);
+                            createElement("span",{},newdiv,numberFormat(w[k]["amount"])+"&nbsp;"+prodName[0][k]);
+                        }
+                    }
+                }
+            }
+        }
+        container=null;newdiv=null;newtable=null;newtr=null;newtd=null;
+    }catch(err){GM_logError("buildInfoPanelClothingDonation","","",err);}
+}
 function buildInfoPanelFarmies(mode){
     try{
         var modeDefault={"limit":95};
@@ -6138,6 +6230,28 @@ function buildInfoPanelOptions(){
         }, false);
         createElement("td",{},newtr,getText("veterinary") + "<br/>" + getText("reloadRequired"));
         createElement("td",{},newtr,getText("settings_vet")[1]);
+
+        newtr=createElement("tr",{},newtable);
+        newtd=createElement("td",{"align":"center"},newtr);
+        newinput=createElement("input",{"type":"checkbox","class":"link","checked": valVetAutoSet}, newtd);
+        if (!unsafeWindow.farmersmarket_data.vet) { newinput.disabled = true; }
+        newinput.addEventListener("click",function(){
+            valVetAutoSet = this.checked;
+            GM_setValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_valVetAutoSet", valVetAutoSet);
+        }, false);
+        createElement("td",{},newtr,getText("settings_vetAutoSet")[0]);
+        createElement("td",{},newtr,getText("settings_vetAutoSet")[1]);
+
+        newtr=createElement("tr",{},newtable);
+        newtd=createElement("td",{"align":"center"},newtr);
+        newinput=createElement("input",{"type":"checkbox","class":"link","checked": valVetNoCoinDrugs}, newtd);
+        if (!unsafeWindow.farmersmarket_data.vet) { newinput.disabled = true; }
+        newinput.addEventListener("click",function(){
+            valVetNoCoinDrugs = this.checked;
+            GM_setValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_valVetNoCoinDrugs", valVetNoCoinDrugs);
+        }, false);
+        createElement("td",{},newtr,getText("settings_valVetNoCoinDrugs")[0]);
+        createElement("td",{},newtr,getText("settings_valVetNoCoinDrugs")[1]);
 
         // ***************Megafield***********************************************
         newtr=createElement("tr",{},newtable);
@@ -14248,6 +14362,67 @@ return false;
         }catch(err){GM_logError("getGardenInfoResponse","","",err);}
     });
 
+    function setFarmProductionInfos() {
+        // Rescedule, if data is not ready
+        if (Object.getOwnPropertyNames(unsafeWindow.farms_data.farms).length==0) {
+            window.setTimeout(setFarmProductionInfos,100);
+            return;
+        }
+
+        var z,p,w,iAmount,iPoints,skip;
+        var zoneNrF, aktZone, newData, oldData;
+        for(var farm in unsafeWindow.farms_data.farms){
+            if (!unsafeWindow.farms_data.farms.hasOwnProperty(farm)) {continue};
+
+            for(var zone in unsafeWindow.farms_data.farms[farm]){
+                if (!unsafeWindow.farms_data.farms[farm].hasOwnProperty(zone)) {continue};
+
+                aktZone=unsafeWindow.farms_data.farms[farm][zone];
+                zoneNrF=6*(parseInt(farm, 10)-1)+parseInt(zone, 10);
+
+                // Check, if old production data is still valid
+                oldData=zones.getProduction(zoneNrF);
+                skip=false;
+                for(var oldProdId in oldData[0][0]) {
+                    if (!oldData[0][0].hasOwnProperty(oldProdId)) {continue};
+                    skip=oldData[0][0][oldProdId][0][2]>now; // Skip renewing production data, if old production is still running
+                }
+                // Skip not-yet-enabled or blocked zones, non-fields and skippable fields
+                if (!aktZone.status || aktZone.premiumblock || aktZone.buildingid != 1 || skip) {continue};
+
+                newData=[[{}],[,0,0,,0],[,120,60,,30],true];
+                if (aktZone.production) {
+                    p=aktZone.production[0].pid; // ProductId
+                    z=aktZone.production[0].remain; // Seconds until production is ready
+                    iAmount=(prodYield[0][p]+((currentPowerup[p]&&(now+z<currentPowerup[p][0]))?currentPowerup[p][1]:0));
+                    iAmount=iAmount*120/prodPlantSize[0][p];
+
+                    iPoints=(prodPoints[0][p]+((currentPowerup[p]&&(now+z<currentPowerup[p][0]))?currentPowerup[p][2]:0));
+                    iPoints=iPoints*120/prodPlantSize[0][p];
+
+                    w=NEVER;
+                    if (aktZone.water) {
+                        for (var i=aktZone.water.length-1; i>=0; i--) {
+                            w=Math.min(w, aktZone.water[i].waterremain);
+                        }
+                        if (w<0) {w=1;} // If watering is needed, then in 1s
+                    }
+                    w=w<z?w+now:NEVER; // If watering is needed, then now+1s, else NEVER
+
+                    if(!newData[0][0][p]){ newData[0][0][p]=new Array(); }
+                    newData[0][0][p].push([iAmount,iPoints,now+z,w]);
+                } else {
+                    // Field is empty
+                    newData[1]=[,120,60,,30];
+                }
+                zones.setProduction(zoneNrF,newData.clone());
+                newData=null;
+            }
+
+        }
+    }
+    setFarmProductionInfos();
+
     unsafeOverwriteFunction("farmAction",function(mode,farm,position,s,d,b,a){
         try{
             switch(mode){
@@ -14405,14 +14580,15 @@ return false;
             }
         }catch(err){GM_logError("ponyDialog","","",err);}
     });
+
     unsafeOverwriteFunction("AbrissResponse",function(request){
         try{
             unsafeWindow._AbrissResponse(request);
         }catch(err){GM_logError("_AbrissResponse","","",err);}
         try{
-            if((request.readyState==4)&&(request.status==200)){
+            if((request.success == 1 )){
                 checkFieldTimes();
-                raiseEvent("gameFieldDemolished");
+                raiseEvent("gameFieldDemolish");
             }
         }catch(err){GM_logError("AbrissResponse","","",err);}
     });
@@ -16270,6 +16446,7 @@ return false;
                                 zones.setBonus(zoneNrF,0);
                                 // console.log("=== START LESE VET ===");
                                 // console.log(print_r(unsafeWindow.farmersmarket_data.vet, "", true, "\n"));
+                                // console.log(unsafeWindow.farmersmarket_data.vet.production);
                                 if((!currBlock)&&(unsafeWindow.farmersmarket_data.vet&&unsafeWindow.farmersmarket_data.vet.production)){
                                     tempZoneProductionData=[[{},{}],0,0,true];
                                     for(var slot=1;slot<=4;slot++){
@@ -16324,7 +16501,8 @@ return false;
             calcTotalZones();
         }catch(err){GM_logError("doFarmersMarketData","","err_trace="+err_trace,err);}
     };
-    if(unsafeWindow.farmersmarket_data){ doFarmersMarketData(); }
+    // if(unsafeWindow.farmersmarket_data){ doFarmersMarketData(); } // Moved after showGoToVetFarmi() --Moe, 2016/04/28
+
     unsafeOverwriteFunction("farmersMarketHandler",function(response){
         try{
             unsafeWindow._farmersMarketHandler(response);
@@ -16333,6 +16511,7 @@ return false;
             doFarmersMarketData()
         }catch(err){GM_logError("farmersMarketHandler","","",err);}
     });
+
     function doFarmersMarket(){
         try{
             var div,div1,divZone;
@@ -16514,6 +16693,116 @@ return false;
                 }
             }
         }catch(err){GM_logError("dialogNursery","","",err);}
+    });
+
+    valVetAutoSet= GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_valVetAutoSet", true);
+    unsafeOverwriteFunction("setVetAnimalQueueSelect",function(a){
+        try{
+            unsafeWindow._setVetAnimalQueueSelect(a);
+        }catch(err){GM_logError("_setVetAnimalQueueSelect","","",err);}
+        try{
+            // Get first free slot (bench)
+            var div=$("vet_animal_slots").querySelector(".vet_animal_slot_hover");
+            if(valVetAutoSet && div!=null) { // Check, if auto set is enabled in options
+                click(div); // CLick slot
+            }
+        }catch(err){GM_logError("setVetAnimalQueueSelect","","",err);}
+    });
+
+    valVetNoCoinDrugs= GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_valVetNoCoinDrugs", true);
+    unsafeOverwriteFunction("showVetMedicalRecord",function(h){
+        // showVetMedicalRecord is also called in vetDiseaseSetDrug
+        // We need to know, if the frame is already visible (and thus only redrawn) to prevent an infinite loop
+        var vetAnimalRecord=$("vet_animal_record");
+        var freshlyOpened=vetAnimalRecord.style.display!="block";
+
+        try{
+            unsafeWindow._showVetMedicalRecord(h);
+        }catch(err){GM_logError("_showVetMedicalRecord","","",err);}
+        try{
+            if(freshlyOpened) { // Only initiate setting drugs, when called for the first time
+                var vet_data=unsafeWindow.vet_data;
+                var n = vet_data.animals.slots[h]; // {id:38226, remain: NaN}
+                var e = vet_data.animals.queue[n.id]; // {id, diseases:[{id, phase},...]}
+                for (var c = 0; c < e.diseases.length; c++) {
+                    var b = e.diseases[c].id; // b = diseaseId
+                    for (var l in vet_data.drugs) { // l = drugId
+                        // If flag is set, ignore coin drugs
+                        if(valVetNoCoinDrugs && vet_data.drugs[l].coins) {
+                            continue;
+                        }
+
+                        // Is drug l curing disease b AND is our vet level high enough for drug l?
+                        if(unsafeWindow.in_array(b, vet_data.drugs[l].diseases) && vet_data.drugs[l].level <= vet_data.info.level) {
+                            // Enough of that drug in stock?
+                            if (prodStock[0][l]>=e.diseases[c].phase){
+                                unsafeWindow.vetDiseaseSetDrug(h, b, l);
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }catch(err){GM_logError("showVetMedicalRecord","","",err);}
+    });
+
+    unsafeOverwriteFunction("updateVetAnimalQueue",function(){
+        try{
+            unsafeWindow._updateVetAnimalQueue();
+        }catch(err){GM_logError("_updateVetAnimalQueue","","",err);}
+        try{
+            var vet_data=unsafeWindow.vet_data;
+            // console.log(vet_data);
+            for (var b in vet_data.animals.queue) { // b=AnimalId
+                var r = vet_data.animals.queue[b]; // r=Animal-Object
+                var div=$("vet_animal_queue_item_tt"+b);
+                if(div) { // Is div one the four queuing animals
+                    var times=[];
+                    for (var j = 0; j < r.diseases.length; j++) {
+                        var d=r.diseases[j]; // d=Disease-Object {id:int, phase:int}
+                        var disDiv=div.childNodes[j]; // Disease-div
+                        disDiv.setAttribute("style","margin-bottom:2px; width:212px;");
+                        disDiv.firstElementChild.setAttribute("style","float: left; margin-right: 5px; margin-top: 6px;");
+
+                        var oldChild = disDiv.removeChild(disDiv.lastChild); // Remove clear-div, we'll append that later
+                        var newDiv=createElement("div",{"style":"float:left; width:212px;"},disDiv);
+                        for (var l in vet_data.drugs) { // l = drugId
+                            // If flag is set, ignore coin drugs
+                            if(valVetNoCoinDrugs && vet_data.drugs[l].coins) {
+                                continue;
+                            }
+
+                            // Check, if drug l cures disease d AND if level is high enough
+                            if(unsafeWindow.in_array(d.id, vet_data.drugs[l].diseases) && vet_data.drugs[l].level <= vet_data.info.level) {
+                                var drugDiv=createElement("div",{"style":"margin-top:3px;"},newDiv);
+                                produktPic(0,l,drugDiv);
+                                var time=vet_data.drugs[l]["times"][d.id];
+                                // Push time of first matching drug into array
+                                if(j==times.length && prodStock[0][l]>=d.phase) {
+                                    times.push(time);
+                                }
+                                // Withdraw time bonus
+                                if (vet_data.quest && vet_data.quest.bonus_all && vet_data.quest.bonus_all.treatment_reduce) {
+                                    time=Math.ceil(time-((time/100)*vet_data.quest.bonus_all.treatment_reduce));
+                                }
+                                var style=prodStock[0][l]<d.phase?"text-decoration:line-through;":""; // Strike-through drugs that are out of stock
+                                createElement("span",{"style":style},drugDiv,prodName[0][l]+" ("+getTimeStr(time,true)+"h)");
+                            }
+                        }
+                        disDiv.appendChild(oldChild); // Reappend clear-div
+                    }
+
+                    var resDiv=div.querySelector(".vet_animal_queue_item_tt_reward");
+                    var oldChild = resDiv.removeChild(resDiv.lastChild);
+                    var sum = times.reduce(function(pv, cv) { return pv + cv; }, 0); // Sum up times
+                    if (vet_data.quest && vet_data.quest.bonus_all && vet_data.quest.bonus_all.treatment_reduce) {
+                        sum=Math.ceil(sum-((sum/100)*vet_data.quest.bonus_all.treatment_reduce));
+                    }
+                    createElement("div",{"style":"float:right;font-weight:bold;"},resDiv,"&Sigma; "+getTimeStr(sum,true)+"h");
+                    resDiv.appendChild(oldChild);
+                }
+            }
+        }catch(err){GM_logError("updateVetAnimalQueue","","",err);}
     });
 
     // events forestry ==============================================================================
@@ -17534,11 +17823,6 @@ return;
             raiseEvent("gameCity"+unsafeWindow.city);
         }catch(err){GM_logError("cityArrived","","",err);}
     });
-    // unsafeOverwriteFunction("initCity",function(e,c,d){
-    //  try{
-    //      unsafeWindow._initCity(e,c,d);
-    //  }catch(err){GM_logError("_initCity","e="+e+" c="+c+" d="+d,"",err);}
-    // });
 
     // Werbung
     unsafeOverwriteFunction("fillAdColumn",function(){
@@ -17899,6 +18183,10 @@ return;
                 }
                 div.innerHTML = numberFormat(unsafeWindow.clothingdonation_data.data.percent)+"%";
                 div=null; container=null;
+
+                var button=createElement("button", {"class":"link button_new","style":"position:absolute;bottom:42px;left:0px;"}, $("clothingdonation_inner"), getText("clothingDonationLog"));
+                button.addEventListener("click",function(){unsafeWindow.buildInfoPanel("clothingDonation");},false);
+                button=null;
 
                 clothingDataAvailable(unsafeWindow.clothingdonation_data.data, goodsValue);
             }catch(err){ GM_logError("showClothingDonation","","prodId="+prodId,err); }
@@ -18344,6 +18632,9 @@ return;
                 }
             }catch(err){GM_logError("hideGoToVetFarmi","","",err);}
         }
+
+        // doFarmersmarketData was moved to here, so data is ready for showGoToVetFarmi
+        if(unsafeWindow.farmersmarket_data){ doFarmersMarketData(); }
 
         // Clothing Donation
         /*
@@ -20705,6 +20996,7 @@ try{
         text["de"]["clickCtrl"]="Strg+Klick";
         text["de"]["clickDouble"]="Doppel-Klick";
         text["de"]["clickToChange"]="Klick um zu ändern";
+        text["de"]["clothingDonationLog"]="Kleiderspende Log";
         text["de"]["commission"]   = "Gebühr";
         text["de"]["coins"]=unsafeWindow.t_coins;
         text["de"]["confirmUseObservedPrices"]="Es werden die beobachteten Preise eingetragen. Die eigenen gehen dabei verloren ...";
@@ -20733,6 +21025,7 @@ try{
         text["de"]["detail"]="Detail";
         text["de"]["difficulty"]="Schwierigkeit";
         text["de"]["donkey"]="Waltraud";
+        text["de"]["donation"]="Spende";
         text["de"]["duration"]="Dauer";
         text["de"]["editPrice"]="Preis ändern";
         text["de"]["emptyField"]="Feld leer!";
@@ -21039,6 +21332,8 @@ try{
         text["de"]["settings_megafieldSmartTimer"]=["Beachte aktive Tour", "Soll beim Starten einer Tour der Güterhof-Timer auf das Ende der Tour gesetzt werden?"];
         text["de"]["settings_clothingDonation"]=["Kleiderspende", "Ein blinkender Icon zeigt an, wenn bei der Kleiderspende gespendet oder gewürfelt werden kann."];
         text["de"]["settings_vet"]=["Tierarzt (Behandlung kranker Tiere)", "Ein blinkender Icon zeigt an, wenn ein geheiltes Tier entlassen werden kann."];
+        text["de"]["settings_vetAutoSet"]=["Automatisches Setzen", "Wird ein krankes Tier angeklickt, wird es direkt auf eine freie Liege gelegt."];
+        text["de"]["settings_valVetNoCoinDrugs"]=["Keine Coin-Tinkturen", "Ignoriere Tinkturen, die in der Herstellung Coins kosten."];
         // help
         text["de"]["help_0"]=[,"This is small introduction to the functions of the Adviser-Script. Not all changes are written here, go find them yourself ... Sometimes a mouse-over helps. <br>At the bottom you see a button to visit the <a href=\""+GM_Home+"\" target=\"_blank\">homepage</a>. Next to it, there is the button for the options. You should look at them and configure as you desire.<br>Generally the script only knows what you have seen. So just visit the field if something is wrong."];
         text["de"]["help_1"]=["The Zones","The fields are observed while you see them. The script saves the plants, times and watering. So on the farm view this can be displayed. Each zone has a time counter at its top to show you when it is ready.<br>If you own the planting helper, you can access it directly from opened field. At the top of an opened zone you can navigate directly to zones of the same type."];
@@ -21107,6 +21402,7 @@ try{
         text["en"]["clickCtrl"]="Ctrl+Click";
         text["en"]["clickDouble"]="Double-Click";
         text["en"]["clickToChange"]="Click to change";
+        text["en"]["clothingDonationLog"]="Clothing Donation Log";
         text["en"]["coins"]=unsafeWindow.t_coins;
         text["en"]["commission"]="Commission";
         text["en"]["confirmUseObservedPrices"]="The observed prices will overwrite previously saved market prices ...";
@@ -21135,6 +21431,7 @@ try{
         text["en"]["detail"]="Detail";
         text["en"]["difficulty"]="Difficulty";
         text["en"]["donkey"]="Donkey";
+        text["en"]["donation"]="Donation";
         text["en"]["duration"]="duration";
         text["en"]["editPrice"]="Edit price";
         text["en"]["emptyField"]="Empty field!";
@@ -21441,6 +21738,8 @@ try{
         text["en"]["settings_megafieldSmartTimer"]=["Integrate active tour", "Megafield-Timer is set to end of the tour after a tour is started."];
         text["en"]["settings_clothingDonation"]=["Clothing Donation", "A blinking icon indicates, when you can donate or gamble."];
         text["en"]["settings_vet"]=["Veterinary (Treatment of sick animals)", "A blinking icon indicates, when a cured animal can be discharged."];
+        text["en"]["settings_vetAutoSet"]=["Auto set", "A selected sick animal is directly benched."];
+        text["en"]["settings_valVetNoCoinDrugs"]=["No coin drugs", "Ignore drugs needing coins to be produced."];
         //help
         text["en"]["help_0"]=[,"This is a small introduction to the functions of the Adviser-Script. Not all changes are written here, go find them yourself ... Sometimes a mouse-over helps. <br>At the bottom you see a button to visit the <a href=\""+GM_Home+"\" target=\"_blank\">homepage</a>. Next to it, there is the button for the options. You should look at them and configure as you desire.<br>Generally the script only knows what you have seen. So just visit the field if something is wrong."];
         text["en"]["help_1"]=["The Zones","The fields are observed while you see them. The script saves the plants, times and watering. So on the farm view this can be displayed. Each zone has a time counter at its top to show you when it is ready.<br>If you own the planting helper, you can access it directly from opened field. At the top of an opened zone you can navigate directly to zones of the same type."];
@@ -21488,7 +21787,7 @@ try{
         allEvents.push("gameFieldPlanted");                 // a field has been planted
         allEvents.push("gameFieldWatered");                 // a field has been watered
         allEvents.push("gameFieldCropped");                 // a field has been cropped
-        allEvents.push("gameFieldDemolished");              //
+        allEvents.push("gameFieldDemolish");              //
         allEvents.push("gameFactoryKnittingStarted");       // a knitting factory has been started
         allEvents.push("gameFactoryKnittingCropped");       // a knitting factory has been cropped
         allEvents.push("gameFactoryKnittingDialogStart");   // a knitting factory has opened a production dialogue
