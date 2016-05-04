@@ -592,6 +592,7 @@ const VARIABLES = {
                     "valVetAutostart":["Option",3],
                     "valVetAutoSet":["Option",3],
                     "valVetNoCoinDrugs":["Option",3],
+					"vetAnimalSick":["Option",3],
                     "valWaterNeeded":["Option",3],
                     "vertraegeIn":["Contracts received",1],
                     "vertraegeOut":["Contracts sent",1],
@@ -687,7 +688,7 @@ var upjersAds, buyNotePadShowBlocked, show;
 var farmiLog, farmiDailyCount, levelLog, levelLogId, lotteryLog, lotteryLogId, logSales, logSalesId, logDonkey, logDonkeyId, logClothingDonation;
 var zoneAddToGlobalTime;
 var totalAnimals, totalFarmis, totalPowerups, totalQuest, totalRecursive, totalZones, totalEndtime;
-var valKauflimit, valKauflimitNPC, highlightProducts, highlightUser, valNimmBeob, valVerkaufLimitDown, valVerkaufLimitUp, valJoinPreise, lastOffer, protectMinRack, ownMarketOffers, valClothingDonation, valVet, valVetAutostart, valVetAutoSet, valVetNoCoinDrugs;
+var valKauflimit, valKauflimitNPC, highlightProducts, highlightUser, valNimmBeob, valVerkaufLimitDown, valVerkaufLimitUp, valJoinPreise, lastOffer, protectMinRack, ownMarketOffers, valClothingDonation, valVet, valVetAutostart, valVetAutoSet, valVetNoCoinDrugs, vetAnimalSick;
 var valAnimateStartscreen, valAutoLogin;
 var valMessagesSystemMarkRead;
 var megafieldVehicle, megafieldJob, logMegafieldJob, megafieldSmartTimer;
@@ -6230,6 +6231,21 @@ function buildInfoPanelOptions(){
         }, false);
         createElement("td",{},newtr,getText("veterinary") + "<br/>" + getText("reloadRequired"));
         createElement("td",{},newtr,getText("settings_vet")[1]);
+
+
+		newtr=createElement("tr",{},newtable);
+        newtd=createElement("td",{"align":"center"},newtr);
+        newinput=createElement("input",{"type":"checkbox","class":"link","checked": vetAnimalSick}, newtd);
+        if (!unsafeWindow.farmersmarket_data.vet) { newinput.disabled = true; }
+        newinput.addEventListener("click",function(){
+            vetAnimalSick = this.checked;
+            GM_setValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_vetAnimalSick", vetAnimalSick);
+        }, false);
+		createElement("td",{},newtr,getText("settings_vetAnimalSick")[0]);
+        createElement("td",{},newtr,getText("settings_vetAnimalSick")[1]);
+
+
+
 
         newtr=createElement("tr",{},newtable);
         newtd=createElement("td",{"align":"center"},newtr);
@@ -14447,6 +14463,7 @@ return false;
         }catch(err){GM_logError("_farmActionResponse","mode="+mode,"",err);}
         try{
             var r = checkRequest(request, mode);
+			//alert(mode);
             if((r!=0)&&(r[0]!=0)){
                 switch(mode){
                 case "autoplant":{
@@ -14501,6 +14518,21 @@ return false;
                     doFarmis();
                     raiseEvent("gameFarmiResponse");
                 break;}
+				case "vet_endtreatment": {
+					//doFarmersMarketData();
+					raiseEvent("gameVet_endtreatment");
+					//Tier entlassen: vet_endtreatment
+				break;}
+				case "vet_setslot": {
+					//doFarmersMarketData();
+					raiseEvent("gameVet_setslot");
+					//tier auf slot:
+				break;}
+				case "vet_starttreatment": {
+					doFarmersMarketData();
+					raiseEvent("gameVet_starttreatment");
+					//Behandlung starten:
+				break;}
                 case "watergarden":{
                     var zoneNrF = zoneNr+6*(farmNR-1);
                     if(1==zones.getBuilding(zoneNrF)){
@@ -16295,6 +16327,8 @@ return false;
     });
 
     // Farmersmarket
+
+	vetAnimalSick= GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_vetAnimalSick", true);
     function doFarmersMarketData(){
         try{
             var err_trace="zones";
@@ -16485,6 +16519,59 @@ return false;
                                         }
                                         zones.setProduction(zoneNrS,tempZoneProductionDataSlot.clone());
                                     }
+
+									//Behandlung
+									if (vetAnimalSick){
+										for(var slot=1;slot<=3;slot++){
+											//+4 wegen den 4 Slots von der Tinkturenproduktion
+											zoneNrS=zoneNrF+"."+(slot+4);
+											zones.setBlock(zoneNrS,"");
+											tempZoneProductionDataSlot=[[{},{}],0,0,true];
+
+											item=unsafeWindow.farmersmarket_data.vet.animals
+
+											if (item["slots"][slot]) {
+												iProd=null;
+												if (item["slots"][slot]["remain"] < 0)	{
+													//fertig
+													iTime=nowServer+item["slots"][slot]["remain"];
+													//iTime=NEVER;
+													//tempZoneProductionData[1]++;
+													//tempZoneProductionDataSlot[1]++;
+												} else if(isNaN(item["slots"][slot]["remain"])){
+													iTime=0;
+												}
+												else {
+													iTime=nowServer+item["slots"][slot]["remain"];
+												}
+											}
+											else {
+												iTime=0;
+
+											}
+
+											tempZoneProductionData[2]++;
+											tempZoneProductionDataSlot[2]++;
+
+											iAmount=0; //Ertrag Geld konnte ich nicht ermitteln
+											iPoints=0; //Punte konnte ich nicht ermitteln
+
+											if(!tempZoneProductionData[0][0][iProd]){
+												tempZoneProductionData[0][0][iProd]=[];
+											}
+											tempZoneProductionData[0][0][iProd].push([iAmount,iPoints,iTime,NEVER]);
+											if(!tempZoneProductionDataSlot[0][0][iProd]){
+												tempZoneProductionDataSlot[0][0][iProd]=[];
+											}
+											tempZoneProductionDataSlot[0][0][iProd].push([iAmount,iPoints,iTime,NEVER]);
+											zones.setProduction(zoneNrS,tempZoneProductionDataSlot.clone());
+										}
+									}
+
+
+
+
+
                                     zones.setProduction(zoneNrF,tempZoneProductionData.clone());
 
                                     showGoToVetFarmi(); // Determine, if Discharge-Sick-Animals-Icon is shown
@@ -21033,6 +21120,7 @@ try{
         text["de"]["exchangedLots"]="Eingelöste Lose";
         text["de"]["farm"]="Farm";
         text["de"]["farmersmarket"]=unsafeWindow.t_farmers_market;
+		text["de"]["farmUseVetTreatment"]="Tier heilen";
         text["de"]["farmX"]="%1%. Farm";
         text["de"]["farmi"]="Farmi";
         text["de"]["farmis"]="Farmis";
@@ -21334,6 +21422,8 @@ try{
         text["de"]["settings_vet"]=["Tierarzt (Behandlung kranker Tiere)", "Ein blinkender Icon zeigt an, wenn ein geheiltes Tier entlassen werden kann."];
         text["de"]["settings_vetAutoSet"]=["Automatisches Setzen", "Wird ein krankes Tier angeklickt, wird es direkt auf eine freie Liege gelegt."];
         text["de"]["settings_valVetNoCoinDrugs"]=["Keine Coin-Tinkturen", "Ignoriere Tinkturen, die in der Herstellung Coins kosten."];
+		text["de"]["settings_vetAnimalSick"]=["Tier heilen", "Tierdaten werden eingelesen"];
+
         // help
         text["de"]["help_0"]=[,"This is small introduction to the functions of the Adviser-Script. Not all changes are written here, go find them yourself ... Sometimes a mouse-over helps. <br>At the bottom you see a button to visit the <a href=\""+GM_Home+"\" target=\"_blank\">homepage</a>. Next to it, there is the button for the options. You should look at them and configure as you desire.<br>Generally the script only knows what you have seen. So just visit the field if something is wrong."];
         text["de"]["help_1"]=["The Zones","The fields are observed while you see them. The script saves the plants, times and watering. So on the farm view this can be displayed. Each zone has a time counter at its top to show you when it is ready.<br>If you own the planting helper, you can access it directly from opened field. At the top of an opened zone you can navigate directly to zones of the same type."];
@@ -21439,6 +21529,7 @@ try{
         text["en"]["exchangedLots"]="Exchanged lots";
         text["en"]["farm"]="Farm";
         text["en"]["farmersmarket"]=unsafeWindow.t_farmers_market;
+		text["en"]["farmUseVetTreatment"]="Animals sick";
         text["en"]["farmX"]="%1%. farm";
         text["en"]["farmi"]="Farmie";
         text["en"]["farmis"]="Farmies";
@@ -21740,6 +21831,7 @@ try{
         text["en"]["settings_vet"]=["Veterinary (Treatment of sick animals)", "A blinking icon indicates, when a cured animal can be discharged."];
         text["en"]["settings_vetAutoSet"]=["Auto set", "A selected sick animal is directly benched."];
         text["en"]["settings_valVetNoCoinDrugs"]=["No coin drugs", "Ignore drugs needing coins to be produced."];
+		text["en"]["settings_vetAnimalSick"]=["Animal sick", "Animaldata read for animal-sick"];
         //help
         text["en"]["help_0"]=[,"This is a small introduction to the functions of the Adviser-Script. Not all changes are written here, go find them yourself ... Sometimes a mouse-over helps. <br>At the bottom you see a button to visit the <a href=\""+GM_Home+"\" target=\"_blank\">homepage</a>. Next to it, there is the button for the options. You should look at them and configure as you desire.<br>Generally the script only knows what you have seen. So just visit the field if something is wrong."];
         text["en"]["help_1"]=["The Zones","The fields are observed while you see them. The script saves the plants, times and watering. So on the farm view this can be displayed. Each zone has a time counter at its top to show you when it is ready.<br>If you own the planting helper, you can access it directly from opened field. At the top of an opened zone you can navigate directly to zones of the same type."];
