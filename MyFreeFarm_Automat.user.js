@@ -7422,10 +7422,10 @@ try{
                     }
                 break;}
                 case 4:{
-                    if(help=$("nursery_slot_item" + handled.slot)){
+                    if(handled.zoneNrF=="farmersmarket-2" && (help=$("nursery_slot_item" + handled.slot))){
                         action=function(){ click(help); };
                         listeningEvent="gameFarmersmarketCropped";
-                    }else if(help=$("vet_production_slot_click" + handled.slot)){
+                    }else if(handled.zoneNrF=="farmersmarket-5" && (help=$("vet_production_slot_click" + handled.slot))){
                         action=function(){ click(help); };
                         listeningEvent="gameFarmersmarketCropped";
                     }else{
