@@ -9020,7 +9020,7 @@ function buildInfoPanelOptions(){
             buildInfoPanelOptionsDisabling();
             botArbiter.check();
         },false);
-        newtd=createElement("td",{"colspan":"2"},newtr,getText("botUseVetTreatment"));
+        newtd=createElement("td",{"colspan":"2"},newtr,getText("automat_settings_botUseVetTreatment"));
 
         // *********** WALTRAUD ***********************************
         newtr=createElement("tr",{"style":"background-color:#b69162;"},newtable);
@@ -11008,6 +11008,7 @@ try{
         text["de"]["automat_settings_autoWater"] = "Sollen die Äcker gegossen werden?";
         text["de"]["automat_settings_autoFeed"] = "Soll der Futter-Automat angezeigt werden?";
         text["de"]["automat_settings_botUse"] = "Verwende Bot";
+		text["de"]["automat_settings_botUseVetTreatment"] = "Tierarzt: automatische Heilen";
         text["de"]["automat_settings_closeWindowTimer"] = "Timer: Zeit, die der Bot wartet um ein offenes Fenster zu schließen.";
         text["de"]["automat_settings_disableCropFields"]="Block the cropping of sleeping fields.";
         text["de"]["automat_settings_megafieldPreference"]="Bevorzuge Güterhof (auf anderen Accounts)";
@@ -11223,6 +11224,7 @@ try{
         text["en"]["automat_settings_autoWater"] = "Shall the fields be watered?";
         text["en"]["automat_settings_autoFeed"] = "Shall the feeding machine be displayed?";
         text["en"]["automat_settings_botUse"] = "Use bot";
+		text["en"]["automat_settings_botUseVetTreatment"] = "vet: automatic treatment";
         text["en"]["automat_settings_closeWindowTimer"] = "Timer: Waiting time to close an open window.";
         text["en"]["automat_settings_disableCropFields"]="Block the cropping of sleeping fields.";
         text["en"]["automat_settings_megafieldPreference"]="Prefer megafield (on other accounts)";
