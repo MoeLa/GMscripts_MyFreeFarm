@@ -9540,6 +9540,7 @@ try{
     if(newdiv=$("customerstats")){
         newdiv.setAttribute("class","link");
         newdiv.addEventListener("click",function(){unsafeWindow.buildInfoPanel("farmies");},false);
+        newdiv.addEventListener("mouseover",function(){raiseEvent("gameMegafieldDataDone");},false);
     }
     // farmiLog[farmiId]=[date,money,{prod1:amount,...}]
     farmiLog=explode(GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_farmiLog"),"do_main/farmiLog",[]);
@@ -15417,6 +15418,7 @@ return false;
                         if("license" in reward){ logMegafieldJob[i][5][2]=reward.license-logMegafieldJob[i][6][2]-logMegafieldJob[i][7][2]; }
                     }
                     GM_setValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_logMegafieldJob",implode(logMegafieldJob,"setTourVehicleMegafield/logMegafieldJob"));
+                    unsafeData.logMegafieldJob = logMegafieldJob[i];
                 }
                 // Update data of production
                 if(unsafeWindow.megafield_data.area_free){
@@ -15460,14 +15462,16 @@ return false;
         }catch(err){GM_logError("_megafieldHandler","","",err);}
     }
     doMegafieldData();
-    unsafeOverwriteFunction("megafieldHandler",function(a){
-        try{
-            unsafeWindow._megafieldHandler(a);
-        }catch(err){GM_logError("_megafieldHandler","","",err);}
-        try{
-            doMegafieldData();
-        }catch(err){GM_logError("megafieldHandler","","",err);}
+    unsafeOverwriteFunction("megafieldHandler", function(a) {
+      try {
+        unsafeWindow._megafieldHandler(a);
+      } catch (err) { GM_logError("_megafieldHandler", "", "", err); }
+      try {
+        doMegafieldData();
+        raiseEvent("gameMegafieldDataDone");
+      } catch (err) { GM_logError("megafieldHandler", "", "", err); }
     });
+
     unsafeOverwriteFunction("buildMegafield",function(){
         try{
             unsafeWindow._buildMegafield();
