@@ -2443,6 +2443,8 @@ function getBuildingName(building){
 }
 // Totals
 function calcTotalRecursive(recursionCount,stack){
+  // console.log(recursionCount);
+  // console.trace();
 try{
  if(DEVMODE_FUNCTION){ var trackingHandle = tracking.start("berater","calcTotalRecursive",[recursionCount]); }
     if(recursionCount>100){throw("TOO MUCH RECURSION")}
@@ -10004,7 +10006,7 @@ try{
     unsafeOverwriteFunction("contractsDialog", function(b, productId){
         /*
          * Is called, when User clicks a product in "New Contract" dialog to add that product to the cart.
-         * Contribution/Author  of function "contractsDialog": Moe
+         * Contribution/Author of function "contractsDialog": Moe
          *
          * b = Is either 'select' or nothing happens in original "contractsDialog"
          * productId = Id of the clicked product
@@ -10013,11 +10015,20 @@ try{
             unsafeWindow._contractsDialog(b, productId);
         } catch(err) { GM_logError("contractsDialog","","",err); }
         try {
+            // Add a Sum-of-Contract dic to dialog
+            var parent = $("globalbox_content");
+            var sumDiv = createElement("div", {"style": "font-style: italic;"}, parent, "");
+            var fktCalcSum = function () {
+              var amount = parseFloat($("contracts_select_pid_input").value);
+              var price = parseFloat($("contracts_select_price_input").value);
+              sumDiv.innerHTML = "&Sigma; " + moneyFormat(amount*price);
+            };
+
             // Read the saved value from DB (if it exists)
             var value = GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_contractsProductInCart_"+productId,{});
 
             // Draw radio buttons saved-value/market-value
-            var parent = $("contracts_button_add_cart").parentNode;
+            parent = $("contracts_button_add_cart").parentNode;
 
             var div = createElement("div", {
                 "style":"margin-bottom: 5px; text-align: left; padding-left: 50px;"
@@ -10044,6 +10055,7 @@ try{
             if (productId == value.id) {
                 radioPriceSaved.addEventListener("click", function () {
                     $("contracts_select_price_input").value = value.price;
+                    fktCalcSum();
                 }, false);
             } else {
                 // No saved value
@@ -10059,7 +10071,7 @@ try{
                 "name": "contractPrice"
             }, div, false);
             var labelPriceMarketText;
-            var marketPrice = preisBeob[productId][2] ? parseFloat(preisBeob[productId][2],10) : 0;
+            var marketPrice = preisBeob[productId][2] ? preisBeob[productId][2] : 0;
             if (!marketPrice==0) {
                 labelPriceMarketText = getText("marketPrice") + " (" + moneyFormat(marketPrice) + ")";
             } else {
@@ -10069,12 +10081,11 @@ try{
                 "for": "contractPriceMarket"
             }, div, labelPriceMarketText);
 
-            console.log("preisBeob: "+marketPrice);
-
             // Check, if there is a observed market price or we disable the radio button
             if (!marketPrice==0) {
                 radioPriceMarket.addEventListener("click", function () {
                     $("contracts_select_price_input").value = marketPrice;
+                    fktCalcSum();
                 }, false);
             } else {
                 // No observed marekt price
@@ -10100,14 +10111,13 @@ try{
             } else {
                 var valNPC=0;
             }
-            console.log("NPC-Preis/Produkt-Id: "+valNPC+" /"+productId);
 
             var radioPriceNPC = createElement("input", {
                 "id": "contractPriceNPC",
                 "type":"radio",
                 "name": "contractPrice"
             }, div, false);
-            var labelPriceNPCText;
+            var labelPriceNPCText; // Are decorated with *, if NPC actually doesn't sell that item
             if (!valNPC==0) {
                 labelPriceNPCText = (NPC_isNaN?"*":"") + getText("NPCprice") + (NPC_isNaN?"*":"") + " (" + moneyFormat(valNPC) + ")";
             } else {
@@ -10122,6 +10132,7 @@ try{
             if (!valNPC==0) {
                 radioPriceNPC.addEventListener("click", function () {
                     $("contracts_select_price_input").value = valNPC;
+                    fktCalcSum();
                 }, false);
             } else {
                 // No NPC value
@@ -10129,7 +10140,7 @@ try{
                 labelPriceNPC.style = "color: gray; font-style: italic;";
             }
 
-            // set a first selection
+            // Set a first selection
             if (!radioPriceSaved.disabled) {
                 radioPriceSaved.checked = true;
                 $("contracts_select_price_input").value = value.price;
@@ -10141,11 +10152,23 @@ try{
                 $("contracts_select_price_input").value = valNPC;
             }
 
-            // Uncheck radio buttons, when User edits price manually
-            $("contracts_select_price_input").addEventListener("keydown", function () {
+            // Calculate sum and Send-on-Enter
+            $("contracts_select_pid_input").addEventListener("keyup", function (event) {
+              fktCalcSum();
+              if (event.key == "Enter") {
+                click($("contracts_button_add_cart"));
+              }
+            }, false);
+
+            // Uncheck radio buttons, when User edits price manually, calculate sum, and Send-on-Enter
+            $("contracts_select_price_input").addEventListener("keyup", function () {
                 radioPriceSaved.checked = false;
                 radioPriceMarket.checked = false;
                 radioPriceNPC.checked = false;
+                fktCalcSum();
+                if (event.key == "Enter") {
+                  click($("contracts_button_add_cart"));
+                }
             }, false);
 
         } catch(err) { GM_logError("contractsDialog","","",err); }
