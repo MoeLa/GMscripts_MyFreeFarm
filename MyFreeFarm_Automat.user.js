@@ -7889,18 +7889,38 @@ try{
                 GM_logInfo("autoFarmersmarketVetTreatment","runId="+runId+" step="+step,"","No production selected."); //TODO text
                 autoFarmersmarketVetTreatment(runId,8); // -> exit
             }else */
-			if(help[1]=="e"){
+
+
+			if(help[1]=="e"||help[1]=="r"){//??????? todo
                 switch(handled.zoneBuildingTyp){
                 case 4:{
-					if(!$("vet_animal_queue_animal_img"+(handled.slot-4)))
-					{
-						var animal_right=$("vet_animal_queue").firstChild;
-						if (animal_right) {
-							action=function(){ click(animal_right);};
-							listeningEvent="gameVet_setslot";
-						} else {
-							autoFarmersmarketVetTreatment(runId,8); // -> exit
-						}
+					if(!$("vet_animal_queue_animal_img"+(handled.slot-4))) {
+                        var animalID = unsafeWindow.findTreatedAnimal();
+
+                        if(typeof animalID=="string") {
+                            var animal_right=$("vet_animal_queue"+animalID);
+                            //var animal_right=$("vet_animal_queue").firstChild;
+    						if (animal_right) {
+    							action=function(){ click(animal_right);};
+    							listeningEvent="gameVet_setslot";
+    						} else {
+    							autoFarmersmarketVetTreatment(runId,8); // -> exit
+    						}
+                        } else {
+
+                            unsafeData.zones.setEndtime(handled.zoneNrS,animalID);
+                            autoFarmersmarketVetTreatment(runId,8); // -> exit
+                        }
+                        //autoFarmersmarketVetTreatment(runId,8); // -> exit
+                        /*
+                        var animal_right=$("vet_animal_queue").firstChild;
+                        if (animal_right) {
+                            action=function(){ click(animal_right);};
+                            listeningEvent="gameVet_setslot";
+                        } else {
+                            autoFarmersmarketVetTreatment(runId,8); // -> exit
+                        }
+                        */
 					}
 					else {
 						autoFarmersmarketVetTreatment(runId,step+1); // alle Slots belegt, Behandlung starten
@@ -7956,6 +7976,7 @@ try{
         break;}
 
         case 8:{
+            GM_logInfo("autoFarmersmarketVetTreatment","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"start other slot or exit");
             var zoneNrS,zoneNrL,help,next=false;
             if(unsafeData.zones.isMultiSlot(handled.zoneNrF)){
                 for(var slot=5;slot<=unsafeData.BUILDING_SLOTS[getZoneType(handled.zoneNrF)];slot++){

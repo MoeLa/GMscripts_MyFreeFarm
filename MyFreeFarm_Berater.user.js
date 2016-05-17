@@ -8344,12 +8344,21 @@ function toolTipZoneProduction(zoneNrS){
                 td=createElement("td",{"colspan":2},tr,"---");
             }else{
                 for(var k=0;k<help.length;k++){
-                    tr=createElement("tr",{},table);
-                    td=createElement("td",{},tr);
-                    produktPic(help[k][0],help[k][1],td);
-                    createElement("span",{},td,numberFormat(help[k][2])+"&nbsp;"+prodName[help[k][0]][help[k][1]]);
-                    td=createElement("td",{"style":"padding-left:5px;"},tr);
-                    if(help[k][3]>0){ pointsFormat(help[k][3],"div",td); }
+                    if(zones.getBuilding(zoneNrS)=="fl5"&&help[k][1]>=0&&help[k][1]<=3){
+                        tr=createElement("tr",{},table);
+                        td=createElement("td",{},tr);
+                        createElement("img",{"src":GFX+"vet_cow_head_queue.gif","style":"height:15px;width:15px;border:none;top:0px;vertical-align:bottom;"},td);
+                        createElement("span",{},td,moneyFormat(help[k][2]));
+                        td=createElement("td",{"style":"padding-left:5px;"},tr);
+                        if(help[k][3]>0){ pointsFormat(help[k][3],"div",td); }
+                    } else {
+                        tr=createElement("tr",{},table);
+                        td=createElement("td",{},tr);
+                        produktPic(help[k][0],help[k][1],td);
+                        createElement("span",{},td,numberFormat(help[k][2])+"&nbsp;"+prodName[help[k][0]][help[k][1]]);
+                        td=createElement("td",{"style":"padding-left:5px;"},tr);
+                        if(help[k][3]>0){ pointsFormat(help[k][3],"div",td); }
+                    }
                 }
             }
         }else{
@@ -8598,6 +8607,7 @@ var clocks=new function(){
         }catch(err){GM_logError("clocks.run","","",err);}
     }
 };
+//createZoneTimer("globalZoneTimer_farmersmarket-"+v,"farmersmarket-"+v,"zonetimer","position:relative;",$("timeHolder"));
 function createZoneTimer(name,zoneNrS,type,style,append){ // type="zonetimer" || "zonetimerWater"
     try{
         if(!$(name)){
@@ -9916,32 +9926,33 @@ try{
     }
 
     function dofoodworldFarmisBubble() {
-                try {
-                        var foodWorldFarmi = unsafeWindow.foodworldfarmis;
-                        for (var i=0;i<foodWorldFarmi.length;i++) {
-                                if (foodWorldFarmi[i].status==0){
-                                        var cost=0;
-                                        for (var c in foodWorldFarmi[i].products) {
-                                                if (!foodWorldFarmi[i].products.hasOwnProperty(c)) { continue; }
-                                                cost+=gut[c]*foodWorldFarmi[i].products[c]
-                                        }
-                                        var rate=100*foodWorldFarmi[i].price/cost;
-                                        if(rate<valFarmiLimits[0]){ // unter 90%
-                        str = css_styles["farmi_price_low"][1];
-                    }else if(rate<valFarmiLimits[1]){ //zwischen 90% und 100%
-                        str = css_styles["farmi_price_between"][1];
-                    }else{ // über 100%
-                        str = css_styles["farmi_price_above"][1];
+        try {
+			var foodWorldFarmi = unsafeWindow.foodworldfarmis;
+            for (var i=0;i<foodWorldFarmi.length;i++) {
+				if (foodWorldFarmi[i].status==0){
+					var cost=0;
+					for (var c in foodWorldFarmi[i].products) {
+						if (!foodWorldFarmi[i].products.hasOwnProperty(c)) { continue; }
+							cost+=gut[c]*foodWorldFarmi[i].products[c]
+					}
+					var rate=100*foodWorldFarmi[i].price/cost;
+                    if(rate<valFarmiLimits[0]){ // unter 90%
+						unsafeWindow.foodworldAction('kick', foodWorldFarmi[i].id);
+						str = css_styles["farmi_price_low"][1];
+					}else if(rate<valFarmiLimits[1]){ //zwischen 90% und 100%
+						str = css_styles["farmi_price_between"][1];
+					}else{ // über 100%
+						str = css_styles["farmi_price_above"][1];
+					}
+                    if ($("foodworldfarmi"+i)){
+						createElement("div",{"id":"foodworldfarmiMiniInfo"+i,"class":"foodworldfarmiMiniInfo"},$("foodworldfarmi"+i));
+                        $("foodworldfarmiMiniInfo"+i).setAttribute("style",str);
                     }
-                                        if ($("foodworldfarmi"+i)){
-                                                createElement("div",{"id":"foodworldfarmiMiniInfo"+i,"class":"foodworldfarmiMiniInfo"},$("foodworldfarmi"+i));
-                                                $("foodworldfarmiMiniInfo"+i).setAttribute("style",str);
-                                        }
-                                }
-                        }
-                }
-                catch(err) {GM_logError("dofoodworldFarmisBubble","","err_trace="+err_trace,err);}
+				}
+            }
         }
+        catch(err) {GM_logError("dofoodworldFarmisBubble","","err_trace="+err_trace,err);}
+    }
 
     unsafeOverwriteFunction("foodworldActionResponse",function(request,action,id,table,chair){
         try{
@@ -16327,7 +16338,67 @@ return false;
         }catch(err){GM_logError("setFarmis","","",err);}
     });
 
+
     // Farmersmarket
+    // return AnimalID or Time of next ready tinkture
+    unsafeWindow.findTreatedAnimal=function() {
+        try {
+            var vet_data=unsafeWindow.farmersmarket_data.vet;
+            var drugsArray = {};
+            var animalID;
+            for (var queueID in vet_data.animals.queue) {
+                if(vet_data.animals.queue[queueID].drugs) {continue;}
+                for (var diseasesCount = 0; diseasesCount < vet_data.animals.queue[queueID].diseases.length; diseasesCount++) {
+                    var diseasesID = vet_data.animals.queue[queueID].diseases[diseasesCount].id;
+                    for (var drugsID in vet_data.drugs) {
+                        if(vet_data.drugs[drugsID].coins) {continue;}
+                        if(unsafeWindow.in_array(diseasesID, vet_data.drugs[drugsID].diseases) && vet_data.drugs[drugsID].level <= vet_data.info.level) {
+                            if(drugsArray[drugsID]) {
+                                drugsArray[drugsID]+=vet_data.animals.queue[queueID].diseases[diseasesCount].phase;
+                            }
+                            else {
+                                drugsArray[drugsID]=vet_data.animals.queue[queueID].diseases[diseasesCount].phase;
+                            }
+                            break;
+                            /*var test = vet_data.animals.queue[queueID].diseases[diseasesCount].phase;
+                            //var test1 = drugsArray[drugsID]?drugsArray[drugsID]+vet_data.animals.queue[queueID].diseases[diseasesCount].phase:vet_data.animals.queue[queueID].diseases[diseasesCount].phase;
+                            var test1 = vet_data.animals.queue[queueID].diseases[diseasesCount].phase + (drugsArray[drugsID]?drugsArray[drugsID]:0);
+
+                            console.log(prodStock[0][drugsID]+" "+drugsID+" test"+test+" test1: "+test1);
+                            */
+                        }
+                    }
+                }
+                if (drugsArray) {
+                    //console.log(drugsArray);
+                    for (var c in drugsArray) {
+                        if (!drugsArray.hasOwnProperty(c)){ continue; }
+                        //console.log(c+" "+drugsArray[c]);
+                        if (prodStock[0][c]>=drugsArray[c]){
+                            animalID=queueID;
+                        } else {
+                            animalID=0;
+                            break;
+                        }
+                    }
+                }
+                if(typeof animalID=="string") {
+                    return animalID;
+                    break;
+                }
+                drugsArray={};
+            }
+            var endTime=NEVER;
+            for(var slot=1;slot<=3;slot++){
+                zoneNrS="farmersmarket-5"+"."+slot;
+                if(!zones.getBlock(zoneNrS)){
+                    var help=zones.getEndtime(zoneNrS);
+                    endTime=Math.min(endTime,help);
+                }
+            }
+            return endTime;
+        } catch(err){GM_logError("findTreatedAnimal","","",err); }
+    }
 
 	vetTreatment= GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_vetTreatment", true);
     function doFarmersMarketData(){
@@ -16523,39 +16594,75 @@ return false;
 
 									//Behandlung
 									if (vetTreatment){
+                                        iProd=0;
+                                        var vet_data=unsafeWindow.farmersmarket_data.vet;
 										for(var slot=1;slot<=3;slot++){
-											//+4 wegen den 4 Slots von der Tinkturenproduktion
-											zoneNrS=zoneNrF+"."+(slot+4);
+											zoneNrS=zoneNrF+"."+(slot+4); //+4 internal mapping
 											zones.setBlock(zoneNrS,"");
 											tempZoneProductionDataSlot=[[{},{}],0,0,true];
+                                            iProd++; iAmount = 0; iPoints = 0;
+											//item=unsafeWindow.farmersmarket_data.vet.animals
+                                            if (vet_data.animals.slots[slot]) {
+                                                if(isNaN(vet_data.animals.slots[slot].remain)){
+                                                    iTime=0;
+                                                } else {
+                                                    iTime=nowServer+vet_data.animals.slots[slot].remain;
+                                                    for (var d = 0; d < vet_data.animals.queue[vet_data.animals.slots[slot].id].diseases.length; d++) {
+                                                        var diseasesID =  vet_data.animals.queue[vet_data.animals.slots[slot].id].diseases[d].id;
+                                                        var drugsID = vet_data.animals.queue[vet_data.animals.slots[slot].id].drugs[diseasesID];
+                                                        if(drugsID) {
+                                                            var phase = vet_data.animals.queue[vet_data.animals.slots[slot].id].diseases[d].phase;
+                                                            var moneyBonus = vet_data.quest.bonus_all.pat_money ? 1+(vet_data.quest.bonus_all.pat_money/100):1;
+                                                            var pointBonus = vet_data.quest.bonus_all.pat_points ? 1+(vet_data.quest.bonus_all.pat_points/100):1;
+                                                            iAmount = iAmount + (vet_data.drugs[drugsID].reward[diseasesID].money * phase * moneyBonus);
+                                                            iPoints = iPoints + (vet_data.drugs[drugsID].reward[diseasesID].points * phase * pointBonus);
+                                                        }
+                                                    }
+                                                }
+                                            }
 
-											item=unsafeWindow.farmersmarket_data.vet.animals
 
-											if (item["slots"][slot]) {
-												iProd=null;
-												if (item["slots"][slot]["remain"] < 0)	{
+                                            /*
+                                            if (vet_data.animals.slots[slot]) {
+												//iProd=null; iAmount = 0; iPoints = 0;
+												if (vet_data.animals.slots[slot].remain<0) {
 													//fertig
-													iTime=nowServer+item["slots"][slot]["remain"];
-													//iTime=NEVER;
+													//iTime=nowServer+item["slots"][slot]["remain"];
+                                                    iTime=nowServer+vet_data.animals.slots[slot].remain;
+                                                    //iTime=NEVER;
 													//tempZoneProductionData[1]++;
 													//tempZoneProductionDataSlot[1]++;
-												} else if(isNaN(item["slots"][slot]["remain"])){
+												} else if(isNaN(vet_data.animals.slots[slot].remain)){
 													iTime=0;
+												} else {
+                                                    iTime=nowServer+vet_data.animals.slots[slot].remain;
+                                                    for (var d = 0; d < vet_data.animals.queue[vet_data.animals.slots[slot].id].diseases.length; d++) {
+                                                        var diseasesID =  vet_data.animals.queue[vet_data.animals.slots[slot].id].diseases[d].id;
+                                                        var drugsID = vet_data.animals.queue[vet_data.animals.slots[slot].id].drugs[diseasesID];
+                                                        if(drugsID) {
+                                                            var phase = vet_data.animals.queue[vet_data.animals.slots[slot].id].diseases[d].phase;
+                                                            var moneyBonus = vet_data.quest.bonus_all.pat_money ? 1+(vet_data.quest.bonus_all.pat_money/100):1;
+                                                            var pointBonus = vet_data.quest.bonus_all.pat_points ? 1+(vet_data.quest.bonus_all.pat_points/100):1;
+                                                            iAmount = iAmount + (vet_data.drugs[drugsID].reward[diseasesID].money * phase * moneyBonus);
+                                                            iPoints = iPoints + (vet_data.drugs[drugsID].reward[diseasesID].points * phase * pointBonus);
+                                                        }
+                                                    }
 												}
-												else {
-													iTime=nowServer+item["slots"][slot]["remain"];
-												}
-											}
+											}*/
 											else {
-												iTime=0;
-
+                                                var animalID = unsafeWindow.findTreatedAnimal();
+                                                if(typeof animalID!="string") {
+                                                    iTime=animalID;
+                                                } else {
+                                                    iTime=nowServer-5000;
+                                                }
 											}
 
 											tempZoneProductionData[2]++;
 											tempZoneProductionDataSlot[2]++;
 
-											iAmount=0; //Ertrag Geld konnte ich nicht ermitteln
-											iPoints=0; //Punte konnte ich nicht ermitteln
+											//iAmount=0; //Ertrag Geld konnte ich nicht ermitteln
+											//iPoints=0; //Punte konnte ich nicht ermitteln
 
 											if(!tempZoneProductionData[0][0][iProd]){
 												tempZoneProductionData[0][0][iProd]=[];
@@ -16568,10 +16675,6 @@ return false;
 											zones.setProduction(zoneNrS,tempZoneProductionDataSlot.clone());
 										}
 									}
-
-
-
-
 
                                     zones.setProduction(zoneNrF,tempZoneProductionData.clone());
 
