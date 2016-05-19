@@ -16605,6 +16605,7 @@ return false;
                                             if (vet_data.animals.slots[slot]) {
                                                 if(isNaN(vet_data.animals.slots[slot].remain)){
                                                     iTime=0;
+                                                    //iTime=nowServer-5000;
                                                 } else {
                                                     iTime=nowServer+vet_data.animals.slots[slot].remain;
                                                     for (var d = 0; d < vet_data.animals.queue[vet_data.animals.slots[slot].id].diseases.length; d++) {

@@ -7963,17 +7963,17 @@ try{
 
         case 7:{
             switch(handled.zoneBuildingTyp){
-            case 4:{ // start production
-				var start=$("vet_animal_disease_start"+(handled.slot-4));
-				if (start) {
-					action=function(){ click(start);};
-					listeningEvent="gameVet_starttreatment";
-				} else {
-					autoFarmersmarketVetTreatment(runId,8); // -> exit
-				}
-            break;}
+                case 4:{ // start production
+    				var start=$("vet_animal_disease_start"+(handled.slot-4));
+    				if (start) {
+    					action=function(){ click(start);};
+    					listeningEvent="gameVet_starttreatment";
+    				} else {
+    					autoFarmersmarketVetTreatment(runId,8); // -> exit
+    				}
+                break;}
             }
-        break;}
+            break;}
 
         case 8:{
             GM_logInfo("autoFarmersmarketVetTreatment","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"start other slot or exit");
@@ -8000,11 +8000,14 @@ try{
                 help=/-(\d)$/.exec(handled.zoneNrF)[1];
                 var div=$("farmersmarket_pos"+help+"_inner").querySelector(".big_close");
                 if (!div) {
-                    div=$("farmersmarket_pos"+help+"_inner").querySelector(".mini_close");
+                    var help2=$("farmersmarket_pos"+help+"_inner").querySelectorAll(".mini_close");
+                    for (var i=0;i<help2.length;i++) {
+                        if (help2[i].getAttribute("onclick")=="closeVet()"){
+                            div = help2[i];
+                            break;
+                        }
+                    }
                 }
-				console.log(div);
-				console.log(runId+" "+div.classname);
-				//Fenster wird nicht geschlossen :(
                 autoZoneFinish(runId,div);
             }
         break;}
