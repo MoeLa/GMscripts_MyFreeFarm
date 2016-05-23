@@ -8296,7 +8296,14 @@ try{
             }
         }
     }
-    unsafeData.ALL_SLOTS=ALL_SLOTS.clone();
+    unsafeData.ALL_SLOTS=ALL_SLOTS.clone(); //for Automat
+
+    //todo: Look for a better solution
+    //this extra is for checkReady
+    for (var i = 5; i<=7; i++) {
+        ALL_SLOTS["farmersmarket-5."+i]="farmersmarket";
+    }
+
 }catch(err){ GM_logError("calcAllSlots","","",err); }
 }
 function toolTipZoneProduction(zoneNrS){
@@ -16389,7 +16396,7 @@ return false;
                 drugsArray={};
             }
             var endTime=NEVER;
-            for(var slot=1;slot<=3;slot++){
+            for(var slot=1;slot<=3;slot++){ //Find endtime: next tincture
                 zoneNrS="farmersmarket-5"+"."+slot;
                 if(!zones.getBlock(zoneNrS)){
                     var help=zones.getEndtime(zoneNrS);
@@ -16592,7 +16599,7 @@ return false;
                                         zones.setProduction(zoneNrS,tempZoneProductionDataSlot.clone());
                                     }
 
-									//Behandlung
+									//Animal Treatment
 									if (vetTreatment){
                                         iProd=0;
                                         var vet_data=unsafeWindow.farmersmarket_data.vet;
@@ -16608,6 +16615,9 @@ return false;
                                                     //iTime=nowServer-5000;
                                                 } else {
                                                     iTime=nowServer+vet_data.animals.slots[slot].remain;
+                                                    //Test
+                                                    //if (vet_data.animals.slots[slot].remain<0) iTime =nowServer+20;
+                                                    //Test End
                                                     for (var d = 0; d < vet_data.animals.queue[vet_data.animals.slots[slot].id].diseases.length; d++) {
                                                         var diseasesID =  vet_data.animals.queue[vet_data.animals.slots[slot].id].diseases[d].id;
                                                         var drugsID = vet_data.animals.queue[vet_data.animals.slots[slot].id].drugs[diseasesID];
@@ -19100,6 +19110,7 @@ return;
                 readyZoneAdded+=zones.checkReady(i);
             }
         }
+
         if(readyZoneAdded>0){
             GM_logInfo("loop1","","readyZone="+implode(unsafeData.readyZone,"loop1/readyZone"),"Zone ready",0);
             raiseEvent("gameZoneReady");
