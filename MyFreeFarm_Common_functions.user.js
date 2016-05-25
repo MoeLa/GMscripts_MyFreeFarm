@@ -24,7 +24,7 @@ try{
     var revertext = splitext.reverse();
     var reversed = revertext.join("");
     return reversed;
-}catch(err){ GM_logError("String.prototype.reverse","","",err); }    
+}catch(err){ GM_logError("String.prototype.reverse","","",err); }
 };
 String.prototype.capitalize = function() {
 try{
@@ -35,14 +35,14 @@ Array.prototype.contains = function(searchElement){
 try{
     return (this.indexOf(searchElement)!=-1);
 }catch(err){ GM_logError("Array.prototype.contains","","",err); }
-}  
+}
 Array.prototype.equals = function(that){
 try{
    // if the other array is a falsy value, return
     if (!that)
         return false;
 
-    // compare lengths - can save a lot of time 
+    // compare lengths - can save a lot of time
     if (this.length != that.length)
         return false;
 
@@ -61,12 +61,12 @@ try{
                 return false;
             }
         else if (this[i] != that[i]) {
-            return false;   
-        }           
-    }       
+            return false;
+        }
+    }
     return true;
 }catch(err){ GM_logError("Array.prototype.equals","","",err); }
-}  
+}
 Array.prototype.shuffle = function (){
 try{
     var i=this.length, j, temp;
@@ -78,7 +78,7 @@ try{
         this[j] = temp;
     }
     temp=null;
-}catch(err){ GM_logError("Array.prototype.shuffle","","",err); }    
+}catch(err){ GM_logError("Array.prototype.shuffle","","",err); }
 };
 Array.prototype.swap = function (from, to){
 try{
@@ -91,7 +91,7 @@ try{
 }catch(err){ GM_logError("Array.prototype.swap","from, to","",err); }
 };
 Object.prototype.equals = function(that) {
-try{    
+try{
     //For the first loop, we only check for types
     for (propName in this) {
         //Check for inherited methods and properties - like .equals itself
@@ -109,7 +109,7 @@ try{
     //Now a deeper check using other objects property names
     for(propName in that) {
         //We must check instances anyway, there may be a property that only exists in object2
-            //I wonder, if remembering the checked values from the first loop would be faster or not 
+            //I wonder, if remembering the checked values from the first loop would be faster or not
         if (this.hasOwnProperty(propName) != that.hasOwnProperty(propName)) {
             return false;
         }
@@ -142,8 +142,8 @@ try{
     }
     //If everything passed, let's say YES
     return true;
-}catch(err){ GM_logError("Object.prototype.equals","","",err); }    
-}  
+}catch(err){ GM_logError("Object.prototype.equals","","",err); }
+}
 Object.prototype.order = new Array();
 Object.prototype.sortObj = function(sortfkt,descending){
     // sortfkt:
@@ -244,22 +244,22 @@ try{
 function GM_logInfo(name,parameters,variables,text,type){
 try{
     if((undefined===type)||OPTION_LOGGING[type]){
-        GM_log((COUNTRY?COUNTRY.toUpperCase():"")+"-"+(SERVER?SERVER:"")+": Information\n"+name+"\n"+parameters+"\n"+variables+"\n"+text);
+        console.log((COUNTRY?COUNTRY.toUpperCase():"")+"-"+(SERVER?SERVER:"")+": Information\n"+name+"\n"+parameters+"\n"+variables+"\n"+text);
         if(DEVMODE_LOG_INFO){ logBubble.add(text,10); }
     }
 }catch(err){ GM_logError("GM_logInfo","name="+name+" parameters="+parameters+" variables="+variables+" text="+text,"",err); }
 };
 function GM_logWarning(name,parameters,variables,text){
 try{
-    GM_log((COUNTRY?COUNTRY.toUpperCase():"")+"-"+(SERVER?SERVER:"")+": Warning\n"+name+"\n"+parameters+"\n"+variables+"\n"+text);
+    console.log((COUNTRY?COUNTRY.toUpperCase():"")+"-"+(SERVER?SERVER:"")+": Warning\n"+name+"\n"+parameters+"\n"+variables+"\n"+text);
     if(DEVMODE_LOG_WARNING){ logBubble.add(text,10,"orange"); }
 }catch(err){ GM_logError("GM_logWarning","name="+name+" parameters="+parameters+" variables="+variables+" text="+text,"",err); }
 };
 function GM_logError(name,parameters,variables,text){
 try{
-    GM_log((COUNTRY?COUNTRY.toUpperCase():"")+"-"+(SERVER?SERVER:"")+": Error\n"+name+"\n"+parameters+"\n"+variables+"\n"+text);
+    console.log((COUNTRY?COUNTRY.toUpperCase():"")+"-"+(SERVER?SERVER:"")+": Error\n"+name+"\n"+parameters+"\n"+variables+"\n"+text);
     if(DEVMODE_LOG_ERROR){ logBubble.add(text,10,"red"); }
-}catch(err){ GM_log("ERROR in 'GM_logError'\nname="+name+"\n"+err); }
+}catch(err){ console.log("ERROR in 'GM_logError'\nname="+name+"\n"+err); }
 };
 
 /*
@@ -548,9 +548,9 @@ try{
 }
 function removeAllCSS(reg){
 try{
-// The function seems to be not working. 
+// The function seems to be not working.
 // "SecurityError: The operation is insecure."
-return; 
+return;
     for (var i = document.styleSheets.length - 1; i >= 0; i--) {
         for (var j = document.styleSheets[i].cssRules.length - 1; j >= 0; j--) {
             if(document.styleSheets[i].cssRules[j].selectorText&&(document.styleSheets[i].cssRules[j].selectorText.match(reg))){
@@ -1042,9 +1042,9 @@ try{
     }
     if (append){ append.appendChild(newdiv); }
     return newdiv;
-} catch(err){ 
+} catch(err){
     GM_logError("produktPic","type="+type+" product="+product,"",err);
-    return null; 
+    return null;
 }
 }
 function numberFormat(number,decimals,dec_point,thousands_sep){
@@ -1096,9 +1096,9 @@ try{
         s = s.replace('.', dec);
     }
     return s;
-}catch(err){ 
+}catch(err){
     GM_logError("numberFormat","number="+number,"",err);
-    return ""; 
+    return "";
 }
 }
 function numberFormatPrefixed(number){
@@ -1111,9 +1111,9 @@ try{
     }else{
         return numberFormat(number);
     }
-}catch(err){ 
+}catch(err){
     GM_logError("numberFormatPrefixed","number="+number,"",err);
-    return ""; 
+    return "";
 }
 }
 function moneyFormat(number){

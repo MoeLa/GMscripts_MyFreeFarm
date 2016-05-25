@@ -9892,12 +9892,12 @@ try{
         err_trace = "listener gameMegafieldDataDone";
         document.addEventListener("gameMegafieldDataDone", function() {
           try {
-            // console.log("Moe, gameMegafieldDataDone in Automat empfangen");
-            // console.log(zoneList["megafield"]);
-            var data = unsafeWindow.megafield_data;
-            // console.log(data);
             var log = unsafeData.logMegafieldJob;
-            // console.log(log);
+            if (!log) {
+              // Exit here, if no current log is available
+              return;
+            }
+            var data = unsafeWindow.megafield_data;
             var item; // Temp variable
 
             var planted = {}; // pId -> amount currently planted
@@ -9907,8 +9907,6 @@ try{
               if (!planted[item.pid]) { planted[item.pid]=0; }
               planted[item.pid]++;
             }
-            // console.log("Aktuell angebaut:");
-            // console.log(planted);
 
             var sumInQueue = {}; // pId -> amount in queue
             for (var i=0; i<zoneList["megafield"].length; i++) {
@@ -9916,16 +9914,12 @@ try{
               if (!sumInQueue[item[0]]) {sumInQueue[item[0]]=0;}
               sumInQueue[item[0]]+=item[1];
             }
-            // console.log("Summe in Queue:");
-            // console.log(sumInQueue);
 
             var missing = {}; // pId -> amount missing (due to log)
             for (var i=0; i<log[4].length; i++) {
               item = log[4][i];
               missing[item[0]]=item[1]-item[2];
             }
-            // console.log("Fehlend (laut Log):");
-            // console.log(missing);
 
             for (var pId in sumInQueue) {
               if (!sumInQueue.hasOwnProperty(pId)) { continue; }
@@ -9933,35 +9927,30 @@ try{
 
               item = sumInQueue[pId];
               if (item == missing[pId]-planted[pId]) {
-                console.log("Hier passt's: " + pId + " -> " + missing[pId] + "-" + planted[pId] + "=" +item);
+                // Queue contains exactly the remaining amounts
               } else if (item > missing[pId]-planted[pId]) {
                 // More amount of pId in queue than allowed
-                console.log("Zu viel in Queue: " + pId + " -> " + item + " > " + (missing[pId]-planted[pId]));
                 var delta = item-(missing[pId]-planted[pId]);
                 var newZoneListMegafield=[];
                 for (var i=0; i<zoneList["megafield"].length; i++) {
                   item = zoneList["megafield"][i].clone();
                   if (item[0]==pId) {
                     var minValue=Math.min(item[1], delta);
-                    console.log("Ziehe ab: " + minValue);
                     delta-=minValue;
                     if (item[1] > minValue) {
                       item[1]-=minValue; // Just subtract delta amount
                       newZoneListMegafield.push(item);
                     } else {
-                      // Remove whole entry from megafield queue
+                      // Remove whole entry from megafield queue (by not pushing it here to newZoneListMegafield)
                     }
                   } else {
                     // Wrong pId, skip entry
                     newZoneListMegafield.push(item);
                   }
                 }
-                // console.log("Erneuere zoneList['megafield']");
-                // console.log(newZoneListMegafield);
                 zoneList["megafield"]=newZoneListMegafield;
 
               } else if (item < missing[pId]-planted[pId]) {
-                // console.log("Zu wenig in Queue: " + pId);
                 // Fewer amount of pId in queue than possible
               } else {
                 // Any value was undefined (pId not in megafield queue or PRODSTOP)
@@ -9969,7 +9958,6 @@ try{
             }
           } catch (err) { GM_logError("eventListener:gameMegafieldDataDone ", "", "", err); }
         }, false);
-        console.log("Moe, gameMegafieldDataDone in Automat registriert");
 
         err_trace="listener gameCity2";
         document.addEventListener("gameCity2",function(){
