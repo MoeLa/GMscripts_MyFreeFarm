@@ -9939,30 +9939,6 @@ try{
 
     function dofoodworldFarmisBubble() {
         try {
-<<<<<<< HEAD
-			var foodWorldFarmi = unsafeWindow.foodworldfarmis;
-            for (var i=0;i<foodWorldFarmi.length;i++) {
-				if (foodWorldFarmi[i].status==0){
-					var cost=0;
-					for (var c in foodWorldFarmi[i].products) {
-						if (!foodWorldFarmi[i].products.hasOwnProperty(c)) { continue; }
-							cost+=gut[c]*foodWorldFarmi[i].products[c]
-					}
-					var rate=100*foodWorldFarmi[i].price/cost;
-                    if(rate<valFarmiLimits[0]){ // unter 90%
-						unsafeWindow.foodworldAction('kick', foodWorldFarmi[i].id);
-						str = css_styles["farmi_price_low"][1];
-					}else if(rate<valFarmiLimits[1]){ //zwischen 90% und 100%
-						str = css_styles["farmi_price_between"][1];
-					}else{ // über 100%
-						str = css_styles["farmi_price_above"][1];
-					}
-                    if ($("foodworldfarmi"+i)){
-						createElement("div",{"id":"foodworldfarmiMiniInfo"+i,"class":"foodworldfarmiMiniInfo"},$("foodworldfarmi"+i));
-                        $("foodworldfarmiMiniInfo"+i).setAttribute("style",str);
-                    }
-				}
-=======
             var foodWorldFarmi = unsafeWindow.foodworldfarmis;
             for (var i=0;i<foodWorldFarmi.length;i++) {
                 if (foodWorldFarmi[i].status==0){
@@ -9985,7 +9961,6 @@ try{
                         $("foodworldfarmiMiniInfo"+i).setAttribute("style",str);
                     }
                 }
->>>>>>> master
             }
         }
         catch(err) {GM_logError("dofoodworldFarmisBubble","","err_trace="+err_trace,err);}
