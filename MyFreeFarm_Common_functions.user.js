@@ -1,6 +1,6 @@
 ﻿// ==UserScript==
 // @name           MyFreeFarm Common functions
-// @namespace      https://github.com/BastianKanaan/GMscripts_MyFreeFarm
+// @namespace      https://github.com/linus--tux/GMscripts_MyFreeFarm
 // @author         BastianKanaan
 // @description    Common functions for MyFreeFarm-Scripts
 // @date           11.07.2015

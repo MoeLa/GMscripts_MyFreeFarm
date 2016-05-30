@@ -46,7 +46,7 @@
 // @grant          GM_setValue
 // @grant          GM_xmlhttpRequest
 // @grant          unsafeWindow
-// @require        https://raw.githubusercontent.com/BastianKanaan/GMscripts_MyFreeFarm/master/MyFreeFarm_Common_functions.user.js
+// @require        https://raw.githubusercontent.com/linus--tux/GMscripts_MyFreeFarm/master/MyFreeFarm_Common_functions.user.js
 // ==/UserScript==
 
 //***********************************************************************************************************
