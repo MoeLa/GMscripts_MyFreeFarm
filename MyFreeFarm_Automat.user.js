@@ -5380,7 +5380,7 @@ try{
             if((unsafeWindow.premium==1) || (parseInt($("levelnum").innerHTML,10)<10)){ // check if premium feeding
                 var div=$("feed_item"+sorte+"_normal");
                 if (div && div.firstElementChild) {
-                  click($("feed_item"+sorte+"_normal").firstElementChild); // start feed
+                  click(div.firstElementChild); // start feed
                   window.setTimeout(autoFarmStable,3*settings.getPause(true),runId,step+1,didFeed,isBot,sorte,feedcounter,maxFeed);
                 } else {
                   // Wait, until div is ready
