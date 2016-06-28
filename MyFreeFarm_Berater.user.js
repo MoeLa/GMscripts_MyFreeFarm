@@ -599,7 +599,7 @@ const VARIABLES = {
                     "valVetAutostart":["Option",3],
                     "valVetAutoSet":["Option",3],
                     "valVetNoCoinDrugs":["Option",3],
-					"vetTreatment":["Option",3],
+                                        "vetTreatment":["Option",3],
                     "valWaterNeeded":["Option",3],
                     "vertraegeIn":["Contracts received",1],
                     "vertraegeOut":["Contracts sent",1],
@@ -6242,7 +6242,7 @@ function buildInfoPanelOptions(){
         createElement("td",{},newtr,getText("settings_vet")[1]);
 
 
-		newtr=createElement("tr",{},newtable);
+                newtr=createElement("tr",{},newtable);
         newtd=createElement("td",{"align":"center"},newtr);
         newinput=createElement("input",{"type":"checkbox","class":"link","checked": vetTreatment}, newtd);
         if (!unsafeWindow.farmersmarket_data.vet) { newinput.disabled = true; }
@@ -6250,7 +6250,7 @@ function buildInfoPanelOptions(){
             vetTreatment = this.checked;
             GM_setValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_vetTreatment", vetTreatment);
         }, false);
-		createElement("td",{},newtr,getText("settings_vetTreatment")[0]);
+                createElement("td",{},newtr,getText("settings_vetTreatment")[0]);
         createElement("td",{},newtr,getText("settings_vetTreatment")[1]);
 
 
@@ -10044,8 +10044,8 @@ try{
         } catch(err) { GM_logError("contractsDialog","","",err); }
         try {
             // Add a Sum-of-Contract dic to dialog
-            var parent = $("globalbox_content");
-            var sumDiv = createElement("div", {"style": "font-style: italic;"}, parent, "");
+            var parent = $("globalbox_footer"); // $("globalbox_content"); // globalbox_footer
+            var sumDiv = createElement("div", {"id": "contractSum", "style": "font-style: italic;"}, parent, ""); // Will be removed from DOM in 'unsafeOverwriteFunction("contractsProductInCart",...'
             var fktCalcSum = function () {
               var amount = parseFloat($("contracts_select_pid_input").value);
               var price = parseFloat($("contracts_select_price_input").value);
@@ -10182,20 +10182,22 @@ try{
 
             // Calculate sum and Send-on-Enter
             $("contracts_select_pid_input").addEventListener("keyup", function (event) {
-              fktCalcSum();
               if (event.key == "Enter") {
                 click($("contracts_button_add_cart"));
+              } else {
+                fktCalcSum();
               }
             }, false);
 
             // Uncheck radio buttons, when User edits price manually, calculate sum, and Send-on-Enter
-            $("contracts_select_price_input").addEventListener("keyup", function () {
-                radioPriceSaved.checked = false;
-                radioPriceMarket.checked = false;
-                radioPriceNPC.checked = false;
-                fktCalcSum();
+            $("contracts_select_price_input").addEventListener("keyup", function (event) {
                 if (event.key == "Enter") {
                   click($("contracts_button_add_cart"));
+                } else {
+                  radioPriceSaved.checked = false;
+                  radioPriceMarket.checked = false;
+                  radioPriceNPC.checked = false;
+                  fktCalcSum();
                 }
             }, false);
 
@@ -10216,6 +10218,7 @@ try{
                 var value = {id: productId, amount: amount, price: price};
                 GM_setValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_contractsProductInCart_"+productId,value);
             }
+            removeElement($("contractSum"));
             unsafeWindow._contractsProductInCart(productId);
         } catch(err) { GM_logError("contractsProductInCart","","",err); }
     });
@@ -14516,7 +14519,7 @@ return false;
         }catch(err){GM_logError("_farmActionResponse","mode="+mode,"",err);}
         try{
             var r = checkRequest(request, mode);
-			//alert(mode);
+                        //alert(mode);
             if((r!=0)&&(r[0]!=0)){
                 switch(mode){
                 case "autoplant":{
@@ -14571,21 +14574,21 @@ return false;
                     doFarmis();
                     raiseEvent("gameFarmiResponse");
                 break;}
-				case "vet_endtreatment": {
-					//doFarmersMarketData();
-					raiseEvent("gameVet_endtreatment");
-					//Tier entlassen
-				break;}
-				case "vet_setslot": {
-					//doFarmersMarketData();
-					raiseEvent("gameVet_setslot");
-					//Krankes Tier auf Slot:
-				break;}
-				case "vet_starttreatment": {
-					doFarmersMarketData();
-					raiseEvent("gameVet_starttreatment");
-					//Tier-Behandlung starten:
-				break;}
+                                case "vet_endtreatment": {
+                                        //doFarmersMarketData();
+                                        raiseEvent("gameVet_endtreatment");
+                                        //Tier entlassen
+                                break;}
+                                case "vet_setslot": {
+                                        //doFarmersMarketData();
+                                        raiseEvent("gameVet_setslot");
+                                        //Krankes Tier auf Slot:
+                                break;}
+                                case "vet_starttreatment": {
+                                        doFarmersMarketData();
+                                        raiseEvent("gameVet_starttreatment");
+                                        //Tier-Behandlung starten:
+                                break;}
                 case "watergarden":{
                     var zoneNrF = zoneNr+6*(farmNR-1);
                     if(1==zones.getBuilding(zoneNrF)){
@@ -16444,7 +16447,7 @@ return false;
         } catch(err){GM_logError("findTreatedAnimal","","",err); }
     }
 
-	//vetTreatment= GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_vetTreatment", true);
+        //vetTreatment= GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_vetTreatment", true);
     function doFarmersMarketData(){
         try{
             var err_trace="zones";
@@ -16636,16 +16639,16 @@ return false;
                                         zones.setProduction(zoneNrS,tempZoneProductionDataSlot.clone());
                                     }
 
-									//Animal Treatment
-									if (vetTreatment){
+                                                                        //Animal Treatment
+                                                                        if (vetTreatment){
                                         iProd=0;
                                         var vet_data=unsafeWindow.farmersmarket_data.vet;
-										for(var slot=1;slot<=3;slot++){
-											zoneNrS=zoneNrF+"."+(slot+4); //+4 internal mapping
-											zones.setBlock(zoneNrS,"");
-											tempZoneProductionDataSlot=[[{},{}],0,0,true];
+                                                                                for(var slot=1;slot<=3;slot++){
+                                                                                        zoneNrS=zoneNrF+"."+(slot+4); //+4 internal mapping
+                                                                                        zones.setBlock(zoneNrS,"");
+                                                                                        tempZoneProductionDataSlot=[[{},{}],0,0,true];
                                             iProd++; iAmount = 0; iPoints = 0;
-											//item=unsafeWindow.farmersmarket_data.vet.animals
+                                                                                        //item=unsafeWindow.farmersmarket_data.vet.animals
                                             if (vet_data.animals.slots[slot]) {
                                                 if(isNaN(vet_data.animals.slots[slot].remain)){
                                                     iTime=0;
@@ -16672,17 +16675,17 @@ return false;
 
                                             /*
                                             if (vet_data.animals.slots[slot]) {
-												//iProd=null; iAmount = 0; iPoints = 0;
-												if (vet_data.animals.slots[slot].remain<0) {
-													//fertig
-													//iTime=nowServer+item["slots"][slot]["remain"];
+                                                                                                //iProd=null; iAmount = 0; iPoints = 0;
+                                                                                                if (vet_data.animals.slots[slot].remain<0) {
+                                                                                                        //fertig
+                                                                                                        //iTime=nowServer+item["slots"][slot]["remain"];
                                                     iTime=nowServer+vet_data.animals.slots[slot].remain;
                                                     //iTime=NEVER;
-													//tempZoneProductionData[1]++;
-													//tempZoneProductionDataSlot[1]++;
-												} else if(isNaN(vet_data.animals.slots[slot].remain)){
-													iTime=0;
-												} else {
+                                                                                                        //tempZoneProductionData[1]++;
+                                                                                                        //tempZoneProductionDataSlot[1]++;
+                                                                                                } else if(isNaN(vet_data.animals.slots[slot].remain)){
+                                                                                                        iTime=0;
+                                                                                                } else {
                                                     iTime=nowServer+vet_data.animals.slots[slot].remain;
                                                     for (var d = 0; d < vet_data.animals.queue[vet_data.animals.slots[slot].id].diseases.length; d++) {
                                                         var diseasesID =  vet_data.animals.queue[vet_data.animals.slots[slot].id].diseases[d].id;
@@ -16695,34 +16698,34 @@ return false;
                                                             iPoints = iPoints + (vet_data.drugs[drugsID].reward[diseasesID].points * phase * pointBonus);
                                                         }
                                                     }
-												}
-											}*/
-											else {
+                                                                                                }
+                                                                                        }*/
+                                                                                        else {
                                                 var animalID = unsafeWindow.findTreatedAnimal();
                                                 if(typeof animalID!="string") {
                                                     iTime=animalID;
                                                 } else {
                                                     iTime=nowServer-5000;
                                                 }
-											}
+                                                                                        }
 
-											tempZoneProductionData[2]++;
-											tempZoneProductionDataSlot[2]++;
+                                                                                        tempZoneProductionData[2]++;
+                                                                                        tempZoneProductionDataSlot[2]++;
 
-											//iAmount=0; //Ertrag Geld konnte ich nicht ermitteln
-											//iPoints=0; //Punte konnte ich nicht ermitteln
+                                                                                        //iAmount=0; //Ertrag Geld konnte ich nicht ermitteln
+                                                                                        //iPoints=0; //Punte konnte ich nicht ermitteln
 
-											if(!tempZoneProductionData[0][0][iProd]){
-												tempZoneProductionData[0][0][iProd]=[];
-											}
-											tempZoneProductionData[0][0][iProd].push([iAmount,iPoints,iTime,NEVER]);
-											if(!tempZoneProductionDataSlot[0][0][iProd]){
-												tempZoneProductionDataSlot[0][0][iProd]=[];
-											}
-											tempZoneProductionDataSlot[0][0][iProd].push([iAmount,iPoints,iTime,NEVER]);
-											zones.setProduction(zoneNrS,tempZoneProductionDataSlot.clone());
-										}
-									}
+                                                                                        if(!tempZoneProductionData[0][0][iProd]){
+                                                                                                tempZoneProductionData[0][0][iProd]=[];
+                                                                                        }
+                                                                                        tempZoneProductionData[0][0][iProd].push([iAmount,iPoints,iTime,NEVER]);
+                                                                                        if(!tempZoneProductionDataSlot[0][0][iProd]){
+                                                                                                tempZoneProductionDataSlot[0][0][iProd]=[];
+                                                                                        }
+                                                                                        tempZoneProductionDataSlot[0][0][iProd].push([iAmount,iPoints,iTime,NEVER]);
+                                                                                        zones.setProduction(zoneNrS,tempZoneProductionDataSlot.clone());
+                                                                                }
+                                                                        }
 
                                     zones.setProduction(zoneNrF,tempZoneProductionData.clone());
 
@@ -16976,7 +16979,7 @@ return false;
                             // Enough of that drug in stock?
                             if (prodStock[0][l]>=e.diseases[c].phase){
                                 unsafeWindow.vetDiseaseSetDrug(h, b, l);
-								raiseEvent("gameShowVetMedicalRecord");
+                                                                raiseEvent("gameShowVetMedicalRecord");
                                 break;
                             }
                         }
@@ -21274,7 +21277,7 @@ try{
         text["de"]["exchangedLots"]="Eingelöste Lose";
         text["de"]["farm"]="Farm";
         text["de"]["farmersmarket"]=unsafeWindow.t_farmers_market;
-		text["de"]["farmUseVetTreatment"]="Tier heilen";
+                text["de"]["farmUseVetTreatment"]="Tier heilen";
         text["de"]["farmX"]="%1%. Farm";
         text["de"]["farmi"]="Farmi";
         text["de"]["farmis"]="Farmis";
@@ -21576,7 +21579,7 @@ try{
         text["de"]["settings_vet"]=["Tierarzt (Behandlung kranker Tiere)", "Ein blinkender Icon zeigt an, wenn ein geheiltes Tier entlassen werden kann."];
         text["de"]["settings_vetAutoSet"]=["Automatisches Setzen", "Wird ein krankes Tier angeklickt, wird es direkt auf eine freie Liege gelegt."];
         text["de"]["settings_valVetNoCoinDrugs"]=["Keine Coin-Tinkturen", "Ignoriere Tinkturen, die in der Herstellung Coins kosten."];
-		text["de"]["settings_vetTreatment"]=["Tier heilen", "Tierdaten werden eingelesen"];
+                text["de"]["settings_vetTreatment"]=["Tier heilen", "Tierdaten werden eingelesen"];
 
         // help
         text["de"]["help_0"]=[,"This is small introduction to the functions of the Adviser-Script. Not all changes are written here, go find them yourself ... Sometimes a mouse-over helps. <br>At the bottom you see a button to visit the <a href=\""+GM_Home+"\" target=\"_blank\">homepage</a>. Next to it, there is the button for the options. You should look at them and configure as you desire.<br>Generally the script only knows what you have seen. So just visit the field if something is wrong."];
@@ -21683,7 +21686,7 @@ try{
         text["en"]["exchangedLots"]="Exchanged lots";
         text["en"]["farm"]="Farm";
         text["en"]["farmersmarket"]=unsafeWindow.t_farmers_market;
-		text["en"]["farmUseVetTreatment"]="Animals sick";
+                text["en"]["farmUseVetTreatment"]="Animals sick";
         text["en"]["farmX"]="%1%. farm";
         text["en"]["farmi"]="Farmie";
         text["en"]["farmis"]="Farmies";
@@ -21985,7 +21988,7 @@ try{
         text["en"]["settings_vet"]=["Veterinary (Treatment of sick animals)", "A blinking icon indicates, when a cured animal can be discharged."];
         text["en"]["settings_vetAutoSet"]=["Auto set", "A selected sick animal is directly benched."];
         text["en"]["settings_valVetNoCoinDrugs"]=["No coin drugs", "Ignore drugs needing coins to be produced."];
-		text["en"]["settings_vetTreatment"]=["Animal sick", "Animaldata read for animal-sick"];
+                text["en"]["settings_vetTreatment"]=["Animal sick", "Animaldata read for animal-sick"];
         //help
         text["en"]["help_0"]=[,"This is a small introduction to the functions of the Adviser-Script. Not all changes are written here, go find them yourself ... Sometimes a mouse-over helps. <br>At the bottom you see a button to visit the <a href=\""+GM_Home+"\" target=\"_blank\">homepage</a>. Next to it, there is the button for the options. You should look at them and configure as you desire.<br>Generally the script only knows what you have seen. So just visit the field if something is wrong."];
         text["en"]["help_1"]=["The Zones","The fields are observed while you see them. The script saves the plants, times and watering. So on the farm view this can be displayed. Each zone has a time counter at its top to show you when it is ready.<br>If you own the planting helper, you can access it directly from opened field. At the top of an opened zone you can navigate directly to zones of the same type."];
