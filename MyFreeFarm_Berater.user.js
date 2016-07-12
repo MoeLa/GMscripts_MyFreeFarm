@@ -21321,6 +21321,7 @@ try{
         text["de"]["fw1"]="Getränkebude";
         text["de"]["fw2"]="Imbissbude";
         text["de"]["fw3"]="Konditorei";
+        text["de"]["fw4"]="Eiscafe";
         text["de"]["gamecurrency"]=unsafeWindow.gamecurrency;
         text["de"]["gain"]="Erzeugnis";
         text["de"]["general"]="Allgemein";
@@ -21534,7 +21535,7 @@ try{
         text["de"]["category_fw1"]="Getränke";
         text["de"]["category_fw2"]="Speisen";
         text["de"]["category_fw3"]="Torten und Kuchen";
-        text["de"]["category_fw4"]="noch nicht verfügbar";
+        text["de"]["category_fw4"]="Eiscreme und Sorbee";
         text["de"]["category_fl"]="Blumen";
         text["de"]["category_fla"]="Gestecke";
         text["de"]["category_hr"]="Kräuter";
@@ -21730,6 +21731,7 @@ try{
         text["en"]["fw1"]="Soda stall";
         text["en"]["fw2"]="Snack booth";
         text["en"]["fw3"]="Pastry shop";
+        text["en"]["fw4"]="Ice creme parlor";
         text["en"]["gain"]="Gain";
         text["en"]["gamecurrency"]=unsafeWindow.gamecurrency;
         text["en"]["general"]="General";
@@ -21943,7 +21945,7 @@ try{
         text["en"]["category_fw1"]="Drinks";
         text["en"]["category_fw2"]="Food";
         text["en"]["category_fw3"]="Cakes";
-        text["en"]["category_fw4"]="not yet available";
+        text["en"]["category_fw4"]="Ice crem";
         text["en"]["category_fl"]="Flowers";
         text["en"]["category_fla"]="Arrangements";
         text["en"]["category_hr"]="Medicinal herb";
