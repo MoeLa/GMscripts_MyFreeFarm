@@ -147,7 +147,7 @@ const CHANGELOG=[["2.0","29.05.2014",[["Migration nach openuserjs.org","Migratio
                 ,["2.10.28","13.07.2016",[["Fix Produktionszeiten","Fix Productiongrowtime"]]]
                 ,["2.10.29","25.07.2016",[["Update Picknick-Questreihe ","Update Foodworld-Quest-Series"]]]
                 ,["2.10.30","27.07.2016",[["Verbesserung Fahrzeug für Transport von Farm5","Improvements vehicle for transporting exotic fruits from farm 5"]]]
-                ,["2.10.31","09.08.2016",[["Anpassung an Spiel-Update 12.07.2016","Fix for game update 12.07.2016"]]]
+                ,["2.10.31","09.08.2016",[["Anpassung an Spiel-Update 08.08.2016","Fix for game update 08.08.2016"]]]
                 ];
 if(!VERSIONfunctionFile){
     alert("Hi, I am the Berater-Script.\nThe function-file is missing.\nPlease install me again.");
