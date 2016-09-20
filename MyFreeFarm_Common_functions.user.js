@@ -1,14 +1,14 @@
-﻿// ==UserScript==
+// ==UserScript==
 // @name           MyFreeFarm Common functions
 // @namespace      https://github.com/linus--tux/GMscripts_MyFreeFarm
 // @author         BastianKanaan
 // @description    Common functions for MyFreeFarm-Scripts
-// @date           30.05.2016
-// @version        2.1.8
+// @date           20.09.2016
+// @version        2.1.9
 // @license        GPL version 3 or any later version; http://www.gnu.org/copyleft/gpl.html
 // ==/UserScript==
 
-const VERSIONfunctionFile = "2.1.8";
+const VERSIONfunctionFile = "2.1.9";
 var DEVMODE=GM_getValue("devmode",false);
 var DEVMODE_EVENTS=GM_getValue("devmode_events",false);
 var DEVMODE_FUNCTION=GM_getValue("devmode_function",false);
@@ -391,6 +391,7 @@ try{
         var T = node;
         var str = T.id;
         while(!T.id){
+            if (!T.parentNode) break;
             T = T.parentNode;
             str += ".child";
         }
