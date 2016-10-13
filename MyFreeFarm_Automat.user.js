@@ -5397,7 +5397,7 @@ function checkGuildJobProduct(zoneNrL) {
 	        var jobProducts = unsafeWindow.job_data.config.jobs[job].products; //Produkte die der Beruf herstellen kann
             for (var i=0;i<buildProducts.length;i++) {
                 if (unsafeWindow.job_data.guild_job_data.data.products.hasOwnProperty(buildProducts[0]) &&
-                    jobProducts.indexOf(buildProducts[i])){
+                    (jobProducts.indexOf(buildProducts[i])>=0)){
                     return true;
                 }
             }
@@ -7596,10 +7596,14 @@ try{
                     }
                 break;}
                 case 4:{
+                    //13102016
                     if(handled.zoneNrF=="farmersmarket-2" && (help=$("nursery_slot_item" + handled.slot))){
                         action=function(){ click(help); };
                         listeningEvent="gameFarmersmarketCropped";
-                    }else if(handled.zoneNrF=="farmersmarket-5" && (help=$("vet_production_slot_click" + handled.slot))){
+                    } else if(handled.zoneNrF=="farmersmarket-4" && (help=$("pets_productionslot"+handled.slot+"_click"))){
+                        action=function(){ click(help); };
+                        listeningEvent="gameFarmersmarketCropped";
+                    } else if(handled.zoneNrF=="farmersmarket-5" && (help=$("vet_production_slot_click" + handled.slot))){
                         action=function(){ click(help); };
                         listeningEvent="gameFarmersmarketCropped";
                     }else{
