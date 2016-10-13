@@ -143,12 +143,12 @@ const CHANGELOG=[["2.0","29.05.2014",[["Migration nach openuserjs.org","Migratio
                 ,["2.10.24","30.05.2016",[["Neues common_function_file","New common_function_file"]]]
                 ,["2.10.25","01.06.2016",[["Bugfix","Bugfix"]]]
                 ,["2.10.26","28.06.2016",[["Bugfix Güterhof und Verträge","Bugfix: megafield and contract"]]]
-				,["2.10.27","12.07.2016",[["Anpassung an Spiel-Update 12.07.2016","Fix for game update 12.07.2016"]]]
+                                ,["2.10.27","12.07.2016",[["Anpassung an Spiel-Update 12.07.2016","Fix for game update 12.07.2016"]]]
                 ,["2.10.28","13.07.2016",[["Fix Produktionszeiten","Fix Productiongrowtime"]]]
                 ,["2.10.29","25.07.2016",[["Update Picknick-Questreihe ","Update Foodworld-Quest-Series"]]]
                 ,["2.10.30","27.07.2016",[["Verbesserung Fahrzeug für Transport von Farm5","Improvements vehicle for transporting exotic fruits from farm 5"]]]
                 ,["2.10.31","09.08.2016",[["Anpassung an Spiel-Update 08.08.2016","Fix for game update 08.08.2016"]]]
-				,["2.10.32","10.08.2016",[["Verbesserung Fahrzeug für Transport von Farm5","Improvements vehicle for transporting exotic fruits from farm 5"]]]
+                                ,["2.10.32","10.08.2016",[["Verbesserung Fahrzeug für Transport von Farm5","Improvements vehicle for transporting exotic fruits from farm 5"]]]
                 ,["2.10.33","11.08.2016",[["Update Quest Data","Update Quest Data"]]]
                 ,["2.10.34","15.08.2016",[["Eisdiele","ice cream parlor"]]]
                 ,["2.10.35","26.08.2016",[["Bugfix","Bugfix"]]]
@@ -320,7 +320,7 @@ const ANIMAL_MOVE=[,,[false,0,0,255,10,10,505],[false,0,0,280,1,0,525],[false,0,
             fw1         Soda stall              Foodworld
             fw2         Snack booth             Foodworld
             fw3         Pastry shop             Foodworld
-			fw4			ice cream parlor		Foodworld
+            fw4         ice cream parlor        Foodworld
             fl1         Flower meadow           Farmersmarket
             fl2         Flower workshop         Farmersmarket
             fl3         Monster fruit culture   Farmersmarket
@@ -605,7 +605,7 @@ const VARIABLES = {
                     "valLimitEmptyFields":["Option",3],
                     "valMessageRe":["Option",3],
                     "valMessagesSystemMarkRead":["Option",3],
-					"valMinExFruitsFarms5":["Option",3,1],
+                                        "valMinExFruitsFarms5":["Option",3,1],
                     "valMinRack":["Option",3],
                     "valMinRackE":["Option",5],
                     "valMinRackF":["Option",5],
@@ -1053,12 +1053,11 @@ function updateProductDataFarm(){
         //
         // task_new_plant task_new_product
         prodBlock[0]=["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","ct","","ct","","ct","ct","","ct","","","","","","","","","","ct","ct","ct","ct","ct","ct","ct","","","","","","","ct","","ct","","","ct","","","ct","ct","ct","","","","","","","","t","","","","","","","t","","t","t","","","","","","","","","","","","","","","","","","","","","","t","","","","","","","","","","","","","","","","","","","","","","","","","","","","","t","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","ut","ut",,,,,,,,,,,"","","","","","","","","","","","","","","t","t","t","t","t","t","t","t",,,,,,,,,,,,,,,,,,,,,,,,,,,,,"","","","","","","","","","","","","","","","","","","","","","","","","","","",,,,,,,,,,,,,,,,,,,,,,,,"","","","","","t","t","","t","","t","","t","","t","","t","","t","","","t","","t","","","","","","","","t","t","","t","","","t","","t","","t","","t","t","","t","","","t","","","","","","","","","","","","",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"","t","","t",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""];
-
         //patch0803
         /*
-		var new_prodBlock=prodBlock[0].clone();
-		new_prodBlock[450]="test";
-		console.log(implode(new_prodBlock));
+                var new_prodBlock=prodBlock[0].clone();
+                new_prodBlock[450]="test";
+                console.log(implode(new_prodBlock));
 */
 
         var help={"v":[],"ex":[],"hr":[],"e":[],"o":[],"fw1":[],"fw2":[],"fw3":[],"fw4":[],"z":[],"fl":[],"fla":[],"md":[]};
@@ -1085,8 +1084,8 @@ function updateProductDataFarm(){
             }
         }
 
-        //Ghost values im Regal von nicht vorhandener Farm5 eleminieren ;)
-        if (Object.keys(unsafeWindow.rackobj[5]).length==0) {
+        // Ghost values im Regal von nicht vorhandener Farm5 eleminieren
+        if (!unsafeWindow.rackobj[5] || Object.keys(unsafeWindow.rackobj[5]).length==0) {
             for(var v in unsafeWindow.produkt_name){
                 if(!unsafeWindow.produkt_name.hasOwnProperty(v)){continue;}
                 prodStock[5][v]=0;
@@ -1138,7 +1137,7 @@ function updateProductDataFarm(){
                     case 136:case 137:case 138:case 139:case 140:case 141:case 142:case 143:case 148:case 149:case 150:case 474:case 475:case 476:case 477:
                         prodTyp[0][v]+="2"; break;
 
-					case 161:case 162:case 163:case 164:case 165:case 166:case 167:case 168:case 169:case 170:case 478:case 479:case 480:case 481:case 482:case 483:
+                                        case 161:case 162:case 163:case 164:case 165:case 166:case 167:case 168:case 169:case 170:case 478:case 479:case 480:case 481:case 482:case 483:
                         prodTyp[0][v]+="3"; break;
                     case 450:case 451:case 452:case 453:case 454:case 455:case 456:case 457:case 458:case 459:case 460:case 461:case 462:case 463:case 464:case 465:case 466:case 467:
                         prodTyp[0][v]+="4"; break;
@@ -1779,12 +1778,12 @@ var zones=new function(){
                     building=data[zoneNrF]["building"];
                     if(BUILDING_SLOTS[building]){
                         for(var i=BUILDING_SLOTS[building];i>=1;i--){
-                            if(undefined===data[zoneNrF]["slots"][i]){
+                            if(data[zoneNrF]["slots"] != null && undefined===data[zoneNrF]["slots"][i]){
                                 // Slot not defined in record of zone
                                 data[zoneNrF]["slots"][i]=INIT_zoneSlotItem.clone();
                             }
                         }
-                        if(data[zoneNrF]["slots"].length>1+BUILDING_SLOTS[building]){
+                        if(data[zoneNrF]["slots"] && data[zoneNrF]["slots"].length>1+BUILDING_SLOTS[building]){
                             // Too many slots defined in record of zone
                             data[zoneNrF]["slots"].splice(1+BUILDING_SLOTS[building],data[zoneNrF]["slots"].length-BUILDING_SLOTS[building]-1);
                         }
@@ -1795,7 +1794,7 @@ var zones=new function(){
                 }
             }
             totalEndtime=GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_totalEndtime",-1);
-            }catch(err){GM_logError("zones.init","","",err);}
+            }catch(err){GM_logError("zones.init","","zoneNrF="+zoneNrF+",i="+i+",zoneNr="+zoneNr,err);}
     }
     this.save=function(){
         try{
@@ -2090,129 +2089,137 @@ var zones=new function(){
             }
         }catch(err){GM_logError("zones.getProduction","zoneNrS="+zoneNrS,"",err);}
     }
-    this.processProduction=function(zoneNrS,noFollowing){
-        try{
-            if(DEVMODE_FUNCTION){ var trackingHandle = tracking.start("berater","zones.processProduction",[zoneNrS]); }
-                var err_trace="begin";
-                var zoneNrF=zoneNrS.toString().replace(/\.\d+$/g,"");
-                var help;
-                data[zoneNrS]["crop"]=new Array();
-                data[zoneNrS]["endtime"]=NEVER;
-                data[zoneNrS]["endproduct"]=null;
-                data[zoneNrS]["watertime"]=NEVER;
-                data[zoneNrS]["mainproduct"]=null;
-                if(!zones.getBlock(zoneNrS)){
-                    var currLocation=zones.getLocation(zoneNrS).location;
-                    var currBonus=zones.getBonus(zoneNrS);
-                    var currBonusSpecial=zones.getBonusSpecial(zoneNrS);
-                    var zoneErnteCurr=new Object();
-                    var iZoneTyp=zones.getBuilding(zoneNrS);
-                    var isProductional=zones.isProductional(zoneNrS);
-                    var nowServer=unsafeWindow.Zeit.Server;
-                    var c=0,item;
-                    err_trace="product loop";
-                    for(var iType=0;iType<data[zoneNrS]["production"][0].length;iType++){
-                        for(var iProdStr in data[zoneNrS]["production"][0][iType]){
-                            if(!data[zoneNrS]["production"][0][iType].hasOwnProperty(iProdStr)){ continue; }
-                            var iProd = parseInt(iProdStr,10);
-                            if((prodTyp[iType][iProd]!="u")&&(prodTyp[iType][iProd]!="z")){ // only products
-                                item=data[zoneNrS]["production"][0][iType][iProdStr];
-                                for(var i=0;i<item.length;i++){
-                                    var z=item[i][2];
-                                    var w=item[i][3];
-                                    if (data[zoneNrS]["mainproduct"]==iProd){ c += item[i][0]; }
-                                    else{ c -= item[i][0]; }
-                                    if (c<1){
-                                        data[zoneNrS]["mainproduct"]=iProd;
-                                        c=item[i][0];
-                                    }
-                                    if (!zoneErnteCurr[iType]){ zoneErnteCurr[iType]={}; }
-                                    if (!zoneErnteCurr[iType][iProdStr]){ zoneErnteCurr[iType][iProdStr]=[0,0]; }
-                                    zoneErnteCurr[iType][iProdStr][0] += item[i][0];
-                                    zoneErnteCurr[iType][iProdStr][1] += item[i][1];
-                                    if(w){
-                                        data[zoneNrS]["watertime"]=Math.min(data[zoneNrS]["watertime"],w);
-                                        if(valAssumeWater[currLocation]&&(nowServer<=z)&&(w<=z)){
-                                            // calculate future watering
-                                            // w<nowServer means that now can be watered. because it isnt watered, assume that watering is not wanted
-                                            // if (nowServer<=w){
-                                            w=Math.max(0,Math.min(86400,w-nowServer)); // time till watering
-                                            z-=nowServer; // remaining time
-                                            z=nowServer+w+calcGrowDuration(z-w,(100-currBonus-((currBonusSpecial&&(iProd==currBonusSpecial[0]))?currBonusSpecial[1]:0))/100);
-                                        }
-                                    }
+    this.processProduction = function(zoneNrS, noFollowing) {
+          try {
+            if (DEVMODE_FUNCTION) {
+              var trackingHandle = tracking.start("berater", "zones.processProduction", [zoneNrS]);
+            }
+            // console.log("=== MOE === processProduction");
+            // console.log(zoneNrS); // Unteranderem megafield.99 etc.
+            var err_trace = "begin";
+            var zoneNrF = zoneNrS.toString().replace(/\.\d+$/g, "");
+            var help;
+            data[zoneNrS]["crop"] = new Array();
+            data[zoneNrS]["endtime"] = NEVER;
+            data[zoneNrS]["endproduct"] = null;
+            data[zoneNrS]["watertime"] = NEVER;
+            data[zoneNrS]["mainproduct"] = null;
+            if (!zones.getBlock(zoneNrS)) {
+              var currLocation = zones.getLocation(zoneNrS).location;
+              var currBonus = zones.getBonus(zoneNrS);
+              var currBonusSpecial = zones.getBonusSpecial(zoneNrS);
+              var zoneErnteCurr = new Object();
+              var iZoneTyp = zones.getBuilding(zoneNrS);
+              var isProductional = zones.isProductional(zoneNrS);
+              var nowServer = unsafeWindow.Zeit.Server;
+              var c = 0, item;
+              err_trace = "product loop";
+              for (var iType = 0; iType < data[zoneNrS]["production"][0].length; iType++) {
+                for (var iProdStr in data[zoneNrS]["production"][0][iType]) {
+                  if (!data[zoneNrS]["production"][0][iType].hasOwnProperty(iProdStr)) {
+                    continue; }
+                  var iProd = parseInt(iProdStr, 10);
+                  if ((prodTyp[iType][iProd] != "u") && (prodTyp[iType][iProd] != "z")) { // only products
+                    item = data[zoneNrS]["production"][0][iType][iProdStr];
+                    for (var i = 0; i < item.length; i++) {
+                      var z = item[i][2];
+                      var w = item[i][3];
+                      if (data[zoneNrS]["mainproduct"] == iProd) { c += item[i][0]; } else { c -= item[i][0]; }
+                      if (c < 1) {
+                        data[zoneNrS]["mainproduct"] = iProd;
+                        c = item[i][0];
+                      }
+                      if (!zoneErnteCurr[iType]) { zoneErnteCurr[iType] = {}; }
+                      if (!zoneErnteCurr[iType][iProdStr]) { zoneErnteCurr[iType][iProdStr] = [0, 0]; }
+                      zoneErnteCurr[iType][iProdStr][0] += item[i][0];
+                      zoneErnteCurr[iType][iProdStr][1] += item[i][1];
+                      if (w) {
+                        data[zoneNrS]["watertime"] = Math.min(data[zoneNrS]["watertime"], w);
+                        if (valAssumeWater[currLocation] && (nowServer <= z) && (w <= z)) {
+                          // calculate future watering
+                          // w<nowServer means that now can be watered. because it isnt watered, assume that watering is not wanted
+                          // if (nowServer<=w){
+                          w = Math.max(0, Math.min(86400, w - nowServer)); // time till watering
+                          z -= nowServer; // remaining time
+                          z = nowServer + w + calcGrowDuration(z - w, (100 - currBonus - ((currBonusSpecial && (iProd == currBonusSpecial[0])) ? currBonusSpecial[1] : 0)) / 100);
+                        }
+                      }
 
-                                    if (z < data[zoneNrS]["endtime"]){
-                                        data[zoneNrS]["endtime"]=z;
-                                        data[zoneNrS]["endproduct"]=[iType,iProd];
-                                    }
-                                }
-                            }
-                        }
+                      if (z < data[zoneNrS]["endtime"]) {
+                        data[zoneNrS]["endtime"] = z;
+                        data[zoneNrS]["endproduct"] = [iType, iProd];
+                      }
                     }
-                    if(isProductional){
-                        for(var iTypeStr in zoneErnteCurr){
-                            if(!zoneErnteCurr.hasOwnProperty(iTypeStr)){ continue; }
-                            for(var iProdStr in zoneErnteCurr[iTypeStr]){
-                                if(!zoneErnteCurr[iTypeStr].hasOwnProperty(iProdStr)){ continue; }
-                                if(iTypeStr=="0"){
-                                    // zoneErnteCurr[iTypeStr][iProdStr][0] /= 10; // Fix Seberoth ... why ... TODO!
-                                }
-                                data[zoneNrS]["crop"].push([parseInt(iTypeStr,10),parseInt(iProdStr,10)].concat(zoneErnteCurr[iTypeStr][iProdStr]));
-                            }
-                        }
-                    }
-                    // too many empty fields
-                    err_trace="empty fields";
-                    if(now<data[zoneNrS]["endtime"]){
-                        if(!isNaN(valLimitEmptyFields[iZoneTyp])){
-                            help=(typeof data[zoneNrS]["production"][1]=="object"?data[zoneNrS]["production"][1][1]:data[zoneNrS]["production"][1]);
-                            if(help>valLimitEmptyFields[iZoneTyp]){
-                                data[zoneNrS]["endtime"]=NEVER;
-                                data[zoneNrS]["endproduct"]=null;
-                            }
-                        }else if(iZoneTyp=="megafield"){
-                            help=(typeof data[zoneNrS]["production"][1]=="object"?data[zoneNrS]["production"][1][1]:data[zoneNrS]["production"][1]);
-                            if(help>0){
-                                if(megafieldJob){
-                                    for(var prod in megafieldJob.products){
-                                        if(!megafieldJob.products.hasOwnProperty(prod)){ continue; }
-                                        if(megafieldJob.products[prod].have+megafieldJob.products[prod].growing<megafieldJob.products[prod].need){
-                                            data[zoneNrS]["endtime"]=NEVER;
-                                            data[zoneNrS]["endproduct"]=null;
-                                        }
-                                    }
-                                }
-                            }
-                        }else if(valGlobaltimeShowCroppedZone[currLocation]){
-                            help=(typeof data[zoneNrS]["production"][1]=="object"?data[zoneNrS]["production"][1][1]:data[zoneNrS]["production"][1]);
-                            if(help>0){
-                                data[zoneNrS]["endtime"]=NEVER;
-                                data[zoneNrS]["endproduct"]=null;
-                            }
-                        }
-                    }
-                    // create watering timer
-                    if(iZoneTyp==1){
-                        var farmNR=Math.floor((zoneNrF-1)/6)+1;
-                        var zoneNr=zoneNrF-6*(farmNR-1);
-                        createZoneTimer("zoneTimerWater_"+zoneNrS,zoneNrS,"zoneTimerWater","top:20px;left:5px;",$("farm"+farmNR+"_pos"+zoneNr));
-                    }
+                  }
                 }
-                err_trace="timer";
-                updateZoneTimer("zoneTimer_"+zoneNrS,zoneNrS,"zonetimer");
-                updateZoneTimer("zoneTimerWater_"+zoneNrS,zoneNrS,"zoneTimerWater");
-                updateZoneTimer("globalZoneTimer_"+zoneNrS,zoneNrS,"zonetimer");
-                updateZoneTimer("globalZoneTimerWater_"+zoneNrS,zoneNrS,"zoneTimerWater");
-                if(!noFollowing){
-                    err_trace="readyZone";
-                    zones.checkReady(zoneNrS);
-                    calcTotalEndtime();
-                    zones.save();
+              }
+              if (isProductional) {
+                for (var iTypeStr in zoneErnteCurr) {
+                  if (!zoneErnteCurr.hasOwnProperty(iTypeStr)) {
+                    continue; }
+                  for (var iProdStr in zoneErnteCurr[iTypeStr]) {
+                    if (!zoneErnteCurr[iTypeStr].hasOwnProperty(iProdStr)) {
+                      continue; }
+                    if (iTypeStr == "0") {
+                      // zoneErnteCurr[iTypeStr][iProdStr][0] /= 10; // Fix Seberoth ... why ... TODO!
+                    }
+                    data[zoneNrS]["crop"].push([parseInt(iTypeStr, 10), parseInt(iProdStr, 10)].concat(zoneErnteCurr[iTypeStr][iProdStr]));
+                  }
                 }
-                if(DEVMODE_FUNCTION){ tracking.end("berater",trackingHandle); }
-            }catch(err){ GM_logError("zones.processProduction","zoneNrS="+zoneNrS,"err_trace="+err_trace+" iProdStr="+iProdStr,err); }
-    }
+              }
+              // too many empty fields
+              err_trace = "empty fields";
+              if (now < data[zoneNrS]["endtime"]) {
+                if (!isNaN(valLimitEmptyFields[iZoneTyp])) {
+                  help = (typeof data[zoneNrS]["production"][1] == "object" ? data[zoneNrS]["production"][1][1] : data[zoneNrS]["production"][1]);
+                  if (help > valLimitEmptyFields[iZoneTyp]) {
+                    data[zoneNrS]["endtime"] = NEVER;
+                    data[zoneNrS]["endproduct"] = null;
+                  }
+                } else if (iZoneTyp == "megafield") {
+                  help = (typeof data[zoneNrS]["production"][1] == "object" ? data[zoneNrS]["production"][1][1] : data[zoneNrS]["production"][1]);
+                  if (help > 0) {
+                    if (megafieldJob) {
+                      for (var prod in megafieldJob.products) {
+                        if (!megafieldJob.products.hasOwnProperty(prod)) {
+                          continue; }
+                        if (megafieldJob.products[prod].have + megafieldJob.products[prod].growing < megafieldJob.products[prod].need) {
+                          data[zoneNrS]["endtime"] = NEVER;
+                          data[zoneNrS]["endproduct"] = null;
+                        }
+                      }
+                    }
+                  }
+                } else if (valGlobaltimeShowCroppedZone[currLocation]) {
+                  help = (typeof data[zoneNrS]["production"][1] == "object" ? data[zoneNrS]["production"][1][1] : data[zoneNrS]["production"][1]);
+                  if (help > 0) {
+                    data[zoneNrS]["endtime"] = NEVER;
+                    data[zoneNrS]["endproduct"] = null;
+                  }
+                }
+              }
+              // create watering timer
+              if (iZoneTyp == 1) {
+                var farmNR = Math.floor((zoneNrF - 1) / 6) + 1;
+                var zoneNr = zoneNrF - 6 * (farmNR - 1);
+                createZoneTimer("zoneTimerWater_" + zoneNrS, zoneNrS, "zoneTimerWater", "top:20px;left:5px;", $("farm" + farmNR + "_pos" + zoneNr));
+              }
+            }
+            err_trace = "timer";
+            updateZoneTimer("zoneTimer_" + zoneNrS, zoneNrS, "zonetimer");
+            updateZoneTimer("zoneTimerWater_" + zoneNrS, zoneNrS, "zoneTimerWater");
+            updateZoneTimer("globalZoneTimer_" + zoneNrS, zoneNrS, "zonetimer");
+            updateZoneTimer("globalZoneTimerWater_" + zoneNrS, zoneNrS, "zoneTimerWater");
+            if (!noFollowing) {
+              err_trace = "readyZone";
+              zones.checkReady(zoneNrS);
+              calcTotalEndtime();
+              zones.save();
+            }
+            if (DEVMODE_FUNCTION) { tracking.end("berater", trackingHandle); }
+          } catch (err) { GM_logError("zones.processProduction", "zoneNrS=" + zoneNrS, "err_trace=" + err_trace + " iProdStr=" + iProdStr, err); }
+}
+
     this.flagProduction=function(zoneNrS){
         try{
             if(!data[zoneNrS]){
@@ -2278,64 +2285,132 @@ var zones=new function(){
     this.checkReady=function(zoneNrS){
         try{
             var readyZoneAdded=0;
-            if((!zoneNrS.toString().match("megafield\.\d+"))&&(!zones.getBlock(zoneNrS))&&(zones.isProductional(zoneNrS))){
-                var zoneNrF=zoneNrS.toString().replace(/\.\d+$/g,"");
-                var farmNR=Math.floor((zoneNrF-1)/6)+1;
-                var zoneNr=zoneNrF-6*(farmNR-1);
-                var currZoneType=zones.getBuilding(zoneNrF);
-                var currLocation=zones.getLocation(zoneNrF);
-                var zT=zones.getEndtime(zoneNrS);
-                var zTw=zones.getWatertime(zoneNrS);
-                var div;
-                // We gonna set the megafield timer to the end of the tour, if we can't/needn't to plant anything
-                if (megafieldSmartTimer && zoneNrF == "megafield") {
-                    // Do we have the data AND is a harvest tour running (and the job hasn't timed out already)?
-                    if (unsafeWindow.megafield_data && unsafeWindow.megafield_data.tour && unsafeWindow.megafield_data.job_start != "0") {
-                        var toHarvest = 0; // Amount of fields, that the machine still has to harvest
-                        if (unsafeWindow.megafield_data.tour.steps) {
-                            // Iterate over all steps (completed and to do ones)
-                            for (var i = 0; i < unsafeWindow.megafield_data.tour.steps.length; i++) {
-                                // If the i-th step has attributes, it's not completed yet
-                                if (Object.keys(unsafeWindow.megafield_data.tour.steps[i]).length > 0) {
-                                    toHarvest++;
-                                }
-                            }
-                        }
-                        var planted = Object.keys(unsafeWindow.megafield_data.area).length; // Amount of planted fields
-                        var unlocked = Object.keys(unsafeWindow.megafield_data.area_free).length; // Amount unlocked fields
+            if ((!zoneNrS.toString().match("megafield\.\d+")) && (!zones.getBlock(zoneNrS)) && (zones.isProductional(zoneNrS))) {
+              var zoneNrF = zoneNrS.toString().replace(/\.\d+$/g, "");
+              var farmNR = Math.floor((zoneNrF - 1) / 6) + 1;
+              var zoneNr = zoneNrF - 6 * (farmNR - 1);
+              var currZoneType = zones.getBuilding(zoneNrF);
+              var currLocation = zones.getLocation(zoneNrF);
+              var zT = zones.getEndtime(zoneNrS);
+              var zTw = zones.getWatertime(zoneNrS);
+              var div;
 
-                        // Do we have to plant anything at all (or are we gonna finish the job soon)?
-                        var toPlant = 0; // Amount of plants missing/not yet planted to finish the job
-                        if (unsafeWindow.megafield_data.job && unsafeWindow.megafield_data.job.products) {
-                            // Iterate over needed products for current job
-                            for (var i = 0; i < unsafeWindow.megafield_data.job.products.length; i++) {
-                                var product = unsafeWindow.megafield_data.job.products[i];
-
-                                // If the product can be planted...
-                                if (product.duration) { // Only check plants: Cheese/Milk/Honey/... don't have a duration
-                                    // ... we add the total needed amount minus the amount we have minus the amount currently growing
-                                    toPlant += product.need - product.have - product.growing;
-                                }
-                            }
-                        }
-
-                        // There are empty fields (that need to be planted), if
-                        //  a) we still need to plant something AND
-                        //  b) there are empty fields
-                        var plantFields = toPlant && (toHarvest + planted) < unlocked;
-
-                        // If the tour is still running...
-                        if (unsafeWindow.megafield_data.tour.remain > 0) {
-                            // ... and we don't wanna plant anything right now...
-                            if (!plantFields) {
-                                // ... we set the megafield-timer to the end of the tour
-                                zT = unsafeWindow.megafield_data.tour.duration + unsafeWindow.megafield_data.tour.start;
-                                zones.setEndtime(zoneNrF, zT);
-                            }
-                            // otherwise we don't do anything until the empty fields are planted
-                        }
+              /*
+               * The following code block handles smart setting of the megafield time(s)
+               *  - Running tour => Mark megafield ready after tour
+               *  - No more planting needed/possible => Mark megafield ready when next plant is ready TODO: If last plant?
+               *  - Else (no running tour, but more planting needed&possible): Do nothing
+               */
+              if (megafieldSmartTimer && zoneNrF == "megafield" && unsafeWindow.megafield_data) {
+                var toHarvestInCurrentTour = 0; // Amount of fields, that the machine still has to harvest
+                if (unsafeWindow.megafield_data.tour && unsafeWindow.megafield_data.tour.steps) {
+                  // Iterate over all steps (completed and to do ones)
+                  for (var i = 0; i < unsafeWindow.megafield_data.tour.steps.length; i++) {
+                    // If the i-th step has attributes, it's not completed yet
+                    if (Object.keys(unsafeWindow.megafield_data.tour.steps[i]).length > 0) {
+                      toHarvestInCurrentTour++;
                     }
+                  }
                 }
+                var toPlantForCurrentJob = 0; // Amount of plants missing/not yet planted to finish the job
+                if (unsafeWindow.megafield_data.job && unsafeWindow.megafield_data.job.products) {
+                  // Iterate over needed products for current job
+                  for (var i = 0; i < unsafeWindow.megafield_data.job.products.length; i++) {
+                    var product = unsafeWindow.megafield_data.job.products[i];
+                    // If the product can be planted...
+                    if (product.duration) { // Only check plants: Cheese/Milk/Honey/... don't have a duration
+                      // ... we add the total needed amount minus the amount we have minus the amount currently growing
+                      toPlantForCurrentJob += product.need - product.have - product.growing;
+                    }
+                  }
+                }
+                var plantedCurrently = Object.keys(unsafeWindow.megafield_data.area).length; // Amount of planted fields
+                var unlocked = Object.keys(unsafeWindow.megafield_data.area_free).length; // Amount unlocked fields
+
+                // console.log("=== Moe, MGEAFIELD LOS GEHT'S ===");
+                if (toPlantForCurrentJob && (toHarvestInCurrentTour + plantedCurrently) < unlocked) {
+                  // console.log("Moe, wir müssten pflanzen");
+                } else {
+                  var readyFields = 0; // Amount of ready fields that could be started to be harvested right now
+                  var nextReadyField;
+                  for (var key in unsafeWindow.megafield_data.area) {
+                    if (!unsafeWindow.megafield_data.area.hasOwnProperty(key)) {
+                      continue;
+                    }
+                    var area = unsafeWindow.megafield_data.area[key];
+                    if (area.remain <= 0) {
+                      readyFields++;
+                    }
+                    if (!nextReadyField || nextReadyField.remain > area.remain) {
+                        nextReadyField = area;
+                    }
+                  }
+                  // console.log("Moe, wir müssen nix pflanzen. " + readyFields + " Felder READY");
+                  if (readyFields > 0 && !(unsafeWindow.megafield_data.tour && unsafeWindow.megafield_data.tour.remain > 0)) {
+                    // console.log("Moe, wir müssten die Erntemaschine starten");
+                  } else {
+                    // console.log("Moe, wir müssen die Erntemaschine nicht starten");
+                    if (unsafeWindow.megafield_data.tour && unsafeWindow.megafield_data.tour.remain > 0) {
+                      // console.log("Moe, wir warten bis zum Ende der Tour");
+                      zT = unsafeWindow.megafield_data.tour.duration + unsafeWindow.megafield_data.tour.start;
+                      zones.setEndtime(zoneNrF, zT);
+                      // console.log("Das wäre in " + (zT - unsafeWindow.servertimetime) + "s");
+                    } else {
+                      // console.log("Moe, wir warten bis das nächste Feld fertig ist");
+                      zT = nextReadyField.time + nextReadyField.duration;
+                      zones.setEndtime(zoneNrF, zT);
+                      // console.log("Das wäre in " + (zT - unsafeWindow.servertimetime) + "s");
+                    }
+                  }
+                }
+
+                // Do we have the data AND is a harvest tour running (and the job hasn't timed out already)?
+              //   if (unsafeWindow.megafield_data && unsafeWindow.megafield_data.tour && unsafeWindow.megafield_data.job_start != "0") {
+              //     var toHarvest = 0; // Amount of fields, that the machine still has to harvest
+              //     if (unsafeWindow.megafield_data.tour.steps) {
+              //       // Iterate over all steps (completed and to do ones)
+              //       for (var i = 0; i < unsafeWindow.megafield_data.tour.steps.length; i++) {
+              //         // If the i-th step has attributes, it's not completed yet
+              //         if (Object.keys(unsafeWindow.megafield_data.tour.steps[i]).length > 0) {
+              //           toHarvest++;
+              //         }
+              //       }
+              //     }
+              //     var planted = Object.keys(unsafeWindow.megafield_data.area).length; // Amount of planted fields
+              //     var unlocked = Object.keys(unsafeWindow.megafield_data.area_free).length; // Amount unlocked fields
+
+              //     // Do we have to plant anything at all (or are we gonna finish the job soon)?
+              //     var toPlant = 0; // Amount of plants missing/not yet planted to finish the job
+              //     if (unsafeWindow.megafield_data.job && unsafeWindow.megafield_data.job.products) {
+              //       // Iterate over needed products for current job
+              //       for (var i = 0; i < unsafeWindow.megafield_data.job.products.length; i++) {
+              //         var product = unsafeWindow.megafield_data.job.products[i];
+
+              //         // If the product can be planted...
+              //         if (product.duration) { // Only check plants: Cheese/Milk/Honey/... don't have a duration
+              //           // ... we add the total needed amount minus the amount we have minus the amount currently growing
+              //           toPlant += product.need - product.have - product.growing;
+              //         }
+              //       }
+              //     }
+
+              //     // There are empty fields (that need to be planted), if
+              //     //  a) we still need to plant something AND
+              //     //  b) there are empty fields
+              //     var plantFields = toPlant && (toHarvest + planted) < unlocked;
+
+              //     // If the tour is still running...
+              //     if (unsafeWindow.megafield_data.tour.remain > 0) {
+              //       // ... and we don't wanna plant anything right now...
+              //       if (!plantFields) {
+              //         // ... we set the megafield-timer to the end of the tour
+              //         zT = unsafeWindow.megafield_data.tour.duration + unsafeWindow.megafield_data.tour.start;
+              //         zones.setEndtime(zoneNrF, zT);
+              //       }
+              //       // otherwise we don't do anything until the empty fields are planted
+              //     }
+              //   }
+              }
 
                 if (zT==NEVER){ // empty
                     if(unsafeData.readyZone[zoneNrS]&&(unsafeData.readyZone[zoneNrS][1]=="e")){
@@ -4396,7 +4471,7 @@ try{
                     case 18:{
                         createElement("div",{},td,unsafeWindow.t_vet_quest_bonus["pat_points"].replace(/%PERCENT%/,questCurr[3][w][1]));
                     break;}
-					case 19:{
+                                        case 19:{
                         createElement("div",{},td,unsafeWindow.t_foodworld_reward_bonus.replace(/%PERCENT%/,questCurr[3][w][1]));
                     break;}
                     default:{
@@ -6627,8 +6702,8 @@ function buildInfoPanelOptions(){
             }
         }
 
-		//Min exotic fruits on farm5
-		newtr=createElement("tr",{},newtable);
+                //Min exotic fruits on farm5
+                newtr=createElement("tr",{},newtable);
         newtd=createElement("td",{"align":"center"},newtr);
         newdiv=createElement("div",{"style":"white-space:nowrap;"},newtd);
         newinput=createElement("input",{"id":"valMinExFruitsFarms5","value":valMinExFruitsFarms5,"class":"text","maxlength":"1","size":"3px","style":"background-color:transparent;text-align:center;"},newdiv);
@@ -8353,35 +8428,36 @@ function goToZone(zoneNrF){
         div=null;
     }catch(err){GM_logError("goToZone","zoneNrF="+zoneNrF,"",err);}
 }
-function calcAllSlots(){
-try{
+function calcAllSlots() {
+  try {
     var help;
-    ALL_SLOTS={};
-    for(var i in ALL_ZONES){
-        if(!ALL_ZONES.hasOwnProperty(i)){ continue; }
-        for(var j=0;j<ALL_ZONES[i].length;j++){
-            if(("megafield"!=ALL_ZONES[i][j])&&(help=zones.isMultiSlot(ALL_ZONES[i][j]))){
-                for(var slot=1;slot<=help;slot++){
-                    ALL_SLOTS[ALL_ZONES[i][j]+"."+slot]=i;
-                }
-            }else{
-                ALL_SLOTS[ALL_ZONES[i][j]]=i;
-            }
+    ALL_SLOTS = {};
+    for (var i in ALL_ZONES) { // i = farm, farmersmarket, forestry, city, foodworld, megafield
+      if (!ALL_ZONES.hasOwnProperty(i)) {
+        continue;
+      }
+      for (var j = 0; j < ALL_ZONES[i].length; j++) { // j iterates over length of array
+        if (("megafield" != ALL_ZONES[i][j]) && (help = zones.isMultiSlot(ALL_ZONES[i][j]))) { // Multislot buildings get a '.slot' ending
+          for (var slot = 1; slot <= help; slot++) {
+            ALL_SLOTS[ALL_ZONES[i][j] + "." + slot] = i;
+          }
+        } else {
+          ALL_SLOTS[ALL_ZONES[i][j]] = i;
         }
+      }
     }
-    unsafeData.ALL_SLOTS=ALL_SLOTS.clone(); //for Automat
+    unsafeData.ALL_SLOTS = ALL_SLOTS.clone(); // for Automat
 
     //todo: Look for a better solution
     //this extra is for checkReady
-    //Animal Treatment
-    vetTreatment= GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_vetTreatment", true);
-    if (vetTreatment){
-        for (var i = 5; i<=7; i++) {
-            ALL_SLOTS["farmersmarket-5."+i]="farmersmarket";
-        }
+    //Animal Treatment of Veterinary
+    vetTreatment = GM_getValue(COUNTRY + "_" + SERVER + "_" + USERNAME + "_vetTreatment", true);
+    if (vetTreatment) {
+      for (var i = 5; i <= 7; i++) {
+        ALL_SLOTS["farmersmarket-5." + i] = "farmersmarket";
+      }
     }
-
-}catch(err){ GM_logError("calcAllSlots","","",err); }
+  } catch (err) { GM_logError("calcAllSlots", "", "", err); }
 }
 function toolTipZoneProduction(zoneNrS){
     try{
@@ -9618,11 +9694,11 @@ try{
     valMinRackGrowing=GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_valMinRackGrowing",true);
     valMinRackRecursive=GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_valMinRackRecursive",false);
     valFarmiLimits=explode(GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_valFarmiLimits"),"do_main/valFarmiLimits",[90,100]);
-	unsafeData.valFarmiLimits=valFarmiLimits.clone();
-	valMinExFruitsFarms5=GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_valMinExFruitsFarms5",implode(valMinExFruitsFarms5,"buildInfoPanelOptions/valMinExFruitsFarms5"));
-	if (isNaN(valMinExFruitsFarms5)){
+        unsafeData.valFarmiLimits=valFarmiLimits.clone();
+        valMinExFruitsFarms5=GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_valMinExFruitsFarms5",implode(valMinExFruitsFarms5,"buildInfoPanelOptions/valMinExFruitsFarms5"));
+        if (isNaN(valMinExFruitsFarms5)){
         valMinExFruitsFarms5=VARIABLES["USER"]["valMinExFruitsFarms5"][2];
-	}
+        }
 
     valFarmiMiniInfo=GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_valFarmiMiniInfo",true);
 
@@ -10086,7 +10162,7 @@ try{
                 }
             }
         } catch(err) {GM_logError("openFoodworldBuildingSelect","","",err); }
-    });
+    }, true);
 
     unsafeOverwriteFunction("entryCityXmasEvent",function(c){
         /*
@@ -14661,21 +14737,21 @@ return false;
                     doFarmis();
                     raiseEvent("gameFarmiResponse");
                 break;}
-				case "vet_endtreatment": {
-						//doFarmersMarketData();
-						raiseEvent("gameVet_endtreatment");
-						//Tier entlassen
-				break;}
-				case "vet_setslot": {
-						//doFarmersMarketData();
-						raiseEvent("gameVet_setslot");
-						//Krankes Tier auf Slot:
-				break;}
-				case "vet_starttreatment": {
-						doFarmersMarketData();
-						raiseEvent("gameVet_starttreatment");
-						//Tier-Behandlung starten:
-				break;}
+                                case "vet_endtreatment": {
+                                                //doFarmersMarketData();
+                                                raiseEvent("gameVet_endtreatment");
+                                                //Tier entlassen
+                                break;}
+                                case "vet_setslot": {
+                                                //doFarmersMarketData();
+                                                raiseEvent("gameVet_setslot");
+                                                //Krankes Tier auf Slot:
+                                break;}
+                                case "vet_starttreatment": {
+                                                doFarmersMarketData();
+                                                raiseEvent("gameVet_starttreatment");
+                                                //Tier-Behandlung starten:
+                                break;}
                 case "watergarden":{
                     var zoneNrF = zoneNr+6*(farmNR-1);
                     if(1==zones.getBuilding(zoneNrF)){
@@ -21669,7 +21745,7 @@ try{
         text["de"]["settings_valContractLogAmount"]=["Anzahl gemerkte Verträge","Deine letzten erhaltenen und gesendeten Verträge werden gespeichert und somit kann ein Verlauf angezeigt werden."];
         text["de"]["settings_valFarmiLimits"]=["Farmi Grenzen","Die Farmis sind in 3 Klassen eingeteilt, je nachdem wie gut ihre Bezahl-Rate ist."];
         text["de"]["settings_valFarmiMiniInfo"]=["Farmi Mini Info","Zeigt einen kleinen Kreis unter jedem Farmi mit der jeweiligen Klasse der Bezahl-Rate."];
-		text["de"]["settings_valMinExFruitsFarms5"]=["Exotische Früchte","Korrektur der Transportmenge (Anzahl Felder)"];
+                text["de"]["settings_valMinExFruitsFarms5"]=["Exotische Früchte","Korrektur der Transportmenge (Anzahl Felder)"];
         text["de"]["settings_valMinRackMan"]=["Detail Konfiguration","Du editierst die Anzahl selbst *hier*"];
         text["de"]["settings_valMinRack"]=[,"Ein Produkt wird markiert, falls der Lagerbestand unter diese Grenze fällt. Du kannst verschiedene Werte abhängig von der Kategorie einstellen."];
         text["de"]["settings_valMinRackPlantsize"]=["Pflanzengröße einrechnen","Zum Beispiel braucht Getreide nur den halben Bestand."];
@@ -21711,7 +21787,7 @@ try{
         text["de"]["settings_vet"]=["Tierarzt (Behandlung kranker Tiere)", "Ein blinkender Icon zeigt an, wenn ein geheiltes Tier entlassen werden kann."];
         text["de"]["settings_vetAutoSet"]=["Automatisches Setzen", "Wird ein krankes Tier angeklickt, wird es direkt auf eine freie Liege gelegt."];
         text["de"]["settings_valVetNoCoinDrugs"]=["Keine Coin-Tinkturen", "Ignoriere Tinkturen, die in der Herstellung Coins kosten."];
-		text["de"]["settings_vetTreatment"]=["Tier heilen", "Tierdaten werden eingelesen"];
+                text["de"]["settings_vetTreatment"]=["Tier heilen", "Tierdaten werden eingelesen"];
 
         // help
         text["de"]["help_0"]=[,"This is small introduction to the functions of the Adviser-Script. Not all changes are written here, go find them yourself ... Sometimes a mouse-over helps. <br>At the bottom you see a button to visit the <a href=\""+GM_Home+"\" target=\"_blank\">homepage</a>. Next to it, there is the button for the options. You should look at them and configure as you desire.<br>Generally the script only knows what you have seen. So just visit the field if something is wrong."];
@@ -22079,8 +22155,8 @@ try{
         text["en"]["settings_valMoveAnimals"]=["Move animals",""];
         text["en"]["settings_valContractLogAmount"]=["Number contracts kept","Your last sent and received contracts are kept so that a history of them can be shown."];
         text["en"]["settings_valFarmiLimits"]=["Farmie Limits","The farmies are marked in 3 cases depending on their payment-rate."];
-		text["en"]["settings_valFarmiMiniInfo"]=["Farmie Mini Info","Displays a small circle below each farmie showing its case of payment-rate."];
-		text["en"]["settings_valMinExFruitsFarms5"]=["Exotic Fruits","Correction of transport amount (number of fields)"];
+                text["en"]["settings_valFarmiMiniInfo"]=["Farmie Mini Info","Displays a small circle below each farmie showing its case of payment-rate."];
+                text["en"]["settings_valMinExFruitsFarms5"]=["Exotic Fruits","Correction of transport amount (number of fields)"];
         text["en"]["settings_valMinRackMan"]=["Detail configuration","You edit the amount on your own *here*"];
         text["en"]["settings_valMinRack"]=[,"A product is marked if its amount in your rack is falling below this value. You can enter different values depending on the category."];
         text["en"]["settings_valMinRackPlantsize"]=["Aspect size of plant","For example grain needs only half of the value above."];
