@@ -109,7 +109,7 @@ const CHANGELOG=[["2.0","29.05.2014",[["Migration nach openuserjs.org","Migratio
                 ,["2.09.17","30.05.2016",[["Bugfix ","Bugfix"]]]
                 ,["2.09.18","30.05.2016",[["Neues common_function_file","New common_function_file"]]]
                 ,["2.09.19","28.06.2016",[["Bugfix Güterhof und Verträge","Bugfix: megafield and contract"]]]
-				,["2.09.20","12.07.2016",[["Anpassung an Spiel-Update 12.07.2016","Fix for game update 12.07.2016"]]]
+                ,["2.09.20","12.07.2016",[["Anpassung an Spiel-Update 12.07.2016","Fix for game update 12.07.2016"]]]
                 ,["2.09.21","15.08.2016",[["Eisdiele","ice cream parlor"]]]
                 ,["2.09.22","16.08.2016",[["Bugfix Picknick Bereich","Bugfix Foodworld"]]]
                 ,["2.09.23","30.08.2016",[["Bugfix","Bugfix"]]]
@@ -2814,26 +2814,26 @@ try{
             //       Aber bei bspw. Fabriken oder Tinkturen macht das keinen Sinn!
             //       Hier sollten vllt. die benötigten Produkte gecheckt werden
 
-			//Patch 12072016
-			var inStock = false;
-			if (unsafeData.prodTyp[0][iProd].match(/fw/)){
-				for(var i=0;i<unsafeData.prodRequire[0][iProd].length;i++){
-					input=unsafeData.prodRequire[0][iProd][i][1];
-					if (unsafeData.prodStock[0][input]&&unsafeData.prodStock[0][input]>=unsafeData.prodRequire[0][iProd][i][2]) {
-						inStock = true;
-					}
-					else {
-						inStock = false;
-						break;
-					}
-				}
-			}
+            //Patch 12072016
+            var inStock = false;
+            if (unsafeData.prodTyp[0][iProd].match(/fw/)){
+                for(var i=0;i<unsafeData.prodRequire[0][iProd].length;i++){
+                    input=unsafeData.prodRequire[0][iProd][i][1];
+                    if (unsafeData.prodStock[0][input]&&unsafeData.prodStock[0][input]>=unsafeData.prodRequire[0][iProd][i][2]) {
+                        inStock = true;
+                    }
+                    else {
+                        inStock = false;
+                        break;
+                    }
+                }
+            }
 
-			if(inStock){
-				newdiv.style.opacity=1;
-			}else{
-				newdiv.style.opacity=(unsafeData.prodStock[0][iProd]&&unsafeData.prodStock[0][iProd]>0)?1:0.4;
-			}
+            if(inStock){
+                newdiv.style.opacity=1;
+            }else{
+                newdiv.style.opacity=(unsafeData.prodStock[0][iProd]&&unsafeData.prodStock[0][iProd]>0)?1:0.4;
+            }
             newdiv.addEventListener("click",function(){
                 var zoneNrS=this.parentNode.getAttribute("zoneNrS");
                 var zoneNrL=this.parentNode.getAttribute("zoneNrL");
@@ -5394,7 +5394,7 @@ function checkGuildJobProduct(zoneNrL) {
         var buildProducts = unsafeData.BUILDING2PRODUCT[getZoneType(zoneNrL)]; //produzierte Produkte
         if (settings.get("account","botUseGuildJop") && unsafeWindow.job_data && unsafeWindow.job_data.guild_job_data) {
             var job = unsafeWindow.job_data.currentjob; // aktueller Beruf
-	        var jobProducts = unsafeWindow.job_data.config.jobs[job].products; //Produkte die der Beruf herstellen kann
+            var jobProducts = unsafeWindow.job_data.config.jobs[job].products; //Produkte die der Beruf herstellen kann
             for (var i=0;i<buildProducts.length;i++) {
                 if (unsafeWindow.job_data.guild_job_data.data.products.hasOwnProperty(buildProducts[0]) &&
                     jobProducts.indexOf(buildProducts[i])){
@@ -6245,228 +6245,250 @@ function autoFarmFuelstation(runId,step){
   }catch(err){ GM_logError("autoFarmFuelstation_error","runId="+runId+" step="+step,"",err); }
 }
 
-function autoMegafield(runId,step){
-    try{
-    if(!step){ step=1; }
-    if(settings.get("account","botUseMegafield") && bot.checkRun("autoMegafield",runId)) {
-        bot.setAction("autoMegafield ("+step+")");
-        var action=null,listeningEvent=null;
-        var help;
-        switch(step){
-        case 1:{ // init
-            var zoneNrF="megafield";
+function autoMegafield(runId, step) {
+  try {
+    if (!step) { step = 1; }
+    if (settings.get("account", "botUseMegafield") && bot.checkRun("autoMegafield", runId)) {
+      bot.setAction("autoMegafield (" + step + ")");
+      var action = null, listeningEvent = null;
+      var help;
+      switch (step) {
+        case 1:
+          { // init
+            var zoneNrF = "megafield";
             handled.set(zoneNrF);
-            if(!zoneWaiting[handled.zoneNrL] && // Befindet sich das Megafield nicht in der Liste der "behandle mich gerade nicht"-Zonen?
-               (help=unsafeData.readyZone[handled.zoneNrL]) &&  // ["megafield", "r", true] => vorhanden => true
-                help[2] && // siehe drüber => true
-                ((("r"==help[1] || "e"==help[1]) &&  // siehe drüber => true
-                  (PRODSTOP!=zoneList[handled.zoneNrL][0][0] || !settings.get("account","disableCropFields"))) || // Kein ProdStop ODER nicht-Ernten-Flag nicht gesetzt
-                 ("e"==help[1] && PRODSTOP!=zoneList[handled.zoneNrL][0][0]))) { // Feld leer UND noch was anzupflanzen
-                autoMegafield(runId,step+1);
-            }else{
-                autoMegafield(runId,9); // exit
+            if (!zoneWaiting[handled.zoneNrL] && // Befindet sich das Megafield nicht in der Liste der "behandle mich gerade nicht"-Zonen?
+              (help = unsafeData.readyZone[handled.zoneNrL]) && // ["megafield", "r", true] => vorhanden => true
+              help[2] && // siehe drüber => true
+              ((("r" == help[1] || "e" == help[1]) && // siehe drüber => true
+                  (PRODSTOP != zoneList[handled.zoneNrL][0][0] || !settings.get("account", "disableCropFields"))) || // Kein ProdStop ODER nicht-Ernten-Flag nicht gesetzt
+                ("e" == help[1] && PRODSTOP != zoneList[handled.zoneNrL][0][0]))) { // Feld leer UND noch was anzupflanzen
+              autoMegafield(runId, step + 1);
+            } else {
+              autoMegafield(runId, 9); // exit
             }
-        break;}
-        case 2:{ // switch action: cropping or planting?
-            if(("object"==typeof unsafeWindow.megafield_data.tour)&&(!unsafeWindow.megafield_data.tour.remain)){ // Tour noch aktiv, aber in Vergangenheit zu Ende gegangen
-                unsafeWindow.megafield_data.tour=0; // Das Ding auf einen Integer setzen, was wohl löschen bedeutet
+            break;
+          }
+        case 2:
+          { // switch action: cropping or planting?
+            if (("object" == typeof unsafeWindow.megafield_data.tour) && (!unsafeWindow.megafield_data.tour.remain)) { // Tour noch aktiv, aber in Vergangenheit zu Ende gegangen
+              unsafeWindow.megafield_data.tour = 0; // Das Ding auf einen Integer setzen, was wohl löschen bedeutet
             }
-            if(!unsafeWindow.megafield_data.tour && // Die Tour wurde (bspw. in den Zeilen drüber) auf 0 gesetzt und ist damit beendet
-               (help=unsafeData.readyZone[handled.zoneNrL]) && // help=["megafield", "r", true] => vorhanden => true
-               "r"==help[1] && // "r" für ready
-               (PRODSTOP!=zoneList[handled.zoneNrL][0][0] || !settings.get("account","disableCropFields"))) { // Noch was anzubauen ODER nicht-Ernten-Flag nicht gesetzt
-                // crop
-                autoMegafield(runId,step+1);
-            }else if((help=unsafeData.readyZone[handled.zoneNrL]) && // Wir haben wieder/immernoch einen Eintrag in readyZone
-                     help[2] && // Im Array steht an der Stelle ein true
-                     (("r"==help[1] && // Megafield ist ready UND [Noch was anzubauen ODER nicht-Ernten-Flag nicht gesetzt]
-                       (PRODSTOP!=zoneList[handled.zoneNrL][0][0] || !settings.get("account","disableCropFields"))) || // siehe Kommentar drüber
-                      ("e"==help[1] && PRODSTOP!=zoneList[handled.zoneNrL][0][0]))) { // Megafield ist empty und noch was anzubauen
-                // plant
-                autoMegafield(runId,7);
-            }else{
-                autoMegafield(runId,9); // exit
+            if (!unsafeWindow.megafield_data.tour && // Die Tour wurde (bspw. in den Zeilen drüber) auf 0 gesetzt und ist damit beendet
+              (help = unsafeData.readyZone[handled.zoneNrL]) && // help=["megafield", "r", true] => vorhanden => true
+              "r" == help[1] && // "r" für ready
+              (PRODSTOP != zoneList[handled.zoneNrL][0][0] || !settings.get("account", "disableCropFields"))) { // Noch was anzubauen ODER nicht-Ernten-Flag nicht gesetzt
+              // crop
+              autoMegafield(runId, step + 1);
+            } else if ((help = unsafeData.readyZone[handled.zoneNrL]) && // Wir haben wieder/immernoch einen Eintrag in readyZone
+              help[2] && // Im Array steht an der Stelle ein true
+              (("r" == help[1] && // Megafield ist ready UND [Noch was anzubauen ODER nicht-Ernten-Flag nicht gesetzt]
+                  (PRODSTOP != zoneList[handled.zoneNrL][0][0] || !settings.get("account", "disableCropFields"))) || // siehe Kommentar drüber
+                ("e" == help[1] && PRODSTOP != zoneList[handled.zoneNrL][0][0]))) { // Megafield ist empty und noch was anzubauen
+              // plant
+              autoMegafield(runId, 7);
+            } else {
+              autoMegafield(runId, 9); // exit
             }
-        break;}
-        case 3:{ // crop vehicle
-            if(!unsafeData.gameLocation.check("megafield")) { // Falls wir uns nicht auf dem Megafield befinden => hinwechseln
-                // open megafield
-                GM_logInfo("autoMegafield","runId="+runId+" step="+step,"zoneNrF="+handled.zoneNrF+" zoneNrL="+handled.zoneNrL,getText("automat_automatMegafield")+": "+getText("automat_changingToX").replace("%1%",getText("megafield")));
-                step--;
-                listeningEvent="gameOpenMegafield";
-                action=function(){ click($("speedlink_megafield")); };
-            }else if(unsafeWindow.megafield_vehicle_id && unsafeWindow.megafield_tour_type=="harvest") { // Ein Fahrzeug ist selektiert und es ist ein Ernte-Fahrzeug
-                if((unsafeWindow.megafield_data.vehicles[unsafeWindow.megafield_vehicle_id])&&(unsafeWindow.megafield_data.vehicles[unsafeWindow.megafield_vehicle_id].durability>0)){
-                    // Das Fahrzeug ist noch nicht "aufgebraucht" => befinden uns im Zustand "vehicle selected"
-                    GM_logInfo("autoMegafield","runId="+runId+" step="+step,"zoneNrF="+handled.zoneNrF+" zoneNrL="+handled.zoneNrL,getText("automat_automatMegafield")+": "+getText("automat_vehicleXSelected").replace("%1%",unsafeWindow.megafield_vehicle_id));
-                    autoMegafield(runId,step+2);
-                }else if(unsafeWindow.megafield_data.vehicles_unlock[unsafeWindow.megafield_vehicle_id]){ // Fahrzeug ist entsperrt => Kaufen
-                    // buy vehicle
-                    GM_logInfo("autoMegafield","runId="+runId+" step="+step,"zoneNrF="+handled.zoneNrF+" zoneNrL="+handled.zoneNrL,getText("automat_automatMegafield")+": "+getText("automat_vehicleXBuying").replace("%1%",unsafeWindow.megafield_vehicle_id));
-                    listeningEvent="gameMegafieldDialogStarted";
-                    action=function(){ click($("megafield_vehicle"+unsafeWindow.megafield_vehicle_id).querySelector(".lock_open")); };
-                }else{ // Fahrzeug nicht verfügbar... wie kann das überhaupt passieren? -Egal jetzt => Abbruch
-                    GM_logWarning("autoMegafield","runId="+runId+" step="+step,"zoneNrF="+handled.zoneNrF+" zoneNrL="+handled.zoneNrL,getText("automat_automatMegafield")+": "+getText("automat_vehicleXNotAvailable").replace("%1%",unsafeWindow.megafield_vehicle_id)+" "+getText("automat_stopAdding"));
-                    zoneList[handled.zoneNrL].unshift(DEFAULT_ZONELIST_ITEM.clone());
-                    updateQueueBox(handled.zoneNrS);
-                    autoMegafield(runId,9); // exit
-                }
-            }else{ // Kein Fahrzeug selektiert => Abbruch. Vielleicht kann man ja mal implementieren, dass da was selektiert wird
-                // TODO select vehicle ?
-                GM_logWarning("autoMegafield","runId="+runId+" step="+step,"zoneNrF="+handled.zoneNrF+" zoneNrL="+handled.zoneNrL,getText("automat_automatMegafield")+": "+getText("automat_vehicleNotKnown")+" "+getText("automat_stopAdding"));
+            break;
+          }
+        case 3:
+          { // crop vehicle
+            if (!unsafeData.gameLocation.check("megafield")) { // Falls wir uns nicht auf dem Megafield befinden => hinwechseln
+              // open megafield
+              GM_logInfo("autoMegafield", "runId=" + runId + " step=" + step, "zoneNrF=" + handled.zoneNrF + " zoneNrL=" + handled.zoneNrL, getText("automat_automatMegafield") + ": " + getText("automat_changingToX").replace("%1%", getText("megafield")));
+              step--;
+              listeningEvent = "gameOpenMegafield";
+              action = function() { click($("speedlink_megafield")); };
+            } else if (unsafeWindow.megafield_vehicle_id && unsafeWindow.megafield_tour_type == "harvest") { // Ein Fahrzeug ist selektiert und es ist ein Ernte-Fahrzeug
+              if ((unsafeWindow.megafield_data.vehicles[unsafeWindow.megafield_vehicle_id]) && (unsafeWindow.megafield_data.vehicles[unsafeWindow.megafield_vehicle_id].durability > 0)) {
+                // Das Fahrzeug ist noch nicht "aufgebraucht" => befinden uns im Zustand "vehicle selected"
+                GM_logInfo("autoMegafield", "runId=" + runId + " step=" + step, "zoneNrF=" + handled.zoneNrF + " zoneNrL=" + handled.zoneNrL, getText("automat_automatMegafield") + ": " + getText("automat_vehicleXSelected").replace("%1%", unsafeWindow.megafield_vehicle_id));
+                autoMegafield(runId, step + 2);
+              } else if (unsafeWindow.megafield_data.vehicles_unlock[unsafeWindow.megafield_vehicle_id]) { // Fahrzeug ist entsperrt => Kaufen
+                // buy vehicle
+                GM_logInfo("autoMegafield", "runId=" + runId + " step=" + step, "zoneNrF=" + handled.zoneNrF + " zoneNrL=" + handled.zoneNrL, getText("automat_automatMegafield") + ": " + getText("automat_vehicleXBuying").replace("%1%", unsafeWindow.megafield_vehicle_id));
+                listeningEvent = "gameMegafieldDialogStarted";
+                action = function() { click($("megafield_vehicle" + unsafeWindow.megafield_vehicle_id).querySelector(".lock_open")); };
+              } else { // Fahrzeug nicht verfügbar... wie kann das überhaupt passieren? -Egal jetzt => Abbruch
+                GM_logWarning("autoMegafield", "runId=" + runId + " step=" + step, "zoneNrF=" + handled.zoneNrF + " zoneNrL=" + handled.zoneNrL, getText("automat_automatMegafield") + ": " + getText("automat_vehicleXNotAvailable").replace("%1%", unsafeWindow.megafield_vehicle_id) + " " + getText("automat_stopAdding"));
                 zoneList[handled.zoneNrL].unshift(DEFAULT_ZONELIST_ITEM.clone());
                 updateQueueBox(handled.zoneNrS);
-                autoMegafield(runId,9); // exit
+                autoMegafield(runId, 9); // exit
+              }
+            } else { // Kein Fahrzeug selektiert => Abbruch. Vielleicht kann man ja mal implementieren, dass da was selektiert wird
+              // TODO select vehicle ?
+              GM_logWarning("autoMegafield", "runId=" + runId + " step=" + step, "zoneNrF=" + handled.zoneNrF + " zoneNrL=" + handled.zoneNrL, getText("automat_automatMegafield") + ": " + getText("automat_vehicleNotKnown") + " " + getText("automat_stopAdding"));
+              zoneList[handled.zoneNrL].unshift(DEFAULT_ZONELIST_ITEM.clone());
+              updateQueueBox(handled.zoneNrS);
+              autoMegafield(runId, 9); // exit
             }
-        break;}
-        case 4:{ // crop vehicle dialogue, wir ham zuvor auf "Fahrzeug kaufen" geklickt, dass muss nun bestätigt werden
-            step=step-2;
-            listeningEvent="gameMegafieldVehicleBought";
-            action=function(){ click($("globalbox_button1")); };
-        break;}
-        case 5:{ // crop mode
-            if(unsafeWindow.megafield_plant_pid>0){ // Falls wir uns nicht im Ernte-Modus befinden, in diesen wechseln
-                click($("megafield_vehicle_select_slot"));
-                window.setTimeout(autoMegafield,settings.getPause(),runId,step+1);
-            }else{
-                autoMegafield(runId,step+1);
+            break;
+          }
+        case 4:
+          { // crop vehicle dialogue, wir ham zuvor auf "Fahrzeug kaufen" geklickt, dass muss nun bestätigt werden
+            step = step - 2;
+            listeningEvent = "gameMegafieldVehicleBought";
+            action = function() { click($("globalbox_button1")); };
+            break;
+          }
+        case 5:
+          { // crop mode
+            if (unsafeWindow.megafield_plant_pid > 0) { // Falls wir uns nicht im Ernte-Modus befinden, in diesen wechseln
+              click($("megafield_vehicle_select_slot"));
+              window.setTimeout(autoMegafield, settings.getPause(), runId, step + 1);
+            } else {
+              autoMegafield(runId, step + 1);
             }
-        break;}
-        case 6:{ // crop
-            var area=unsafeWindow.megafield_data.area; // Objekt mit Attributen 1-99 => [duration, pid, remain, time] also Wachstumsdauer, ProduktID, Restzeit, Endzeitpunkt
-            var areaSize=unsafeData.BUILDING_SIZE["megafield"][0]*unsafeData.BUILDING_SIZE["megafield"][1]; // Rechteck 9*11 = 99
+            break;
+          }
+        case 6:
+          { // crop
+            var area = unsafeWindow.megafield_data.area; // Objekt mit Attributen 1-99 => [duration, pid, remain, time] also Wachstumsdauer, ProduktID, Restzeit, Endzeitpunkt
+            var areaSize = unsafeData.BUILDING_SIZE["megafield"][0] * unsafeData.BUILDING_SIZE["megafield"][1]; // Rechteck 9*11 = 99
             // Generate route
-            var i=0;
-            while(i<=areaSize){ // Solange nicht bis 99 gezählt wurde...
-                for(i=1;i<=areaSize;i++){ // Zähle von 1 bis 99 bzw. erneut anfangen, wenn...
-                    if(area[i]&&(area[i].remain<0) && // das i-te Feld existiert UND
-                       $("megafield_tile_tour"+i).className=="megafield_area_tour_possible") { // wir dort die Tour anfangen/fortsetzen können
-                        click($("megafield_tile"+i));
-                        break;
-                    }
+            var i = 0;
+            while (i <= areaSize) { // Solange nicht bis 99 gezählt wurde...
+              for (i = 1; i <= areaSize; i++) { // Zähle von 1 bis 99 bzw. erneut anfangen, wenn...
+                if (area[i] && (area[i].remain < 0) && // das i-te Feld existiert UND
+                  $("megafield_tile_tour" + i).className == "megafield_area_tour_possible") { // wir dort die Tour anfangen/fortsetzen können
+                  click($("megafield_tile" + i));
+                  break;
                 }
+              }
             } // Jetzt hamma unsere Tour zusammengeklickt
             // Commit
-            if($("megafield_vehicle_go"+unsafeWindow.megafield_vehicle_id).style.display=="block"){ // Grüner Haken sichtbar
-                GM_logInfo("autoMegafield","runId="+runId+" step="+step,"zoneNrF="+handled.zoneNrF+" zoneNrL="+handled.zoneNrL,getText("automat_automatMegafield")+": "+getText("automat_tourStarting"));
-                listeningEvent="gameMegafieldTourStarted";
-                action=function(){ click($("megafield_vehicle_go"+unsafeWindow.megafield_vehicle_id)); };
-            }else{
-                // TODO: Falls auch nichts mehr zu pflanzen ist: Warum sind wir hier?
-                GM_logWarning("autoMegafield","runId="+runId+" step="+step,"zoneNrF="+handled.zoneNrF+" zoneNrL="+handled.zoneNrL,getText("automat_automatMegafield")+": "+getText("automat_nothingToCrop"));
-                autoMegafield(runId,step+1);
+            if ($("megafield_vehicle_go" + unsafeWindow.megafield_vehicle_id).style.display == "block") { // Grüner Haken sichtbar
+              GM_logInfo("autoMegafield", "runId=" + runId + " step=" + step, "zoneNrF=" + handled.zoneNrF + " zoneNrL=" + handled.zoneNrL, getText("automat_automatMegafield") + ": " + getText("automat_tourStarting"));
+              listeningEvent = "gameMegafieldTourStarted";
+              action = function() { click($("megafield_vehicle_go" + unsafeWindow.megafield_vehicle_id)); };
+            } else {
+              // TODO: Falls auch nichts mehr zu pflanzen ist: Warum sind wir hier?
+              GM_logWarning("autoMegafield", "runId=" + runId + " step=" + step, "zoneNrF=" + handled.zoneNrF + " zoneNrL=" + handled.zoneNrL, getText("automat_automatMegafield") + ": " + getText("automat_nothingToCrop"));
+              autoMegafield(runId, step + 1);
             }
-        break;}
-        case 7:{ // Plant
-            if((zoneList[handled.zoneNrL][0][0]==PRODSTOP)||(!unsafeData.readyZone[handled.zoneNrS])){ // PRODSTOP ganz vorne ODER Mgeafield nicht (mehr) ready
-                autoMegafield(runId,9); // exit
-            }else if(unsafeWindow.megafield_plant_pid && zoneList[handled.zoneNrL][0][0]==unsafeWindow.megafield_plant_pid){ // Ein Produkt ist angewählt UND Passt das zum Produkt in der Queue??
-                var div;
-                if (unsafeWindow.premium==1 && // Premium is active
-                    settings.get("account","botUseMegafieldPremiumPlanting") && // Option is activated
-                    (div=$("megafield_products").querySelector('div[onclick*="dialogMegafield(\'autoplant\', 0, 0, 0, '+zoneList[handled.zoneNrL][0][0]+')"]'))) { // Div is visible
-                    // var div=$("megafield_products").querySelector('div[onclick*="dialogMegafield(\'autoplant\', 0, 0, 0, '+zoneList[handled.zoneNrL][0][0]+')"]');
-                    GM_logInfo("autoMegafield","runId="+runId+" step="+step,"zoneNrF="+handled.zoneNrF+" zoneNrL="+handled.zoneNrL,getText("automat_automatMegafield")+": Open autoplant dialog");
-                    listeningEvent="gameMegafieldDialogAutoplant";
-                    action=function(){ click(div); };
-                } else {
-                    var actionField=null;
-                    var area=unsafeWindow.megafield_data.area; // Komplette Area: Konkreter, nur Attribute mit bepflanzten Feldern
-                    var areaFree=unsafeWindow.megafield_data.area_free; // Freigeschaltete Area: Konkreter, wann wurde das Feld freigeschaltet
-                    var tour=unsafeWindow.megafield_data.tour; // Aktuell laufende Tour. Ist 0, wenn keine Tour läuft.
-                    var tourSteps={};
-                    if(tour&&tour.steps){ // Falls aktuell eine Route läuft, deren Schritte "sammeln"
-                        for(var i=0;i<tour.steps.length;i++){
-                            for(var j in tour.steps[i]){
-                                if(!tour.steps[i].hasOwnProperty(j)){continue;}
-                                tourSteps[j]=i+1;
-                            }
-                        }
+            break;
+          }
+        case 7:
+          { // Plant
+            if ((zoneList[handled.zoneNrL][0][0] == PRODSTOP) || (!unsafeData.readyZone[handled.zoneNrS])) { // PRODSTOP ganz vorne ODER Mgeafield nicht (mehr) ready
+              autoMegafield(runId, 9); // exit
+            } else if (unsafeWindow.megafield_plant_pid && zoneList[handled.zoneNrL][0][0] == unsafeWindow.megafield_plant_pid) { // Ein Produkt ist angewählt UND Passt das zum Produkt in der Queue??
+              var div;
+              if (unsafeWindow.premium == 1 && // Premium is active
+                settings.get("account", "botUseMegafieldPremiumPlanting") && // Option is activated
+                (div = $("megafield_products").querySelector('div[onclick*="dialogMegafield(\'autoplant\', 0, 0, 0, ' + zoneList[handled.zoneNrL][0][0] + ')"]'))) { // Div is visible
+                // var div=$("megafield_products").querySelector('div[onclick*="dialogMegafield(\'autoplant\', 0, 0, 0, '+zoneList[handled.zoneNrL][0][0]+')"]');
+                GM_logInfo("autoMegafield", "runId=" + runId + " step=" + step, "zoneNrF=" + handled.zoneNrF + " zoneNrL=" + handled.zoneNrL, getText("automat_automatMegafield") + ": " + getText("automat_openAutoplantDialog"));
+                listeningEvent = "gameMegafieldDialogAutoplant";
+                action = function() { click(div); };
+              } else {
+                var actionField = null;
+                var area = unsafeWindow.megafield_data.area; // Komplette Area: Konkreter, nur Attribute mit bepflanzten Feldern
+                var areaFree = unsafeWindow.megafield_data.area_free; // Freigeschaltete Area: Konkreter, wann wurde das Feld freigeschaltet
+                var tour = unsafeWindow.megafield_data.tour; // Aktuell laufende Tour. Ist 0, wenn keine Tour läuft.
+                var tourSteps = {};
+                if (tour && tour.steps) { // Falls aktuell eine Route läuft, deren Schritte "sammeln"
+                  for (var i = 0; i < tour.steps.length; i++) {
+                    for (var j in tour.steps[i]) {
+                      if (!tour.steps[i].hasOwnProperty(j)) {
+                        continue; }
+                      tourSteps[j] = i + 1;
                     }
-                    var i=0;
-                    loop:
-                    for(var r=1;r<=unsafeData.BUILDING_SIZE["megafield"][1];r++){ // Über alle 11 Zeilen des Megafields iterieren
-                        for(var c=1;c<=unsafeData.BUILDING_SIZE["megafield"][0];c++){ // Über alle 9 Spalten des Megafields iterieren
-                            if(areaFree[++i]&&(!area[i])&&(!tourSteps[i])){ // i erhöhen, i-tes Feld freigeschaltet UND nicht bepflanzt UND nicht am geerntet werden
-                                actionField=[c,r,i]; // [Zeile, Spalte, FeldNummer] kann/muss bepflanzt werden
-                                break loop;
-                            }
-                        }
-                    }
-                    if(actionField){ // Wir ham n Feld, das bepflanzt werden muss
-                        if(!unsafeData.gameLocation.check("megafield")){ // Sind wir wieder nicht mehr auf dem Megafield?!
-                            // open megafield
-                            GM_logInfo("autoMegafield","runId="+runId+" step="+step,"zoneNrF="+handled.zoneNrF+" zoneNrL="+handled.zoneNrL,getText("automat_automatMegafield")+": "+getText("automat_changingToX").replace("%1%",getText("megafield")));
-                            step--;
-                            listeningEvent="gameOpenMegafield";
-                            action=function(){ click($("speedlink_megafield")); };
-                        }else{ // Leeres Feld bepflanzen
-                            GM_logInfo("autoMegafield","runId="+runId+" step="+step,"zoneNrF="+handled.zoneNrF+" zoneNrL="+handled.zoneNrL,getText("automat_automatMegafield")+": "+getText("automat_plantingAtX").replace("%1%",String.fromCharCode(64+actionField[0])+actionField[1]));
-                            unsafeData.readyZone[handled.zoneNrL][2]=false;
-                            listeningEvent="gameMegafieldPlanted";
-                            action=function(){ click($("megafield_tile"+actionField[2])); };
-                        }
-                    }else{
-                        // no free field to plant
-                        GM_logInfo("autoMegafield","runId="+runId+" step="+step,"zoneNrF="+handled.zoneNrF+" zoneNrL="+handled.zoneNrL,getText("automat_automatMegafield")+": "+getText("automat_plantingNoFreeField"));
-                        autoMegafield(runId,9); // exit
-                    }
+                  }
                 }
-            }else if(!unsafeData.gameLocation.check("megafield")){ // Befinden wir und noch auf dem Megafield? => zur Not: Hinwechseln!
-                // open megafield
-                GM_logInfo("autoMegafield","runId="+runId+" step="+step,"zoneNrF="+handled.zoneNrF+" zoneNrL="+handled.zoneNrL,getText("automat_automatMegafield")+": "+getText("automat_changingToX").replace("%1%",getText("megafield")));
-                step--;
-                listeningEvent="gameOpenMegafield";
-                action=function(){ click($("speedlink_megafield")); };
-            }else { // Produkt selektieren/wechseln
-                GM_logInfo("autoMegafield","runId="+runId+" step="+step,"zoneNrF="+handled.zoneNrF+" zoneNrL="+handled.zoneNrL,getText("automat_automatMegafield")+": "+getText("automat_plantingSetX").replace("%1%",unsafeData.prodName[4][zoneList[handled.zoneNrL][0][0]]));
-                click($("megafield_products").querySelector(".tt"+zoneList[handled.zoneNrL][0][0]));
-                window.setTimeout(autoMegafield,settings.getPause(),runId,step);
-            }
-        break;}
-        case 8:{ // Plant Response
-            if (unsafeWindow.premium==1 && settings.get("account","botUseMegafieldPremiumPlanting") && (div=$("globalbox_button1"))) {
-                GM_logInfo("autoMegafield","runId="+runId+" step="+step,"zoneNrF="+handled.zoneNrF+" zoneNrL="+handled.zoneNrL,getText("automat_automatMegafield")+": Confirm autoplant dialog");
-                listeningEvent="gameMegafieldAutoplanted";
-                action=function(){ click(div); };
-            } else if(unsafeData.readyZone[handled.zoneNrS]&&(!unsafeData.readyZone[handled.zoneNrS][2])){ // Megafield ist in der Liste der "ready zones", aber Wert ist "false" (wie oben bei leeres Feld bepflanzen gesetzt)
-                GM_logInfo("autoMegafield","runId="+runId+" step="+step,"zoneNrF="+handled.zoneNrF+" zoneNrL="+handled.zoneNrL,getText("automat_automatMegafield")+": "+getText("automat_responseWaiting"));
-                window.setTimeout(autoMegafield,settings.getPause(),runId,step); // => Warten und gleich nochmal versuchen
-            }else{
-                // Commented, because queue is now updated after new megafield data
-                // setNextQueueItem(handled.zoneNrS); // Feld bepflanzt, fortfahren
-                autoMegafield(runId,2);
-            }
-        break;}
-        case 9:{ // Exit
-            if(unsafeWindow.megafield_data.tour){ // Tour läuft noch
-                help=Math.min(unsafeWindow.megafield_data.tour.remain,unsafeWindow.megafield_data.tour.step_duration);
-                zoneWaiting[handled.zoneNrF]=now+help;
-                window.setTimeout(function(){
-                    for(var fz in zoneWaiting){
-                        if(!zoneWaiting.hasOwnProperty(fz)){continue;}
-                        if(zoneWaiting[fz]<=now){ delete zoneWaiting[fz]; } // Bereinige das zoneWaiting-Objekt um alle abgelaufenen Einträge
+                var i = 0;
+                loop:
+                  for (var r = 1; r <= unsafeData.BUILDING_SIZE["megafield"][1]; r++) { // Über alle 11 Zeilen des Megafields iterieren
+                    for (var c = 1; c <= unsafeData.BUILDING_SIZE["megafield"][0]; c++) { // Über alle 9 Spalten des Megafields iterieren
+                      if (areaFree[++i] && (!area[i]) && (!tourSteps[i])) { // i erhöhen, i-tes Feld freigeschaltet UND nicht bepflanzt UND nicht am geerntet werden
+                        actionField = [c, r, i]; // [Zeile, Spalte, FeldNummer] kann/muss bepflanzt werden
+                        break loop;
+                      }
                     }
-                    checkReadyZone();
-                },(1000*help)+settings.getPause());
-                GM_logInfo("autoMegafield","runId="+runId+" step="+step,"zoneNrF="+handled.zoneNrF+" zoneNrL="+handled.zoneNrL,getText("automat_automatMegafield")+": "+getText("automat_cropWaitingInX").replace("%1%",getTimeStr(help)));
+                  }
+                if (actionField) { // Wir ham n Feld, das bepflanzt werden muss
+                  if (!unsafeData.gameLocation.check("megafield")) { // Sind wir wieder nicht mehr auf dem Megafield?!
+                    // open megafield
+                    GM_logInfo("autoMegafield", "runId=" + runId + " step=" + step, "zoneNrF=" + handled.zoneNrF + " zoneNrL=" + handled.zoneNrL, getText("automat_automatMegafield") + ": " + getText("automat_changingToX").replace("%1%", getText("megafield")));
+                    step--;
+                    listeningEvent = "gameOpenMegafield";
+                    action = function() { click($("speedlink_megafield")); };
+                  } else { // Leeres Feld bepflanzen
+                    GM_logInfo("autoMegafield", "runId=" + runId + " step=" + step, "zoneNrF=" + handled.zoneNrF + " zoneNrL=" + handled.zoneNrL, getText("automat_automatMegafield") + ": " + getText("automat_plantingAtX").replace("%1%", String.fromCharCode(64 + actionField[0]) + actionField[1]));
+                    unsafeData.readyZone[handled.zoneNrL][2] = false;
+                    listeningEvent = "gameMegafieldPlanted";
+                    action = function() { click($("megafield_tile" + actionField[2])); };
+                  }
+                } else {
+                  // no free field to plant
+                  GM_logInfo("autoMegafield", "runId=" + runId + " step=" + step, "zoneNrF=" + handled.zoneNrF + " zoneNrL=" + handled.zoneNrL, getText("automat_automatMegafield") + ": " + getText("automat_plantingNoFreeField"));
+                  autoMegafield(runId, 9); // exit
+                }
+              }
+            } else if (!unsafeData.gameLocation.check("megafield")) { // Befinden wir und noch auf dem Megafield? => zur Not: Hinwechseln!
+              // open megafield
+              GM_logInfo("autoMegafield", "runId=" + runId + " step=" + step, "zoneNrF=" + handled.zoneNrF + " zoneNrL=" + handled.zoneNrL, getText("automat_automatMegafield") + ": " + getText("automat_changingToX").replace("%1%", getText("megafield")));
+              step--;
+              listeningEvent = "gameOpenMegafield";
+              action = function() { click($("speedlink_megafield")); };
+            } else { // Produkt selektieren/wechseln
+              GM_logInfo("autoMegafield", "runId=" + runId + " step=" + step, "zoneNrF=" + handled.zoneNrF + " zoneNrL=" + handled.zoneNrL, getText("automat_automatMegafield") + ": " + getText("automat_plantingSetX").replace("%1%", unsafeData.prodName[4][zoneList[handled.zoneNrL][0][0]]));
+              click($("megafield_products").querySelector(".tt" + zoneList[handled.zoneNrL][0][0]));
+              window.setTimeout(autoMegafield, settings.getPause(), runId, step);
+            }
+            break;
+          }
+        case 8:
+          { // Plant Response
+            if (unsafeWindow.premium == 1 && settings.get("account", "botUseMegafieldPremiumPlanting") && (div = $("globalbox_button1"))) {
+              GM_logInfo("autoMegafield", "runId=" + runId + " step=" + step, "zoneNrF=" + handled.zoneNrF + " zoneNrL=" + handled.zoneNrL, getText("automat_automatMegafield") + ": " + getText("automat_confirmAutoplantDialog"));
+              listeningEvent = "gameMegafieldAutoplanted";
+              action = function() { click(div); };
+            } else if (unsafeData.readyZone[handled.zoneNrS] && (!unsafeData.readyZone[handled.zoneNrS][2])) { // Megafield ist in der Liste der "ready zones", aber Wert ist "false" (wie oben bei leeres Feld bepflanzen gesetzt)
+              GM_logInfo("autoMegafield", "runId=" + runId + " step=" + step, "zoneNrF=" + handled.zoneNrF + " zoneNrL=" + handled.zoneNrL, getText("automat_automatMegafield") + ": " + getText("automat_responseWaiting"));
+              window.setTimeout(autoMegafield, settings.getPause(), runId, step); // => Warten und gleich nochmal versuchen
+            } else {
+              // Commented, because queue is now updated after new megafield data
+              // setNextQueueItem(handled.zoneNrS); // Feld bepflanzt, fortfahren
+              autoMegafield(runId, 2);
+            }
+            break;
+          }
+        case 9:
+          { // Exit
+            if (unsafeWindow.megafield_data.tour) { // Tour läuft noch
+              help = Math.min(unsafeWindow.megafield_data.tour.remain, unsafeWindow.megafield_data.tour.step_duration);
+              zoneWaiting[handled.zoneNrF] = now + help;
+              window.setTimeout(function() {
+                for (var fz in zoneWaiting) {
+                  if (!zoneWaiting.hasOwnProperty(fz)) {
+                    continue; }
+                  if (zoneWaiting[fz] <= now) { delete zoneWaiting[fz]; } // Bereinige das zoneWaiting-Objekt um alle abgelaufenen Einträge
+                }
+                checkReadyZone();
+              }, (1000 * help) + settings.getPause());
+              GM_logInfo("autoMegafield", "runId=" + runId + " step=" + step, "zoneNrF=" + handled.zoneNrF + " zoneNrL=" + handled.zoneNrL, getText("automat_automatMegafield") + ": " + getText("automat_cropWaitingInX").replace("%1%", getTimeStr(help)));
             }
             autoZoneFinish(runId, $("speedlink_farm1")); // Verlasse den Güterhof -> Gehe zur Farm1
-        break;}
-        }
-        if(listeningEvent){
-            document.addEventListener(listeningEvent,function(listeningEvent,runId,step){
-                return function(){
-                    document.removeEventListener(listeningEvent,arguments.callee,false);
-                    window.setTimeout(autoMegafield,settings.getPause(),runId,step+1);
-                };
-            }(listeningEvent,runId,step),false);
-        }
-        if(action){ action(); }
-        listeningEvent=null;action=null;
+            break;
+          }
+      }
+      if (listeningEvent) {
+        document.addEventListener(listeningEvent, function(listeningEvent, runId, step) {
+          return function() {
+            document.removeEventListener(listeningEvent, arguments.callee, false);
+            window.setTimeout(autoMegafield, settings.getPause(), runId, step + 1);
+          };
+        }(listeningEvent, runId, step), false);
+      }
+      if (action) { action(); }
+      listeningEvent = null;
+      action = null;
     }
-    }catch(err){ GM_logError("autoMegafield","runId="+runId+" step="+step,"",err); }
+  } catch (err) { GM_logError("autoMegafield", "runId=" + runId + " step=" + step, "", err); }
 }
+
 function autoWindmill(runId,step){
 try{
     if(!step){ step=1; }
@@ -11296,6 +11318,8 @@ try{
         text["de"]["automat_confirmChangelogVersion"]="Du hast eine neue Version des Automat-Scriptes installiert.<br>Die Version %1% beinhaltet folgende Änderungen:";
         text["de"]["automat_maximumStockCapacityReached"]="Maximale Lagerkapazität wird erreicht werden.";
         text["de"]["automat_nothingToCrop"]="Nichts zum Ernten.";
+        text["de"]["automat_openAutoplantDialog"]="Öffne Auto-Pflanz-Dialog.";
+        text["de"]["automat_confirmAutoplantDialog"]="Bestätige Auto-Pflanz-Dialog.";
         text["de"]["automat_cropWaitingInX"]="Warte auf Ernten in %1%.";
         text["de"]["automat_plantingAtX"]="Pflanze auf %1%.";
         text["de"]["automat_plantingNoFreeField"]="Kein freies Feld zum Pflanzen.";
@@ -11513,6 +11537,8 @@ try{
         text["en"]["automat_confirmChangelogVersion"]="You have installed a new version of the Automaton script.<br>The version %1% contains the following changes:";
         text["en"]["automat_maximumStockCapacityReached"]="Maximum stock capacity will be reached.";
         text["en"]["automat_nothingToCrop"]="Nothing to crop.";
+        text["de"]["automat_openAutoplantDialog"]="Open autoplant dialog.";
+        text["de"]["automat_confirmAutoplantDialog"]="Confirm autoplant dialog.";
         text["en"]["automat_cropWaitingInX"]="Waiting for crop in %1%.";
         text["en"]["automat_plantingAtX"]="Planting at %1%.";
         text["en"]["automat_plantingNoFreeField"]="No free field to plant.";
