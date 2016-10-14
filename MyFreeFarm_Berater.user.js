@@ -2298,7 +2298,7 @@ var zones=new function(){
               /*
                * The following code block handles smart setting of the megafield time(s)
                *  - Running tour => Mark megafield ready after tour
-               *  - No more planting needed/possible => Mark megafield ready when next plant is ready TODO: If last plant?
+               *  - No more planting needed/possible/wise => Mark megafield ready when next plant is ready. If field is empty => when job has timed out
                *  - Else (no running tour, but more planting needed&possible): Do nothing
                */
               if (megafieldSmartTimer && zoneNrF == "megafield" && unsafeWindow.megafield_data) {
@@ -2312,27 +2312,29 @@ var zones=new function(){
                     }
                   }
                 }
-                var toPlantForCurrentJob = 0; // Amount of plants missing/not yet planted to finish the job
+                var toPlantForCurrentJob = 0; // Amount of plants missing/not yet planted to finish the job. Leave out plants that won't finish in time.
                 if (unsafeWindow.megafield_data.job && unsafeWindow.megafield_data.job.products) {
                   // Iterate over needed products for current job
                   for (var i = 0; i < unsafeWindow.megafield_data.job.products.length; i++) {
                     var product = unsafeWindow.megafield_data.job.products[i];
                     // If the product can be planted...
                     if (product.duration) { // Only check plants: Cheese/Milk/Honey/... don't have a duration
-                      // ... we add the total needed amount minus the amount we have minus the amount currently growing
-                      toPlantForCurrentJob += product.need - product.have - product.growing;
+                      // Only count plants, that finish before the job runs out of time: NOW + GROWING TIME - (JOB START + 1 WEEK + 5 MIN)
+                      if (0 > unsafeWindow.servertimetime + product.duration - (3600*24*7 + 300 + parseInt(unsafeWindow.megafield_data.job_start,10))) {
+                        // ... we add the total needed amount minus the amount we have minus the amount currently growing
+                        toPlantForCurrentJob += product.need - product.have - product.growing;
+                      }
                     }
                   }
                 }
                 var plantedCurrently = Object.keys(unsafeWindow.megafield_data.area).length; // Amount of planted fields
                 var unlocked = Object.keys(unsafeWindow.megafield_data.area_free).length; // Amount unlocked fields
 
-                // console.log("=== Moe, MGEAFIELD LOS GEHT'S ===");
                 if (toPlantForCurrentJob && (toHarvestInCurrentTour + plantedCurrently) < unlocked) {
-                  // console.log("Moe, wir müssten pflanzen");
+                  // Do nothing. Bot should start planting.
                 } else {
                   var readyFields = 0; // Amount of ready fields that could be started to be harvested right now
-                  var nextReadyField;
+                  var nextReadyField; // Determines that field, is ready next. Might be in the past or empty
                   for (var key in unsafeWindow.megafield_data.area) {
                     if (!unsafeWindow.megafield_data.area.hasOwnProperty(key)) {
                       continue;
@@ -2345,71 +2347,25 @@ var zones=new function(){
                         nextReadyField = area;
                     }
                   }
-                  // console.log("Moe, wir müssen nix pflanzen. " + readyFields + " Felder READY");
+
                   if (readyFields > 0 && !(unsafeWindow.megafield_data.tour && unsafeWindow.megafield_data.tour.remain > 0)) {
-                    // console.log("Moe, wir müssten die Erntemaschine starten");
+                    // Do nothing. Bot should start harvesting.
                   } else {
-                    // console.log("Moe, wir müssen die Erntemaschine nicht starten");
                     if (unsafeWindow.megafield_data.tour && unsafeWindow.megafield_data.tour.remain > 0) {
-                      // console.log("Moe, wir warten bis zum Ende der Tour");
+                      // Set time to end of the currently running tour.
                       zT = unsafeWindow.megafield_data.tour.duration + unsafeWindow.megafield_data.tour.start;
                       zones.setEndtime(zoneNrF, zT);
-                      // console.log("Das wäre in " + (zT - unsafeWindow.servertimetime) + "s");
-                    } else {
-                      // console.log("Moe, wir warten bis das nächste Feld fertig ist");
+                    } else if (nextReadyField) {
+                      // Set time to end of growth of next field
                       zT = nextReadyField.time + nextReadyField.duration;
                       zones.setEndtime(zoneNrF, zT);
-                      // console.log("Das wäre in " + (zT - unsafeWindow.servertimetime) + "s");
+                    } else {
+                      // Set time to end of job
+                      zT = 3600*24*7 + parseInt(unsafeWindow.megafield_data.job_start,10);
+                      zones.setEndtime(zoneNrF, zT);
                     }
                   }
                 }
-
-                // Do we have the data AND is a harvest tour running (and the job hasn't timed out already)?
-              //   if (unsafeWindow.megafield_data && unsafeWindow.megafield_data.tour && unsafeWindow.megafield_data.job_start != "0") {
-              //     var toHarvest = 0; // Amount of fields, that the machine still has to harvest
-              //     if (unsafeWindow.megafield_data.tour.steps) {
-              //       // Iterate over all steps (completed and to do ones)
-              //       for (var i = 0; i < unsafeWindow.megafield_data.tour.steps.length; i++) {
-              //         // If the i-th step has attributes, it's not completed yet
-              //         if (Object.keys(unsafeWindow.megafield_data.tour.steps[i]).length > 0) {
-              //           toHarvest++;
-              //         }
-              //       }
-              //     }
-              //     var planted = Object.keys(unsafeWindow.megafield_data.area).length; // Amount of planted fields
-              //     var unlocked = Object.keys(unsafeWindow.megafield_data.area_free).length; // Amount unlocked fields
-
-              //     // Do we have to plant anything at all (or are we gonna finish the job soon)?
-              //     var toPlant = 0; // Amount of plants missing/not yet planted to finish the job
-              //     if (unsafeWindow.megafield_data.job && unsafeWindow.megafield_data.job.products) {
-              //       // Iterate over needed products for current job
-              //       for (var i = 0; i < unsafeWindow.megafield_data.job.products.length; i++) {
-              //         var product = unsafeWindow.megafield_data.job.products[i];
-
-              //         // If the product can be planted...
-              //         if (product.duration) { // Only check plants: Cheese/Milk/Honey/... don't have a duration
-              //           // ... we add the total needed amount minus the amount we have minus the amount currently growing
-              //           toPlant += product.need - product.have - product.growing;
-              //         }
-              //       }
-              //     }
-
-              //     // There are empty fields (that need to be planted), if
-              //     //  a) we still need to plant something AND
-              //     //  b) there are empty fields
-              //     var plantFields = toPlant && (toHarvest + planted) < unlocked;
-
-              //     // If the tour is still running...
-              //     if (unsafeWindow.megafield_data.tour.remain > 0) {
-              //       // ... and we don't wanna plant anything right now...
-              //       if (!plantFields) {
-              //         // ... we set the megafield-timer to the end of the tour
-              //         zT = unsafeWindow.megafield_data.tour.duration + unsafeWindow.megafield_data.tour.start;
-              //         zones.setEndtime(zoneNrF, zT);
-              //       }
-              //       // otherwise we don't do anything until the empty fields are planted
-              //     }
-              //   }
               }
 
                 if (zT==NEVER){ // empty
