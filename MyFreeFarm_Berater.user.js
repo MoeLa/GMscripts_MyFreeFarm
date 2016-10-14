@@ -2412,8 +2412,7 @@ var zones=new function(){
                 }
                 div=null;
                 if (readyZoneAdded) {
-                    console.log("Ready Zone: " + zoneNrS);
-                    // console.log(unsafeData.readyZone[zoneNrS]);
+                    console.log("Found Ready Zone: " + zoneNrS);
                 }
             }
             return readyZoneAdded;
@@ -14638,12 +14637,14 @@ return false;
                 case "autoplant":{
                     var zoneNrF = zoneNr+6*(farmNR-1);
                     if(1==zones.getBuilding(zoneNrF)){
+                        checkFieldTimes();
                         raiseEvent("gameFieldPlanted");
                     }
                 break;}
                 case "cropgarden":{
                     var zoneNrF = zoneNr+6*(farmNR-1);
                     if(1==zones.getBuilding(zoneNrF)){
+                        checkFieldTimes();
                         raiseEvent("gameFieldCropped");
                     }
                 break;}
@@ -14711,6 +14712,7 @@ return false;
                 case "watergarden":{
                     var zoneNrF = zoneNr+6*(farmNR-1);
                     if(1==zones.getBuilding(zoneNrF)){
+                        checkFieldTimes();
                         raiseEvent("gameFieldWatered");
                     }
                 break;}
@@ -14731,39 +14733,6 @@ return false;
                 }
             }
         }catch(err){GM_logError("farmActionResponse","mode="+mode,"",err);}
-    });
-    unsafeOverwriteFunction("PflanzResponse",function(request){
-        try{
-            unsafeWindow._PflanzResponse(request);
-        }catch(err){GM_logError("_PflanzResponse","","",err);}
-        try{
-            if((request.readyState==4)&&(request.status==200)){
-                checkFieldTimes();
-                raiseEvent("gameFieldPlanted");
-            }
-        }catch(err){GM_logError("PflanzResponse","","",err);}
-    });
-    unsafeOverwriteFunction("WasserResponse",function(request){
-        try{
-            unsafeWindow._WasserResponse(request);
-        }catch(err){GM_logError("_WasserResponse","","",err);}
-        try{
-            if((request.readyState==4)&&(request.status==200)){
-                checkFieldTimes();
-                raiseEvent("gameFieldWatered");
-            }
-        }catch(err){GM_logError("WasserResponse","","",err);}
-    });
-    unsafeOverwriteFunction("ErnteResponse",function(request){
-        try{
-            unsafeWindow._ErnteResponse(request);
-        }catch(err){GM_logError("_ErnteResponse","","",err);}
-        try{
-            if((request.readyState==4)&&(request.status==200)){
-                checkFieldTimes();
-                raiseEvent("gameFieldCropped");
-            }
-        }catch(err){GM_logError("ErnteResponse","","",err);}
     });
     unsafeOverwriteFunction("ponySelectFarmi",function(farmiId){
         try{
