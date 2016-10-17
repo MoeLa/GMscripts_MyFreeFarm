@@ -245,6 +245,7 @@ function GM_logInfo(name,parameters,variables,text,type){
 try{
     if((undefined===type)||OPTION_LOGGING[type]){
         console.log((COUNTRY?COUNTRY.toUpperCase():"")+"-"+(SERVER?SERVER:"")+": Information\n"+name+"\n"+parameters+"\n"+variables+"\n"+text);
+        // console.trace();
         if(DEVMODE_LOG_INFO){ logBubble.add(text,10); }
     }
 }catch(err){ GM_logError("GM_logInfo","name="+name+" parameters="+parameters+" variables="+variables+" text="+text,"",err); }
@@ -252,12 +253,14 @@ try{
 function GM_logWarning(name,parameters,variables,text){
 try{
     console.log((COUNTRY?COUNTRY.toUpperCase():"")+"-"+(SERVER?SERVER:"")+": Warning\n"+name+"\n"+parameters+"\n"+variables+"\n"+text);
+    console.trace();
     if(DEVMODE_LOG_WARNING){ logBubble.add(text,10,"orange"); }
 }catch(err){ GM_logError("GM_logWarning","name="+name+" parameters="+parameters+" variables="+variables+" text="+text,"",err); }
 };
 function GM_logError(name,parameters,variables,text){
 try{
     console.log((COUNTRY?COUNTRY.toUpperCase():"")+"-"+(SERVER?SERVER:"")+": Error\n"+name+"\n"+parameters+"\n"+variables+"\n"+text);
+    console.trace();
     if(DEVMODE_LOG_ERROR){ logBubble.add(text,10,"red"); }
 }catch(err){ console.log("ERROR in 'GM_logError'\nname="+name+"\n"+err); }
 };
@@ -341,10 +344,15 @@ try{
     }
 }catch(err){ GM_logError("unsafeCloneObject","","",err); }
 }
-function unsafeOverwriteFunction(fooName,newFoo) {
+function unsafeOverwriteFunction(fooName,newFoo,optional) {
 try{
     if(!unsafeWindow[fooName]){
-        GM_logWarning("unsafeOverwriteFunction","fooName="+fooName,"","Function does not exist.");
+        if (optional) {
+            // If function doesn't exist and is optional, everything's ok
+            return;
+        } else {
+            GM_logWarning("unsafeOverwriteFunction","fooName="+fooName,"","Function does not exist.");
+        }
     }
     if(typeof exportFunction=="function"){
         exportFunction(newFoo,unsafeWindow,{"defineAs":"unsafe_"+fooName});
