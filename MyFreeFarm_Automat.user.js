@@ -1342,11 +1342,7 @@ try{
     }else if(unsafeData.zones.isMultiSlot(zoneNrF)&&(!zoneNrF.match(/\.\d+$/))){
         zoneToListId += "."+(slot?+slot:1);
     }
-    // if(isNaN(zoneNrF)){
-    //  var zoneToListId = zoneNrF+(unsafeData.zones.isMultiSlot(zoneNrF)?(slot?"."+slot:".1"):"");
-    // }else{
-    //  var zoneToListId = zoneNrF.toString()+(unsafeData.zones.isMultiSlot(zoneNrF)?(slot?"."+slot:".1"):"");
-    // }
+
     if(!zoneToList[zoneToListId]){ setZoneListId(zoneToListId,zoneToListId); }
     if(!zoneList[zoneToList[zoneToListId]]){ createZoneList(zoneToList[zoneToListId]); }
     return zoneToList[zoneToListId];

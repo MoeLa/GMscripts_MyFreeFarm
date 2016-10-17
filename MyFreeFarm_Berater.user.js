@@ -1778,7 +1778,10 @@ var zones=new function(){
                     building=data[zoneNrF]["building"];
                     if(BUILDING_SLOTS[building]){
                         for(var i=BUILDING_SLOTS[building];i>=1;i--){
-                            if(data[zoneNrF]["slots"] != null && undefined===data[zoneNrF]["slots"][i]){
+                            if (data[zoneNrF]["slots"] == null) {
+                                data[zoneNrF]["slots"] = [];
+                            }
+                            if(undefined===data[zoneNrF]["slots"][i]){
                                 // Slot not defined in record of zone
                                 data[zoneNrF]["slots"][i]=INIT_zoneSlotItem.clone();
                             }
