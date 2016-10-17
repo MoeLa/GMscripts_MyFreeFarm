@@ -3,12 +3,12 @@
 // @namespace      https://github.com/linus--tux/GMscripts_MyFreeFarm
 // @author         BastianKanaan
 // @description    Common functions for MyFreeFarm-Scripts
-// @date           20.09.2016
-// @version        2.1.9
+// @date           17.10.2016
+// @version        2.1.10
 // @license        GPL version 3 or any later version; http://www.gnu.org/copyleft/gpl.html
 // ==/UserScript==
 
-const VERSIONfunctionFile = "2.1.9";
+const VERSIONfunctionFile = "2.1.10";
 var DEVMODE=GM_getValue("devmode",false);
 var DEVMODE_EVENTS=GM_getValue("devmode_events",false);
 var DEVMODE_FUNCTION=GM_getValue("devmode_function",false);
