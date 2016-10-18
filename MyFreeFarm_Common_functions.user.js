@@ -3,12 +3,12 @@
 // @namespace      https://github.com/linus--tux/GMscripts_MyFreeFarm
 // @author         BastianKanaan
 // @description    Common functions for MyFreeFarm-Scripts
-// @date           17.10.2016
-// @version        2.1.10
+// @date           18.10.2016
+// @version        2.1.11
 // @license        GPL version 3 or any later version; http://www.gnu.org/copyleft/gpl.html
 // ==/UserScript==
 
-const VERSIONfunctionFile = "2.1.10";
+const VERSIONfunctionFile = "2.1.11";
 var DEVMODE=GM_getValue("devmode",false);
 var DEVMODE_EVENTS=GM_getValue("devmode_events",false);
 var DEVMODE_FUNCTION=GM_getValue("devmode_function",false);
@@ -362,6 +362,21 @@ try{
     unsafeWindow["_"+fooName]=unsafeWindow[fooName];
     unsafeWindow[fooName]=unsafeWindow["unsafe_"+fooName];
 }catch(err){ GM_logError("unsafeOverwriteFunction","fooName="+fooName,"",err); }
+};
+
+function unsafeOverwriteObjFunction(fooObj,fooName,newFoo) {
+try{
+    if(!unsafeWindow[fooObj][fooName]){
+        GM_logWarning("unsafeOverwriteObjFunction","fooObj"+fooObj+" fooName="+fooName,"","Function does not exist.");
+    }
+    if(typeof exportFunction=="function"){
+        exportFunction(newFoo, unsafeWindow[fooObj],{"defineAs":"unsafe_"+fooName});
+    }else{
+        unsafeWindow["unsafe_"+fooName]=newFoo;
+    }
+    unsafeWindow[fooObj]["_"+fooName]=unsafeWindow[fooObj][fooName];
+    unsafeWindow[fooObj][fooName]=unsafeWindow[fooObj]["unsafe_"+fooName];
+}catch(err){GM_logError("unsafeOverwriteObjFunction","fooObj"+fooObj+" fooName="+fooName,"",err); }
 };
 
 function raiseEvent(name){
