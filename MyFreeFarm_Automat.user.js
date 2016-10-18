@@ -375,7 +375,7 @@ var botArbiter=new function(){
             if(settings.get("account","botUseFarmi")&&unsafeWindow.farmisinfo && unsafeWindow.farmisinfo[0] && (settings.get("account","farmiReject") || settings.get("account","farmiAccept"))){
                 checkFarmi(1);
             }
-            if($("divGoToClothingDonation")) {
+            if($("divGoToClothingDonation") && !zoneWaiting["clothingDonation"]) {
                 var log = unsafeData.latestClothingDonationLog;
                 if (!log && (settings.get("account","botUseClothingGamble") || settings.get("account","botUseClothingDonation")) || // No log available (and at least one option is checked) => Let bot open the dialog
                     settings.get("account","botUseClothingGamble") && unsafeWindow.clothingdonation_data.data.gambleremain < 1 || // We need to gamble
@@ -7092,17 +7092,41 @@ try{
                 };
             }
             break; }
-        case 3: { // donate or gamble
+        case 3: { // donate (if wise and products are available) or gamble (if possible and wise)
             GM_logInfo("autoClothingDonation","runId="+runId+" step="+step,"","Clothing Donation: Donating/Gambling");
-            if (settings.get("account","botUseClothingDonation") && unsafeData.latestClothingDonationLog["gambleInfo"][0]["gain"] > 0) {
+
+            if (settings.get("account", "botUseClothingDonation") && unsafeData.latestClothingDonationLog["gambleInfo"][0]["gain"] > 0) {
+                // We should donate, because flag is set and positive gain
+                var allProdsAvailable = true; // Assume all clothing products are available
+                for (var prod in unsafeData.latestClothingDonationLog["in"]) {
+                    if (!unsafeData.latestClothingDonationLog["in"].hasOwnProperty(prod)) { continue; }
+                    if (unsafeData.prodStock[0][prod] < unsafeData.latestClothingDonationLog["in"][prod]["amount"]) {
+                        allProdsAvailable = false; // Set flag to false, when at least one product is missing
+                        GM_logWarning("autoClothingDonation", "runId=" + runId + " step=" + step, "", "Clothing Donation: Missing " + unsafeData.prodName[0][prod]);
+                    }
+                }
+
                 if ($("globalbox").style.display == "block") { // Globalbox is opened
                     autoClothingDonation(runId, step + 1);
-                } else {
+                } else if (allProdsAvailable) {
                     listeningEvent = "gameOpenGlobalCommitBox";
                     action = function() {
-                        GM_logInfo("autoClothingDonation","runId="+runId+" step="+step,"","Clothing Donation: Donating");
+                        GM_logInfo("autoClothingDonation", "runId=" + runId + " step=" + step, "", "Clothing Donation: Donating");
                         click($("clothingdonation_donatebutton"));
                     };
+                } else {
+                    // Not all products are available => wait and exit
+                    zoneWaiting["clothingDonation"] = now + 90;
+                    GM_logWarning("autoClothingDonation", "runId=" + runId + " step=" + step, "", "Clothing Donation: Retrying in 90s");
+                    window.setTimeout(function() { //TIMEOUT
+                        for (var fz in zoneWaiting) {
+                            if (!zoneWaiting.hasOwnProperty(fz)) { continue; }
+                            if (zoneWaiting[fz] <= now) { delete zoneWaiting[fz]; }
+                        }
+                        botArbiter.check();
+                    }, (1000 * 90) + settings.getPause());
+
+                    autoClothingDonation(runId, 5); // Can't donate right now => exit
                 }
             } else if (settings.get("account","botUseClothingGamble") && unsafeWindow.clothingdonation_data.data.gambleremain < 1) {
                 if ($("globalbox").style.display == "block") { // Globalbox is opened
