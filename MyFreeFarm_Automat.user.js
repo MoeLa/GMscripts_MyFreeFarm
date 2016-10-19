@@ -6337,20 +6337,18 @@ function autoMegafield(runId, step) {
             } else { // Kein/falsches Fahrzeug selektiert
               GM_logWarning("autoMegafield", "runId=" + runId + " step=" + step, "zoneNrF=" + handled.zoneNrF + " zoneNrL=" + handled.zoneNrL, getText("automat_automatMegafield") + ": Kein oder falsches Fahrzeug selektiert");
               action = function() { click($("megafield_vehicle" + v_id)); };
-              listeningEvent = "gameMegafieldTourVehicleSet";
-
-              // Kein/falsches Fahrzeug selektiert => Abbruch. Vielleicht kann man ja mal implementieren, dass da was selektiert wird
-              // GM_logWarning("autoMegafield", "runId=" + runId + " step=" + step, "zoneNrF=" + handled.zoneNrF + " zoneNrL=" + handled.zoneNrL, getText("automat_automatMegafield") + ": " + getText("automat_vehicleNotKnown") + " " + getText("automat_stopAdding"));
-              // zoneList[handled.zoneNrL].unshift(DEFAULT_ZONELIST_ITEM.clone());
-              // updateQueueBox(handled.zoneNrS);
-              // autoMegafield(runId, 9); // exit
+              if (unsafeWindow.megafield_data.vehicles[v_id] && unsafeWindow.megafield_data.vehicles[v_id].durability > 0) {
+                listeningEvent = "gameMegafieldTourVehicleSet";
+              } else {
+                listeningEvent = "gameMegafieldDialogStarted";
+              }
             }
             break;
           }
         case 4:
           {
             step = step - 2; // Step two back, because step is incremented by one, when event occurs. Effectly we jump back to 'crop vehicle'
-            if (unsafeWindow.megafield_move_position == 2 && unsafeWindow.megafield_data.vehicles[unsafeWindow.megafield_vehicle_id].durability > 0) {
+            if (unsafeWindow.megafield_move_position == 2 && unsafeWindow.megafield_data.vehicles[unsafeWindow.megafield_vehicle_id] && unsafeWindow.megafield_data.vehicles[unsafeWindow.megafield_vehicle_id].durability > 0) {
                 // After switching the vehicle, go back to megafield
                 listeningEvent = "gameMegafieldMoved";
                 action = function() { click($("megafield_carpool")); };
@@ -6535,7 +6533,7 @@ function autoMegafield(runId, step) {
       listeningEvent = null;
       action = null;
     }
-  } catch (err) { GM_logError("autoMegafield", "runId=" + runId + " step=" + step, "", err); }
+  } catch (err) { GM_logError("autoMegafield", "runId=" + runId + " step=" + step, "", err); console.log(err); }
 }
 
 function autoWindmill(runId,step){
