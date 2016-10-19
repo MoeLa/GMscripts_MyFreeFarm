@@ -2316,12 +2316,15 @@ var zones=new function(){
                */
               if (megafieldSmartTimer && zoneNrF == "megafield" && unsafeWindow.megafield_data) {
                 var toHarvestInCurrentTour = 0; // Amount of fields, that the machine still has to harvest
+                console.log("Moe, checkReady");
+                console.log(unsafeWindow.megafield_data);
                 if (unsafeWindow.megafield_data.tour && unsafeWindow.megafield_data.tour.steps) {
                   // Iterate over all steps (completed and to do ones)
                   for (var i = 0; i < unsafeWindow.megafield_data.tour.steps.length; i++) {
                     // If the i-th step has attributes, it's not completed yet
                     if (Object.keys(unsafeWindow.megafield_data.tour.steps[i]).length > 0) {
-                      toHarvestInCurrentTour++;
+                      toHarvestInCurrentTour += unsafeWindow.megafield_data.vehicle_slots[unsafeWindow.megafield_vehicle_id].size; // Muss durch Vehicle-Größe ersetzt werden
+                      // unsafeWindow.megafield_data.vehicle_slots[unsafeWindow.megafield_vehicle_id].size
                     }
                   }
                 }
@@ -15675,6 +15678,7 @@ return false;
                 unsafeData.megafieldVehicle=megafieldVehicle.clone();
                 GM_setValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_megafieldVehicle",implode(megafieldVehicle,"setTourVehicleMegafield/megafieldVehicle"));
             }
+            raiseEvent("gameMegafieldTourVehicleSet");
         }catch(err){GM_logError("setTourVehicleMegafield","","",err);}
     });
     unsafeOverwriteFunction("dialogMegafield",function(mode, K, slot, B, pid){

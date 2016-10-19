@@ -552,7 +552,7 @@ var settings=new function(){
     var dataDefault={"global":{},
                      "country":{"valCloseWindowTimer":30,"pauseShort":[300,700],"pause":[2000,4000],"maxDurationBotRun":300,"maxDurationBotStep":30,"botErrorBehaviour":"reload"},
                      "server":{"botActive":false},
-                     "account":{"autoPlant":true,"autoWater":true,"autoFeed":true,"botUseClothingDonation":false,"botUseClothingGamble":false,"botUseDonkey":false,"botUseFarmersmarket":false,"botUseVetTreatment":true,"botUseFarmi":false,"botUseFoodworld":false,"botUseForestry":false,"botUseGuildJop":false,"botUseLottery":false,"botUseMegafield":false,"botPreferMegafield":true,"botUseMegafieldPremiumPlanting":true,"botUseWindmill":false,"disableCropFields":false,"farmiAccept":false,"farmiAcceptAboveNr":100,"farmiAcceptBelowMinValue":false,"farmiReject":false,"farmiRejectUntilNr":90,"farmiRemoveMissing":false,"farmiRemoveMissingAboveNr":10,"lotteryActivate":false,"lotteryDailyLot":false,"powerUpActivate":false,"seedWaitForCrop":30,"showQueueTime":true,"useQueueList":false}
+                     "account":{"autoPlant":true,"autoWater":true,"autoFeed":true,"botUseClothingDonation":false,"botUseClothingGamble":false,"botUseDonkey":false,"botUseFarmersmarket":false,"botUseVetTreatment":true,"botUseFarmi":false,"botUseFoodworld":false,"botUseForestry":false,"botUseGuildJop":false,"botUseLottery":false,"botUseMegafield":false,"botPreferMegafield":true,"botUseMegafieldPremiumPlanting":true,"megafieldSmallVehicle":1,"megafieldBigVehicle":0,"botUseWindmill":false,"disableCropFields":false,"farmiAccept":false,"farmiAcceptAboveNr":100,"farmiAcceptBelowMinValue":false,"farmiReject":false,"farmiRejectUntilNr":90,"farmiRemoveMissing":false,"farmiRemoveMissingAboveNr":10,"lotteryActivate":false,"lotteryDailyLot":false,"powerUpActivate":false,"seedWaitForCrop":30,"showQueueTime":true,"useQueueList":false}
                     };
     var require=    {"global":{},
                      "country":{},
@@ -6284,7 +6284,7 @@ function autoMegafield(runId, step) {
                   (PRODSTOP != zoneList[handled.zoneNrL][0][0] || !settings.get("account", "disableCropFields"))) || // siehe Kommentar drüber
                 ("e" == help[1] && PRODSTOP != zoneList[handled.zoneNrL][0][0]))) { // Megafield ist empty und noch was anzubauen
               // plant
-              autoMegafield(runId, 7);
+              autoMegafield(runId, 7); // plant
             } else {
               autoMegafield(runId, 9); // exit
             }
@@ -6293,16 +6293,40 @@ function autoMegafield(runId, step) {
         case 3:
           { // crop vehicle
             if (!unsafeData.gameLocation.check("megafield")) { // Falls wir uns nicht auf dem Megafield befinden => hinwechseln
-              // open megafield
               GM_logInfo("autoMegafield", "runId=" + runId + " step=" + step, "zoneNrF=" + handled.zoneNrF + " zoneNrL=" + handled.zoneNrL, getText("automat_automatMegafield") + ": " + getText("automat_changingToX").replace("%1%", getText("megafield")));
               step--;
               listeningEvent = "gameOpenMegafield";
               action = function() { click($("speedlink_megafield")); };
-            } else if (unsafeWindow.megafield_vehicle_id && unsafeWindow.megafield_tour_type == "harvest") { // Ein Fahrzeug ist selektiert und es ist ein Ernte-Fahrzeug
-              if ((unsafeWindow.megafield_data.vehicles[unsafeWindow.megafield_vehicle_id]) && (unsafeWindow.megafield_data.vehicles[unsafeWindow.megafield_vehicle_id].durability > 0)) {
+              break;
+            }
+
+            var area = unsafeWindow.megafield_data.area;
+            var useBigHarvester = false;
+            console.log("Moe, starte Große-Maschine-Check");
+            if (settings.get("account","megafieldBigVehicle") > 0) {
+                for (var y = 0; y < unsafeData.BUILDING_SIZE["megafield"][0] - 1; y++) {
+                    for (var x = 1; x <= unsafeData.BUILDING_SIZE["megafield"][1] - 1; x++) {
+                        var i = y * unsafeData.BUILDING_SIZE["megafield"][1] + x;
+                        if (area[i] && area[i].remain <= 0 && area[i+1] && area[i+1].remain <= 0 && 
+                            area[i+11] && area[i+11].remain <= 0 && area[i+12] && area[i+12].remain <= 0) {
+                            useBigHarvester = true;
+                            console.log("Moe, große Maschine auf: " + x + "/" + y + " (Id: " + i + ")");
+                        }
+                    }
+                }
+                console.log("Moe, Check abgeschlossen: " + useBigHarvester);
+            } else {
+                console.log("Moe, kein Check: " + settings.get("account","megafieldBigVehicle"));
+            }
+
+            var v_id = useBigHarvester ? settings.get("account","megafieldBigVehicle") : settings.get("account","megafieldSmallVehicle");
+
+            if (v_id == unsafeWindow.megafield_vehicle_id) { // Korrektes Fahrzeug selektiert
+              
+              if ((unsafeWindow.megafield_data.vehicles[v_id]) && (unsafeWindow.megafield_data.vehicles[v_id].durability > 0)) {
                 // Das Fahrzeug ist noch nicht "aufgebraucht" => befinden uns im Zustand "vehicle selected"
                 GM_logInfo("autoMegafield", "runId=" + runId + " step=" + step, "zoneNrF=" + handled.zoneNrF + " zoneNrL=" + handled.zoneNrL, getText("automat_automatMegafield") + ": " + getText("automat_vehicleXSelected").replace("%1%", unsafeWindow.megafield_vehicle_id));
-                autoMegafield(runId, step + 2);
+                autoMegafield(runId, step + 2); // crop mode
               } else if (unsafeWindow.megafield_data.vehicles_unlock[unsafeWindow.megafield_vehicle_id]) { // Fahrzeug ist entsperrt => Kaufen
                 // buy vehicle
                 GM_logInfo("autoMegafield", "runId=" + runId + " step=" + step, "zoneNrF=" + handled.zoneNrF + " zoneNrL=" + handled.zoneNrL, getText("automat_automatMegafield") + ": " + getText("automat_vehicleXBuying").replace("%1%", unsafeWindow.megafield_vehicle_id));
@@ -6314,18 +6338,26 @@ function autoMegafield(runId, step) {
                 updateQueueBox(handled.zoneNrS);
                 autoMegafield(runId, 9); // exit
               }
-            } else { // Kein Fahrzeug selektiert => Abbruch. Vielleicht kann man ja mal implementieren, dass da was selektiert wird
-              // TODO select vehicle ?
-              GM_logWarning("autoMegafield", "runId=" + runId + " step=" + step, "zoneNrF=" + handled.zoneNrF + " zoneNrL=" + handled.zoneNrL, getText("automat_automatMegafield") + ": " + getText("automat_vehicleNotKnown") + " " + getText("automat_stopAdding"));
-              zoneList[handled.zoneNrL].unshift(DEFAULT_ZONELIST_ITEM.clone());
-              updateQueueBox(handled.zoneNrS);
-              autoMegafield(runId, 9); // exit
+
+            } else { // Kein/falsches Fahrzeug selektiert
+              GM_logWarning("autoMegafield", "runId=" + runId + " step=" + step, "zoneNrF=" + handled.zoneNrF + " zoneNrL=" + handled.zoneNrL, getText("automat_automatMegafield") + ": Kein oder falsches Fahrzeug selektiert");
+              step--;
+              action = function() { click($("megafield_vehicle" + v_id)); };
+              listeningEvent = "gameMegafieldTourVehicleSet";
+
+              // TODO: Im nächsten/zusätzlichen Step den Pfeil nach links 'zurück' zum Megafield
+
+              // Kein/falsches Fahrzeug selektiert => Abbruch. Vielleicht kann man ja mal implementieren, dass da was selektiert wird
+              // GM_logWarning("autoMegafield", "runId=" + runId + " step=" + step, "zoneNrF=" + handled.zoneNrF + " zoneNrL=" + handled.zoneNrL, getText("automat_automatMegafield") + ": " + getText("automat_vehicleNotKnown") + " " + getText("automat_stopAdding"));
+              // zoneList[handled.zoneNrL].unshift(DEFAULT_ZONELIST_ITEM.clone());
+              // updateQueueBox(handled.zoneNrS);
+              // autoMegafield(runId, 9); // exit
             }
             break;
           }
         case 4:
           { // crop vehicle dialogue, wir ham zuvor auf "Fahrzeug kaufen" geklickt, dass muss nun bestätigt werden
-            step = step - 2;
+            step = step - 2; // Step two back, because step is incremented by one, when event occurs. Effectly we jump back to 'crop vehicle'
             listeningEvent = "gameMegafieldVehicleBought";
             action = function() { click($("globalbox_button1")); };
             break;
@@ -6333,10 +6365,12 @@ function autoMegafield(runId, step) {
         case 5:
           { // crop mode
             if (unsafeWindow.megafield_plant_pid > 0) { // Falls wir uns nicht im Ernte-Modus befinden, in diesen wechseln
-              click($("megafield_vehicle_select_slot"));
-              window.setTimeout(autoMegafield, settings.getPause(), runId, step + 1);
+              // click($("megafield_vehicle_select_slot"));
+              // window.setTimeout(autoMegafield, settings.getPause(), runId, step + 1);
+              listeningEvent = "gameMegafieldMoved";
+              action = function() { click($("megafield_vehicle_select_slot")); };
             } else {
-              autoMegafield(runId, step + 1);
+              autoMegafield(runId, step + 1); // crop
             }
             break;
           }
@@ -6350,8 +6384,10 @@ function autoMegafield(runId, step) {
               for (i = 1; i <= areaSize; i++) { // Zähle von 1 bis 99 bzw. erneut anfangen, wenn...
                 if (area[i] && (area[i].remain < 0) && // das i-te Feld existiert UND
                   $("megafield_tile_tour" + i).className == "megafield_area_tour_possible") { // wir dort die Tour anfangen/fortsetzen können
-                  click($("megafield_tile" + i));
-                  break;
+                  if (unsafeWindow.megafield_data.vehicle_slots[unsafeWindow.megafield_vehicle_id].size == 1 || i%11 != 0 && i<88) {
+                      click($("megafield_tile" + i));
+                      break;
+                  }
                 }
               }
             } // Jetzt hamma unsere Tour zusammengeklickt
@@ -6369,9 +6405,9 @@ function autoMegafield(runId, step) {
           }
         case 7:
           { // Plant
-            if ((zoneList[handled.zoneNrL][0][0] == PRODSTOP) || (!unsafeData.readyZone[handled.zoneNrS])) { // PRODSTOP ganz vorne ODER Mgeafield nicht (mehr) ready
+            if ((zoneList[handled.zoneNrL][0][0] == PRODSTOP) || (!unsafeData.readyZone[handled.zoneNrS])) { // PRODSTOP ganz vorne ODER Megafield nicht (mehr) ready
               autoMegafield(runId, 9); // exit
-            } else if (unsafeWindow.megafield_plant_pid && zoneList[handled.zoneNrL][0][0] == unsafeWindow.megafield_plant_pid) { // Ein Produkt ist angewählt UND Passt das zum Produkt in der Queue??
+            } else if (unsafeWindow.megafield_plant_pid && zoneList[handled.zoneNrL][0][0] == unsafeWindow.megafield_plant_pid) { // Ein Produkt ist angewählt UND passt das zum Produkt in der Queue??
               var div;
               if (unsafeWindow.premium == 1 && // Premium is active
                 settings.get("account", "botUseMegafieldPremiumPlanting") && // Option is activated
@@ -9568,6 +9604,39 @@ function buildInfoPanelOptions(){
         inp.disabled=!unsafeWindow.premium;
         newtd=createElement("td",{"colspan":"2"},newtr,"Benutze Premium-Anpflanzen");
         newtr.style.opacity=(inp.disabled?"0.6":"1")
+
+        console.log("=== MOE, Options");
+        console.log(unsafeWindow.megafield_data);
+        newtr=createElement("tr",{"style":"line-height:18px;"},newtable);
+        newtd=createElement("td",{"align":"center"},newtr);
+        inp=createElement("select",{"id":"input_smallHarvester","class":"link", "style":"max-width:100%; width:100%;"},newtd);
+        for (var v_id in unsafeWindow.megafield_data.vehicles_unlock) {
+            var v = unsafeWindow.megafield_data.vehicle_slots[v_id];
+            if (v.size == 1 && v.type == "harvest") {
+                createElement("option",{"value":v_id},inp,v.name + " (" + v_id + ")");
+            }
+        }
+        inp.value=settings.get("account","megafieldSmallVehicle");
+        inp.addEventListener("change",function(){
+            settings.set("account","megafieldSmallVehicle",this.value)
+        },false);
+        newtd=createElement("td",{"colspan":"2"},newtr,"Erntemaschine Größe 1x1");
+
+        newtr=createElement("tr",{"style":"line-height:18px;"},newtable);
+        newtd=createElement("td",{"align":"center"},newtr);
+        inp=createElement("select",{"id":"input_bigHarvester","class":"link", "style":"max-width:100%; width:100%;"},newtd);
+        createElement("option",{"value":0},inp,"deaktivieren");
+        for (var v_id in unsafeWindow.megafield_data.vehicles_unlock) {
+            var v = unsafeWindow.megafield_data.vehicle_slots[v_id];
+            if (v.size == 4 && v.type == "harvest") {
+                createElement("option",{"value":v_id},inp,v.name + " (" + v_id + ")");
+            }
+        }
+        inp.value=settings.get("account","megafieldBigVehicle");
+        inp.addEventListener("change",function(){
+            settings.set("account","megafieldBigVehicle",this.value)
+        },false);
+        newtd=createElement("td",{"colspan":"2"},newtr,"Erntemaschine Größe 2x2");
 
         // *********** GUILD *****************************************
         newtr=createElement("tr",{"style":"background-color:#b69162;"},newtable);
