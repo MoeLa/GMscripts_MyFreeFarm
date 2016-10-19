@@ -2316,18 +2316,17 @@ var zones=new function(){
                */
               if (megafieldSmartTimer && zoneNrF == "megafield" && unsafeWindow.megafield_data) {
                 var toHarvestInCurrentTour = 0; // Amount of fields, that the machine still has to harvest
-                console.log("Moe, checkReady");
-                console.log(unsafeWindow.megafield_data);
                 if (unsafeWindow.megafield_data.tour && unsafeWindow.megafield_data.tour.steps) {
                   // Iterate over all steps (completed and to do ones)
                   for (var i = 0; i < unsafeWindow.megafield_data.tour.steps.length; i++) {
                     // If the i-th step has attributes, it's not completed yet
                     if (Object.keys(unsafeWindow.megafield_data.tour.steps[i]).length > 0) {
                       toHarvestInCurrentTour += unsafeWindow.megafield_data.vehicle_slots[unsafeWindow.megafield_vehicle_id].size; // Muss durch Vehicle-Größe ersetzt werden
-                      // unsafeWindow.megafield_data.vehicle_slots[unsafeWindow.megafield_vehicle_id].size
                     }
                   }
                 }
+                console.log("Moe, toHarvestInCurrentTour: " + toHarvestInCurrentTour);
+                
                 var toPlantForCurrentJob = 0; // Amount of plants missing/not yet planted to finish the job. Leave out plants that won't finish in time.
                 if (unsafeWindow.megafield_data.job && unsafeWindow.megafield_data.job.products) {
                   // Iterate over needed products for current job
@@ -15527,6 +15526,8 @@ return false;
 }*/
         try{
             if(unsafeWindow.megafield_data){
+                console.log("Moe, checkReady");
+                console.log(unsafeWindow);
                 updateProductDataMegafield();
                 // Store data of job and reward
                 var jobStart=parseInt(unsafeWindow.megafield_data.job_start,10);

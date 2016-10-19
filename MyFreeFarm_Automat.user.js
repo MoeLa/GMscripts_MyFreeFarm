@@ -6302,25 +6302,20 @@ function autoMegafield(runId, step) {
 
             var area = unsafeWindow.megafield_data.area;
             var useBigHarvester = false;
-            console.log("Moe, starte Große-Maschine-Check");
             if (settings.get("account","megafieldBigVehicle") > 0) {
-                for (var y = 0; y < unsafeData.BUILDING_SIZE["megafield"][0] - 1; y++) {
+                outer: for (var y = 0; y < unsafeData.BUILDING_SIZE["megafield"][0] - 1; y++) {
                     for (var x = 1; x <= unsafeData.BUILDING_SIZE["megafield"][1] - 1; x++) {
                         var i = y * unsafeData.BUILDING_SIZE["megafield"][1] + x;
                         if (area[i] && area[i].remain <= 0 && area[i+1] && area[i+1].remain <= 0 && 
                             area[i+11] && area[i+11].remain <= 0 && area[i+12] && area[i+12].remain <= 0) {
                             useBigHarvester = true;
-                            console.log("Moe, große Maschine auf: " + x + "/" + y + " (Id: " + i + ")");
+                            break outer;
                         }
                     }
                 }
-                console.log("Moe, Check abgeschlossen: " + useBigHarvester);
-            } else {
-                console.log("Moe, kein Check: " + settings.get("account","megafieldBigVehicle"));
             }
 
             var v_id = useBigHarvester ? settings.get("account","megafieldBigVehicle") : settings.get("account","megafieldSmallVehicle");
-
             if (v_id == unsafeWindow.megafield_vehicle_id) { // Korrektes Fahrzeug selektiert
               
               if ((unsafeWindow.megafield_data.vehicles[v_id]) && (unsafeWindow.megafield_data.vehicles[v_id].durability > 0)) {
@@ -6341,11 +6336,8 @@ function autoMegafield(runId, step) {
 
             } else { // Kein/falsches Fahrzeug selektiert
               GM_logWarning("autoMegafield", "runId=" + runId + " step=" + step, "zoneNrF=" + handled.zoneNrF + " zoneNrL=" + handled.zoneNrL, getText("automat_automatMegafield") + ": Kein oder falsches Fahrzeug selektiert");
-              step--;
               action = function() { click($("megafield_vehicle" + v_id)); };
               listeningEvent = "gameMegafieldTourVehicleSet";
-
-              // TODO: Im nächsten/zusätzlichen Step den Pfeil nach links 'zurück' zum Megafield
 
               // Kein/falsches Fahrzeug selektiert => Abbruch. Vielleicht kann man ja mal implementieren, dass da was selektiert wird
               // GM_logWarning("autoMegafield", "runId=" + runId + " step=" + step, "zoneNrF=" + handled.zoneNrF + " zoneNrL=" + handled.zoneNrL, getText("automat_automatMegafield") + ": " + getText("automat_vehicleNotKnown") + " " + getText("automat_stopAdding"));
@@ -6356,10 +6348,17 @@ function autoMegafield(runId, step) {
             break;
           }
         case 4:
-          { // crop vehicle dialogue, wir ham zuvor auf "Fahrzeug kaufen" geklickt, dass muss nun bestätigt werden
+          {
             step = step - 2; // Step two back, because step is incremented by one, when event occurs. Effectly we jump back to 'crop vehicle'
-            listeningEvent = "gameMegafieldVehicleBought";
-            action = function() { click($("globalbox_button1")); };
+            if (unsafeWindow.megafield_move_position == 2 && unsafeWindow.megafield_data.vehicles[unsafeWindow.megafield_vehicle_id].durability > 0) {
+                // After switching the vehicle, go back to megafield
+                listeningEvent = "gameMegafieldMoved";
+                action = function() { click($("megafield_carpool")); };
+            } else {
+                // 'buy crop vehicle' dialogue must be confirmed
+                listeningEvent = "gameMegafieldVehicleBought";
+                action = function() { click($("globalbox_button1")); };
+            }
             break;
           }
         case 5:
@@ -6379,18 +6378,34 @@ function autoMegafield(runId, step) {
             var area = unsafeWindow.megafield_data.area; // Objekt mit Attributen 1-99 => [duration, pid, remain, time] also Wachstumsdauer, ProduktID, Restzeit, Endzeitpunkt
             var areaSize = unsafeData.BUILDING_SIZE["megafield"][0] * unsafeData.BUILDING_SIZE["megafield"][1]; // Rechteck 9*11 = 99
             // Generate route
+
             var i = 0;
-            while (i <= areaSize) { // Solange nicht bis 99 gezählt wurde...
-              for (i = 1; i <= areaSize; i++) { // Zähle von 1 bis 99 bzw. erneut anfangen, wenn...
-                if (area[i] && (area[i].remain < 0) && // das i-te Feld existiert UND
-                  $("megafield_tile_tour" + i).className == "megafield_area_tour_possible") { // wir dort die Tour anfangen/fortsetzen können
-                  if (unsafeWindow.megafield_data.vehicle_slots[unsafeWindow.megafield_vehicle_id].size == 1 || i%11 != 0 && i<88) {
-                      click($("megafield_tile" + i));
-                      break;
+            if (unsafeWindow.megafield_data.vehicle_slots[unsafeWindow.megafield_vehicle_id].size == 1) {
+                // Crop vehicle with harvest size 1
+                while (i <= areaSize) { // Solange nicht bis 99 gezählt wurde...
+                  for (i = 1; i <= areaSize; i++) { // Zähle von 1 bis 99 bzw. erneut anfangen, wenn...
+                    if (area[i] && (area[i].remain < 0) && // das i-te Feld existiert UND
+                      $("megafield_tile_tour" + i).className == "megafield_area_tour_possible") { // wir dort die Tour anfangen/fortsetzen können
+                        click($("megafield_tile" + i));
+                        break;
+                    }
                   }
                 }
-              }
-            } // Jetzt hamma unsere Tour zusammengeklickt
+            } else {
+                for (i = 1; i <= areaSize; i++) {
+                    if (area[i] && (area[i].remain < 0) &&
+                        $("megafield_tile_tour" + i).className == "megafield_area_tour_possible" &&
+                        area[i+1] && (area[i+1].remain < 0) &&
+                        area[i+11] && (area[i+11].remain < 0) &&
+                        area[i+12] && (area[i+12].remain < 0) &&
+                        (i % 11 != 0) && i < 88
+                        ) {
+                        click($("megafield_tile" + i));
+                    }
+                }
+            } 
+            // Jetzt hamma unsere Tour zusammengeklickt
+            
             // Commit
             if ($("megafield_vehicle_go" + unsafeWindow.megafield_vehicle_id).style.display == "block") { // Grüner Haken sichtbar
               GM_logInfo("autoMegafield", "runId=" + runId + " step=" + step, "zoneNrF=" + handled.zoneNrF + " zoneNrL=" + handled.zoneNrL, getText("automat_automatMegafield") + ": " + getText("automat_tourStarting"));
