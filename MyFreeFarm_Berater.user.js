@@ -2325,7 +2325,6 @@ var zones=new function(){
                     }
                   }
                 }
-                console.log("Moe, toHarvestInCurrentTour: " + toHarvestInCurrentTour);
                 
                 var toPlantForCurrentJob = 0; // Amount of plants missing/not yet planted to finish the job. Leave out plants that won't finish in time.
                 if (unsafeWindow.megafield_data.job && unsafeWindow.megafield_data.job.products) {
@@ -13708,6 +13707,14 @@ return false;
             raiseEvent("gameOpenGlobalBox");
         }catch(err){GM_logError("globalBox","","",err);}
     });
+    unsafeOverwriteFunction("buildingInnerDialogBox",function(m, a, l, h, s){
+        try{
+            unsafeWindow._buildingInnerDialogBox(m, a, l, h, s);
+        }catch(err){GM_logError("_buildingInnerDialogBox","","",err);}
+        try{
+            raiseEvent("gameOpenBuildingInnerDialogBox");
+        }catch(err){GM_logError("buildingInnerDialogBox","","",err);}
+    });
 
     if(newdiv=$("coins")){
         newdiv1=newdiv.cloneNode(true);
@@ -14932,7 +14939,9 @@ return false;
             if(checkRequest(request)){
                 switch(action){
                 case "init": raiseEvent("gameOpenStable"); break;
-                default:
+                case "crop": raiseEvent("gameOpenStableCrop"); break;
+                case "feed": raiseEvent("gameOpenStableFeed"); break;
+                default: console.log("Moe, action"); console.log(action);
                 }
             }
         }catch(err){GM_logError("buildingInnerActionResponse","","",err);}

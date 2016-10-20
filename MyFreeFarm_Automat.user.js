@@ -5404,150 +5404,199 @@ function checkGuildJobProduct(zoneNrL) {
     }catch(err){GM_logError("productInGuildJop","","",err);}
 }
 
-function autoFarmStable(runId,step,didFeed,isBot,sorte,feedcounter,maxFeed){
-try{
-    // GM_log("autoFarmStable runId="+runId+" step="+step+" didFeed="+didFeed+" isBot="+isBot+" sorte="+sorte+" feedcounter="+feedcounter+" maxFeed="+maxFeed);
-    if(bot.checkRun("autoFarmStable",runId,!isBot)){
-        var help,action=null,listeningEvent=null;
-        bot.setAction("autoFarmStable ("+step+")");
-        // Error displayed
-        if($("errorboxinner").style.display=="block"){ step=9; } // exit
-        switch(step){
-        case 1:{ // init
-            GM_logInfo("autoFarmStable","runId="+runId+" step="+step+" didFeed="+didFeed+" isBot="+isBot+" sorte="+sorte+" feedcounter="+feedcounter+" maxFeed="+maxFeed,"","Feeding");
-            autoFarmStable(runId,isBot?step+1:5,didFeed,isBot,sorte,feedcounter,maxFeed);
-        break;}
-        case 2:{ // crop
-            help=$("globalbox");
-            if(help&&(help.style.display=="block")){
-                click($("globalbox_button1"));
-                window.setTimeout(autoFarmStable,3*settings.getPause(true),runId,step+1,didFeed,isBot,sorte,feedcounter,maxFeed);
-            }else{
-                autoFarmStable(runId,step+1,didFeed,isBot,sorte,feedcounter,maxFeed);
-            }
-        break;}
-        case 3:{ // check if active
-            if(zoneList[handled.zoneNrL][0][0]==PRODSTOP){
-                autoFarmStable(runId,9,didFeed,isBot,sorte,feedcounter,maxFeed);
-            }else{
-                autoFarmStable(runId,step+1,didFeed,isBot,sorte,feedcounter,maxFeed);
-            }
-        break;}
-        case 4:{ // check storage of feed
-            if (checkGuildJobProduct(handled.zoneNrL)) {
-                if (unsafeWindow.job_data.guild_job_data.stock[sorte]&&unsafeWindow.job_data.guild_job_data.stock[sorte]>0){
-                    window.setTimeout(autoFarmStable, 3*settings.getPause(true),runId,step+1,didFeed,isBot,sorte,feedcounter,maxFeed)
-                } else {
-                    GM_logWarning("autoFarmStable","runId="+runId+" step="+step+" didFeed="+didFeed+" isBot="+isBot+" sorte="+sorte+" feedcounter="+feedcounter+" maxFeed="+maxFeed,"","No feed.<br>Stopping zone.");
-                    zoneList[handled.zoneNrL][0][0]=PRODSTOP; // sleep zone
-                    updateQueueBox(handled.zoneNrF);
-                    autoFarmStable(runId,10,didFeed,isBot,sorte,feedcounter,maxFeed); // exit
-                }
-            } else if(unsafeData.prodStock[0][sorte]&&unsafeData.prodStock[0][sorte]>0){
-                window.setTimeout(autoFarmStable, 3*settings.getPause(true),runId,step+1,didFeed,isBot,sorte,feedcounter,maxFeed)
-            }else{
-                // feed not found
-                if(parseInt(unsafeWindow.racksort,10)<unsafeWindow.userracks){
-                    step--;
-                    action=function(){
-                        unsafeWindow.updateRack(parseInt(unsafeWindow.userracks,10)); // switch to last rack
+function autoFarmStable(runId, step, didFeed, isBot, sorte, feedcounter, maxFeed) {
+    try {
+        // GM_log("autoFarmStable runId="+runId+" step="+step+" didFeed="+didFeed+" isBot="+isBot+" sorte="+sorte+" feedcounter="+feedcounter+" maxFeed="+maxFeed);
+        if (bot.checkRun("autoFarmStable", runId, !isBot)) {
+            var help, action = null,
+                listeningEvent = null;
+            bot.setAction("autoFarmStable (" + step + ")");
+            console.log("Moe, autoFarmStable, step: " + step);
+            // Error displayed
+            if ($("errorboxinner").style.display == "block") { step = 9; } // exit
+            switch (step) {
+                case 1:
+                    { // init: Show "Feeding" bubble and probably jump to step 5
+                        GM_logInfo("autoFarmStable", "runId=" + runId + " step=" + step + " didFeed=" + didFeed + " isBot=" + isBot + " sorte=" + sorte + " feedcounter=" + feedcounter + " maxFeed=" + maxFeed, "", "Feeding");
+                        autoFarmStable(runId, isBot ? step + 1 : 5, didFeed, isBot, sorte, feedcounter, maxFeed);
+                        break;
                     }
-                    listeningEvent="gameUpdateRack";
-                }else{
-                    if(sorte==zoneList[handled.zoneNrL][0][0]){
-                        autoFarmStable(runId,step,didFeed,isBot,zoneList[handled.zoneNrL][1][0],0,zoneList[handled.zoneNrL][1][1]); // do other food
-                    }else{
-                        if(unsafeData.readyZone[handled.zoneNrS]){
-                            GM_logWarning("autoFarmStable","runId="+runId+" step="+step+" didFeed="+didFeed+" isBot="+isBot+" sorte="+sorte+" feedcounter="+feedcounter+" maxFeed="+maxFeed,"","No feed.<br>Stopping zone.");
-                            zoneList[handled.zoneNrL][0][0]=PRODSTOP; // sleep zone
-                            updateQueueBox(handled.zoneNrF);
+                case 2:
+                    { // crop: If a/the globalbox is opened, confirm it
+                        help = $("globalbox");
+                        if (help && (help.style.display == "block")) {
+                            console.log("Moe, autoFarmStable, Defining action/listeningEvent");
+                            action = function() { click($("globalbox_button1")); console.log("Moe, autoFarmStable, click $globalbox_button1"); }
+                            listeningEvent = "gameOpenStableCrop";
+
+                            // click($("globalbox_button1"));
+                            // window.setTimeout(autoFarmStable, 3 * settings.getPause(true), runId, step + 1, didFeed, isBot, sorte, feedcounter, maxFeed);
+                        } else {
+                            console.log("Moe, autoFarmStable, step 2 else-loop");
+                            autoFarmStable(runId, step + 1, didFeed, isBot, sorte, feedcounter, maxFeed);
                         }
-                        autoFarmStable(runId,10,didFeed,isBot,sorte,feedcounter,maxFeed); // exit
+                        break;
                     }
-                }
+                case 3:
+                    { // check, if active
+                        if (zoneList[handled.zoneNrL][0][0] == PRODSTOP) {
+                            console.log("Moe, autoFarmStable, step 3 handle PRODSTOP");
+                            autoFarmStable(runId, 9, didFeed, isBot, sorte, feedcounter, maxFeed);
+                        } else {
+                            console.log("Moe, autoFarmStable, step 3 no PRODSTOP");
+                            autoFarmStable(runId, step + 1, didFeed, isBot, sorte, feedcounter, maxFeed);
+                        }
+                        break;
+                    }
+                case 4:
+                    { // check storage of feed
+                        if (checkGuildJobProduct(handled.zoneNrL)) {
+                            console.log("Moe, irgend n Gildenkack");
+                            if (unsafeWindow.job_data.guild_job_data.stock[sorte] && unsafeWindow.job_data.guild_job_data.stock[sorte] > 0) {
+                                autoFarmStable(runId, step + 1, didFeed, isBot, sorte, feedcounter, maxFeed);
+                                // window.setTimeout(autoFarmStable, 3 * settings.getPause(true), runId, step + 1, didFeed, isBot, sorte, feedcounter, maxFeed);
+                            } else {
+                                GM_logWarning("autoFarmStable", "runId=" + runId + " step=" + step + " didFeed=" + didFeed + " isBot=" + isBot + " sorte=" + sorte + " feedcounter=" + feedcounter + " maxFeed=" + maxFeed, "", "No feed.<br>Stopping zone.");
+                                zoneList[handled.zoneNrL][0][0] = PRODSTOP; // sleep zone
+                                updateQueueBox(handled.zoneNrF);
+                                autoFarmStable(runId, 10, didFeed, isBot, sorte, feedcounter, maxFeed); // exit
+                            }
+                        } else if (unsafeData.prodStock[0][sorte] && unsafeData.prodStock[0][sorte] > 0) {
+                            // Some products of 'sorte' in stock
+                            console.log("Moe, Fütterprodukt gefunden");
+                            autoFarmStable(runId, step + 1, didFeed, isBot, sorte, feedcounter, maxFeed);
+                            // window.setTimeout(autoFarmStable, 3 * settings.getPause(true), runId, step + 1, didFeed, isBot, sorte, feedcounter, maxFeed);
+                        } else {
+                            // No products of 'sorte' found
+                            console.log("Moe, keine Produkte zum Füttern gefunden");
+                            if (parseInt(unsafeWindow.racksort, 10) < unsafeWindow.userracks) {
+                                console.log("Moe, Rack updaten");
+                                step--;
+                                action = function() {
+                                    unsafeWindow.updateRack(parseInt(unsafeWindow.userracks, 10)); // switch to last rack
+                                }
+                                listeningEvent = "gameUpdateRack";
+                            } else {
+                                console.log("Moe, Rack nicht updaten");
+                                if (sorte == zoneList[handled.zoneNrL][0][0]) {
+                                    console.log("Moe, anderes Fütterprodukt");
+                                    autoFarmStable(runId, step, didFeed, isBot, zoneList[handled.zoneNrL][1][0], 0, zoneList[handled.zoneNrL][1][1]); // do other food
+                                } else {
+                                    console.log("Moe, Notausgang");
+                                    if (unsafeData.readyZone[handled.zoneNrS]) {
+                                        GM_logWarning("autoFarmStable", "runId=" + runId + " step=" + step + " didFeed=" + didFeed + " isBot=" + isBot + " sorte=" + sorte + " feedcounter=" + feedcounter + " maxFeed=" + maxFeed, "", "No feed.<br>Stopping zone.");
+                                        zoneList[handled.zoneNrL][0][0] = PRODSTOP; // sleep zone
+                                        updateQueueBox(handled.zoneNrF);
+                                    }
+
+                                    autoFarmStable(runId, 10, didFeed, isBot, sorte, feedcounter, maxFeed); // exit
+                                }
+                            }
+                        }
+                        break;
+                    }
+                case 5:
+                    { // Feeding (Premium): start
+                        if ((unsafeWindow.premium == 1) || (parseInt($("levelnum").innerHTML, 10) < 10)) { // check if premium feeding
+                            var div = (checkGuildJobProduct(handled.zoneNrL)) ? $("feed_item" + sorte + "_guild").querySelector(".sack") : $("feed_item" + sorte + "_normal").querySelector(".sack");
+                            if (div) {
+                                action = function() { click(div); }
+                                listeningEvent = "gameOpenBuildingInnerDialogBox";
+                                // click(div); // start feed
+                                // window.setTimeout(autoFarmStable, 3 * settings.getPause(true), runId, step + 1, didFeed, isBot, sorte, feedcounter, maxFeed);
+                            } else {
+                                // Wait, until div is ready
+                                GM_logInfo("autoFarmStable", "runId=" + runId + " step=" + step + " didFeed=" + didFeed + " isBot=" + isBot + " sorte=" + sorte + " feedcounter=" + feedcounter + " maxFeed=" + maxFeed, "", "Waiting for dialog to be completely loaded");
+                                window.setTimeout(autoFarmStable, 3 * settings.getPause(true), runId, step, didFeed, isBot, sorte, feedcounter, maxFeed);
+                            }
+                        } else {
+                            autoFarmStable(runId, 8, didFeed, isBot, sorte, feedcounter, maxFeed); // go to non-premium feeding
+                        }
+                        break;
+                    }
+                case 6:
+                    { // Feeding (Premium): amount
+                        if (help = $("building_dialogbox_input")) {
+                            //maxFeed=Math.min(unsafeData.prodStock[0][sorte],maxFeed);
+                            maxFeed = (checkGuildJobProduct(handled.zoneNrL)) ? Math.min(unsafeWindow.job_data.guild_job_data.stock[sorte], maxFeed) : Math.min(unsafeData.prodStock[0][sorte], maxFeed);
+                            GM_logInfo("autoFarmStable", "runId=" + runId + " step=" + step + " didFeed=" + didFeed + " isBot=" + isBot + " sorte=" + sorte + " feedcounter=" + feedcounter + " maxFeed=" + maxFeed, "", getText("automat_feeding") + "<br>" + maxFeed + " " + unsafeData.prodName[0][sorte]);
+                            help.value = maxFeed; // enter amount
+                            keyup(help);
+                            help = null;
+                            // window.setTimeout(autoFarmStable, 3 * settings.getPause(true), runId, step + 1, didFeed, isBot, sorte, feedcounter, maxFeed);
+                            autoFarmStable(runId, step + 1, didFeed, isBot, sorte, feedcounter, maxFeed);
+                        } else {
+                            window.setTimeout(autoFarmStable, 1000, runId, step, didFeed, isBot, sorte, feedcounter, maxFeed);
+                        }
+                        break;
+                    }
+                case 7:
+                    { // Feeding (Premium): submit
+                        feedcounter += maxFeed;
+                        if (!checkGuildJobProduct(handled.zoneNrL)) {
+                            unsafeData.prodStock[0][sorte] -= maxFeed;
+                        }
+                        didFeed = true;
+                        action = function() { click($("building_dialogbox_submit")); }
+                        listeningEvent = "gameOpenStableFeed";
+                        // click($("building_dialogbox_submit"));
+                        if (isBot && (sorte == zoneList[handled.zoneNrL][0][0]) && (zoneList[handled.zoneNrL][1]) && (zoneList[handled.zoneNrL][1][1] > 0)) {
+                            step = 3;
+                            // window.setTimeout(autoFarmStable, 3 * settings.getPause(true), runId, 4, didFeed, isBot, zoneList[handled.zoneNrL][1][0], 0, zoneList[handled.zoneNrL][1][1]); // do other food
+                        } else {
+                            step = 9;
+                            // window.setTimeout(autoFarmStable, 3 * settings.getPause(true), runId, 10, didFeed, isBot, sorte, feedcounter, maxFeed); // exit
+                        }
+                        break;
+                    }
+                case 8:
+                    { // Feeding (Non-Premium)
+                        feedcounter++;
+                        unsafeData.prodStock[0][sorte]--;
+                        didFeed = true;
+                        GM_logInfo("autoFarmStable", "runId=" + runId + " step=" + step + " didFeed=" + didFeed + " isBot=" + isBot + " sorte=" + sorte + " feedcounter=" + feedcounter + " maxFeed=" + maxFeed, "", getText("automat_feeding") + "<br>" + feedcounter + " " + unsafeData.prodName[0][sorte]);
+                        click($("feed_item" + sorte + "_normal").firstElementChild); // give feed
+                        if (feedcounter >= maxFeed) {
+                            if ((sorte == zoneList[handled.zoneNrL][0][0]) && (zoneList[handled.zoneNrL][1][1] > 0)) {
+                                window.setTimeout(autoFarmStable, 3 * settings.getPause(true), runId, 4, didFeed, isBot, zoneList[handled.zoneNrL][1][0], 0, zoneList[handled.zoneNrL][1][1]); // do other food
+                            } else {
+                                window.setTimeout(autoFarmStable, 3 * settings.getPause(true), runId, 10, didFeed, isBot, sorte, feedcounter, maxFeed); // exit
+                            }
+                        } else {
+                            window.setTimeout(autoFarmStable, settings.getPause(true), runId, step, true, isBot, sorte, feedcounter, maxFeed); // next feeding
+                        }
+                        break;
+                    }
+                case 9:
+                    { // click errorbox if opened
+                        if ($("errorboxinner").style.display == "block") {
+                            click($("errorboxfooterinner").getElementsByClassName("link")[0]);
+                            window.setTimeout(autoFarmStable, settings.getPause(), runId, step + 1, didFeed, isBot, sorte, feedcounter, maxFeed);
+                        } else {
+                            autoFarmStable(runId, step + 1, didFeed, isBot, sorte, feedcounter, maxFeed);
+                        }
+                        break;
+                    }
+                case 10:
+                    { // exit
+                        autoZoneFinish(runId, isBot ? $("building_inner").querySelector(".big_close") : null);
+                        break;
+                    }
             }
-        break;}
-        case 5:{ // Feeding (Premium): start
-            if((unsafeWindow.premium==1) || (parseInt($("levelnum").innerHTML,10)<10)){ // check if premium feeding
-                var div = (checkGuildJobProduct(handled.zoneNrL))?$("feed_item"+sorte+"_guild").querySelector(".sack"):$("feed_item"+sorte+"_normal").querySelector(".sack");
-                if (div) {
-                  click(div); // start feed
-                  window.setTimeout(autoFarmStable,3*settings.getPause(true),runId,step+1,didFeed,isBot,sorte,feedcounter,maxFeed);
-                } else {
-                  // Wait, until div is ready
-                  GM_logInfo("autoFarmStable","runId="+runId+" step="+step+" didFeed="+didFeed+" isBot="+isBot+" sorte="+sorte+" feedcounter="+feedcounter+" maxFeed="+maxFeed,"","Waiting for dialog to be completely loaded");
-                  window.setTimeout(autoFarmStable,3*settings.getPause(true),runId,step,didFeed,isBot,sorte,feedcounter,maxFeed);
-                }
-            } else {
-                autoFarmStable(runId,8,didFeed,isBot,sorte,feedcounter,maxFeed); // go to non-premium feeding
+            if (listeningEvent) {
+                document.addEventListener(listeningEvent, function(listeningEvent, runId, step, didFeed, isBot, sorte, feedcounter, maxFeed) {
+                    return function() {
+                        document.removeEventListener(listeningEvent, arguments.callee, false);
+                        window.setTimeout(autoFarmStable, settings.getPause(), runId, step + 1, didFeed, isBot, sorte, feedcounter, maxFeed);
+                    };
+                }(listeningEvent, runId, step, didFeed, isBot, sorte, feedcounter, maxFeed), false);
             }
-        break;}
-        case 6:{ // Feeding (Premium): amount
-            if(help=$("building_dialogbox_input")){
-                //maxFeed=Math.min(unsafeData.prodStock[0][sorte],maxFeed);
-                maxFeed =  (checkGuildJobProduct(handled.zoneNrL))?Math.min(unsafeWindow.job_data.guild_job_data.stock[sorte],maxFeed):Math.min(unsafeData.prodStock[0][sorte],maxFeed);
-                GM_logInfo("autoFarmStable","runId="+runId+" step="+step+" didFeed="+didFeed+" isBot="+isBot+" sorte="+sorte+" feedcounter="+feedcounter+" maxFeed="+maxFeed,"",getText("automat_feeding")+"<br>"+maxFeed+" "+unsafeData.prodName[0][sorte]);
-                help.value=maxFeed; // enter amount
-                keyup(help);
-                help=null;
-                window.setTimeout(autoFarmStable,3*settings.getPause(true),runId,step+1,didFeed,isBot,sorte,feedcounter,maxFeed);
-            }else{
-                window.setTimeout(autoFarmStable,1000,runId,step,didFeed,isBot,sorte,feedcounter,maxFeed);
-            }
-        break;}
-        case 7:{ // Feeding (Premium): submit
-            feedcounter+=maxFeed;
-            if (!checkGuildJobProduct(handled.zoneNrL)) {
-                unsafeData.prodStock[0][sorte]-=maxFeed;
-            }
-            didFeed=true;
-            click($("building_dialogbox_submit"));
-            if(isBot&&(sorte==zoneList[handled.zoneNrL][0][0])&&(zoneList[handled.zoneNrL][1])&&(zoneList[handled.zoneNrL][1][1]>0)){
-                window.setTimeout(autoFarmStable,3*settings.getPause(true),runId,4,didFeed,isBot,zoneList[handled.zoneNrL][1][0],0,zoneList[handled.zoneNrL][1][1]); // do other food
-            }else{
-                window.setTimeout(autoFarmStable,3*settings.getPause(true),runId,10,didFeed,isBot,sorte,feedcounter,maxFeed); // exit
-            }
-        break;}
-        case 8:{ // Feeding (Non-Premium)
-            feedcounter++;
-            unsafeData.prodStock[0][sorte]--;
-            didFeed=true;
-            GM_logInfo("autoFarmStable","runId="+runId+" step="+step+" didFeed="+didFeed+" isBot="+isBot+" sorte="+sorte+" feedcounter="+feedcounter+" maxFeed="+maxFeed,"",getText("automat_feeding")+"<br>"+feedcounter+" "+unsafeData.prodName[0][sorte]);
-            click($("feed_item"+sorte+"_normal").firstElementChild); // give feed
-            if(feedcounter>=maxFeed){
-                if((sorte==zoneList[handled.zoneNrL][0][0]) && (zoneList[handled.zoneNrL][1][1]>0)){
-                    window.setTimeout(autoFarmStable,3*settings.getPause(true),runId,4,didFeed,isBot,zoneList[handled.zoneNrL][1][0],0,zoneList[handled.zoneNrL][1][1]); // do other food
-                }else{
-                    window.setTimeout(autoFarmStable,3*settings.getPause(true),runId,10,didFeed,isBot,sorte,feedcounter,maxFeed); // exit
-                }
-            }else{
-                window.setTimeout(autoFarmStable,settings.getPause(true),runId,step,true,isBot,sorte,feedcounter,maxFeed); // next feeding
-            }
-        break;}
-        case 9:{ // click errorbox if opened
-            if($("errorboxinner").style.display=="block"){
-                click($("errorboxfooterinner").getElementsByClassName("link")[0]);
-                window.setTimeout(autoFarmStable,settings.getPause(),runId,step+1,didFeed,isBot,sorte,feedcounter,maxFeed);
-            } else {
-                autoFarmStable(runId,step+1,didFeed,isBot,sorte,feedcounter,maxFeed);
-            }
-        break;}
-        case 10:{ // exit
-            autoZoneFinish(runId,isBot?$("building_inner").querySelector(".big_close"):null);
-        break;}
+            if (action) { action(); }
+            help = null;
+            listeningEvent = null;
+            action = null;
         }
-        if(listeningEvent){
-            document.addEventListener(listeningEvent,function(listeningEvent,runId,step,didFeed,isBot,sorte,feedcounter,maxFeed){
-                return function(){
-                    document.removeEventListener(listeningEvent,arguments.callee,false);
-                    window.setTimeout(autoFarmStable,settings.getPause(),runId,step+1,didFeed,isBot,sorte,feedcounter,maxFeed);
-                };
-            }(listeningEvent,runId,step,didFeed,isBot,sorte,feedcounter,maxFeed),false);
-        }
-        if(action){ action(); }
-        help=null;listeningEvent=null;action=null;
-    }
-}catch(err){GM_logError("autoFarmStable","runId="+runId+" step="+step+" didFeed="+didFeed+" isBot="+isBot+" sorte="+sorte+" feedcounter="+feedcounter+" maxFeed="+maxFeed,"",err);}
+    } catch (err) { GM_logError("autoFarmStable", "runId=" + runId + " step=" + step + " didFeed=" + didFeed + " isBot=" + isBot + " sorte=" + sorte + " feedcounter=" + feedcounter + " maxFeed=" + maxFeed, "", err); }
 }
 function autoFarmFactory(runId,step){
     try{
