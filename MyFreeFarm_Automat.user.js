@@ -5598,123 +5598,139 @@ function autoFarmStable(runId, step, didFeed, isBot, sorte, feedcounter, maxFeed
         }
     } catch (err) { GM_logError("autoFarmStable", "runId=" + runId + " step=" + step + " didFeed=" + didFeed + " isBot=" + isBot + " sorte=" + sorte + " feedcounter=" + feedcounter + " maxFeed=" + maxFeed, "", err); }
 }
-function autoFarmFactory(runId,step){
-    try{
-    if(!step){ step=1; }
-    if(bot.checkRun("autoFarmFactory",runId)){
-        bot.setAction("autoFarmFactory ("+step+")");
-        var action=null,listeningEvent=null;
-        switch(step){
-        case 1:{
-            if($("innermaincontainer").style.display=="block"){
-                GM_logInfo("autoFarmFactory","runId="+runId+" step="+step,"",getText("automat_automatFactory"));
-
-                if($("production_slot_cancel"+handled.farmNr+"_"+handled.zoneNr+"_1").style.display=="block"){
-                    autoFarmFactory(runId,6); // exit
-                } else {
-                    if ($("production_slot_info"+handled.farmNr+"_"+handled.zoneNr+"_1").innerHTML==""){
-                        window.setTimeout(autoFarmFactory,settings.getPause(),runId,step+1);
-                    } else {
-                        var croppingBtn = $("production_slot"+handled.farmNr+"_"+handled.zoneNr+"_1");
-                        if (croppingBtn) {
-                            //cropping
-                            click(croppingBtn);
-                            window.setTimeout(autoFarmFactory,settings.getPause(),runId,step+1);
-                        }
-                    }
-                }
-            }else{
-                window.setTimeout(autoFarmFactory,settings.getPause(),runId,step);
-            }
-        break;}
-        case 2:{
-                GM_logInfo("autoFarmFactory","runId="+runId+" step="+step,"",getText("automat_automatFactory"));
-                //if($("infoblock"+unsafeWindow.locationinfo[6])){ // zone is running
-                if(unsafeData.zones.getBlock(handled.zoneNrS)){
-                    autoFarmFactory(runId,6); // exit
-                } else {
-                    if ($("production_slot_info2"+handled.farmNr+"_"+handled.zoneNr+"_1").innerHTML==""){
-                        window.setTimeout(autoFarmFactory,settings.getPause(),runId,step);
-                    } else {
-                        var startProductionButton = $("production_slot"+handled.farmNr+"_"+handled.zoneNr+"_1");
-                        if (startProductionButton) {
-                            click(startProductionButton);
-                            window.setTimeout(autoFarmFactory,settings.getPause(),runId,step+1);
+function autoFarmFactory(runId, step) {
+    try {
+        if (!step) { step = 1; }
+        if (bot.checkRun("autoFarmFactory", runId)) {
+            bot.setAction("autoFarmFactory (" + step + ")");
+            var action = null, listeningEvent = null;
+            switch (step) {
+                case 1:
+                    { // init and optinally crop
+                        if ($("innermaincontainer").style.display == "block") {
+                            GM_logInfo("autoFarmFactory", "runId=" + runId + " step=" + step, "", getText("automat_automatFactory"));
+                            if ($("production_slot_cancel" + handled.farmNr + "_" + handled.zoneNr + "_1").style.display == "block") {
+                                // Production not finished yet
+                                autoFarmFactory(runId, 6); // exit
+                            } else {
+                                if ($("production_slot_info" + handled.farmNr + "_" + handled.zoneNr + "_1").innerHTML == "") {
+                                    // Cropped
+                                    // window.setTimeout(autoFarmFactory, settings.getPause(), runId, step + 1);
+                                    autoFarmFactory(runId, step + 1);
+                                } else {
+                                    var croppingBtn = $("production_slot" + handled.farmNr + "_" + handled.zoneNr + "_1");
+                                    if (croppingBtn) {
+                                        // Cropping
+                                        // action = function() { click(croppingBtn); }
+                                        // listeningEvent = "";
+                                        click(croppingBtn);
+                                        window.setTimeout(autoFarmFactory, settings.getPause(), runId, step + 1);
+                                    }
+                                }
+                            }
                         } else {
-                            // not enough products
-                            zoneList[handled.zoneNrL].unshift(DEFAULT_ZONELIST_ITEM.clone());
-                            updateQueueBox(handled.zoneNrS);
-                            window.setTimeout(autoFarmFactory,settings.getPause(),runId,6);// exit
+                            window.setTimeout(autoFarmFactory, settings.getPause(), runId, step);
                         }
+                        break;
                     }
+                case 2:
+                    { // Click on empty slot
+                        GM_logInfo("autoFarmFactory", "runId=" + runId + " step=" + step, "", getText("automat_automatFactory"));
+                        //if($("infoblock"+unsafeWindow.locationinfo[6])){ // zone is running
+                        if (unsafeData.zones.getBlock(handled.zoneNrS)) {
+                            autoFarmFactory(runId, 6); // exit
+                        } else {
+                            if ($("production_slot_info2" + handled.farmNr + "_" + handled.zoneNr + "_1").innerHTML == "") {
+                                window.setTimeout(autoFarmFactory, settings.getPause(), runId, step);
+                            } else {
+                                var startProductionButton = $("production_slot" + handled.farmNr + "_" + handled.zoneNr + "_1");
+                                if (startProductionButton) {
+                                    action = function() { click(startProductionButton); }
+                                    listeningEvent = "gameOpenGlobalCommitBox";
+                                    // click(startProductionButton);
+                                    // window.setTimeout(autoFarmFactory, settings.getPause(), runId, step + 1);
+                                } else {
+                                    // not enough products
+                                    zoneList[handled.zoneNrL].unshift(DEFAULT_ZONELIST_ITEM.clone());
+                                    updateQueueBox(handled.zoneNrS);
 
-
-                    // click on "Produktion starten" advancedproductionbutton8_10
-                    //console.log("Moe, vor advancedproductionbutton");
-                    //console.log("test"+unsafeWindow.locationinfo[6]);
-                    //console.log(getZoneType(handled.zoneNrL));
-                    //console.log(zoneList[handled.zoneNrL][0][0]);
-                    //console.log(unsafeData.BUILDING_INPUT[getZoneType(handled.zoneNrL)][zoneList[handled.zoneNrL][0][0]]);
-                    //var startProductionButton = $("advancedproductionbutton"+unsafeWindow.locationinfo[6]+"_"+unsafeData.BUILDING_INPUT[getZoneType(handled.zoneNrL)][zoneList[handled.zoneNrL][0][0]][0][0][0]).firstElementChild;
-
-                }
-
-        break;}
-
-
-
-
-        case 3:{
-            console.log(zoneList[handled.zoneNrL][0][0]);
-            if($("globalbox").style.display=="block"){
-                var products = $("globalbox").querySelector(".tt"+zoneList[handled.zoneNrL][0][0]);
-                click(products);
-                window.setTimeout(autoFarmFactory,settings.getPause(),runId,step+1);
-            }else{
-                window.setTimeout(autoFarmFactory,settings.getPause(),runId,step);
+                                    window.setTimeout(autoFarmFactory, settings.getPause(), runId, 6); // exit
+                                }
+                            }
+                            // click on "Produktion starten" advancedproductionbutton8_10
+                            //console.log("Moe, vor advancedproductionbutton");
+                            //console.log("test"+unsafeWindow.locationinfo[6]);
+                            //console.log(getZoneType(handled.zoneNrL));
+                            //console.log(zoneList[handled.zoneNrL][0][0]);
+                            //console.log(unsafeData.BUILDING_INPUT[getZoneType(handled.zoneNrL)][zoneList[handled.zoneNrL][0][0]]);
+                            //var startProductionButton = $("advancedproductionbutton"+unsafeWindow.locationinfo[6]+"_"+unsafeData.BUILDING_INPUT[getZoneType(handled.zoneNrL)][zoneList[handled.zoneNrL][0][0]][0][0][0]).firstElementChild;
+                        }
+                        break;
+                    }
+                case 3:
+                    { // Click on product to produce
+                        // console.log(zoneList[handled.zoneNrL][0][0]);
+                        if ($("globalbox").style.display == "block") {
+                            action = function() { click($("globalbox").querySelector(".tt" + zoneList[handled.zoneNrL][0][0])); }
+                            listeningEvent = "gameOpenGlobalBox";
+                            // var products = $("globalbox").querySelector(".tt" + zoneList[handled.zoneNrL][0][0]);
+                            // click(products);
+                            // window.setTimeout(autoFarmFactory, settings.getPause(), runId, step + 1);
+                        } else {
+                            window.setTimeout(autoFarmFactory, settings.getPause(), runId, step);
+                        }
+                        break;
+                    }
+                case 4:
+                    {
+                        if ($("globalbox").style.display == "block") {
+                            action = function() { click($("globalbox_button1")); setNextQueueItem(handled.zoneNrS); }
+                            listeningEvent = "gameOpenGlobalBox";
+                            
+                            // click($("globalbox_button1"));
+                            // window.setTimeout(autoFarmFactory, settings.getPause(), runId, step + 1);
+                        } else {
+                            window.setTimeout(autoFarmFactory, settings.getPause(), runId, step);
+                        }
+                        break;
+                    }
+                case 5:
+                    {
+                        if ($("production_slot_cancel" + handled.farmNr + "_" + handled.zoneNr + "_1") && $("production_slot_cancel" + handled.farmNr + "_" + handled.zoneNr + "_1").style.display == "block") {
+                            autoFarmFactory(runId, 6); // exit
+                        } else {
+                            window.setTimeout(autoFarmFactory, settings.getPause(), runId, step);
+                        }
+                        /*
+                        if($("infoblock"+unsafeWindow.locationinfo[6]) && $("infoblock"+unsafeWindow.locationinfo[6]).style.display=="block"){
+                            autoFarmFactory(runId,5); //exit
+                        }else{
+                            window.setTimeout(autoFarmFactory,settings.getPause(),runId,step);
+                        }*/
+                        break;
+                    }
+                case 6:
+                    { // exit
+                        autoZoneFinish(runId, $("innercontent").querySelector(".big_close")); //exit
+                        break;
+                    }
             }
-        break;}
-
-        case 4:{
-            if($("globalbox").style.display=="block"){
-                click($("globalbox_button1"));
-                setNextQueueItem(handled.zoneNrS);
-                window.setTimeout(autoFarmFactory,settings.getPause(),runId,step+1);
-            }else{
-                window.setTimeout(autoFarmFactory,settings.getPause(),runId,step);
+            if (listeningEvent) {
+                document.addEventListener(listeningEvent, function(listeningEvent, runId, step) {
+                    return function() {
+                        document.removeEventListener(listeningEvent, arguments.callee, false);
+                        window.setTimeout(autoFarmFactory, settings.getPause(), runId, step + 1);
+                    };
+                }(listeningEvent, runId, step), false);
             }
-        break;}
-        case 5:{
-            if($("production_slot_cancel"+handled.farmNr+"_"+handled.zoneNr+"_1").style.display=="block"){
-                autoFarmFactory(runId,6); // exit
-            } else {
-                window.setTimeout(autoFarmFactory,settings.getPause(),runId,step);
-
-            }
-            /*
-            if($("infoblock"+unsafeWindow.locationinfo[6]) && $("infoblock"+unsafeWindow.locationinfo[6]).style.display=="block"){
-                autoFarmFactory(runId,5); //exit
-            }else{
-                window.setTimeout(autoFarmFactory,settings.getPause(),runId,step);
-            }*/
-        break;}
-        case 6:{ // exit
-            autoZoneFinish(runId,$("innercontent").querySelector(".big_close"));//exit
-        break;}
+            if (action) { action(); }
+            listeningEvent = null;
+            action = null;
         }
-        if(listeningEvent){
-            document.addEventListener(listeningEvent,function(listeningEvent,runId,step){
-                return function(){
-                    document.removeEventListener(listeningEvent,arguments.callee,false);
-                    window.setTimeout(autoFarmFactory,settings.getPause(),runId,step+1);
-                };
-            }(listeningEvent,runId,step),false);
-        }
-        if(action){ action(); }
-        listeningEvent=null;action=null;
-    }
-    }catch(err){ GM_logError("autoFarmFactory","runId="+runId+" step="+step,"",err); }
+    } catch (err) { GM_logError("autoFarmFactory", "runId=" + runId + " step=" + step, "", err);
+        console.log(err); }
 }
+
 
 function autoFarmPony(runId,step){
     try{
