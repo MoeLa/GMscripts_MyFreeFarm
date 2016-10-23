@@ -14699,6 +14699,8 @@ return false;
                             var zoneNrF = zoneNr + 6 * (farmNR - 1);
                             if (16 == zones.getBuilding(zoneNrF)) {
                                 raiseEvent("gameFactoryKnittingCropped");
+                            } else {
+                                raiseEvent("harvestproduction");
                             }
                             break;
                         }
@@ -14759,6 +14761,11 @@ return false;
                             calcTotalFarmis();
                             doFarmis();
                             raiseEvent("gameFarmiResponse");
+                            break;
+                        }
+                    case "setadvancedproduction":
+                        {
+                            raiseEvent("setadvancedproduction");
                             break;
                         }
                     case "vet_endtreatment":

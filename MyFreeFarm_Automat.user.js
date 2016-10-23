@@ -5621,10 +5621,10 @@ function autoFarmFactory(runId, step) {
                                     var croppingBtn = $("production_slot" + handled.farmNr + "_" + handled.zoneNr + "_1");
                                     if (croppingBtn) {
                                         // Cropping
-                                        // action = function() { click(croppingBtn); }
-                                        // listeningEvent = "";
-                                        click(croppingBtn);
-                                        window.setTimeout(autoFarmFactory, settings.getPause(), runId, step + 1);
+                                        action = function() { click(croppingBtn); }
+                                        listeningEvent = "harvestproduction";
+                                        // click(croppingBtn);
+                                        // window.setTimeout(autoFarmFactory, settings.getPause(), runId, step + 1);
                                     }
                                 }
                             }
@@ -5685,8 +5685,8 @@ function autoFarmFactory(runId, step) {
                     {
                         if ($("globalbox").style.display == "block") {
                             action = function() { click($("globalbox_button1")); setNextQueueItem(handled.zoneNrS); }
-                            listeningEvent = "gameOpenGlobalBox";
-                            
+                            // listeningEvent = "innerinfos";
+                            listeningEvent = "setadvancedproduction";
                             // click($("globalbox_button1"));
                             // window.setTimeout(autoFarmFactory, settings.getPause(), runId, step + 1);
                         } else {
