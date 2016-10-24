@@ -2107,8 +2107,6 @@ var zones=new function(){
             if (DEVMODE_FUNCTION) {
               var trackingHandle = tracking.start("berater", "zones.processProduction", [zoneNrS]);
             }
-            // console.log("=== MOE === processProduction");
-            // console.log(zoneNrS); // Unteranderem megafield.99 etc.
             var err_trace = "begin";
             var zoneNrF = zoneNrS.toString().replace(/\.\d+$/g, "");
             var help;
@@ -2425,7 +2423,7 @@ var zones=new function(){
             }
         }
         return readyZoneAdded;
-    } catch (err) { GM_logError("zones.checkReady", "zoneNrS=" + zoneNrS, "", err); console.log(err); }
+    } catch (err) { GM_logError("zones.checkReady", "zoneNrS=" + zoneNrS, "", err); }
     }
 
     this.getTotalCrop=function(timeBegin,timeEnd){
@@ -14645,7 +14643,6 @@ return false;
         } catch (err) { GM_logError("_farmActionResponse", "mode=" + mode, "", err); }
         try {
             var r = checkRequest(request, mode);
-            console.log("farmActionResponse, mode: " + mode);
             if ((r != 0) && (r[0] != 0)) {
                 switch (mode) {
                     case "autoplant":
@@ -15007,7 +15004,7 @@ return false;
                 case "init": raiseEvent("gameOpenStable"); break;
                 case "crop": raiseEvent("gameOpenStableCrop"); break;
                 case "feed": raiseEvent("gameOpenStableFeed"); break;
-                default: console.log("Moe, action"); console.log(action);
+                default: // Nothing
                 }
             }
         }catch(err){GM_logError("buildingInnerActionResponse","","",err);}
@@ -15601,8 +15598,6 @@ return false;
 }*/
         try{
             if(unsafeWindow.megafield_data){
-                // console.log("Moe, checkReady");
-                // console.log(unsafeWindow);
                 updateProductDataMegafield();
                 // Store data of job and reward
                 var jobStart=parseInt(unsafeWindow.megafield_data.job_start,10);
@@ -16861,9 +16856,6 @@ return false;
                             break;}
                             case 5:{ // Vet
                                 zones.setBonus(zoneNrF,0);
-                                // console.log("=== START LESE VET ===");
-                                // console.log(print_r(unsafeWindow.farmersmarket_data.vet, "", true, "\n"));
-                                // console.log(unsafeWindow.farmersmarket_data.vet.production);
                                 if((!currBlock)&&(unsafeWindow.farmersmarket_data.vet&&unsafeWindow.farmersmarket_data.vet.production)){
                                     tempZoneProductionData=[[{},{}],0,0,true];
                                     for(var slot=1;slot<=4;slot++){
@@ -17292,7 +17284,6 @@ return false;
         }catch(err){GM_logError("_updateVetAnimalQueue","","",err);}
         try{
             var vet_data=unsafeWindow.vet_data;
-            // console.log(vet_data);
             for (var b in vet_data.animals.queue) { // b=AnimalId
                 var r = vet_data.animals.queue[b]; // r=Animal-Object
                 var div=$("vet_animal_queue_item_tt"+b);
