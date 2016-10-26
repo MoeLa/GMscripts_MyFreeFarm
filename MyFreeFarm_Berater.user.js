@@ -5,8 +5,8 @@
 // @author         BastianKanaan
 // @description    Extends MyFreeFarm
 // @icon           data:image/png;base64,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
-// @date           24.10.2016
-// @version        2.10.46
+// @date           26.10.2016
+// @version        2.10.47
 // @license        GPL version 3 or any later version; http://www.gnu.org/copyleft/gpl.html
 // @include        /^http:\/\/(|www\.|s\d+\.)au\.myfreefarm\.com\/.*$/
 // @include        /^http:\/\/(|www\.|s\d+\.)veselaferma\.com\/.*$/
@@ -163,6 +163,7 @@ const CHANGELOG=[["2.0","29.05.2014",[["Migration nach openuserjs.org","Migratio
                 ,["2.10.44","17.10.2016",[["Verbesserung Megafield, Error Log, and Bugfixes","Improvements Megafield, Error Log, and Bugfixes"]]]
                 ,["2.10.45","18.10.2016",[["Produktion Tieraufzuchtsprodukte","Production animal breed products"]]]
                 ,["2.10.46","24.10.2016",[["Güterhof: 2x2 Erntemaschine (Optionen-Automat)","Megafield: 2x2 harvester (Check options automat)"],["Verbesserungen: Güterhof","Improvements: Megafield"],["Verbesserungen: Ställe und Fabriken","Improvements: stable and factories"]]]
+                ,["2.10.47","26.10.2016",[["Tabelle: Questserie Tieraufzucht","Table: Quest-Series animal breed"],["Automatisches tägliches Abholen des 5000kT Puzzlepaket (siehe Optionen - Automat)","Automatic daily pick of 5000kT puzzle package (Check options automat)"]]]
                 ];
 if(!VERSIONfunctionFile){
     alert("Hi, I am the Berater-Script.\nThe function-file is missing.\nPlease install me again.");
@@ -448,13 +449,20 @@ const QUESTS =
                         }
                         ,"veterinary":{"1":[,[[[0,302,56],[0,301,232]],,425680,[[14,0.5]]],[[[0,301,156],[0,300,104]],,424320,[[15,0.5]]],[[[0,302,60],[0,300,232]],,436200,[[14,0.5]]],[[[0,303,140],[0,302,92]],,308680,[[16,1]]],[[[0,302,60],[0,301,236]],,435720,[[14,0.5]]],[[[0,301,156],[0,300,104]],,424320,[[15,0.5]]],[[[0,303,48],[0,301,192]],,388800,[[15,0.5]]],[[[0,302,60],[0,300,240]],,449400,[[14,0.5]]],[[[0,303,48],[0,300,192]],,394560,[[17,0.5]]],[[[0,304,52],[0,303,200]],,393160,[[17,0.5]]],[[[0,303,148],[0,302,96]],,325200,[[18,1]]],[[[0,302,60],[0,301,244]],,448680,[[14,0.5]]],[[[0,304,180],[0,302,76]],,307040,[[18,1]]],[[[0,303,48],[0,301,196]],,395280,[[17,0.5]]],[[[0,304,52],[0,301,208]],,406120,[[15,0.5]]],[[[0,304,52],[0,303,208]],,406120,[[14,0.5]]],[[[0,303,152],[0,302,100]],,335240,[[18,1]]],[[[0,302,64],[0,301,252]],,465200,[[17,0.5]]],[[[0,304,184],[0,302,80]],,315920,[[18,1]]],[[[0,303,52],[0,301,204]],,414720,[[18,1]]],[[[0,304,52],[0,301,212]],,412600,[[17,0.5]]],[[[0,304,52],[0,303,216]],,419080,[[18,1]]],[[[0,303,156],[0,302,104]],,345280,[[18,1]]],[[[0,302,64],[0,301,260]],,478160,[[15,0.5]]],[[[0,304,192],[0,302,80]],,326560,[[14,0.5]]],[[[0,303,52],[0,301,212]],,427680,[[14,0.5]]],[[[0,304,56],[0,301,220]],,430880,[[16,1]]],[[[0,307,224],[0,304,148]],,376040,[[15,0.5]]],[[[0,304,56],[0,303,224]],,437360,[[14,0.5]]],[[[0,303,160],[0,302,108]],,355320,[[18,1]]],[[[0,307,228],[0,303,152]],,428640,[[15,0.5]]],[[[0,304,196],[0,302,84]],,335440,[[14,0.5]]],[[[0,307,228],[0,302,152]],,317680,[[15,0.5]]],[[[0,307,232],[0,304,152]],,387760,[[18,1]]],[[[0,304,56],[0,303,228]],,443840,[[18,1]]],[[[0,303,164],[0,302,112]],,365360,[[18,1]]],[[[0,307,232],[0,303,156]],,438320,[[16,1]]],[[[0,304,204],[0,302,88]],,349640,[[16,1]]],[[[0,307,236],[0,302,156]],,327640,[[14,0.5]]],[[[0,309,76],[0,307,304]],,344280,[[17,0.5]]],[[[0,307,240],[0,304,160]],,404800,[[17,0.5]]],[[[0,304,60],[0,303,236]],,462120,[[14,0.5]]],[[[0,309,232],[0,304,156]],,516040,[[16,1]]],[[[0,307,240],[0,303,160]],,451200,[[15,0.5]]],[[[0,309,236],[0,303,156]],,566600,[[17,0.5]]],[[[0,309,80],[0,307,316]],,359200,[[16,1]]],[[[0,307,244],[0,304,164]],,413320,[[14,0.5]]],[[[0,304,60],[0,303,244]],,475080,[[18,1]]],[[[0,309,240],[0,304,160]],,532000,[[18,1]]],[[[0,307,248],[0,303,164]],,464080,[[18,1]]],[[[0,309,240],[0,303,160]],,578400,[[18,1]]],[[[0,311,200],[0,309,132]],,515560,[[14,0.5]]],[[[0,309,80],[0,307,324]],,365600,[[15,0.5]]],[[[0,307,252],[0,304,168]],,425040,[[14,0.5]]],[[[0,311,68],[0,307,268]],,330000,[[17,0.5]]],[[[0,309,248],[0,304,164]],,547960,[[15,0.5]]],[[[0,311,204],[0,304,136]],,527680,[[15,0.5]]],[[[0,311,204],[0,309,136]],,527680,[[18,1]]],[[[0,309,84],[0,307,332]],,377320,[[18,1]]],[[[0,307,260],[0,304,172]],,436760,[[14,0.5]]],[[[0,311,68],[0,307,276]],,336400,[[15,0.5]]],[[[0,309,252],[0,304,168]],,558600,[[18,1]]],[[[0,311,208],[0,304,140]],,539800,[[17,0.5]]],[[[0,313,244],[0,311,104]],,372000,[[16,1]]],[[[0,311,208],[0,309,140]],,539800,[[18,1]]],[[[0,309,84],[0,307,344]],,386920,[[15,0.5]]],[[[0,313,212],[0,309,140]],,355800,[[15,0.5]]],[[[0,311,72],[0,307,284]],,349600,[[18,1]]],[[[0,313,72],[0,307,284]],,284800,[[15,0.5]]],[[[0,313,248],[0,311,108]],,382000,[[15,0.5]]],[[[0,311,216],[0,309,144]],,558720,[[18,1]]],[[[0,309,88],[0,307,352]],,398640,[[18,1]]],[[[0,313,216],[0,309,144]],,364320,[[17,0.5]]],[[[0,311,72],[0,307,288]],,352800,[[15,0.5]]],[[[0,313,72],[0,307,292]],,291200,[[17,0.5]]],[[[0,315,36],[0,313,140]],,144040,[[18,1]]],[[[0,313,256],[0,311,108]],,388400,[[15,0.5]]],[[[0,311,220],[0,309,148]],,570840,[[18,1]]],[[[0,315,36],[0,311,140]],,270040,[[18,1]]],[[[0,313,224],[0,309,148]],,376040,[[15,0.5]]],[[[0,315,36],[0,309,140]],,218240,[[16,1]]],[[[0,315,36],[0,313,140]],,144040,[[15,0.5]]],[[[0,313,264],[0,311,112]],,401600,[[18,1]]],[[[0,311,228],[0,309,152]],,589760,[[18,1]]],[[[0,315,36],[0,311,144]],,276840,[[15,0.5]]],[[[0,313,228],[0,309,152]],,384560,[[18,1]]],[[[0,315,36],[0,309,144]],,223560,[[16,1]]],[[[0,315,36],[0,313,144]],,147240,[[16,1]]],[[[0,313,268],[0,311,116]],,411600,[[15,0.5]]],[[[0,311,232],[0,309,156]],,601880,[[17,0.5]]],[[[0,315,36],[0,311,148]],,283640,[[14,0.5]]],[[[0,313,232],[0,309,156]],,393080,[[17,0.5]]],[[[0,315,36],[0,309,148]],,228880,[[14,0.5]]],[[[0,315,36],[0,313,148]],,150440,[[17,0.5]]],[[[0,313,276],[0,311,116]],,418000,[[16,1]]],[[[0,311,236],[0,309,156]],,608680,[[17,0.5]]],[[[0,315,36],[0,311,148]],,283640,[[14,0.5]]],[[[0,313,240],[0,309,160]],,404800,[[18,1]]],[[[0,315,36],[0,309,152]],,234200,[[17,0.5]]],[[[0,317,228],[0,315,152]],,317680,[[16,1]]],[[[0,315,40],[0,313,152]],,157200,[[17,0.5]]],[[[0,313,284],[0,311,120]],,431200,[[14,0.5]]],[[[0,317,232],[0,313,156]],,310400,[[14,0.5]]],[[[0,315,40],[0,311,152]],,294000,[[17,0.5]]],[[[0,317,232],[0,311,156]],,450800,[[16,1]]],[[[0,317,236],[0,315,156]],,327640,[[14,0.5]]],[[[0,315,40],[0,313,156]],,160400,[[16,1]]],[[[0,313,288],[0,311,124]],,441200,[[16,1]]],[[[0,317,236],[0,313,156]],,313600,[[17,0.5]]],[[[0,315,40],[0,311,156]],,300800,[[16,1]]],[[[0,317,240],[0,311,160]],,464000,[[14,0.5]]],[[[0,317,240],[0,315,160]],,334400,[[18,1]]],[[[0,315,40],[0,313,160]],,163600,[[17,0.5]]],[[[0,313,296],[0,311,128]],,454400,[[15,0.5]]],[[[0,317,240],[0,313,160]],,320000,[[14,0.5]]],[[[0,315,40],[0,311,160]],,307600,[[17,0.5]]],[[[0,317,244],[0,311,164]],,474000,[[17,0.5]]],[[[0,317,244],[0,315,164]],,341160,[[17,0.5]]],[[[0,315,40],[0,313,164]],,166800,[[15,0.5]]],[[[0,313,300],[0,311,128]],,457600,[[14,0.5]]],[[[0,317,248],[0,313,164]],,329600,[[14,0.5]]],[[[0,315,40],[0,311,164]],,314400,[[15,0.5]]],[[[0,317,248],[0,311,164]],,477200,[[16,1]]],[[[0,319,52],[0,317,208]],,208000,[[17,0.5]]],[[[0,317,248],[0,315,168]],,347920,[[16,1]]],[[[0,315,40],[0,313,164]],,166800,[[15,0.5]]],[[[0,319,160],[0,315,104]],,220560,[[17,0.5]]],[[[0,317,252],[0,313,168]],,336000,[[14,0.5]]],[[[0,319,52],[0,313,212]],,211200,[[17,0.5]]],[[[0,319,52],[0,317,212]],,211200,[[17,0.5]]],[[[0,317,256],[0,315,168]],,354320,[[14,0.5]]],[[[0,315,44],[0,313,168]],,173560,[[15,0.5]]],[[[0,319,160],[0,315,108]],,224120,[[17,0.5]]],[[[0,317,256],[0,313,172]],,342400,[[15,0.5]]],[[[0,319,56],[0,313,216]],,217600,[[15,0.5]]],[[[0,320,260],[0,319,172]],,345600,[[14,0.5]]],[[[0,319,56],[0,317,216]],,217600,[[15,0.5]]],[[[0,317,260],[0,315,172]],,361080,[[14,0.5]]],[[[0,320,304],[0,317,132]],,348800,[[17,0.5]]],[[[0,319,164],[0,315,108]],,227320,[[14,0.5]]],[[[0,320,264],[0,315,176]],,367840,[[16,1]]],[[[0,320,264],[0,319,176]],,352000,[[14,0.5]]],[[[0,319,56],[0,317,224]],,224000,[[16,1]]],[[[0,317,264],[0,315,176]],,367840,[[17,0.5]]],[[[0,320,312],[0,317,132]],,355200,[[17,0.5]]],[[[0,319,168],[0,315,112]],,234080,[[17,0.5]]],[[[0,320,268],[0,315,180]],,374600,[[15,0.5]]],[[[0,320,268],[0,319,180]],,358400,[[16,1]]],[[[0,319,56],[0,317,228]],,227200,[[17,0.5]]],[[[0,317,272],[0,315,180]],,377800,[[15,0.5]]],[[[0,320,316],[0,317,136]],,361600,[[17,0.5]]],[[[0,319,172],[0,315,116]],,240840,[[15,0.5]]],[[[0,320,272],[0,315,184]],,381360,[[17,0.5]]],[[[0,320,276],[0,319,184]],,368000,[[17,0.5]]],[[[0,319,56],[0,317,232]],,230400,[[17,0.5]]],[[[0,317,276],[0,315,184]],,384560,[[15,0.5]]],[[[0,320,324],[0,317,140]],,371200,[[16,1]]],[[[0,319,176],[0,315,116]],,244040,[[14,0.5]]],[[[0,320,280],[0,315,184]],,387760,[[17,0.5]]],[[[0,322,396],[0,320,264]],,528000,[[17,0.5]]],[[[0,320,280],[0,319,188]],,374400,[[16,1]]],[[[0,319,60],[0,317,236]],,236800,[[15,0.5]]],[[[0,322,400],[0,319,264]],,531200,[[15,0.5]]],[[[0,320,328],[0,317,140]],,374400,[[17,0.5]]],[[[0,322,400],[0,317,268]],,534400,[[14,0.5]]],[[[0,322,400],[0,320,268]],,534400,[[17,0.5]]],[[[0,320,284],[0,319,188]],,377600,[[14,0.5]]],[[[0,319,60],[0,317,240]],,240000,[[14,0.5]]],[[[0,322,404],[0,319,272]],,540800,[[14,0.5]]],[[[0,320,336],[0,317,144]],,384000,[[14,0.5]]],[[[0,322,408],[0,317,272]],,544000,[[15,0.5]]],[[[0,322,408],[0,320,272]],,544000,[[15,0.5]]],[[[0,320,288],[0,319,192]],,384000,[[16,1]]],[[[0,319,60],[0,317,244]],,243200,[[16,1]]],[[[0,322,412],[0,319,276]],,550400,[[14,0.5]]],[[[0,320,340],[0,317,148]],,390400,[[15,0.5]]],[[[0,322,416],[0,317,276]],,553600,[[14,0.5]]]]
                         }
+                        ,"breed":{"1":[,
+                            [[[0,600,72],[0,668,24]],,80100],[[[0,636,132],[0,600,74]],,79500],[[[0,668,26],[0,636,135]],,81600],[[[0,600,78],[0,668,26]],,86800],[[[0,636,141],[0,600,80]],,85500],[[[0,668,27],[0,636,144]],,85900],[[[0,600,83],[0,636,148]],,89100],[[[0,668,29],[0,600,85]],,95600],[[[0,668,29],[0,636,154]],,92000],[[[0,600,59],[0,668,20],[0,636,105]],,96300,[[20,2]]],[[[0,636,160],[0,668,30]],, 95400],[[[0,634,134],[0,600,92]],, 133800],[[[0,668,32],[0,636,167]],, 100700],[[[0,600,96],[0,668,32]],, 106800],[[[0,636,173],[0,634,142]],, 136600],[[[0,668,33],[0,600,99]],, 110100],[[[0,634,147],[0,636,180]],, 141700],[[[0,668,35],[0,636,183]],, 110300],[[[0,600,105],[0,634,152]],, 152100],[[[0,668,24],[0,600,71],[0,602,16]],, 141800,[[20,3]]],[[[0,634,158],[0,602,24]],, 190200],[[[0,600,110],[0,634,160]],, 159900],[[[0,602,25],[0,636,199]],, 154400],[[[0,668,38],[0,600,114]],, 126800],[[[0,634,168],[0,602,26]],, 204100],[[[0,636,208],[0,668,39]],, 124000],[[[0,600,119],[0,634,173]],, 172900],[[[0,602,27],[0,636,215]],, 166800],[[[0,668,41],[0,600,123]],, 136800],[[[0,636,148],[0,634,121],[0,668,28]],, 162800,[[20,2]]],[[[0,602,28],[0,668,42]],, 178300],[[[0,636,228],[0,600,128]],, 137400],[[[0,634,189],[0,602,29]],, 228600],[[[0,636,234],[0,668,44]],, 139700],[[[0,602,30],[0,634,194]],, 235600],[[[0,667,45],[0,602,30]],, 238100],[[[0,634,199],[0,636,244]],, 191900],[[[0,600,139],[0,667,47]],, 204900],[[[0,602,32],[0,634,205]],, 250100],[[[0,667,32],[0,668,32],[0,634,138]],, 223600,[[20,3]]],[[[0,600,144],[0,602,32]],, 205500],[[[0,634,213],[0,667,49]],, 262600],[[[0,636,263],[0,668,50]],, 158000],[[[0,667,50],[0,602,34]],, 267200],[[[0,600,152],[0,634,220]],, 220200],[[[0,602,34],[0,667,51]],, 269900],[[[0,636,276],[0,600,155]],, 166400],[[[0,667,53],[0,634,228]],, 282600],[[[0,602,36],[0,668,53]],, 227500],[[[0,636,190],[0,667,36],[0,634,156]],, 247200,[[20,4]]],[[[0,635,93],[0,600,162]],, 272900],[[[0,668,55],[0,667,55]],, 239100],[[[0,602,37],[0,635,95]],, 329800],[[[0,600,168],[0,636,298]],, 180000],[[[0,635,97],[0,667,57]],, 343400],[[[0,668,57],[0,602,38]],, 241900],[[[0,636,308],[0,635,99]],, 282000],[[[0,667,59],[0,600,175]],, 257600],[[[0,635,101],[0,668,59]],, 294800],[[[0,602,27],[0,667,40],[0,635,68]],, 345900,[[20,2]]],[[[0,600,180],[0,635,103]],, 302600],[[[0,667,61],[0,636,324]],, 257500],[[[0,635,105],[0,602,41]],, 364900],[[[0,600,186],[0,667,62]],, 271800],[[[0,602,42],[0,635,107]],, 372700],[[[0,666,152],[0,667,63]],, 393400],[[[0,635,110],[0,602,43]],, 382400],[[[0,667,65],[0,666,155]],, 403200],
+                            [[[0,634,283],[0,635,112]],, 392300],[[[0,666,105],[0,602,30],[0,636,233]],, 338000,[[20,3]]],[[[0,635,114],[0,667,66]],, 400900],[[[0,634,291],[0,666,160]],, 413400],[[[0,602,45],[0,635,116]],, 402000],[[[0,666,163],[0,636,362]],, 343500],[[[0,667,69],[0,668,69]],, 299900],[[[0,635,119],[0,666,166]],, 476700],[[[0,602,47],[0,667,70]],, 371700],[[[0,666,169],[0,634,307]],, 436500],[[[0,668,71],[0,635,122]],, 355700],[[[0,667,48],[0,666,115]],, 467600,[[20,4]]],[[[0,604,144],[0,635,124]],, 483900],[[[0,667,73],[0,666,175]],, 454200],[[[0,635,126],[0,602,49]],, 437100],[[[0,634,323],[0,604,148]],, 446000],[[[0,666,179],[0,635,128]],, 513400],[[[0,604,150],[0,667,75]],, 453800],[[[0,668,76],[0,666,182]],, 392900],[[[0,635,131],[0,602,51]],, 454600],[[[0,668,77],[0,604,154]],, 385200],[[[0,667,52],[0,600,155],[0,604,104]],, 401800,[[20,2]]],[[[0,666,188],[0,634,341]],, 485200],[[[0,604,158],[0,635,135]],, 528900],[[[0,602,53],[0,636,423]],, 327700],[[[0,667,80],[0,666,192]],, 498000],[[[0,635,138],[0,604,161]],, 539800],[[[0,603,162],[0,667,81]],, 538300],[[[0,666,196],[0,602,55]],, 502200],[[[0,668,83],[0,604,165]],, 413500],[[[0,635,142],[0,603,166]],, 605300],[[[0,667,84],[0,634,364]],, 449500],[[[0,604,112],[0,666,135],[0,668,56]],, 478600,[[20,3]]],[[[0,603,170],[0,636,452]],, 465300],[[[0,602,57],[0,635,147]],, 509300],[[[0,667,86],[0,668,86]],, 373800],[[[0,604,173],[0,603,173]],, 631500],[[[0,666,209],[0,600,261]],, 454000],[[[0,603,176],[0,602,59]],, 577100],[[[0,634,385],[0,635,152]],, 533000],[[[0,667,89],[0,604,178]],, 538500],[[[0,666,144],[0,603,120],[0,634,261]],, 608400,[[20,4]]],[[[0,637,540],[0,635,155]],, 645200],[[[0,602,61],[0,604,182]],, 542500],[[[0,603,183],[0,666,219]],, 683200],[[[0,667,92],[0,637,551]],, 597200],[[[0,604,185],[0,668,93]],, 463600],[[[0,666,224],[0,603,186]],, 696400],[[[0,637,562],[0,602,63]],, 601200],[[[0,635,162],[0,604,189]],, 633600],[[[0,634,414],[0,667,95]],, 509800],[[[0,666,153],[0,637,382],[0,604,128]],, 681500,[[20,2]]],[[[0,603,192],[0,602,64]],, 628100],[[[0,604,194],[0,635,166]],, 649800],[[[0,637,584],[0,666,234]],, 713900],[[[0,667,98],[0,604,196]],, 592900],[[[0,603,197],[0,637,591]],, 763300],[[[0,668,425],[0,603,198]],, 783600],[[[0,604,200],[0,635,171]],, 669700],[[[0,637,602],[0,666,241]],, 735600],[[[0,667,101],[0,668,432]],, 671600],[[[0,603,136],[0,602,46],[0,668,290]],, 715500,[[20,3]]],[[[0,635,175],[0,637,612]],, 729900],[[[0,668,440],[0,604,206]],, 751900],[[[0,666,248],[0,668,104]],, 536100],[[[0,637,623],[0,603,208]],, 805300],[[[0,667,105],[0,668,448]],, 697200],[[[0,604,210],[0,634,459]],, 633200],[[[0,603,212],[0,666,254]],, 791900],[[[0,668,456],[0,637,638]],, 825500],[[[0,635,184],[0,604,214]],, 718600],[[[0,603,144],[0,668,307],[0,637,430]],, 840300,[[20,4]]],[[[0,639,130],[0,603,216]],, 884700],[[[0,637,652],[0,666,261]],, 796700],[[[0,668,468],[0,604,219]],, 799600],[[[0,603,220],[0,639,132]],, 899700],[[[0,635,190],[0,667,111]],, 670900],[[[0,634,485],[0,668,476]],, 736900],[[[0,639,134],[0,637,670]],, 896900],[[[0,604,225],[0,603,225]],, 821400],[[[0,668,484],[0,639,136]],, 926700],[[[0,602,51],[0,666,182],[0,639,91]],, 786900,[[20,2]]],[[[0,637,684],[0,635,196]],, 816600],[[[0,639,138],[0,603,230]],, 940600],[[[0,604,231],[0,668,494]],, 843700],[[[0,666,278],[0,637,695]],, 848900],[[[0,603,233],[0,639,140]],, 953500],[[[0,606,141],[0,666,281]],, 918700],[[[0,604,236],[0,668,504]],, 861400],[[[0,639,142],[0,606,142]],, 1009900],[[[0,637,713],[0,603,238]],, 921500],[[[0,668,342],[0,635,137],[0,606,96]],, 928200,[[20,3]]],[[[0,606,144],[0,604,240]],, 918800],[[[0,666,290],[0,639,145]],, 937500],[[[0,637,728],[0,603,243]],, 940900],[[[0,668,522],[0,606,147]],, 1009500],[[[0,639,147],[0,667,123]],, 850000],[[[0,604,246],[0,635,211]],, 825000],[[[0,606,149],[0,637,742]],, 1004400],[[[0,603,249],[0,639,150]],, 1020400],[[[0,666,300],[0,668,535]],, 935300],[[[0,637,502],[0,606,101],[0,604,168]],, 961900,[[20,4]]],[[[0,663,398],[0,639,152]],, 1081400],[[[0,604,254],[0,603,254]],, 927200],[[[0,606,153],[0,668,546]],, 1053200],[[[0,637,767],[0,663,404]],, 1039600],[[[0,635,221],[0,666,309]],, 886400],[[[0,663,408],[0,603,258]],, 1068500],[[[0,639,156],[0,606,156]],, 1109500],[[[0,668,558],[0,602,87]],, 854200],[[[0,604,262],[0,663,414]],, 1006700],[[[0,667,88],[0,637,526],[0,663,277]],, 950200,[[20,2]]],[[[0,603,264],[0,639,159]],, 1081700],[[[0,663,419],[0,606,160]],, 1148100],[[[0,666,320],[0,668,571]],, 998000],[[[0,635,230],[0,663,423]],, 1029500],[[[0,639,162],[0,604,269]],, 1022100],[[[0,606,162],[0,637,810]],, 1094100],[[[0,602,91],[0,603,272]],, 891100],[[[0,663,431],[0,668,584]],, 1130300],[[[0,666,329],[0,639,165]],, 1065400],[[[0,637,550],[0,606,110],[0,663,290]],, 1140400,[[20,3]]],[[[0,604,276],[0,663,436]],, 1060300],[[[0,668,594],[0,635,238]],, 1014200],[[[0,639,168],[0,603,279]],, 1143100],[[[0,663,442],[0,637,839]],, 1137300],[[[0,606,169],[0,666,337]],, 1101500],[[[0,667,141],[0,668,605]],, 939300],[[[0,603,284],[0,663,448]],, 1174600],[[[0,637,854],[0,639,171]],, 1143900],[[[0,634,624],[0,606,172]],, 999000],[[[0,663,302],[0,604,192],[0,668,96]],, 894200,[[20,4]]]]
+                        }
                };
 unsafeData.QUESTS=QUESTS.clone();
 const INIT_questDataItem = {"nr":0,"time":0,"calcTo":0,"state":0,"given":{}};
+//22102016
 const INIT_questData = {"main":{"1":INIT_questDataItem.clone(),"2":INIT_questDataItem.clone(),"3":INIT_questDataItem.clone()}
                        ,"forestry":{"1":INIT_questDataItem.clone(),"2":INIT_questDataItem.clone()}
                        ,"foodworld":{"1":INIT_questDataItem.clone()}
                        ,"veterinary":{"1":INIT_questDataItem.clone()}
+                       ,"breed":{"1":INIT_questDataItem.clone()}
+
                        };
 // state: 0:not available, 1:not activated, 2:active
 /*
@@ -1617,6 +1625,42 @@ function showLottery(){
     }
     div=null;
 }
+
+// 22102016
+function goToBuyPetsParts(){
+try{
+    var div=$("pets_parts");
+    var listeningEvent=null;
+    if(div&&(div=div.querySelector(".buy"))) {
+        click(div);
+    } else if(!(gameLocation.check("farm",0)) && (div=$("speedlink_farm1"))){
+        document.addEventListener("gameFarmOpened",function(){
+            document.removeEventListener("gameFarmOpened",arguments.callee,false);
+            action=function(){ click($("pets_parts_link")); }
+            listeningEvent="gamegoToBuyPetsParts";
+        },false);
+        listeningEvent="gameFarmOpened";
+        action=function(){ click(div); };
+        //click(div);
+    } else {
+        action=function(){ click($("pets_parts_link")); }
+        listeningEvent="gamegoToOpenPetsParts";
+    }
+
+    if(listeningEvent){
+        document.addEventListener(listeningEvent,function(listeningEvent){
+            return function(){
+                document.removeEventListener(listeningEvent,arguments.callee,false);
+                window.setTimeout(function(){ goToBuyPetsParts(); },300);
+            };
+        }(listeningEvent),false);
+    }
+    if(action){ action(); }
+
+    listeningEvent=null;action=null;div=null;
+}catch(err){GM_logError("goToBuyPetsParts","","",err);}
+}
+
 function goToDonkey(){
 try{
     var div;
@@ -4435,9 +4479,13 @@ try{
                     case 18:{
                         createElement("div",{},td,unsafeWindow.t_vet_quest_bonus["pat_points"].replace(/%PERCENT%/,questCurr[3][w][1]));
                     break;}
-                                        case 19:{
+                    case 19:{
                         createElement("div",{},td,unsafeWindow.t_foodworld_reward_bonus.replace(/%PERCENT%/,questCurr[3][w][1]));
                     break;}
+                    case 20:{
+                        createElement("div",{"class":"pets_package"+questCurr[3][w][1],"style":"width:30px; height:30px; background-size:100%;"},td);
+                    break;}
+
                     default:{
                         createElement("div",{},td,implode(questCurr[3][w],"buildInfoPanelQuests/selectQuestCalcTo"));
                     }
@@ -11570,6 +11618,52 @@ try{
         }catch(err){ GM_logError("handleQuestDataVeterinary","","err_trace="+err_trace,err); }
     }
 
+    //22102016
+    function handleQuestDataBreed(){
+        // GM_log("setQuest newQuestNr="+newQuestNr);
+        try{
+            var err_trace = "Get questdata";
+            if(unsafeWindow.pets&&unsafeWindow.pets.data.quest){
+                // GM_log("unsafeWindow.pets.data.quest:\n"+print_r(unsafeWindow.pets.data.quest,"",true,"\n"));
+                if(!questData["breed"]){ questData["breed"]={}; }
+                var campaign = "1";
+                if(!questData["breed"][campaign]){
+                    questData["breed"][campaign]=INIT_questData["breed"][campaign].clone();
+                }
+                if(unsafeWindow.pets.data.quest.questid){
+                    // Quest number
+                    if(questData["breed"][campaign]["nr"]!=parseInt(unsafeWindow.pets.data.quest.questid,10)){
+                        GM_logInfo("handleQuestLine","","",getText("questSetXToNrY").replace(/%1%/,getText("quest"+"breed"+campaign)).replace(/%2%/,unsafeWindow.pets.data.quest.questid));
+                        questData["breed"][campaign]["nr"]=parseInt(unsafeWindow.pets.data.quest.questid,10);
+                    }
+                    // Given
+                    questData["breed"][campaign]["given"] = new Object();
+                    if(unsafeWindow.pets.data.quest.questid){
+                        for(var t in unsafeWindow.pets.data.quest.data){
+                            if(!unsafeWindow.pets.data.quest.data.hasOwnProperty(t)){continue;}
+                            var prod = parseInt(t,10);
+                            var type = 0;
+                            if(!questData["breed"][campaign]["given"][type]){ questData["breed"][campaign]["given"][type] = new Object(); }
+                            if(!questData["breed"][campaign]["given"][type][prod]){ questData["breed"][campaign]["given"][type][prod] = 0; }
+                            questData["breed"][campaign]["given"][type][prod] += parseInt(unsafeWindow.pets.data.quest.data[t],10);
+                        }
+                    }
+                    // Time
+                    questData["breed"][campaign]["time"] = now; // TODO
+                }else{
+                    questData["breed"][campaign]["nr"]=QUESTS["breed"][campaign].length;
+                    questData["breed"][campaign]["given"] = new Object();
+                    questData["breed"][campaign]["time"] = 0;
+                }
+                calcQuestData("breed",campaign);
+                // GM_log("questdata:\n"+print_r(questData["breed"],"",true,"\n"));
+                GM_setValueCache(COUNTRY+"_"+SERVER+"_"+USERNAME+"_questData",implode(questData,"handleQuestDataBreed/questData"));
+                unsafeData.questData=questData.clone();
+            }
+            div=null;
+        }catch(err){ GM_logError("handleQuestDataBreed","","err_trace="+err_trace,err); }
+    }
+
     // mouseover showing quest data
     function questLineMouseOver(questType,campaign){
         try{
@@ -16961,6 +17055,8 @@ return false;
                 }
             }
             handleQuestDataVeterinary();
+            //22102016
+            handleQuestDataBreed();
             calcTotalZones();
         }catch(err){GM_logError("doFarmersMarketData","","err_trace="+err_trace,err);}
     };
@@ -16971,7 +17067,11 @@ return false;
             unsafeWindow._farmersMarketHandler(response);
         }catch(err){GM_logError("_farmersMarketHandler","","",err);}
         try{
-            doFarmersMarketData()
+            doFarmersMarketData();
+            if((USERLEVEL>=31)&&(unsafeWindow.pets)&&(unsafeWindow.pets.data.daily==1)){
+                showGoToBuyPetsParts();
+            }
+
         }catch(err){GM_logError("farmersMarketHandler","","",err);}
     });
 
@@ -17146,6 +17246,43 @@ return false;
             raiseEvent("gameFarmersmarketStarted");
         }catch(err){GM_logError("startProductionCommitResponse","","",err);}
     });
+
+    unsafeOverwriteObjFunction("pets","parts",function(){
+        try{
+            unsafeWindow.pets._parts();
+        }catch(err){GM_logError("pets.parts","","",err);}
+        try{
+            raiseEvent("gamegoToOpenPetsParts");
+        }catch(err){GM_logError("gamegoToOpenPetsPartsResponse","","",err);}
+    });
+
+    unsafeOverwriteObjFunction("pets","partsBuy",function(){
+        try{
+            unsafeWindow.pets._partsBuy();
+        }catch(err){GM_logError("pets.partsBuy","","",err);}
+        try{
+            raiseEvent("gamegoToBuyPetsParts");
+        }catch(err){GM_logError("gamegoToBuyPetsPartsResponse","","",err);}
+    });
+
+    unsafeOverwriteObjFunction("pets","partsBuyCommit",function(c,d){
+        try{
+            unsafeWindow.pets._partsBuyCommit(c,d);
+        }catch(err){GM_logError("pets.partsBuyCommit","","",err);}
+        try{
+            raiseEvent("gamepartsBuyCommit");
+        }catch(err){GM_logError("gamepartsBuyCommitResponse","","",err);}
+    });
+
+    unsafeOverwriteObjFunction("pets","partsBuyFire",function(b,a){
+        try{
+            unsafeWindow.pets._partsBuyFire(b,a);
+        }catch(err){GM_logError("pets.partsBuyFire","","",err);}
+        try{
+            hideGoToBuyPetsParts();
+            raiseEvent("gamepartsBuyFire");
+        }catch(err){GM_logError("gamepartsBuyFireResponse","","",err);}
+    })
 
     unsafeOverwriteFunction("initVet",function(){
         try{
@@ -19166,7 +19303,9 @@ return;
         }
 
         // doFarmersmarketData was moved to here, so data is ready for showGoToVetFarmi
-        if(unsafeWindow.farmersmarket_data){ doFarmersMarketData(); }
+        if(unsafeWindow.farmersmarket_data){
+            doFarmersMarketData();
+        }
 
         // Clothing Donation
         /*
@@ -19350,6 +19489,34 @@ return;
         showGoToDonkey();
     }
 
+    //*********************************************************************************************
+    // buyPetsParts
+    //*********************************************************************************************
+    //22102016
+    function showGoToBuyPetsParts(){
+    try{
+        if(unsafeWindow.pets&&(unsafeWindow.pets.data.daily==1)){
+            if(!nodes["goTobuyPetsParts"]){
+                nodes["goTobuyPetsParts"]=new Object();
+                nodes["goTobuyPetsParts"]["node"]=createElement("div",{"id":"divGoTobuyPetsParts","class":"link blinking","style":"height:70px;width:70px;background:url('"+GFX+"breed/PuzzlePieces_00.png') -10px -14px;border:2px solid black;border-radius:35px;margin-bottom:5px;opacity:1;"},$("fixedDivRight"));
+                nodes["goTobuyPetsParts"]["node"].addEventListener("mouseover",function(event){ toolTip.show(event,getText("goTobuyPetsParts")); },false);
+                nodes["goTobuyPetsParts"]["node"].addEventListener("click",function(event){ goToBuyPetsParts(); },false);
+            }
+        } else {
+            hideGoToBuyPetsParts();
+        }
+    }catch(err){GM_logError("showGoToBuyPetsParts","","",err);}
+    }
+
+    function hideGoToBuyPetsParts(){
+    try{
+        if(nodes["goTobuyPetsParts"]){
+            if(nodes["goTobuyPetsParts"]["node"]){ removeElement(nodes["goTobuyPetsParts"]["node"]); }
+            delete nodes["goTobuyPetsParts"];
+        }
+    }catch(err){GM_logError("hideGoToBuyPetsParts","","",err);}
+    }
+
     // on load execute ============================================================================
     err_trace="on load execute";
     newdiv1=$("buildingmain");
@@ -19401,6 +19568,7 @@ return;
         todayStr=getDateStr(now,2,false);
         nowServerOff=unsafeWindow.Zeit.Server+valServerTimeOffset;
         var help=getDateStr(nowServerOff,2,false);
+
         if(help!=todayServerStr){
             todayServerStr=help;
             setLevelLogId();
@@ -19419,7 +19587,6 @@ return;
         if(USERLEVEL>=38){
             showGoToClothingDonation();
         }
-
         // clock
         nodes["serverTime"]["node"].innerHTML=todayServerStr+"&nbsp;"+getDaytimeStr(nowServerOff);
         if(valSessionEndtime){ nodes["sessionTimeLeft"]["node"].innerHTML="("+getTimeStr(valSessionEndtime-now)+")"; }
@@ -20914,6 +21081,8 @@ try{
         .quests_status_bar_main2_active{background:url('"+IMAGES["questMain2Active"]+"') repeat scroll 0 0 rgba(0, 0, 0, 0);}\
         .quests_status_bar_main3{background:url('"+GFX+"questbar_main3.png') repeat scroll 0 0 rgba(0, 0, 0, 0);}\
         .quests_status_bar_main3_active{background:url('"+IMAGES["questMain3Active"]+"') repeat scroll 0 0 rgba(0, 0, 0, 0);}\
+        .quests_status_bar_breed1{background:url('"+GFX+"breed/Heart_00.png') no-repeat scroll 0 0 rgba(0, 0, 0, 0);background-size: 30px 30px;}\
+        .quests_status_bar_breed1_active{background:url('"+GFX+"breed/Heart_00.png') no-repeat scroll 0 0 rgba(116, 160, 43, 0.85);background-size: 30px 30px;}\
         .quests_status_bar_forestry1{background:url('"+GFX+"questbar_forestry1.png') repeat scroll 0 0 rgba(0, 0, 0, 0);}\
         .quests_status_bar_forestry1_active{background:url('"+IMAGES["questForestry1Active"]+"') repeat scroll 0 0 rgba(0, 0, 0, 0);}\
         .quests_status_bar_forestry2{background:url('"+GFX+"questbar_forestry2.png') repeat scroll 0 0 rgba(0, 0, 0, 0);}\
@@ -20986,6 +21155,7 @@ try{
         .loginbutton{background-color:white;color:black;text-align:center;font-weight:bold;width:250px;line-height:20px;margin:3px;border:3px solid #6c441e;border-radius:10px;}"
     );
     // Game elements
+    //22102016
     GM_addStyle(
         ".friendslineoptions{width:72px!important;}\
         .forestry_slot_product{margin:15px 0 0 20px!important;}\
@@ -21030,8 +21200,10 @@ try{
         .help_content{margin:20px 0 0 0;width: 345px;!important}\
         .rahmen_hoch{position:absolute;height:640px!important;}\
         #questbarcontrol{top:0px!important;}\
-        #reallocatebuilding_symbol{top:20px!important;}\
-        #reallocateanimals_symbol{top:40px!important;}\
+        #reallocatebuilding_symbol{top:10px!important;}\
+        #reallocateanimals_symbol{top:35px!important;}\
+        #job_overview_link{top:60px!important;}\
+        #pets_parts_link{top:65px!important;}\
         #cropbonus_symbol{top:101px!important;}\
         #specialbonus_link{top:20px!important;left:-30px!important}\
         #poweruptimes{top:158px!important;}\
@@ -21527,6 +21699,8 @@ try{
         text["de"]["boughtTickets"]="Gekaufte Tickets";
         text["de"]["buy"]="Kauf";
         text["de"]["buyers"]="Käufer";
+        //22102016
+        text["de"]["buyPetsParts"]="Tierpuzzle-Teile";
         text["de"]["calcTo"]="Berechne bis";
         text["de"]["carpentry"]="Schreinerei";
         text["de"]["city"]="Stadt";
@@ -21605,6 +21779,7 @@ try{
         text["de"]["general"]="Allgemein";
         text["de"]["given"]="Gegeben";
         text["de"]["goods"]="Waren";
+        text["de"]["goTobuyPetsParts"]="Zum Puzzleteilekauf";
         text["de"]["goToClothingDonation"]="Zur Kleiderspende";
         text["de"]["goToDonkey"]="Zum Goldesel Waltraud";
         text["de"]["goToLottery"]="Zur Lotterie";
@@ -21692,6 +21867,9 @@ try{
         text["de"]["profit"]="Gewinn";
         text["de"]["profitTable"]="Profit pro Zone\/Produktionsplatz pro Tag";
         text["de"]["quantity"]="Menge";
+        //22102016
+        text["de"]["quest_breed"]="Tieraufzuchtsanlage Questreihe";
+        text["de"]["questbreed1"]="Tieraufzuchtsanlage Questreihe";
         text["de"]["quest_foodworld"]="Picknickarea Questreihe";
         text["de"]["quest_forestry"]="Forsthütte Questreihe";
         text["de"]["quest_main"]="Hauptquestreihe";
@@ -21939,6 +22117,8 @@ try{
         text["en"]["boughtTickets"]="Bought tickets";
         text["en"]["buy"]="Buy";
         text["en"]["buyers"]="Buyers";
+        //22102016
+        text["en"]["buyPetsParts"]="Buy Petparts";
         text["en"]["calcTo"]="Calculate to";
         text["en"]["carpentry"]="Carpentry";
         text["en"]["city"]="City";
@@ -22017,6 +22197,7 @@ try{
         text["en"]["general"]="General";
         text["en"]["given"]="Given";
         text["en"]["goods"]="Goods";
+        text["en"]["goTobuyPetsParts"]="Go to buy puzzle parts";
         text["en"]["goToClothingDonation"]="Go to clothing donation";
         text["en"]["goToDonkey"]="Go to donkey Luke";
         text["en"]["goToLottery"]="Go to lottery";
@@ -22104,6 +22285,9 @@ try{
         text["en"]["profit"]="Profit";
         text["en"]["profitTable"]="Profit per Zone per Day";
         text["en"]["quantity"]="Quantity";
+        //22102016
+        text["en"]["quest_breed"]="Animal breed quest series";
+        text["en"]["questbreed1"]="Animal breed quest series";
         text["en"]["quest_foodworld"]="Picnic area quest series";
         text["en"]["quest_forestry"]="Series of quests (forestry)";
         text["en"]["quest_main"]="Series of quests (farm)";
