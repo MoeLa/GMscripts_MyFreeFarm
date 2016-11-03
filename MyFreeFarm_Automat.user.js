@@ -10695,7 +10695,7 @@ try{
             for(var slot=1;slot<=3;slot++){
                 zoneNrS=zoneNrF+"."+slot;
                 if(!unsafeData.zones.getBlock(zoneNrS)){
-                    drawAutomatIcon(zoneNrS,zoneNrS,$("production_slot_info"+farmNr+"_"+position+"_"+slot).parentNode,"left:100px;");
+                    drawAutomatIcon(zoneNrS,zoneNrS,$("production_slot_info"+farmNr+"_"+position+"_"+slot).parentNode,"top:60px;left:100px;");
                 }
             }
         }catch(err){GM_logError("eventListener:gameOpenFactoryOil ","","",err);}
