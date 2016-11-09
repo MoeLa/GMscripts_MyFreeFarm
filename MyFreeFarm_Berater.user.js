@@ -382,7 +382,7 @@ unsafeData.BUILDING_SIZE=BUILDING_SIZE.clone();
 // task_new_building
 
 //13102016
-const BUILDING_SLOTS={"13":3,"14":3,"16":3,"18":3,"20":4,"windmill":2,"sawmill":3,"carpentry":3,"fw1":3,"fw2":3,"fw3":3,"fw4":3,"fl0":17,"fl2":3,"fl4":4,"fl5":4,"megafield":99};
+const BUILDING_SLOTS={"13":3,"14":3,"16":3,"18":3,"20":4,"windmill":2,"sawmill":3,"carpentry":3,"fw1":3,"fw2":3,"fw3":3,"fw4":3,"fl0":17,"fl2":3,"fl4":7,"fl5":4,"megafield":99};
 unsafeData.BUILDING_SLOTS=BUILDING_SLOTS.clone();
 // Needed input of a zone
 // BUILDING_INPUT[buildTyp]{output}[alternatives]=[[prod1,amount1||reducing time1],...]
@@ -1153,6 +1153,7 @@ function updateProductDataFarm(){
                     default: prodTyp[0][v]+="4";
                     }
                 }
+
                 if(help[prodTyp[0][v]]){
                     help[prodTyp[0][v]].push(v);
                 }
@@ -16900,13 +16901,14 @@ return false;
                                     zones.setProduction(zoneNrF,tempZoneProductionData.clone());
                                 }
                             break;}
-                            case 4:{//Animal breeding
+                            case 4:{ //breeding
                                 //13102016
                                 zones.setBonus(zoneNrF,0);
                                 // console.log("=== START LESE Animal breeding ===");
                                 // console.log(print_r(unsafeWindow.farmersmarket_data.pets, "", true, "\n"));
                                 // console.log(unsafeWindow.farmersmarket_data.pets.production);
                                 if((!currBlock)&&(unsafeWindow.farmersmarket_data.pets&&unsafeWindow.farmersmarket_data.pets.production)){
+                                    //Products for animal breeding
                                     tempZoneProductionData=[[{},{}],0,0,true];
                                     for(var slot=1;slot<=4;slot++){
                                         zoneNrS=zoneNrF+"."+slot;
@@ -16915,8 +16917,7 @@ return false;
                                         item=unsafeWindow.farmersmarket_data.pets.production[slot];
                                         if(slot >= 3 && unsafeWindow.farmersmarket_data.pets.data.slots[slot]["block"]) { // slot blocked
                                             zones.setBlock(zoneNrS,"b");
-                                        } else
-                                         if(unsafeWindow.farmersmarket_data.pets.production[slot]){ // production running ?????
+                                        } else if(unsafeWindow.farmersmarket_data.pets.production[slot]){ // production running ?????
                                             item=unsafeWindow.farmersmarket_data.pets.production[slot]["1"];
                                             iProd=(item["pid"]?parseInt(item["pid"],10):null);
                                             if(isNaN(iProd)){ iProd=null; }
@@ -16946,6 +16947,52 @@ return false;
                                         }
                                         zones.setProduction(zoneNrS,tempZoneProductionDataSlot.clone());
                                     }
+                                    //Animal breeding
+                                    if (unsafeWindow.farmersmarket_data.pets.breed!=0){
+                                        zones.setBonus(zoneNrF,0);
+                                        item = unsafeWindow.farmersmarket_data.pets.breed;
+                                        slot = 4;
+                                        for (var i in item.happiness_interval){
+                                            if(!item.happiness_interval.hasOwnProperty(i)){ continue; }
+                                            slot++;
+                                            zoneNrS=zoneNrF+"."+slot;
+                                            zones.setBlock(zoneNrS,"");
+
+                                            tempZoneProductionDataSlot=[[{},{}],0,0,true];
+
+                                            iProd=0; iAmount=0; iPoints=0;
+
+                                            //if (Array.isArray(item.care_remains)||(!item.care_remains[i])){
+                                            //if (item.happiness_interval[i]==1) {
+                                            if (item.care_remains.hasOwnProperty(i)){
+                                                iTime = nowServer+item.care_remains[i];
+                                            } else {
+                                                iTime = nowServer-item.happiness_interval[i];
+                                                tempZoneProductionData[1]++;
+                                                tempZoneProductionDataSlot[1]++;
+                                            }
+
+                                            tempZoneProductionData[2]++;
+                                            tempZoneProductionDataSlot[2]++;
+
+                                            if(!tempZoneProductionData[0][0][iProd]) {
+                                                tempZoneProductionData[0][0][iProd]=[];
+                                            }
+                                            tempZoneProductionData[0][0][iProd].push([iAmount,iPoints,iTime,NEVER]);
+                                            if(!tempZoneProductionDataSlot[0][0][iProd]) {
+                                                tempZoneProductionDataSlot[0][0][iProd]=[];
+                                            }
+                                            tempZoneProductionDataSlot[0][0][iProd].push([iAmount,iPoints,iTime,NEVER]);
+                                            zones.setProduction(zoneNrS,tempZoneProductionDataSlot.clone());
+                                        }
+                                    } else {
+                                        for (slot=5;slot<=7;slot++){
+                                            zoneNrS=zoneNrF+"."+slot;
+                                            zones.setBlock(zoneNrS,"blpqs");
+                                        }
+                                    }
+
+                                    //End
                                 zones.setProduction(zoneNrF,tempZoneProductionData.clone());
                                 }
                             break;}
@@ -17181,7 +17228,7 @@ return false;
     /**********************************************************
     * Tierzucht / Animal breeding 13102016
     **********************************************************/
-    unsafeOverwriteObjFunction("pets","init",function(){
+    /*unsafeOverwriteObjFunction("pets","init",function(){
         try{
              unsafeWindow.pets._init();
         }catch(err){GM_logError("pets.init","","",err);}
@@ -17189,7 +17236,7 @@ return false;
             raiseEvent("gameFarmersmarketOpened4");
         }catch(err){GM_logError("InitResponse","","",err);}
 
-    });
+    });*/
 
     unsafeOverwriteObjFunction("pets","buildProductionSlots",function(){
         try{
@@ -17283,6 +17330,48 @@ return false;
             raiseEvent("gamepartsBuyFire");
         }catch(err){GM_logError("gamepartsBuyFireResponse","","",err);}
     })
+
+    unsafeOverwriteObjFunction("pets","needSlot",function(l){
+        try{
+             unsafeWindow.pets._needSlot(l);
+        }catch(err){GM_logError("pets.needSlot","","",err);}
+        try{
+            raiseEvent("gameAnimalBreedingOpenSlot");
+        }catch(err){GM_logError("needSlotResponse","","",err);}
+
+    });
+
+    unsafeOverwriteObjFunction("pets","needSelection",function(a){
+        try{
+             unsafeWindow.pets._needSelection(a);
+        }catch(err){GM_logError("pets.needSelection","","",err);}
+        try{
+            raiseEvent("gameAnimalBreedingNeedSelection");
+        }catch(err){GM_logError("needSelectionResponse","","",err);}
+
+    });
+
+    unsafeOverwriteObjFunction("pets","needSelectionSet",function(r){
+        try{
+             unsafeWindow.pets._needSelectionSet(r);
+        }catch(err){GM_logError("pets.needSelectionSet","","",err);}
+        try{
+            raiseEvent("gameAnimalBreedingneedSelectionSet");
+        }catch(err){GM_logError("needSelectionSetResponse","","",err);}
+
+    });
+
+    unsafeOverwriteObjFunction("pets","care",function(){
+        try{
+             unsafeWindow.pets._care();
+        }catch(err){GM_logError("pets.care","","",err);}
+        try{
+            raiseEvent("gameAnimalBreedCare");
+        }catch(err){GM_logError("careResponse","","",err);}
+
+    });
+
+
 
     unsafeOverwriteFunction("initVet",function(){
         try{
