@@ -1628,38 +1628,55 @@ function showLottery(){
 }
 
 // 22102016
+function goToAnimalBreedingReady(){
+    try{
+        var div;
+        if(gameLocation.check("farmersmarket",0)){
+            if(div=$("farmersmarket_pos4_click")){
+                click(div);
+            }
+        }else if(div=$("speedlink_farmersmarket")){
+            document.addEventListener("gameFarmersmarketOpened",function(){
+                document.removeEventListener("gameFarmersmarketOpened",arguments.callee,false);
+                window.setTimeout(goToAnimalBreedingReady,100);
+            },false);
+            click(div);
+        }
+        div=null;
+    }catch(err){GM_logError("goToAnimalBreedingReady","","",err);}
+}
+
 function goToBuyPetsParts(){
-try{
-    var div=$("pets_parts");
-    var listeningEvent=null;
-    if(div&&(div=div.querySelector(".buy"))) {
-        click(div);
-    } else if(!(gameLocation.check("farm",0)) && (div=$("speedlink_farm1"))){
-        document.addEventListener("gameFarmOpened",function(){
-            document.removeEventListener("gameFarmOpened",arguments.callee,false);
+    try{
+        var div=$("pets_parts");
+        var listeningEvent=null;
+        if(div&&(div=div.querySelector(".buy"))) {
+            click(div);
+        } else if(!(gameLocation.check("farm",0)) && (div=$("speedlink_farm1"))){
+            document.addEventListener("gameFarmOpened",function(){
+                document.removeEventListener("gameFarmOpened",arguments.callee,false);
+                action=function(){ click($("pets_parts_link")); }
+                listeningEvent="gamegoToBuyPetsParts";
+            },false);
+            listeningEvent="gameFarmOpened";
+            action=function(){ click(div); };
+        } else {
             action=function(){ click($("pets_parts_link")); }
-            listeningEvent="gamegoToBuyPetsParts";
-        },false);
-        listeningEvent="gameFarmOpened";
-        action=function(){ click(div); };
-        //click(div);
-    } else {
-        action=function(){ click($("pets_parts_link")); }
-        listeningEvent="gamegoToOpenPetsParts";
-    }
+            listeningEvent="gamegoToOpenPetsParts";
+        }
 
-    if(listeningEvent){
-        document.addEventListener(listeningEvent,function(listeningEvent){
-            return function(){
-                document.removeEventListener(listeningEvent,arguments.callee,false);
-                window.setTimeout(function(){ goToBuyPetsParts(); },300);
-            };
-        }(listeningEvent),false);
-    }
-    if(action){ action(); }
+        if(listeningEvent){
+            document.addEventListener(listeningEvent,function(listeningEvent){
+                return function(){
+                    document.removeEventListener(listeningEvent,arguments.callee,false);
+                    window.setTimeout(function(){ goToBuyPetsParts(); },300);
+                };
+            }(listeningEvent),false);
+        }
+        if(action){ action(); }
 
-    listeningEvent=null;action=null;div=null;
-}catch(err){GM_logError("goToBuyPetsParts","","",err);}
+        listeningEvent=null;action=null;div=null;
+    }catch(err){GM_logError("goToBuyPetsParts","","",err);}
 }
 
 function goToDonkey(){
@@ -16948,7 +16965,7 @@ return false;
                                         zones.setProduction(zoneNrS,tempZoneProductionDataSlot.clone());
                                     }
                                     //Animal breeding
-                                    if (unsafeWindow.farmersmarket_data.pets.breed!=0){
+                                    if (unsafeWindow.farmersmarket_data.pets.breed!=0 && unsafeWindow.farmersmarket_data.pets.breed.remain>0){
                                         zones.setBonus(zoneNrF,0);
                                         item = unsafeWindow.farmersmarket_data.pets.breed;
                                         slot = 4;
@@ -16984,6 +17001,13 @@ return false;
                                             }
                                             tempZoneProductionDataSlot[0][0][iProd].push([iAmount,iPoints,iTime,NEVER]);
                                             zones.setProduction(zoneNrS,tempZoneProductionDataSlot.clone());
+                                        }
+                                    } else if (unsafeWindow.farmersmarket_data.pets.breed!=0 && unsafeWindow.farmersmarket_data.pets.breed.remain<0){
+                                        //Aufzucht beenndet
+                                        showGoToAnimalBreedingReady();
+                                        for (slot=5;slot<=7;slot++){
+                                            zoneNrS=zoneNrF+"."+slot;
+                                            zones.setBlock(zoneNrS,"blpqs");
                                         }
                                     } else {
                                         for (slot=5;slot<=7;slot++){
@@ -17367,6 +17391,16 @@ return false;
         }catch(err){GM_logError("pets.care","","",err);}
         try{
             raiseEvent("gameAnimalBreedCare");
+        }catch(err){GM_logError("careResponse","","",err);}
+
+    });
+
+    unsafeOverwriteObjFunction("pets","finish",function(){
+        try{
+             unsafeWindow.pets._finish();
+        }catch(err){GM_logError("pets.finish","","",err);}
+        try{
+            hideGoToAnimalBreedingReady();
         }catch(err){GM_logError("careResponse","","",err);}
 
     });
@@ -19583,28 +19617,49 @@ return;
     //*********************************************************************************************
     //22102016
     function showGoToBuyPetsParts(){
-    try{
-        if(unsafeWindow.pets&&(unsafeWindow.pets.data.daily==1)){
-            if(!nodes["goTobuyPetsParts"]){
-                nodes["goTobuyPetsParts"]=new Object();
-                nodes["goTobuyPetsParts"]["node"]=createElement("div",{"id":"divGoTobuyPetsParts","class":"link blinking","style":"height:70px;width:70px;background:url('"+GFX+"breed/PuzzlePieces_00.png') -10px -14px;border:2px solid black;border-radius:35px;margin-bottom:5px;opacity:1;"},$("fixedDivRight"));
-                nodes["goTobuyPetsParts"]["node"].addEventListener("mouseover",function(event){ toolTip.show(event,getText("goTobuyPetsParts")); },false);
-                nodes["goTobuyPetsParts"]["node"].addEventListener("click",function(event){ goToBuyPetsParts(); },false);
+        try{
+            if(unsafeWindow.pets&&(unsafeWindow.pets.data.daily==1)){
+                if(!nodes["goTobuyPetsParts"]){
+                    nodes["goTobuyPetsParts"]=new Object();
+                    nodes["goTobuyPetsParts"]["node"]=createElement("div",{"id":"divGoTobuyPetsParts","class":"link blinking","style":"height:70px;width:70px;background:url('"+GFX+"breed/PuzzlePieces_00.png') -10px -14px;border:2px solid black;border-radius:35px;margin-bottom:5px;opacity:1;"},$("fixedDivRight"));
+                    nodes["goTobuyPetsParts"]["node"].addEventListener("mouseover",function(event){ toolTip.show(event,getText("goTobuyPetsParts")); },false);
+                    nodes["goTobuyPetsParts"]["node"].addEventListener("click",function(event){ goToBuyPetsParts(); },false);
+                }
+            } else {
+                hideGoToBuyPetsParts();
             }
-        } else {
-            hideGoToBuyPetsParts();
-        }
-    }catch(err){GM_logError("showGoToBuyPetsParts","","",err);}
+        }catch(err){GM_logError("showGoToBuyPetsParts","","",err);}
     }
 
     function hideGoToBuyPetsParts(){
-    try{
-        if(nodes["goTobuyPetsParts"]){
-            if(nodes["goTobuyPetsParts"]["node"]){ removeElement(nodes["goTobuyPetsParts"]["node"]); }
-            delete nodes["goTobuyPetsParts"];
-        }
-    }catch(err){GM_logError("hideGoToBuyPetsParts","","",err);}
+        try{
+            if(nodes["goTobuyPetsParts"]){
+                if(nodes["goTobuyPetsParts"]["node"]){ removeElement(nodes["goTobuyPetsParts"]["node"]); }
+                delete nodes["goTobuyPetsParts"];
+            }
+        }catch(err){GM_logError("hideGoToBuyPetsParts","","",err);}
     }
+
+    function showGoToAnimalBreedingReady(){
+        try{
+            if(!nodes["goToAnimalBreedingReady"]){
+                nodes["goToAnimalBreedingReady"]=new Object();
+                nodes["goToAnimalBreedingReady"]["node"]=createElement("div",{"id":"divGoToAnimalBreedingReady","class":"link blinking","style":"height:70px;width:70px;background:url('"+GFX+"breed/production_ready.gif') -10px -14px;border:2px solid black;border-radius:35px;margin-bottom:5px;opacity:1;"},$("fixedDivRight"));
+                nodes["goToAnimalBreedingReady"]["node"].addEventListener("mouseover",function(event){ toolTip.show(event,getText("showGoToAnimalBreedingReady")); },false);
+                nodes["goToAnimalBreedingReady"]["node"].addEventListener("click",function(event){ goToAnimalBreedingReady(); },false);
+            }
+        }catch(err){GM_logError("showGoToAnimalBreedingReady","","",err);}
+    }
+
+    function hideGoToAnimalBreedingReady(){
+        try{
+            if(nodes["goToAnimalBreedingReady"]){
+                if(nodes["goToAnimalBreedingReady"]["node"]){ removeElement(nodes["goToAnimalBreedingReady"]["node"]); }
+                delete nodes["goToAnimalBreedingReady"];
+            }
+        }catch(err){GM_logError("hideGoToAnimalBreedingReady","","",err);}
+    }
+
 
     // on load execute ============================================================================
     err_trace="on load execute";
@@ -21868,6 +21923,7 @@ try{
         text["de"]["general"]="Allgemein";
         text["de"]["given"]="Gegeben";
         text["de"]["goods"]="Waren";
+        text["de"]["showGoToAnimalBreedingReady"]="Tieraufzucht fertig!";
         text["de"]["goTobuyPetsParts"]="Zum Puzzleteilekauf";
         text["de"]["goToClothingDonation"]="Zur Kleiderspende";
         text["de"]["goToDonkey"]="Zum Goldesel Waltraud";
@@ -22286,6 +22342,7 @@ try{
         text["en"]["general"]="General";
         text["en"]["given"]="Given";
         text["en"]["goods"]="Goods";
+        text["en"]["showGoToAnimalBreedingReady"]="Animalbreeding is ready!";
         text["en"]["goTobuyPetsParts"]="Go to buy puzzle parts";
         text["en"]["goToClothingDonation"]="Go to clothing donation";
         text["en"]["goToDonkey"]="Go to donkey Luke";

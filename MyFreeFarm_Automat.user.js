@@ -1656,9 +1656,12 @@ try {
             zoneNrF=null;zoneNrS=null;zoneNrL=null;
         }catch(err){GM_logError("automatIcon.click","$('"+this.id+"') zoneNrF="+zoneNrF+" zoneNrS="+zoneNrS+" zoneNrL="+zoneNrL,"",err);}
         },false);
-        automatIcons[name][1].addEventListener("mouseover", function(event){
-            toolTip.show(event, toolTipProductSmall(this.getAttribute("zoneNrS"),this.getAttribute("zoneNrL"),0,this));
-        },false);
+        if(!(zoneNrS=="farmersmarket-4.5"||zoneNrS=="farmersmarket-4.6"||zoneNrS=="farmersmarket-4.7")) {
+            //toolTip von  farmersmarket-4 slot 5 bis 7 ausblenden
+            automatIcons[name][1].addEventListener("mouseover", function(event){
+                toolTip.show(event, toolTipProductSmall(this.getAttribute("zoneNrS"),this.getAttribute("zoneNrL"),0,this));
+            },false);
+        }
         updateQueueBox(zoneNrS);
     }else if(appendTo&&(!automatIcons[name][1].offsetParent)){
         // append again
@@ -2013,12 +2016,15 @@ try{
             drawQueueChooseItemBox(zoneNrS, zoneNrL, queueNum, $("divChooseBoxInner"));
         }
     },false);
-    newelm.addEventListener("mouseover", function(event){
-        var zoneNrS=this.parentNode.getAttribute("zoneNrS");
-        var zoneNrL=this.parentNode.getAttribute("zoneNrL");
-        var queueNum=parseInt(this.parentNode.getAttribute("queueNum"),10);
-        toolTip.show(event, toolTipMain(zoneNrS, zoneNrL, queueNum, this.parentNode));
-    },false);
+    if(!(zoneNrS=="farmersmarket-4.5"||zoneNrS=="farmersmarket-4.6"||zoneNrS=="farmersmarket-4.7")) {
+        //toolTip von  farmersmarket-4 slot 5 bis 7 ausblenden
+        newelm.addEventListener("mouseover", function(event){
+            var zoneNrS=this.parentNode.getAttribute("zoneNrS");
+            var zoneNrL=this.parentNode.getAttribute("zoneNrL");
+            var queueNum=parseInt(this.parentNode.getAttribute("queueNum"),10);
+            toolTip.show(event, toolTipMain(zoneNrS, zoneNrL, queueNum, this.parentNode));
+        },false);
+    }
 
     // Minus Button
     newelm=createElement("div",{id:newlayerId+"M",alt:"-","class":"link queueItemButton queueItemMinButton"},newlayer);
@@ -2908,6 +2914,7 @@ function drawAnimalBreedingChooseItemBox(zoneNrS, zoneNrL, queueNum, appendTo){
             if(fzZoneType==unsafeData.PRODUCT2BUILDING[0][iProd]){ // display only appropriate products for current building
             if(!unsafeData.prodBlock[0][iProd].match(/[uvlq]/)){
                 if ((zoneNrS=="farmersmarket-4.5"&&(iProd<600||iProd>609))||(zoneNrS=="farmersmarket-4.6"&&(iProd<630||iProd>639))||(zoneNrS=="farmersmarket-4.7"&&(iProd<660||iProd>669))) {
+                    //nur gültige Produkte für die Slots anzeigen
                     continue;
                 }
 
@@ -9010,6 +9017,7 @@ try{
         if(!unsafeData.ALL_SLOTS.hasOwnProperty(fz)){ continue; }
         if(unsafeData.zones.getBlock(fz)){ continue; }
         if(getZoneType(fz)!=currZoneType){ continue; }
+        if(fz=="farmersmarket-4.5"||fz=="farmersmarket-4.6"||fz=="farmersmarket-4.7"){ continue; }
         zones.push(fz);
     }
     // build table
@@ -9026,6 +9034,7 @@ try{
     for(var lz in zoneList){
         if(!zoneList.hasOwnProperty(lz)){ continue; }
         if(lz==0 || lz=="windmill"){ continue; }
+        if(lz=="farmersmarket-4.5"||lz=="farmersmarket-4.6"||lz=="farmersmarket-4.7"){ continue; }
         var extendedList=extendedListReg.exec(lz);
         if((!extendedList && currZoneType!=getZoneType(lz)) || (extendedList && currZoneType!=1)) continue;
         newtr=createElement("tr",{"style":"line-height:18px;"},newtable);
@@ -10214,6 +10223,7 @@ function buildInfoPanelZonePairing(){
         for(var i in unsafeData.ALL_SLOTS){
             if(!unsafeData.ALL_SLOTS.hasOwnProperty(i)){ continue; }
             if(unsafeData.zones.getBlock(i)){ continue; }
+            //if(i=="farmersmarket-4.5"||i=="farmersmarket-4.6"||i=="farmersmarket-4.7"){ continue; }
             zoneType=getZoneType(i);
             if(!slotCount[zoneType]){ slotCount[zoneType]=0; }
             slotCount[zoneType]++;
