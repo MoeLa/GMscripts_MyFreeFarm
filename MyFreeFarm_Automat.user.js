@@ -8616,6 +8616,7 @@ try{
               // button is visible, can be clicked on
               action=function(){
                   click(help);
+                  //setNextQueueItem(handled.zoneNrS);
               };
               listeningEvent="gameAnimalBreedCare";
 
