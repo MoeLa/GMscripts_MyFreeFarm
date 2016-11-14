@@ -32,7 +32,6 @@
 // @include        /^http:\/\/(|www\.|s\d+\.)myfreefarm\.se\/.*$/
 // @include        /^http:\/\/(|www\.|s\d+\.)th\.myfreefarm\.com\/.*$/
 // @include        /^http:\/\/(|www\.|s\d+\.)tr\.myfreefarm\.com\/.*$/
-// @include        /^http:\/\/(|www\.|s\d+\.)myfreefarm\.co\.uk\/.*$/
 // @include        /^http:\/\/(|www\.|s\d+\.)myfreefarm\.com\/.*$/
 // @include        /^http:\/\/(|www\.|s\d+\.)myfreefarm\.com\.vn\/.*$/
 // @exclude        http://*/dyn_bubbles.php*
@@ -16965,7 +16964,8 @@ return false;
                                         zones.setProduction(zoneNrS,tempZoneProductionDataSlot.clone());
                                     }
                                     //Animal breeding
-                                    if (unsafeWindow.farmersmarket_data.pets.breed!=0 && unsafeWindow.farmersmarket_data.pets.breed.remain>0){
+                                    //if (unsafeWindow.farmersmarket_data.pets.breed!=0 && unsafeWindow.farmersmarket_data.pets.breed.remain>0){
+                                    if (unsafeWindow.farmersmarket_data.pets.breed!=0){
                                         zones.setBonus(zoneNrF,0);
                                         item = unsafeWindow.farmersmarket_data.pets.breed;
                                         slot = 4;
@@ -16981,12 +16981,18 @@ return false;
 
                                             //if (Array.isArray(item.care_remains)||(!item.care_remains[i])){
                                             //if (item.happiness_interval[i]==1) {
-                                            if (item.care_remains.hasOwnProperty(i)){
-                                                iTime = nowServer+item.care_remains[i];
+                                            if (unsafeWindow.farmersmarket_data.pets.breed.remain>0) {
+                                                if (item.care_remains.hasOwnProperty(i)){
+                                                    iTime = nowServer+item.care_remains[i];
+                                                } else {
+                                                    iTime = nowServer-item.happiness_interval[i];
+                                                    tempZoneProductionData[1]++;
+                                                    tempZoneProductionDataSlot[1]++;
+                                                }
                                             } else {
-                                                iTime = nowServer-item.happiness_interval[i];
-                                                tempZoneProductionData[1]++;
-                                                tempZoneProductionDataSlot[1]++;
+                                                //Aufzucht fertig
+                                                showGoToAnimalBreedingReady();
+                                                iTime=NEVER;
                                             }
 
                                             tempZoneProductionData[2]++;
@@ -17002,14 +17008,15 @@ return false;
                                             tempZoneProductionDataSlot[0][0][iProd].push([iAmount,iPoints,iTime,NEVER]);
                                             zones.setProduction(zoneNrS,tempZoneProductionDataSlot.clone());
                                         }
-                                    } else if (unsafeWindow.farmersmarket_data.pets.breed!=0 && unsafeWindow.farmersmarket_data.pets.breed.remain<0){
+                                    } /*else if (unsafeWindow.farmersmarket_data.pets.breed!=0 && unsafeWindow.farmersmarket_data.pets.breed.remain<0){
                                         //Aufzucht beenndet
                                         showGoToAnimalBreedingReady();
                                         for (slot=5;slot<=7;slot++){
                                             zoneNrS=zoneNrF+"."+slot;
                                             zones.setBlock(zoneNrS,"blpqs");
                                         }
-                                    } else {
+                                    } */
+                                    else {
                                         for (slot=5;slot<=7;slot++){
                                             zoneNrS=zoneNrF+"."+slot;
                                             zones.setBlock(zoneNrS,"blpqs");
@@ -17354,7 +17361,7 @@ return false;
             raiseEvent("gamepartsBuyFire");
         }catch(err){GM_logError("gamepartsBuyFireResponse","","",err);}
     })
-
+    // Slot Futter, Spielzeug, Kuscheltier  öffnen
     unsafeOverwriteObjFunction("pets","needSlot",function(l){
         try{
              unsafeWindow.pets._needSlot(l);
@@ -17364,7 +17371,7 @@ return false;
         }catch(err){GM_logError("needSlotResponse","","",err);}
 
     });
-
+    // Auswahl für Futter, Spielzeug, Kuscheltier  öffnen
     unsafeOverwriteObjFunction("pets","needSelection",function(a){
         try{
              unsafeWindow.pets._needSelection(a);
@@ -17374,7 +17381,7 @@ return false;
         }catch(err){GM_logError("needSelectionResponse","","",err);}
 
     });
-
+    // Futter, Spielzeug, Kuscheltier für Slot auswählen
     unsafeOverwriteObjFunction("pets","needSelectionSet",function(r){
         try{
              unsafeWindow.pets._needSelectionSet(r);
@@ -17384,17 +17391,18 @@ return false;
         }catch(err){GM_logError("needSelectionSetResponse","","",err);}
 
     });
-
+    //Slot Futter, Spielzeug, Kuscheltier starten
     unsafeOverwriteObjFunction("pets","care",function(){
         try{
              unsafeWindow.pets._care();
         }catch(err){GM_logError("pets.care","","",err);}
         try{
+            doFarmersMarketData();
             raiseEvent("gameAnimalBreedCare");
         }catch(err){GM_logError("careResponse","","",err);}
 
     });
-
+    //Tieraufzucht beenden
     unsafeOverwriteObjFunction("pets","finish",function(){
         try{
              unsafeWindow.pets._finish();
@@ -17404,8 +17412,6 @@ return false;
         }catch(err){GM_logError("careResponse","","",err);}
 
     });
-
-
 
     unsafeOverwriteFunction("initVet",function(){
         try{
