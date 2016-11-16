@@ -4,8 +4,8 @@
 // @author         BastianKanaan
 // @description    Extends MyFreeFarm
 // @icon           data:image/png;base64,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
-// @date           26.10.2016
-// @version        2.9.34
+// @date           16.11.2016
+// @version        2.9.35
 // @license        GPL version 3 or any later version; http://www.gnu.org/copyleft/gpl.html
 // @include        /^http:\/\/(|www\.|s\d+\.)au\.myfreefarm\.com\/.*$/
 // @include        /^http:\/\/(|www\.|s\d+\.)veselaferma\.com\/.*$/
@@ -124,6 +124,7 @@ const CHANGELOG=[["2.0","29.05.2014",[["Migration nach openuserjs.org","Migratio
                 ,["2.09.32","18.10.2016",[["Produktion Tieraufzuchtsprodukte","Production animal breed products"]]]
                 ,["2.09.33","24.10.2016",[["Güterhof: 2x2 Erntemaschine (Optionen-Automat)","Megafield: 2x2 harvester (Check options automat)"],["Verbesserungen: Güterhof","Improvements: Megafield"],["Verbesserungen: Ställe und Fabriken","Improvements: stable and factories"]]]
                 ,["2.09.34","26.10.2016",[["Automatisches tägliches Abholen des 5000kT Puzzlepaket (siehe Optionen - Automat)","Automatic daily pick of 5000kT puzzle package (Check options automat)"]]]
+                ,["2.09.35","26.10.2016",[["Tieraufzucht","Animal breeding"]]]
                 ];
 
 if(!VERSIONfunctionFile){
@@ -1656,9 +1657,12 @@ try {
             zoneNrF=null;zoneNrS=null;zoneNrL=null;
         }catch(err){GM_logError("automatIcon.click","$('"+this.id+"') zoneNrF="+zoneNrF+" zoneNrS="+zoneNrS+" zoneNrL="+zoneNrL,"",err);}
         },false);
-        automatIcons[name][1].addEventListener("mouseover", function(event){
-            toolTip.show(event, toolTipProductSmall(this.getAttribute("zoneNrS"),this.getAttribute("zoneNrL"),0,this));
-        },false);
+        if(!(zoneNrS=="farmersmarket-4.5"||zoneNrS=="farmersmarket-4.6"||zoneNrS=="farmersmarket-4.7")) {
+            //toolTip von  farmersmarket-4 slot 5 bis 7 ausblenden
+            automatIcons[name][1].addEventListener("mouseover", function(event){
+                toolTip.show(event, toolTipProductSmall(this.getAttribute("zoneNrS"),this.getAttribute("zoneNrL"),0,this));
+            },false);
+        }
         updateQueueBox(zoneNrS);
     }else if(appendTo&&(!automatIcons[name][1].offsetParent)){
         // append again
@@ -1997,7 +2001,11 @@ try{
             drawForestryChooseItemBox(zoneNrS, zoneNrL, queueNum, $("divChooseBoxInner"));
         break;
         case 4:
-            drawFoodworldChooseItemBox(zoneNrS, zoneNrL, queueNum, $("divChooseBoxInner"));
+            if(zoneNrS=="farmersmarket-4.5"||zoneNrS=="farmersmarket-4.6"||zoneNrS=="farmersmarket-4.7") {
+                drawAnimalBreedingChooseItemBox(zoneNrS, zoneNrL, queueNum, $("divChooseBoxInner"));
+            } else {
+                drawFoodworldChooseItemBox(zoneNrS, zoneNrL, queueNum, $("divChooseBoxInner"));
+            }
         break;
         case 5: // Pony
             drawChooseItemBoxPony(zoneNrS, zoneNrL, queueNum, $("divChooseBoxInner"));
@@ -2009,12 +2017,15 @@ try{
             drawQueueChooseItemBox(zoneNrS, zoneNrL, queueNum, $("divChooseBoxInner"));
         }
     },false);
-    newelm.addEventListener("mouseover", function(event){
-        var zoneNrS=this.parentNode.getAttribute("zoneNrS");
-        var zoneNrL=this.parentNode.getAttribute("zoneNrL");
-        var queueNum=parseInt(this.parentNode.getAttribute("queueNum"),10);
-        toolTip.show(event, toolTipMain(zoneNrS, zoneNrL, queueNum, this.parentNode));
-    },false);
+    if(!(zoneNrS=="farmersmarket-4.5"||zoneNrS=="farmersmarket-4.6"||zoneNrS=="farmersmarket-4.7")) {
+        //toolTip von  farmersmarket-4 slot 5 bis 7 ausblenden
+        newelm.addEventListener("mouseover", function(event){
+            var zoneNrS=this.parentNode.getAttribute("zoneNrS");
+            var zoneNrL=this.parentNode.getAttribute("zoneNrL");
+            var queueNum=parseInt(this.parentNode.getAttribute("queueNum"),10);
+            toolTip.show(event, toolTipMain(zoneNrS, zoneNrL, queueNum, this.parentNode));
+        },false);
+    }
 
     // Minus Button
     newelm=createElement("div",{id:newlayerId+"M",alt:"-","class":"link queueItemButton queueItemMinButton"},newlayer);
@@ -2774,98 +2785,172 @@ try{
     // GM_log("End drawForestryChooseItemBox zoneNrF:"+zoneNrF+" zoneNrL:" + zoneNrL);
 }catch(err){GM_logError("drawForestryChooseItemBox","iProd:"+iProd,"",err);}
 }
+
 function drawFoodworldChooseItemBox(zoneNrS, zoneNrL, queueNum, appendTo){
-try{
-//  GM_log("Begin drawFoodworldChooseItemBox zoneNrS="+zoneNrS+" zoneNrL="+zoneNrL+" queueNum="+queueNum+" appendTo.id="+appendTo.id);
-    if(zoneNrL===undefined || zoneNrL==null){ zoneNrL=getZoneListId(zoneNrS); }
-    if(queueNum===undefined){ queueNum=0; }
-    appendTo.innerHTML="";
-    appendTo.setAttribute("zoneNrS",zoneNrS);
-    appendTo.setAttribute("zoneNrL",zoneNrL);
-    appendTo.setAttribute("queueNum",queueNum);
-    var fzZoneType=getZoneType(zoneNrS);
-    createElement("div",{"id":"divChooseTitle"+zoneNrL,"class":"queueTitle"},appendTo, getZoneName(0,zoneNrS,zoneNrL, ($("divChooseBoxInner")==appendTo)?queueNum:null, 20, true, true));
-    createElement("div",{"id":"divChooseEndTime"+zoneNrL,"class":"queueTime"},appendTo);
-    createElement("div",{"style":"clear:both;"},appendTo);
+    try{
+    //  GM_log("Begin drawFoodworldChooseItemBox zoneNrS="+zoneNrS+" zoneNrL="+zoneNrL+" queueNum="+queueNum+" appendTo.id="+appendTo.id);
+        if(zoneNrL===undefined || zoneNrL==null){ zoneNrL=getZoneListId(zoneNrS); }
+        if(queueNum===undefined){ queueNum=0; }
+        appendTo.innerHTML="";
+        appendTo.setAttribute("zoneNrS",zoneNrS);
+        appendTo.setAttribute("zoneNrL",zoneNrL);
+        appendTo.setAttribute("queueNum",queueNum);
+        var fzZoneType=getZoneType(zoneNrS);
+        createElement("div",{"id":"divChooseTitle"+zoneNrL,"class":"queueTitle"},appendTo, getZoneName(0,zoneNrS,zoneNrL, ($("divChooseBoxInner")==appendTo)?queueNum:null, 20, true, true));
+        createElement("div",{"id":"divChooseEndTime"+zoneNrL,"class":"queueTime"},appendTo);
+        createElement("div",{"style":"clear:both;"},appendTo);
 
-    newdiv=createElement("div",{id:"divChooseItem"+zoneNrL+"Q"+queueNum + "I"+PRODSTOP,"class":"divChooseItem link v"+PRODSTOP,"product":PRODSTOP},appendTo);
-    newdiv.addEventListener("click",function(){
-        var zoneNrS=this.parentNode.getAttribute("zoneNrS");
-        var zoneNrL=this.parentNode.getAttribute("zoneNrL");
-        var queueNum=parseInt(this.parentNode.getAttribute("queueNum"),10);
-        zoneList[zoneNrL][queueNum]=DEFAULT_ZONELIST_ITEM.clone();
-        toolTip.hide(this);
-        if(this.parentNode==$("divChooseBoxInner")) click($("divChooseBoxClose"));
+        newdiv=createElement("div",{id:"divChooseItem"+zoneNrL+"Q"+queueNum + "I"+PRODSTOP,"class":"divChooseItem link v"+PRODSTOP,"product":PRODSTOP},appendTo);
+        newdiv.addEventListener("click",function(){
+            var zoneNrS=this.parentNode.getAttribute("zoneNrS");
+            var zoneNrL=this.parentNode.getAttribute("zoneNrL");
+            var queueNum=parseInt(this.parentNode.getAttribute("queueNum"),10);
+            zoneList[zoneNrL][queueNum]=DEFAULT_ZONELIST_ITEM.clone();
+            toolTip.hide(this);
+            if(this.parentNode==$("divChooseBoxInner")) click($("divChooseBoxClose"));
+            updateQueueBox(zoneNrS, zoneNrL);
+        },false);
+        newdiv.addEventListener("mouseover", function(event){
+            var zoneNrS=this.parentNode.getAttribute("zoneNrS");
+            var zoneNrL=this.parentNode.getAttribute("zoneNrL");
+            var queueNum=parseInt(this.parentNode.getAttribute("queueNum"),10);
+            toolTip.show(event, toolTipProductSmall(zoneNrS, zoneNrL, queueNum, this));
+        },false);
+
+        for(var iProd=0;iProd<unsafeData.prodName[0].length;iProd++){
+            if(fzZoneType==unsafeData.PRODUCT2BUILDING[0][iProd]){ // display only appropriate products for current building
+            if(!unsafeData.prodBlock[0][iProd].match(/[uvlq]/)){
+                newdiv=createElement("div",{"id":"divChooseItem"+zoneNrL+"Q"+queueNum+"I"+iProd,"class":"divChooseItem link v"+iProd,"product":iProd},appendTo);
+                // TODO: Opacity von 0.4 ist ok, wenn Ertragsprodukt=benötiges Produkt.
+                //       Aber bei bspw. Fabriken oder Tinkturen macht das keinen Sinn!
+                //       Hier sollten vllt. die benötigten Produkte gecheckt werden
+
+                //Patch 12072016
+                var inStock = false;
+                if (unsafeData.prodTyp[0][iProd].match(/fw/)){
+                    for(var i=0;i<unsafeData.prodRequire[0][iProd].length;i++){
+                        input=unsafeData.prodRequire[0][iProd][i][1];
+                        if (unsafeData.prodStock[0][input]&&unsafeData.prodStock[0][input]>=unsafeData.prodRequire[0][iProd][i][2]) {
+                            inStock = true;
+                        }
+                        else {
+                            inStock = false;
+                            break;
+                        }
+                    }
+                }
+
+                if(inStock){
+                    newdiv.style.opacity=1;
+                }else{
+                    newdiv.style.opacity=(unsafeData.prodStock[0][iProd]&&unsafeData.prodStock[0][iProd]>0)?1:0.4;
+                }
+                newdiv.addEventListener("click",function(){
+                    var zoneNrS=this.parentNode.getAttribute("zoneNrS");
+                    var zoneNrL=this.parentNode.getAttribute("zoneNrL");
+                    var queueNum=parseInt(this.parentNode.getAttribute("queueNum"),10);
+                    var product=parseInt(this.getAttribute("product"),10);
+                    if(zoneList[zoneNrL][queueNum][0]!=product){
+                        zoneList[zoneNrL][queueNum][0]=product;
+                        zoneList[zoneNrL][queueNum][1]=(zoneNrS!="windmill"&&zoneList[zoneNrL][queueNum][3])?((unsafeData.prodMinRack&&(unsafeData.prodMinRack[0][product]!=undefined))?unsafeData.prodMinRack[0][product]:100):(zoneList[zoneNrL][queueNum][1]>=1?zoneList[zoneNrL][queueNum][1]:1);
+                        zoneList[zoneNrL][queueNum][2]=0;
+                    }
+                    toolTip.hide(this);
+                    if(this.parentNode==$("divChooseBoxInner")) click($("divChooseBoxClose"));
+                    updateQueueBox(zoneNrS, zoneNrL);
+                },false);
+                newdiv.addEventListener("mouseover", function(event){
+                    var zoneNrS=this.parentNode.getAttribute("zoneNrS");
+                    var zoneNrL=this.parentNode.getAttribute("zoneNrL");
+                    var queueNum=parseInt(this.parentNode.getAttribute("queueNum"),10);
+                    toolTip.show(event, toolTipProductSmall(zoneNrS, zoneNrL, queueNum, this));
+                },false);
+            }
+            }
+        }
+        if(appendTo==$("divChooseBoxInner")){
+            $("divChooseBox").style.display="block";
+            $("divChooseBox").style.top=Math.round(255 - $("divChooseBox").offsetHeight/2)+"px";
+        }
+        newdiv=null;appendTo=null;
         updateQueueBox(zoneNrS, zoneNrL);
-    },false);
-    newdiv.addEventListener("mouseover", function(event){
-        var zoneNrS=this.parentNode.getAttribute("zoneNrS");
-        var zoneNrL=this.parentNode.getAttribute("zoneNrL");
-        var queueNum=parseInt(this.parentNode.getAttribute("queueNum"),10);
-        toolTip.show(event, toolTipProductSmall(zoneNrS, zoneNrL, queueNum, this));
-    },false);
 
-    for(var iProd=0;iProd<unsafeData.prodName[0].length;iProd++){
-        if(fzZoneType==unsafeData.PRODUCT2BUILDING[0][iProd]){ // display only appropriate products for current building
-        if(!unsafeData.prodBlock[0][iProd].match(/[uvlq]/)){
-            newdiv=createElement("div",{"id":"divChooseItem"+zoneNrL+"Q"+queueNum+"I"+iProd,"class":"divChooseItem link v"+iProd,"product":iProd},appendTo);
-            // TODO: Opacity von 0.4 ist ok, wenn Ertragsprodukt=benötiges Produkt.
-            //       Aber bei bspw. Fabriken oder Tinkturen macht das keinen Sinn!
-            //       Hier sollten vllt. die benötigten Produkte gecheckt werden
-
-            //Patch 12072016
-            var inStock = false;
-            if (unsafeData.prodTyp[0][iProd].match(/fw/)){
-                for(var i=0;i<unsafeData.prodRequire[0][iProd].length;i++){
-                    input=unsafeData.prodRequire[0][iProd][i][1];
-                    if (unsafeData.prodStock[0][input]&&unsafeData.prodStock[0][input]>=unsafeData.prodRequire[0][iProd][i][2]) {
-                        inStock = true;
-                    }
-                    else {
-                        inStock = false;
-                        break;
-                    }
-                }
-            }
-
-            if(inStock){
-                newdiv.style.opacity=1;
-            }else{
-                newdiv.style.opacity=(unsafeData.prodStock[0][iProd]&&unsafeData.prodStock[0][iProd]>0)?1:0.4;
-            }
-            newdiv.addEventListener("click",function(){
-                var zoneNrS=this.parentNode.getAttribute("zoneNrS");
-                var zoneNrL=this.parentNode.getAttribute("zoneNrL");
-                var queueNum=parseInt(this.parentNode.getAttribute("queueNum"),10);
-                var product=parseInt(this.getAttribute("product"),10);
-                if(zoneList[zoneNrL][queueNum][0]!=product){
-                    zoneList[zoneNrL][queueNum][0]=product;
-                    zoneList[zoneNrL][queueNum][1]=(zoneNrS!="windmill"&&zoneList[zoneNrL][queueNum][3])?((unsafeData.prodMinRack&&(unsafeData.prodMinRack[0][product]!=undefined))?unsafeData.prodMinRack[0][product]:100):(zoneList[zoneNrL][queueNum][1]>=1?zoneList[zoneNrL][queueNum][1]:1);
-                    zoneList[zoneNrL][queueNum][2]=0;
-                }
-                toolTip.hide(this);
-                if(this.parentNode==$("divChooseBoxInner")) click($("divChooseBoxClose"));
-                updateQueueBox(zoneNrS, zoneNrL);
-            },false);
-            newdiv.addEventListener("mouseover", function(event){
-                var zoneNrS=this.parentNode.getAttribute("zoneNrS");
-                var zoneNrL=this.parentNode.getAttribute("zoneNrL");
-                var queueNum=parseInt(this.parentNode.getAttribute("queueNum"),10);
-                toolTip.show(event, toolTipProductSmall(zoneNrS, zoneNrL, queueNum, this));
-            },false);
-        }
-        }
-    }
-    if(appendTo==$("divChooseBoxInner")){
-        $("divChooseBox").style.display="block";
-        $("divChooseBox").style.top=Math.round(255 - $("divChooseBox").offsetHeight/2)+"px";
-    }
-    newdiv=null;appendTo=null;
-    updateQueueBox(zoneNrS, zoneNrL);
-
-    // GM_log("End drawFoodworldChooseItemBox :" + zoneNrL);
-}catch(err){GM_logError("drawFoodworldChooseItemBox ","","",err);}
+        // GM_log("End drawFoodworldChooseItemBox :" + zoneNrL);
+    }catch(err){GM_logError("drawFoodworldChooseItemBox ","","",err);}
 }
+
+function drawAnimalBreedingChooseItemBox(zoneNrS, zoneNrL, queueNum, appendTo){
+    try{
+    //  GM_log("Begin drawAnimalBreedingChooseItemBox zoneNrS="+zoneNrS+" zoneNrL="+zoneNrL+" queueNum="+queueNum+" appendTo.id="+appendTo.id);
+        if(zoneNrL===undefined || zoneNrL==null){ zoneNrL=getZoneListId(zoneNrS); }
+        if(queueNum===undefined){ queueNum=0; }
+        appendTo.innerHTML="";
+        appendTo.setAttribute("zoneNrS",zoneNrS);
+        appendTo.setAttribute("zoneNrL",zoneNrL);
+        appendTo.setAttribute("queueNum",queueNum);
+        var fzZoneType=getZoneType(zoneNrS);
+        createElement("div",{"id":"divChooseTitle"+zoneNrL,"class":"queueTitle"},appendTo, getZoneName(0,zoneNrS,zoneNrL, ($("divChooseBoxInner")==appendTo)?queueNum:null, 20, true, true));
+        createElement("div",{"id":"divChooseEndTime"+zoneNrL,"class":"queueTime"},appendTo);
+        createElement("div",{"style":"clear:both;"},appendTo);
+
+        newdiv=createElement("div",{id:"divChooseItem"+zoneNrL+"Q"+queueNum + "I"+PRODSTOP,"class":"divChooseItem link v"+PRODSTOP,"product":PRODSTOP},appendTo);
+        newdiv.addEventListener("click",function(){
+            var zoneNrS=this.parentNode.getAttribute("zoneNrS");
+            var zoneNrL=this.parentNode.getAttribute("zoneNrL");
+            var queueNum=parseInt(this.parentNode.getAttribute("queueNum"),10);
+            zoneList[zoneNrL][queueNum]=DEFAULT_ZONELIST_ITEM.clone();
+            toolTip.hide(this);
+            if(this.parentNode==$("divChooseBoxInner")) click($("divChooseBoxClose"));
+            updateQueueBox(zoneNrS, zoneNrL);
+        },false);
+
+        newdiv.addEventListener("mouseover", function(event){
+            var zoneNrS=this.parentNode.getAttribute("zoneNrS");
+            var zoneNrL=this.parentNode.getAttribute("zoneNrL");
+            var queueNum=parseInt(this.parentNode.getAttribute("queueNum"),10);
+            toolTip.show(event, toolTipProductSmall(zoneNrS, zoneNrL, queueNum, this));
+        },false);
+
+        for(var iProd=600;iProd<unsafeData.prodName[0].length;iProd++){
+            if(fzZoneType==unsafeData.PRODUCT2BUILDING[0][iProd]){ // display only appropriate products for current building
+            if(!unsafeData.prodBlock[0][iProd].match(/[uvlq]/)){
+                if ((zoneNrS=="farmersmarket-4.5"&&(iProd<600||iProd>609))||(zoneNrS=="farmersmarket-4.6"&&(iProd<630||iProd>639))||(zoneNrS=="farmersmarket-4.7"&&(iProd<660||iProd>669))) {
+                    //nur gültige Produkte für die Slots anzeigen
+                    continue;
+                }
+
+                newdiv=createElement("div",{"id":"divChooseItem"+zoneNrL+"Q"+queueNum+"I"+iProd,"class":"divChooseItem link v"+iProd,"product":iProd},appendTo);
+
+                newdiv.style.opacity=(unsafeData.prodStock[0][iProd]&&unsafeData.prodStock[0][iProd]>0)?1:0.4;
+                newdiv.addEventListener("click",function(){
+                    var zoneNrS=this.parentNode.getAttribute("zoneNrS");
+                    var zoneNrL=this.parentNode.getAttribute("zoneNrL");
+                    var queueNum=parseInt(this.parentNode.getAttribute("queueNum"),10);
+                    var product=parseInt(this.getAttribute("product"),10);
+                    if(zoneList[zoneNrL][queueNum][0]!=product){
+                        zoneList[zoneNrL][queueNum][0]=product;
+                        zoneList[zoneNrL][queueNum][1]=(zoneNrS!="windmill"&&zoneList[zoneNrL][queueNum][3])?((unsafeData.prodMinRack&&(unsafeData.prodMinRack[0][product]!=undefined))?unsafeData.prodMinRack[0][product]:100):(zoneList[zoneNrL][queueNum][1]>=1?zoneList[zoneNrL][queueNum][1]:1);
+                        zoneList[zoneNrL][queueNum][2]=0;
+                    }
+                    /*toolTip.hide(this);*/
+                    if(this.parentNode==$("divChooseBoxInner")) click($("divChooseBoxClose"));
+                    updateQueueBox(zoneNrS, zoneNrL);
+                },false);
+
+            }
+            }
+        }
+        if(appendTo==$("divChooseBoxInner")){
+            $("divChooseBox").style.display="block";
+            $("divChooseBox").style.top=Math.round(255 - $("divChooseBox").offsetHeight/2)+"px";
+        }
+        newdiv=null;appendTo=null;
+        updateQueueBox(zoneNrS, zoneNrL);
+
+        // GM_log("End drawAnimalBreedingChooseItemBox :" + zoneNrL);
+    }catch(err){GM_logError("drawAnimalBreedingChooseItemBox ","","",err);}
+}
+
 function drawChooseItemBoxPony(zoneNrS, zoneNrL, queueNum, appendTo){
 try{
     var zoneNrF=zoneNrS.toString().replace(/\.\d+$/,"");
@@ -7186,7 +7271,7 @@ try{
             }
         break; }
 
-        case 6: { // exit --- todo 
+        case 6: { // exit --- todo
             GM_logInfo("autobuyPetsParts","runId="+runId+" step="+step,"","buyPetsParts: Exiting");
             autoZoneFinish(runId, $("globalbox_close"));
             break;}
@@ -7657,22 +7742,17 @@ try{
             }
             handled.set(zoneNrS);
 
-
             try{ unsafeWindow.jsTimeStamp=unsafeWindow.Zeit.Client - unsafeWindow.Zeit.Verschiebung; }catch(err){}
             if (handled.zoneBuildingTyp==4 && handled.slot>4){
-                autoFarmersmarketVetTreatment(runId,1);
+                if (handled.zoneNrF=="farmersmarket-4") {
+                    autoFarmersmarketAnimalBreeding(runId,1,1);
+                } else {
+                    autoFarmersmarketVetTreatment(runId,1);
+                }
             }
             else {
                 autoFarmersmarketBuilding(runId,1);
             }
-            // if(unsafeData.readyZone[handled.zoneNrS][2]){
-            //  switch(handled.zoneBuildingTyp){
-            //  case 4:
-            //  break;}
-            // }else{
-            //  GM_log("autoFarmersmarket: data not ready\nreadyZone[handled.zoneNrS]="+implode(unsafeData.readyZone[handled.zoneNrS]));
-            //  autoZoneFinish(runId); // TODO else
-            // }
         }
     }
     GM_logInfo("autoFarmersmarket","runId="+runId,"handled.zoneNrF="+handled.zoneNrF,"End",1);
@@ -8409,6 +8489,191 @@ try{
  }catch(err){ GM_logError("autoFarmersmarketVetTreatment","runId="+runId+" step="+step,"",err); }
 }
 
+//autoFarmersmarketAnimalBreeding
+function autoFarmersmarketAnimalBreeding(runId, step, step5_6loop){
+try{
+    GM_log("autoFarmersmarketAnimalBreeding runId="+runId+" step="+step+" step5_6loop"+step5_6loop+" handled.zoneNrS="+handled.zoneNrS);
+    //TODO Option
+    var botUseAnimalBreeding = true;
+    //if(settings.get("account","botUseVetTreatment")&&bot.checkRun("autoFarmersmarketAnimalBreeding",runId)){
+    if(botUseAnimalBreeding&&bot.checkRun("autoFarmersmarketAnimalBreeding",runId)){
+        bot.setAction("autoFarmersmarketAnimalBreeding ("+step+")");
+        //console.log("autoFarmersmarketAnimalBreeding"+step);
+        var help,help2,action=null,listeningEvent=null;
+        switch(step){
+        case 1:{ // check required products
+            if((zoneList[handled.zoneNrL][0][0]!=PRODSTOP)&&(help=unsafeData.readyZone[handled.zoneNrS])&&help[2]&&((help[1]=="r")||(help[1]=="e"))){
+                help=unsafeData.prodRequire[0][zoneList[handled.zoneNrL][0][0]]
+                if(typeof help=="object"){
+                    for(var i=0;i<help.length;i++){
+                        if(help[i][0]<0){
+                            if(unsafeData.money<help[i][1]){
+                                zoneList[handled.zoneNrL].unshift(DEFAULT_ZONELIST_ITEM.clone());
+                                updateQueueBox(handled.zoneNrS);
+                                break;
+                            }
+                        }else{
+                            if(unsafeData.prodStock[help[i][0]][help[i][1]]<help[i][2]){
+                                zoneList[handled.zoneNrL].unshift(DEFAULT_ZONELIST_ITEM.clone());
+                                updateQueueBox(handled.zoneNrS);
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            autoFarmersmarketAnimalBreeding(runId,step+1,step5_6loop);
+        break;}
+        case 2:{ // open farmersmarket
+            if((help=unsafeData.readyZone[handled.zoneNrS])&&help[2]&&(((help[1]=="r")&&(zoneList[handled.zoneNrL][0][0]!=PRODSTOP))||((help[1]=="e")&&(zoneList[handled.zoneNrL][0][0]!=PRODSTOP)))){
+                if(!unsafeData.gameLocation.check("farmersmarket")){
+                    action=function(){ click($("speedlink_farmersmarket")); };
+                    listeningEvent="gameFarmersmarketOpened";
+                }else{
+                    autoFarmersmarketAnimalBreeding(runId,step+1,step5_6loop);
+                }
+            } else {
+                autoFarmersmarketAnimalBreeding(runId,8,step5_6loop); // -> exit
+            }
+
+        break;}
+        case 3:{ // open farmersmarket building
+            if( (help=unsafeData.readyZone[handled.zoneNrS])&&help[2]&&(help[1]=="r"||help[1]=="e")) {
+                //GM_logInfo("autoFarmersmarketAnimalBreeding","runId="+runId+" step="+step,"",handled.zoneNrF.capitalize()+" automat<br>Opening Step:"); //TODO text
+                help=/-(\d)$/.exec(handled.zoneNrF)[1]; // determine which building to work on
+                if($("farmersmarket_pos"+help+"_inner").style.display != "block"){
+                    action=function(){ click($("farmersmarket_pos"+help+"_click")); };
+                    listeningEvent="gameFarmersmarketOpened"+help;
+                }else{
+                    GM_logInfo("autoFarmersmarketAnimalBreeding","runId="+runId+" step="+step,"",handled.zoneNrF.capitalize()+" automat<br>Opening Step:"); //TODO text
+                    autoFarmersmarketAnimalBreeding(runId,step+1,step5_6loop);
+                }
+            }else{
+                autoFarmersmarketAnimalBreeding(runId,8,step5_6loop); // -> exit
+            }
+        break;}
+        case 4:{ // open slot
+            help = $("pets_pet_needs").children[handled.slot-5];
+            if(help) {
+                action=function(){ click(help);};
+                listeningEvent="gameAnimalBreedingOpenSlot";
+            } else {
+                autoFarmersmarketAnimalBreeding(runId,8,step5_6loop); // -> exit
+            }
+
+        break;}
+        case 5:{
+            //open pets need slot
+            //Schleife  step 5 - 7, bis Button "Einwerfen erscheint"
+            help = $("pets_need_slot");
+            if((step5_6loop<=3)&&(help=help.querySelector('div[onclick*="pets.needSelection('+step5_6loop+')"]'))&&(!help.querySelector('.img'))
+                ) {
+                if(help) {
+                    action=function(){ click(help);};
+                    listeningEvent="gameAnimalBreedingNeedSelection";
+                }
+            }else{
+                console.log("Step 5 -> Skipping directly to exit");
+                GM_logInfo("autoFarmersmarketAnimalBreeding","runId="+runId+" step="+step,"","Zone not empty."); //TODO text
+                autoFarmersmarketAnimalBreeding(runId,8,step5_6loop); // -> exit
+            }
+        break;}
+
+        case 6:{ //Product select
+            if((help=$("pets_need_slot_selection")) && (handled.zoneNrF == "farmersmarket-4")){
+                help2=help.querySelector('div[onclick*="pets.needSelectionSet('+zoneList[handled.zoneNrL][0][0]+')"]');
+                var helpDown=$("pets_need_selection_navi_down");
+                var helpUp=$("pets_need_selection_navi_up");
+
+                if(help2) {
+                    // link is visible, can be clicked on
+                    action=function(){ click(help2); setNextQueueItem(handled.zoneNrS);};
+                    listeningEvent="gameAnimalBreedingneedSelectionSet";
+                }else if(helpDown || helpUp) {
+                    // link not visible, we need to scroll
+                    if (directionDown && !helpDown) { // Scroll-Down-Mode, but at bottom?
+                        directionDown = false; // Switch to Scroll-Up-Mode
+                    } else if (!directionDown && !helpUp) { // Scroll-Up-Mode, but at top?
+                        directionDown = true; // Switch to Scroll-Down-Mode
+                    }
+                    action=function(){
+                        if (directionDown) { // In Scroll-Down-Mode?
+                            click(helpDown); // Scroll down
+                        } else {
+                            click(helpUp);   // Scroll up
+                        }
+                    };
+                    step--;
+                    listeningEvent="gameProductionSelectionNavi";
+                }else{
+                    autoFarmersmarketAnimalBreeding(runId,8,step5_6loop); // -> exit
+                }
+            }
+        break;}
+
+        case 7:{
+            //help = $("pets_need_slot").querySelector(".button_new");
+            if(help=$("pets_need_slot").querySelector(".button_new"))  {
+              // button is visible, can be clicked on
+              action=function(){
+                  click(help);
+              };
+              listeningEvent="gameAnimalBreedCare";
+
+            } else {
+                // button isn't visible, product-slots not filled
+                autoFarmersmarketAnimalBreeding(runId,5,step5_6loop+1);
+            }
+            break;}
+
+        case 8:{
+            GM_logInfo("autoFarmersmarketAnimalBreeding","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"start other slot or exit");
+            var zoneNrS,zoneNrL,help,next=false;
+            if(unsafeData.zones.isMultiSlot(handled.zoneNrF)){
+                for(var slot=5;slot<=unsafeData.BUILDING_SLOTS[getZoneType(handled.zoneNrF)];slot++){
+                    zoneNrS=handled.zoneNrF+"."+slot;
+                    if((help=unsafeData.readyZone[zoneNrS])&&help[2]){
+                        zoneNrL=getZoneListId(zoneNrS);
+                        if(((help[1]=="r")&&((zoneList[zoneNrL][0][0]!=PRODSTOP)||!settings.get("account","disableCropFields")))||((help[1]=="e")&&(zoneList[zoneNrL][0][0]!=PRODSTOP))){
+                            next=true;
+                            handled.set(zoneNrS);
+                            break;
+                        }
+                    }
+                }
+            }
+            if(next){
+                autoFarmersmarketAnimalBreeding(runId,1,1);
+            }else{
+                help=/-(\d)$/.exec(handled.zoneNrF)[1];
+                var div=$("farmersmarket_pos"+help+"_inner").querySelector(".big_close");
+                if (!div) {
+                    var help2=$("farmersmarket_pos"+help+"_inner").querySelectorAll(".mini_close");
+                    for (var i=0;i<help2.length;i++) {
+                        if (help2[i].getAttribute("onclick")=="pets.close()"){
+                            div = help2[i];
+                            break;
+                        }
+                    }
+                }
+                autoZoneFinish(runId,div);
+            }
+        break;}
+        }
+        if(listeningEvent){
+            document.addEventListener(listeningEvent,function(listeningEvent,runId,step){
+                return function(){
+                    document.removeEventListener(listeningEvent,arguments.callee,false);
+                    window.setTimeout(autoFarmersmarketAnimalBreeding,settings.getPause(),runId,step+1,step5_6loop);
+                };
+            }(listeningEvent,runId,step),false);
+        }
+        if(action){ action(); }
+        help=null;listeningEvent=null;action=null;
+    }
+ }catch(err){ GM_logError("autoFarmersmarketAnimalBreeding","runId="+runId+" step="+step,"",err); }
+}
+
 function autoFoodworld(runId){
 try{
     if(!settings.get("account","botUseFoodworld")){
@@ -8752,6 +9017,7 @@ try{
         if(!unsafeData.ALL_SLOTS.hasOwnProperty(fz)){ continue; }
         if(unsafeData.zones.getBlock(fz)){ continue; }
         if(getZoneType(fz)!=currZoneType){ continue; }
+        if(fz=="farmersmarket-4.5"||fz=="farmersmarket-4.6"||fz=="farmersmarket-4.7"){ continue; }
         zones.push(fz);
     }
     // build table
@@ -8768,6 +9034,7 @@ try{
     for(var lz in zoneList){
         if(!zoneList.hasOwnProperty(lz)){ continue; }
         if(lz==0 || lz=="windmill"){ continue; }
+        if(lz=="farmersmarket-4.5"||lz=="farmersmarket-4.6"||lz=="farmersmarket-4.7"){ continue; }
         var extendedList=extendedListReg.exec(lz);
         if((!extendedList && currZoneType!=getZoneType(lz)) || (extendedList && currZoneType!=1)) continue;
         newtr=createElement("tr",{"style":"line-height:18px;"},newtable);
@@ -9956,6 +10223,7 @@ function buildInfoPanelZonePairing(){
         for(var i in unsafeData.ALL_SLOTS){
             if(!unsafeData.ALL_SLOTS.hasOwnProperty(i)){ continue; }
             if(unsafeData.zones.getBlock(i)){ continue; }
+            //if(i=="farmersmarket-4.5"||i=="farmersmarket-4.6"||i=="farmersmarket-4.7"){ continue; }
             zoneType=getZoneType(i);
             if(!slotCount[zoneType]){ slotCount[zoneType]=0; }
             slotCount[zoneType]++;
@@ -10695,7 +10963,7 @@ try{
             for(var slot=1;slot<=3;slot++){
                 zoneNrS=zoneNrF+"."+slot;
                 if(!unsafeData.zones.getBlock(zoneNrS)){
-                    drawAutomatIcon(zoneNrS,zoneNrS,$("production_slot_info"+farmNr+"_"+position+"_"+slot).parentNode,"left:100px;");
+                    drawAutomatIcon(zoneNrS,zoneNrS,$("production_slot_info"+farmNr+"_"+position+"_"+slot).parentNode,"top:60px;left:100px;");
                 }
             }
         }catch(err){GM_logError("eventListener:gameOpenFactoryOil ","","",err);}
@@ -10966,7 +11234,13 @@ try{
                         zoneNrS=zoneNrF+"."+slot;
                         switch(id) {
                             case 2: container=$("nursery_slot_item"+slot); break;
-                            case 4: container=$("pets_productionslot"+slot); break;
+                            case 4: if (slot<=4) {
+                                      container=$("pets_productionslot"+slot);
+                                    }
+                                    else {
+                                      container=$("pets_pet_needs").children[slot-5];
+                                    }
+                                    break;
                             case 5: container=$("vet_production_slot"+slot); break;
                             default: container=null;
                         }
