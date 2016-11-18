@@ -9786,50 +9786,6 @@ try{
     // Foodworld
     err_trace="Foodworld";
     // Foodworld-Farmi
-/*
-    unsafeOverwriteFunction("showFoodworldFarmiCart",function(id){
-        unsafeWindow._showFoodworldFarmiCart(id);
-        try{
-            var newdiv, sum=0, prodId, priceMissing=false;
-            if(newdiv=$("food_cart_products")){
-                for(var i=0;i<newdiv.childElementCount;i++){
-                    prodId=parseInt(newdiv.children[i].firstElementChild.getAttribute("class").replace(/\D+/g,""),10);
-                    newdiv.children[i].setAttribute("prodId",prodId);
-                    newdiv.children[i].classList.add("link");
-                    newdiv.children[i].addEventListener("mouseover",function(event){ showGoToMarketToolTip(event,this.getAttribute("prodId")); },false);
-                    newdiv.children[i].addEventListener("click",function(event){ showMarket(this.getAttribute("prodId")); },false);
-                    if(gut[prodId]){
-                        sum+=gut[prodId]*unsafeWindow.foodworldfarmis[id]["products"][prodId];
-                    }else{
-                        newdiv.children[i].style.backgroundColor="red";
-                        priceMissing=true;
-                    }
-                }
-            }
-            if(newdiv=$("food_cart_cost")){
-                newdiv.innerHTML="100%:&nbsp;"+moneyFormatInt(sum)+"&nbsp;|&nbsp;90%:&nbsp;"+moneyFormatInt(0.9*sum);
-            }
-            if(newdiv=$("food_cart_perc")){
-                if(priceMissing){
-                    newdiv.style.border="4px inset #336";
-                    newdiv.style.color="#336";
-                    newdiv.style.backgroundColor="transparent";
-                    newdiv.innerHTML="--%";
-                }else{
-                    var price=parseInt(unsafeWindow.foodworldfarmis[id]["price"],10);
-                    if(100*price<valFarmiLimits[0]*sum){ var col="red";var col2="#fcc"; }
-                    else if(100*price<valFarmiLimits[1]*sum){ var col="#d80";var col2="#ff9"; }
-                    else{ var col="green";var col2="#80ff80"; }
-                    newdiv.style.border="4px inset "+col;
-                    newdiv.style.color=col;
-                    newdiv.style.backgroundColor=col2;
-                    newdiv.innerHTML=Math.round(100*price/sum)+"%";
-                }
-            }
-            newdiv=null;
-        }catch(err){ GM_logError("showFoodworldFarmiCart","","",err); }
-    });
-*/
     unsafeOverwriteFunction("showFoodworldFarmiCart",function(farmi){
     try{
         unsafeWindow._showFoodworldFarmiCart(farmi);
@@ -10142,13 +10098,14 @@ try{
 
                     if(rate<valFarmiLimits[0]){ // unter 90%
                         str = css_styles["farmi_price_low"][1];
-                        unsafeWindow.foodworldAction('kick', foodWorldFarmi[i].id);
+                        // unsafeWindow.foodworldAction('kick', foodWorldFarmi[i].id);
                     }else if(rate<valFarmiLimits[1]){ //zwischen 90% und 100%
                         str = css_styles["farmi_price_between"][1];
                     }else{ // über 100%
                         str = css_styles["farmi_price_above"][1];
                     }
                     if ($("foodworldfarmi"+i)){
+                        $("foodworldfarmi"+i).setAttribute("rate",rate);
                         createElement("div",{"id":"foodworldfarmiMiniInfo"+i,"class":"foodworldfarmiMiniInfo"},$("foodworldfarmi"+i));
                         $("foodworldfarmiMiniInfo"+i).setAttribute("style",str);
                     }

@@ -371,9 +371,14 @@ var botArbiter=new function(){
                 botArbiter.add("sessionEnds");
             }
             checkReadyZone(); // farm, windmill, forestry
-            if(settings.get("account","botUseFarmi")&&unsafeWindow.farmisinfo && unsafeWindow.farmisinfo[0] && (settings.get("account","farmiReject") || settings.get("account","farmiAccept"))){
+            if (settings.get("account", "botUseFarmi") && unsafeWindow.farmisinfo && unsafeWindow.farmisinfo[0] && (settings.get("account", "farmiReject") || settings.get("account", "farmiAccept"))) {
                 checkFarmi(1);
             }
+            // if (settings.get("account", "botUseFarmi") && settings.get("account", "farmiReject") && settings.get("account", "botUseFoodworld") && settings.get("account", "farmiFoodworldReject")) {
+            //     console.log("Moe, checkFoordworldFarmi");
+            //     checkFoordworldFarmi();
+            //     console.log("Moe, NACH checkFoordworldFarmi");
+            // }
             if($("divGoToClothingDonation") && !zoneWaiting["clothingDonation"]) {
                 var log = unsafeData.latestClothingDonationLog;
                 if (!log && (settings.get("account","botUseClothingGamble") || settings.get("account","botUseClothingDonation")) || // No log available (and at least one option is checked) => Let bot open the dialog
@@ -554,12 +559,12 @@ var settings=new function(){
     var dataDefault={"global":{},
                      "country":{"valCloseWindowTimer":30,"pauseShort":[300,700],"pause":[2000,4000],"maxDurationBotRun":300,"maxDurationBotStep":30,"botErrorBehaviour":"reload"},
                      "server":{"botActive":false},
-                     "account":{"autoPlant":true,"autoWater":true,"autoFeed":true,"botUseClothingDonation":false,"botUsebuyPetsParts":false,"botUseClothingGamble":false,"botUseDonkey":false,"botUseFarmersmarket":false,"botUseVetTreatment":true,"botUseFarmi":false,"botUseFoodworld":false,"botUseForestry":false,"botUseGuildJop":false,"botUseLottery":false,"botUseMegafield":false,"botPreferMegafield":true,"botUseMegafieldPremiumPlanting":true,"megafieldSmallVehicle":1,"megafieldBigVehicle":0,"botUseWindmill":false,"disableCropFields":false,"farmiAccept":false,"farmiAcceptAboveNr":100,"farmiAcceptBelowMinValue":false,"farmiReject":false,"farmiRejectUntilNr":90,"farmiRemoveMissing":false,"farmiRemoveMissingAboveNr":10,"lotteryActivate":false,"lotteryDailyLot":false,"powerUpActivate":false,"seedWaitForCrop":30,"showQueueTime":true,"useQueueList":false}
+                     "account":{"autoPlant":true,"autoWater":true,"autoFeed":true,"botUseClothingDonation":false,"botUsebuyPetsParts":false,"botUseClothingGamble":false,"botUseDonkey":false,"botUseFarmersmarket":false,"botUseVetTreatment":true,"botUseFarmi":false,"botUseFoodworld":false,"botUseForestry":false,"botUseGuildJop":false,"botUseLottery":false,"botUseMegafield":false,"botPreferMegafield":true,"botUseMegafieldPremiumPlanting":true,"megafieldSmallVehicle":1,"megafieldBigVehicle":0,"botUseWindmill":false,"disableCropFields":false,"farmiAccept":false,"farmiAcceptAboveNr":100,"farmiAcceptBelowMinValue":false,"farmiFoodworldReject":false,"farmiReject":false,"farmiRejectUntilNr":90,"farmiRemoveMissing":false,"farmiRemoveMissingAboveNr":10,"lotteryActivate":false,"lotteryDailyLot":false,"powerUpActivate":false,"seedWaitForCrop":30,"showQueueTime":true,"useQueueList":false}
                     };
     var require=    {"global":{},
                      "country":{},
                      "server":{},
-                     "account":{"farmiAccept":[["account","botUseFarmi"]],"farmiAcceptAboveNr":[["account","botUseFarmi"]],"farmiAcceptBelowMinValue":[["account","botUseFarmi"],["account","farmiAccept"]],"farmiReject":[["account","botUseFarmi"]],"farmiRejectUntilNr":[["account","botUseFarmi"]],"farmiRemoveMissing":[["account","botUseFarmi"]],"farmiRemoveMissingAboveNr":[["account","botUseFarmi"]],"lotteryActivate":[["account","botUseLottery"]],"lotteryDailyLot":[["account","botUseLottery"],["account","lotteryActivate"]],"powerUpActivate":[["account","botUseWindmill"]]}
+                     "account":{"farmiAccept":[["account","botUseFarmi"]],"farmiAcceptAboveNr":[["account","botUseFarmi"]],"farmiAcceptBelowMinValue":[["account","botUseFarmi"],["account","farmiAccept"]],"farmiFoodworldReject":[["account","botUseFarmi"],["account","botUseFoodworld"]],"farmiReject":[["account","botUseFarmi"]],"farmiRejectUntilNr":[["account","botUseFarmi"]],"farmiRemoveMissing":[["account","botUseFarmi"]],"farmiRemoveMissingAboveNr":[["account","botUseFarmi"]],"lotteryActivate":[["account","botUseLottery"]],"lotteryDailyLot":[["account","botUseLottery"],["account","lotteryActivate"]],"powerUpActivate":[["account","botUseWindmill"]]}
                     };
     this.init=function(){
     try{
@@ -8966,6 +8971,35 @@ try{
     }
 }catch(err){ GM_logError("autoFarmi","","farmiNr="+farmiNr+" farmiAmount="+farmiAmount,err); }
 }
+function checkFoordworldFarmi() {
+    try {
+        var foodWorldFarmi = unsafeWindow.foodworldfarmis;
+        if (settings.get("account", "botUseFarmi") && settings.get("account", "farmiReject") && settings.get("account", "botUseFoodworld") && settings.get("account", "farmiFoodworldReject") && foodWorldFarmi) {
+        GM_logInfo("checkFoodworldFarmi", "", "", "Begin", 1);
+            for (var i = 0; i < foodWorldFarmi.length; i++) {
+                if (foodWorldFarmi[i].status == 0) {
+                    var rate = parseFloat($("foodworldfarmi"+i).getAttribute("rate"));
+                    console.log(settings.get("account","farmiRejectUntilNr"));
+                    console.log(typeof settings.get("account","farmiRejectUntilNr"));
+
+                    var style = $("foodworldfarmiMiniInfo" + i).getAttribute("style");
+                    if (rate < settings.get("account","farmiRejectUntilNr")) {
+                        // unsafeWindow.foodworldAction('kick', foodWorldFarmi[i].id);
+                        console.log("Foodworld: ROT -> " + foodWorldFarmi[i].id);
+                    } else if (rate >= settings.get("account","farmiRejectUntilNr") && rate <= settings.get("account","farmiAcceptAboveNr")) {
+                        console.log("Foodworld: GELB -> " + foodWorldFarmi[i].id);
+                    } else if (rate > settings.get("account","farmiAcceptAboveNr")) {
+                        console.log("Foodworld: GRUEN -> " + foodWorldFarmi[i].id);
+                    } else {
+                        console.log("Foodworld: Nicht gefunden: " + rate);
+                        console.log(style);
+                    }
+                }
+            }
+        }
+    } catch (err) { GM_logError("checkFoodworldFarmi", "", "", err); }
+}
+
 function doGameSessionEnds(){  //NOTICE: Use only in combination with botArbiter.add("sessionEnds");
     click($("divSessionEnd"));
 }
@@ -9932,6 +9966,16 @@ function buildInfoPanelOptions(){
         },false);
         newtd=createElement("td",{"colspan":"2"},newtr,getText("automat_settings_botUse"));
 
+        newtr=createElement("tr",{"style":"line-height:18px;","set":"account_farmiFoodworldReject"},newtable);
+        newtd=createElement("td",{"align":"center","width":"40"},newtr);
+        inp=createElement("input",{"class":"link","type":"checkbox","checked":settings.get("account","farmiFoodworldReject")},newtd);
+        inp.addEventListener("click",function(){
+            settings.set("account","farmiFoodworldReject",this.checked);
+            buildInfoPanelOptionsDisabling(); // To get this working, we need the "set" this <tr> and the definition in settings.require
+            botArbiter.check();
+        },false);
+        newtd=createElement("td",{"colspan":"2"},newtr,"Auto-kick foodworld farmis");
+
         // *********** FORESTRY ***********************************
 
         newtr=createElement("tr",{"style":"background-color:#b69162;"},newtable);
@@ -10786,6 +10830,7 @@ try{
         err_trace="listener gameFoodworldOpened";
         document.addEventListener("gameFoodworldOpened",function(){
         try{
+            checkFoordworldFarmi();
             // Automat icons
             for(var v=1;v<=4;v++){
                 if(v<4){
