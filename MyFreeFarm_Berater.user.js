@@ -277,8 +277,8 @@ const PRODUCT_QUEST=[{"117":["main",2,15],"118":["main",2,25],"119":["main",2,35
  PRODUCT_LEVEL={"veterinary":{"250":1,"251":1,"252":1,"253":2,"254":3,"255":4,"256":5,"257":6,"258":7,"259":8,"260":9,"261":10,"262":11,"263":12,"264":13,"265":14,"266":16,"267":18,"268":20,"269":22,"270":24,"271":26,"272":28,"273":30,"274":32,"275":44,"276":60,"300":1,"301":1,"302":1,"303":2,"304":3,"305":4,"306":5,"307":6,"308":7,"309":8,"310":9,"311":10,"312":11,"313":12,"314":13,"315":14,"316":16,"317":18,"318":20,"319":22,"320":24,"321":26,"322":28,"323":30,"324":32,"325":34,"326":36,"327":38,"328":40,"329":42,"330":44,"331":46,"332":48,"333":50,"334":51,"335":52,"336":53,"337":54,"338":55,"339":56,"340":57,"341":58,"342":59,"343":60,"344":61,"345":62,"346":63,"347":64,"348":65,"349":66,"400":67,"401":68,"402":69,"403":70},
 "breeding":{"600":1,"601":2,"602":3,"603":8,"604":7,"605":14,"606":12,"607":10,"608":11,"609":5,"630":6,"631":13,"632":4,"633":14,"634":2,"635":5,"636":1,"637":9,"638":8,"639":11,"660":14,"661":9,"662":7,"663":13,"664":3,"665":12,"666":6,"667":4,"668":1,"669":10}};
 
-// Required products to produce
-// task_new_product task_new_picnic_product
+// Required products to produce in format -> "prodId": [[type_p1, prodId_p1, amount_p1], [type_p2, prodId_p2, amount_p2], ...]
+// [-1, amount] is money; [0, 0, amount] are coins
 // 13102016
 const PRODUCT_REQUIRE=[{"25":[[0,9,30]],"27":[[0,10,12]],"28":[[0,11,8]],"30":[[0,12,5]],"111":[[0,110,5]],"116":[[0,2,1980]],"117":[[0,7,550]],"118":[[0,4,1020]],"119":[[0,38,650]],"120":[[0,42,110]],"121":[[0,43,100]],"122":[[0,112,130],[0,116,35]],"123":[[0,113,220],[0,117,35]],"124":[[0,114,345],[0,118,35]],"125":[[0,115,80],[0,119,35]],"130":[[0,17,400]],"131":[[0,21,150]],"132":[[0,20,100],[0,10,2]],"133":[[0,19,100],[0,10,2]],"134":[[0,17,400],[0,6,25]],"135":[[0,21,150],[0,6,25]],"136":[[0,2,120]],"137":[[0,1,200]],"138":[[0,1,200],[0,23,30]],"139":[[0,18,150],[0,22,30]],"140":[[0,21,150],[0,22,30]],"141":[[0,26,100],[0,144,3]],"142":[[0,26,100],[0,25,3]],"143":[[0,26,100],[0,25,3],[0,144,3]],"144":[[0,21,450]],"145":[[0,33,300],[0,12,2]],"146":[[0,35,200],[0,10,4],[0,12,2]],"147":[[0,37,60],[0,12,2]],"148":[[0,31,250],[0,26,150],[0,27,7]],"149":[[0,21,300],[0,43,10],[0,22,50],[0,121,4]],"150":[[0,38,60],[0,119,6],[0,17,50]],"152":[[0,151,5]],"155":[[0,152,5],[0,28,6]],"156":[[0,152,8],[0,28,5]],"157":[[0,152,2],[0,28,9]],"161":[[0,1,300],[0,17,150]],"162":[[0,1,250],[0,20,200]],"163":[[0,22,190],[0,26,120]],"164":[[0,1,150],[0,10,30]],"165":[[0,10,10],[0,12,5]],"166":[[0,10,10],[0,27,7]],"167":[[0,40,60],[0,111,10]],"168":[[0,10,10],[0,42,25]],"169":[[0,6,300],[0,9,15],[0,121,3]],"170":[[0,1,200],[0,43,20],[0,121,4]],"200":[[-1,1200],[0,171,24],[0,172,20],[0,173,12]],"201":[[-1,1400],[0,171,25],[0,172,18],[0,174,15]],"202":[[-1,1500],[0,172,22],[0,173,19],[0,174,16]],"203":[[-1,1460],[0,172,19],[0,173,16],[0,175,29]],"204":[[-1,1510],[0,171,7],[0,173,18],[0,174,8],[0,176,21]],"205":[[-1,1622],[0,171,14],[0,173,22],[0,176,10],[0,177,12]],"206":[[-1,1787],[0,174,16],[0,176,9],[0,177,10],[0,178,9]],"207":[[-1,1894],[0,173,15],[0,175,10],[0,177,11],[0,179,8]],"208":[[-1,1950],[0,173,12],[0,175,13],[0,178,15],[0,180,18]],"209":[[-1,2110],[0,171,12],[0,176,21],[0,179,7],[0,181,9]],"210":[[-1,2250],[0,171,12],[0,175,5],[0,179,34],[0,182,11]],"211":[[-1,2357],[0,172,9],[0,176,12],[0,181,22],[0,183,18]],"212":[[-1,2488],[0,171,13],[0,182,13],[0,183,16],[0,184,6]],"213":[[-1,2595],[0,171,3],[0,179,8],[0,185,7],[0,186,9],[0,187,7]],"214":[[0,0,2],[0,171,10],[0,172,14],[0,173,13],[0,174,18]],"215":[[0,0,2],[0,171,12],[0,172,22],[0,174,10],[0,175,19]],"216":[[0,0,2],[0,173,14],[0,175,8],[0,177,19],[0,178,16]],"217":[[0,0,3],[0,171,19],[0,177,5],[0,178,17],[0,180,13]],"218":[[0,0,3],[0,180,9],[0,181,8],[0,182,9],[0,183,9]],"219":[[0,0,3],[0,179,4],[0,182,1],[0,185,6],[0,186,15],[0,187,7]],"220":[[-1,1500],[0,171,70],[0,172,180],[0,173,80],[0,174,80],[0,188,1]],"221":[[-1,1500],[0,171,80],[0,172,50],[0,173,65],[0,174,140],[0,189,1]],"300":[[-1,100],[0,250,240],[0,251,210]],"301":[[-1,200],[0,251,160],[0,252,200]],"302":[[-1,300],[0,252,230],[0,250,210]],"303":[[-1,400],[0,253,220],[0,252,150]],"304":[[-1,500],[0,253,150],[0,254,110]],"305":[[0,0,1],[0,254,90],[0,255,100]],"306":[[0,0,1],[0,256,80],[0,255,80]],"307":[[-1,600],[0,257,210],[0,256,160]],"308":[[0,0,1],[0,258,130],[0,257,160]],"309":[[-1,700],[0,259,190],[0,258,140]],"310":[[0,0,2],[0,260,90],[0,259,90]],"311":[[-1,800],[0,261,390],[0,260,390]],"312":[[0,0,2],[0,262,130],[0,261,150]],"313":[[-1,900],[0,263,180],[0,262,230]],"314":[[0,0,2],[0,264,90],[0,263,80]],"315":[[-1,1000],[0,265,100],[0,264,130]],"316":[[0,0,3],[0,266,130],[0,265,90]],"317":[[-1,1100],[0,267,290],[0,266,260]],"318":[[0,0,3],[0,268,160],[0,267,170]],"319":[[-1,1200],[0,269,130],[0,268,180]],"320":[[-1,1300],[0,270,90],[0,269,80]],"321":[[0,0,3],[0,271,50],[0,270,100]],"322":[[-1,1400],[0,272,380],[0,271,320]],"323":[[0,0,4],[0,273,190],[0,272,160]],"324":[[-1,1500],[0,272,321],[0,274,321]],"325":[[-1,1600],[0,250,480],[0,251,420]],"326":[[-1,1700],[0,251,320],[0,252,400]],"327":[[-1,1800],[0,250,420],[0,252,460]],"328":[[-1,1900],[0,252,300],[0,253,440]],"329":[[-1,2000],[0,253,300],[0,254,200]],"330":[[-1,2100],[0,273,71],[0,275,111]],"331":[[0,0,4],[0,254,180],[0,255,200]],"332":[[0,0,4],[0,255,160],[0,256,160]],"333":[[-1,2200],[0,256,320],[0,257,420]],"334":[[0,0,4],[0,257,320],[0,258,260]],"335":[[-1,2300],[0,272,111],[0,274,90]],"336":[[-1,2400],[0,258,280],[0,259,380]],"337":[[0,0,5],[0,259,180],[0,260,180]],"338":[[-1,2500],[0,260,780],[0,261,780]],"339":[[0,0,5],[0,261,300],[0,262,160]],"340":[[-1,2600],[0,262,460],[0,263,360]],"341":[[0,0,5],[0,263,160],[0,264,180]],"342":[[-1,2700],[0,264,260],[0,265,200]],"343":[[0,0,6],[0,265,180],[0,266,260]],"344":[[0,0,6],[0,256,71],[0,276,51]],"345":[[-1,2800],[0,266,520],[0,267,580]],"346":[[0,0,6],[0,267,340],[0,268,320]],"347":[[-1,2900],[0,268,360],[0,269,260]],"348":[[-1,3000],[0,269,160],[0,270,180]],"349":[[0,0,6],[0,270,200],[0,271,100]],"400":[[-1,3100],[0,271,640],[0,272,760]],"401":[[0,0,7],[0,272,320],[0,273,380]],"402":[[-1,3200],[0,272,181],[0,275,221]],"403":[[0,0,7],[0,257,111],[0,276,141]],"450":[[0,20,190],[0,10,15]],"451":[[0,33,120],[0,111,5]],"452":[[0,34,100],[0,9,15]],"453":[[0,35,150],[0,10,10]],"454":[[0,36,190],[0,10,12]],"455":[[0,37,200],[0,9,8]],"456":[[0,40,40],[0,10,8]],"457":[[0,351,20],[0,9,8]],"458":[[0,356,10],[0,10,12]],"459":[[0,361,18],[0,111,8]],"460":[[0,360,14],[0,10,15]],"461":[[0,357,18],[0,10,16]],"462":[[0,352,16],[0,9,20]],"463":[[0,353,20],[0,10,18]],"464":[[0,359,22],[0,111,14]],"465":[[0,355,12],[0,9,16]],"466":[[0,354,15],[0,111,8],[0,12,5]],"467":[[0,358,14],[0,10,12],[0,9,16]],"468":[[0,10,6],[0,356,20]],"469":[[0,6,40],[0,37,120],[0,352,60]],"470":[[0,351,120],[0,355,50],[0,359,80]],"471":[[0,10,12],[0,351,100],[0,360,40]],"472":[[0,10,20],[0,360,100]],"473":[[0,352,120],[0,357,120]],"474":[[0,6,20],[0,117,6],[0,154,50]],"475":[[0,9,20],[0,44,40],[0,153,40]],"476":[[0,6,15],[0,111,6],[0,115,25]],"477":[[0,1,200],[0,27,12],[0,351,80]],"478":[[0,39,20],[0,111,6]],"479":[[0,1,250],[0,9,10],[0,41,20]],"480":[[0,10,10],[0,12,10],[0,352,30]],"481":[[0,111,6],[0,355,12],[0,359,25]],"482":[[0,1,200],[0,9,8],[0,356,20]],"483":[[0,10,10],[0,111,8],[0,127,15]],"600":[[-1,200],[0,1,340],[0,10,3],[0,12,4]],"601":[[0,0,1],[0,6,60],[0,17,500],[0,111,12]],"602":[[-1,300],[0,1,500],[0,2,200],[0,3,200]],"603":[[-1,600],[0,8,15],[0,108,100],[0,109,150]],"604":[[-1,400],[0,32,50],[0,33,30],[0,34,30]],"605":[[0,0,4],[0,9,12],[0,10,10],[0,27,10]],"606":[[-1,800],[0,3,220],[0,6,150],[0,18,200]],"607":[[0,0,2],[0,5,220],[0,17,500],[0,24,200]],"608":[[0,0,3],[0,1,400],[0,10,8],[0,37,20]],"609":[[0,0,2],[0,35,30],[0,36,10],[0,37,20]],"630":[[0,0,2],[0,28,7],[0,30,12],[0,109,100]],"631":[[0,0,3],[0,11,17],[0,26,20],[0,29,20]],"632":[[0,0,1],[0,7,20],[0,17,300],[0,28,10]],"633":[[0,0,4],[0,2,350],[0,11,12],[0,28,8]],"634":[[-1,300],[0,1,400],[0,6,50],[0,28,5]],"635":[[-1,400],[0,11,10],[0,17,420],[0,38,100]],"636":[[-1,200],[0,19,30],[0,30,5],[0,38,20]],"637":[[-1,600],[0,24,60],[0,34,200],[0,35,30]],"638":[[0,0,2],[0,28,18],[0,153,40]],"639":[[-1,800],[0,9,13],[0,21,100],[0,26,80]],"660":[[0,0,4],[0,11,15],[0,17,450],[0,28,11]],"661":[[0,0,2],[0,4,250],[0,11,17],[0,20,30]],"662":[[0,0,2],[0,4,300],[0,5,75],[0,36,25]],"663":[[-1,800],[0,8,40],[0,11,11],[0,108,140]],"664":[[0,0,1],[0,2,250],[0,7,25],[0,8,25]],"665":[[0,0,3],[0,1,460],[0,4,80],[0,11,17]],"666":[[-1,400],[0,3,100],[0,11,8],[0,18,0]],"667":[[-1,300],[0,1,400],[0,7,30],[0,11,6]],"668":[[-1,200],[0,5,100],[0,6,30],[0,18,200]],"669":[[-1,600],[0,11,10],[0,28,7],[0,33,20]]}
                       ,{"41":[[1,21,1]],"42":[[1,21,1]],"43":[[1,21,1]],"44":[[1,22,1]],"45":[[1,22,1]],"46":[[1,22,1]],"47":[[1,23,1]],"48":[[1,23,1]],"49":[[1,23,1]],"50":[[1,24,1]],"51":[[1,24,1]],"52":[[1,24,1]],"53":[[1,25,1]],"54":[[1,25,1]],"55":[[1,25,1]],"56":[[1,26,1]],"57":[[1,26,1]],"58":[[1,26,1]],"59":[[1,27,1]],"60":[[1,27,1]],"61":[[1,27,1]],"62":[[1,28,1]],"63":[[1,28,1]],"64":[[1,28,1]],"101":[[1,41,4]],"102":[[1,41,18],[1,42,2]],"103":[[1,44,11]],"104":[[1,42,1],[1,43,5]],"105":[[1,44,20],[1,45,50],[1,46,70]],"106":[[1,49,1]],"107":[[1,46,1]],"108":[[1,47,125],[1,48,65],[1,49,32]],"109":[[1,47,5]],"110":[[1,50,9],[1,51,4]],"111":[[1,52,4]],"112":[[1,50,12],[1,51,7],[1,52,6]],"113":[[1,42,1]],"114":[[1,41,1],[1,43,1]],"115":[[1,53,8],[1,55,2]],"116":[[1,53,120],[1,54,40],[1,55,40]],"117":[[1,53,80],[1,54,65],[1,55,125]],"118":[[1,53,6],[1,54,8]],"119":[[1,54,20],[1,55,25]],"120":[[1,54,35],[1,55,40]],"121":[[1,56,7],[1,57,3]],"122":[[1,58,9]],"123":[[1,57,4],[1,58,5]],"124":[[1,56,9],[1,57,4]],"125":[[1,58,3]],"126":[[1,61,5]],"127":[[1,60,3]],"128":[[1,60,6],[1,61,5]],"129":[[1,59,10],[1,60,8],[1,61,5]],"130":[[1,60,9],[1,61,8]],"131":[[1,59,6],[1,61,12]],"132":[[1,59,10],[1,60,8],[1,61,5]],"133":[[1,42,1]],"134":[[1,62,21],[1,63,15]],"143":[[1,62,21],[1,63,22],[1,64,15]],"144":[[1,64,15]],"146":[[1,45,12],[1,63,12],[1,46,6],[1,64,6]],"148":[[1,64,15],[1,63,10]],"200":[[1,41,12]],"201":[[0,0,2],[1,44,8]],"202":[[1,47,21]],"203":[[0,0,4],[1,51,20]],"204":[[1,42,6]],"205":[[0,0,2],[1,45,4]],"206":[[1,48,9]],"207":[[0,0,4],[1,52,20]],"208":[[1,41,15]],"209":[[0,0,2],[1,45,5]],"210":[[1,48,8]],"211":[[0,0,4],[1,50,27]],"212":[[1,43,15]],"213":[[0,0,2],[1,44,11]],"214":[[1,51,21]],"215":[[0,0,4],[1,52,22]]
@@ -2591,62 +2591,67 @@ function getBuildingName(building){
     }catch(err){GM_logError("getBuildingName","","",err);}
 }
 // Totals
-function calcTotalRecursive(recursionCount,stack){
-  // console.log(recursionCount);
-  // console.trace();
-try{
- if(DEVMODE_FUNCTION){ var trackingHandle = tracking.start("berater","calcTotalRecursive",[recursionCount]); }
-    if(recursionCount>100){throw("TOO MUCH RECURSION")}
-    var err_trace="init";
-    var help;
-    var next=false;
-    var nextStack={};
-    if(!stack){
-        totalRecursive=new Array(new Object(),new Object(),new Object(),new Object());
-        stack=prodStock.clone();
-        for(var type in prodMinRack){
-            if(!prodMinRack.hasOwnProperty(type)){ continue; }
-            for(var iProd in prodMinRack[type]){
-                if (!prodMinRack[type].hasOwnProperty(iProd)){ continue; }
-                if(!stack[type]){ stack[type]={}; }
-                stack[type][iProd]-=prodMinRack[type][iProd];
-            }
+function calcTotalRecursive() {
+    var type, id, req, i, amountMissingProducts, j, k;
+    try {
+        if (DEVMODE_FUNCTION) {
+            var trackingHandle = tracking.start("berater", "calcTotalRecursive", []);
         }
-    }
-    err_trace="step";
-    for(var type in stack){
-        if(!stack.hasOwnProperty(type)){ continue; }
-        for(var iProd in stack[type]){
-            if(!stack[type].hasOwnProperty(iProd)){ continue; }
-            if(stack[type][iProd]<0){
-                if((typeof prodRequire[type][iProd]=="object")&&(totalZones[PRODUCT2BUILDING[type][iProd]]>0)){
-                    err_trace="prodRequire";
-                    for(var i=0;i<prodRequire[type][iProd].length;i++){
-                        err_trace="prodRequire "+i;
-                        if(prodRequire[type][iProd][i][0]>-1){
-                            help=-stack[type][iProd]/prodYield[type][iProd]*prodRequire[type][iProd][i][2];
-                            if(!nextStack[prodRequire[type][iProd][i][0]]){
-                                nextStack[prodRequire[type][iProd][i][0]]={};
+
+        totalRecursive = new Array(new Object(), new Object(), new Object(), new Object());
+        var types = [0, 1]; // 0 = normal products, 1 = forestry products
+        
+        for (k = 0; k < types.length; k++) {
+            type = types[k];
+            
+            // Iterate over all products starting with those which are no pre-product.
+            // It is important that an inspected product won't be needed by a non-yet-inspected product!
+            for (i = prodNameSort[type].length - 1; i >= 0; i--) {
+                // Id of currently inspected product
+                id = prodNameSort[type][i];
+                
+                /** Calculate the amount of missing products:
+                 *   - Amount of directly needed product and currently in production in 'prodMinRack'
+                 *   - Amount of recursivly needed product in 'totalRecursive'
+                 *   - Amount of already produced/existing product in stock in 'ProdStock'
+                 */
+                amountMissingProducts = prodMinRack[type][id] + (totalRecursive[type][id] ? totalRecursive[type][id] : 0) - prodStock[type][id];
+                
+                // If there is a need to gain this product...
+                if (amountMissingProducts > 0) {
+                    // If this product requires other products... (e.g. tree logs DON'T!)
+                    if (prodRequire[type][id]) {
+                        // Iterate over pre-products
+                        for (j = 0; j < prodRequire[type][id].length; j++) {
+                            // Cache the currently inspected pre-product
+                            req = prodRequire[type][id][j];
+
+                            // Do only consider pre-products (ignore money)
+                            if (req[0] >= 0) {
+                                // Initialize result storage of pre-product, if necessary
+                                if (!totalRecursive[req[0]]) { totalRecursive[req[0]] = []; }
+                                if (!totalRecursive[req[0]][req[1]]) { totalRecursive[req[0]][req[1]] = 0; }
+                                
+                                /** Some real magic is done here: We calculate, how many pre-products are recursivly needed!
+                                 *  We know the amount to produce ('amountMissingProducts') and divide it by the yielded amount per production
+                                 *  cycle ('prodYield'). Then we (should) multiply with the amount of needed pre-product ('req[2]') to initiate
+                                 *  the production. Finally, we round up, since we can't produce fractions ('Math.ceil()').
+                                 *  If the production needs more than one unit of the pre-product, we need to round up to a multiple of 'req[2]'.
+                                 *  The formula therefore is 'Math.ceil(x / req[2]) * req[2]'. We then reduce 'req[2]' inside the ceiling-function.
+                                 */
+                                totalRecursive[req[0]][req[1]] += Math.ceil((amountMissingProducts) / prodYield[type][id]) * req[2];
                             }
-                            if(!nextStack[prodRequire[type][iProd][i][0]][prodRequire[type][iProd][i][1]]){
-                                nextStack[prodRequire[type][iProd][i][0]][prodRequire[type][iProd][i][1]]=0;
-                            }
-                            next=true;
-                            nextStack[prodRequire[type][iProd][i][0]][prodRequire[type][iProd][i][1]]-=help;
-                            if(!totalRecursive[prodRequire[type][iProd][i][0]][prodRequire[type][iProd][i][1]]){
-                                totalRecursive[prodRequire[type][iProd][i][0]][prodRequire[type][iProd][i][1]]=0;
-                            }
-                            totalRecursive[prodRequire[type][iProd][i][0]][prodRequire[type][iProd][i][1]]+=help;
                         }
                     }
                 }
-
             }
         }
+        if (DEVMODE_FUNCTION) {
+            tracking.end("berater", trackingHandle);
+        }
+    } catch (err) {
+        GM_logError("calcTotalRecursive\ntype=" + type + " id=" + id + " req=" + implode(req) + " i=" + i + " j=" + j + "\n" + err);
     }
-    if(next){ calcTotalRecursive(++recursionCount,nextStack); }
- if(DEVMODE_FUNCTION){ tracking.end("berater",trackingHandle); }
-}catch(err){ GM_logError("calcTotalRecursive","","err_trace="+err_trace+" type="+type+" iProd="+iProd+" help="+implode(help,"calcTotalRecursive/help")+" i="+i,err); }
 }
 function calcTotalFarmis(){
     try{
@@ -2921,21 +2926,19 @@ try{
         }
     }
     err_trace="recursive";
-    //GM_log("Before calcTotalRecursive prodMinRack:"+implode(prodMinRack[1]));
-    if(valMinRackRecursive){
-        calcTotalRecursive(1); // recursive need products calculation
-        for(var type in totalRecursive){
-            if (!totalRecursive.hasOwnProperty(type)){ continue; }
-            for(var prod in totalRecursive[type]){
-                if(!totalRecursive[type].hasOwnProperty(prod)){ continue; }
-                if(!prodMinRack[type][prod]){ prodMinRack[type][prod]=0; }
+    if (valMinRackRecursive) {
+        calcTotalRecursive(); // recursive need products calculation
+        for (var type in totalRecursive) {
+            if (!totalRecursive.hasOwnProperty(type)) { continue; }
+            for (var prod in totalRecursive[type]) {
+                if (!totalRecursive[type].hasOwnProperty(prod)) { continue; }
+                if (!prodMinRack[type]) { prodMinRack[type] = []; }
+                if (!prodMinRack[type][prod]) { prodMinRack[type][prod] = 0; }
                 prodMinRack[type][prod] += totalRecursive[type][prod];
             }
         }
     }
-    //GM_log("After calcTotalRecursive totalRecursive:"+implode(totalRecursive));
-    //GM_log("After calcTotalRecursive prodMinRack:"+implode(prodMinRack[1]));
-    //GM_log("After calcTotalRecursive prodStock:"+implode(prodStock[1]));
+
 
     // delete wrong values
     err_trace="QA";
@@ -22172,7 +22175,7 @@ try{
         text["de"]["settings_valMinRackPlantsize"]=["Pflanzengröße einrechnen","Zum Beispiel braucht Getreide nur den halben Bestand."];
         text["de"]["settings_valMinRackGrowing"]=["Ernteprodukte","Beachtet zusätzlich die Produkte in Produktion und in den fertigen Powerups."];
         text["de"]["settings_valMinRackQuest"]=["Quest-Produkte","Beachtet zusätzlich die benötigte Menge der Produkte für die Quests."];
-        text["de"]["settings_valMinRackRecursive"]=["Rekursive Produkte","Beachtet zusätzlich die benötigten Ausgangsprodukte um fehlenden Produkte zu produzieren (für verarbeitete Produkte der Baumerei)."];
+        text["de"]["settings_valMinRackRecursive"]=["Rekursive Produkte","Beachtet zusätzlich die benötigten Ausgangsprodukte um fehlenden Produkte zu produzieren."];
         text["de"]["settings_valMinRackFarmis"]=["Farmi-Produkte","Beachtet zusätzlich die Menge der Produkte, die deine Farmis verlangen. Dabei gelten nur diejenigen, die besser als die untere Grenze bezahlen."];
         text["de"]["settings_valMinRackForestryFarmis"]=["Baumerei-Farmi-Produkte","Beachtet zusätzlich die Menge der Produkte, die deine Baumerei-Farmis verlangen."];
         text["de"]["settings_protectMinRack"]=["Marktschutz","Verhindert, dass die Warenmenge beim Marktverkauf den minimalen Lagerbestand unterschreitet."];
@@ -22591,7 +22594,7 @@ try{
         text["en"]["settings_valMinRackPlantsize"]=["Aspect size of plant","For example grain needs only half of the value above."];
         text["en"]["settings_valMinRackGrowing"]=["Growing products","Adds the amount of products that are in production and ready by powerup."];
         text["en"]["settings_valMinRackQuest"]=["Quest products","Adds the amount of the quest products"];
-        text["en"]["settings_valMinRackRecursive"]=["Recursive products","Add the required products needed to make missing products, and calculate these again for the required proucts.(used by forestry products)"];
+        text["en"]["settings_valMinRackRecursive"]=["Recursive products","Add required products needed to manufacture missing products."];
         text["en"]["settings_valMinRackFarmis"]=["Farmie products","Adds the amount of the products wanted by the farmies which pay more than the lower limit."];
         text["en"]["settings_valMinRackForestryFarmis"]=["Lodge farmie products","Adds the amount of the products wanted by the lodge farmies."];
         text["en"]["settings_protectMinRack"]=["Selling protection","Prohibits to sell products at market below the minimal rackamount"];
