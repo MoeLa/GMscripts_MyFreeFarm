@@ -8975,31 +8975,31 @@ function checkFoordworldFarmi() {
     try {
         var foodWorldFarmi = unsafeWindow.foodworldfarmis;
         if (settings.get("account", "botUseFarmi") && settings.get("account", "farmiReject") && settings.get("account", "botUseFoodworld") && settings.get("account", "farmiFoodworldReject") && foodWorldFarmi) {
-        GM_logInfo("checkFoodworldFarmi", "", "", "Begin", 1);
+            var toKickFoodworldFarmiIds = [];
             for (var i = 0; i < foodWorldFarmi.length; i++) {
                 if (foodWorldFarmi[i].status == 0) {
-                    var rate = parseFloat($("foodworldfarmi"+i).getAttribute("rate"));
-                    console.log(settings.get("account","farmiRejectUntilNr"));
-                    console.log(typeof settings.get("account","farmiRejectUntilNr"));
+                    var rate = parseFloat($("foodworldfarmi" + i).getAttribute("rate"));
 
-                    var style = $("foodworldfarmiMiniInfo" + i).getAttribute("style");
-                    if (rate < settings.get("account","farmiRejectUntilNr")) {
-                        // unsafeWindow.foodworldAction('kick', foodWorldFarmi[i].id);
-                        console.log("Foodworld: ROT -> " + foodWorldFarmi[i].id);
-                    } else if (rate >= settings.get("account","farmiRejectUntilNr") && rate <= settings.get("account","farmiAcceptAboveNr")) {
-                        console.log("Foodworld: GELB -> " + foodWorldFarmi[i].id);
-                    } else if (rate > settings.get("account","farmiAcceptAboveNr")) {
-                        console.log("Foodworld: GRUEN -> " + foodWorldFarmi[i].id);
+                    if (rate < settings.get("account", "farmiRejectUntilNr")) {
+                        toKickFoodworldFarmiIds.push(foodWorldFarmi[i].id);
+                    } else if (rate <= settings.get("account", "farmiAcceptAboveNr")) {
+                        // Farmi is neither to kick nor to accept
                     } else {
-                        console.log("Foodworld: Nicht gefunden: " + rate);
-                        console.log(style);
+                        // Farmi is to accept
                     }
                 }
             }
+            
+            // Kick farmis in separate thread
+            window.setTimeout(function() {
+                for (var i = toKickFoodworldFarmiIds.length - 1; i >= 0; i--) {
+                    GM_logInfo("checkFoodworldFarmi", "", "", "Kick Foodworld-Farmi " + toKickFoodworldFarmiIds[i]);
+                    unsafeWindow.foodworldAction('kick', toKickFoodworldFarmiIds[i]);
+                }
+            }, 300);
         }
     } catch (err) { GM_logError("checkFoodworldFarmi", "", "", err); }
 }
-
 function doGameSessionEnds(){  //NOTICE: Use only in combination with botArbiter.add("sessionEnds");
     click($("divSessionEnd"));
 }
