@@ -3066,136 +3066,203 @@ try {
 }catch(err){ GM_logError("gatherQuestDetails",(" type: "+type+", campaign: "+campaign+", Nr: "+nr),"",err); }
 }
 
-function handleQuestLine(){
-try{
-    var div,help;
-    for(var type in questData){
-        if (!questData.hasOwnProperty(type)){ continue; }
-        for(var campaign in questData[type]){
-            if(!questData[type].hasOwnProperty(campaign)){continue;}
-            // GM_logInfo("handleQuestLine","","type="+type+" campaign="+campaign,"quests_status[type][campaign]:\n"+print_r(unsafeWindow.quests_status[type][campaign],"",true,"\n"));
-            if((type=="foodworld")&&unsafeWindow.quests_status&&unsafeWindow.quests_status[type]&&unsafeWindow.quests_status[type][campaign]&&unsafeWindow.quests_status[type][campaign]["data"]){
-                unsafeWindow.quests_status[type][campaign]["questid"]=unsafeWindow.quests_status[type][campaign]["data"]["questid"]; //Bugfix
-            }
-            if(unsafeWindow.quests_status&&unsafeWindow.quests_status[type]&&unsafeWindow.quests_status[type][campaign]){
-                help=parseInt(unsafeWindow.quests_status[type][campaign]["questid"],10);
-                if(isNaN(help)){ help=1; };
-                switch(implode([type,campaign],"handleQuestLine/typeCampaign")){
-                case implode(["main","2"],"handleQuestLine/main2"):{
-                    if(USERLEVEL<31){ help=-1; }
-                break;}
-                case implode(["main","3"],"handleQuestLine/main3"):{
-                    if((USERLEVEL<40)||(speedlink_farm5.style.display=="none")){ help=-1; }
-                break;}
-                case implode(["forestry","1"],"handleQuestLine/forestry1"):{
-                    if(USERLEVEL<20){ help=-1; }
-                break;}
-                case implode(["forestry","2"],"handleQuestLine/forestry2"):{
-                    if(questData["forestry"]["1"]["nr"]<35){ help=-1; }
-                break;}
-                case implode(["foodworld","1"],"handleQuestLine/foodworld1"):{
-                    if(USERLEVEL<12){ help=-1; }
-                break;}
+function handleQuestLine() {
+    try {
+        var div, help;
+        for (var type in questData) { // Iterate over quest types
+            if (!questData.hasOwnProperty(type)) { continue; }
+            for (var campaign in questData[type]) { // Iterate over campaigns
+                if (!questData[type].hasOwnProperty(campaign)) { continue; }
+                if ((type == "foodworld") 
+                        && unsafeWindow.quests_status 
+                        && unsafeWindow.quests_status[type] 
+                        && unsafeWindow.quests_status[type][campaign] 
+                        && unsafeWindow.quests_status[type][campaign]["data"]) {
+                    // Bugfix: Write Foodworld-QuestId to quests_status[type][campaign]
+                    unsafeWindow.quests_status[type][campaign]["questid"] = unsafeWindow.quests_status[type][campaign]["data"]["questid"];
                 }
-                // if((type=="forestry")&&(campaign=="2")){ help++; } // Bugfix
-                if(questData[type][campaign]["nr"]!=help){
-                    switch(type){
-                    case "main":{      GM_logInfo("handleQuestLine","","type="+type+" campaign="+campaign,getText("pleaseOpenX").replace(/%1%/,getText("quest"+type+campaign))+" ("+questData[type][campaign]["nr"]+"&ne;"+help+")"); break;}
-                    case "forestry":{  GM_logInfo("handleQuestLine","","type="+type+" campaign="+campaign,getText("pleaseOpenX").replace(/%1%/,getText("lodge"))+" ("+questData[type][campaign]["nr"]+"&ne;"+help+")"); break;}
-                    case "foodworld":{ GM_logInfo("handleQuestLine","","type="+type+" campaign="+campaign,getText("pleaseOpenX").replace(/%1%/,getText("foodworld"))+" ("+questData[type][campaign]["nr"]+"&ne;"+help+")"); break;}
+                if (unsafeWindow.quests_status 
+                        && unsafeWindow.quests_status[type] 
+                        && unsafeWindow.quests_status[type][campaign]) {
+                    if (type == "foodworld") {
+                        help = unsafeWindow.quests_status[type][campaign]["data"]["questid"];
+                    } else if (type == "forestry" && campaign == "2" && typeof unsafeWindow.quests_status[type][campaign]["questid"] === 'string') {
+                        // QuestId from forestry/2 might come as a string of last finished quest
+                        // We need to parse and increment it!
+                        help = parseInt(unsafeWindow.quests_status[type][campaign]["questid"], 10) + 1;
+                    } else {
+                        help = unsafeWindow.quests_status[type][campaign]["questid"];
                     }
-                    if(!QUESTS[type][campaign][questData[type][campaign]["nr"]]){
-                        GM_logInfo("handleQuestLine","","type="+type+" campaign="+campaign+" quests_status="+implode(unsafeWindow.quests_status,1),getText("questSetXToNrY").replace(/%1%/,getText("quest"+type+campaign)).replace(/%2%/,help));
-                        questData[type][campaign]["nr"]=help;
+                    
+                    if (isNaN(help)) { help = 1; };
+                    switch (implode([type, campaign], "handleQuestLine/typeCampaign")) {
+                        case implode(["main", "2"], "handleQuestLine/main2"):
+                            {
+                                if (USERLEVEL < 31) { help = -1; }
+                                break;
+                            }
+                        case implode(["main", "3"], "handleQuestLine/main3"):
+                            {
+                                if ((USERLEVEL < 40) || (speedlink_farm5.style.display == "none")) { help = -1; }
+                                break;
+                            }
+                        case implode(["forestry", "1"], "handleQuestLine/forestry1"):
+                            {
+                                if (USERLEVEL < 20) { help = -1; }
+                                break;
+                            }
+                        case implode(["forestry", "2"], "handleQuestLine/forestry2"):
+                            {
+                                if (questData["forestry"]["1"]["nr"] < 35) { help = -1; }
+                                break;
+                            }
+                        case implode(["foodworld", "1"], "handleQuestLine/foodworld1"):
+                            {
+                                if (USERLEVEL < 12) { help = -1; }
+                                break;
+                            }
+                    }
+
+                    if (questData[type][campaign]["nr"] != help) {
+                        switch (type) {
+                            case "main":
+                                {
+                                    GM_logInfo("handleQuestLine", "", "type=" + type + " campaign=" + campaign, getText("pleaseOpenX").replace(/%1%/, getText("quest" + type + campaign)) + " (" + questData[type][campaign]["nr"] + "&ne;" + help + ")");
+                                    break;
+                                }
+                            case "forestry":
+                                {
+                                    GM_logInfo("handleQuestLine", "", "type=" + type + " campaign=" + campaign, getText("pleaseOpenX").replace(/%1%/, getText("lodge")) + " (" + questData[type][campaign]["nr"] + "&ne;" + help + ")");
+                                    console.trace();
+                                    break;
+                                }
+                            case "foodworld":
+                                {
+                                    GM_logInfo("handleQuestLine", "", "type=" + type + " campaign=" + campaign, getText("pleaseOpenX").replace(/%1%/, getText("foodworld")) + " (" + questData[type][campaign]["nr"] + "&ne;" + help + ")");
+                                    break;
+                                }
+                        }
+
+                        if (!QUESTS[type][campaign][questData[type][campaign]["nr"]]) {
+                            GM_logInfo("handleQuestLine", "", "type=" + type + " campaign=" + campaign + " quests_status=" + implode(unsafeWindow.quests_status, 1), getText("questSetXToNrY").replace(/%1%/, getText("quest" + type + campaign)).replace(/%2%/, help));
+                            questData[type][campaign]["nr"] = help;
+                            questData[type][campaign]["given"] = new Object();
+                            questData[type][campaign]["time"] = 0;
+                            GM_setValueCache(COUNTRY + "_" + SERVER + "_" + USERNAME + "_questData", implode(questData, "handleQuestLine/questData"));
+                            unsafeData.questData = questData.clone();
+                        }
+                    }
+                } else {
+                    help = questData[type][campaign]["nr"];
+                    switch (implode([type, campaign], "handleQuestLine/typeCampaign")) {
+                        case implode(["main", "2"], "handleQuestLine/main2"):
+                            {
+                                if (USERLEVEL < 31) { help = -1; }
+                                break;
+                            }
+                        case implode(["main", "3"], "handleQuestLine/main3"):
+                            {
+                                if ((USERLEVEL < 40) || (speedlink_farm5.style.display == "none")) { help = -1; }
+                                break;
+                            }
+                        case implode(["forestry", "1"], "handleQuestLine/forestry1"):
+                            {
+                                if (USERLEVEL < 20) { help = -1; }
+                                break;
+                            }
+                        case implode(["forestry", "2"], "handleQuestLine/forestry2"):
+                            {
+                                if (questData["forestry"]["1"]["nr"] < 35) { help = -1; }
+                                break;
+                            }
+                        case implode(["foodworld", "1"], "handleQuestLine/foodworld1"):
+                            {
+                                if (USERLEVEL < 12) { help = -1; }
+                                break;
+                            }
+                    }
+                    if (questData[type][campaign]["nr"] != help) {
+                        GM_logInfo("handleQuestLine", "", "type=" + type + " campaign=" + campaign + " quests_status=" + implode(unsafeWindow.quests_status, 1), getText("questSetXToNrY").replace(/%1%/, getText("quest" + type + campaign)).replace(/%2%/, help));
+                        questData[type][campaign]["nr"] = help;
                         questData[type][campaign]["given"] = new Object();
                         questData[type][campaign]["time"] = 0;
-                        GM_setValueCache(COUNTRY+"_"+SERVER+"_"+USERNAME+"_questData",implode(questData,"handleQuestLine/questData"));
-                        unsafeData.questData=questData.clone();
+                        GM_setValueCache(COUNTRY + "_" + SERVER + "_" + USERNAME + "_questData", implode(questData, "handleQuestLine/questData"));
+                        unsafeData.questData = questData.clone();
                     }
                 }
-            }else{
-                help=questData[type][campaign]["nr"];
-                switch(implode([type,campaign],"handleQuestLine/typeCampaign")){
-                case implode(["main","2"],"handleQuestLine/main2"):{
-                    if(USERLEVEL<31){ help=-1; }
-                break;}
-                case implode(["main","3"],"handleQuestLine/main3"):{
-                    if((USERLEVEL<40)||(speedlink_farm5.style.display=="none")){ help=-1; }
-                break;}
-                case implode(["forestry","1"],"handleQuestLine/forestry1"):{
-                    if(USERLEVEL<20){ help=-1; }
-                break;}
-                case implode(["forestry","2"],"handleQuestLine/forestry2"):{
-                    if(questData["forestry"]["1"]["nr"]<35){ help=-1; }
-                break;}
-                case implode(["foodworld","1"],"handleQuestLine/foodworld1"):{
-                    if(USERLEVEL<12){ help=-1; }
-                break;}
-                }
-                if(questData[type][campaign]["nr"]!=help){
-                    GM_logInfo("handleQuestLine","","type="+type+" campaign="+campaign+" quests_status="+implode(unsafeWindow.quests_status,1),getText("questSetXToNrY").replace(/%1%/,getText("quest"+type+campaign)).replace(/%2%/,help));
-                    questData[type][campaign]["nr"]=help;
-                    questData[type][campaign]["given"] = new Object();
-                    questData[type][campaign]["time"] = 0;
-                    GM_setValueCache(COUNTRY+"_"+SERVER+"_"+USERNAME+"_questData",implode(questData,"handleQuestLine/questData"));
-                    unsafeData.questData=questData.clone();
-                }
-            }
-            if(div=$("quests_status_bar_"+type+campaign)){
-                if(questData[type][campaign]["nr"]==0){
-                    div.style.display="block"; // quest number unknown
-                    switch(type){
-                    case "main":{      GM_logInfo("handleQuestLine","","type="+type+" campaign="+campaign,getText("informationIsMissing")+" "+getText("pleaseOpenX").replace(/%1%/,getText("quest"+type+campaign))); break;}
-                    case "forestry":{  GM_logInfo("handleQuestLine","","type="+type+" campaign="+campaign,getText("informationIsMissing")+" "+getText("pleaseOpenX").replace(/%1%/,getText("lodge"))); break;}
-                    case "foodworld":{ GM_logInfo("handleQuestLine","","type="+type+" campaign="+campaign,getText("informationIsMissing")+" "+getText("pleaseOpenX").replace(/%1%/,getText("foodworld"))); break;}
+                if (div = $("quests_status_bar_" + type + campaign)) {
+                    if (questData[type][campaign]["nr"] == 0) {
+                        div.style.display = "block"; // quest number unknown
+                        switch (type) {
+                            case "main":
+                                {
+                                    GM_logInfo("handleQuestLine", "", "type=" + type + " campaign=" + campaign, getText("informationIsMissing") + " " + getText("pleaseOpenX").replace(/%1%/, getText("quest" + type + campaign)));
+                                    break;
+                                }
+                            case "forestry":
+                                {
+                                    GM_logInfo("handleQuestLine", "", "type=" + type + " campaign=" + campaign, getText("informationIsMissing") + " " + getText("pleaseOpenX").replace(/%1%/, getText("lodge")));
+                                    break;
+                                }
+                            case "foodworld":
+                                {
+                                    GM_logInfo("handleQuestLine", "", "type=" + type + " campaign=" + campaign, getText("informationIsMissing") + " " + getText("pleaseOpenX").replace(/%1%/, getText("foodworld")));
+                                    break;
+                                }
+                        }
+
+                    } else if ((questData[type][campaign]["nr"] == -1) || (questData[type][campaign]["calcTo"] == -1)) {
+                        div.style.display = "none"; // do not show quest
+                    } else if (QUESTS[type][campaign][questData[type][campaign]["nr"]]) {
+                        div.style.display = "block"; // quest available
+                    } else {
+                        div.style.display = "none"; // all quests done
                     }
-                }else if((questData[type][campaign]["nr"]==-1)||(questData[type][campaign]["calcTo"]==-1)){
-                    div.style.display="none"; // do not show quest
-                }else if(QUESTS[type][campaign][questData[type][campaign]["nr"]]){
-                    div.style.display="block"; // quest available
-                }else{
-                    div.style.display="none"; // all quests done
-                }
-                if(!unsafeWindow.premium){
-                    switch(type){
-                    case "forestry":{
-                        div.addEventListener("click",function(){
-                            if(gameLocation.check("city",2)){
-                                unsafeWindow.close_page();
-                                unsafeWindow.showDiv("transp3");
-                                unsafeWindow.initCampaigns();
-                            }else{
-                                document.addEventListener("gameCity2",function(){
-                                    document.removeEventListener("gameCity2",arguments.callee,false);
-                                    unsafeWindow.close_page();
-                                    unsafeWindow.showDiv("transp3");
-                                    unsafeWindow.initCampaigns();
-                                },false);
-                                click($("speedlink_city2"));
-                            }
-                        },false);
-                    break;}
-                    case "foodworld":{
-                        div.addEventListener("click",function(){
-                            if(gameLocation.check("foodworld")){
-                                click($("foodworld_questblock"));
-                            }else{
-                                document.addEventListener("gameFoodworldOpened",function(){
-                                    document.removeEventListener("gameFoodworldOpened",arguments.callee,false);
-                                    click($("foodworld_questblock"));
-                                },false);
-                                click($("speedlink_foodworld"));
-                            }
-                        },false);
-                    break;}
+                    if (!unsafeWindow.premium) {
+                        switch (type) {
+                            case "forestry":
+                                {
+                                    div.addEventListener("click", function() {
+                                        if (gameLocation.check("city", 2)) {
+                                            unsafeWindow.close_page();
+                                            unsafeWindow.showDiv("transp3");
+                                            unsafeWindow.initCampaigns();
+                                        } else {
+                                            document.addEventListener("gameCity2", function() {
+                                                document.removeEventListener("gameCity2", arguments.callee, false);
+                                                unsafeWindow.close_page();
+                                                unsafeWindow.showDiv("transp3");
+                                                unsafeWindow.initCampaigns();
+                                            }, false);
+                                            click($("speedlink_city2"));
+                                        }
+                                    }, false);
+                                    break;
+                                }
+                            case "foodworld":
+                                {
+                                    div.addEventListener("click", function() {
+                                        if (gameLocation.check("foodworld")) {
+                                            click($("foodworld_questblock"));
+                                        } else {
+                                            document.addEventListener("gameFoodworldOpened", function() {
+                                                document.removeEventListener("gameFoodworldOpened", arguments.callee, false);
+                                                click($("foodworld_questblock"));
+                                            }, false);
+                                            click($("speedlink_foodworld"));
+                                        }
+                                    }, false);
+                                    break;
+                                }
+                        }
                     }
                 }
             }
         }
-    }
-    div=null;
-}catch(err){GM_logError("handleQuestLine","","type="+type+" campaign="+campaign,err);}
+        div = null;
+    } catch (err) { GM_logError("handleQuestLine", "", "type=" + type + " campaign=" + campaign, err); }
 };
+
 //***********************************************************************************************************
 
 function do_shop(){
@@ -7320,7 +7387,6 @@ function buildInfoPanelOptions(){
                  *     forestry 2: quest 35 of forestry 1 completed
                  *
                  */
-                console.log(implode(unsafeWindow.quests_status));
                 var help = "setQuestAll "
                 var help = help + "MAIN ";
                 if (USERLEVEL >= 40
@@ -10068,11 +10134,11 @@ try{
         calcTotalZones();
         // Quest
         handleQuestDataFoodworld();
-        if((newdiv=$("foodworld_questblock"))&&(!newdiv.classList.contains("mouseOver"))){
+        if ((newdiv = $("foodworld_questblock")) && (!newdiv.classList.contains("mouseOver"))) {
             newdiv.classList.add("mouseOver");
-            newdiv.addEventListener("mouseover",function(event){
-                toolTip.show(event,questLineMouseOver("foodworld","1"));
-            },false);
+            newdiv.addEventListener("mouseover", function(event) {
+                toolTip.show(event, questLineMouseOver("foodworld", "1"));
+            }, false);
         }
         zoneNrF=null;tempZoneProductionData=null;tempZoneProductionDataSlot=null;
 
@@ -10098,7 +10164,6 @@ try{
 
                     if(rate<valFarmiLimits[0]){ // unter 90%
                         str = css_styles["farmi_price_low"][1];
-                        // unsafeWindow.foodworldAction('kick', foodWorldFarmi[i].id);
                     }else if(rate<valFarmiLimits[1]){ //zwischen 90% und 100%
                         str = css_styles["farmi_price_between"][1];
                     }else{ // über 100%
@@ -10149,7 +10214,6 @@ try{
             }
         } catch(err) {GM_logError("openFoodworldBuildingSelect","","",err); }
     }, true);
-
     unsafeOverwriteFunction("entryCityXmasEvent",function(c){
         /*
          * Contribution/Author of function "entryCityXmasEvent": Moe
@@ -11431,9 +11495,6 @@ try{
             }else{
                 questData[quTyp][campaign]["data"]=[];
             }
-            // GM_log("questData["+quTyp+"]["+campaign+"]="+implode(questData[quTyp][campaign]));
-            // GM_setValueCache(COUNTRY+"_"+SERVER+"_"+USERNAME+"_questData",implode(questData));
-            // unsafeData.questData=questData.clone();
         }catch(err){ GM_logError("calcQuestData","","err_trace="+err_trace,err); }
     }
     function handleQuestData(){
@@ -11501,56 +11562,57 @@ try{
             handleQuestData();
         }catch(err){GM_logError("questInitGo","","",err);}
     });
-    function handleQuestDataFoodworld(){
-        // GM_log("setQuest newQuestNr="+newQuestNr);
-        try{
+    function handleQuestDataFoodworld() {
+        try {
             var err_trace = "Get questdata";
-            if(unsafeWindow.foodworld_quest){
-                // GM_log("unsafeWindow.foodworld_quest:\n"+print_r(unsafeWindow.foodworld_quest,"",true,"\n"));
-                if(!questData["foodworld"]){ questData["foodworld"]={}; }
-                for(var campaign in QUESTS["foodworld"]){
-                    if(!QUESTS["foodworld"].hasOwnProperty(campaign)){continue;}
-                    if(!questData["foodworld"][campaign]){
-                        questData["foodworld"][campaign]=INIT_questData["foodworld"][campaign].clone();
+            if (unsafeWindow.foodworld_quest) {
+                if (!questData["foodworld"]) { questData["foodworld"] = {}; }
+                for (var campaign in QUESTS["foodworld"]) { // Iterate over campaigns. So far only one campaign available
+                    if (!QUESTS["foodworld"].hasOwnProperty(campaign)) { continue; }
+                    if (!questData["foodworld"][campaign]) {
+                        questData["foodworld"][campaign] = INIT_questData["foodworld"][campaign].clone();
                     }
-                    if(campaign==unsafeWindow.foodworld_quest["campaignid"]){
-                        if(unsafeWindow.foodworld_quest["questid"]){
-                            // Quest number
-                            GM_logInfo("handleQuestLine","","",getText("questSetXToNrY").replace(/%1%/,getText("quest"+"foodworld"+campaign)).replace(/%2%/,unsafeWindow.foodworld_quest["questid"]));
-                            questData["foodworld"][campaign]["nr"]=unsafeWindow.foodworld_quest["questid"];
-                            // Given
-                            questData["foodworld"][campaign]["given"] = new Object();
-                            if(unsafeWindow.foodworld_quest["entries"]){
-                                for(var t in unsafeWindow.foodworld_quest["entries"]){
-                                    if(!unsafeWindow.foodworld_quest["entries"].hasOwnProperty(t)){continue;}
-                                    var prod = parseInt(t,10);
-                                    var type = 0;
-                                    if(!questData["foodworld"][campaign]["given"][type]){ questData["foodworld"][campaign]["given"][type] = new Object(); }
-                                    if(!questData["foodworld"][campaign]["given"][type][prod]){ questData["foodworld"][campaign]["given"][type][prod] = 0; }
-                                    questData["foodworld"][campaign]["given"][type][prod] += parseInt(unsafeWindow.foodworld_quest["entries"][t],10);
-                                }
-                            }
-                            // Time
-                            questData["foodworld"][campaign]["time"] = now+unsafeWindow.foodworld_quest["remain"];
-                        }else{
-                            questData["foodworld"][campaign]["nr"]=QUESTS["foodworld"][campaign].length;
-                            questData["foodworld"][campaign]["given"] = new Object();
-                            questData["foodworld"][campaign]["time"] = 0;
+                    if (campaign == unsafeWindow.foodworld_quest["campaignid"] &&
+                        unsafeWindow.foodworld_quest["questid"]) {
+                        // If ever another campaign might show up, Upjers needs to adjust the "campaignid" thing.
+                        // We then need to adjust our code here, too!
+
+                        // Quest number
+                        if (questData["foodworld"][campaign]["nr"] != unsafeWindow.foodworld_quest["questid"]) {
+                            // Current quest in our data is lower/not equal to actual quest number
+                            GM_logInfo("handleQuestDataFoodworld", "", "", getText("questSetXToNrY").replace(/%1%/, getText("quest" + "foodworld" + campaign)).replace(/%2%/, unsafeWindow.foodworld_quest["questid"]));
+
+                            // Read actual quest number
+                            questData["foodworld"][campaign]["nr"] = unsafeWindow.foodworld_quest["questid"];
+                            // Read time
+                            questData["foodworld"][campaign]["time"] = now + unsafeWindow.foodworld_quest["remain"];
                         }
-                    }else{
-                        questData["foodworld"][campaign]["nr"]=QUESTS["foodworld"][campaign].length;
+                        // In any case: Read already given products
+                        questData["foodworld"][campaign]["given"] = new Object();
+                        if (unsafeWindow.foodworld_quest["entries"]) {
+                            for (var t in unsafeWindow.foodworld_quest["entries"]) {
+                                if (!unsafeWindow.foodworld_quest["entries"].hasOwnProperty(t)) { continue; }
+                                var prod = parseInt(t, 10);
+                                var type = 0; // So far we know, only type-0 products are needed here
+                                if (!questData["foodworld"][campaign]["given"][type]) { questData["foodworld"][campaign]["given"][type] = new Object(); }
+                                if (!questData["foodworld"][campaign]["given"][type][prod]) { questData["foodworld"][campaign]["given"][type][prod] = 0; }
+                                questData["foodworld"][campaign]["given"][type][prod] += parseInt(unsafeWindow.foodworld_quest["entries"][t], 10);
+                            }
+                        }
+                    } else {
+                        questData["foodworld"][campaign]["nr"] = QUESTS["foodworld"][campaign].length;
                         questData["foodworld"][campaign]["given"] = new Object();
                         questData["foodworld"][campaign]["time"] = 0;
                     }
-                    calcQuestData("foodworld",campaign);
-                // GM_log("questdata:\n"+print_r(questData["foodworld"],"",true,"\n"));
+                    calcQuestData("foodworld", campaign);
                 }
-                GM_setValueCache(COUNTRY+"_"+SERVER+"_"+USERNAME+"_questData",implode(questData,"handleQuestDataFoodworld/questData"));
-                unsafeData.questData=questData.clone();
+                GM_setValueCache(COUNTRY + "_" + SERVER + "_" + USERNAME + "_questData", implode(questData, "handleQuestDataFoodworld/questData"));
+                unsafeData.questData = questData.clone();
             }
-            div=null;
-        }catch(err){ GM_logError("handleQuestDataFoodworld","","err_trace="+err_trace,err); }
+            div = null;
+        } catch (err) { GM_logError("handleQuestDataFoodworld", "", "err_trace=" + err_trace, err); }
     }
+
     function handleQuestDataVeterinary(){
         // GM_log("setQuest newQuestNr="+newQuestNr);
         try{
@@ -11565,7 +11627,7 @@ try{
                 if(unsafeWindow.vet_data.quest.quest_id){
                     // Quest number
                     if(questData["veterinary"][campaign]["nr"]!=parseInt(unsafeWindow.vet_data.quest.quest_id,10)){
-                        GM_logInfo("handleQuestLine","","",getText("questSetXToNrY").replace(/%1%/,getText("quest"+"veterinary"+campaign)).replace(/%2%/,unsafeWindow.vet_data.quest.quest_id));
+                        GM_logInfo("handleQuestDataVeterinary","","",getText("questSetXToNrY").replace(/%1%/,getText("quest"+"veterinary"+campaign)).replace(/%2%/,unsafeWindow.vet_data.quest.quest_id));
                         questData["veterinary"][campaign]["nr"]=parseInt(unsafeWindow.vet_data.quest.quest_id,10);
                     }
                     // Given
@@ -11611,7 +11673,7 @@ try{
                 if(unsafeWindow.pets.data.quest.questid){
                     // Quest number
                     if(questData["breed"][campaign]["nr"]!=parseInt(unsafeWindow.pets.data.quest.questid,10)){
-                        GM_logInfo("handleQuestLine","","",getText("questSetXToNrY").replace(/%1%/,getText("quest"+"breed"+campaign)).replace(/%2%/,unsafeWindow.pets.data.quest.questid));
+                        GM_logInfo("handleQuestDataBreed","","",getText("questSetXToNrY").replace(/%1%/,getText("quest"+"breed"+campaign)).replace(/%2%/,unsafeWindow.pets.data.quest.questid));
                         questData["breed"][campaign]["nr"]=parseInt(unsafeWindow.pets.data.quest.questid,10);
                     }
                     // Given
@@ -11765,17 +11827,27 @@ try{
         }catch(err){
             var msgText=null;
             try{
-                switch(questType){
-                case "main":{
-                    msgText = getText("informationIsMissing")+" "+getText("pleaseOpenX").replace(/%1%/,getText("quest"+questType+campaign));
-                break;}
-                case "forestry":{
-                    msgText = (getText("informationIsMissing")+" "+getText("pleaseOpenX").replace(/%1%/,getText("lodge")));
-                break;}
-                case "foodworld":{
-                    msgText = (getText("informationIsMissing")+" "+getText("pleaseOpenX").replace(/%1%/,getText("foodworld")));
-                break;}
+                switch (questType) {
+                    case "main":
+                        {
+                            msgText = getText("informationIsMissing") + " " + getText("pleaseOpenX").replace(/%1%/, getText("quest" + questType + campaign));
+                            console.trace();
+                            break;
+                        }
+                    case "forestry":
+                        {
+                            msgText = (getText("informationIsMissing") + " " + getText("pleaseOpenX").replace(/%1%/, getText("lodge")));
+                            console.trace();
+                            break;
+                        }
+                    case "foodworld":
+                        {
+                            msgText = (getText("informationIsMissing") + " " + getText("pleaseOpenX").replace(/%1%/, getText("foodworld")));
+                            console.trace();
+                            break;
+                        }
                 }
+
                 if(msgText){
                     GM_logWarning("questLineMouseOver","","err="+err,msgText);
                     return msgText;
@@ -11827,12 +11899,6 @@ try{
             handleQuestLine();
         }catch(err){GM_logError("questsHandler","","",err);}
     });
-/* todo:
-    raiseEvent("gameQuestSolvable");
-    raiseEvent("gameQuestNewAvailable");
-    raiseEvent("gameQuestFinished");
-    raiseEvent("gameQuestAccepted");
-*/
     unsafeOverwriteFunction("showQuestBoxLine",function(){
         try{
             unsafeWindow._showQuestBoxLine();
@@ -11841,25 +11907,30 @@ try{
             handleQuestLine();
         }catch(err){GM_logError("showQuestBoxLine","","",err);}
     });
-    function updateQuestLineTimer(){
-    try{
-return false;
-        for(var type in QUESTS){
-            if (!QUESTS.hasOwnProperty(type)){ continue; }
-            if (type=="main"){ continue; }
-            for(var campaign in QUESTS[type]){
-                if (!QUESTS[type].hasOwnProperty(campaign)){ continue; }
-                if(nodes["questline_"+type+"_"+campaign]&&nodes["questline_"+type+"_"+campaign]["node"]){
-                    if(now<questData[type][campaign]["time"]){
-                        nodes["questline_"+type+"_"+campaign]["node"].children[1].innerHTML = getTimeStr(questData[type][campaign]["time"]-now,false)+" "+getText("shortHours");
-                    }else{
-                        handleQuestLine();
+    function updateQuestLineTimer() {
+        try {
+            return false;
+            // Remarks, Moe, 16. Nov 2016: Dead code, but why???        
+            for (var type in QUESTS) {
+                if (!QUESTS.hasOwnProperty(type)) {
+                    continue; }
+                if (type == "main") {
+                    continue; }
+                for (var campaign in QUESTS[type]) {
+                    if (!QUESTS[type].hasOwnProperty(campaign)) {
+                        continue; }
+                    if (nodes["questline_" + type + "_" + campaign] && nodes["questline_" + type + "_" + campaign]["node"]) {
+                        if (now < questData[type][campaign]["time"]) {
+                            nodes["questline_" + type + "_" + campaign]["node"].children[1].innerHTML = getTimeStr(questData[type][campaign]["time"] - now, false) + " " + getText("shortHours");
+                        } else {
+                            handleQuestLine();
+                        }
                     }
                 }
             }
-        }
-    }catch(err){GM_logError("updateQuestLineTimer","","type="+type+" campaign="+campaign,err);}
+        } catch (err) { GM_logError("updateQuestLineTimer", "", "type=" + type + " campaign=" + campaign, err); }
     }
+
     handleQuestData(); // --> handleQuestLine
 
     err_trace="Show Data";
@@ -18439,7 +18510,7 @@ return;
                             // campaign not available
                             var newforestryQuestNr = 0;
                             if(questData["forestry"][campaign]["nr"]!=newforestryQuestNr){
-                                GM_logInfo("handleQuestLine","","",getText("questSetXToNrY").replace(/%1%/,getText("quest"+"forestry"+campaign)).replace(/%2%/,newforestryQuestNr));
+                                GM_logInfo("initCampaignsResponse","","",getText("questSetXToNrY").replace(/%1%/,getText("quest"+"forestry"+campaign)).replace(/%2%/,newforestryQuestNr));
                                 questData["forestry"][campaign]["nr"]=newforestryQuestNr;
                                 if(questData["forestry"][campaign]["calcTo"]!=0){
                                     setCalcToQuest("forestry",campaign,0);
@@ -18491,7 +18562,7 @@ return;
                             // Number
                             var newforestryQuestNr = parseInt(result[1][campaign]["questid"],10);
                             if((questData["forestry"][campaign]["nr"]!=newforestryQuestNr)||(typeof questData["forestry"][campaign]["nr"]!=typeof newforestryQuestNr)){
-                                GM_logInfo("handleQuestLine","","",getText("questSetXToNrY").replace(/%1%/,getText("quest"+"forestry"+campaign)).replace(/%2%/,newforestryQuestNr));
+                                GM_logInfo("initCampaignsResponse","","",getText("questSetXToNrY").replace(/%1%/,getText("quest"+"forestry"+campaign)).replace(/%2%/,newforestryQuestNr));
                                 questData["forestry"][campaign]["nr"]=newforestryQuestNr;
                                 if((0<questData["forestry"][campaign]["calcTo"])&&(questData["forestry"][campaign]["calcTo"]<questData["forestry"][1]["nr"])){
                                     setCalcToQuest("forestry",campaign,questData["forestry"][campaign]["nr"]);
@@ -18504,7 +18575,7 @@ return;
                         // all quests solved
                         var newforestryQuestNr = QUESTS["forestry"][campaign].length;
                         if(questData["forestry"][campaign]["nr"]!=newforestryQuestNr){
-                            GM_logInfo("handleQuestLine","","",getText("questSetXToNrY").replace(/%1%/,getText("quest"+"forestry"+campaign)).replace(/%2%/,newforestryQuestNr));
+                            GM_logInfo("initCampaignsResponse","","",getText("questSetXToNrY").replace(/%1%/,getText("quest"+"forestry"+campaign)).replace(/%2%/,newforestryQuestNr));
                             questData["forestry"][campaign]["nr"]=newforestryQuestNr;
                             if(questData["forestry"][campaign]["calcTo"]!=0){
                                 setCalcToQuest("forestry",campaign,0);
