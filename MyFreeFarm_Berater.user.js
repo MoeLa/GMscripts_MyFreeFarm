@@ -10006,20 +10006,19 @@ try{
             }
         }catch(err){GM_logError("createFoodworldFarmis","","",err);}
     });
-    unsafeOverwriteFunction("dragFoodworldFarmiTouch",function(id){
-        try{
+    unsafeOverwriteFunction("dragFoodworldFarmiTouch", function(id) {
+        try {
             unsafeWindow._dragFoodworldFarmiTouch(id);
-        }catch(err){GM_logError("_dragFoodworldFarmiTouch","","",err);}
-        try{
-            if(valFoodworldFarmiPlacing){
-                loop:
-                for(var b=0;b<=4;b++){
-                    if(unsafeWindow.foodworldtables[b]&&(!unsafeWindow.foodworldtables[b]["block"])&&(!unsafeWindow.foodworldtables[b]["locked"])){
-                        for(var a=1;a<=2;a++) {
-                            if(!(unsafeWindow.foodworldtables[b]["chairs"]&&unsafeWindow.foodworldtables[b]["chairs"][a]&&unsafeWindow.foodworldtables[b]["chairs"][a]["id"])){
-                                if(div=$("foodworldchair"+b+"_"+a+"_touch")){
+        } catch (err) { GM_logError("_dragFoodworldFarmiTouch", "", "", err); }
+        try {
+            if (valFoodworldFarmiPlacing) {
+                loop: for (var b = 0; b <= 4; b++) {
+                    if (unsafeWindow.foodworldtables[b] && (!unsafeWindow.foodworldtables[b]["block"]) && (!unsafeWindow.foodworldtables[b]["locked"])) {
+                        for (var a = 1; a <= 2; a++) {
+                            if (!(unsafeWindow.foodworldtables[b]["chairs"] && unsafeWindow.foodworldtables[b]["chairs"][a] && unsafeWindow.foodworldtables[b]["chairs"][a]["id"])) {
+                                if (div = $("foodworldchair" + b + "_" + a + "_touch")) {
                                     click(div);
-                                    div=null;
+                                    div = null;
                                     break loop;
                                 }
                             }
@@ -10027,7 +10026,7 @@ try{
                     }
                 }
             }
-        }catch(err){GM_logError("dragFoodworldFarmiTouch","","",err);}
+        } catch (err) { GM_logError("dragFoodworldFarmiTouch", "", "", err); }
     });
     if(newdiv=$("food_cart")){
         createElement("div",{"id":"food_cart_cost","style":"position:absolute;bottom:130px;left:135px;font-size:12px;color:#463824;"},newdiv);

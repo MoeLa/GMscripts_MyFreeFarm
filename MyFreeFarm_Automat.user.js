@@ -374,11 +374,6 @@ var botArbiter=new function(){
             if (settings.get("account", "botUseFarmi") && unsafeWindow.farmisinfo && unsafeWindow.farmisinfo[0] && (settings.get("account", "farmiReject") || settings.get("account", "farmiAccept"))) {
                 checkFarmi(1);
             }
-            // if (settings.get("account", "botUseFarmi") && settings.get("account", "farmiReject") && settings.get("account", "botUseFoodworld") && settings.get("account", "farmiFoodworldReject")) {
-            //     console.log("Moe, checkFoordworldFarmi");
-            //     checkFoordworldFarmi();
-            //     console.log("Moe, NACH checkFoordworldFarmi");
-            // }
             if($("divGoToClothingDonation") && !zoneWaiting["clothingDonation"]) {
                 var log = unsafeData.latestClothingDonationLog;
                 if (!log && (settings.get("account","botUseClothingGamble") || settings.get("account","botUseClothingDonation")) || // No log available (and at least one option is checked) => Let bot open the dialog
@@ -559,12 +554,12 @@ var settings=new function(){
     var dataDefault={"global":{},
                      "country":{"valCloseWindowTimer":30,"pauseShort":[300,700],"pause":[2000,4000],"maxDurationBotRun":300,"maxDurationBotStep":30,"botErrorBehaviour":"reload"},
                      "server":{"botActive":false},
-                     "account":{"autoPlant":true,"autoWater":true,"autoFeed":true,"botUseClothingDonation":false,"botUsebuyPetsParts":false,"botUseClothingGamble":false,"botUseDonkey":false,"botUseFarmersmarket":false,"botUseVetTreatment":true,"botUseFarmi":false,"botUseFoodworld":false,"botUseForestry":false,"botUseGuildJop":false,"botUseLottery":false,"botUseMegafield":false,"botPreferMegafield":true,"botUseMegafieldPremiumPlanting":true,"megafieldSmallVehicle":1,"megafieldBigVehicle":0,"botUseWindmill":false,"disableCropFields":false,"farmiAccept":false,"farmiAcceptAboveNr":100,"farmiAcceptBelowMinValue":false,"farmiFoodworldReject":false,"farmiReject":false,"farmiRejectUntilNr":90,"farmiRemoveMissing":false,"farmiRemoveMissingAboveNr":10,"lotteryActivate":false,"lotteryDailyLot":false,"powerUpActivate":false,"seedWaitForCrop":30,"showQueueTime":true,"useQueueList":false}
+                     "account":{"autoPlant":true,"autoWater":true,"autoFeed":true,"botUseClothingDonation":false,"botUsebuyPetsParts":false,"botUseClothingGamble":false,"botUseDonkey":false,"botUseFarmersmarket":false,"botUseVetTreatment":true,"botUseFarmi":false,"botUseFoodworld":false,"botUseForestry":false,"botUseGuildJop":false,"botUseLottery":false,"botUseMegafield":false,"botPreferMegafield":true,"botUseMegafieldPremiumPlanting":true,"megafieldSmallVehicle":1,"megafieldBigVehicle":0,"botUseWindmill":false,"disableCropFields":false,"farmiAccept":false,"farmiAcceptAboveNr":100,"farmiAcceptBelowMinValue":false,"botUseFarmiFoodworld":true,"farmiReject":false,"farmiRejectUntilNr":90,"farmiRemoveMissing":false,"farmiRemoveMissingAboveNr":10,"lotteryActivate":false,"lotteryDailyLot":false,"powerUpActivate":false,"seedWaitForCrop":30,"showQueueTime":true,"useQueueList":false}
                     };
     var require=    {"global":{},
                      "country":{},
                      "server":{},
-                     "account":{"farmiAccept":[["account","botUseFarmi"]],"farmiAcceptAboveNr":[["account","botUseFarmi"]],"farmiAcceptBelowMinValue":[["account","botUseFarmi"],["account","farmiAccept"]],"farmiFoodworldReject":[["account","botUseFarmi"],["account","botUseFoodworld"]],"farmiReject":[["account","botUseFarmi"]],"farmiRejectUntilNr":[["account","botUseFarmi"]],"farmiRemoveMissing":[["account","botUseFarmi"]],"farmiRemoveMissingAboveNr":[["account","botUseFarmi"]],"lotteryActivate":[["account","botUseLottery"]],"lotteryDailyLot":[["account","botUseLottery"],["account","lotteryActivate"]],"powerUpActivate":[["account","botUseWindmill"]]}
+                     "account":{"farmiAccept":[["account","botUseFarmi"]],"farmiAcceptAboveNr":[["account","botUseFarmi"]],"farmiAcceptBelowMinValue":[["account","botUseFarmi"],["account","farmiAccept"]],"botUseFarmiFoodworld":[["account","botUseFarmi"],["account","botUseFoodworld"]],"farmiReject":[["account","botUseFarmi"]],"farmiRejectUntilNr":[["account","botUseFarmi"]],"farmiRemoveMissing":[["account","botUseFarmi"]],"farmiRemoveMissingAboveNr":[["account","botUseFarmi"]],"lotteryActivate":[["account","botUseLottery"]],"lotteryDailyLot":[["account","botUseLottery"],["account","lotteryActivate"]],"powerUpActivate":[["account","botUseWindmill"]]}
                     };
     this.init=function(){
     try{
@@ -8971,21 +8966,23 @@ try{
     }
 }catch(err){ GM_logError("autoFarmi","","farmiNr="+farmiNr+" farmiAmount="+farmiAmount,err); }
 }
-function checkFoordworldFarmi() {
+function checkFoodworldFarmi() {
     try {
-        var foodWorldFarmi = unsafeWindow.foodworldfarmis;
-        if (settings.get("account", "botUseFarmi") && settings.get("account", "farmiReject") && settings.get("account", "botUseFoodworld") && settings.get("account", "farmiFoodworldReject") && foodWorldFarmi) {
+        var foodworldFarmis = unsafeWindow.foodworldfarmis;
+        if (settings.get("account", "botUseFarmi")
+                && settings.get("account", "botUseFoodworld")
+                && settings.get("account", "botUseFarmiFoodworld")
+                && settings.get("account", "farmiReject")
+                && foodworldFarmis) {
+            // So far, only kicking is implemented
+
             var toKickFoodworldFarmiIds = [];
-            for (var i = 0; i < foodWorldFarmi.length; i++) {
-                if (foodWorldFarmi[i].status == 0) {
+            for (var i = 0; i < foodworldFarmis.length; i++) {
+                if (foodworldFarmis[i].status == 0) {
                     var rate = parseFloat($("foodworldfarmi" + i).getAttribute("rate"));
 
                     if (rate < settings.get("account", "farmiRejectUntilNr")) {
-                        toKickFoodworldFarmiIds.push(foodWorldFarmi[i].id);
-                    } else if (rate <= settings.get("account", "farmiAcceptAboveNr")) {
-                        // Farmi is neither to kick nor to accept
-                    } else {
-                        // Farmi is to accept
+                        toKickFoodworldFarmiIds.push(foodworldFarmis[i].id);
                     }
                 }
             }
@@ -8993,7 +8990,7 @@ function checkFoordworldFarmi() {
             // Kick farmis in separate thread
             window.setTimeout(function() {
                 for (var i = toKickFoodworldFarmiIds.length - 1; i >= 0; i--) {
-                    GM_logInfo("checkFoodworldFarmi", "", "", "Kick Foodworld-Farmi " + toKickFoodworldFarmiIds[i]);
+                    GM_logInfo("checkFoodworldFarmi", "", "", getText("automat_removeFoodworldFarmi") + ": " + toKickFoodworldFarmiIds[i]);
                     unsafeWindow.foodworldAction('kick', toKickFoodworldFarmiIds[i]);
                 }
             }, 300);
@@ -9966,15 +9963,15 @@ function buildInfoPanelOptions(){
         },false);
         newtd=createElement("td",{"colspan":"2"},newtr,getText("automat_settings_botUse"));
 
-        newtr=createElement("tr",{"style":"line-height:18px;","set":"account_farmiFoodworldReject"},newtable);
+        newtr=createElement("tr",{"style":"line-height:18px;","set":"account_botUseFarmiFoodworld"},newtable);
         newtd=createElement("td",{"align":"center","width":"40"},newtr);
-        inp=createElement("input",{"class":"link","type":"checkbox","checked":settings.get("account","farmiFoodworldReject")},newtd);
+        inp=createElement("input",{"class":"link","type":"checkbox","checked":settings.get("account","botUseFarmiFoodworld")},newtd);
         inp.addEventListener("click",function(){
-            settings.set("account","farmiFoodworldReject",this.checked);
+            settings.set("account","botUseFarmiFoodworld",this.checked);
             buildInfoPanelOptionsDisabling(); // To get this working, we need the "set" this <tr> and the definition in settings.require
             botArbiter.check();
         },false);
-        newtd=createElement("td",{"colspan":"2"},newtr,"Auto-kick foodworld farmis");
+        newtd=createElement("td",{"colspan":"2"},newtr,getText("automat_settings_botUseFoodworld"));
 
         // *********** FORESTRY ***********************************
 
@@ -10828,29 +10825,31 @@ try{
             }catch(err){GM_logError("eventListener:gameCarpentryOpened","","",err);}
         },false);
         err_trace="listener gameFoodworldOpened";
-        document.addEventListener("gameFoodworldOpened",function(){
-        try{
-            checkFoordworldFarmi();
-            // Automat icons
-            for(var v=1;v<=4;v++){
-                if(v<4){
-                    if(!unsafeData.zones.getBlock("foodworld-"+v+".1")){
-                        drawAutomatIcon("foodworld-"+v,
-                                        "foodworld-"+v+".1",
-                                        $("food_pos"+v),
-                                        "position:absolute;left:90px;top:100px;");
-                    }
-                }else{
-                    if(!unsafeData.zones.getBlock("foodworld-"+v+".1")){
-                        drawAutomatIcon("foodworld-"+v,
-                                        "foodworld-"+v+".1",
-                                        $("food_pos"+v),
-                                        "position:absolute;right:52px;bottom:27px;");
+        document.addEventListener("gameFoodworldOpened", function() {
+            try {
+                // Kick Foodworld-Farmis
+                checkFoodworldFarmi();
+
+                // Automat icons
+                for (var v = 1; v <= 4; v++) {
+                    if (v < 4) {
+                        if (!unsafeData.zones.getBlock("foodworld-" + v + ".1")) {
+                            drawAutomatIcon("foodworld-" + v,
+                                "foodworld-" + v + ".1",
+                                $("food_pos" + v),
+                                "position:absolute;left:90px;top:100px;");
+                        }
+                    } else {
+                        if (!unsafeData.zones.getBlock("foodworld-" + v + ".1")) {
+                            drawAutomatIcon("foodworld-" + v,
+                                "foodworld-" + v + ".1",
+                                $("food_pos" + v),
+                                "position:absolute;right:52px;bottom:27px;");
+                        }
                     }
                 }
-            }
-        }catch(err){GM_logError("eventListener:gameFoodworldOpened ","","",err);}
-        },false);
+            } catch (err) { GM_logError("eventListener:gameFoodworldOpened ", "", "", err); }
+        }, false);
         for(var v=1;v<=4;v++){
             err_trace="listener gameFoodworldOpened"+v;
             document.addEventListener("gameFoodworldOpened"+v,function(id){
@@ -11855,7 +11854,7 @@ try{
         text["de"]["automat_settings_botRestart"] = "Neu Starten des Bots";
         text["de"]["automat_zonePairing"] = "Zone pairing";
         text["de"]["automat_debugInfo"] = "Debug Info";
-        text["de"]["automat_windmill"] = "windmill";
+        text["de"]["automat_windmill"] = "Windmühle";
         text["de"]["automat_timing"] = "Timing";
         text["de"]["automat_general"] = "General";
         text["de"]["automat_guild"] = "Bauernclub";
@@ -11886,15 +11885,17 @@ try{
         text["de"]["automat_vehicleXNotAvailable"]="Fahrzeug \"%1%\" nicht verfügbar.";
         text["de"]["automat_vehicleXBuying"]="Kaufe Fahrzeug \"%1%\".";
         text["de"]["automat_vehicleXSelected"]="Fahrzeug  ist ausgewählt.";
+        text["de"]["automat_removeFoodworldFarmi"]="Entferne Picknick-Farmi";
         text["de"]["automat_shouldUpdateAdviser"] = "Du solltest das Berater-Script aktualisieren!<br>Der Automat wird nicht ordnungsgemäß arbeiten.";
         text["de"]["automat_settings_autoPlant"] = "Soll der Pflanz-Automat angezeigt werden?";
         text["de"]["automat_settings_autoWater"] = "Sollen die Äcker gegossen werden?";
         text["de"]["automat_settings_autoFeed"] = "Soll der Futter-Automat angezeigt werden?";
         text["de"]["automat_settings_botUse"] = "Verwende Bot";
+        text["de"]["automat_settings_botUseFoodworld"] = "Auto-Ablehnung für Picknick-Farmis";
         text["de"]["automat_settings_botUseGuildJop"] = "Verwende Bot für Clubauftrag";
         text["de"]["automat_settings_botUseVetTreatment"] = "Tierarzt: automatische Heilen";
         text["de"]["automat_settings_closeWindowTimer"] = "Timer: Zeit, die der Bot wartet um ein offenes Fenster zu schließen.";
-        text["de"]["automat_settings_disableCropFields"]="Block the cropping of sleeping fields.";
+        text["de"]["automat_settings_disableCropFields"]="Schlafende Felder nicht ernten";
         text["de"]["automat_settings_megafieldPreference"]="Bevorzuge Güterhof (auf anderen Accounts)";
         text["de"]["automat_settings_megafieldPreferenceTooltip"]="Wechsle zu anderem Account mit fertigem Güterhof, auch wenn auf dem aktuellen noch nicht alle Farmen bearbeitet wurden.";
         text["de"]["automat_settings_megafieldUsePremium"]="Benutze Premium-Anpflanzen";
@@ -12093,8 +12094,8 @@ try{
         text["en"]["automat_confirmChangelogVersion"]="You have installed a new version of the Automaton script.<br>The version %1% contains the following changes:";
         text["en"]["automat_maximumStockCapacityReached"]="Maximum stock capacity will be reached.";
         text["en"]["automat_nothingToCrop"]="Nothing to crop.";
-        text["de"]["automat_openAutoplantDialog"]="Open autoplant dialog.";
-        text["de"]["automat_confirmAutoplantDialog"]="Confirm autoplant dialog.";
+        text["en"]["automat_openAutoplantDialog"]="Open autoplant dialog.";
+        text["en"]["automat_confirmAutoplantDialog"]="Confirm autoplant dialog.";
         text["en"]["automat_cropWaitingInX"]="Waiting for crop in %1%.";
         text["en"]["automat_plantingAtX"]="Planting at %1%.";
         text["en"]["automat_plantingNoFreeField"]="No free field to plant.";
@@ -12109,11 +12110,13 @@ try{
         text["en"]["automat_vehicleXBuying"]="Buying vehicle \"%1%\".";
         text["en"]["automat_vehicleXSelected"]="Vehicle \"%1%\" is selected.";
         text["en"]["automat_msgUpdate"] = "There is a new script version of the automaton. Install?";
+        text["en"]["automat_removeFoodworldFarmi"]="Kick Foodworld-Farmi";
         text["en"]["automat_shouldUpdateAdviser"] = "You should update the script of the Adviser!<br>The Automaton will not run properly.";
         text["en"]["automat_settings_autoPlant"] = "Shall the planting machine be displayed?";
         text["en"]["automat_settings_autoWater"] = "Shall the fields be watered?";
         text["en"]["automat_settings_autoFeed"] = "Shall the feeding machine be displayed?";
         text["en"]["automat_settings_botUse"] = "Use bot";
+        text["en"]["automat_settings_botUseFoodworld"] = "Auto reject foodworld farmis";
         text["en"]["automat_settings_botUseGuildJop"] = "Use bot for guildjob ";
         text["en"]["automat_settings_botUseVetTreatment"] = "Vet: Automatic treatment";
         text["en"]["automat_settings_closeWindowTimer"] = "Timer: Waiting time to close an open window.";
