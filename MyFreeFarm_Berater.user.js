@@ -339,7 +339,7 @@ const ANIMAL_MOVE=[,,[false,0,0,255,10,10,505],[false,0,0,280,1,0,525],[false,0,
 // task_new_building
 const BUILDING_UPGRADES={"1":[[1,2000,0.95,0],[15,21500,0.9,0],[21,76000,0.85,0],[27,192300,0.8,0],[33,"c20",0.8,0]],"2":[[2,2500,1,5],[7,15200,1,10],[12,32500,1,15],[23,134500,0.9,20],[29,350800,0.8,20]],"3":[[11,3400,1,2],[13,16300,1,3],[17,50200,1,4],[25,159600,0.9,5],[32,441000,0.8,6]],"4":[[14,6200,1,2],[18,33500,1,3],[20,76000,1,4],[28,210500,0.9,5],[34,482000,0.8,6]],"5":[[19,6800,1,1],[22,44800,1,2],[26,128200,1,3],[31,230600,0.9,4],[35,482000,0.8,4]],"7":[[16,5200,1,1],[19,33500,0.95,1],[25,106400,0.9,1],[30,230600,0.85,1],[33,441000,0.8,1]],"8":[[18,6800,1,1],[21,38000,0.95,1],[27,128200,0.9,1],[31,230600,0.85,1],[35,482000,0.8,1]],"9":[[27,8100,1,1],[30,53200,0.95,1],[33,140300,0.9,1],[36,264600,0.85,1],[38,597200,0.8,1]],"10":[[30,9700,1,1],[33,70200,0.95,1],[34,153700,0.9,1],[37,289200,0.85,1],[39,626300,0.8,1]],"11":[[16,10000,1,1],[20,85000,1,3],[24,200000,1,5],[28,"c22",0.9,6],[32,"c38",0.8,6]],"12":[[15,38000,1,2],[17,17200,1,3],[23,54600,1,4],[29,168800,0.9,5],[38,472400,0.8,6]],"13":[[31,16800,1,1],[32,86400,0.95,1],[34,174200,0.9,1],[36,362800,0.85,1],[38,796300,0.8,1]],"14":[[35,19400,1,1],[37,97100,0.95,1],[39,218400,0.9,1],[40,509800,0.85,1],[41,1388600,0.8,1]],"15":[[37,23000,1,1],[37,95300,1,2],[38,198500,1,3],[38,391700,0.9,4],[39,842200,0.8,5]],"16":[[38,97100,1,1],[39,209736,0.95,1],[40,467711,0.9,1],[41,1080413,0.85,1],[42,2538970,0.8,1]],"17":[[10,1000,1,1]],"18":[[10,5000,1,1]],"19":[[28,250000,1,1]]
                          ,"20":[[40,421500,1,1,1,360],[40,0,1,1,2,420],[40,0,1,1,3,480],[40,0,1,1,4,510],[40,0,1,1,5,540],[40,0,1,1,6,570],[40,0,1,1,7,600],[40,0,1,1,8,660],[40,0,1,1,9,690],[40,0,1,1,10,720]]
-                         ,"fw1":[[11,7000,1,1],[11,24600,0.95,1],[11,64200,0.9,1],[11,114400,0.85,1],[11,186300,0.8,1]],"fw2":[[12,8400,1,1],[12,32500,0.95,1],[12,68900,0.9,1],[12,122400,0.85,1],[12,178600,0.8,1]],"fw3":[[12,11200,1,1],[12,43300,0.95,1],[12,91900,0.9,1],[12,163200,0.85,1],[12,238100,0.8,1]],"fw4":[[31,14400,1,1],[31,55700,0.95,1],[31,118100,0.9,1],[31,209800,0.85,1],[31,306200,0.8,1]],"fl1":[[23,85000,0.95,36]],"fl2":[[23,75000,1,1]],"fl3":[[31,900000,1,1]],"fl5":[[36,1000000,1,1]],"fl6":[[31,900000,1,1]]
+                         ,"fw1":[[11,7000,1,1],[11,24600,0.95,1],[11,64200,0.9,1],[11,114400,0.85,1],[11,186300,0.8,1]],"fw2":[[12,8400,1,1],[12,32500,0.95,1],[12,68900,0.9,1],[12,122400,0.85,1],[12,178600,0.8,1]],"fw3":[[12,11200,1,1],[12,43300,0.95,1],[12,91900,0.9,1],[12,163200,0.85,1],[12,238100,0.8,1]],"fw4":[[31,14400,1,1],[31,55700,0.95,1],[31,118100,0.9,1],[31,209800,0.85,1],[31,306200,0.8,1]],"fl1":[[23,85000,0.95,36]],"fl2":[[23,75000,1,1]],"fl3":[[31,900000,1,1]],"fl4":[[36,900000,1,1]],"fl5":[[36,1000000,1,1]],"fl6":[[31,900000,1,1]]
                         };
 // produced thing -> production area
 // task_new_plant task_new_product
@@ -491,7 +491,7 @@ GM_log("new_PRODUCT_QUEST:\n"+implode(new_PRODUCT_QUEST));
 */
 
 // Default values for Mimimum stock-amount of goods
-const INIT_valMinRack={"v":200,"ex":200,"e":50,"o":10,"z":0,"f1":25,"f2":10,"f3":10,"f4":0,"fw1":10,"fw2":10,"fw3":10,"fw4":10,"hr":1000,"md":10};
+const INIT_valMinRack={"v":200,"ex":200,"e":50,"o":10,"z":0,"f1":25,"f2":10,"f3":10,"f4":0,"fw1":10,"fw2":10,"fw3":10,"fw4":10,"hr":1000,"md":10,"breed":10};
 // task_new_level
 const LEVEL_POINTS=[0,0,58,2420,6620,15620,27900,58700,101700,163100,211900
                    ,276900,359000,467000,730000,1190000,1750000,2680000,3900000,5660000,7850000
@@ -614,7 +614,7 @@ const VARIABLES = {
                     "valLimitEmptyFields":["Option",3],
                     "valMessageRe":["Option",3],
                     "valMessagesSystemMarkRead":["Option",3],
-                                        "valMinExFruitsFarms5":["Option",3,1],
+                    "valMinExFruitsFarms5":["Option",3,1],
                     "valMinRack":["Option",3],
                     "valMinRackE":["Option",5],
                     "valMinRackF":["Option",5],
@@ -3490,6 +3490,7 @@ try{
         createElement("div",{"class":"link rackcat30fla"+(mode["filterCategory"]["fla"]?"_active":""),"filter":'["fla"]',"mouseOverText":getText("category_fla"),"style":"float:left;"},newdiv);
         createElement("div",{"class":"link rackcat60hr"+(mode["filterCategory"]["hr"]?"_active":""),"filter":'["hr"]',"mouseOverText":getText("category_hr"),"style":"float:left;"},newdiv);
         createElement("div",{"class":"link rackcat60md"+(mode["filterCategory"]["md"]?"_active":""),"filter":'["md"]',"mouseOverText":getText("category_md"),"style":"float:left;"},newdiv);
+        createElement("div",{"class":"link rackcat60breed"+(mode["filterCategory"]["breed"]?"_active":""),"filter":'["breed"]',"mouseOverText":getText("category_breed"),"style":"float:left;"},newdiv);
     } break;
     case 1:{
         for(var i=1;i<=5;i++){
@@ -3956,10 +3957,10 @@ try{
     newdiv=createElement("div",{"class":"borderBottom1Black","style":"height:50px;"},container);
     table=createElement("table",{"border":"0","cellspacing":"0","style":"width:100%;"},newdiv);
     newtr=createElement("tr",{},table);
-    createElement("td",{"class":"tnormal","style":"color:black;font-weight:bold;text-align:center;"},newtr,getText("profitTable"));
+    createElement("td",{"class":"tnormal","style":"color:black;font-weight:bold;text-align:center;position:absolute;top:5px"},newtr,getText("profitTable"));
     // switch bar to filter category
     newtd=createElement("td",{"align":"right"},newtr);
-    newdiv=createElement("div",{"style":"-moz-user-select:none;width:275px;"},newtd);
+    newdiv=createElement("div",{"style":"-moz-user-select:none;width:315px;"},newtd);
     newdiv.addEventListener("mouseover",function(event){
         var mouseOverText=event.target.getAttribute("mouseOverText");
         if(mouseOverText){
@@ -4000,6 +4001,7 @@ try{
     createElement("div",{"class":"link rackcat30fla"+(mode["filterCategory"]["fla"]?"_active":""),"filter":'["fla"]',"mouseOverText":getText("category_fla"),"style":"float:left;"},newdiv);
     createElement("div",{"class":"link rackcat60hr"+(mode["filterCategory"]["hr"]?"_active":""),"filter":'["hr"]',"mouseOverText":getText("category_hr"),"style":"float:left;"},newdiv);
     createElement("div",{"class":"link rackcat60md"+(mode["filterCategory"]["md"]?"_active":""),"filter":'["md"]',"mouseOverText":getText("category_md"),"style":"float:left;"},newdiv);
+    createElement("div",{"class":"link rackcat60breed"+(mode["filterCategory"]["breed"]?"_active":""),"filter":'["breed"]',"mouseOverText":getText("category_breed"),"style":"float:left;"},newdiv);
 
     // the table
         err_trace="table";
@@ -8542,6 +8544,18 @@ function toolTipZoneProduction(zoneNrS){
                         createElement("span",{},td,moneyFormat(help[k][2]));
                         td=createElement("td",{"style":"padding-left:5px;"},tr);
                         if(help[k][3]>0){ pointsFormat(help[k][3],"div",td); }
+                    } else if (zones.getBuilding(zoneNrS)=="fl4"&&help[k][1]==0){
+                        //Tieraufzucht
+                        var item = unsafeWindow.farmersmarket_data.pets.breed;
+                        tr=createElement("tr",{},table);
+                        td=createElement("td",{},tr);
+                        createElement("img",{"src":GFX+"/breed/Paw_00.png","style":"height:15px;width:15px;border:none;top:0px;vertical-align:bottom;"},td);
+                        createElement("span",{},td,moneyFormat(item.money));
+                        td=createElement("td",{"style":"padding-left:5px;"},tr);
+                        pointsFormat(item.points,"span",td);
+                        createElement("img",{"src":GFX+"/breed/Heart_00.png","style":"height:15px;width:15px;border:none;top:0px;vertical-align:bottom;padding-left:5px;"},td);
+                        createElement("span",{},td,numberFormat(item.breedpoints));
+
                     } else {
                         tr=createElement("tr",{},table);
                         td=createElement("td",{},tr);
@@ -21188,7 +21202,11 @@ try{
         .rackcat60md,.rackcat60md_active{background:url('"+IMAGES["racksortVeterinary"]+"');width:26px;height:39px;}\
         .rackcat60md{background-position:-26px 0px;}\
         .rackcat60md:hover{background-position:-26px -39px;}\
-        .rackcat60md_active{background-position:-26px -78px;};"
+        .rackcat60md_active{background-position:-26px -78px;}\
+        .rackcat60breed,.rackcat60breed_active{background:url("+GFX+"rack_sort_left6.png);width:26px;height:39px;}\
+        .rackcat60breed{background-position:0px -562px;}\
+        .rackcat60breed:hover{background-position:-36px -562px;}\
+        .rackcat60breed_active{background-position:-72px -562px;};"
     );
 
     // temporary hack
@@ -22016,7 +22034,7 @@ try{
         text["de"]["products"]="Produkte";
         text["de"]["productTimeSaving"]="%1% Minuten Zeitersparnis auf %2%";
         text["de"]["profit"]="Gewinn";
-        text["de"]["profitTable"]="Profit pro Zone\/Produktionsplatz pro Tag";
+        text["de"]["profitTable"]="Profit pro Zone\/<br>Produktionsplatz pro Tag";
         text["de"]["quantity"]="Menge";
         //22102016
         text["de"]["quest_breed"]="Tieraufzuchtsanlage Questreihe";
@@ -22144,6 +22162,7 @@ try{
         text["de"]["category_fw2"]="Speisen";
         text["de"]["category_fw3"]="Torten und Kuchen";
         text["de"]["category_fw4"]="Eiscreme und Sorbee";
+        text["de"]["category_breed"]="Tieraufzucht";
         text["de"]["category_fl"]="Blumen";
         text["de"]["category_fla"]="Gestecke";
         text["de"]["category_hr"]="Kräuter";
@@ -22563,6 +22582,7 @@ try{
         text["en"]["category_fw2"]="Food";
         text["en"]["category_fw3"]="Cakes";
         text["en"]["category_fw4"]="Ice crem";
+        text["en"]["category_breed"]="Animal breeding";
         text["en"]["category_fl"]="Flowers";
         text["en"]["category_fla"]="Arrangements";
         text["en"]["category_hr"]="Medicinal herb";
