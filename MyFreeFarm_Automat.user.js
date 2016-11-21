@@ -11893,7 +11893,7 @@ try{
         text["de"]["automat_settings_botUse"] = "Verwende Bot";
         text["de"]["automat_settings_botUseFoodworld"] = "Auto-Ablehnung für Picknick-Farmis";
         text["de"]["automat_settings_botUseGuildJop"] = "Verwende Bot für Clubauftrag";
-        text["de"]["automat_settings_botUseVetTreatment"] = "Tierarzt: automatische Heilen";
+        text["de"]["automat_settings_botUseVetTreatment"] = "Tierarzt: Automatisches Heilen";
         text["de"]["automat_settings_closeWindowTimer"] = "Timer: Zeit, die der Bot wartet um ein offenes Fenster zu schließen.";
         text["de"]["automat_settings_disableCropFields"]="Schlafende Felder nicht ernten";
         text["de"]["automat_settings_megafieldPreference"]="Bevorzuge Güterhof (auf anderen Accounts)";

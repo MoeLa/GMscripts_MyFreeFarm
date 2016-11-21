@@ -684,7 +684,8 @@ const VARIABLES = {
                     "prodTyp":["Product types",2],
                     "sessionlost":["Page attributes",4],
                     "username":["Username",4],
-                    "valNimmBeob":["Option",3]},
+                    "valNimmBeob":["Option",3],
+                    "valUse3TimesNpcPrices":["Option",3]},
          "COUNTRY":{"changedata":["Data version",1],
                     "pagedataLogin":["Page attributes",4],
                     "valServerTimeOffset":["Option",3]},
@@ -740,7 +741,7 @@ var upjersAds, buyNotePadShowBlocked, show;
 var farmiLog, farmiDailyCount, levelLog, levelLogId, lotteryLog, lotteryLogId, logSales, logSalesId, logDonkey, logDonkeyId, logClothingDonation;
 var zoneAddToGlobalTime;
 var totalAnimals, totalFarmis, totalPowerups, totalQuest, totalRecursive, totalZones, totalEndtime;
-var valKauflimit, valKauflimitNPC, highlightProducts, highlightUser, valNimmBeob, valVerkaufLimitDown, valVerkaufLimitUp, valJoinPreise, lastOffer, protectMinRack, ownMarketOffers, valClothingDonation, valVet, valVetAutostart, valVetAutoSet, valVetNoCoinDrugs, vetTreatment;
+var valKauflimit, valKauflimitNPC, highlightProducts, highlightUser, valNimmBeob, valUse3TimesNpcPrices, valVerkaufLimitDown, valVerkaufLimitUp, valJoinPreise, lastOffer, protectMinRack, ownMarketOffers, valClothingDonation, valVet, valVetAutostart, valVetAutoSet, valVetNoCoinDrugs, vetTreatment;
 var valAnimateStartscreen, valAutoLogin;
 var valMessagesSystemMarkRead;
 var megafieldVehicle, megafieldJob, logMegafieldJob, megafieldSmartTimer;
@@ -7145,9 +7146,21 @@ function buildInfoPanelOptions(){
         newtr=createElement("tr",{},newtable);
         newtd=createElement("td",{"align":"center"},newtr);
         newinput=createElement("input",{"id":"inputvalNimmBeob","type":"checkbox","class":"link","checked":GM_getValue(COUNTRY+"_"+SERVER+"_valNimmBeob",true)},newtd);
-        newinput.addEventListener("click",function(){ GM_setValue2(COUNTRY+"_"+SERVER+"_valNimmBeob",this.checked,44); },false);
+        newinput.addEventListener("click",function(){
+                GM_setValue2(COUNTRY+"_"+SERVER+"_valNimmBeob",this.checked,44);
+        },false);
         createElement("td",{},newtr,getText("settings_valUseObservedPrices")[0]);
         createElement("td",{},newtr,getText("settings_valUseObservedPrices")[1]);
+
+        newtr = createElement("tr", {}, newtable);
+        newtd = createElement("td", { "align": "center" }, newtr);
+        newinput = createElement("input", { "id": "inputValUse3TimesNpcPrices", "type": "checkbox", "class": "link", "checked": GM_getValue(COUNTRY + "_" + SERVER + "_valUse3TimesNpcPrices", true) }, newtd);
+        newinput.addEventListener("click", function() {
+                valUse3TimesNpcPrices = this.checked;
+                GM_setValue2(COUNTRY + "_" + SERVER + "_valUse3TimesNpcPrices", this.checked, 44);
+        }, false);
+        createElement("td", {}, newtr, getText("settings_valUse3TimesNpcPrices")[0]);
+        createElement("td", {}, newtr, getText("settings_valUse3TimesNpcPrices")[1]);
 
         // ***************Messages************************************************
         newtr=createElement("tr",{},newtable);
@@ -12380,6 +12393,7 @@ try{
     highlightUser=explode(GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_highlight"),"do_main/highlightUser",{});
     highlightUser[FARMNAME]="104e8b";
     valNimmBeob=GM_getValue(COUNTRY+"_"+SERVER+"_valNimmBeob",true);
+    valUse3TimesNpcPrices=GM_getValue(COUNTRY+"_"+SERVER+"_valUse3TimesNpcPrices",true);
 
     valVerkaufLimitDown=GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_valVerkaufLimitDown",95);
     valVerkaufLimitUp=GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_valVerkaufLimitUp",130);
@@ -13143,29 +13157,29 @@ try{
     });
 
     // Revised by Moe
-    unsafeOverwriteFunction("marketActionResponse",function(request,action,id,open){
-        try{
+    unsafeOverwriteFunction("marketActionResponse", function(request, action, id, open) {
+        try {
             var result = checkRequest(request);
-            if(result!=0 && result[0]!=0 && result[1]["offers"]) {
+            if (result != 0 && result[0] != 0 && result[1]["offers"]) {
                 // Save own offers
-                var err_trace="Save own offers";
+                var err_trace = "Save own offers";
                 var ownOffersMap = new Object();
                 var marketOffersArr = new Array();
                 var row, offer_id, prod, preis, menge, menge_sum, typ;
-                err_trace="Save own offers";
+                err_trace = "Save own offers";
                 // Iterate over received offers. Put my offers into ownOffersMap
-                for(var v = 0; v < result[1]["offers"].length; v++){
-                    row=result[1]["offers"][v]; // A received offer
+                for (var v = 0; v < result[1]["offers"].length; v++) {
+                    row = result[1]["offers"][v]; // A received offer
                     offer_id = parseInt(row["id"], 10); // Id of offer
-                    prod=parseInt(row["p"], 10); // Id of product in offer
-                    preis=parseFloat(row["pr"], 10); // Price of pruduct
-                    menge=parseInt(row["a"], 10); // Amount
-                    typ=prodTyp[0][prod] // Type of the product
+                    prod = parseInt(row["p"], 10); // Id of product in offer
+                    preis = parseFloat(row["pr"], 10); // Price of pruduct
+                    menge = parseInt(row["a"], 10); // Amount
+                    typ = prodTyp[0][prod] // Type of the product
                     if (row["s"]) { // Is this my offer?
-                        ownOffersMap[offer_id] = {id: offer_id, prod: prod, preis: preis, menge: menge, typ: typ};
+                        ownOffersMap[offer_id] = { id: offer_id, prod: prod, preis: preis, menge: menge, typ: typ };
                     }
 
-                    if(!marketOffersArr[prod]) {
+                    if (!marketOffersArr[prod]) {
                         marketOffersArr[prod] = new Array();
                     }
                     marketOffersArr[prod].push([menge, preis, offer_id]);
@@ -13179,7 +13193,7 @@ try{
 
                         // Check, if we know its product_id and if it isn't already in ownOffersMap. Check for product_id is neccessary because of migration :-)
                         if (row[3] && !ownOffersMap[row[3]]) {
-                            ownOffersMap[row[3]] = {id: row[3], prod: row[0], preis: row[1], menge: row[2], typ: row[4]};
+                            ownOffersMap[row[3]] = { id: row[3], prod: row[0], preis: row[1], menge: row[2], typ: row[4] };
                         }
                     }
                 }
@@ -13195,7 +13209,7 @@ try{
                 }
 
                 // Sort ownMarketOffers-data
-                var TYP2NUMBER = {"c":0,"v":1,"e":2,"o":3,"fw1":4,"fw2":5,"fw3":6,"fw4":7,"z":8, "fl": 9, "fla": 10};
+                var TYP2NUMBER = { "c": 0, "v": 1, "e": 2, "o": 3, "fw1": 4, "fw2": 5, "fw3": 6, "fw4": 7, "z": 8, "fl": 9, "fla": 10 };
                 ownMarketOffers.sort(function(a, b) {
                     var result = TYP2NUMBER[a[4]] - TYP2NUMBER[b[4]]; // Product-Type
                     if (result == 0) {
@@ -13209,78 +13223,92 @@ try{
                 });
 
                 // Persist values
-                GM_setValueCache(COUNTRY+"_"+SERVER+"_"+USERNAME+"_ownMarketOffers", implode(ownMarketOffers,"marketActionResponse/ownMarketOffers"));
+                GM_setValueCache(COUNTRY + "_" + SERVER + "_" + USERNAME + "_ownMarketOffers", implode(ownMarketOffers, "marketActionResponse/ownMarketOffers"));
                 doMarketoffersNotepad();
 
                 // Calculate all observed prices
-                err_trace="Observing prices";
+                err_trace = "Observing prices";
 
-                for(var v = 0; v < prodBlock[0].length; v++) {
+                for (var v = 0; v < prodBlock[0].length; v++) {
                     if (prodBlock[0][v] === undefined) { continue; }
-                    if(!prodBlock[0][v].match(/t/) && !prodBlock[0][v].match(/l/)) {
+                    if (!prodBlock[0][v].match(/t/) && !prodBlock[0][v].match(/l/)) {
                         // marketOffersArr[v] = [menge, preis, offer_id]
                         if (marketOffersArr[v]) {
                             // Sort offers by price, lowest first... same price? => take offer_id
                             marketOffersArr[v].sort(function(a, b) {
-                                return a[1]==b[1] ? a[2]-b[2] : a[1]-b[1];
+                                return a[1] == b[1] ? a[2] - b[2] : a[1] - b[1];
                             });
-                            marketOffersArr[v]=marketOffersArr[v].slice(0,18); // Take cheapest 18 offers
+                            marketOffersArr[v] = marketOffersArr[v].slice(0, 18); // Take cheapest 18 offers
 
                             menge_sum = 0; // Total amount of product v offered at market (within the cheapest 18 offers)
                             // Iterate over those (at most) 18 offers of product v
-                            for(var w = 0; w < marketOffersArr[v].length; w++){
+                            for (var w = 0; w < marketOffersArr[v].length; w++) {
                                 menge_sum += marketOffersArr[v][w][0];
                             };
                             // Calc a weighted "watched price" value for product v
-                            gutBeob[v] = calcObservedPrice((prodTyp[0][v]=="z" ? 2 : 1), marketOffersArr[v]);
-                            if (valNimmBeob){
-                                if(!isNaN(NPC[0][v])) { // If product v can be bought at NPC
-                                    gut[v]=Math.min(gutBeob[v], NPC[0][v]);
-                                }else{
-                                    gut[v]=gutBeob[v];
+                            gutBeob[v] = calcObservedPrice((prodTyp[0][v] == "z" ? 2 : 1), marketOffersArr[v]);
+                            if (valNimmBeob) {
+                                if (!isNaN(NPC[0][v])) { // If product v can be bought at NPC
+                                    gut[v] = Math.min(gutBeob[v], NPC[0][v]);
+                                } else {
+                                    gut[v] = gutBeob[v];
                                 }
                             }
-                            if (!(preisBeob instanceof Array)) { preisBeob=new Array(); }
+                            if (!(preisBeob instanceof Array)) { preisBeob = new Array(); }
                             // preisBeob[v] = [isOfferAtMarket, timeOfCalculation, priceCheapest, priceMostExpensive, amountInPriceRange]
-                            preisBeob[v]=[true, now, marketOffersArr[v][0][1], marketOffersArr[v][marketOffersArr[v].length-1][1], menge_sum];
+                            preisBeob[v] = [true, now, marketOffersArr[v][0][1], marketOffersArr[v][marketOffersArr[v].length - 1][1], menge_sum];
                         } else {
                             // no offers
                             if (valNimmBeob) {
-                                if (unsafeWindow.market_filter_pid == -1 ||
-                                    unsafeWindow.market_filter_pid == v ) {
+                                if (unsafeWindow.market_filter_pid == -1 || unsafeWindow.market_filter_pid == v) {
                                     //unsafeWindow.market_filter_pid -1 by marketinit >0 = Single view (marketOffersArr have maximum one product)
-                                    if(!isNaN(NPC[0][v])) {
-                                        gut[v] = NPC[0][v]; // Use NPC price if available
+                                    if (!isNaN(NPC[0][v])) {
+                                        // It's a Number => it can be bought at NPC
+                                        gut[v] = NPC[0][v];
                                     } else {
-                                        if (NPC[0][v]=== undefined) { continue; } //Coins have not a npc price
-                                        gut[v] = parseFloat(NPC[0][v].replace("f",""),10);
+                                        // It's not a number...
+
+                                        // Coins (v=0) are undefinded in NPC[0], entries starting with 'c' cost coins => Skip them
+                                        if (NPC[0][v] === undefined || NPC[0][v].startsWith("c")) { continue; }
+                                        
+                                        // ... it's a string starting with 'f' followed by the price
+                                        gut[v] = parseFloat(NPC[0][v].replace("f", ""), 10);
+                                        if (valUse3TimesNpcPrices) {
+                                            gut[v] = 3 * gut[v];    
+                                        }
                                     }
                                     gutBeob[v] = gut[v];
                                 }
                             }
-                            if (!(preisBeob instanceof Array)) { preisBeob=new Array(); }
+                            if (!(preisBeob instanceof Array)) { preisBeob = new Array(); }
                             if (!(preisBeob[v] && preisBeob[v][0])) { // If no "watched price"...
-                                preisBeob[v]=[false,now,,,0]; // ... set preisBeob[v] accordingly
+                                preisBeob[v] = [false, now, , , 0]; // ... set preisBeob[v] accordingly
                             }
                         }
                     }
                 }
 
-                marketOffersArr=null; ownOffersMap=null;
-                row=null;prod=null;preis=null;menge=null;menge_sum=null;
-                if (valNimmBeob){
-                    GM_setValueCache(COUNTRY+"_"+SERVER+"_gut",implode(gut,"marketActionResponse/gut"));
+                marketOffersArr = null;
+                ownOffersMap = null;
+                row = null;
+                prod = null;
+                preis = null;
+                menge = null;
+                menge_sum = null;
+                if (valNimmBeob) {
+                    GM_setValueCache(COUNTRY + "_" + SERVER + "_gut", implode(gut, "marketActionResponse/gut"));
                     raiseEventTop("gameChangedGut");
                 }
-                GM_setValueCache(COUNTRY+"_"+SERVER+"_gutBeob",implode(gutBeob,"marketActionResponse/gutBeob"));
-                GM_setValueCache(COUNTRY+"_"+SERVER+"_preisBeob",implode(preisBeob,"marketActionResponse/preisBeob"));
+                GM_setValueCache(COUNTRY + "_" + SERVER + "_gutBeob", implode(gutBeob, "marketActionResponse/gutBeob"));
+                GM_setValueCache(COUNTRY + "_" + SERVER + "_preisBeob", implode(preisBeob, "marketActionResponse/preisBeob"));
                 raiseEventTop("gameChangedBeobPrice");
             }
-        }catch(err){GM_logError("marketActionResponse","","err_trace="+err_trace+" v="+v,err);}
-        try{
-            unsafeWindow._marketActionResponse(request,action,id,open);
-        }catch(err){GM_logError("_marketActionResponse","","",err);}
+        } catch (err) { GM_logError("marketActionResponse", "", "err_trace=" + err_trace + " v=" + v, err); }
+        try {
+            unsafeWindow._marketActionResponse(request, action, id, open);
+        } catch (err) { GM_logError("_marketActionResponse", "", "", err); }
     });
+
     // Buy offer by pressing Enter
     if(newdiv=$("marketbuyofferamount")){
         newdiv.addEventListener("keyup",function(event){
@@ -22213,6 +22241,7 @@ try{
         text["de"]["settings_valJoinPrices"]=["Ein Preisfeld","Verbindet die Preis-Eingabefelder beim Marktstand"];
         text["de"]["settings_valQuicklinks"]=["Quicklinks am Markt anzeigen","Quicklinks am Markt anzeigen"];
         text["de"]["settings_valUseObservedPrices"]=["Benutze beobachtete Preise","Wenn du dich durch den Markt klickst, werden die Preise beobachtet. Ein berechneter Preis ist in der Preisliste zu sehen. Soll dieser automatisch übernommen werden?"];
+        text["de"]["settings_valUse3TimesNpcPrices"]=["Benutze dreifache NPC-Preise","Für Produkte, die nicht am NPC zu kaufen sind, wird der (fiktive) dreifache Preis angenommen."];
         text["de"]["settings_valSendStatistics"]=["Sende Statistiken","Unterstütze den <a href='http://mff.metrax.eu/' target='_blank'>Statistik-Server</a>. Es werden keine privaten Daten gesendet!"];
         text["de"]["settings_valPrivateMessages"]=["Anzahl gemerkte Privatnachrichten","Deine letzten privaten Nachrichten werden gespeichert und somit kann ein Nachrichten-Verlauf mit einem Kontakt angezeigt werden."];
         text["de"]["settings_valMarketMessages"]=["Anzahl gemerkte Marktnachrichten","Es bleiben auch alte System-Nachrichten in diesem Speicher, selbst wenn sie älter als die maximalen 7&nbsp;Tage sind."];
@@ -22632,6 +22661,7 @@ try{
         text["en"]["settings_valJoinPrices"]=["One input","Joins the price input fields at the market stand."];
         text["en"]["settings_valQuicklinks"]=["Show market quicklinks","Show quicklinks at market place"];
         text["en"]["settings_valUseObservedPrices"]=["Use observed prices","Prices are observed while clicking through the market place. A calculated price can be seen in the price list. Shall this automatically override your settings?"];
+        text["en"]["settings_valUse3TimesNpcPrices"]=["Use three times NPC prices","For products, that can't be bought at an NPC, three times their (fictual) values are assumed."];
         text["en"]["settings_valSendStatistics"]=["Send statistics","Support the <a href='http://mff.metrax.eu/' target='_blank'>Statistik-Server</a>.  No private data is sent!"];
         text["en"]["settings_valPrivateMessages"]=["Number private messages kept","Your last private messages are kept so that a message history of one contact can be shown."];
         text["en"]["settings_valMarketMessages"]=["Number market messages kept","Old messages remain in this archive, even if they are older than the maximum 7 days."];
