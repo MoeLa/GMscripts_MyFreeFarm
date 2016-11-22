@@ -5,8 +5,8 @@
 // @author         BastianKanaan
 // @description    Extends MyFreeFarm
 // @icon           data:image/png;base64,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
-// @date           16.11.2016
-// @version        2.10.49
+// @date           21.11.2016
+// @version        2.10.50
 // @license        GPL version 3 or any later version; http://www.gnu.org/copyleft/gpl.html
 // @include        /^http:\/\/(|www\.|s\d+\.)au\.myfreefarm\.com\/.*$/
 // @include        /^http:\/\/(|www\.|s\d+\.)veselaferma\.com\/.*$/
@@ -164,6 +164,7 @@ const CHANGELOG=[["2.0","29.05.2014",[["Migration nach openuserjs.org","Migratio
                 ,["2.10.46","24.10.2016",[["Güterhof: 2x2 Erntemaschine (Optionen-Automat)","Megafield: 2x2 harvester (Check options automat)"],["Verbesserungen: Güterhof","Improvements: Megafield"],["Verbesserungen: Ställe und Fabriken","Improvements: stable and factories"]]]
                 ,["2.10.47","26.10.2016",[["Tabelle: Questserie Tieraufzucht","Table: Quest-Series animal breed"],["Automatisches tägliches Abholen des 5000kT Puzzlepaket (siehe Optionen - Automat)","Automatic daily pick of 5000kT puzzle package (Check options automat)"]]]
                 ,["2.10.49","16.11.2016",[["Tieraufzucht","Animal breeding"]]]
+                ,["2.10.50","21.11.2016",[["Verbesserungen (Kleinvieh macht auch Mist :D)","Improvements"],["Option: NPC-Preis Berechnung","Option: NPC price calculation"]]]
                 ];
 if(!VERSIONfunctionFile){
     alert("Hi, I am the Berater-Script.\nThe function-file is missing.\nPlease install me again.");
@@ -277,8 +278,8 @@ const PRODUCT_QUEST=[{"117":["main",2,15],"118":["main",2,25],"119":["main",2,35
  PRODUCT_LEVEL={"veterinary":{"250":1,"251":1,"252":1,"253":2,"254":3,"255":4,"256":5,"257":6,"258":7,"259":8,"260":9,"261":10,"262":11,"263":12,"264":13,"265":14,"266":16,"267":18,"268":20,"269":22,"270":24,"271":26,"272":28,"273":30,"274":32,"275":44,"276":60,"300":1,"301":1,"302":1,"303":2,"304":3,"305":4,"306":5,"307":6,"308":7,"309":8,"310":9,"311":10,"312":11,"313":12,"314":13,"315":14,"316":16,"317":18,"318":20,"319":22,"320":24,"321":26,"322":28,"323":30,"324":32,"325":34,"326":36,"327":38,"328":40,"329":42,"330":44,"331":46,"332":48,"333":50,"334":51,"335":52,"336":53,"337":54,"338":55,"339":56,"340":57,"341":58,"342":59,"343":60,"344":61,"345":62,"346":63,"347":64,"348":65,"349":66,"400":67,"401":68,"402":69,"403":70},
 "breeding":{"600":1,"601":2,"602":3,"603":8,"604":7,"605":14,"606":12,"607":10,"608":11,"609":5,"630":6,"631":13,"632":4,"633":14,"634":2,"635":5,"636":1,"637":9,"638":8,"639":11,"660":14,"661":9,"662":7,"663":13,"664":3,"665":12,"666":6,"667":4,"668":1,"669":10}};
 
-// Required products to produce
-// task_new_product task_new_picnic_product
+// Required products to produce in format -> "prodId": [[type_p1, prodId_p1, amount_p1], [type_p2, prodId_p2, amount_p2], ...]
+// [-1, amount] is money; [0, 0, amount] are coins
 // 13102016
 const PRODUCT_REQUIRE=[{"25":[[0,9,30]],"27":[[0,10,12]],"28":[[0,11,8]],"30":[[0,12,5]],"111":[[0,110,5]],"116":[[0,2,1980]],"117":[[0,7,550]],"118":[[0,4,1020]],"119":[[0,38,650]],"120":[[0,42,110]],"121":[[0,43,100]],"122":[[0,112,130],[0,116,35]],"123":[[0,113,220],[0,117,35]],"124":[[0,114,345],[0,118,35]],"125":[[0,115,80],[0,119,35]],"130":[[0,17,400]],"131":[[0,21,150]],"132":[[0,20,100],[0,10,2]],"133":[[0,19,100],[0,10,2]],"134":[[0,17,400],[0,6,25]],"135":[[0,21,150],[0,6,25]],"136":[[0,2,120]],"137":[[0,1,200]],"138":[[0,1,200],[0,23,30]],"139":[[0,18,150],[0,22,30]],"140":[[0,21,150],[0,22,30]],"141":[[0,26,100],[0,144,3]],"142":[[0,26,100],[0,25,3]],"143":[[0,26,100],[0,25,3],[0,144,3]],"144":[[0,21,450]],"145":[[0,33,300],[0,12,2]],"146":[[0,35,200],[0,10,4],[0,12,2]],"147":[[0,37,60],[0,12,2]],"148":[[0,31,250],[0,26,150],[0,27,7]],"149":[[0,21,300],[0,43,10],[0,22,50],[0,121,4]],"150":[[0,38,60],[0,119,6],[0,17,50]],"152":[[0,151,5]],"155":[[0,152,5],[0,28,6]],"156":[[0,152,8],[0,28,5]],"157":[[0,152,2],[0,28,9]],"161":[[0,1,300],[0,17,150]],"162":[[0,1,250],[0,20,200]],"163":[[0,22,190],[0,26,120]],"164":[[0,1,150],[0,10,30]],"165":[[0,10,10],[0,12,5]],"166":[[0,10,10],[0,27,7]],"167":[[0,40,60],[0,111,10]],"168":[[0,10,10],[0,42,25]],"169":[[0,6,300],[0,9,15],[0,121,3]],"170":[[0,1,200],[0,43,20],[0,121,4]],"200":[[-1,1200],[0,171,24],[0,172,20],[0,173,12]],"201":[[-1,1400],[0,171,25],[0,172,18],[0,174,15]],"202":[[-1,1500],[0,172,22],[0,173,19],[0,174,16]],"203":[[-1,1460],[0,172,19],[0,173,16],[0,175,29]],"204":[[-1,1510],[0,171,7],[0,173,18],[0,174,8],[0,176,21]],"205":[[-1,1622],[0,171,14],[0,173,22],[0,176,10],[0,177,12]],"206":[[-1,1787],[0,174,16],[0,176,9],[0,177,10],[0,178,9]],"207":[[-1,1894],[0,173,15],[0,175,10],[0,177,11],[0,179,8]],"208":[[-1,1950],[0,173,12],[0,175,13],[0,178,15],[0,180,18]],"209":[[-1,2110],[0,171,12],[0,176,21],[0,179,7],[0,181,9]],"210":[[-1,2250],[0,171,12],[0,175,5],[0,179,34],[0,182,11]],"211":[[-1,2357],[0,172,9],[0,176,12],[0,181,22],[0,183,18]],"212":[[-1,2488],[0,171,13],[0,182,13],[0,183,16],[0,184,6]],"213":[[-1,2595],[0,171,3],[0,179,8],[0,185,7],[0,186,9],[0,187,7]],"214":[[0,0,2],[0,171,10],[0,172,14],[0,173,13],[0,174,18]],"215":[[0,0,2],[0,171,12],[0,172,22],[0,174,10],[0,175,19]],"216":[[0,0,2],[0,173,14],[0,175,8],[0,177,19],[0,178,16]],"217":[[0,0,3],[0,171,19],[0,177,5],[0,178,17],[0,180,13]],"218":[[0,0,3],[0,180,9],[0,181,8],[0,182,9],[0,183,9]],"219":[[0,0,3],[0,179,4],[0,182,1],[0,185,6],[0,186,15],[0,187,7]],"220":[[-1,1500],[0,171,70],[0,172,180],[0,173,80],[0,174,80],[0,188,1]],"221":[[-1,1500],[0,171,80],[0,172,50],[0,173,65],[0,174,140],[0,189,1]],"300":[[-1,100],[0,250,240],[0,251,210]],"301":[[-1,200],[0,251,160],[0,252,200]],"302":[[-1,300],[0,252,230],[0,250,210]],"303":[[-1,400],[0,253,220],[0,252,150]],"304":[[-1,500],[0,253,150],[0,254,110]],"305":[[0,0,1],[0,254,90],[0,255,100]],"306":[[0,0,1],[0,256,80],[0,255,80]],"307":[[-1,600],[0,257,210],[0,256,160]],"308":[[0,0,1],[0,258,130],[0,257,160]],"309":[[-1,700],[0,259,190],[0,258,140]],"310":[[0,0,2],[0,260,90],[0,259,90]],"311":[[-1,800],[0,261,390],[0,260,390]],"312":[[0,0,2],[0,262,130],[0,261,150]],"313":[[-1,900],[0,263,180],[0,262,230]],"314":[[0,0,2],[0,264,90],[0,263,80]],"315":[[-1,1000],[0,265,100],[0,264,130]],"316":[[0,0,3],[0,266,130],[0,265,90]],"317":[[-1,1100],[0,267,290],[0,266,260]],"318":[[0,0,3],[0,268,160],[0,267,170]],"319":[[-1,1200],[0,269,130],[0,268,180]],"320":[[-1,1300],[0,270,90],[0,269,80]],"321":[[0,0,3],[0,271,50],[0,270,100]],"322":[[-1,1400],[0,272,380],[0,271,320]],"323":[[0,0,4],[0,273,190],[0,272,160]],"324":[[-1,1500],[0,272,321],[0,274,321]],"325":[[-1,1600],[0,250,480],[0,251,420]],"326":[[-1,1700],[0,251,320],[0,252,400]],"327":[[-1,1800],[0,250,420],[0,252,460]],"328":[[-1,1900],[0,252,300],[0,253,440]],"329":[[-1,2000],[0,253,300],[0,254,200]],"330":[[-1,2100],[0,273,71],[0,275,111]],"331":[[0,0,4],[0,254,180],[0,255,200]],"332":[[0,0,4],[0,255,160],[0,256,160]],"333":[[-1,2200],[0,256,320],[0,257,420]],"334":[[0,0,4],[0,257,320],[0,258,260]],"335":[[-1,2300],[0,272,111],[0,274,90]],"336":[[-1,2400],[0,258,280],[0,259,380]],"337":[[0,0,5],[0,259,180],[0,260,180]],"338":[[-1,2500],[0,260,780],[0,261,780]],"339":[[0,0,5],[0,261,300],[0,262,160]],"340":[[-1,2600],[0,262,460],[0,263,360]],"341":[[0,0,5],[0,263,160],[0,264,180]],"342":[[-1,2700],[0,264,260],[0,265,200]],"343":[[0,0,6],[0,265,180],[0,266,260]],"344":[[0,0,6],[0,256,71],[0,276,51]],"345":[[-1,2800],[0,266,520],[0,267,580]],"346":[[0,0,6],[0,267,340],[0,268,320]],"347":[[-1,2900],[0,268,360],[0,269,260]],"348":[[-1,3000],[0,269,160],[0,270,180]],"349":[[0,0,6],[0,270,200],[0,271,100]],"400":[[-1,3100],[0,271,640],[0,272,760]],"401":[[0,0,7],[0,272,320],[0,273,380]],"402":[[-1,3200],[0,272,181],[0,275,221]],"403":[[0,0,7],[0,257,111],[0,276,141]],"450":[[0,20,190],[0,10,15]],"451":[[0,33,120],[0,111,5]],"452":[[0,34,100],[0,9,15]],"453":[[0,35,150],[0,10,10]],"454":[[0,36,190],[0,10,12]],"455":[[0,37,200],[0,9,8]],"456":[[0,40,40],[0,10,8]],"457":[[0,351,20],[0,9,8]],"458":[[0,356,10],[0,10,12]],"459":[[0,361,18],[0,111,8]],"460":[[0,360,14],[0,10,15]],"461":[[0,357,18],[0,10,16]],"462":[[0,352,16],[0,9,20]],"463":[[0,353,20],[0,10,18]],"464":[[0,359,22],[0,111,14]],"465":[[0,355,12],[0,9,16]],"466":[[0,354,15],[0,111,8],[0,12,5]],"467":[[0,358,14],[0,10,12],[0,9,16]],"468":[[0,10,6],[0,356,20]],"469":[[0,6,40],[0,37,120],[0,352,60]],"470":[[0,351,120],[0,355,50],[0,359,80]],"471":[[0,10,12],[0,351,100],[0,360,40]],"472":[[0,10,20],[0,360,100]],"473":[[0,352,120],[0,357,120]],"474":[[0,6,20],[0,117,6],[0,154,50]],"475":[[0,9,20],[0,44,40],[0,153,40]],"476":[[0,6,15],[0,111,6],[0,115,25]],"477":[[0,1,200],[0,27,12],[0,351,80]],"478":[[0,39,20],[0,111,6]],"479":[[0,1,250],[0,9,10],[0,41,20]],"480":[[0,10,10],[0,12,10],[0,352,30]],"481":[[0,111,6],[0,355,12],[0,359,25]],"482":[[0,1,200],[0,9,8],[0,356,20]],"483":[[0,10,10],[0,111,8],[0,127,15]],"600":[[-1,200],[0,1,340],[0,10,3],[0,12,4]],"601":[[0,0,1],[0,6,60],[0,17,500],[0,111,12]],"602":[[-1,300],[0,1,500],[0,2,200],[0,3,200]],"603":[[-1,600],[0,8,15],[0,108,100],[0,109,150]],"604":[[-1,400],[0,32,50],[0,33,30],[0,34,30]],"605":[[0,0,4],[0,9,12],[0,10,10],[0,27,10]],"606":[[-1,800],[0,3,220],[0,6,150],[0,18,200]],"607":[[0,0,2],[0,5,220],[0,17,500],[0,24,200]],"608":[[0,0,3],[0,1,400],[0,10,8],[0,37,20]],"609":[[0,0,2],[0,35,30],[0,36,10],[0,37,20]],"630":[[0,0,2],[0,28,7],[0,30,12],[0,109,100]],"631":[[0,0,3],[0,11,17],[0,26,20],[0,29,20]],"632":[[0,0,1],[0,7,20],[0,17,300],[0,28,10]],"633":[[0,0,4],[0,2,350],[0,11,12],[0,28,8]],"634":[[-1,300],[0,1,400],[0,6,50],[0,28,5]],"635":[[-1,400],[0,11,10],[0,17,420],[0,38,100]],"636":[[-1,200],[0,19,30],[0,30,5],[0,38,20]],"637":[[-1,600],[0,24,60],[0,34,200],[0,35,30]],"638":[[0,0,2],[0,28,18],[0,153,40]],"639":[[-1,800],[0,9,13],[0,21,100],[0,26,80]],"660":[[0,0,4],[0,11,15],[0,17,450],[0,28,11]],"661":[[0,0,2],[0,4,250],[0,11,17],[0,20,30]],"662":[[0,0,2],[0,4,300],[0,5,75],[0,36,25]],"663":[[-1,800],[0,8,40],[0,11,11],[0,108,140]],"664":[[0,0,1],[0,2,250],[0,7,25],[0,8,25]],"665":[[0,0,3],[0,1,460],[0,4,80],[0,11,17]],"666":[[-1,400],[0,3,100],[0,11,8],[0,18,0]],"667":[[-1,300],[0,1,400],[0,7,30],[0,11,6]],"668":[[-1,200],[0,5,100],[0,6,30],[0,18,200]],"669":[[-1,600],[0,11,10],[0,28,7],[0,33,20]]}
                       ,{"41":[[1,21,1]],"42":[[1,21,1]],"43":[[1,21,1]],"44":[[1,22,1]],"45":[[1,22,1]],"46":[[1,22,1]],"47":[[1,23,1]],"48":[[1,23,1]],"49":[[1,23,1]],"50":[[1,24,1]],"51":[[1,24,1]],"52":[[1,24,1]],"53":[[1,25,1]],"54":[[1,25,1]],"55":[[1,25,1]],"56":[[1,26,1]],"57":[[1,26,1]],"58":[[1,26,1]],"59":[[1,27,1]],"60":[[1,27,1]],"61":[[1,27,1]],"62":[[1,28,1]],"63":[[1,28,1]],"64":[[1,28,1]],"101":[[1,41,4]],"102":[[1,41,18],[1,42,2]],"103":[[1,44,11]],"104":[[1,42,1],[1,43,5]],"105":[[1,44,20],[1,45,50],[1,46,70]],"106":[[1,49,1]],"107":[[1,46,1]],"108":[[1,47,125],[1,48,65],[1,49,32]],"109":[[1,47,5]],"110":[[1,50,9],[1,51,4]],"111":[[1,52,4]],"112":[[1,50,12],[1,51,7],[1,52,6]],"113":[[1,42,1]],"114":[[1,41,1],[1,43,1]],"115":[[1,53,8],[1,55,2]],"116":[[1,53,120],[1,54,40],[1,55,40]],"117":[[1,53,80],[1,54,65],[1,55,125]],"118":[[1,53,6],[1,54,8]],"119":[[1,54,20],[1,55,25]],"120":[[1,54,35],[1,55,40]],"121":[[1,56,7],[1,57,3]],"122":[[1,58,9]],"123":[[1,57,4],[1,58,5]],"124":[[1,56,9],[1,57,4]],"125":[[1,58,3]],"126":[[1,61,5]],"127":[[1,60,3]],"128":[[1,60,6],[1,61,5]],"129":[[1,59,10],[1,60,8],[1,61,5]],"130":[[1,60,9],[1,61,8]],"131":[[1,59,6],[1,61,12]],"132":[[1,59,10],[1,60,8],[1,61,5]],"133":[[1,42,1]],"134":[[1,62,21],[1,63,15]],"143":[[1,62,21],[1,63,22],[1,64,15]],"144":[[1,64,15]],"146":[[1,45,12],[1,63,12],[1,46,6],[1,64,6]],"148":[[1,64,15],[1,63,10]],"200":[[1,41,12]],"201":[[0,0,2],[1,44,8]],"202":[[1,47,21]],"203":[[0,0,4],[1,51,20]],"204":[[1,42,6]],"205":[[0,0,2],[1,45,4]],"206":[[1,48,9]],"207":[[0,0,4],[1,52,20]],"208":[[1,41,15]],"209":[[0,0,2],[1,45,5]],"210":[[1,48,8]],"211":[[0,0,4],[1,50,27]],"212":[[1,43,15]],"213":[[0,0,2],[1,44,11]],"214":[[1,51,21]],"215":[[0,0,4],[1,52,22]]
@@ -684,7 +685,8 @@ const VARIABLES = {
                     "prodTyp":["Product types",2],
                     "sessionlost":["Page attributes",4],
                     "username":["Username",4],
-                    "valNimmBeob":["Option",3]},
+                    "valNimmBeob":["Option",3],
+                    "valUse3TimesNpcPrices":["Option",3]},
          "COUNTRY":{"changedata":["Data version",1],
                     "pagedataLogin":["Page attributes",4],
                     "valServerTimeOffset":["Option",3]},
@@ -740,7 +742,7 @@ var upjersAds, buyNotePadShowBlocked, show;
 var farmiLog, farmiDailyCount, levelLog, levelLogId, lotteryLog, lotteryLogId, logSales, logSalesId, logDonkey, logDonkeyId, logClothingDonation;
 var zoneAddToGlobalTime;
 var totalAnimals, totalFarmis, totalPowerups, totalQuest, totalRecursive, totalZones, totalEndtime;
-var valKauflimit, valKauflimitNPC, highlightProducts, highlightUser, valNimmBeob, valVerkaufLimitDown, valVerkaufLimitUp, valJoinPreise, lastOffer, protectMinRack, ownMarketOffers, valClothingDonation, valVet, valVetAutostart, valVetAutoSet, valVetNoCoinDrugs, vetTreatment;
+var valKauflimit, valKauflimitNPC, highlightProducts, highlightUser, valNimmBeob, valUse3TimesNpcPrices, valVerkaufLimitDown, valVerkaufLimitUp, valJoinPreise, lastOffer, protectMinRack, ownMarketOffers, valClothingDonation, valVet, valVetAutostart, valVetAutoSet, valVetNoCoinDrugs, vetTreatment;
 var valAnimateStartscreen, valAutoLogin;
 var valMessagesSystemMarkRead;
 var megafieldVehicle, megafieldJob, logMegafieldJob, megafieldSmartTimer;
@@ -2591,62 +2593,67 @@ function getBuildingName(building){
     }catch(err){GM_logError("getBuildingName","","",err);}
 }
 // Totals
-function calcTotalRecursive(recursionCount,stack){
-  // console.log(recursionCount);
-  // console.trace();
-try{
- if(DEVMODE_FUNCTION){ var trackingHandle = tracking.start("berater","calcTotalRecursive",[recursionCount]); }
-    if(recursionCount>100){throw("TOO MUCH RECURSION")}
-    var err_trace="init";
-    var help;
-    var next=false;
-    var nextStack={};
-    if(!stack){
-        totalRecursive=new Array(new Object(),new Object(),new Object(),new Object());
-        stack=prodStock.clone();
-        for(var type in prodMinRack){
-            if(!prodMinRack.hasOwnProperty(type)){ continue; }
-            for(var iProd in prodMinRack[type]){
-                if (!prodMinRack[type].hasOwnProperty(iProd)){ continue; }
-                if(!stack[type]){ stack[type]={}; }
-                stack[type][iProd]-=prodMinRack[type][iProd];
-            }
+function calcTotalRecursive() {
+    var type, id, req, i, amountMissingProducts, j, k;
+    try {
+        if (DEVMODE_FUNCTION) {
+            var trackingHandle = tracking.start("berater", "calcTotalRecursive", []);
         }
-    }
-    err_trace="step";
-    for(var type in stack){
-        if(!stack.hasOwnProperty(type)){ continue; }
-        for(var iProd in stack[type]){
-            if(!stack[type].hasOwnProperty(iProd)){ continue; }
-            if(stack[type][iProd]<0){
-                if((typeof prodRequire[type][iProd]=="object")&&(totalZones[PRODUCT2BUILDING[type][iProd]]>0)){
-                    err_trace="prodRequire";
-                    for(var i=0;i<prodRequire[type][iProd].length;i++){
-                        err_trace="prodRequire "+i;
-                        if(prodRequire[type][iProd][i][0]>-1){
-                            help=-stack[type][iProd]/prodYield[type][iProd]*prodRequire[type][iProd][i][2];
-                            if(!nextStack[prodRequire[type][iProd][i][0]]){
-                                nextStack[prodRequire[type][iProd][i][0]]={};
+
+        totalRecursive = new Array(new Object(), new Object(), new Object(), new Object());
+        var types = [0, 1]; // 0 = normal products, 1 = forestry products
+
+        for (k = 0; k < types.length; k++) {
+            type = types[k];
+
+            // Iterate over all products starting with those which are no pre-product.
+            // It is important that an inspected product won't be needed by a non-yet-inspected product!
+            for (i = prodNameSort[type].length - 1; i >= 0; i--) {
+                // Id of currently inspected product
+                id = prodNameSort[type][i];
+
+                /** Calculate the amount of missing products:
+                 *   - Amount of directly needed product and currently in production in 'prodMinRack'
+                 *   - Amount of recursivly needed product in 'totalRecursive'
+                 *   - Amount of already produced/existing product in stock in 'ProdStock'
+                 */
+                amountMissingProducts = prodMinRack[type][id] + (totalRecursive[type][id] ? totalRecursive[type][id] : 0) - prodStock[type][id];
+
+                // If there is a need to gain this product...
+                if (amountMissingProducts > 0) {
+                    // If this product requires other products... (e.g. tree logs DON'T!)
+                    if (prodRequire[type][id]) {
+                        // Iterate over pre-products
+                        for (j = 0; j < prodRequire[type][id].length; j++) {
+                            // Cache the currently inspected pre-product
+                            req = prodRequire[type][id][j];
+
+                            // Do only consider pre-products (ignore money)
+                            if (req[0] >= 0) {
+                                // Initialize result storage of pre-product, if necessary
+                                if (!totalRecursive[req[0]]) { totalRecursive[req[0]] = []; }
+                                if (!totalRecursive[req[0]][req[1]]) { totalRecursive[req[0]][req[1]] = 0; }
+
+                                /** Some real magic is done here: We calculate, how many pre-products are recursivly needed!
+                                 *  We know the amount to produce ('amountMissingProducts') and divide it by the yielded amount per production
+                                 *  cycle ('prodYield'). Then we (should) multiply with the amount of needed pre-product ('req[2]') to initiate
+                                 *  the production. Finally, we round up, since we can't produce fractions ('Math.ceil()').
+                                 *  If the production needs more than one unit of the pre-product, we need to round up to a multiple of 'req[2]'.
+                                 *  The formula therefore is 'Math.ceil(x / req[2]) * req[2]'. We then reduce 'req[2]' inside the ceiling-function.
+                                 */
+                                totalRecursive[req[0]][req[1]] += Math.ceil((amountMissingProducts) / prodYield[type][id]) * req[2];
                             }
-                            if(!nextStack[prodRequire[type][iProd][i][0]][prodRequire[type][iProd][i][1]]){
-                                nextStack[prodRequire[type][iProd][i][0]][prodRequire[type][iProd][i][1]]=0;
-                            }
-                            next=true;
-                            nextStack[prodRequire[type][iProd][i][0]][prodRequire[type][iProd][i][1]]-=help;
-                            if(!totalRecursive[prodRequire[type][iProd][i][0]][prodRequire[type][iProd][i][1]]){
-                                totalRecursive[prodRequire[type][iProd][i][0]][prodRequire[type][iProd][i][1]]=0;
-                            }
-                            totalRecursive[prodRequire[type][iProd][i][0]][prodRequire[type][iProd][i][1]]+=help;
                         }
                     }
                 }
-
             }
         }
+        if (DEVMODE_FUNCTION) {
+            tracking.end("berater", trackingHandle);
+        }
+    } catch (err) {
+        GM_logError("calcTotalRecursive\ntype=" + type + " id=" + id + " req=" + implode(req) + " i=" + i + " j=" + j + "\n" + err);
     }
-    if(next){ calcTotalRecursive(++recursionCount,nextStack); }
- if(DEVMODE_FUNCTION){ tracking.end("berater",trackingHandle); }
-}catch(err){ GM_logError("calcTotalRecursive","","err_trace="+err_trace+" type="+type+" iProd="+iProd+" help="+implode(help,"calcTotalRecursive/help")+" i="+i,err); }
 }
 function calcTotalFarmis(){
     try{
@@ -2921,21 +2928,19 @@ try{
         }
     }
     err_trace="recursive";
-    //GM_log("Before calcTotalRecursive prodMinRack:"+implode(prodMinRack[1]));
-    if(valMinRackRecursive){
-        calcTotalRecursive(1); // recursive need products calculation
-        for(var type in totalRecursive){
-            if (!totalRecursive.hasOwnProperty(type)){ continue; }
-            for(var prod in totalRecursive[type]){
-                if(!totalRecursive[type].hasOwnProperty(prod)){ continue; }
-                if(!prodMinRack[type][prod]){ prodMinRack[type][prod]=0; }
+    if (valMinRackRecursive) {
+        calcTotalRecursive(); // recursive need products calculation
+        for (var type in totalRecursive) {
+            if (!totalRecursive.hasOwnProperty(type)) { continue; }
+            for (var prod in totalRecursive[type]) {
+                if (!totalRecursive[type].hasOwnProperty(prod)) { continue; }
+                if (!prodMinRack[type]) { prodMinRack[type] = []; }
+                if (!prodMinRack[type][prod]) { prodMinRack[type][prod] = 0; }
                 prodMinRack[type][prod] += totalRecursive[type][prod];
             }
         }
     }
-    //GM_log("After calcTotalRecursive totalRecursive:"+implode(totalRecursive));
-    //GM_log("After calcTotalRecursive prodMinRack:"+implode(prodMinRack[1]));
-    //GM_log("After calcTotalRecursive prodStock:"+implode(prodStock[1]));
+
 
     // delete wrong values
     err_trace="QA";
@@ -3063,136 +3068,203 @@ try {
 }catch(err){ GM_logError("gatherQuestDetails",(" type: "+type+", campaign: "+campaign+", Nr: "+nr),"",err); }
 }
 
-function handleQuestLine(){
-try{
-    var div,help;
-    for(var type in questData){
-        if (!questData.hasOwnProperty(type)){ continue; }
-        for(var campaign in questData[type]){
-            if(!questData[type].hasOwnProperty(campaign)){continue;}
-            // GM_logInfo("handleQuestLine","","type="+type+" campaign="+campaign,"quests_status[type][campaign]:\n"+print_r(unsafeWindow.quests_status[type][campaign],"",true,"\n"));
-            if((type=="foodworld")&&unsafeWindow.quests_status&&unsafeWindow.quests_status[type]&&unsafeWindow.quests_status[type][campaign]&&unsafeWindow.quests_status[type][campaign]["data"]){
-                unsafeWindow.quests_status[type][campaign]["questid"]=unsafeWindow.quests_status[type][campaign]["data"]["questid"]; //Bugfix
-            }
-            if(unsafeWindow.quests_status&&unsafeWindow.quests_status[type]&&unsafeWindow.quests_status[type][campaign]){
-                help=parseInt(unsafeWindow.quests_status[type][campaign]["questid"],10);
-                if(isNaN(help)){ help=1; };
-                switch(implode([type,campaign],"handleQuestLine/typeCampaign")){
-                case implode(["main","2"],"handleQuestLine/main2"):{
-                    if(USERLEVEL<31){ help=-1; }
-                break;}
-                case implode(["main","3"],"handleQuestLine/main3"):{
-                    if((USERLEVEL<40)||(speedlink_farm5.style.display=="none")){ help=-1; }
-                break;}
-                case implode(["forestry","1"],"handleQuestLine/forestry1"):{
-                    if(USERLEVEL<20){ help=-1; }
-                break;}
-                case implode(["forestry","2"],"handleQuestLine/forestry2"):{
-                    if(questData["forestry"]["1"]["nr"]<35){ help=-1; }
-                break;}
-                case implode(["foodworld","1"],"handleQuestLine/foodworld1"):{
-                    if(USERLEVEL<12){ help=-1; }
-                break;}
+function handleQuestLine() {
+    try {
+        var div, help;
+        for (var type in questData) { // Iterate over quest types
+            if (!questData.hasOwnProperty(type)) { continue; }
+            for (var campaign in questData[type]) { // Iterate over campaigns
+                if (!questData[type].hasOwnProperty(campaign)) { continue; }
+                if ((type == "foodworld")
+                        && unsafeWindow.quests_status
+                        && unsafeWindow.quests_status[type]
+                        && unsafeWindow.quests_status[type][campaign]
+                        && unsafeWindow.quests_status[type][campaign]["data"]) {
+                    // Bugfix: Write Foodworld-QuestId to quests_status[type][campaign]
+                    unsafeWindow.quests_status[type][campaign]["questid"] = unsafeWindow.quests_status[type][campaign]["data"]["questid"];
                 }
-                // if((type=="forestry")&&(campaign=="2")){ help++; } // Bugfix
-                if(questData[type][campaign]["nr"]!=help){
-                    switch(type){
-                    case "main":{      GM_logInfo("handleQuestLine","","type="+type+" campaign="+campaign,getText("pleaseOpenX").replace(/%1%/,getText("quest"+type+campaign))+" ("+questData[type][campaign]["nr"]+"&ne;"+help+")"); break;}
-                    case "forestry":{  GM_logInfo("handleQuestLine","","type="+type+" campaign="+campaign,getText("pleaseOpenX").replace(/%1%/,getText("lodge"))+" ("+questData[type][campaign]["nr"]+"&ne;"+help+")"); break;}
-                    case "foodworld":{ GM_logInfo("handleQuestLine","","type="+type+" campaign="+campaign,getText("pleaseOpenX").replace(/%1%/,getText("foodworld"))+" ("+questData[type][campaign]["nr"]+"&ne;"+help+")"); break;}
+                if (unsafeWindow.quests_status
+                        && unsafeWindow.quests_status[type]
+                        && unsafeWindow.quests_status[type][campaign]) {
+                    if (type == "foodworld") {
+                        help = unsafeWindow.quests_status[type][campaign]["data"]["questid"];
+                    } else if (type == "forestry" && campaign == "2" && typeof unsafeWindow.quests_status[type][campaign]["questid"] === 'string') {
+                        // QuestId from forestry/2 might come as a string of last finished quest
+                        // We need to parse and increment it!
+                        help = parseInt(unsafeWindow.quests_status[type][campaign]["questid"], 10) + 1;
+                    } else {
+                        help = unsafeWindow.quests_status[type][campaign]["questid"];
                     }
-                    if(!QUESTS[type][campaign][questData[type][campaign]["nr"]]){
-                        GM_logInfo("handleQuestLine","","type="+type+" campaign="+campaign+" quests_status="+implode(unsafeWindow.quests_status,1),getText("questSetXToNrY").replace(/%1%/,getText("quest"+type+campaign)).replace(/%2%/,help));
-                        questData[type][campaign]["nr"]=help;
+
+                    if (isNaN(help)) { help = 1; };
+                    switch (implode([type, campaign], "handleQuestLine/typeCampaign")) {
+                        case implode(["main", "2"], "handleQuestLine/main2"):
+                            {
+                                if (USERLEVEL < 31) { help = -1; }
+                                break;
+                            }
+                        case implode(["main", "3"], "handleQuestLine/main3"):
+                            {
+                                if ((USERLEVEL < 40) || (speedlink_farm5.style.display == "none")) { help = -1; }
+                                break;
+                            }
+                        case implode(["forestry", "1"], "handleQuestLine/forestry1"):
+                            {
+                                if (USERLEVEL < 20) { help = -1; }
+                                break;
+                            }
+                        case implode(["forestry", "2"], "handleQuestLine/forestry2"):
+                            {
+                                if (questData["forestry"]["1"]["nr"] < 35) { help = -1; }
+                                break;
+                            }
+                        case implode(["foodworld", "1"], "handleQuestLine/foodworld1"):
+                            {
+                                if (USERLEVEL < 12) { help = -1; }
+                                break;
+                            }
+                    }
+
+                    if (questData[type][campaign]["nr"] != help) {
+                        switch (type) {
+                            case "main":
+                                {
+                                    GM_logInfo("handleQuestLine", "", "type=" + type + " campaign=" + campaign, getText("pleaseOpenX").replace(/%1%/, getText("quest" + type + campaign)) + " (" + questData[type][campaign]["nr"] + "&ne;" + help + ")");
+                                    break;
+                                }
+                            case "forestry":
+                                {
+                                    GM_logInfo("handleQuestLine", "", "type=" + type + " campaign=" + campaign, getText("pleaseOpenX").replace(/%1%/, getText("lodge")) + " (" + questData[type][campaign]["nr"] + "&ne;" + help + ")");
+                                    console.trace();
+                                    break;
+                                }
+                            case "foodworld":
+                                {
+                                    GM_logInfo("handleQuestLine", "", "type=" + type + " campaign=" + campaign, getText("pleaseOpenX").replace(/%1%/, getText("foodworld")) + " (" + questData[type][campaign]["nr"] + "&ne;" + help + ")");
+                                    break;
+                                }
+                        }
+
+                        if (!QUESTS[type][campaign][questData[type][campaign]["nr"]]) {
+                            GM_logInfo("handleQuestLine", "", "type=" + type + " campaign=" + campaign + " quests_status=" + implode(unsafeWindow.quests_status, 1), getText("questSetXToNrY").replace(/%1%/, getText("quest" + type + campaign)).replace(/%2%/, help));
+                            questData[type][campaign]["nr"] = help;
+                            questData[type][campaign]["given"] = new Object();
+                            questData[type][campaign]["time"] = 0;
+                            GM_setValueCache(COUNTRY + "_" + SERVER + "_" + USERNAME + "_questData", implode(questData, "handleQuestLine/questData"));
+                            unsafeData.questData = questData.clone();
+                        }
+                    }
+                } else {
+                    help = questData[type][campaign]["nr"];
+                    switch (implode([type, campaign], "handleQuestLine/typeCampaign")) {
+                        case implode(["main", "2"], "handleQuestLine/main2"):
+                            {
+                                if (USERLEVEL < 31) { help = -1; }
+                                break;
+                            }
+                        case implode(["main", "3"], "handleQuestLine/main3"):
+                            {
+                                if ((USERLEVEL < 40) || (speedlink_farm5.style.display == "none")) { help = -1; }
+                                break;
+                            }
+                        case implode(["forestry", "1"], "handleQuestLine/forestry1"):
+                            {
+                                if (USERLEVEL < 20) { help = -1; }
+                                break;
+                            }
+                        case implode(["forestry", "2"], "handleQuestLine/forestry2"):
+                            {
+                                if (questData["forestry"]["1"]["nr"] < 35) { help = -1; }
+                                break;
+                            }
+                        case implode(["foodworld", "1"], "handleQuestLine/foodworld1"):
+                            {
+                                if (USERLEVEL < 12) { help = -1; }
+                                break;
+                            }
+                    }
+                    if (questData[type][campaign]["nr"] != help) {
+                        GM_logInfo("handleQuestLine", "", "type=" + type + " campaign=" + campaign + " quests_status=" + implode(unsafeWindow.quests_status, 1), getText("questSetXToNrY").replace(/%1%/, getText("quest" + type + campaign)).replace(/%2%/, help));
+                        questData[type][campaign]["nr"] = help;
                         questData[type][campaign]["given"] = new Object();
                         questData[type][campaign]["time"] = 0;
-                        GM_setValueCache(COUNTRY+"_"+SERVER+"_"+USERNAME+"_questData",implode(questData,"handleQuestLine/questData"));
-                        unsafeData.questData=questData.clone();
+                        GM_setValueCache(COUNTRY + "_" + SERVER + "_" + USERNAME + "_questData", implode(questData, "handleQuestLine/questData"));
+                        unsafeData.questData = questData.clone();
                     }
                 }
-            }else{
-                help=questData[type][campaign]["nr"];
-                switch(implode([type,campaign],"handleQuestLine/typeCampaign")){
-                case implode(["main","2"],"handleQuestLine/main2"):{
-                    if(USERLEVEL<31){ help=-1; }
-                break;}
-                case implode(["main","3"],"handleQuestLine/main3"):{
-                    if((USERLEVEL<40)||(speedlink_farm5.style.display=="none")){ help=-1; }
-                break;}
-                case implode(["forestry","1"],"handleQuestLine/forestry1"):{
-                    if(USERLEVEL<20){ help=-1; }
-                break;}
-                case implode(["forestry","2"],"handleQuestLine/forestry2"):{
-                    if(questData["forestry"]["1"]["nr"]<35){ help=-1; }
-                break;}
-                case implode(["foodworld","1"],"handleQuestLine/foodworld1"):{
-                    if(USERLEVEL<12){ help=-1; }
-                break;}
-                }
-                if(questData[type][campaign]["nr"]!=help){
-                    GM_logInfo("handleQuestLine","","type="+type+" campaign="+campaign+" quests_status="+implode(unsafeWindow.quests_status,1),getText("questSetXToNrY").replace(/%1%/,getText("quest"+type+campaign)).replace(/%2%/,help));
-                    questData[type][campaign]["nr"]=help;
-                    questData[type][campaign]["given"] = new Object();
-                    questData[type][campaign]["time"] = 0;
-                    GM_setValueCache(COUNTRY+"_"+SERVER+"_"+USERNAME+"_questData",implode(questData,"handleQuestLine/questData"));
-                    unsafeData.questData=questData.clone();
-                }
-            }
-            if(div=$("quests_status_bar_"+type+campaign)){
-                if(questData[type][campaign]["nr"]==0){
-                    div.style.display="block"; // quest number unknown
-                    switch(type){
-                    case "main":{      GM_logInfo("handleQuestLine","","type="+type+" campaign="+campaign,getText("informationIsMissing")+" "+getText("pleaseOpenX").replace(/%1%/,getText("quest"+type+campaign))); break;}
-                    case "forestry":{  GM_logInfo("handleQuestLine","","type="+type+" campaign="+campaign,getText("informationIsMissing")+" "+getText("pleaseOpenX").replace(/%1%/,getText("lodge"))); break;}
-                    case "foodworld":{ GM_logInfo("handleQuestLine","","type="+type+" campaign="+campaign,getText("informationIsMissing")+" "+getText("pleaseOpenX").replace(/%1%/,getText("foodworld"))); break;}
+                if (div = $("quests_status_bar_" + type + campaign)) {
+                    if (questData[type][campaign]["nr"] == 0) {
+                        div.style.display = "block"; // quest number unknown
+                        switch (type) {
+                            case "main":
+                                {
+                                    GM_logInfo("handleQuestLine", "", "type=" + type + " campaign=" + campaign, getText("informationIsMissing") + " " + getText("pleaseOpenX").replace(/%1%/, getText("quest" + type + campaign)));
+                                    break;
+                                }
+                            case "forestry":
+                                {
+                                    GM_logInfo("handleQuestLine", "", "type=" + type + " campaign=" + campaign, getText("informationIsMissing") + " " + getText("pleaseOpenX").replace(/%1%/, getText("lodge")));
+                                    break;
+                                }
+                            case "foodworld":
+                                {
+                                    GM_logInfo("handleQuestLine", "", "type=" + type + " campaign=" + campaign, getText("informationIsMissing") + " " + getText("pleaseOpenX").replace(/%1%/, getText("foodworld")));
+                                    break;
+                                }
+                        }
+
+                    } else if ((questData[type][campaign]["nr"] == -1) || (questData[type][campaign]["calcTo"] == -1)) {
+                        div.style.display = "none"; // do not show quest
+                    } else if (QUESTS[type][campaign][questData[type][campaign]["nr"]]) {
+                        div.style.display = "block"; // quest available
+                    } else {
+                        div.style.display = "none"; // all quests done
                     }
-                }else if((questData[type][campaign]["nr"]==-1)||(questData[type][campaign]["calcTo"]==-1)){
-                    div.style.display="none"; // do not show quest
-                }else if(QUESTS[type][campaign][questData[type][campaign]["nr"]]){
-                    div.style.display="block"; // quest available
-                }else{
-                    div.style.display="none"; // all quests done
-                }
-                if(!unsafeWindow.premium){
-                    switch(type){
-                    case "forestry":{
-                        div.addEventListener("click",function(){
-                            if(gameLocation.check("city",2)){
-                                unsafeWindow.close_page();
-                                unsafeWindow.showDiv("transp3");
-                                unsafeWindow.initCampaigns();
-                            }else{
-                                document.addEventListener("gameCity2",function(){
-                                    document.removeEventListener("gameCity2",arguments.callee,false);
-                                    unsafeWindow.close_page();
-                                    unsafeWindow.showDiv("transp3");
-                                    unsafeWindow.initCampaigns();
-                                },false);
-                                click($("speedlink_city2"));
-                            }
-                        },false);
-                    break;}
-                    case "foodworld":{
-                        div.addEventListener("click",function(){
-                            if(gameLocation.check("foodworld")){
-                                click($("foodworld_questblock"));
-                            }else{
-                                document.addEventListener("gameFoodworldOpened",function(){
-                                    document.removeEventListener("gameFoodworldOpened",arguments.callee,false);
-                                    click($("foodworld_questblock"));
-                                },false);
-                                click($("speedlink_foodworld"));
-                            }
-                        },false);
-                    break;}
+                    if (!unsafeWindow.premium) {
+                        switch (type) {
+                            case "forestry":
+                                {
+                                    div.addEventListener("click", function() {
+                                        if (gameLocation.check("city", 2)) {
+                                            unsafeWindow.close_page();
+                                            unsafeWindow.showDiv("transp3");
+                                            unsafeWindow.initCampaigns();
+                                        } else {
+                                            document.addEventListener("gameCity2", function() {
+                                                document.removeEventListener("gameCity2", arguments.callee, false);
+                                                unsafeWindow.close_page();
+                                                unsafeWindow.showDiv("transp3");
+                                                unsafeWindow.initCampaigns();
+                                            }, false);
+                                            click($("speedlink_city2"));
+                                        }
+                                    }, false);
+                                    break;
+                                }
+                            case "foodworld":
+                                {
+                                    div.addEventListener("click", function() {
+                                        if (gameLocation.check("foodworld")) {
+                                            click($("foodworld_questblock"));
+                                        } else {
+                                            document.addEventListener("gameFoodworldOpened", function() {
+                                                document.removeEventListener("gameFoodworldOpened", arguments.callee, false);
+                                                click($("foodworld_questblock"));
+                                            }, false);
+                                            click($("speedlink_foodworld"));
+                                        }
+                                    }, false);
+                                    break;
+                                }
+                        }
                     }
                 }
             }
         }
-    }
-    div=null;
-}catch(err){GM_logError("handleQuestLine","","type="+type+" campaign="+campaign,err);}
+        div = null;
+    } catch (err) { GM_logError("handleQuestLine", "", "type=" + type + " campaign=" + campaign, err); }
 };
+
 //***********************************************************************************************************
 
 function do_shop(){
@@ -7077,9 +7149,21 @@ function buildInfoPanelOptions(){
         newtr=createElement("tr",{},newtable);
         newtd=createElement("td",{"align":"center"},newtr);
         newinput=createElement("input",{"id":"inputvalNimmBeob","type":"checkbox","class":"link","checked":GM_getValue(COUNTRY+"_"+SERVER+"_valNimmBeob",true)},newtd);
-        newinput.addEventListener("click",function(){ GM_setValue2(COUNTRY+"_"+SERVER+"_valNimmBeob",this.checked,44); },false);
+        newinput.addEventListener("click",function(){
+                GM_setValue2(COUNTRY+"_"+SERVER+"_valNimmBeob",this.checked,44);
+        },false);
         createElement("td",{},newtr,getText("settings_valUseObservedPrices")[0]);
         createElement("td",{},newtr,getText("settings_valUseObservedPrices")[1]);
+
+        newtr = createElement("tr", {}, newtable);
+        newtd = createElement("td", { "align": "center" }, newtr);
+        newinput = createElement("input", { "id": "inputValUse3TimesNpcPrices", "type": "checkbox", "class": "link", "checked": GM_getValue(COUNTRY + "_" + SERVER + "_valUse3TimesNpcPrices", true) }, newtd);
+        newinput.addEventListener("click", function() {
+                valUse3TimesNpcPrices = this.checked;
+                GM_setValue2(COUNTRY + "_" + SERVER + "_valUse3TimesNpcPrices", this.checked, 44);
+        }, false);
+        createElement("td", {}, newtr, getText("settings_valUse3TimesNpcPrices")[0]);
+        createElement("td", {}, newtr, getText("settings_valUse3TimesNpcPrices")[1]);
 
         // ***************Messages************************************************
         newtr=createElement("tr",{},newtable);
@@ -7319,7 +7403,6 @@ function buildInfoPanelOptions(){
                  *     forestry 2: quest 35 of forestry 1 completed
                  *
                  */
-                console.log(implode(unsafeWindow.quests_status));
                 var help = "setQuestAll "
                 var help = help + "MAIN ";
                 if (USERLEVEL >= 40
@@ -9797,50 +9880,6 @@ try{
     // Foodworld
     err_trace="Foodworld";
     // Foodworld-Farmi
-/*
-    unsafeOverwriteFunction("showFoodworldFarmiCart",function(id){
-        unsafeWindow._showFoodworldFarmiCart(id);
-        try{
-            var newdiv, sum=0, prodId, priceMissing=false;
-            if(newdiv=$("food_cart_products")){
-                for(var i=0;i<newdiv.childElementCount;i++){
-                    prodId=parseInt(newdiv.children[i].firstElementChild.getAttribute("class").replace(/\D+/g,""),10);
-                    newdiv.children[i].setAttribute("prodId",prodId);
-                    newdiv.children[i].classList.add("link");
-                    newdiv.children[i].addEventListener("mouseover",function(event){ showGoToMarketToolTip(event,this.getAttribute("prodId")); },false);
-                    newdiv.children[i].addEventListener("click",function(event){ showMarket(this.getAttribute("prodId")); },false);
-                    if(gut[prodId]){
-                        sum+=gut[prodId]*unsafeWindow.foodworldfarmis[id]["products"][prodId];
-                    }else{
-                        newdiv.children[i].style.backgroundColor="red";
-                        priceMissing=true;
-                    }
-                }
-            }
-            if(newdiv=$("food_cart_cost")){
-                newdiv.innerHTML="100%:&nbsp;"+moneyFormatInt(sum)+"&nbsp;|&nbsp;90%:&nbsp;"+moneyFormatInt(0.9*sum);
-            }
-            if(newdiv=$("food_cart_perc")){
-                if(priceMissing){
-                    newdiv.style.border="4px inset #336";
-                    newdiv.style.color="#336";
-                    newdiv.style.backgroundColor="transparent";
-                    newdiv.innerHTML="--%";
-                }else{
-                    var price=parseInt(unsafeWindow.foodworldfarmis[id]["price"],10);
-                    if(100*price<valFarmiLimits[0]*sum){ var col="red";var col2="#fcc"; }
-                    else if(100*price<valFarmiLimits[1]*sum){ var col="#d80";var col2="#ff9"; }
-                    else{ var col="green";var col2="#80ff80"; }
-                    newdiv.style.border="4px inset "+col;
-                    newdiv.style.color=col;
-                    newdiv.style.backgroundColor=col2;
-                    newdiv.innerHTML=Math.round(100*price/sum)+"%";
-                }
-            }
-            newdiv=null;
-        }catch(err){ GM_logError("showFoodworldFarmiCart","","",err); }
-    });
-*/
     unsafeOverwriteFunction("showFoodworldFarmiCart",function(farmi){
     try{
         unsafeWindow._showFoodworldFarmiCart(farmi);
@@ -9995,20 +10034,19 @@ try{
             }
         }catch(err){GM_logError("createFoodworldFarmis","","",err);}
     });
-    unsafeOverwriteFunction("dragFoodworldFarmiTouch",function(id){
-        try{
+    unsafeOverwriteFunction("dragFoodworldFarmiTouch", function(id) {
+        try {
             unsafeWindow._dragFoodworldFarmiTouch(id);
-        }catch(err){GM_logError("_dragFoodworldFarmiTouch","","",err);}
-        try{
-            if(valFoodworldFarmiPlacing){
-                loop:
-                for(var b=0;b<=4;b++){
-                    if(unsafeWindow.foodworldtables[b]&&(!unsafeWindow.foodworldtables[b]["block"])&&(!unsafeWindow.foodworldtables[b]["locked"])){
-                        for(var a=1;a<=2;a++) {
-                            if(!(unsafeWindow.foodworldtables[b]["chairs"]&&unsafeWindow.foodworldtables[b]["chairs"][a]&&unsafeWindow.foodworldtables[b]["chairs"][a]["id"])){
-                                if(div=$("foodworldchair"+b+"_"+a+"_touch")){
+        } catch (err) { GM_logError("_dragFoodworldFarmiTouch", "", "", err); }
+        try {
+            if (valFoodworldFarmiPlacing) {
+                loop: for (var b = 0; b <= 4; b++) {
+                    if (unsafeWindow.foodworldtables[b] && (!unsafeWindow.foodworldtables[b]["block"]) && (!unsafeWindow.foodworldtables[b]["locked"])) {
+                        for (var a = 1; a <= 2; a++) {
+                            if (!(unsafeWindow.foodworldtables[b]["chairs"] && unsafeWindow.foodworldtables[b]["chairs"][a] && unsafeWindow.foodworldtables[b]["chairs"][a]["id"])) {
+                                if (div = $("foodworldchair" + b + "_" + a + "_touch")) {
                                     click(div);
-                                    div=null;
+                                    div = null;
                                     break loop;
                                 }
                             }
@@ -10016,7 +10054,7 @@ try{
                     }
                 }
             }
-        }catch(err){GM_logError("dragFoodworldFarmiTouch","","",err);}
+        } catch (err) { GM_logError("dragFoodworldFarmiTouch", "", "", err); }
     });
     if(newdiv=$("food_cart")){
         createElement("div",{"id":"food_cart_cost","style":"position:absolute;bottom:130px;left:135px;font-size:12px;color:#463824;"},newdiv);
@@ -10123,11 +10161,11 @@ try{
         calcTotalZones();
         // Quest
         handleQuestDataFoodworld();
-        if((newdiv=$("foodworld_questblock"))&&(!newdiv.classList.contains("mouseOver"))){
+        if ((newdiv = $("foodworld_questblock")) && (!newdiv.classList.contains("mouseOver"))) {
             newdiv.classList.add("mouseOver");
-            newdiv.addEventListener("mouseover",function(event){
-                toolTip.show(event,questLineMouseOver("foodworld","1"));
-            },false);
+            newdiv.addEventListener("mouseover", function(event) {
+                toolTip.show(event, questLineMouseOver("foodworld", "1"));
+            }, false);
         }
         zoneNrF=null;tempZoneProductionData=null;tempZoneProductionDataSlot=null;
 
@@ -10153,13 +10191,13 @@ try{
 
                     if(rate<valFarmiLimits[0]){ // unter 90%
                         str = css_styles["farmi_price_low"][1];
-                        unsafeWindow.foodworldAction('kick', foodWorldFarmi[i].id);
                     }else if(rate<valFarmiLimits[1]){ //zwischen 90% und 100%
                         str = css_styles["farmi_price_between"][1];
                     }else{ // über 100%
                         str = css_styles["farmi_price_above"][1];
                     }
                     if ($("foodworldfarmi"+i)){
+                        $("foodworldfarmi"+i).setAttribute("rate",rate);
                         createElement("div",{"id":"foodworldfarmiMiniInfo"+i,"class":"foodworldfarmiMiniInfo"},$("foodworldfarmi"+i));
                         $("foodworldfarmiMiniInfo"+i).setAttribute("style",str);
                     }
@@ -10203,7 +10241,6 @@ try{
             }
         } catch(err) {GM_logError("openFoodworldBuildingSelect","","",err); }
     }, true);
-
     unsafeOverwriteFunction("entryCityXmasEvent",function(c){
         /*
          * Contribution/Author of function "entryCityXmasEvent": Moe
@@ -11485,9 +11522,6 @@ try{
             }else{
                 questData[quTyp][campaign]["data"]=[];
             }
-            // GM_log("questData["+quTyp+"]["+campaign+"]="+implode(questData[quTyp][campaign]));
-            // GM_setValueCache(COUNTRY+"_"+SERVER+"_"+USERNAME+"_questData",implode(questData));
-            // unsafeData.questData=questData.clone();
         }catch(err){ GM_logError("calcQuestData","","err_trace="+err_trace,err); }
     }
     function handleQuestData(){
@@ -11555,56 +11589,57 @@ try{
             handleQuestData();
         }catch(err){GM_logError("questInitGo","","",err);}
     });
-    function handleQuestDataFoodworld(){
-        // GM_log("setQuest newQuestNr="+newQuestNr);
-        try{
+    function handleQuestDataFoodworld() {
+        try {
             var err_trace = "Get questdata";
-            if(unsafeWindow.foodworld_quest){
-                // GM_log("unsafeWindow.foodworld_quest:\n"+print_r(unsafeWindow.foodworld_quest,"",true,"\n"));
-                if(!questData["foodworld"]){ questData["foodworld"]={}; }
-                for(var campaign in QUESTS["foodworld"]){
-                    if(!QUESTS["foodworld"].hasOwnProperty(campaign)){continue;}
-                    if(!questData["foodworld"][campaign]){
-                        questData["foodworld"][campaign]=INIT_questData["foodworld"][campaign].clone();
+            if (unsafeWindow.foodworld_quest) {
+                if (!questData["foodworld"]) { questData["foodworld"] = {}; }
+                for (var campaign in QUESTS["foodworld"]) { // Iterate over campaigns. So far only one campaign available
+                    if (!QUESTS["foodworld"].hasOwnProperty(campaign)) { continue; }
+                    if (!questData["foodworld"][campaign]) {
+                        questData["foodworld"][campaign] = INIT_questData["foodworld"][campaign].clone();
                     }
-                    if(campaign==unsafeWindow.foodworld_quest["campaignid"]){
-                        if(unsafeWindow.foodworld_quest["questid"]){
-                            // Quest number
-                            GM_logInfo("handleQuestLine","","",getText("questSetXToNrY").replace(/%1%/,getText("quest"+"foodworld"+campaign)).replace(/%2%/,unsafeWindow.foodworld_quest["questid"]));
-                            questData["foodworld"][campaign]["nr"]=unsafeWindow.foodworld_quest["questid"];
-                            // Given
-                            questData["foodworld"][campaign]["given"] = new Object();
-                            if(unsafeWindow.foodworld_quest["entries"]){
-                                for(var t in unsafeWindow.foodworld_quest["entries"]){
-                                    if(!unsafeWindow.foodworld_quest["entries"].hasOwnProperty(t)){continue;}
-                                    var prod = parseInt(t,10);
-                                    var type = 0;
-                                    if(!questData["foodworld"][campaign]["given"][type]){ questData["foodworld"][campaign]["given"][type] = new Object(); }
-                                    if(!questData["foodworld"][campaign]["given"][type][prod]){ questData["foodworld"][campaign]["given"][type][prod] = 0; }
-                                    questData["foodworld"][campaign]["given"][type][prod] += parseInt(unsafeWindow.foodworld_quest["entries"][t],10);
-                                }
-                            }
-                            // Time
-                            questData["foodworld"][campaign]["time"] = now+unsafeWindow.foodworld_quest["remain"];
-                        }else{
-                            questData["foodworld"][campaign]["nr"]=QUESTS["foodworld"][campaign].length;
-                            questData["foodworld"][campaign]["given"] = new Object();
-                            questData["foodworld"][campaign]["time"] = 0;
+                    if (campaign == unsafeWindow.foodworld_quest["campaignid"] &&
+                        unsafeWindow.foodworld_quest["questid"]) {
+                        // If ever another campaign might show up, Upjers needs to adjust the "campaignid" thing.
+                        // We then need to adjust our code here, too!
+
+                        // Quest number
+                        if (questData["foodworld"][campaign]["nr"] != unsafeWindow.foodworld_quest["questid"]) {
+                            // Current quest in our data is lower/not equal to actual quest number
+                            GM_logInfo("handleQuestDataFoodworld", "", "", getText("questSetXToNrY").replace(/%1%/, getText("quest" + "foodworld" + campaign)).replace(/%2%/, unsafeWindow.foodworld_quest["questid"]));
+
+                            // Read actual quest number
+                            questData["foodworld"][campaign]["nr"] = unsafeWindow.foodworld_quest["questid"];
+                            // Read time
+                            questData["foodworld"][campaign]["time"] = now + unsafeWindow.foodworld_quest["remain"];
                         }
-                    }else{
-                        questData["foodworld"][campaign]["nr"]=QUESTS["foodworld"][campaign].length;
+                        // In any case: Read already given products
+                        questData["foodworld"][campaign]["given"] = new Object();
+                        if (unsafeWindow.foodworld_quest["entries"]) {
+                            for (var t in unsafeWindow.foodworld_quest["entries"]) {
+                                if (!unsafeWindow.foodworld_quest["entries"].hasOwnProperty(t)) { continue; }
+                                var prod = parseInt(t, 10);
+                                var type = 0; // So far we know, only type-0 products are needed here
+                                if (!questData["foodworld"][campaign]["given"][type]) { questData["foodworld"][campaign]["given"][type] = new Object(); }
+                                if (!questData["foodworld"][campaign]["given"][type][prod]) { questData["foodworld"][campaign]["given"][type][prod] = 0; }
+                                questData["foodworld"][campaign]["given"][type][prod] += parseInt(unsafeWindow.foodworld_quest["entries"][t], 10);
+                            }
+                        }
+                    } else {
+                        questData["foodworld"][campaign]["nr"] = QUESTS["foodworld"][campaign].length;
                         questData["foodworld"][campaign]["given"] = new Object();
                         questData["foodworld"][campaign]["time"] = 0;
                     }
-                    calcQuestData("foodworld",campaign);
-                // GM_log("questdata:\n"+print_r(questData["foodworld"],"",true,"\n"));
+                    calcQuestData("foodworld", campaign);
                 }
-                GM_setValueCache(COUNTRY+"_"+SERVER+"_"+USERNAME+"_questData",implode(questData,"handleQuestDataFoodworld/questData"));
-                unsafeData.questData=questData.clone();
+                GM_setValueCache(COUNTRY + "_" + SERVER + "_" + USERNAME + "_questData", implode(questData, "handleQuestDataFoodworld/questData"));
+                unsafeData.questData = questData.clone();
             }
-            div=null;
-        }catch(err){ GM_logError("handleQuestDataFoodworld","","err_trace="+err_trace,err); }
+            div = null;
+        } catch (err) { GM_logError("handleQuestDataFoodworld", "", "err_trace=" + err_trace, err); }
     }
+
     function handleQuestDataVeterinary(){
         // GM_log("setQuest newQuestNr="+newQuestNr);
         try{
@@ -11619,7 +11654,7 @@ try{
                 if(unsafeWindow.vet_data.quest.quest_id){
                     // Quest number
                     if(questData["veterinary"][campaign]["nr"]!=parseInt(unsafeWindow.vet_data.quest.quest_id,10)){
-                        GM_logInfo("handleQuestLine","","",getText("questSetXToNrY").replace(/%1%/,getText("quest"+"veterinary"+campaign)).replace(/%2%/,unsafeWindow.vet_data.quest.quest_id));
+                        GM_logInfo("handleQuestDataVeterinary","","",getText("questSetXToNrY").replace(/%1%/,getText("quest"+"veterinary"+campaign)).replace(/%2%/,unsafeWindow.vet_data.quest.quest_id));
                         questData["veterinary"][campaign]["nr"]=parseInt(unsafeWindow.vet_data.quest.quest_id,10);
                     }
                     // Given
@@ -11665,7 +11700,7 @@ try{
                 if(unsafeWindow.pets.data.quest.questid){
                     // Quest number
                     if(questData["breed"][campaign]["nr"]!=parseInt(unsafeWindow.pets.data.quest.questid,10)){
-                        GM_logInfo("handleQuestLine","","",getText("questSetXToNrY").replace(/%1%/,getText("quest"+"breed"+campaign)).replace(/%2%/,unsafeWindow.pets.data.quest.questid));
+                        GM_logInfo("handleQuestDataBreed","","",getText("questSetXToNrY").replace(/%1%/,getText("quest"+"breed"+campaign)).replace(/%2%/,unsafeWindow.pets.data.quest.questid));
                         questData["breed"][campaign]["nr"]=parseInt(unsafeWindow.pets.data.quest.questid,10);
                     }
                     // Given
@@ -11819,17 +11854,27 @@ try{
         }catch(err){
             var msgText=null;
             try{
-                switch(questType){
-                case "main":{
-                    msgText = getText("informationIsMissing")+" "+getText("pleaseOpenX").replace(/%1%/,getText("quest"+questType+campaign));
-                break;}
-                case "forestry":{
-                    msgText = (getText("informationIsMissing")+" "+getText("pleaseOpenX").replace(/%1%/,getText("lodge")));
-                break;}
-                case "foodworld":{
-                    msgText = (getText("informationIsMissing")+" "+getText("pleaseOpenX").replace(/%1%/,getText("foodworld")));
-                break;}
+                switch (questType) {
+                    case "main":
+                        {
+                            msgText = getText("informationIsMissing") + " " + getText("pleaseOpenX").replace(/%1%/, getText("quest" + questType + campaign));
+                            console.trace();
+                            break;
+                        }
+                    case "forestry":
+                        {
+                            msgText = (getText("informationIsMissing") + " " + getText("pleaseOpenX").replace(/%1%/, getText("lodge")));
+                            console.trace();
+                            break;
+                        }
+                    case "foodworld":
+                        {
+                            msgText = (getText("informationIsMissing") + " " + getText("pleaseOpenX").replace(/%1%/, getText("foodworld")));
+                            console.trace();
+                            break;
+                        }
                 }
+
                 if(msgText){
                     GM_logWarning("questLineMouseOver","","err="+err,msgText);
                     return msgText;
@@ -11881,12 +11926,6 @@ try{
             handleQuestLine();
         }catch(err){GM_logError("questsHandler","","",err);}
     });
-/* todo:
-    raiseEvent("gameQuestSolvable");
-    raiseEvent("gameQuestNewAvailable");
-    raiseEvent("gameQuestFinished");
-    raiseEvent("gameQuestAccepted");
-*/
     unsafeOverwriteFunction("showQuestBoxLine",function(){
         try{
             unsafeWindow._showQuestBoxLine();
@@ -11895,25 +11934,30 @@ try{
             handleQuestLine();
         }catch(err){GM_logError("showQuestBoxLine","","",err);}
     });
-    function updateQuestLineTimer(){
-    try{
-return false;
-        for(var type in QUESTS){
-            if (!QUESTS.hasOwnProperty(type)){ continue; }
-            if (type=="main"){ continue; }
-            for(var campaign in QUESTS[type]){
-                if (!QUESTS[type].hasOwnProperty(campaign)){ continue; }
-                if(nodes["questline_"+type+"_"+campaign]&&nodes["questline_"+type+"_"+campaign]["node"]){
-                    if(now<questData[type][campaign]["time"]){
-                        nodes["questline_"+type+"_"+campaign]["node"].children[1].innerHTML = getTimeStr(questData[type][campaign]["time"]-now,false)+" "+getText("shortHours");
-                    }else{
-                        handleQuestLine();
+    function updateQuestLineTimer() {
+        try {
+            return false;
+            // Remarks, Moe, 16. Nov 2016: Dead code, but why???
+            for (var type in QUESTS) {
+                if (!QUESTS.hasOwnProperty(type)) {
+                    continue; }
+                if (type == "main") {
+                    continue; }
+                for (var campaign in QUESTS[type]) {
+                    if (!QUESTS[type].hasOwnProperty(campaign)) {
+                        continue; }
+                    if (nodes["questline_" + type + "_" + campaign] && nodes["questline_" + type + "_" + campaign]["node"]) {
+                        if (now < questData[type][campaign]["time"]) {
+                            nodes["questline_" + type + "_" + campaign]["node"].children[1].innerHTML = getTimeStr(questData[type][campaign]["time"] - now, false) + " " + getText("shortHours");
+                        } else {
+                            handleQuestLine();
+                        }
                     }
                 }
             }
-        }
-    }catch(err){GM_logError("updateQuestLineTimer","","type="+type+" campaign="+campaign,err);}
+        } catch (err) { GM_logError("updateQuestLineTimer", "", "type=" + type + " campaign=" + campaign, err); }
     }
+
     handleQuestData(); // --> handleQuestLine
 
     err_trace="Show Data";
@@ -12364,6 +12408,7 @@ return false;
     highlightUser=explode(GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_highlight"),"do_main/highlightUser",{});
     highlightUser[FARMNAME]="104e8b";
     valNimmBeob=GM_getValue(COUNTRY+"_"+SERVER+"_valNimmBeob",true);
+    valUse3TimesNpcPrices=GM_getValue(COUNTRY+"_"+SERVER+"_valUse3TimesNpcPrices",true);
 
     valVerkaufLimitDown=GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_valVerkaufLimitDown",95);
     valVerkaufLimitUp=GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_valVerkaufLimitUp",130);
@@ -13127,29 +13172,29 @@ return false;
     });
 
     // Revised by Moe
-    unsafeOverwriteFunction("marketActionResponse",function(request,action,id,open){
-        try{
+    unsafeOverwriteFunction("marketActionResponse", function(request, action, id, open) {
+        try {
             var result = checkRequest(request);
-            if(result!=0 && result[0]!=0 && result[1]["offers"]) {
+            if (result != 0 && result[0] != 0 && result[1]["offers"]) {
                 // Save own offers
-                var err_trace="Save own offers";
+                var err_trace = "Save own offers";
                 var ownOffersMap = new Object();
                 var marketOffersArr = new Array();
                 var row, offer_id, prod, preis, menge, menge_sum, typ;
-                err_trace="Save own offers";
+                err_trace = "Save own offers";
                 // Iterate over received offers. Put my offers into ownOffersMap
-                for(var v = 0; v < result[1]["offers"].length; v++){
-                    row=result[1]["offers"][v]; // A received offer
+                for (var v = 0; v < result[1]["offers"].length; v++) {
+                    row = result[1]["offers"][v]; // A received offer
                     offer_id = parseInt(row["id"], 10); // Id of offer
-                    prod=parseInt(row["p"], 10); // Id of product in offer
-                    preis=parseFloat(row["pr"], 10); // Price of pruduct
-                    menge=parseInt(row["a"], 10); // Amount
-                    typ=prodTyp[0][prod] // Type of the product
+                    prod = parseInt(row["p"], 10); // Id of product in offer
+                    preis = parseFloat(row["pr"], 10); // Price of pruduct
+                    menge = parseInt(row["a"], 10); // Amount
+                    typ = prodTyp[0][prod] // Type of the product
                     if (row["s"]) { // Is this my offer?
-                        ownOffersMap[offer_id] = {id: offer_id, prod: prod, preis: preis, menge: menge, typ: typ};
+                        ownOffersMap[offer_id] = { id: offer_id, prod: prod, preis: preis, menge: menge, typ: typ };
                     }
 
-                    if(!marketOffersArr[prod]) {
+                    if (!marketOffersArr[prod]) {
                         marketOffersArr[prod] = new Array();
                     }
                     marketOffersArr[prod].push([menge, preis, offer_id]);
@@ -13163,7 +13208,7 @@ return false;
 
                         // Check, if we know its product_id and if it isn't already in ownOffersMap. Check for product_id is neccessary because of migration :-)
                         if (row[3] && !ownOffersMap[row[3]]) {
-                            ownOffersMap[row[3]] = {id: row[3], prod: row[0], preis: row[1], menge: row[2], typ: row[4]};
+                            ownOffersMap[row[3]] = { id: row[3], prod: row[0], preis: row[1], menge: row[2], typ: row[4] };
                         }
                     }
                 }
@@ -13179,7 +13224,7 @@ return false;
                 }
 
                 // Sort ownMarketOffers-data
-                var TYP2NUMBER = {"c":0,"v":1,"e":2,"o":3,"fw1":4,"fw2":5,"fw3":6,"fw4":7,"z":8, "fl": 9, "fla": 10};
+                var TYP2NUMBER = { "c": 0, "v": 1, "e": 2, "o": 3, "fw1": 4, "fw2": 5, "fw3": 6, "fw4": 7, "z": 8, "fl": 9, "fla": 10 };
                 ownMarketOffers.sort(function(a, b) {
                     var result = TYP2NUMBER[a[4]] - TYP2NUMBER[b[4]]; // Product-Type
                     if (result == 0) {
@@ -13193,78 +13238,92 @@ return false;
                 });
 
                 // Persist values
-                GM_setValueCache(COUNTRY+"_"+SERVER+"_"+USERNAME+"_ownMarketOffers", implode(ownMarketOffers,"marketActionResponse/ownMarketOffers"));
+                GM_setValueCache(COUNTRY + "_" + SERVER + "_" + USERNAME + "_ownMarketOffers", implode(ownMarketOffers, "marketActionResponse/ownMarketOffers"));
                 doMarketoffersNotepad();
 
                 // Calculate all observed prices
-                err_trace="Observing prices";
+                err_trace = "Observing prices";
 
-                for(var v = 0; v < prodBlock[0].length; v++) {
+                for (var v = 0; v < prodBlock[0].length; v++) {
                     if (prodBlock[0][v] === undefined) { continue; }
-                    if(!prodBlock[0][v].match(/t/) && !prodBlock[0][v].match(/l/)) {
+                    if (!prodBlock[0][v].match(/t/) && !prodBlock[0][v].match(/l/)) {
                         // marketOffersArr[v] = [menge, preis, offer_id]
                         if (marketOffersArr[v]) {
                             // Sort offers by price, lowest first... same price? => take offer_id
                             marketOffersArr[v].sort(function(a, b) {
-                                return a[1]==b[1] ? a[2]-b[2] : a[1]-b[1];
+                                return a[1] == b[1] ? a[2] - b[2] : a[1] - b[1];
                             });
-                            marketOffersArr[v]=marketOffersArr[v].slice(0,18); // Take cheapest 18 offers
+                            marketOffersArr[v] = marketOffersArr[v].slice(0, 18); // Take cheapest 18 offers
 
                             menge_sum = 0; // Total amount of product v offered at market (within the cheapest 18 offers)
                             // Iterate over those (at most) 18 offers of product v
-                            for(var w = 0; w < marketOffersArr[v].length; w++){
+                            for (var w = 0; w < marketOffersArr[v].length; w++) {
                                 menge_sum += marketOffersArr[v][w][0];
                             };
                             // Calc a weighted "watched price" value for product v
-                            gutBeob[v] = calcObservedPrice((prodTyp[0][v]=="z" ? 2 : 1), marketOffersArr[v]);
-                            if (valNimmBeob){
-                                if(!isNaN(NPC[0][v])) { // If product v can be bought at NPC
-                                    gut[v]=Math.min(gutBeob[v], NPC[0][v]);
-                                }else{
-                                    gut[v]=gutBeob[v];
+                            gutBeob[v] = calcObservedPrice((prodTyp[0][v] == "z" ? 2 : 1), marketOffersArr[v]);
+                            if (valNimmBeob) {
+                                if (!isNaN(NPC[0][v])) { // If product v can be bought at NPC
+                                    gut[v] = Math.min(gutBeob[v], NPC[0][v]);
+                                } else {
+                                    gut[v] = gutBeob[v];
                                 }
                             }
-                            if (!(preisBeob instanceof Array)) { preisBeob=new Array(); }
+                            if (!(preisBeob instanceof Array)) { preisBeob = new Array(); }
                             // preisBeob[v] = [isOfferAtMarket, timeOfCalculation, priceCheapest, priceMostExpensive, amountInPriceRange]
-                            preisBeob[v]=[true, now, marketOffersArr[v][0][1], marketOffersArr[v][marketOffersArr[v].length-1][1], menge_sum];
+                            preisBeob[v] = [true, now, marketOffersArr[v][0][1], marketOffersArr[v][marketOffersArr[v].length - 1][1], menge_sum];
                         } else {
                             // no offers
                             if (valNimmBeob) {
-                                if (unsafeWindow.market_filter_pid == -1 ||
-                                    unsafeWindow.market_filter_pid == v ) {
+                                if (unsafeWindow.market_filter_pid == -1 || unsafeWindow.market_filter_pid == v) {
                                     //unsafeWindow.market_filter_pid -1 by marketinit >0 = Single view (marketOffersArr have maximum one product)
-                                    if(!isNaN(NPC[0][v])) {
-                                        gut[v] = NPC[0][v]; // Use NPC price if available
+                                    if (!isNaN(NPC[0][v])) {
+                                        // It's a Number => it can be bought at NPC
+                                        gut[v] = NPC[0][v];
                                     } else {
-                                        if (NPC[0][v]=== undefined) { continue; } //Coins have not a npc price
-                                        gut[v] = parseFloat(NPC[0][v].replace("f",""),10);
+                                        // It's not a number...
+
+                                        // Coins (v=0) are undefinded in NPC[0], entries starting with 'c' cost coins => Skip them
+                                        if (NPC[0][v] === undefined || NPC[0][v].startsWith("c")) { continue; }
+
+                                        // ... it's a string starting with 'f' followed by the price
+                                        gut[v] = parseFloat(NPC[0][v].replace("f", ""), 10);
+                                        if (valUse3TimesNpcPrices) {
+                                            gut[v] = 3 * gut[v];
+                                        }
                                     }
                                     gutBeob[v] = gut[v];
                                 }
                             }
-                            if (!(preisBeob instanceof Array)) { preisBeob=new Array(); }
+                            if (!(preisBeob instanceof Array)) { preisBeob = new Array(); }
                             if (!(preisBeob[v] && preisBeob[v][0])) { // If no "watched price"...
-                                preisBeob[v]=[false,now,,,0]; // ... set preisBeob[v] accordingly
+                                preisBeob[v] = [false, now, , , 0]; // ... set preisBeob[v] accordingly
                             }
                         }
                     }
                 }
 
-                marketOffersArr=null; ownOffersMap=null;
-                row=null;prod=null;preis=null;menge=null;menge_sum=null;
-                if (valNimmBeob){
-                    GM_setValueCache(COUNTRY+"_"+SERVER+"_gut",implode(gut,"marketActionResponse/gut"));
+                marketOffersArr = null;
+                ownOffersMap = null;
+                row = null;
+                prod = null;
+                preis = null;
+                menge = null;
+                menge_sum = null;
+                if (valNimmBeob) {
+                    GM_setValueCache(COUNTRY + "_" + SERVER + "_gut", implode(gut, "marketActionResponse/gut"));
                     raiseEventTop("gameChangedGut");
                 }
-                GM_setValueCache(COUNTRY+"_"+SERVER+"_gutBeob",implode(gutBeob,"marketActionResponse/gutBeob"));
-                GM_setValueCache(COUNTRY+"_"+SERVER+"_preisBeob",implode(preisBeob,"marketActionResponse/preisBeob"));
+                GM_setValueCache(COUNTRY + "_" + SERVER + "_gutBeob", implode(gutBeob, "marketActionResponse/gutBeob"));
+                GM_setValueCache(COUNTRY + "_" + SERVER + "_preisBeob", implode(preisBeob, "marketActionResponse/preisBeob"));
                 raiseEventTop("gameChangedBeobPrice");
             }
-        }catch(err){GM_logError("marketActionResponse","","err_trace="+err_trace+" v="+v,err);}
-        try{
-            unsafeWindow._marketActionResponse(request,action,id,open);
-        }catch(err){GM_logError("_marketActionResponse","","",err);}
+        } catch (err) { GM_logError("marketActionResponse", "", "err_trace=" + err_trace + " v=" + v, err); }
+        try {
+            unsafeWindow._marketActionResponse(request, action, id, open);
+        } catch (err) { GM_logError("_marketActionResponse", "", "", err); }
     });
+
     // Buy offer by pressing Enter
     if(newdiv=$("marketbuyofferamount")){
         newdiv.addEventListener("keyup",function(event){
@@ -18493,7 +18552,7 @@ return;
                             // campaign not available
                             var newforestryQuestNr = 0;
                             if(questData["forestry"][campaign]["nr"]!=newforestryQuestNr){
-                                GM_logInfo("handleQuestLine","","",getText("questSetXToNrY").replace(/%1%/,getText("quest"+"forestry"+campaign)).replace(/%2%/,newforestryQuestNr));
+                                GM_logInfo("initCampaignsResponse","","",getText("questSetXToNrY").replace(/%1%/,getText("quest"+"forestry"+campaign)).replace(/%2%/,newforestryQuestNr));
                                 questData["forestry"][campaign]["nr"]=newforestryQuestNr;
                                 if(questData["forestry"][campaign]["calcTo"]!=0){
                                     setCalcToQuest("forestry",campaign,0);
@@ -18545,7 +18604,7 @@ return;
                             // Number
                             var newforestryQuestNr = parseInt(result[1][campaign]["questid"],10);
                             if((questData["forestry"][campaign]["nr"]!=newforestryQuestNr)||(typeof questData["forestry"][campaign]["nr"]!=typeof newforestryQuestNr)){
-                                GM_logInfo("handleQuestLine","","",getText("questSetXToNrY").replace(/%1%/,getText("quest"+"forestry"+campaign)).replace(/%2%/,newforestryQuestNr));
+                                GM_logInfo("initCampaignsResponse","","",getText("questSetXToNrY").replace(/%1%/,getText("quest"+"forestry"+campaign)).replace(/%2%/,newforestryQuestNr));
                                 questData["forestry"][campaign]["nr"]=newforestryQuestNr;
                                 if((0<questData["forestry"][campaign]["calcTo"])&&(questData["forestry"][campaign]["calcTo"]<questData["forestry"][1]["nr"])){
                                     setCalcToQuest("forestry",campaign,questData["forestry"][campaign]["nr"]);
@@ -18558,7 +18617,7 @@ return;
                         // all quests solved
                         var newforestryQuestNr = QUESTS["forestry"][campaign].length;
                         if(questData["forestry"][campaign]["nr"]!=newforestryQuestNr){
-                            GM_logInfo("handleQuestLine","","",getText("questSetXToNrY").replace(/%1%/,getText("quest"+"forestry"+campaign)).replace(/%2%/,newforestryQuestNr));
+                            GM_logInfo("initCampaignsResponse","","",getText("questSetXToNrY").replace(/%1%/,getText("quest"+"forestry"+campaign)).replace(/%2%/,newforestryQuestNr));
                             questData["forestry"][campaign]["nr"]=newforestryQuestNr;
                             if(questData["forestry"][campaign]["calcTo"]!=0){
                                 setCalcToQuest("forestry",campaign,0);
@@ -22191,7 +22250,7 @@ try{
         text["de"]["settings_valMinRackPlantsize"]=["Pflanzengröße einrechnen","Zum Beispiel braucht Getreide nur den halben Bestand."];
         text["de"]["settings_valMinRackGrowing"]=["Ernteprodukte","Beachtet zusätzlich die Produkte in Produktion und in den fertigen Powerups."];
         text["de"]["settings_valMinRackQuest"]=["Quest-Produkte","Beachtet zusätzlich die benötigte Menge der Produkte für die Quests."];
-        text["de"]["settings_valMinRackRecursive"]=["Rekursive Produkte","Beachtet zusätzlich die benötigten Ausgangsprodukte um fehlenden Produkte zu produzieren (für verarbeitete Produkte der Baumerei)."];
+        text["de"]["settings_valMinRackRecursive"]=["Rekursive Produkte","Beachtet zusätzlich die benötigten Ausgangsprodukte um fehlenden Produkte zu produzieren."];
         text["de"]["settings_valMinRackFarmis"]=["Farmi-Produkte","Beachtet zusätzlich die Menge der Produkte, die deine Farmis verlangen. Dabei gelten nur diejenigen, die besser als die untere Grenze bezahlen."];
         text["de"]["settings_valMinRackForestryFarmis"]=["Baumerei-Farmi-Produkte","Beachtet zusätzlich die Menge der Produkte, die deine Baumerei-Farmis verlangen."];
         text["de"]["settings_protectMinRack"]=["Marktschutz","Verhindert, dass die Warenmenge beim Marktverkauf den minimalen Lagerbestand unterschreitet."];
@@ -22202,6 +22261,7 @@ try{
         text["de"]["settings_valJoinPrices"]=["Ein Preisfeld","Verbindet die Preis-Eingabefelder beim Marktstand"];
         text["de"]["settings_valQuicklinks"]=["Quicklinks am Markt anzeigen","Quicklinks am Markt anzeigen"];
         text["de"]["settings_valUseObservedPrices"]=["Benutze beobachtete Preise","Wenn du dich durch den Markt klickst, werden die Preise beobachtet. Ein berechneter Preis ist in der Preisliste zu sehen. Soll dieser automatisch übernommen werden?"];
+        text["de"]["settings_valUse3TimesNpcPrices"]=["Benutze dreifache NPC-Preise","Für Produkte, die nicht am NPC zu kaufen sind, wird der (fiktive) dreifache Preis angenommen."];
         text["de"]["settings_valSendStatistics"]=["Sende Statistiken","Unterstütze den <a href='http://mff.metrax.eu/' target='_blank'>Statistik-Server</a>. Es werden keine privaten Daten gesendet!"];
         text["de"]["settings_valPrivateMessages"]=["Anzahl gemerkte Privatnachrichten","Deine letzten privaten Nachrichten werden gespeichert und somit kann ein Nachrichten-Verlauf mit einem Kontakt angezeigt werden."];
         text["de"]["settings_valMarketMessages"]=["Anzahl gemerkte Marktnachrichten","Es bleiben auch alte System-Nachrichten in diesem Speicher, selbst wenn sie älter als die maximalen 7&nbsp;Tage sind."];
@@ -22611,7 +22671,7 @@ try{
         text["en"]["settings_valMinRackPlantsize"]=["Aspect size of plant","For example grain needs only half of the value above."];
         text["en"]["settings_valMinRackGrowing"]=["Growing products","Adds the amount of products that are in production and ready by powerup."];
         text["en"]["settings_valMinRackQuest"]=["Quest products","Adds the amount of the quest products"];
-        text["en"]["settings_valMinRackRecursive"]=["Recursive products","Add the required products needed to make missing products, and calculate these again for the required proucts.(used by forestry products)"];
+        text["en"]["settings_valMinRackRecursive"]=["Recursive products","Add required products needed to manufacture missing products."];
         text["en"]["settings_valMinRackFarmis"]=["Farmie products","Adds the amount of the products wanted by the farmies which pay more than the lower limit."];
         text["en"]["settings_valMinRackForestryFarmis"]=["Lodge farmie products","Adds the amount of the products wanted by the lodge farmies."];
         text["en"]["settings_protectMinRack"]=["Selling protection","Prohibits to sell products at market below the minimal rackamount"];
@@ -22622,6 +22682,7 @@ try{
         text["en"]["settings_valJoinPrices"]=["One input","Joins the price input fields at the market stand."];
         text["en"]["settings_valQuicklinks"]=["Show market quicklinks","Show quicklinks at market place"];
         text["en"]["settings_valUseObservedPrices"]=["Use observed prices","Prices are observed while clicking through the market place. A calculated price can be seen in the price list. Shall this automatically override your settings?"];
+        text["en"]["settings_valUse3TimesNpcPrices"]=["Use three times NPC prices","For products, that can't be bought at an NPC, three times their (fictual) values are assumed."];
         text["en"]["settings_valSendStatistics"]=["Send statistics","Support the <a href='http://mff.metrax.eu/' target='_blank'>Statistik-Server</a>.  No private data is sent!"];
         text["en"]["settings_valPrivateMessages"]=["Number private messages kept","Your last private messages are kept so that a message history of one contact can be shown."];
         text["en"]["settings_valMarketMessages"]=["Number market messages kept","Old messages remain in this archive, even if they are older than the maximum 7 days."];
