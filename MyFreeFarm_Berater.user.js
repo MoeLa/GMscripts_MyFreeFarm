@@ -10243,8 +10243,16 @@ try{
                     case "crop":
                         raiseEvent("gameFoodworldCropped");
                         break;
+                    // case "dropped":
+                    //     calcProdMinRack(); // Does this need to be done?
+                    //     raiseEvent("gameFoodworldFarmiDropped");
+                    //     break;
                     case "foodworld_init":
                         raiseEvent("gameFoodworldOpened");
+                        break;
+                    case "kick":
+                        calcProdMinRack();
+                        raiseEvent("gameFoodworldFarmiKick");
                         break;
                     case "open":
                         raiseEvent("gameFoodworldOpened" + id);
@@ -17762,7 +17770,7 @@ try{
                         */
 
                         //make prodName[1] && prodYield[1] && prodRequire[1] = [[type,fId,amount]]
-                        var store,stock,fId,bChanged=false,help,building;
+                        var store,stock,fId,help,building;
                         for(var stock in result[4]){ //forestry_production_products==initForestryResponce->result[4]
                             if (!result[4].hasOwnProperty(stock)){ continue; }
                             for(var fId in result[4][stock]){
@@ -17875,32 +17883,20 @@ try{
                         // prodStock[1].sortObj();
                         GM_setValueCache(COUNTRY+"_"+SERVER+"_"+USERNAME+"_prodStock",implode(prodStock,"initForestryResponse/prodStock"));
 
-                        //forestry_farmis
-                        var farmi, i;
-                        totalFarmis[1]=new Object();
-                        for(farmi in result[5]){ //forestry_farmis==initForestryResponce->result[5]
-                            if (!result[5].hasOwnProperty(farmi)){ continue; }
-                            for(i in result[5][farmi]["products"]){
-                                if (!result[5][farmi]["products"].hasOwnProperty(i)){ continue; }
+                        // Forestry Farmis
+                        totalFarmis[1] = new Object();
+                        for (var farmi in result[5]) {
+                            if (!result[5].hasOwnProperty(farmi)) { continue; }
+                            for (var i in result[5][farmi]["products"]) {
+                                if (!result[5][farmi]["products"].hasOwnProperty(i)) { continue; }
+                                
                                 fId = result[5][farmi]["products"][i]["product"];
-                                // if (!prodName[1][fId]){
-                                //  prodName[1][fId] = result[5][farmi]["products"][i]["name"]; // set prodName[1]
-                                //  //GM_log("initForestryResponse ADD prodName farmis fId:"+fId+" name:"+prodName[1][fId]);
-                                //  bChanged=true;
-                                // }
-                                if(!totalFarmis[1][fId]) totalFarmis[1][fId]=0;
-                                totalFarmis[1][fId] += parseInt(result[5][farmi]["products"][i]["amount"],10);
+                                if (!totalFarmis[1][fId]) { totalFarmis[1][fId] = 0; }
+                                totalFarmis[1][fId] += parseInt(result[5][farmi]["products"][i]["amount"], 10);
                             }
                         }
-                        // totalFarmis[1].sortObj();
-                        // GM_log("initForestryResponse totalFarmis:"+implode(totalFarmis));
-                        GM_setValueCache(COUNTRY+"_"+SERVER+"_"+USERNAME+"_totalFarmis",implode(totalFarmis,"initForestryResponse/totalFarmis"));
+                        GM_setValueCache(COUNTRY + "_" + SERVER + "_" + USERNAME + "_totalFarmis", implode(totalFarmis, "initForestryResponse/totalFarmis"));
 
-                        if(bChanged){
-                            // prodName[1].sortObj();
-                            // GM_log("initForestryResponse bChanged:"+ bChanged+" prodName:"+implode(prodName));
-                            GM_setValueCache(COUNTRY+"_"+SERVER+"_prodName",implode(prodName,"initForestryResponse/prodName"));
-                        }
                     }catch(err){GM_logError("initForestryResponse","","",err);}
                     var zoneNrF;
                     switch(type){
