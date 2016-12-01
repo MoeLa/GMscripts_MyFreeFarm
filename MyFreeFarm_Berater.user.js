@@ -1,4 +1,3 @@
-
 // ==UserScript==
 // @name           MyFreeFarm Berater
 // @namespace      https://github.com/BastianKanaan/GMscripts_MyFreeFarm
@@ -623,6 +622,8 @@ const VARIABLES = {
                     "valMinRackV":["Option",5],
                     "valMinRackFarmis":["Option",3],
                     "valMinRackForestryFarmis":["Option",3],
+                    "valMinRackFoodworldFarmis":["Option",3],
+                    "valMinRackFarmersmarketFarmis":["Option",3],
                     "valMinRackGrowing":["Option",3],
                     "valMinRackLodgeQuest":["Option",5],
                     "valMinRackMan":["Option",3],
@@ -737,7 +738,7 @@ var questData;
 var css_styles=new Object();
 var regMsgContentMarketsale,regMsgContentContractsale,regMsgContentContractsaleList,regMsgSubjectFriend,regMsgSubjectFriendCancel;
 var valAutoWater, valWaterNeeded, valAssumeWater, valAutoCrop, valErnteMsg, valLimitEmptyFields, valStatistik, valClickErrorbox, valGlobaltimeShowCroppedZone;
-var valMoveAnimals, valMinRackMan, valMinRack, valMinRackPlantsize, valMinRackFarmis,valMinRackForestryFarmis, valMinRackGrowing, valMinRackRecursive, valFarmiLimits, valFarmiMiniInfo,valMinExFruitsFarms5;
+var valMoveAnimals, valMinRackMan, valMinRack, valMinRackPlantsize, valMinRackFarmis,valMinRackForestryFarmis,valMinRackFoodworldFarmis,valMinRackFarmersmarketFarmis, valMinRackGrowing, valMinRackRecursive, valFarmiLimits, valFarmiMiniInfo,valMinExFruitsFarms5;
 var upjersAds, buyNotePadShowBlocked, show;
 var farmiLog, farmiDailyCount, levelLog, levelLogId, lotteryLog, lotteryLogId, logSales, logSalesId, logDonkey, logDonkeyId, logClothingDonation;
 var zoneAddToGlobalTime;
@@ -2881,6 +2882,20 @@ try{
             if(!totalFarmis[1].hasOwnProperty(prod)){ continue; }
             if(!prodMinRack[1][prod]){ prodMinRack[1][prod]=0;}
             prodMinRack[1][prod] += totalFarmis[1][prod];
+        }
+    }
+    if(valMinRackFoodworldFarmis){
+        for(var prod in totalFarmis[2]){ // {pid: amount}
+            if(!totalFarmis[2].hasOwnProperty(prod)){ continue; }
+            if(!prodMinRack[0][prod]){ prodMinRack[0][prod]=0;}
+            prodMinRack[0][prod] += totalFarmis[2][prod];
+        }
+    }
+    if(valMinRackFarmersmarketFarmis){
+        for(var prod in totalFarmis[3]){ // {pid: amount}
+            if(!totalFarmis[3].hasOwnProperty(prod)){ continue; }
+            if(!prodMinRack[0][prod]){ prodMinRack[0][prod]=0;}
+            prodMinRack[0][prod] += totalFarmis[3][prod];
         }
     }
     // Addons
@@ -6914,6 +6929,28 @@ function buildInfoPanelOptions(){
 
         newtr=createElement("tr",{},newtable);
         newtd=createElement("td",{"align":"center"},newtr);
+        newinput=createElement("input",{"id":"inputValMinRackFoodworldFarmis","type":"checkbox","class":"link","checked":valMinRackFoodworldFarmis},newtd);
+        newinput.addEventListener("click",function(){
+            valMinRackFoodworldFarmis=this.checked;
+            GM_setValue2(COUNTRY+"_"+SERVER+"_"+USERNAME+"_valMinRackFoodworldFarmis",valMinRackFoodworldFarmis,31);
+            calcProdMinRack();
+        },false);
+        createElement("td",{},newtr,getText("settings_valMinRackFoodworldFarmis")[0]);
+        createElement("td",{},newtr,getText("settings_valMinRackFoodworldFarmis")[1]);
+
+        newtr=createElement("tr",{},newtable);
+        newtd=createElement("td",{"align":"center"},newtr);
+        newinput=createElement("input",{"id":"inputValMinRackFarmersmarketFarmis","type":"checkbox","class":"link","checked":valMinRackFarmersmarketFarmis},newtd);
+        newinput.addEventListener("click",function(){
+            valMinRackFarmersmarketFarmis=this.checked;
+            GM_setValue2(COUNTRY+"_"+SERVER+"_"+USERNAME+"_valMinRackFarmersmarketFarmis",valMinRackFarmersmarketFarmis,31);
+            calcProdMinRack();
+        },false);
+        createElement("td",{},newtr,getText("settings_valMinRackFarmersmarketFarmis")[0]);
+        createElement("td",{},newtr,getText("settings_valMinRackFarmersmarketFarmis")[1]);
+
+        newtr=createElement("tr",{},newtable);
+        newtd=createElement("td",{"align":"center"},newtr);
         newinput=createElement("input",{"id":"inputvalProtectMinRack","type":"checkbox","class":"link","checked":GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_valProtectMinRack",false)},newtd);
         newinput.addEventListener("click",function(){
             GM_setValue2(COUNTRY+"_"+SERVER+"_"+USERNAME+"_valProtectMinRack",this.checked,32);
@@ -9093,6 +9130,7 @@ try{
         var oldType=null;
         var newType=null;
         var help=0; //TODO review
+
         for(var i=0;i<prodMissing.length;i++){
             var prod=prodMissing[i][0];
             var amountForFarmis=valMinRackFarmis?((totalFarmis[0]&&totalFarmis[0][prod]?totalFarmis[0][prod]:0)-(prodStock[0]&&prodStock[0][prod]?prodStock[0][prod]:0)):0;
@@ -9800,6 +9838,8 @@ try{
     valMinRackPlantsize=GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_valMinRackPlantsize",false); //Use plant ratio
     valMinRackFarmis=GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_valMinRackFarmis",true);
     valMinRackForestryFarmis=GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_valMinRackForestryFarmis",true);
+    valMinRackFoodworldFarmis=GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_valMinRackFoodworldFarmis",true);
+    valMinRackFarmersmarketFarmis=GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_valMinRackFarmersmarketFarmis",true);
     valMinRackGrowing=GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_valMinRackGrowing",true);
     valMinRackRecursive=GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_valMinRackRecursive",false);
     valFarmiLimits=explode(GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_valFarmiLimits"),"do_main/valFarmiLimits",[90,100]);
@@ -10047,185 +10087,195 @@ try{
         createElement("div",{"id":"food_cart_perc","style":"position:absolute;bottom:105px;left:375px;width:70px;padding:2px;text-align:right;font-size:20px;font-weight:bold;"},newdiv);
     }
     // Foodworld-Zones
-    function doFoodworld(){
-    try{
-        gameLocation.set("foodworld");
-        var nowServer=unsafeWindow.Zeit.Server;
-        var zoneNrF,zoneNrS,tempZoneProductionData,tempZoneProductionDataSlot,currBlock;
-        // Buildings
-        var err_trace="Buildings";
-        //zoneNrF="foodworld-4";
-        //zones.setBlock(zoneNrF,"blpqs");
-        if(unsafeWindow.foodworldbuildings){
-            var res,iProd,iTime,iAmount,iPoints,iSlotCount;
-            for(var building in unsafeWindow.foodworldbuildings){
-                if(!unsafeWindow.foodworldbuildings.hasOwnProperty(building)){continue;}
-                res=unsafeWindow.foodworldbuildings[building];
-                zoneNrF="foodworld-"+building;
-                currBlock=(unsafeWindow.foodworldbuildings[building]["cost"]?"b":""); // foodworld building locked due to missing payment
-                currBlock+=(unsafeWindow.foodworldbuildings[building]["block"]?"l":""); // foodworld building locked due to level requirement
-                zones.setBlock(zoneNrF,currBlock);
-                if(iSlotCount=zones.isMultiSlot(zoneNrF)){
-                    if(!currBlock){
-                        for(var slot=1;slot<=iSlotCount;slot++){
-                            zoneNrS=zoneNrF+"."+slot;
-                            zones.setBlock(zoneNrS,res["slots"]&&res["slots"][slot]&&res["slots"][slot]["block"]?"b":"");
-                        }
-                    }
-                }else{
-                    iSlotCount=0;
-                }
-                if(!currBlock){
-                    zones.setBonus(zoneNrF,0); // TODO // unsafeWindow.forestry_user_buildings[building]["boni"]?unsafeWindow.forestry_user_buildings[building]["boni"]:0;
-                    res=(unsafeWindow.foodworldbuildings[building]&&unsafeWindow.foodworldbuildings[building]["slots"])?unsafeWindow.foodworldbuildings[building]["slots"]:{};
-
-                    tempZoneProductionData=[[{},{}],0,0,true];
-                    for(var slot=1;slot<=(iSlotCount==0?1:iSlotCount);slot++){
-                        GM_logInfo("doFoodworld","","zoneNrF="+zoneNrF+" slot="+slot+" res["+slot+"]="+implode(res[slot],"res"),"Loop",0);
-                        if(iSlotCount>0){
-                            zoneNrS=zoneNrF+"."+slot;
-                        }else{
-                            zoneNrS=zoneNrF;
-                        }
-                        if(!zones.getBlock(zoneNrS)){
-                            tempZoneProductionDataSlot=[[{},{}],0,0,true];
-                            if(res[slot]){
-                                iProd=(res[slot]["pid"]?parseInt(res[slot]["pid"],10):null);
-                                if(isNaN(iProd)){ iProd=null; }
-                                if((iProd!=null)&&(res[slot]["ready"])){ // production ready
-                                    iTime=nowServer;
-                                }else if((iProd!=null)&&(res[slot]["remain"])){ // production busy
-                                    iTime=nowServer+res[slot]["remain"];
-                                }else{
-                                    iTime=NEVER;
-                                    tempZoneProductionData[1]++;
-                                    tempZoneProductionDataSlot[1]++;
-                                }
-                                // iAmount=(res[slot]["amount"]?res[slot]["amount"]:null);
-                                tempZoneProductionData[2]++;
-                                tempZoneProductionDataSlot[2]++;
-                                if(iProd!=null){
-                                    iAmount=prodYield[0][iProd];
-                                    iPoints=iAmount*prodPoints[0][iProd];
-                                    if(!tempZoneProductionData[0][0][iProd]){ tempZoneProductionData[0][0][iProd]=[]; }
-                                    tempZoneProductionData[0][0][iProd].push([iAmount,iPoints,iTime,NEVER]);
-                                    if(!tempZoneProductionDataSlot[0][0][iProd]){ tempZoneProductionDataSlot[0][0][iProd]=[]; }
-                                    tempZoneProductionDataSlot[0][0][iProd].push([iAmount,iPoints,iTime,NEVER]);
-                                }
-                            }
-                            if(iSlotCount>0){
-                                zones.setProduction(zoneNrS,tempZoneProductionDataSlot.clone());
+    function doFoodworld() {
+        try {
+            gameLocation.set("foodworld");
+            var nowServer = unsafeWindow.Zeit.Server;
+            var zoneNrF, zoneNrS, tempZoneProductionData, tempZoneProductionDataSlot, currBlock;
+            // Buildings
+            var err_trace = "Buildings";
+            if (unsafeWindow.foodworldbuildings) {
+                var res, iProd, iTime, iAmount, iPoints, iSlotCount;
+                for (var building in unsafeWindow.foodworldbuildings) {
+                    if (!unsafeWindow.foodworldbuildings.hasOwnProperty(building)) { continue; }
+                    res = unsafeWindow.foodworldbuildings[building];
+                    zoneNrF = "foodworld-" + building;
+                    currBlock = (unsafeWindow.foodworldbuildings[building]["cost"] ? "b" : ""); // foodworld building locked due to missing payment
+                    currBlock += (unsafeWindow.foodworldbuildings[building]["block"] ? "l" : ""); // foodworld building locked due to level requirement
+                    zones.setBlock(zoneNrF, currBlock);
+                    if (iSlotCount = zones.isMultiSlot(zoneNrF)) {
+                        if (!currBlock) {
+                            for (var slot = 1; slot <= iSlotCount; slot++) {
+                                zoneNrS = zoneNrF + "." + slot;
+                                zones.setBlock(zoneNrS, res["slots"] && res["slots"][slot] && res["slots"][slot]["block"] ? "b" : "");
                             }
                         }
+                    } else {
+                        iSlotCount = 0;
                     }
-                    zones.setProduction(zoneNrF,tempZoneProductionData.clone());
-                    //auto-cropping
-                    // if(iSlotCount=0){
-                    //  var div;
-                    //  if((top.unsafeData.autoAction==null) && valAutoCrop["forestry"] && (zones.getEndtime(zoneNrF)<=unsafeWindow.Zeit.Server) && (div=$("forestry_building_click"+building))){
-                    //      top.unsafeData.autoAction="berater: forestry building crop";
-                    //      document.addEventListener("gameOpenGlobalCommitBox",function(){
-                    //          document.removeEventListener("gameOpenGlobalCommitBox",arguments.callee,false);
-                    //          window.setTimeout(function(){
-                    //              click($("globalcommitboxfooter").firstElementChild);
-                    //              top.unsafeData.autoAction=null;
-                    //          },500);
-                    //      });
-                    //      window.setTimeout(function(div){ click(div); },500,div);
-                    //  }
-                    //  div=null;
-                    // }
-                    if(zoneNrF=="foodworld-4"){
-                        createZoneTimer("zoneTimer_"+zoneNrF,zoneNrF,"zonetimer","position:absolute;top:30px;left:45px;",$("food_pos"+building));
-                    }else{
-                        createZoneTimer("zoneTimer_"+zoneNrF,zoneNrF,"zonetimer","position:absolute;top:-20px;left:0px;",$("food_pos"+building));
+                    if (!currBlock) {
+                        zones.setBonus(zoneNrF, 0);
+                        // TODO: Implement Bonus
+                        // unsafeWindow.forestry_user_buildings[building]["boni"]?unsafeWindow.forestry_user_buildings[building]["boni"]:0;
+                        
+                        res = (unsafeWindow.foodworldbuildings[building] && unsafeWindow.foodworldbuildings[building]["slots"]) ? unsafeWindow.foodworldbuildings[building]["slots"] : {};
+                        tempZoneProductionData = [[{}, {}], 0, 0, true];
+                        for (var slot = 1; slot <= (iSlotCount == 0 ? 1 : iSlotCount); slot++) {
+                            GM_logInfo("doFoodworld", "", "zoneNrF=" + zoneNrF + " slot=" + slot + " res[" + slot + "]=" + implode(res[slot], "res"), "Loop", 0);
+                            if (iSlotCount > 0) {
+                                zoneNrS = zoneNrF + "." + slot;
+                            } else {
+                                zoneNrS = zoneNrF;
+                            }
+                            if (!zones.getBlock(zoneNrS)) {
+                                tempZoneProductionDataSlot = [[{}, {}], 0, 0, true];
+                                if (res[slot]) {
+                                    iProd = (res[slot]["pid"] ? parseInt(res[slot]["pid"], 10) : null);
+                                    if (isNaN(iProd)) { iProd = null; }
+                                    if ((iProd != null) && (res[slot]["ready"])) { // production ready
+                                        iTime = nowServer;
+                                    } else if ((iProd != null) && (res[slot]["remain"])) { // production busy
+                                        iTime = nowServer + res[slot]["remain"];
+                                    } else {
+                                        iTime = NEVER;
+                                        tempZoneProductionData[1]++;
+                                        tempZoneProductionDataSlot[1]++;
+                                    }
+                                    // iAmount=(res[slot]["amount"]?res[slot]["amount"]:null);
+                                    tempZoneProductionData[2]++;
+                                    tempZoneProductionDataSlot[2]++;
+                                    if (iProd != null) {
+                                        iAmount = prodYield[0][iProd];
+                                        iPoints = iAmount * prodPoints[0][iProd];
+                                        if (!tempZoneProductionData[0][0][iProd]) { tempZoneProductionData[0][0][iProd] = []; }
+                                        tempZoneProductionData[0][0][iProd].push([iAmount, iPoints, iTime, NEVER]);
+                                        if (!tempZoneProductionDataSlot[0][0][iProd]) { tempZoneProductionDataSlot[0][0][iProd] = []; }
+                                        tempZoneProductionDataSlot[0][0][iProd].push([iAmount, iPoints, iTime, NEVER]);
+                                    }
+                                }
+                                if (iSlotCount > 0) {
+                                    zones.setProduction(zoneNrS, tempZoneProductionDataSlot.clone());
+                                }
+                            }
+                        }
+                        zones.setProduction(zoneNrF, tempZoneProductionData.clone());
+                        if (zoneNrF == "foodworld-4") {
+                            createZoneTimer("zoneTimer_" + zoneNrF, zoneNrF, "zonetimer", "position:absolute;top:30px;left:45px;", $("food_pos" + building));
+                        } else {
+                            createZoneTimer("zoneTimer_" + zoneNrF, zoneNrF, "zonetimer", "position:absolute;top:-20px;left:0px;", $("food_pos" + building));
+                        }
                     }
                 }
+                building = null;
+                res = null;
+                iProd = null;
+                iTime = null;
+                maxCapacity = null;
             }
-            building=null;res=null;iProd=null;iTime=null;maxCapacity=null;
-        }
-        calcTotalZones();
-        // Quest
-        handleQuestDataFoodworld();
-        if ((newdiv = $("foodworld_questblock")) && (!newdiv.classList.contains("mouseOver"))) {
-            newdiv.classList.add("mouseOver");
-            newdiv.addEventListener("mouseover", function(event) {
-                toolTip.show(event, questLineMouseOver("foodworld", "1"));
-            }, false);
-        }
-        zoneNrF=null;tempZoneProductionData=null;tempZoneProductionDataSlot=null;
+            calcTotalZones();
 
-        err_trace="saving";
-        publishProductData();
-    }catch(err){GM_logError("doFoodworld","","err_trace="+err_trace,err);}
+            // Quest
+            handleQuestDataFoodworld();
+            if ((newdiv = $("foodworld_questblock")) && (!newdiv.classList.contains("mouseOver"))) {
+                newdiv.classList.add("mouseOver");
+                newdiv.addEventListener("mouseover", function(event) {
+                    toolTip.show(event, questLineMouseOver("foodworld", "1"));
+                }, false);
+            }
+            zoneNrF = null;
+            tempZoneProductionData = null;
+            tempZoneProductionDataSlot = null;
+            err_trace = "saving";
+            publishProductData();
+        } catch (err) { GM_logError("doFoodworld", "", "err_trace=" + err_trace, err); }
     }
 
-    function dofoodworldFarmisBubble() {
+
+    function doFoodworldFarmisBubble() {
         try {
             var foodWorldFarmi = unsafeWindow.foodworldfarmis;
-            for (var i=0;i<foodWorldFarmi.length;i++) {
-                if (foodWorldFarmi[i].status==0){
-                    var cost=0;
+            totalFarmis[2] = {}; // Remembers foodworld farmi requests
+
+            for (var i = 0; i < foodWorldFarmi.length; i++) {
+                if (foodWorldFarmi[i].status == 0) {
+                    var cost = 0;
                     for (var c in foodWorldFarmi[i].products) {
                         if (!foodWorldFarmi[i].products.hasOwnProperty(c)) { continue; }
-                        cost+=gut[c]*foodWorldFarmi[i].products[c]
+                        cost += gut[c] * foodWorldFarmi[i].products[c]; // cost = price per unit * amount
+
+                        // Add this farmi's requested products to totalFarmi[2]
+                        if (!totalFarmis[2][c]) { totalFarmis[2][c] = 0; }
+                        totalFarmis[2][c] += foodWorldFarmi[i].products[c];
                     }
-
-                    var money = parseFloat(foodWorldFarmi[i].price,10);
-                    money = money+(money*(unsafeWindow.foodworld_bonus.bonus?unsafeWindow.foodworld_bonus.bonus:1)/100);
-                    var rate=100*money/cost;
-
-                    if(rate<valFarmiLimits[0]){ // unter 90%
+                    var money = parseFloat(foodWorldFarmi[i].price, 10);
+                    money = money + (money * (unsafeWindow.foodworld_bonus.bonus ? unsafeWindow.foodworld_bonus.bonus : 1) / 100);
+                    var rate = 100 * money / cost;
+                    if (rate < valFarmiLimits[0]) { // under 90%
                         str = css_styles["farmi_price_low"][1];
-                    }else if(rate<valFarmiLimits[1]){ //zwischen 90% und 100%
+                    } else if (rate < valFarmiLimits[1]) { // between 90% and 100%
                         str = css_styles["farmi_price_between"][1];
-                    }else{ // über 100%
+                    } else { // above 100%
                         str = css_styles["farmi_price_above"][1];
                     }
-                    if ($("foodworldfarmi"+i)){
-                        $("foodworldfarmi"+i).setAttribute("rate",rate);
-                        createElement("div",{"id":"foodworldfarmiMiniInfo"+i,"class":"foodworldfarmiMiniInfo"},$("foodworldfarmi"+i));
-                        $("foodworldfarmiMiniInfo"+i).setAttribute("style",str);
+                    if ($("foodworldfarmi" + i)) {
+                        $("foodworldfarmi" + i).setAttribute("rate", rate);
+                        createElement("div", { "id": "foodworldfarmiMiniInfo" + i, "class": "foodworldfarmiMiniInfo" }, $("foodworldfarmi" + i));
+                        $("foodworldfarmiMiniInfo" + i).setAttribute("style", str);
                     }
                 }
             }
-        }
-        catch(err) {GM_logError("dofoodworldFarmisBubble","","err_trace="+err_trace,err);}
-    }
 
-    unsafeOverwriteFunction("foodworldActionResponse",function(request,action,id,table,chair){
-        try{
-            unsafeWindow._foodworldActionResponse(request,action,id,table,chair);
-        }catch(err){GM_logError("_foodworldActionResponse","","",err);}
-        try{
+            // Persist total farmis
+            GM_setValueCache(COUNTRY + "_" + SERVER + "_" + USERNAME + "_totalFarmis", implode(totalFarmis, "doFoodworldFarmisBubble/totalFarmis"));
+
+        } catch (err) { GM_logError("doFoodworldFarmisBubble", "", "err_trace=" + err_trace, err); }
+    }
+    unsafeOverwriteFunction("foodworldActionResponse", function(request, action, id, table, chair) {
+        try {
+            unsafeWindow._foodworldActionResponse(request, action, id, table, chair);
+        } catch (err) { GM_logError("_foodworldActionResponse", "", "", err); }
+        try {
             var result = checkRequest(request);
-            if((result!=0)&&(result[0]!=0)){
+            if ((result != 0) && (result[0] != 0)) {
                 doFoodworld();
-                dofoodworldFarmisBubble();
-                switch(action){
-                case "crop": raiseEvent("gameFoodworldCropped"); break;
-                case "foodworld_init": raiseEvent("gameFoodworldOpened"); break;
-                case "open": raiseEvent("gameFoodworldOpened" + id); break;
-                case "production": raiseEvent("gameFoodworldStarted"); break;
+                doFoodworldFarmisBubble();
+                switch (action) {
+                    case "crop":
+                        raiseEvent("gameFoodworldCropped");
+                        break;
+                    // case "dropped":
+                    //     calcProdMinRack(); // Does this need to be done?
+                    //     raiseEvent("gameFoodworldFarmiDropped");
+                    //     break;
+                    case "foodworld_init":
+                        raiseEvent("gameFoodworldOpened");
+                        break;
+                    case "kick":
+                        calcProdMinRack();
+                        raiseEvent("gameFoodworldFarmiKick");
+                        break;
+                    case "open":
+                        raiseEvent("gameFoodworldOpened" + id);
+                        break;
+                    case "production":
+                        raiseEvent("gameFoodworldStarted");
+                        break;
                 }
             }
-            result=null;
-        }catch(err){GM_logError("foodworldActionResponse","","",err);}
+            result = null;
+        } catch (err) { GM_logError("foodworldActionResponse", "", "", err); }
     });
-    unsafeOverwriteFunction("openMemoryResponse", function(s){
-        /*
-         * Contribution/Author of function "openMemoryResponse": Moe
-         */
-    try{
+    unsafeOverwriteFunction("openMemoryResponse", function(s) {
+        try {
             unsafeWindow._openMemoryResponse(s);
-        } catch(err) { GM_logError("_openMemoryResponse","","",err); }
-        try{
+        } catch (err) { GM_logError("_openMemoryResponse", "", "", err); }
+        try {
             if (s[4]) {
                 for (var i in s[4]) {
-                    $("memorycard"+i).innerHTML = '<span style="font-size: large;background-color:#fff;">Wert: ' + s[4][i] + '</span>';
+                    $("memorycard" + i).innerHTML = '<span style="font-size: large;background-color:#fff;">Wert: ' + s[4][i] + '</span>';
                 }
             }
-        } catch(err) {GM_logError("openFoodworldBuildingSelect","","",err); }
+        } catch (err) { GM_logError("openFoodworldBuildingSelect", "", "", err); }
     }, true);
     unsafeOverwriteFunction("entryCityXmasEvent",function(c){
         /*
@@ -10594,37 +10644,10 @@ try{
 
     zoneAddToGlobalTime=explode(GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_valGlobalTimeAdd"),"do_main/zoneAddToGlobalTime",{}); //TODO name change
 
-    totalFarmis=explode(GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_totalFarmis"),"do_main/totalFarmis",[{},{}]); // Value of products the farmis want
+    totalFarmis=explode(GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_totalFarmis"),"do_main/totalFarmis",[{},{},{},{}]); // Value of products the farmis want
     totalPowerups=new Object(); // Value of powerups creating products
     totalQuest=new Object(); // Value of products the quests need: totalQuest[questType][prodType][prodId]=amount
     totalRecursive=new Array(new Object(), new Object());
-
-    /*
-    function findRecursiveNeededProducts(type,iProd,amount,addto){ //addto=new Array(new Object(), new Object());
-        if(prodRequire[type]&&prodRequire[type][iProd]){
-            //if(DEVMODE_FUNCTION){GM_log("Begin findRecursiveNeededProducts name:"+prodName[type][iProd]+" iProd:"+iProd+" amount:"+amount+" totalRecursive:"+implode(totalRecursive,"findRecursiveNeededProducts/totalRecursive"));}
-            var help;
-            for(var i in prodRequire[type][iProd]){
-                if (!prodRequire[type][iProd].hasOwnProperty(i)){ continue; }
-                help=prodRequire[type][iProd][i];
-                if (help[0]==type&&help[1]==iProd){continue;}
-                pAmount = Math.ceil((parseInt(help[2],10)*amount)/(prodYield[type][iProd]?prodYield[type][iProd]:1));
-                if(!addto){
-                    if(!totalRecursive[help[0]][help[1]]){totalRecursive[help[0]][help[1]]=0;}
-                    totalRecursive[help[0]][help[1]]+=pAmount;
-                }else{
-                    if(!addto[help[0]][help[1]]){addto[help[0]][help[1]]=0;}
-                    addto[help[0]][help[1]]+=pAmount;
-                }
-                if(prodRequire[help[0]][help[1]]){//&&!(help[0]==type&&help[1]==iProd)){
-                    findRecursiveNeededProducts(help[0],parseInt(help[1],10),pAmount,addto);
-                }
-            }
-            help=null;
-            //if(DEVMODE_FUNCTION){GM_log("End findRecursiveNeededProducts name:"+prodName[type][iProd]+" iProd:"+iProd+" amount:"+amount+" totalRecursive:"+implode(totalRecursive,"findRecursiveNeededProducts/totalRecursive"));}
-        }
-    }
-    */
 
     calcTotalPowerups();
     // Value of active powerup for a field
@@ -14939,23 +14962,19 @@ try{
                         }
                     case "vet_endtreatment":
                         {
-                            //doFarmersMarketData();
-                            raiseEvent("gameVet_endtreatment");
-                            //Tier entlassen
+                            raiseEvent("gameVet_endtreatment"); // Tier entlassen
                             break;
                         }
                     case "vet_setslot":
                         {
-                            //doFarmersMarketData();
-                            raiseEvent("gameVet_setslot");
-                            //Krankes Tier auf Slot:
+                            raiseEvent("gameVet_setslot"); // Krankes Tier auf Slot
+                            
                             break;
                         }
                     case "vet_starttreatment":
                         {
                             doFarmersMarketData();
-                            raiseEvent("gameVet_starttreatment");
-                            //Tier-Behandlung starten:
+                            raiseEvent("gameVet_starttreatment"); // Tier-Behandlung starten
                             break;
                         }
                     case "watergarden":
@@ -16826,7 +16845,6 @@ try{
         } catch(err){GM_logError("findTreatedAnimal","","",err); }
     }
 
-        //vetTreatment= GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_vetTreatment", true);
     function doFarmersMarketData(){
         try{
             var err_trace="zones";
@@ -17195,71 +17213,86 @@ try{
             //22102016
             handleQuestDataBreed();
             calcTotalZones();
-        }catch(err){GM_logError("doFarmersMarketData","","err_trace="+err_trace,err);}
+        } catch (err) { GM_logError("doFarmersMarketData", "", "err_trace=" + err_trace, err); }
     };
     // if(unsafeWindow.farmersmarket_data){ doFarmersMarketData(); } // Moved after showGoToVetFarmi() --Moe, 2016/04/28
 
-    unsafeOverwriteFunction("farmersMarketHandler",function(response){
-        try{
+    unsafeOverwriteFunction("farmersMarketHandler", function(response) {
+        try {
             unsafeWindow._farmersMarketHandler(response);
-        }catch(err){GM_logError("_farmersMarketHandler","","",err);}
-        try{
+        } catch (err) { GM_logError("_farmersMarketHandler", "", "", err); }
+        try {
             doFarmersMarketData();
-            if((USERLEVEL>=31)&&(unsafeWindow.pets)&&(unsafeWindow.pets.data.daily==1)){
+
+            // This snippet is executed (at least) at start up and when a farmersmarket farmi is handled
+            totalFarmis[3] = {}; // Reset foodworld farmi requests before re-reading them
+            for (var i in unsafeWindow.farmersmarket_data.farmis) {
+                if (!unsafeWindow.farmersmarket_data.farmis.hasOwnProperty(i)) { continue; }
+                var farmi = unsafeWindow.farmersmarket_data.farmis[i];
+                for (var j = 0; j < farmi.cart.length; j++) {
+                    var pId = farmi.cart[j].pid;
+                    if (!totalFarmis[3][pId]) { totalFarmis[3][pId] = 0; }
+                    totalFarmis[3][pId] += farmi.cart[j].amount;
+                }
+            }
+
+            if ((USERLEVEL >= 31) && (unsafeWindow.pets) && (unsafeWindow.pets.data.daily == 1)) {
                 showGoToBuyPetsParts();
             }
-
-        }catch(err){GM_logError("farmersMarketHandler","","",err);}
+        } catch (err) { GM_logError("farmersMarketHandler", "", "", err); }
     });
 
-    function doFarmersMarket(){
-        try{
-            var div,div1,divZone;
+
+    function doFarmersMarket() {
+        try {
+            var div, div1, divZone;
             var zoneNrF;
-            for(var w=1;w<=6;w++){
-                zoneNrF="farmersmarket-"+w;
-                divZone=$("farmersmarket_pos"+w);
-                if(!divZone.classList.contains("listenerMouseOver")){
+            for (var w = 1; w <= 6; w++) {
+                zoneNrF = "farmersmarket-" + w;
+                divZone = $("farmersmarket_pos" + w);
+                if (!divZone.classList.contains("listenerMouseOver")) {
                     divZone.classList.add("listenerMouseOver");
-                    divZone.addEventListener("mouseout",function(){
+                    divZone.addEventListener("mouseout", function() {
                         hideBlase();
                         hideLagerZeitZiel();
-                    },false);
-                    divZone.addEventListener("mouseover",function(){
+                    }, false);
+                    divZone.addEventListener("mouseover", function() {
                         var help = /^farmersmarket_pos(\d+)$/.exec(this.id);
-                        help="farmersmarket-"+help[1];
+                        help = "farmersmarket-" + help[1];
                         showBlase(help);
                         showLagerZeitZiel(help);
-                    },true);
+                    }, true);
                 }
-                if(div=$("farmersmarket_pos"+w+"_progress")){
-                    if(!div.classList.contains("listenerMouseOver")){
+                if (div = $("farmersmarket_pos" + w + "_progress")) {
+                    if (!div.classList.contains("listenerMouseOver")) {
                         div.classList.add("listenerMouseOver");
-                        div.addEventListener("mouseover",function(event){
-                            var help=/^farmersmarket_pos(\d+)_progress$/.exec(this.id);
-                            help="farmersmarket-"+help[1];
-                            toolTip.show(event,toolTipZoneProduction(help));
-                        },false);
+                        div.addEventListener("mouseover", function(event) {
+                            var help = /^farmersmarket_pos(\d+)_progress$/.exec(this.id);
+                            help = "farmersmarket-" + help[1];
+                            toolTip.show(event, toolTipZoneProduction(help));
+                        }, false);
                     }
                 }
-                switch(w){
-                case 1:{ // Flower meadow
-                    // Production
-                    if(!(div=$("farmersmarket_pos"+w+"_running"))){
-                        if(div1=$("farmersmarket_pos"+w+"_progress")){
-                            div1.style.display="block";
-                            div=createElement("div",{"id":"farmersmarket_pos"+w+"_running","style":"position:absolute;right:0px;top:10px;"},div1);
+                switch (w) {
+                    case 1: // Flower meadow
+                        // Production
+                        if (!(div = $("farmersmarket_pos" + w + "_running"))) {
+                            if (div1 = $("farmersmarket_pos" + w + "_progress")) {
+                                div1.style.display = "block";
+                                div = createElement("div", { "id": "farmersmarket_pos" + w + "_running", "style": "position:absolute;right:0px;top:10px;" }, div1);
+                            }
                         }
-                    }
-                    if(div){
-                        div.setAttribute("class","v"+zones.getMainproduct(zoneNrF));
-                    }
-                break;}
+                        if (div) {
+                            div.setAttribute("class", "v" + zones.getMainproduct(zoneNrF));
+                        }
+                        break;
                 }
+
             }
-            div=null;
-        }catch(err){GM_logError("doFarmersMarket","","",err);}
+            div = null;
+        } catch (err) { GM_logError("doFarmersMarket", "", "", err); }
     }
+
     if($("farmersmarket_pos1")){ doFarmersMarket(); }
     unsafeOverwriteFunction("setFarmersMarket",function(){
         try{
@@ -17450,7 +17483,7 @@ try{
         }catch(err){GM_logError("needSelectionSetResponse","","",err);}
 
     });
-    //Slot Futter, Spielzeug, Kuscheltier starten
+    // Slot Futter, Spielzeug, Kuscheltier starten
     unsafeOverwriteObjFunction("pets","care",function(){
         try{
              unsafeWindow.pets._care();
@@ -17737,7 +17770,7 @@ try{
                         */
 
                         //make prodName[1] && prodYield[1] && prodRequire[1] = [[type,fId,amount]]
-                        var store,stock,fId,bChanged=false,help,building;
+                        var store,stock,fId,help,building;
                         for(var stock in result[4]){ //forestry_production_products==initForestryResponce->result[4]
                             if (!result[4].hasOwnProperty(stock)){ continue; }
                             for(var fId in result[4][stock]){
@@ -17850,32 +17883,20 @@ try{
                         // prodStock[1].sortObj();
                         GM_setValueCache(COUNTRY+"_"+SERVER+"_"+USERNAME+"_prodStock",implode(prodStock,"initForestryResponse/prodStock"));
 
-                        //forestry_farmis
-                        var farmi, i;
-                        totalFarmis[1]=new Object();
-                        for(farmi in result[5]){ //forestry_farmis==initForestryResponce->result[5]
-                            if (!result[5].hasOwnProperty(farmi)){ continue; }
-                            for(i in result[5][farmi]["products"]){
-                                if (!result[5][farmi]["products"].hasOwnProperty(i)){ continue; }
+                        // Forestry Farmis
+                        totalFarmis[1] = new Object();
+                        for (var farmi in result[5]) {
+                            if (!result[5].hasOwnProperty(farmi)) { continue; }
+                            for (var i in result[5][farmi]["products"]) {
+                                if (!result[5][farmi]["products"].hasOwnProperty(i)) { continue; }
+                                
                                 fId = result[5][farmi]["products"][i]["product"];
-                                // if (!prodName[1][fId]){
-                                //  prodName[1][fId] = result[5][farmi]["products"][i]["name"]; // set prodName[1]
-                                //  //GM_log("initForestryResponse ADD prodName farmis fId:"+fId+" name:"+prodName[1][fId]);
-                                //  bChanged=true;
-                                // }
-                                if(!totalFarmis[1][fId]) totalFarmis[1][fId]=0;
-                                totalFarmis[1][fId] += parseInt(result[5][farmi]["products"][i]["amount"],10);
+                                if (!totalFarmis[1][fId]) { totalFarmis[1][fId] = 0; }
+                                totalFarmis[1][fId] += parseInt(result[5][farmi]["products"][i]["amount"], 10);
                             }
                         }
-                        // totalFarmis[1].sortObj();
-                        // GM_log("initForestryResponse totalFarmis:"+implode(totalFarmis));
-                        GM_setValueCache(COUNTRY+"_"+SERVER+"_"+USERNAME+"_totalFarmis",implode(totalFarmis,"initForestryResponse/totalFarmis"));
+                        GM_setValueCache(COUNTRY + "_" + SERVER + "_" + USERNAME + "_totalFarmis", implode(totalFarmis, "initForestryResponse/totalFarmis"));
 
-                        if(bChanged){
-                            // prodName[1].sortObj();
-                            // GM_log("initForestryResponse bChanged:"+ bChanged+" prodName:"+implode(prodName));
-                            GM_setValueCache(COUNTRY+"_"+SERVER+"_prodName",implode(prodName,"initForestryResponse/prodName"));
-                        }
                     }catch(err){GM_logError("initForestryResponse","","",err);}
                     var zoneNrF;
                     switch(type){
@@ -22234,6 +22255,8 @@ try{
         text["de"]["settings_valMinRackRecursive"]=["Rekursive Produkte","Beachtet zusätzlich die benötigten Ausgangsprodukte um fehlenden Produkte zu produzieren."];
         text["de"]["settings_valMinRackFarmis"]=["Farmi-Produkte","Beachtet zusätzlich die Menge der Produkte, die deine Farmis verlangen. Dabei gelten nur diejenigen, die besser als die untere Grenze bezahlen."];
         text["de"]["settings_valMinRackForestryFarmis"]=["Baumerei-Farmi-Produkte","Beachtet zusätzlich die Menge der Produkte, die deine Baumerei-Farmis verlangen."];
+        text["de"]["settings_valMinRackFoodworldFarmis"]=["Picknick-Farmi-Produkte","Beachtet zusätzlich die Menge der Produkte, die deine Picknick-Farmis verlangen."];
+        text["de"]["settings_valMinRackFarmersmarketFarmis"]=["Bauernmarkt-Farmi-Produkte","Beachtet zusätzlich die Menge der Produkte, die deine Bauernmarkt-Farmis verlangen."];
         text["de"]["settings_protectMinRack"]=["Marktschutz","Verhindert, dass die Warenmenge beim Marktverkauf den minimalen Lagerbestand unterschreitet."];
         text["de"]["settings_valBuyingLimitDown"]=["Untere Kaufmarkierung",""];
         text["de"]["settings_valBuyingLimit"]=["Obere Kaufgrenze","Du kannst am Markt nur Produkte kaufen die maximal der Prozentgrenze entsprechen. Dies schützt dich vor dem versehentlichen Kauf übertrieben teurer Waren."];
@@ -22654,6 +22677,8 @@ try{
         text["en"]["settings_valMinRackRecursive"]=["Recursive products","Add required products needed to manufacture missing products."];
         text["en"]["settings_valMinRackFarmis"]=["Farmie products","Adds the amount of the products wanted by the farmies which pay more than the lower limit."];
         text["en"]["settings_valMinRackForestryFarmis"]=["Lodge farmie products","Adds the amount of the products wanted by the lodge farmies."];
+        text["en"]["settings_valMinRackFoodworldFarmis"]=["Foodworld farmie products","Adds the amount of the products wanted by the foodworld farmies."];
+        text["en"]["settings_valMinRackFarmersmarketFarmis"]=["Farmersmarket farmie products","Adds the amount of the products wanted by the farmersmarket farmies."];
         text["en"]["settings_protectMinRack"]=["Selling protection","Prohibits to sell products at market below the minimal rackamount"];
         text["en"]["settings_valBuyingLimitDown"]=["Bottom buy highlight",""];
         text["en"]["settings_valBuyingLimit"]=["Top buy limit","You can only buy products at the market up to the limit given.  This protects you from accidentally purchasing very over-priced goods."];
