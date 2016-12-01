@@ -165,7 +165,7 @@ const CHANGELOG=[["2.0","29.05.2014",[["Migration nach openuserjs.org","Migratio
                 ,["2.10.47","26.10.2016",[["Tabelle: Questserie Tieraufzucht","Table: Quest-Series animal breed"],["Automatisches tägliches Abholen des 5000kT Puzzlepaket (siehe Optionen - Automat)","Automatic daily pick of 5000kT puzzle package (Check options automat)"]]]
                 ,["2.10.49","16.11.2016",[["Tieraufzucht","Animal breeding"]]]
                 ,["2.10.50","21.11.2016",[["Verbesserungen (Kleinvieh macht auch Mist :D)","Improvements"],["Option: NPC-Preis Berechnung","Option: NPC price calculation"]]]
-                ,["2.10.51","28.11.2016",[["Verbesserungen Tieraufzucht","Animal breeding"]]]
+                ,["2.10.51","01.12.2016",[["Verbesserungen Tieraufzucht","Improvements Animal breeding"],["Fehlende Produkte der Mumpfis (siehe Optionen > minimaler Lagerbestand)","Foodworld farmis missing products (CHECK BERATER-OPTIONS > MINIMAL RACKAMOUNT)"],["Fehlende Produkte der Farmesmarket-Farmis","Farmersmarket farmis in missing products"]]]
                 ];
 if(!VERSIONfunctionFile){
     alert("Hi, I am the Berater-Script.\nThe function-file is missing.\nPlease install me again.");
