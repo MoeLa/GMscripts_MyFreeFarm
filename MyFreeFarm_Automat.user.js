@@ -3209,7 +3209,7 @@ try{
                         iTogoArray[zoneNrS]++;
                     }
                     endTime=zoneTimes[zoneNrS];
-                }else if((iTot<=0)||iStop){ //don't do any thing just give the begin info.
+                } else if((iTot<=0)||iStop){ //don't do any thing just give the begin info.
                     for(fz in zoneTimes){
                         if(!zoneTimes.hasOwnProperty(fz)){ continue; }
                         if(isNaN(iTogoArray[fz])) iTogoArray[fz]=0;

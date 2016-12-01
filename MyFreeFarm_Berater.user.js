@@ -589,6 +589,7 @@ const VARIABLES = {
                     "show":["Mode",4],
                     "totalEndtime":["Total endtime",2],
                     "totalFarmis":["Farmi needings",2],
+                    "valAnimalBreedingDelay":["Option",3],
                     "valAssumeWater":["Option",3],
                     "valAutoCrop":["Option",3],
                     "valAutoWater":["Option",3],
@@ -743,7 +744,7 @@ var upjersAds, buyNotePadShowBlocked, show;
 var farmiLog, farmiDailyCount, levelLog, levelLogId, lotteryLog, lotteryLogId, logSales, logSalesId, logDonkey, logDonkeyId, logClothingDonation;
 var zoneAddToGlobalTime;
 var totalAnimals, totalFarmis, totalPowerups, totalQuest, totalRecursive, totalZones, totalEndtime;
-var valKauflimit, valKauflimitNPC, highlightProducts, highlightUser, valNimmBeob, valUse3TimesNpcPrices, valVerkaufLimitDown, valVerkaufLimitUp, valJoinPreise, lastOffer, protectMinRack, ownMarketOffers, valClothingDonation, valVet, valVetAutostart, valVetAutoSet, valVetNoCoinDrugs, vetTreatment;
+var valKauflimit, valKauflimitNPC, highlightProducts, highlightUser, valAnimalBreedingDelay, valNimmBeob, valUse3TimesNpcPrices, valVerkaufLimitDown, valVerkaufLimitUp, valJoinPreise, lastOffer, protectMinRack, ownMarketOffers, valClothingDonation, valVet, valVetAutostart, valVetAutoSet, valVetNoCoinDrugs, vetTreatment;
 var valAnimateStartscreen, valAutoLogin;
 var valMessagesSystemMarkRead;
 var megafieldVehicle, megafieldJob, logMegafieldJob, megafieldSmartTimer;
@@ -17058,9 +17059,16 @@ try{
                                                 if (item.care_remains.hasOwnProperty(i)){
                                                     iTime = nowServer+item.care_remains[i];
                                                 } else {
-                                                    iTime = nowServer-item.happiness_interval[i];
-                                                    tempZoneProductionData[1]++;
-                                                    tempZoneProductionDataSlot[1]++;
+                                                    if (item.remain<7200) {
+                                                        iTime = nowServer+item.remain;
+                                                    } else{
+                                                        iTime = nowServer-item.happiness_interval[i];
+                                                        tempZoneProductionData[1]++;
+                                                        tempZoneProductionDataSlot[1]++;
+                                                    }
+                                                    //iTime = nowServer-item.happiness_interval[i];
+                                                    //tempZoneProductionData[1]++;
+                                                    //tempZoneProductionDataSlot[1]++;
                                                 }
                                             } else {
                                                 //Aufzucht fertig
@@ -17340,11 +17348,11 @@ try{
              unsafeWindow.pets._init();
         }catch(err){GM_logError("pets.init","","",err);}
         try{
-            raiseEvent("gameFarmersmarketOpened4");
         }catch(err){GM_logError("InitResponse","","",err);}
 
     });*/
 
+    //Open Farmersmarket Pos4
     unsafeOverwriteObjFunction("pets","buildProductionSlots",function(){
         try{
              unsafeWindow.pets._buildProductionSlots();
