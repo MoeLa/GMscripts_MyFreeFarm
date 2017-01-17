@@ -638,6 +638,7 @@ const VARIABLES = {
                     "valMoveAnimals":["Option",3],
                     "valMsgFormat":["Option",3],
                     "valNachr":["Option",5],
+                    "valPreiseBeobNum":["Option",3],
                     "valPrivNachr":["Option",3],
                     "valProtectMinRack":["Option",3],
                     "valQuicklinks":["Option",3],
@@ -748,7 +749,7 @@ var upjersAds, buyNotePadShowBlocked, show;
 var farmiLog, farmiDailyCount, levelLog, levelLogId, lotteryLog, lotteryLogId, logSales, logSalesId, logDonkey, logDonkeyId, logClothingDonation;
 var zoneAddToGlobalTime;
 var totalAnimals, totalFarmis, totalPowerups, totalQuest, totalRecursive, totalZones, totalEndtime;
-var valKauflimit, valKauflimitNPC, highlightProducts, highlightUser, valAnimalBreedingDelay, valNimmBeob, valUse3TimesNpcPrices, valVerkaufLimitDown, valVerkaufLimitUp, valJoinPreise, lastOffer, protectMinRack, ownMarketOffers, valClothingDonation, valVet, valVetAutostart, valVetAutoSet, valVetNoCoinDrugs, vetTreatment;
+var valKauflimit, valKauflimitNPC, highlightProducts, highlightUser, valAnimalBreedingDelay, valNimmBeob, valPreiseBeobNum, valUse3TimesNpcPrices, valVerkaufLimitDown, valVerkaufLimitUp, valJoinPreise, lastOffer, protectMinRack, ownMarketOffers, valClothingDonation, valVet, valVetAutostart, valVetAutoSet, valVetNoCoinDrugs, vetTreatment;
 var valAnimateStartscreen, valAutoLogin;
 var valMessagesSystemMarkRead;
 var megafieldVehicle, megafieldJob, logMegafieldJob, megafieldSmartTimer;
@@ -7197,6 +7198,24 @@ function buildInfoPanelOptions(){
         createElement("td",{},newtr,getText("settings_valUseObservedPrices")[0]);
         createElement("td",{},newtr,getText("settings_valUseObservedPrices")[1]);
 
+        newtr=createElement("tr",{},newtable);
+        newtd=createElement("td",{"align":"center"},newtr);
+        newinput=createElement("input",{"id":"inputvalPreiseBeobNum","value":GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_valPreiseBeobNum",18),"type":"text","maxlength":"2","size":"2px","style":"background-color:transparent;text-align:center;"},newtd);
+        newinput.addEventListener("focus",function(){this.style.backgroundColor="lightblue";},false);
+        newinput.addEventListener("blur",function(){this.style.backgroundColor="transparent";},false);
+        newinput.addEventListener("keyup",function(){
+            var valPreiseBeobNum=parseInt(this.value,10);
+            if (isNaN(valPreiseBeobNum)){
+                this.value="";
+            }else{
+                this.value=valPreiseBeobNum;
+                if (valPreiseBeobNum<1) {valPreiseBeobNum=1} // prevents calculation errors when user enters integer < 1
+                GM_setValue2(COUNTRY+"_"+SERVER+"_"+USERNAME+"_valPreiseBeobNum", valPreiseBeobNum,75);
+            }
+        },false);
+        createElement("td",{},newtr,getText("settings_valPreiseBeobNum")[0]);
+        createElement("td",{},newtr,getText("settings_valPreiseBeobNum")[1]);
+
         newtr = createElement("tr", {}, newtable);
         newtd = createElement("td", { "align": "center" }, newtr);
         newinput = createElement("input", { "id": "inputValUse3TimesNpcPrices", "type": "checkbox", "class": "link", "checked": GM_getValue(COUNTRY + "_" + SERVER + "_valUse3TimesNpcPrices", true) }, newtd);
@@ -13271,6 +13290,8 @@ try{
 
                 // Calculate all observed prices
                 err_trace = "Observing prices";
+                // Try to get valPreiseBeobNum from SQLite DB as it is not initialized at this point. Defaults to 18 cheapest offers.
+                valPreiseBeobNum = GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_valPreiseBeobNum",18)
 
                 for (var v = 0; v < prodBlock[0].length; v++) {
                     if (prodBlock[0][v] === undefined) { continue; }
@@ -13281,9 +13302,9 @@ try{
                             marketOffersArr[v].sort(function(a, b) {
                                 return a[1] == b[1] ? a[2] - b[2] : a[1] - b[1];
                             });
-                            marketOffersArr[v] = marketOffersArr[v].slice(0, 18); // Take cheapest 18 offers
+                            marketOffersArr[v] = marketOffersArr[v].slice(0, valPreiseBeobNum); // Take cheapest offers
 
-                            menge_sum = 0; // Total amount of product v offered at market (within the cheapest 18 offers)
+                            menge_sum = 0; // Total amount of product v offered at market (within the cheapest offers)
                             // Iterate over those (at most) 18 offers of product v
                             for (var w = 0; w < marketOffersArr[v].length; w++) {
                                 menge_sum += marketOffersArr[v][w][0];
@@ -22367,6 +22388,7 @@ try{
         text["de"]["settings_valJoinPrices"]=["Ein Preisfeld","Verbindet die Preis-Eingabefelder beim Marktstand"];
         text["de"]["settings_valQuicklinks"]=["Quicklinks am Markt anzeigen","Quicklinks am Markt anzeigen"];
         text["de"]["settings_valUseObservedPrices"]=["Benutze beobachtete Preise","Wenn du dich durch den Markt klickst, werden die Preise beobachtet. Ein berechneter Preis ist in der Preisliste zu sehen. Soll dieser automatisch übernommen werden?"];
+        text["de"]["settings_valPreiseBeobNum"]= ["Limitiere günstigste Angebote","Limitiert die Berechnung des beobachteten Marktpreises auf die angegebene Anzahl der günstigsten Angebote."];
         text["de"]["settings_valUse3TimesNpcPrices"]=["Benutze dreifache NPC-Preise","Für Produkte, die nicht am NPC zu kaufen sind, wird der (fiktive) dreifache Preis angenommen."];
         text["de"]["settings_valSendStatistics"]=["Sende Statistiken","Unterstütze den <a href='http://mff.metrax.eu/' target='_blank'>Statistik-Server</a>. Es werden keine privaten Daten gesendet!"];
         text["de"]["settings_valPrivateMessages"]=["Anzahl gemerkte Privatnachrichten","Deine letzten privaten Nachrichten werden gespeichert und somit kann ein Nachrichten-Verlauf mit einem Kontakt angezeigt werden."];
@@ -22790,6 +22812,7 @@ try{
         text["en"]["settings_valJoinPrices"]=["One input","Joins the price input fields at the market stand."];
         text["en"]["settings_valQuicklinks"]=["Show market quicklinks","Show quicklinks at market place"];
         text["en"]["settings_valUseObservedPrices"]=["Use observed prices","Prices are observed while clicking through the market place. A calculated price can be seen in the price list. Shall this automatically override your settings?"];
+        text["en"]["settings_valPreiseBeobNum"]= ["Limit cheapest offers","Limits the calculation of observed prices to the given amount of cheapest offers."];
         text["en"]["settings_valUse3TimesNpcPrices"]=["Use three times NPC prices","For products, that can't be bought at an NPC, three times their (fictual) values are assumed."];
         text["en"]["settings_valSendStatistics"]=["Send statistics","Support the <a href='http://mff.metrax.eu/' target='_blank'>Statistik-Server</a>.  No private data is sent!"];
         text["en"]["settings_valPrivateMessages"]=["Number private messages kept","Your last private messages are kept so that a message history of one contact can be shown."];
