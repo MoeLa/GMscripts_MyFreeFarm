@@ -6679,15 +6679,28 @@ try{
         var action=null,listeningEvent=null;
         switch(step){
         case 1: // init and open city
-            handled.set("windmill.1");
-            reSortWindmill(false); // checks if recipe is possible
-            if(zoneList[handled.zoneNrL].length==0){ zoneList[handled.zoneNrL]=DEFAULT_ZONELIST_MILL_ARRAY; }
-            if(unsafeData.readyZone["windmill"]&&(unsafeData.readyZone["windmill"][1]=="e")&&(zoneList[handled.zoneNrL][0][0]==PRODSTOP)){
-                // Windmill is empty and no recipe to do
+            //handled.set("windmill.1");
+            for(var slot=1;slot<=2;slot++){
+                var zoneNrS="windmill."+slot;
+                if((help=unsafeData.readyZone[zoneNrS])&&help[2]){
+                    handled.set(zoneNrS);
+                    break;
+                }
+            }
+            if(handled.zoneNrL){
+                reSortWindmill(false); // checks if recipe is possible
+                if(zoneList[handled.zoneNrL].length==0){ zoneList[handled.zoneNrL]=DEFAULT_ZONELIST_MILL_ARRAY; }
+                if(unsafeData.readyZone[handled.zoneNrL]&&(unsafeData.readyZone[handled.zoneNrL][1]=="e")&&(zoneList[handled.zoneNrL][0][0]==PRODSTOP)){
+                    // Windmill is empty and no recipe to do
+                    autoWindmill(runId,8); // exit
+                }else{
+                    listeningEvent="gameCity2";
+                    action=function(){ click($top("speedlink_city2")); };
+                }
+            } else {
+                zoneList[handled.zoneNrL].unshift(DEFAULT_ZONELIST_ITEM.clone());
+                updateQueueBox(handled.zoneNrS);
                 autoWindmill(runId,8); // exit
-            }else{
-                listeningEvent="gameCity2";
-                action=function(){ click($top("speedlink_city2")); };
             }
         break;
         case 2: // open windmill
