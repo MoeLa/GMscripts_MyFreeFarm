@@ -6690,7 +6690,7 @@ try{
             if(handled.zoneNrL){
                 reSortWindmill(false); // checks if recipe is possible
                 if(zoneList[handled.zoneNrL].length==0){ zoneList[handled.zoneNrL]=DEFAULT_ZONELIST_MILL_ARRAY; }
-                if(unsafeData.readyZone[handled.zoneNrL]&&(unsafeData.readyZone[handled.zoneNrL][1]=="e")&&(zoneList[handled.zoneNrL][0][0]==PRODSTOP)){
+                if(unsafeData.readyZone[handled.zoneNrS]&&(unsafeData.readyZone[handled.zoneNrS][1]=="e")&&(zoneList[handled.zoneNrL][0][0]==PRODSTOP)){
                     // Windmill is empty and no recipe to do
                     autoWindmill(runId,8); // exit
                 }else{
@@ -6741,7 +6741,7 @@ try{
             if($("windmill_paper").style.display=="block"){
                 listeningEvent="gameWindmillStarted";
                 action=function(){
-                    unsafeData.readyZone[handled.zoneNrL][2]=false;
+                    unsafeData.readyZone[handled.zoneNrS][2]=false;
                     click($("windmill_paper_commit"));
                 };
             } else {
@@ -6749,7 +6749,7 @@ try{
             }
         break;
         case 7: // wait for response
-            if(unsafeData.readyZone[handled.zoneNrL]){
+            if(unsafeData.readyZone[handled.zoneNrS]){
                 window.setTimeout(autoWindmill,settings.getPause(),runId,step);
             } else {
                 botArbiter.clear("windmill");
