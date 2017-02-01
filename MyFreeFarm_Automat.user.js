@@ -5637,15 +5637,23 @@ function autoFarmStable(runId, step, didFeed, isBot, sorte, feedcounter, maxFeed
                         unsafeData.prodStock[0][sorte]--;
                         didFeed = true;
                         GM_logInfo("autoFarmStable", "runId=" + runId + " step=" + step + " didFeed=" + didFeed + " isBot=" + isBot + " sorte=" + sorte + " feedcounter=" + feedcounter + " maxFeed=" + maxFeed, "", getText("automat_feeding") + "<br>" + feedcounter + " " + unsafeData.prodName[0][sorte]);
-                        click($("feed_item" + sorte + "_normal").firstElementChild); // give feed
-                        if (feedcounter >= maxFeed) {
-                            if ((sorte == zoneList[handled.zoneNrL][0][0]) && (zoneList[handled.zoneNrL][1][1] > 0)) {
-                                window.setTimeout(autoFarmStable, 3 * settings.getPause(true), runId, 4, didFeed, isBot, zoneList[handled.zoneNrL][1][0], 0, zoneList[handled.zoneNrL][1][1]); // do other food
+
+                        //click($("feed_item" + sorte + "_normal").firstElementChild); // give feed
+
+                        var div = (checkGuildJobProduct(handled.zoneNrL)) ? $("feed_item" + sorte + "_guild").querySelector(".sack") : $("feed_item" + sorte + "_normal").querySelector(".sack");
+                        if (div) {
+                            click(div); // give feed
+                            if (feedcounter >= maxFeed) {
+                                if ((sorte == zoneList[handled.zoneNrL][0][0]) && (zoneList[handled.zoneNrL][1][1] > 0)) {
+                                    window.setTimeout(autoFarmStable, 3 * settings.getPause(true), runId, 4, didFeed, isBot, zoneList[handled.zoneNrL][1][0], 0, zoneList[handled.zoneNrL][1][1]); // do other food
+                                } else {
+                                    window.setTimeout(autoFarmStable, 3 * settings.getPause(true), runId, 10, didFeed, isBot, sorte, feedcounter, maxFeed); // exit
+                                }
                             } else {
-                                window.setTimeout(autoFarmStable, 3 * settings.getPause(true), runId, 10, didFeed, isBot, sorte, feedcounter, maxFeed); // exit
+                                window.setTimeout(autoFarmStable, settings.getPause(true), runId, step, true, isBot, sorte, feedcounter, maxFeed); // next feeding
                             }
                         } else {
-                            window.setTimeout(autoFarmStable, settings.getPause(true), runId, step, true, isBot, sorte, feedcounter, maxFeed); // next feeding
+                            window.setTimeout(autoFarmStable, 3 * settings.getPause(true), runId, 10, didFeed, isBot, sorte, feedcounter, maxFeed); // exit
                         }
                         break;
                     }
