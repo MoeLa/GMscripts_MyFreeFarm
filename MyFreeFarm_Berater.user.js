@@ -375,10 +375,11 @@ unsafeData.BUILDING2PRODUCT=BUILDING2PRODUCT.clone();
             Foodworld        4
             Farmersmarket    4
             Pony             5
-            Fuelstation      6
+            Monster fruit culture     7
         */
 //13102016
-const BUILDINGTYPE={"0":0,"1":1,"2":2,"3":2,"4":2,"5":2,"6":0,"7":3,"8":3,"9":3,"10":3,"11":2,"12":2,"13":3,"14":3,"15":2,"16":3,"17":0,"18":5,"19":0,"20":6,"fl1":1,"fl2":4,"fl4":4,"fl5":4,"fw1":4,"fw2":4,"fw3":4,"fw4":4};
+const BUILDINGTYPE={"0":0,"1":1,"2":2,"3":2,"4":2,"5":2,"6":0,"7":3,"8":3,"9":3,"10":3,"11":2,"12":2,"13":3,"14":3,"15":2,"16":3,"17":0,"18":5,"19":0,"20":6,"fl1":1,"fl2":4,"fl3":7,"fl4":4,"fl5":4,"fw1":4,"fw2":4,"fw3":4,"fw4":4};
+
 
 unsafeData.BUILDINGTYPE=BUILDINGTYPE.clone();
 // task_new_building
@@ -387,7 +388,7 @@ unsafeData.BUILDING_SIZE=BUILDING_SIZE.clone();
 // task_new_building
 
 //13102016
-const BUILDING_SLOTS={"13":3,"14":3,"16":3,"18":3,"20":4,"windmill":2,"sawmill":3,"carpentry":3,"fw1":3,"fw2":3,"fw3":3,"fw4":3,"fl0":17,"fl2":3,"fl4":7,"fl5":4,"megafield":99};
+const BUILDING_SLOTS={"13":3,"14":3,"16":3,"18":3,"20":4,"windmill":2,"sawmill":3,"carpentry":3,"fw1":3,"fw2":3,"fw3":3,"fw4":3,"fl0":17,"fl2":3,"fl3":3,"fl4":7,"fl5":4,"megafield":99};
 unsafeData.BUILDING_SLOTS=BUILDING_SLOTS.clone();
 // Needed input of a zone
 // BUILDING_INPUT[buildTyp]{output}[alternatives]=[[prod1,amount1||reducing time1],...]
@@ -8700,7 +8701,29 @@ function toolTipZoneProduction(zoneNrS){
                         pointsFormat(item.points,"span",td);
                         createElement("img",{"src":GFX+"/breed/Heart_00.png","style":"height:15px;width:15px;border:none;top:0px;vertical-align:bottom;padding-left:5px;"},td);
                         createElement("span",{},td,numberFormat(item.breedpoints));
+                      } else if (zones.getBuilding(zoneNrS)=="fl3"){
+                        //monster fruit culture
+                        item = unsafeWindow.farmersmarket_data.megafruit;
 
+                        tr=createElement("tr",{},table);
+                        td=createElement("td",{"colspan":2},tr);
+                        //createElement("img",{"src":GFX+"/monsterfruit_"+item.current.pid+".png","style":"height:15px;width:15px;border:none;top:0px;vertical-align:bottom;"},td);
+                        createElement("span",{},td,"Fruchtsamen: "+ item.current.points);
+
+                        tr=createElement("tr",{"colspan":2},table);
+                        createElement("td",{"colspan":2},tr,moneyFormat(item.current.rewards.money));
+                        tr=createElement("tr",{},table);
+                        td=createElement("td",{"colspan":2},tr);
+                        pointsFormat(item.current.rewards.points,"span",td);
+
+                        tr=createElement("tr",{},table);
+                        td=createElement("td",{},tr);
+                        createElement("img",{"src":GFX+"/megafruit_seed.png","style":"height:15px;width:15px;border:none;top:0px;vertical-align:bottom;"},td);
+                        createElement("span",{"style":"padding-left:2px"},td,item.current.rewards.fruits);
+                        td=createElement("td",{},tr);
+                        createElement("img",{"src":GFX+"/megafruitparts"+item.current.pid+".png","style":"height:15px;width:15px;border:none;top:0px;vertical-align:bottom;"},td);
+                        createElement("span",{"style":"padding-left:2px"},td,item.current.rewards.parts);
+                        break;
                     } else {
                         tr=createElement("tr",{},table);
                         td=createElement("td",{},tr);
@@ -13928,9 +13951,10 @@ try{
             raiseEvent("gameOpenGlobalCommitBox");
         }catch(err){GM_logError("globalcommitbox","","",err);}
     });
-    unsafeOverwriteFunction("globalBox",function(f,a,e,c,b){
+    //(l,e,n,m,h,b,c)
+    unsafeOverwriteFunction("globalBox",function(l,e,n,m,h,b,c){
         try{
-            unsafeWindow._globalBox(f,a,e,c,b);
+            unsafeWindow._globalBox(l,e,n,m,h,b,c);
         }catch(err){GM_logError("_globalBox","","",err);}
         try{
             raiseEvent("gameOpenGlobalBox");
@@ -14880,6 +14904,9 @@ try{
         try {
             var r = checkRequest(request, mode);
             if ((r != 0) && (r[0] != 0)) {
+                console.log("---------------------farmActionResponse-----------------------");
+                console.log(mode);
+                console.log("---------------------farmActionResponse-----------------------");
                 switch (mode) {
                     case "autoplant":
                         {
@@ -14888,6 +14915,11 @@ try{
                                 checkFieldTimes();
                                 raiseEvent("gameFieldPlanted");
                             }
+                            break;
+                        }
+                    case "megafruit_buyobject": {
+                            doFarmersMarketData();
+                            raiseEvent("gameMegafruit_buyobject");
                             break;
                         }
                     case "cropgarden":
@@ -17038,6 +17070,94 @@ try{
                                     zones.setProduction(zoneNrF,tempZoneProductionData.clone());
                                 }
                             break;}
+                            case 3:{ //monster fruit culture
+                                //13102016
+                                zones.setBonus(zoneNrF,0);
+                                console.log("=== START LESE monster fruit culture ===");
+                                console.log(print_r(unsafeWindow.farmersmarket_data.megafruit, "", true, "\n"));
+                                console.log("=== END LESE monster fruit culture ===");
+
+                                if((!currBlock)&&(unsafeWindow.farmersmarket_data.megafruit&&unsafeWindow.farmersmarket_data.megafruit.current)){
+
+                                    zones.setBonus(zoneNrF,0);
+                                    item = unsafeWindow.farmersmarket_data.megafruit;
+                                    slot = 0;
+                                    iProd=634; iAmount=0; iPoints=0;
+                                    tempZoneProductionData=[[{},{}],0,0,true];
+                                    for (var i in item.current.data){
+                                        if(!item.current.data.hasOwnProperty(i)){ continue; }
+                                        slot++;
+                                        zoneNrS=zoneNrF+"."+slot;
+                                        zones.setBlock(zoneNrS,"");
+
+                                        tempZoneProductionDataSlot=[[{},{}],0,0,true];
+
+                                        if (item.current.data[i].remain>0) {
+                                            iTime = nowServer+item.current.data[i].remain;
+                                        } else {
+                                            iTime = nowServer+item.current.data[i].remain;
+                                            //iTime = nowServer+25000;
+                                            tempZoneProductionData[1]++;
+                                            tempZoneProductionDataSlot[1]++;
+                                        }
+
+                                        tempZoneProductionData[2]++;
+                                        tempZoneProductionDataSlot[2]++;
+
+                                        if(!tempZoneProductionData[0][0][iProd]) {
+                                            tempZoneProductionData[0][0][iProd]=[];
+                                        }
+
+                                        tempZoneProductionData[0][0][iProd].push([iAmount,iPoints,iTime,NEVER]);
+                                        if(!tempZoneProductionDataSlot[0][0][iProd]) {
+                                            tempZoneProductionDataSlot[0][0][iProd]=[];
+                                        }
+                                        tempZoneProductionDataSlot[0][0][iProd].push([iAmount,iPoints,iTime,NEVER]);
+                                        zones.setProduction(zoneNrS,tempZoneProductionDataSlot.clone());
+                                    }
+
+                                    zones.setProduction(zoneNrF,tempZoneProductionData.clone());
+                                    /*tempZoneProductionData=[[{},{}],0,0,true];
+                                    item = unsafeWindow.farmersmarket_data.megafruit;
+                                    slot = 0
+                                    for (var i in item.current.data){
+                                        if(!item.current.data.hasOwnProperty(i)){ continue; }
+                                        slot++;
+                                        zoneNrS=zoneNrF+"."+slot;
+                                        zones.setBlock(zoneNrS,"");
+
+                                        tempZoneProductionDataSlot=[[{},{}],0,0,true];
+                                        iProd=0; iAmount=0; iPoints=0;
+
+
+                                        if (item.current.data[i].remain>0) {
+                                            alert(i);
+                                            alert(nowServer);
+                                            iTime = nowServer+Math.round(item.current.data[i].remain);
+                                            alert(getTimeStr(iTime));
+                                        } else {
+                                            iTime = nowServer+item.current.data[i].remain;
+                                            tempZoneProductionData[1]++;
+                                            tempZoneProductionDataSlot[1]++;
+                                        }
+                                        tempZoneProductionData[2]++;
+                                        tempZoneProductionDataSlot[2]++;
+
+                                        if(!tempZoneProductionData[0][0][iProd]) {
+                                            tempZoneProductionData[0][0][iProd]=[];
+                                        }
+                                        tempZoneProductionData[0][0][iProd].push([iAmount,iPoints,iTime,NEVER]);
+                                        if(!tempZoneProductionDataSlot[0][0][iProd]) {
+                                            tempZoneProductionDataSlot[0][0][iProd]=[];
+                                        }
+                                        tempZoneProductionDataSlot[0][0][iProd].push([iAmount,iPoints,iTime,NEVER]);
+                                        zones.setProduction(zoneNrS,tempZoneProductionDataSlot.clone());
+                                    }
+                                    zones.setProduction(zoneNrF,tempZoneProductionData.clone());
+                                    */
+                                  }
+                            break;}
+
                             case 4:{ //breeding
                                 //13102016
                                 zones.setBonus(zoneNrF,0);
@@ -17065,7 +17185,6 @@ try{
                                                 tempZoneProductionData[1]++;
                                                 tempZoneProductionDataSlot[1]++;
                                             }
-
                                             tempZoneProductionData[2]++;
                                             tempZoneProductionDataSlot[2]++;
                                             if(iProd!=null){
@@ -17109,9 +17228,6 @@ try{
                                                         tempZoneProductionData[1]++;
                                                         tempZoneProductionDataSlot[1]++;
                                                     }
-                                                    //iTime = nowServer-item.happiness_interval[i];
-                                                    //tempZoneProductionData[1]++;
-                                                    //tempZoneProductionDataSlot[1]++;
                                                 }
                                             } else {
                                                 //Aufzucht fertig
@@ -17135,21 +17251,13 @@ try{
                                             tempZoneProductionDataSlot[0][0][iProd].push([iAmount,iPoints,iTime,NEVER]);
                                             zones.setProduction(zoneNrS,tempZoneProductionDataSlot.clone());
                                         }
-                                    } /*else if (unsafeWindow.farmersmarket_data.pets.breed!=0 && unsafeWindow.farmersmarket_data.pets.breed.remain<0){
-                                        //Aufzucht beenndet
-                                        showGoToAnimalBreedingReady();
-                                        for (slot=5;slot<=7;slot++){
-                                            zoneNrS=zoneNrF+"."+slot;
-                                            zones.setBlock(zoneNrS,"blpqs");
-                                        }
-                                    } */
+                                    }
                                     else {
                                         for (slot=5;slot<=7;slot++){
                                             zoneNrS=zoneNrF+"."+slot;
                                             zones.setBlock(zoneNrS,"blpqs");
                                         }
                                     }
-
                                     //End
                                 zones.setProduction(zoneNrF,tempZoneProductionData.clone());
                                 }
@@ -17204,16 +17312,11 @@ try{
                                             zones.setBlock(zoneNrS,"");
                                             tempZoneProductionDataSlot=[[{},{}],0,0,true];
                                             iProd++; iAmount = 0; iPoints = 0;
-                                             //item=unsafeWindow.farmersmarket_data.vet.animals
                                             if (vet_data.animals.slots[slot]) {
                                                 if(isNaN(vet_data.animals.slots[slot].remain)){
                                                     iTime=0;
-                                                    //iTime=nowServer-5000;
                                                 } else {
                                                     iTime=nowServer+vet_data.animals.slots[slot].remain;
-                                                    //Test
-                                                    //if (vet_data.animals.slots[slot].remain<0) iTime =nowServer+20;
-                                                    //Test End
                                                     for (var d = 0; d < vet_data.animals.queue[vet_data.animals.slots[slot].id].diseases.length; d++) {
                                                         var diseasesID =  vet_data.animals.queue[vet_data.animals.slots[slot].id].diseases[d].id;
                                                         var drugsID = vet_data.animals.queue[vet_data.animals.slots[slot].id].drugs[diseasesID];
@@ -17398,6 +17501,47 @@ try{
             }
         }catch(err){GM_logError("dialogFlowerArea","","",err);}
     });
+    /**********************************************************
+    * Monsterfruchtzucht / monster fruit culture
+    **********************************************************/
+    unsafeOverwriteFunction("initMegaFruit",function(a){
+        try{
+             unsafeWindow._initMegaFruit(a);
+        }catch(err){GM_logError("initMegaFruit","","",err);}
+        try{
+            raiseEvent("gameFarmersmarketOpened3");
+        }catch(err){GM_logError("initMegaFruit","","",err);}
+
+    });
+
+    unsafeOverwriteFunction("showNeedsMegaFruit",function(d){
+        try{
+             unsafeWindow._showNeedsMegaFruit(d);
+        }catch(err){GM_logError("showNeedsMegaFruit","","",err);}
+        try{
+            raiseEvent("gameShowNeedsMegaFruit");
+        }catch(err){GM_logError("showNeedsMegaFruit","","",err);}
+
+    });
+    //dialogMegaFruit('need', 1)
+    unsafeOverwriteFunction("dialogMegaFruit",function(r,v){
+        try{
+             unsafeWindow._dialogMegaFruit(r,v);
+        }catch(err){GM_logError("dialogMegaFruit","","",err);}
+        try{
+            console.log("-------dialogMegaFruit---------");
+            console.log(r);
+            console.log("-------dialogMegaFruit--------");
+            switch (r) {
+                case 'need':
+                        raiseEvent("gameNeedMegaFruit");
+                    break;
+                default:
+
+            }
+        }catch(err){GM_logError("dialogMegaFruit","","",err);}
+    });
+
     /**********************************************************
     * Tierzucht / Animal breeding 13102016
     **********************************************************/
@@ -19843,26 +19987,6 @@ return;
         }catch(err){GM_logError("hideGoToAnimalBreedingReady","","",err);}
     }
 
-    function olympia() {
-        try {
-            // Christmas Specialoffer 2016
-            if(!unsafeWindow.olympia.data.data) {
-                //unsafeWindow.olympia.action('olympia_init');
-                unsafeWindow.ajaxAction("main",'olympia_init','',unsafeWindow.olympia.response)
-            }
-            console.log("++++++++++++++++++++++++++++++++++++");
-            console.log("++++++++++++++++++++++++++++++++++++");
-            console.log("++++++++++++++++++++++++++++++++++++");
-            /*unsafeWindow.olympia.action('olympia_init');*/
-            console.log("++++++++++++++++++++++++++++++++++++");
-            console.log("++++++++++++++++++++++++++++++++++++");
-            console.log("++++++++++++++++++++++++++++++++++++");
-        } catch(err){ alert("test2");GM_logError("olympia","","",err); }
-
-    }
-    //olympia();
-
-
     // on load execute ============================================================================
     err_trace="on load execute";
     newdiv1=$("buildingmain");
@@ -19923,6 +20047,10 @@ return;
             showGoToLottery();
             raiseEvent("gameNewDay");
         }
+/*
+        console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        console.log(implode(unsafeWindow.job_data));
+        console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++");*/
         /*
         try {
             // Christmas Specialoffer 2016
