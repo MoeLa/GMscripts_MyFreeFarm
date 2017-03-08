@@ -1657,6 +1657,25 @@ function goToAnimalBreedingReady(){
     }catch(err){GM_logError("goToAnimalBreedingReady","","",err);}
 }
 
+function goToMonsterFruitCultureReady(){
+    try{
+        var div;
+        if(gameLocation.check("farmersmarket",0)){
+            if(div=$("farmersmarket_pos3_click")){
+                click(div);
+            }
+        }else if(div=$("speedlink_farmersmarket")){
+            document.addEventListener("gameFarmersmarketOpened",function(){
+                document.removeEventListener("gameFarmersmarketOpened",arguments.callee,false);
+                window.setTimeout(goToMonsterFruitCultureReady,100);
+            },false);
+            click(div);
+        }
+        div=null;
+    }catch(err){GM_logError("goToMonsterFruitCultureReady","","",err);}
+}
+
+
 function goToBuyPetsParts(){
     try{
         var div=$("pets_parts");
@@ -14917,11 +14936,6 @@ try{
                             }
                             break;
                         }
-                    case "megafruit_buyobject": {
-                            doFarmersMarketData();
-                            raiseEvent("gameMegafruit_buyobject");
-                            break;
-                        }
                     case "cropgarden":
                         {
                             var zoneNrF = zoneNr + 6 * (farmNR - 1);
@@ -14981,6 +14995,19 @@ try{
                     case "megafield_autoplant":
                         raiseEvent("gameMegafieldAutoplanted");
                         break;
+                    case "megafruit_buyobject": {
+                            doFarmersMarketData();
+                            raiseEvent("gameMegafruit_buyobject");
+                            break;
+                        }
+                    case "megafruit_harvest": {
+                            hideGoToMonsterFruitCultureReady();
+                            break;
+                        }
+                    case "megafruit_start":{
+                            doFarmersMarketData();
+                            break;
+                    }
                     case "nursery_harvest":
                         raiseEvent("gameFarmersmarketCropped");
                         break;
@@ -17077,85 +17104,74 @@ try{
                                 console.log(print_r(unsafeWindow.farmersmarket_data.megafruit, "", true, "\n"));
                                 console.log("=== END LESE monster fruit culture ===");
 
-                                if((!currBlock)&&(unsafeWindow.farmersmarket_data.megafruit&&unsafeWindow.farmersmarket_data.megafruit.current)){
+                                if((!currBlock)&&(unsafeWindow.farmersmarket_data.megafruit)) {
+                                    if(unsafeWindow.farmersmarket_data.megafruit.current) {
+                                        zones.setBonus(zoneNrF,0);
+                                        item = unsafeWindow.farmersmarket_data.megafruit;
+                                        slot = 0;
+                                        iProd=item.current.pid; iAmount=0; iPoints=0;
+                                        tempZoneProductionData=[[{},{}],0,0,true];
+                                        for (var i in item.current.data){
+                                            if(!item.current.data.hasOwnProperty(i)){ continue; }
+                                            slot++;
+                                            zoneNrS=zoneNrF+"."+slot;
+                                            zones.setBlock(zoneNrS,"");
 
-                                    zones.setBonus(zoneNrF,0);
-                                    item = unsafeWindow.farmersmarket_data.megafruit;
-                                    slot = 0;
-                                    iProd=634; iAmount=0; iPoints=0;
-                                    tempZoneProductionData=[[{},{}],0,0,true];
-                                    for (var i in item.current.data){
-                                        if(!item.current.data.hasOwnProperty(i)){ continue; }
-                                        slot++;
-                                        zoneNrS=zoneNrF+"."+slot;
-                                        zones.setBlock(zoneNrS,"");
+                                            tempZoneProductionDataSlot=[[{},{}],0,0,true];
 
-                                        tempZoneProductionDataSlot=[[{},{}],0,0,true];
+                                            if (item.current.remain>=0) {
+                                                if (item.current.data[i].remain>0) {
+                                                    iTime = nowServer+item.current.data[i].remain;
+                                                } else {
+                                                    iTime = nowServer+item.current.data[i].remain;
+                                                    //iTime = nowServer+25000;
+                                                    tempZoneProductionData[1]++;
+                                                    tempZoneProductionDataSlot[1]++;
+                                                }
+                                            } else {
+                                                //monster fruit culture ready
+                                                showGoToMonsterFruitCultureReady();
+                                                iTime=nowServer+(60*60*3);
+                                            }
 
-                                        if (item.current.data[i].remain>0) {
-                                            iTime = nowServer+item.current.data[i].remain;
-                                        } else {
-                                            iTime = nowServer+item.current.data[i].remain;
-                                            //iTime = nowServer+25000;
-                                            tempZoneProductionData[1]++;
-                                            tempZoneProductionDataSlot[1]++;
+                                            tempZoneProductionData[2]++;
+                                            tempZoneProductionDataSlot[2]++;
+
+                                            if(!tempZoneProductionData[0][0][iProd]) {
+                                                tempZoneProductionData[0][0][iProd]=[];
+                                            }
+                                            tempZoneProductionData[0][0][iProd].push([iAmount,iPoints,iTime,NEVER]);
+
+                                            if(!tempZoneProductionDataSlot[0][0][iProd]) {
+                                                tempZoneProductionDataSlot[0][0][iProd]=[];
+                                            }
+                                            tempZoneProductionDataSlot[0][0][iProd].push([iAmount,iPoints,iTime,NEVER]);
+                                            zones.setProduction(zoneNrS,tempZoneProductionDataSlot.clone());
                                         }
+                                    } else {
+                                        tempZoneProductionData=[[{},{}],0,0,true];
+                                        item = unsafeWindow.farmersmarket_data.megafruit;
+                                        for (slot=1;slot<=3;slot++){
+                                            zoneNrS=zoneNrF+"."+slot;
+                                            if(item.objects[Object.keys(item.objects)[slot-1]][0].locked){
+                                                zones.setBlock(zoneNrS,"blpqs");
+                                                continue;
+                                            }
+                                            zones.setBlock(zoneNrS,"");
+                                            if(!tempZoneProductionData[0][0][iProd]) {
+                                                tempZoneProductionData[0][0][iProd]=[];
+                                            }
+                                            tempZoneProductionData[0][0][iProd].push([0,0,NEVER,NEVER]);
 
-                                        tempZoneProductionData[2]++;
-                                        tempZoneProductionDataSlot[2]++;
-
-                                        if(!tempZoneProductionData[0][0][iProd]) {
-                                            tempZoneProductionData[0][0][iProd]=[];
+                                            if(!tempZoneProductionDataSlot[0][0][iProd]) {
+                                                tempZoneProductionDataSlot[0][0][iProd]=[];
+                                            }
+                                            tempZoneProductionDataSlot[0][0][iProd].push([0,0,NEVER,NEVER]);
+                                            zones.setProduction(zoneNrS,tempZoneProductionDataSlot.clone());
                                         }
-
-                                        tempZoneProductionData[0][0][iProd].push([iAmount,iPoints,iTime,NEVER]);
-                                        if(!tempZoneProductionDataSlot[0][0][iProd]) {
-                                            tempZoneProductionDataSlot[0][0][iProd]=[];
-                                        }
-                                        tempZoneProductionDataSlot[0][0][iProd].push([iAmount,iPoints,iTime,NEVER]);
-                                        zones.setProduction(zoneNrS,tempZoneProductionDataSlot.clone());
-                                    }
-
-                                    zones.setProduction(zoneNrF,tempZoneProductionData.clone());
-                                    /*tempZoneProductionData=[[{},{}],0,0,true];
-                                    item = unsafeWindow.farmersmarket_data.megafruit;
-                                    slot = 0
-                                    for (var i in item.current.data){
-                                        if(!item.current.data.hasOwnProperty(i)){ continue; }
-                                        slot++;
-                                        zoneNrS=zoneNrF+"."+slot;
-                                        zones.setBlock(zoneNrS,"");
-
-                                        tempZoneProductionDataSlot=[[{},{}],0,0,true];
-                                        iProd=0; iAmount=0; iPoints=0;
-
-
-                                        if (item.current.data[i].remain>0) {
-                                            alert(i);
-                                            alert(nowServer);
-                                            iTime = nowServer+Math.round(item.current.data[i].remain);
-                                            alert(getTimeStr(iTime));
-                                        } else {
-                                            iTime = nowServer+item.current.data[i].remain;
-                                            tempZoneProductionData[1]++;
-                                            tempZoneProductionDataSlot[1]++;
-                                        }
-                                        tempZoneProductionData[2]++;
-                                        tempZoneProductionDataSlot[2]++;
-
-                                        if(!tempZoneProductionData[0][0][iProd]) {
-                                            tempZoneProductionData[0][0][iProd]=[];
-                                        }
-                                        tempZoneProductionData[0][0][iProd].push([iAmount,iPoints,iTime,NEVER]);
-                                        if(!tempZoneProductionDataSlot[0][0][iProd]) {
-                                            tempZoneProductionDataSlot[0][0][iProd]=[];
-                                        }
-                                        tempZoneProductionDataSlot[0][0][iProd].push([iAmount,iPoints,iTime,NEVER]);
-                                        zones.setProduction(zoneNrS,tempZoneProductionDataSlot.clone());
                                     }
                                     zones.setProduction(zoneNrF,tempZoneProductionData.clone());
-                                    */
-                                  }
+                                }
                             break;}
 
                             case 4:{ //breeding
@@ -17536,6 +17552,10 @@ try{
                 case 'need':
                         raiseEvent("gameNeedMegaFruit");
                     break;
+                /*case 'start':
+                        doFarmersMarketData();
+                    break;*/
+
                 default:
 
             }
@@ -17887,6 +17907,17 @@ try{
                 }
             }
         }catch(err){GM_logError("updateVetAnimalQueue","","",err);}
+    });
+
+    unsafeOverwriteFunction("moveVet",function(){
+        try{
+            if (!unsafeWindow.vet_data.info.vet_pharmacist_remember_box)
+                unsafeWindow.vet_data.info.vet_pharmacist_remember_box = 1;
+            unsafeWindow._moveVet();
+        }catch(err){GM_logError("_moveVet","","",err);}
+        try{
+
+        }catch(err){GM_logError("_moveVet","","",err);}
     });
 
     // events forestry ==============================================================================
@@ -19985,6 +20016,26 @@ return;
                 delete nodes["goToAnimalBreedingReady"];
             }
         }catch(err){GM_logError("hideGoToAnimalBreedingReady","","",err);}
+    }
+
+    function showGoToMonsterFruitCultureReady(){
+        try{
+            if(!nodes["goToMonsterFruitCultureReady"]){
+                nodes["goToMonsterFruitCultureReady"]=new Object();
+                nodes["goToMonsterFruitCultureReady"]["node"]=createElement("div",{"id":"divGoToMonsterFruitCultureReady","class":"link blinking","style":"height:70px;width:70px;background:url('"+GFX+"megafruit_harvest_button2.png') 0px 0px;border:2px solid black;border-radius:35px;margin-bottom:5px;opacity:1;"},$("fixedDivRight"));
+                nodes["goToMonsterFruitCultureReady"]["node"].addEventListener("mouseover",function(event){ toolTip.show(event,getText("showGoToMonsterFruitCultureReady")); },false);
+                nodes["goToMonsterFruitCultureReady"]["node"].addEventListener("click",function(event){ goToMonsterFruitCultureReady(); },false);
+            }
+        }catch(err){GM_logError("showGoToMonsterFruitCultureReady","","",err);}
+    }
+
+    function hideGoToMonsterFruitCultureReady(){
+        try{
+            if(nodes["goToMonsterFruitCultureReady"]){
+                if(nodes["goToMonsterFruitCultureReady"]["node"]){ removeElement(nodes["goToMonsterFruitCultureReady"]["node"]); }
+                delete nodes["goToMonsterFruitCultureReady"];
+            }
+        }catch(err){GM_logError("hideGoToMonsterFruitCultureReady","","",err);}
     }
 
     // on load execute ============================================================================
@@ -22178,6 +22229,7 @@ try{
         text["de"]["autologinChecking"]="Ermittle aktive Sessions.<br>Bitte %1% Sekunden warten<br>...";
         text["de"]["bonus"]="Bonus";
         text["de"]["boughtTickets"]="Gekaufte Tickets";
+        text["de"]["breed"]="Tieraufzucht";
         text["de"]["buy"]="Kauf";
         text["de"]["buyers"]="Käufer";
         //22102016
@@ -22261,6 +22313,7 @@ try{
         text["de"]["given"]="Gegeben";
         text["de"]["goods"]="Waren";
         text["de"]["showGoToAnimalBreedingReady"]="Tieraufzucht fertig!";
+        text["de"]["showGoToMonsterFruitCultureReady"]="Monsterfruchtzucht fertig!";
         text["de"]["goTobuyPetsParts"]="Zum Puzzleteilekauf";
         text["de"]["goToClothingDonation"]="Zur Kleiderspende";
         text["de"]["goToDonkey"]="Zum Goldesel Waltraud";
@@ -22602,6 +22655,7 @@ try{
         text["en"]["autologinChecking"]="Checking active sessions.  Please wait %1% seconds<br>...";
         text["en"]["bonus"]="Bonus";
         text["en"]["boughtTickets"]="Bought tickets";
+        text["en"]["breed"]="Animal breeding";
         text["en"]["buy"]="Buy";
         text["en"]["buyers"]="Buyers";
         //22102016
@@ -22685,6 +22739,7 @@ try{
         text["en"]["given"]="Given";
         text["en"]["goods"]="Goods";
         text["en"]["showGoToAnimalBreedingReady"]="Animalbreeding is ready!";
+        text["en"]["showGoToMonsterFruitCultureReady"]="Monster fruit culture is ready!";
         text["en"]["goTobuyPetsParts"]="Go to buy puzzle parts";
         text["en"]["goToClothingDonation"]="Go to clothing donation";
         text["en"]["goToDonkey"]="Go to donkey Luke";

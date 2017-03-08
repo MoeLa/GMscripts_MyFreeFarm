@@ -1677,7 +1677,13 @@ try {
             zoneNrF=null;zoneNrS=null;zoneNrL=null;
         }catch(err){GM_logError("automatIcon.click","$('"+this.id+"') zoneNrF="+zoneNrF+" zoneNrS="+zoneNrS+" zoneNrL="+zoneNrL,"",err);}
         },false);
-        if(!(zoneNrS=="farmersmarket-4.5"||zoneNrS=="farmersmarket-4.6"||zoneNrS=="farmersmarket-4.7")) {
+        if (zoneNrS=="farmersmarket-3.1"||zoneNrS=="farmersmarket-3.2"||zoneNrS=="farmersmarket-3.3"){
+            automatIcons[name][1].addEventListener("mouseover", function(event){
+                var newnode = top.document.getElementById('megafruit_need_item'+1+'_tt').cloneNode(true);
+                newnode.removeChild(newnode.lastElementChild);
+                toolTip.show(event, newnode.innerHTML);
+            },false);
+        } else if(!(zoneNrS=="farmersmarket-4.5"||zoneNrS=="farmersmarket-4.6"||zoneNrS=="farmersmarket-4.7")) {
             //toolTip von  farmersmarket-4 slot 5 bis 7 ausblenden
             automatIcons[name][1].addEventListener("mouseover", function(event){
                 toolTip.show(event, toolTipProductSmall(this.getAttribute("zoneNrS"),this.getAttribute("zoneNrL"),0,this));
@@ -2555,8 +2561,7 @@ function drawMonsterfruitChooseItemBox(zoneNrS, zoneNrL, appendTo){
 
         var item = unsafeWindow.farmersmarket_data.megafruit;
         var zoneNrF_h=zoneNrS.split("."); //zoneNrF_h[0]=Zone, zoneNrF_h[1]=Slot
-        //for (var i in item.objects){
-        //    if(!item.objects.hasOwnProperty(i)){ continue; }
+
         for (var i=1;i<item.objects[Object.keys(item.objects)[zoneNrF_h[1]-1]].length;i++){
 //if (    (item.objects[Object.keys(item.objects)[zoneNrF_h[1]-1]][i-1].level<=item.level+20))
             if (   !(item.objects[Object.keys(item.objects)[zoneNrF_h[1]-1]][i-1].hasOwnProperty("buyable"))
@@ -3235,13 +3240,8 @@ try{
                 if (zoneList[zoneNrL][0][0] == PRODSTOP) {
                     automatIcons[i][1].setAttribute("class","link divZoneIcon v"+zoneList[zoneNrL][0][0]);
                 } else {
-                    //automatIcons[i][1].setAttribute("class","link divZoneIcon v"+zoneList[zoneNrL][0][0]);
                     automatIcons[i][1].setAttribute("class","link divZoneAutoMonsterFruitCultureIcon divZoneIcon megafruit_need_item megafruit_need_item"+zoneList[zoneNrL][0][0]);
-                    /*
-                    newdiv=createElement("div",{"class":"divChooseItem divZoneMonsterFruitCultureIcon link megafruit_need_item megafruit_need_item"+i,"id":"megafruit_need_item"+i+"divChooseItem"+zoneNrL+"Q0I"+i},appendTo);
-                    */
                 }
-                //automatIcons[i][1].setAttribute("class","link divZoneIcon v"+zoneList[zoneNrL][0][0]);
             break;
             }
             automatIcons[i][1].setAttribute("product",zoneList[zoneNrL][0][0]);
@@ -3643,6 +3643,8 @@ try{
             }
             zoneFeedCurr=null;zoneProdCurr=null;
         break;}
+        case 5: { // Pony - No queue mode support
+        break;}
         case 6:{ // Fuelstation
             $("divChooseItem"+zoneNrL+"Q"+queueNum+"I"+PRODSTOP).style.border=((zoneList[zoneNrL][queueNum][0]==PRODSTOP)?"2px solid black":"");
             if(settings.get("account","showQueueTime"))  {
@@ -3658,7 +3660,7 @@ try{
             }
             zoneFeedCurr=null;zoneProdCurr=null;
         break;}
-        case 5: { // Pony - No queue mode support
+        case 7: { // monster fruit culture  - No queue mode support
         break;}
         case "windmill":{ // (fzWindmill)
             if(settings.get("account","showQueueTime")){
@@ -7658,11 +7660,6 @@ try{
             }
         break;}
         case 5:{ // Daily lot: got prize
-            /*var closeButton=$("globalbox").querySelector(".mini_close");
-                            alert($("globalbox").innerHTML);
-                            alert(closeButton.id)
-*/
-
             if($("globalbox").style.display=="block"){
                 click($("globalbox_button1"));
                 window.setTimeout(autoLottery,settings.getPause(),runId,step+1);
@@ -8476,31 +8473,7 @@ try{
                 if((help=$("globalbox")) && (help.style.display == "block")) {
                     unsafeWindow.hideDiv('globalbox');
                     unsafeWindow.hideDiv('globaltransp');
-
-
-                    console.log("---------- globalbox -----------");
-                    //console.log(help.innerHTML);
-                    console.log("---------- globalbox -----------");
                     autoFarmersmarketBuilding(runId,9); // -> exit
-
-                    /*help = $("globalbox").querySelector(".mini_close")
-
-                    console.log("---------- closeButton -----------");
-                    console.log(help.id);
-                    console.log("---------- closeButton -----------");
-                    //help = $("globalbox").getElementById("globalbox_close");
-
-                    if (help){
-                    //monster fruit culture -> close summary window
-                        console.log("---------- help -----------");
-                        console.log("---------- help -----------");
-                        console.log("---------- help -----------");
-                        console.log("---------- help -----------");
-                        action=function(){ click(help); }; // open automat
-                        listeningEvent="gameOpenGlobalBox";
-                    } else {
-                        autoFarmersmarketBuilding(runId,9); // -> exit
-                    }*/
                 }else{
                     autoFarmersmarketBuilding(runId,9); // -> exit
                 }
@@ -8508,15 +8481,6 @@ try{
 
                 //{"zoneNrS":"6.2","slot":2,"zoneNrF":"6","farmNr":1,"zoneNr":6,"zoneNrL":"6.1","zoneBuildingTyp":6}
                 //{"6":[0,"r",true],"6.2":[0,"r",true],"6.3":[0,"r",true],
-                /*GM_logInfo("autoFarmersmarketBuilding","runId="+runId+" step="+step,"",handled.zoneNrF.capitalize()+" automat<br>close summary");
-                var closeButton=$("globalbox").querySelector(".mini_close");
-                console.log("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
-                console.log($("globalbox").innerHTML);
-                console.log(closeButton.id);
-                console.log("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
-                click(closeButton);
-                window.setTimeout(autoFarmersmarketBuilding,settings.getPause(),runId,9); //->Exit
-                break;}*/
             }
         break;}
         case 9:{
@@ -8570,7 +8534,6 @@ try{
         bot.setAction("autoFarmersmarketVetTreatment ("+step+")");
         //alert("autoFarmersmarketVetTreatment"+step);
         var help,help2,action=null,listeningEvent=null;
-        //var botUseVetTreatment = true; //todo Option erstellen )
         switch(step){
         case 1:{ // check required products
             if((zoneList[handled.zoneNrL][0][0]!=PRODSTOP)&&(help=unsafeData.readyZone[handled.zoneNrS])&&help[2]&&((help[1]=="r")||(help[1]=="e"))){
