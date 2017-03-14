@@ -3471,7 +3471,6 @@ try{
         divAutoMatQueueItemBox=null;
         totalCrop=null;aGrowingTotal=null;
     }
-    // console.log(debugStr);
     zoneTimes=null;
     //ChooseBox part
     err_trace="ChooseBox";
@@ -6162,51 +6161,51 @@ function autoFarmFactoryKnitting(runId,step){
                 window.setTimeout(autoFarmFactoryKnitting,settings.getPause(),runId,step);
             } else if(zoneList[handled.zoneNrL][0][0]==PRODSTOP){
                 autoFarmFactoryKnitting(runId,5);
-            }else if(!$("production_slot"+handled.farmNr+"_"+handled.zoneNr+"_"+handled.slot).onclick.toString().match(/strickereiSelection/)){
+            }else if(!$("production_slot"+handled.farmNr+"_"+handled.zoneNr+"_"+handled.slot).onclick.toString().match(/factory\.selection/)){
                 GM_logWarning("autoFarmFactoryKnitting","runId="+runId+" step="+step,"","LOGIC ERROR: onclick="+$("production_slot"+handled.farmNr+"_"+handled.zoneNr+"_"+handled.slot).onclick);
                 autoFarmFactoryKnitting(runId,5);
             }else{
-                listeningEvent="gameFactoryKnittingDialogStart";
+                listeningEvent="gameOpenGlobalCommitBox";
                 action=function(){
                     click($("production_slot"+handled.farmNr+"_"+handled.zoneNr+"_"+handled.slot));
                 };
             }
         break;}
         case 4:{ // select production
-            var div=$("globalbox");
-            if(div&&(div.style.display=="block")){
-                div = $("globalbox").querySelector(".tt"+zoneList[handled.zoneNrL][0][0]);
-                if(div){
-                    listeningEvent="gameFactoryKnittingStarted";
-                    action=function(){
+            var div = $("globalbox");
+            if (div && (div.style.display == "block")) {
+                div = div.querySelector(".tt" + zoneList[handled.zoneNrL][0][0]);
+                if (div) {
+                    listeningEvent = "gameFactory_start_"+handled.farmNr+"_"+handled.zoneNr;
+                    action = function() {
                         click(div.parentNode);
                         setNextQueueItem(handled.zoneNrS);
-                        div=null;
+                        div = null;
                     };
                 } else {
-                    window.setTimeout(autoFarmFactoryKnitting,settings.getPause(),runId,step);
+                    window.setTimeout(autoFarmFactoryKnitting, settings.getPause(), runId, step);
                 }
-            }else{
-                window.setTimeout(autoFarmFactoryKnitting,settings.getPause(),runId,step);
+            } else {
+                window.setTimeout(autoFarmFactoryKnitting, settings.getPause(), runId, step);
             }
         break;}
         case 5:{ // start other slot or exit
-            var zoneNrS,zoneNrL,help,next=false;
-            for(var slot=1;slot<=3;slot++){
-                zoneNrS=handled.zoneNrF+"."+slot;
-                if((help=unsafeData.readyZone[zoneNrS])&&help[2]){
-                    zoneNrL=getZoneListId(zoneNrS);
-                    if(((help[1]=="r")&&((zoneList[zoneNrL][0][0]!=PRODSTOP)||!settings.get("account","disableCropFields")))||((help[1]=="e")&&(zoneList[zoneNrL][0][0]!=PRODSTOP))){
-                        next=true;
+            var zoneNrS, zoneNrL, help, next = false;
+            for (var slot = 1; slot <= 3; slot++) {
+                zoneNrS = handled.zoneNrF + "." + slot;
+                if ((help = unsafeData.readyZone[zoneNrS]) && help[2]) {
+                    zoneNrL = getZoneListId(zoneNrS);
+                    if (((help[1] == "r") && ((zoneList[zoneNrL][0][0] != PRODSTOP) || !settings.get("account", "disableCropFields"))) || ((help[1] == "e") && (zoneList[zoneNrL][0][0] != PRODSTOP))) {
+                        next = true;
                         handled.set(zoneNrS);
                         break;
                     }
                 }
             }
-            if(next){
-                autoFarmFactoryKnitting(runId,1);
-            }else{
-                autoZoneFinish(runId,$("cancelscreen").getElementsByClassName("link")[0]);
+            if (next) {
+                autoFarmFactoryKnitting(runId, 1);
+            } else {
+                autoZoneFinish(runId, $("cancelscreen"));
             }
         break;}
         }
@@ -7278,7 +7277,6 @@ try{
         var help, action=null, listeningEvent=null;
         if (!step) { step=1; }
         bot.setAction("autobuyPetsParts (" + step + ")");
-        console.log("Step"+step);
         switch (step) {
             case 1: { // go to farm 1
             if (unsafeWindow.farm == 1) {
@@ -7619,7 +7617,6 @@ try{
         var help, action=null, listeningEvent=null;
         if (!step) { step=1; }
         bot.setAction("autoOlympiaRun (" + step + ")");
-        console.log("Step"+step);
         switch (step) {
             case 1: { // go to farm 1
             if (unsafeWindow.farm == 1) {
@@ -8013,14 +8010,11 @@ try{
                         action=function(){ click(help); };
                         listeningEvent="gameFarmersmarketCropped";
                     }else{
-                        console.log("Step4 -> Exiting from Harvesting");
                         autoFarmersmarketBuilding(runId,9); // -> exit
                     }
                 break;}
                 }
             }else{
-                console.log("Step4 -> Skipping Harvesting");
-                console.log(help);
                 autoFarmersmarketBuilding(runId,step+1);
             }
         break;}
@@ -8170,15 +8164,11 @@ try{
                         action=function(){ click(help2); };
                         listeningEvent="gameFarmersmarketSlotOpened";
                     }else{
-                        console.log("Step 5 -> Skipping to exit after 'open slot failed'");
-                        console.log(help);
                         autoFarmersmarketBuilding(runId,9); // -> exit
                     }
                 break;}
                 }
             }else{
-                console.log("Step 5 -> Skipping directly to exit");
-                console.log(help);
                 GM_logInfo("autoFarmersmarketBuilding","runId="+runId+" step="+step,"","Zone not empty."); //TODO text
                 autoFarmersmarketBuilding(runId,9); // -> exit
             }
@@ -8476,14 +8466,11 @@ try{
                         action=function(){ click(help);};
                         listeningEvent="gameVet_endtreatment";
                     }else{
-                        console.log("Step4 -> Exiting from Harvesting");
                         autoFarmersmarketVetTreatment(runId,8); // -> exit
                     }
                 break;}
                 }
             }else{
-                console.log("Step4 -> Skipping Harvesting");
-                console.log(help);
                 autoFarmersmarketVetTreatment(runId,step+1);
             }
         break;}
@@ -8534,8 +8521,6 @@ try{
                 break;}
                 }
             }else{
-                console.log("Step 5 -> Skipping directly to exit");
-                console.log(help);
                 GM_logInfo("autoFarmersmarketVetTreatment","runId="+runId+" step="+step,"","Zone not empty."); //TODO text
                 autoFarmersmarketVetTreatment(runId,8); // -> exit
             }
@@ -8638,7 +8623,6 @@ try{
     //if(settings.get("account","botUseVetTreatment")&&bot.checkRun("autoFarmersmarketAnimalBreeding",runId)){
     if(botUseAnimalBreeding&&bot.checkRun("autoFarmersmarketAnimalBreeding",runId)){
         bot.setAction("autoFarmersmarketAnimalBreeding ("+step+")");
-        //console.log("autoFarmersmarketAnimalBreeding"+step);
         var help,help2,action=null,listeningEvent=null;
         switch(step){
         case 1:{ // open farmersmarket
@@ -8699,12 +8683,10 @@ try{
                         listeningEvent="gameAnimalBreedingNeedSelection";
                     }
                 }else{
-                    console.log("Step 5 -> Skipping directly to exit");
                     GM_logInfo("autoFarmersmarketAnimalBreeding","runId="+runId+" step="+step,"","Zone not empty."); //TODO text
                     autoFarmersmarketAnimalBreeding(runId,7,step4_6loop); // -> exit
                 }
             } else {
-                console.log("Step 5 -> not enough products in stock");
                 zoneList[handled.zoneNrL].unshift(DEFAULT_ZONELIST_ITEM.clone());
                 updateQueueBox(handled.zoneNrS);
                 autoFarmersmarketAnimalBreeding(runId,7,step4_6loop); // -> exit
@@ -8841,7 +8823,6 @@ try{
         var help,help2,action=null,listeningEvent=null;
         switch(step){
         case 1:{ // check required products
-            //console.log("step:"+step+" zoneNrS:"+handled.zoneNrS+" zoneNrL:"+handled.zoneNrL);
             if((zoneList[handled.zoneNrL][0][0]!=PRODSTOP)&&(help=unsafeData.readyZone[handled.zoneNrS])&&help[2]&&((help[1]=="r")||(help[1]=="e"))){
                 help2=true;
                 help=unsafeData.prodRequire[0][zoneList[handled.zoneNrL][0][0]]
@@ -8859,7 +8840,6 @@ try{
             autoFoodworldBuilding(runId,step+1);
         break;}
         case 2:{ // open foodworld
-            //console.log("step:"+step+" zoneNrS:"+handled.zoneNrS+" zoneNrL:"+handled.zoneNrL);
             if((help=unsafeData.readyZone[handled.zoneNrS])&&help[2]&&(((help[1]=="r")&&(zoneList[handled.zoneNrL][0][0]!=PRODSTOP||!settings.get("account","disableCropFields")))||((help[1]=="e")&&(zoneList[handled.zoneNrL][0][0]!=PRODSTOP)))){
                 if(unsafeData.gameLocation.check("foodworld")){
                     autoFoodworldBuilding(runId,step+1);
@@ -8872,7 +8852,6 @@ try{
             }
         break;}
         case 3:{ // open foodworld building
-            //console.log("step:"+step+" zoneNrS:"+handled.zoneNrS+" zoneNrL:"+handled.zoneNrL);
             if((help=unsafeData.readyZone[handled.zoneNrS])&&help[2]&&(((help[1]=="r")&&((zoneList[handled.zoneNrL][0][0]!=PRODSTOP)||(!settings.get("account","disableCropFields"))))||((help[1]=="e")&&(zoneList[handled.zoneNrL][0][0]!=PRODSTOP)))){
                 GM_logInfo("autoFoodworldBuilding","runId="+runId+" step="+step,"",handled.zoneNrF.capitalize()+" automat<br>Opening"); //TODO text
                 help=/-(\d)$/.exec(handled.zoneNrF)[1]; // determine which building to work on
@@ -8890,7 +8869,6 @@ try{
             }
         break;}
         case 4:{ // harvest
-            //console.log("step:"+step+" zoneNrS:"+handled.zoneNrS+" zoneNrL:"+handled.zoneNrL);
             help=unsafeData.readyZone[handled.zoneNrS];
             if((unsafeData.readyZone[handled.zoneNrS][1]=="r")&&((zoneList[handled.zoneNrL][0][0]!=PRODSTOP)||(!settings.get("account","disableCropFields")))){
                 GM_logInfo("autoFoodworldBuilding","runId="+runId+" step="+step,"",handled.zoneNrF.capitalize()+" automat<br>Cropping"); //TODO text
@@ -8905,7 +8883,6 @@ try{
             }
         break;}
         case 5:{ // open slot
-            //console.log("step:"+step+" zoneNrS:"+handled.zoneNrS+" zoneNrL:"+handled.zoneNrL);
             help=unsafeData.readyZone[handled.zoneNrS];
             if((zoneList[handled.zoneNrL][0][0]!=PRODSTOP)&&(help[1]=="e")){
                 GM_logInfo("autoFoodworldBuilding","runId="+runId+" step="+step,"",handled.zoneNrF.capitalize()+" automat<br>Opening slot"); //TODO text
@@ -8921,7 +8898,6 @@ try{
             }
         break;}
         case 6:{ // click production item
-            //console.log("step:"+step+" zoneNrS:"+handled.zoneNrS+" zoneNrL:"+handled.zoneNrL);
             if(help=$("foodworld_selection")){
                 if((help=$("foodworld_selection_item" + zoneList[handled.zoneNrL][0][0])) && (help.classList.contains('link'))){
                     // link is visible, can be clicked on

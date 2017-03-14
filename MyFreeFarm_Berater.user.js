@@ -14873,6 +14873,19 @@ try{
         }catch(err){GM_logError("_farmAction","mode="+mode,"",err);}
     });
 
+    unsafeOverwriteFunction("ajaxActionResponse", function(b, c, d, e) {
+        // b = Sowas, wie der Request bei farmActionResponse
+        // c = Begriff, der die Aktion beschreibt (bspw. "start" bei Start der Strickerei)
+        // d = Farm, Position, Slot des Gebäudes und welches Item
+        // e = Callback-Funktion in Factory-Objekt, in welchem seit dem 14.03.2017 u.a. Strickerei und Ölerei abgebildet sind
+        try {
+            unsafeWindow._ajaxActionResponse(b, c, d, e);
+        } catch (err) { GM_logError("_ajaxActionResponse", "mode=" + mode, "", err); }
+
+        // Werfe Event à la "gameFactory_start_3_6". Falls auch nicht-Factories hier rein laufen, könnte man überlegen, den Prefix umzubenennen
+        raiseEvent("gameFactory_"+c+"_"+d.farm+"_"+d.position);
+    });
+
     unsafeOverwriteFunction("farmActionResponse", function(request, mode, farmNR, zoneNr, B, d, b, a) {
         try {
             unsafeWindow._farmActionResponse(request, mode, farmNR, zoneNr, B, d, b, a);
@@ -15429,36 +15442,6 @@ try{
             newDiv1 = null;
         } catch (err) { GM_logError("buildOilpressInner", "", "", err); console.log(err); }
     }
-
-    // Knitting
-    unsafeOverwriteFunction("strickereiAjaxActionResponse",function(request,pos,mode){
-        try{
-            unsafeWindow._strickereiAjaxActionResponse(request,pos,mode);
-        }catch(err){GM_logError("_strickereiAjaxActionResponse","","",err);}
-        try{
-            var result = checkRequest(request);
-            if((result!=0)&&(result[0]!=0)){
-                switch(mode){
-                    case "buy": break;
-                    case "cancel": break;
-                    //Update 1209 crop in farmActionResponse
-                    //case "crop": raiseEvent("gameFactoryKnittingCropped"); break;
-                    case "speedup": break;
-                    case "start": raiseEvent("gameFactoryKnittingStarted"); break;
-                    default:
-                }
-            }
-        }catch(err){ GM_logError("strickereiAjaxActionResponse","","",err);}
-    });
-
-    unsafeOverwriteFunction("strickereiSelection",function(a,c,slot){
-        try{
-            unsafeWindow._strickereiSelection(a,c,slot);
-        }catch(err){GM_logError("_strickereiSelection","","",err);}
-        try{
-            raiseEvent("gameFactoryKnittingDialogStart");
-        }catch(err){GM_logError("strickereiSelection","","",err);}
-    });
     
     // Read production data of the currently opened knitting factory
     function doKnitting(zoneNr) {
