@@ -14873,6 +14873,19 @@ try{
         }catch(err){GM_logError("_farmAction","mode="+mode,"",err);}
     });
 
+    unsafeOverwriteFunction("ajaxActionResponse", function(b, c, d, e) {
+        // b = Sowas, wie der Request bei farmActionResponse
+        // c = Begriff, der die Aktion beschreibt (bspw. "start" bei Start der Strickerei)
+        // d = Farm, Position, Slot des Gebäudes und welches Item
+        // e = Callback-Funktion in Factory-Objekt, in welchem seit dem 14.03.2017 u.a. Strickerei und Ölerei abgebildet sind
+        try {
+            unsafeWindow._ajaxActionResponse(b, c, d, e);
+        } catch (err) { GM_logError("_ajaxActionResponse", "mode=" + mode, "", err); }
+
+        // Werfe Event à la "gameFactory_start_3_6". Falls auch nicht-Factories hier rein laufen, könnte man überlegen, den Prefix umzubenennen
+        raiseEvent("gameFactory_"+c+"_"+d.farm+"_"+d.position);
+    });
+
     unsafeOverwriteFunction("farmActionResponse", function(request, mode, farmNR, zoneNr, B, d, b, a) {
         try {
             unsafeWindow._farmActionResponse(request, mode, farmNR, zoneNr, B, d, b, a);
@@ -15303,7 +15316,7 @@ try{
         }
         cand=null;newdiv=null;
         raiseEvent("gameOpenFactory");
-        }catch(err){GM_logError("doFactory","","",err);}
+        }catch(err){GM_logError("doFactory","","",err); console.log(err);}
     }
     // Oil factory, special oil factory
     function doFactoryOil(zoneNr){
@@ -15375,185 +15388,128 @@ try{
         }
         zones.setProduction(zoneNrF, prodData.clone()); // Set proddata for building
     }
-    unsafeOverwriteFunction("buildOilpressInner",function(position,buildingid,info){
-        try{
-            unsafeWindow._buildOilpressInner(position,buildingid,info);
-        }catch(err){GM_logError("_buildOilpressInner","","",err);}
-        try{
-            var zoneNr=position;
-            var zoneNrF=zoneNr+6*gameLocation.get()[1];
+
+    // Read production data of the currently opened oil factory
+    function doFactoryOil2(zoneNr) {
+        try {
+            var zoneNrF = zoneNr + 6 * gameLocation.get()[1];
             var zoneNrS;
-            var data=unsafeWindow.oilproduction;
-            var newDiv,newDiv1;
-            var tempZoneProductionData=[[{}],0,0,true];
+            var data = unsafeWindow.innerinfos_data[1]; // unsafeWindow.oilproduction;
+            var newDiv, newDiv1;
+            var tempZoneProductionData = [[{}], 0, 0, true];
             var tempZoneProductionDataSlot;
-            for(var slot=1;slot<=3;slot++){
-                zoneNrS=zoneNrF+"."+slot;
-                if((slot==1)||(!unsafeWindow.oilslots[slot]["block"])){
-                    zones.setBlock(zoneNrS,"");
-                    tempZoneProductionDataSlot=[[{}],0,0,true];
+            for (var slot = 1; slot <= 3; slot++) {
+                zoneNrS = zoneNrF + "." + slot;
+                if ((slot == 1) || (!data.slots[slot]["block"])) {
+                    zones.setBlock(zoneNrS, "");
+                    tempZoneProductionDataSlot = [[{}], 0, 0, true];
                     tempZoneProductionData[1]++;
                     tempZoneProductionData[2]++;
                     tempZoneProductionDataSlot[1]++;
                     tempZoneProductionDataSlot[2]++;
-                    if(data[slot]){
-                        var iPrTyp=0;
-                        var iProd=parseInt(data[slot].pid,10);
-                        var iAmount=data[slot].amount;
-                        var iPoints=data[slot].amount*prodPoints[iPrTyp][iProd];
-                        var iTime=now+data[slot].remain;
-                        var endDay=countDays(now,iTime);
-                        var farmNr = gameLocation.get()[1]+1;
-                        /*
-                        newDiv=createElement("div",{"class":"blackbox","id":"oil_slot"+slot+"_prodinfo","style":"position:absolute;left:225px;top:25px;white-space:nowrap;"},$("oil_slot"+slot));
-
-                        if(iTime<now){
-                            if(iTime+20*60*60<now){
-                                createElement("div",{},newDiv,getText("readySinceX").replace(/%1%/,getFormattedDateStr(iTime)));
-                            }else{
-                                createElement("div",{},newDiv,getText("readySinceX").replace(/%1%/,getDaytimeStr(iTime)+"&nbsp;"+getText("shortOClock")));
-                            }
-                        } else if (endDay==0){
-                            createElement("div",{},newDiv,getText("readyAtX").replace(/%1%/,getDaytimeStr(iTime)+"&nbsp;"+getText("shortOClock")));
-                        } else if ((endDay==1)&&(getText("readyAtX_day1",true))){
-                            createElement("div",{},newDiv,getText("readyAtX_day1").replace(/%1%/,getDaytimeStr(iTime)+"&nbsp;"+getText("shortOClock")));
-                        } else if ((endDay==2)&&(getText("readyAtX_day2",true))){
-                            createElement("div",{},newDiv,getText("readyAtX_day2").replace(/%1%/,getDaytimeStr(iTime)+"&nbsp;"+getText("shortOClock")));
-                        } else{
-                            createElement("div",{},newDiv,getText("readyAtX").replace(/%1%/,new Date(1000*iTime).toLocaleString()));
-                        }
-                        //newDiv1=$("oil_slot"+slot+"_img_tt_time");
-                        //
-                        newDiv1=$("production_slot_info_time"+farmNr+"_"+zoneNr+"_"+slot);
-
-                        if(newDiv1){ newDiv.appendChild(newDiv1); }
-                        newDiv1=createElement("div",{},newDiv);
-                        produktPic(iPrTyp,iProd,newDiv1);
-                        createElement("span",{},newDiv1,numberFormat(iAmount)+" "+prodName[iPrTyp][iProd]);
-                        pointsFormat(iPoints,"div",newDiv1);
-                        */
-
-                        iTime-=unsafeWindow.Zeit.Verschiebung;
+                    if (data.slots[slot]) {
+                        var iPrTyp = 0;
+                        var iProd = parseInt(data.slots[slot].pid, 10);
+                        var iAmount = data.slots[slot].amount;
+                        var iPoints = data.slots[slot].amount * prodPoints[iPrTyp][iProd];
+                        var iTime = now + data.slots[slot].remain;
+                        var endDay = countDays(now, iTime);
+                        var farmNr = gameLocation.get()[1] + 1;
+                        iTime -= unsafeWindow.Zeit.Verschiebung;
                         tempZoneProductionData[1]--;
-                        if(!tempZoneProductionData[0][iPrTyp][iProd]){ tempZoneProductionData[0][iPrTyp][iProd]=[]; }
-                        tempZoneProductionData[0][iPrTyp][iProd].push([iAmount,iPoints,iTime,NEVER]);
+                        if (!tempZoneProductionData[0][iPrTyp][iProd]) { tempZoneProductionData[0][iPrTyp][iProd] = []; }
+                        tempZoneProductionData[0][iPrTyp][iProd].push([iAmount, iPoints, iTime, NEVER]);
                         tempZoneProductionDataSlot[1]--;
-                        if(!tempZoneProductionDataSlot[0][iPrTyp][iProd]){ tempZoneProductionDataSlot[0][iPrTyp][iProd]=[]; }
-                        tempZoneProductionDataSlot[0][iPrTyp][iProd].push([iAmount,iPoints,iTime,NEVER]);
-                        //auto-cropping
-                        if((top.unsafeData.autoAction==null)&&valAutoCrop["farm"] && (newDiv=$("oil_slot"+slot+"_cropbutton")) && (newDiv.style.display=="block")){
-                            top.unsafeData.autoAction="berater: oil crop";
-                            window.setTimeout(function(div){
+                        if (!tempZoneProductionDataSlot[0][iPrTyp][iProd]) { tempZoneProductionDataSlot[0][iPrTyp][iProd] = []; }
+                        tempZoneProductionDataSlot[0][iPrTyp][iProd].push([iAmount, iPoints, iTime, NEVER]);
+                        // auto-cropping
+                        if ((top.unsafeData.autoAction == null) && valAutoCrop["farm"] && (newDiv = $("oil_slot" + slot + "_cropbutton")) && (newDiv.style.display == "block")) {
+                            top.unsafeData.autoAction = "berater: oil crop";
+                            window.setTimeout(function(div) {
                                 click(div);
-                                top.unsafeData.autoAction=null;
-                            },500,newDiv);
+                                top.unsafeData.autoAction = null;
+                            }, 500, newDiv);
                         }
                     }
-                    zones.setProduction(zoneNrF+"."+slot,tempZoneProductionDataSlot.clone());
+                    zones.setProduction(zoneNrF + "." + slot, tempZoneProductionDataSlot.clone());
                 } else {
-                    zones.setBlock(zoneNrS,"b");
+                    zones.setBlock(zoneNrS, "b");
                 }
             }
-            zones.setProduction(zoneNrF,tempZoneProductionData.clone());
-            var tempZoneProductionData=null;newDiv=null;newDiv1=null;
-        }catch(err){GM_logError("buildOilpressInner","","",err);}
-    });
-    // Knitting
-    unsafeOverwriteFunction("strickereiAjaxActionResponse",function(request,pos,mode){
-        try{
-            unsafeWindow._strickereiAjaxActionResponse(request,pos,mode);
-        }catch(err){GM_logError("_strickereiAjaxActionResponse","","",err);}
-        try{
-            var result = checkRequest(request);
-            if((result!=0)&&(result[0]!=0)){
-                switch(mode){
-                    case "buy": break;
-                    case "cancel": break;
-                    //Update 1209 crop in farmActionResponse
-                    //case "crop": raiseEvent("gameFactoryKnittingCropped"); break;
-                    case "speedup": break;
-                    case "start": raiseEvent("gameFactoryKnittingStarted"); break;
-                    default:
-                }
-            }
-        }catch(err){ GM_logError("strickereiAjaxActionResponse","","",err);}
-    });
-
-    unsafeOverwriteFunction("strickereiSelection",function(a,c,slot){
-        try{
-            unsafeWindow._strickereiSelection(a,c,slot);
-        }catch(err){GM_logError("_strickereiSelection","","",err);}
-        try{
-            raiseEvent("gameFactoryKnittingDialogStart");
-        }catch(err){GM_logError("strickereiSelection","","",err);}
-    });
-    unsafeOverwriteFunction("buildStrickereiInner",function(position,buildingid){
-        try{
-            unsafeWindow._buildStrickereiInner(position,buildingid);
-        }catch(err){GM_logError("_buildStrickereiInner","","",err);}
-        try{
-            var zoneNr=position;
-            var zoneNrF=zoneNr+6*gameLocation.get()[1];
+            zones.setProduction(zoneNrF, tempZoneProductionData.clone());
+            var tempZoneProductionData = null;
+            newDiv = null;
+            newDiv1 = null;
+        } catch (err) { GM_logError("buildOilpressInner", "", "", err); console.log(err); }
+    }
+    
+    // Read production data of the currently opened knitting factory
+    function doKnitting(zoneNr) {
+        try {
+            var zoneNrF = zoneNr + 6 * gameLocation.get()[1];
             var zoneNrS;
-            var farmNr = gameLocation.get()[1]+1;
+            var farmNr = gameLocation.get()[1] + 1;
             showBlase(zoneNrF);
-            drawZoneNavi(zoneNrF,$("innermaincontainer"));
-            var newDiv,newDiv1;
-            var tempZoneProductionData=[[{}],0,0,true];
+            drawZoneNavi(zoneNrF, $("innermaincontainer"));
+            var newDiv, newDiv1;
+            var tempZoneProductionData = [[{}], 0, 0, true];
             var tempZoneProductionDataSlot;
-            var data=unsafeWindow.strickerei_data;
-            for(var slot=1;slot<=3;slot++){
-                zoneNrS=zoneNrF+"."+slot;
-                if((slot==1)||(!data.slots[slot]["block"])){
-                    zones.setBlock(zoneNrS,"");
-                    tempZoneProductionDataSlot=[[{}],0,0,true];
+            var data = unsafeWindow.innerinfos_data[1]; // unsafeWindow.strickerei_data;
+            for (var slot = 1; slot <= 3; slot++) {
+                zoneNrS = zoneNrF + "." + slot;
+                if ((slot == 1) || (!data.slots[slot]["block"])) {
+                    zones.setBlock(zoneNrS, "");
+                    tempZoneProductionDataSlot = [[{}], 0, 0, true];
                     tempZoneProductionData[1]++;
                     tempZoneProductionData[2]++;
                     tempZoneProductionDataSlot[1]++;
                     tempZoneProductionDataSlot[2]++;
-                    if(data.slots[slot]){
-                        var iPrTyp=0;
-                        var iProd=data.slots[slot].pid;
-                        if(iProd){
-                            var iAmount=data.slots[slot].amount;
-                            var iPoints=iAmount*prodPoints[iPrTyp][iProd];
-                            if(data.slots[slot].ready){
-                                var iTime=Math.min(now-unsafeWindow.Zeit.Verschiebung,zones.getEndtime(zoneNrS));
-                            } else{
-                                var iTime=now+data.slots[slot].remain-unsafeWindow.Zeit.Verschiebung;
+                    if (data.slots[slot]) {
+                        var iPrTyp = 0;
+                        var iProd = data.slots[slot].pid;
+                        if (iProd) {
+                            var iAmount = data.slots[slot].amount;
+                            var iPoints = iAmount * prodPoints[iPrTyp][iProd];
+                            if (data.slots[slot].ready) {
+                                var iTime = Math.min(now - unsafeWindow.Zeit.Verschiebung, zones.getEndtime(zoneNrS));
+                            } else {
+                                var iTime = now + data.slots[slot].remain - unsafeWindow.Zeit.Verschiebung;
                             }
                             //production_slot_info2_6_1
-                            newDiv=$("production_slot_info"+farmNr+"_"+zoneNr+"_"+slot).parentNode;
-                            newDiv1=createElement("div",{
-                                "style":" position:absolute;bottom: 70px; left: 102px;"
-                            },newDiv);
-                            pointsFormat(iPoints,"div",newDiv1);
+                            newDiv = $("production_slot_info" + farmNr + "_" + zoneNr + "_" + slot).parentNode;
+                            newDiv1 = createElement("div", {
+                                "style": " position:absolute;bottom: 70px; left: 102px;"
+                            }, newDiv);
+                            pointsFormat(iPoints, "div", newDiv1);
                             tempZoneProductionData[1]--;
-                            if(!tempZoneProductionData[0][iPrTyp][iProd]){ tempZoneProductionData[0][iPrTyp][iProd]=[]; }
-                            tempZoneProductionData[0][iPrTyp][iProd].push([iAmount,iPoints,iTime,NEVER]);
+                            if (!tempZoneProductionData[0][iPrTyp][iProd]) { tempZoneProductionData[0][iPrTyp][iProd] = []; }
+                            tempZoneProductionData[0][iPrTyp][iProd].push([iAmount, iPoints, iTime, NEVER]);
                             tempZoneProductionDataSlot[1]--;
-                            if(!tempZoneProductionDataSlot[0][iPrTyp][iProd]){ tempZoneProductionDataSlot[0][iPrTyp][iProd]=[]; }
-                            tempZoneProductionDataSlot[0][iPrTyp][iProd].push([iAmount,iPoints,iTime,NEVER]);
-                            //auto-cropping
-                            if(data.slots[slot].ready&&(top.unsafeData.autoAction==null)&&valAutoCrop["farm"]&&(newDiv=$("strickerei_slot"+slot))){
-                                top.unsafeData.autoAction="berater: knitting crop";
-                                window.setTimeout(function(div){
+                            if (!tempZoneProductionDataSlot[0][iPrTyp][iProd]) { tempZoneProductionDataSlot[0][iPrTyp][iProd] = []; }
+                            tempZoneProductionDataSlot[0][iPrTyp][iProd].push([iAmount, iPoints, iTime, NEVER]);
+                            // auto-cropping
+                            if (data.slots[slot].ready && (top.unsafeData.autoAction == null) && valAutoCrop["farm"] && (newDiv = $("strickerei_slot" + slot))) {
+                                top.unsafeData.autoAction = "berater: knitting crop";
+                                window.setTimeout(function(div) {
                                     click(div);
-                                    top.unsafeData.autoAction=null;
-                                },500,newDiv);
+                                    top.unsafeData.autoAction = null;
+                                }, 500, newDiv);
                             }
                         }
                     }
-                    zones.setProduction(zoneNrF+"."+slot,tempZoneProductionDataSlot.clone());
+                    zones.setProduction(zoneNrF + "." + slot, tempZoneProductionDataSlot.clone());
                 } else {
-                    zones.setBlock(zoneNrS,"b");
+                    zones.setBlock(zoneNrS, "b");
                 }
             }
-            zones.setProduction(zoneNrF,tempZoneProductionData.clone());
-            var tempZoneProductionData=null;newDiv=null;newDiv1=null;
+            zones.setProduction(zoneNrF, tempZoneProductionData.clone());
+            var tempZoneProductionData = null;
+            newDiv = null;
+            newDiv1 = null;
             raiseEvent("gameOpenFactoryKnitting");
-        }catch(err){GM_logError("buildStrickereiInner","","",err);}
-    });
+        } catch (err) { GM_logError("buildStrickereiInner", "", "", err);
+            console.log(err); }
+    }
 
     //Fuelstation
 
@@ -15719,30 +15675,43 @@ try{
     //fuelstationCheckLevelAdd(a, d)
     //updateFuelstationLevel(e, n)
 
-    unsafeOverwriteFunction("innerInfosResponse",function(zoneNr){
-    // oil, knitting, factory, pony, megafield, fuelstation
-        try{
+    unsafeOverwriteFunction("innerInfosResponse", function(zoneNr) {
+        // oil, knitting, factory, pony, megafield, fuelstation
+        try {
             unsafeWindow._innerInfosResponse(zoneNr);
-        }catch(err){GM_logError("_innerInfosResponse","","",err);}
-        try{
-            $("innermaincontainer").setAttribute("zoneNr",zoneNr);
-            if(unsafeWindow.locationinfo["buildingid"]){
-                switch(unsafeWindow.locationinfo["buildingid"]){
-                case "13": doFactoryOil(zoneNr); break; // Oil
-                case "14": doFactoryOil(zoneNr); break; // Special Oil
-                case "16": break; // Knitting
-                case "17": break; // Carpentry
-                case 18: doPony(zoneNr); raiseEvent("gameOpenPony"); break; // Pony,
-                case "19":  break;// Megafield
-                case 20:  break;// Fuelstation
-                default:
+        } catch (err) { GM_logError("_innerInfosResponse", "", "", err); }
+        try {
+            $("innermaincontainer").setAttribute("zoneNr", zoneNr);
+            if (unsafeWindow.locationinfo["buildingid"]) {
+                switch (unsafeWindow.locationinfo["buildingid"]) {
+                    case "13":
+                        doFactoryOil(zoneNr); // So something else. Might be refactored together!
+                        doFactoryOil2(zoneNr); // Read production data
+                        break; // Oil
+                    case "14":
+                        doFactoryOil(zoneNr);
+                        break; // Special Oil
+                    case "16":
+                        doKnitting(zoneNr);
+                        break; // Knitting
+                    case "17":
+                        break; // Carpentry
+                    case 18:
+                        doPony(zoneNr);
+                        raiseEvent("gameOpenPony");
+                        break; // Pony,
+                    case "19":
+                        break; // Megafield
+                    case 20:
+                        break; // Fuelstation
+                    default:
                 }
-            }else{
-            // }else if(unsafeWindow.locationinfo["in"]){
+            } else {
                 doFactory(zoneNr);
             }
-        }catch(err){GM_logError("innerInfosResponse","","",err);}
+        } catch (err) { GM_logError("innerInfosResponse", "", "", err); }
     });
+
     // Megafield
     err_trace="Megafield";
     // Remembering of latest vehicle. ["harvest", "fertilize"]
