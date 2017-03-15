@@ -4,8 +4,8 @@
 // @author         BastianKanaan
 // @description    Extends MyFreeFarm
 // @icon           data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAYAAAA6/NlyAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB94BGgo6NO+u5q4AAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAS0ElEQVRo3t2aeYxl11ngf+fub3+172t3V1cv7sVuJ3bs7jh2QtoMDoHEwRlCbMJEATRiSaKBQTNBCKGwBwSDNAyTQVGCYJIMEINjxrFix3E73mO7TW/V1VXVtS+v6i13v+ee+aNvQSXDaCTS7W7nSE/v3veuzrm/8y3nO9934Dq08cE+APv9E/1//tDN+16/9+hNJ/l+bXv3jAHw4zf1P/sLdx5TRqXyc++fHPvsGzW+/kbC5vMOyyvrfOSDJz99eM/gj+09fkK9Na/fW8sVzr86NfOl7ydgB+iK46TnVz75wJNtHZX3rcuUI8dvFS9cnuHQ7YcOWprTfvb8pUe/H4BzwH7g0H/59INfq3Z09++ZHBPHbn8LpVKF3WNdWPlOdeIdd962MDf/8vSl+XPX8mW0awxrAiPAgd/4xXf+wdaG74yP7BL9w/vp7x2h1WrRM3SYwf5+8cLz31Yf/w8f/fK1nn3tGkt2D3AE6J7o6xoc7Cjyq//pt3ntm88wMzvDhfMX+dmP/AJJnDKxe0j09HQZDzzwns+9GVW6CBwGjgIdhbz91vfdffjg6soWrhcwf+p5Cu7L3DwhWTkdYvVWCeOEQsFm//5dY1/4wld+880kYQeYBG4CqoD23uMTk0mcQJTQF9R4/48PM3mwDU2HDz5Y5dk/+VPc5YuErZpKooZ9LSVsXOX+BNAB7AUK2X1yx97C7oXpNQb7Nrn5pw5hOA6FthLFYh4hdD7+B8NceHGKi2eqYmTfmAGwb3I3Z85O3fAS1oHubckC6IZ9uGCWCruHN6lWHNIwQRc6BjqkGpqCNEkZPTTG0aFZtuqBPjQ08NPXAvZaAJtA2w7NUQ+9c/Lt5XQOWh5hrY5yfbQoRAYBKvRJ4xgZxcReQD5vMaK9yu9+5j//iWEY4s2g0nYGvO0MxX9/9PTnT1R6P1UqCVJDR/kJdiIQrsIqRghT4KEIpCSNJAuLa3zm7179qJaibnRgDejJgP9JOp3thZueOJvygwdTND0lcFuEWhEtdTALvTTXlmikCV4ScHFhixefXEHSuStKkxveadnAQOas/qm1vHhlq5Uwta6rsUosiCWuVsfJF2itzNMKY+a36sxsNXnhYkI5LLBSWz71ZvDSCkiz739eoyyjMI81VV7Vd6skYLSasrK4gWnnWKt7PL+4wbwbcv6yRKsrZDHXSGqbr74ZAg8t89D9O/stWNbuTS+8+Mzs2hfqstBNnPYOdRpcXNjg4VeXeOqSz/RcghuIb6zr5m+2omQ1NZ2/q7da4c7O+3u6abruDQWsA0PfDTzSVji26QZWJOWFxbr73OTuwcPfeL1ezhcNljydlmdDW+XJ8zPzd/lRsr6vo/xbtkjW26qVwzKJb7INo6OtWl1fWl2LbkQvnQJxJm0NEKZh6yptpNvx9fmt5MXjk72DD798meFyldHDY6xeuMi79nYpJWXqJJH2ajOaqW3UHtvudMsLGOjtYWF55YZahwUggRngEuAC6txa7XHNMF/Z9txRLJNATxnuG2Civ5ORgS56nPTtaPrpr03V9DDwGztht9vVgL0WwBpwGXgKeAVwoyiqNf1gbXtC2goWInLYZUG1UqH25JP4iTr32JnlQ4D92OJm5f83UG93xw2h0gKwsusGcDZbl8eziVADXe33juXlD0QrDRWWcqK2sIDSneSx80sngX6E8IZ7OvvCIPx5Kwnu6eru7J1fWPLLPQMvrtc2v+XknadMzXhdIlr79k2kZ86cv67AaQbqZtd+di8Bdctw9ZerVb3njjvGeOyvT4tG1zD27GX8vqH/wfmlxf6eronRnJqKIt/RCqCcrjNzm+7Nq6GaX52bzxb1K166v7e7HIeRByTXEzgCpjKnlX5HgG3ak+++d39PwcirNAzEsZN38sg/rvPAJ3+WwTb7o3rs3xPWVsYKhQKRq3GmqR2bvrjwIkBfZztL67XvGGhxebVxoyQAomzWLaAL2AVU/u29t9y/d3Skc31pXcTSQG6sENpF3nLLfkwh1ckfua991/4J8fpzL4jXaukTtWbTLBdL7e3t1bzQ9Uaj2Ypv1M3Ddoi5F9iH0Mf/6Jfu/3hff2/n8uqaGpk8KjQErcYmt/YNUe7sxVCJiBPFI5//K0bGB5UoNnNffGL5z8BNLNNMhRDb/uGqbCautoS1LPh4i2ZYRz54fOxT02cv5A/ceozugWFh6RrDh46RMxX9g33IyOeRv36EXYfeQhi02FhaIG9pg1uxuVDbrD8p0zSQUsrvNpEbCTiXpXZGH7xj6NerxTIqidk9Ocljjz6Bcuv09HfxyFe+Stxy6R4a5IlHHuXlp75O4jbxo0jEErW3r3Ty3LL/a2EYXFXYqwksssTdGLC3krf3j7XlbtPRcEyTrz/9Eh0lm5X1TVIl2FxZZGpmjqVLM7SVHSqlAghFEkuWN13hWCb5fOH3Li2sRlwDFbwasJ3AMeCtQLtjm/vcZsDK0ipx4DMx2EGpYGPmHGYvnKVUKVCpFMmZkKQphbxFqlL8WHLq9ByXV+tYmnr4Rk3xlLKU7AGgAmiDbcXROI7xIonne4g0xrYMOtqKKB0sXWekr51c3sa2DNAExZyDbgiUUrx8YYGiKd9+cM/I0I0GrGe7o7EsPQsIYywXTUgF9Uhi6ALimJxlolKJY1uEcYRKFbahUcw5yCQlUQpN03jv8UnZ3T/6e4+/PM14d+F1gIN7x24YYCMLH/PbP1QKdpvrxtQiVHfBVK6fgoypbTZJZYqUkqYb0Gq51BsegecjU4Vp6FimSVuloPte0xsYHHnu+bNzxfvu2P/S6XOXtR86cdMNAWzuyD8DcGig7cFFTzLl6YslS6AZEEcRtVod3wuo111818P3ApIgIooTfM9ndnkLw9AJooR7Dvf/yumZpeMyFY3ZxfUj9905ceGpqcR49+0Hrjuwk9mwBqj+jvKEX6/1zSVO0JeT3cLURck2SJXACTxi10PFCaam02h4+J5HqxnQagUIDUzLIJKSYs7S9/ZXz69uNqtz6631raY7/s4J89w/PPM6B/eOXzdgLfPO5Svxslm9Y9D52DyVxDKNhW4rNUxDo5wzKBo6XqpI/AAZxsRxQj5no3QTJRSWbdBRLWFbFn2dbSgUd9/UN9zd1XVpq+l1P/Pa5ZnaVn38/e84/Nrpc9OMDQ1cF2Anc1gOkPzAwYFfPr0hieL46YG86u0pWMLUBW4sidDo6KzS0dlGV3cbpUKOaql4ZWnK5wmimDSVOI6FF0TIVKGhiYqVjpRLxc/t37/vyEtT66cCzzv4Y3cfefzS5QV2jY2+oYHHdv7qIKAf29VzX1vJmVgMrItFgkP1ZsserFg4to6tGygFVr5AgiBVYDsWmiEIY4lMU8rlIqZloJRASYmuCYIwYrS3Kp77x7nDfhAuOI716GpLqo5c+p5Dk2NDT7905itvFPB2wewo0FMpFQffc3Tgoadn/MgPAtMKG/nx9jwVxyDvGPihBNNB6Dq6YWCaJkLXcf0QhcJ2TDTdQEMgUZiGRhgmxHFCznHQdNT5uZUfHBgc/JlarXYp1osHunPpe7p7B+szC8vfeiNUusCVIwx9QO1Hjw3/4jcvNVLXD6OBkjDiVKiSdaXbpp+gmRapEDTDmI2WS8P1EAIKeQfbsdhqeDRaTYI4wnV9kFBrtIhlSsv1OTTeJ0p5G5toutFonlrf2Lzv23PuZncu/AzkR/fsGrumwGYWZIwD0Vv39LxrvRU4F5fr2sbm5meDVqs43u4IKSFNFZoSRGGEIaCQc+hpr2KYOkopQGEaBuVino5yBamg1fLZaLYo5hyUglimmJbJiSPjTM0utR05eji/Xqutu2H03hdeX/jGB06MPn3h4qVrBiyyRPu+LNAwBkvmQ6emNnyU+l89He0fyosUSxOkKiWIU/woIQgTGq0Av9EijWMsXYNUIVNoNT1sU6fp+bgND5mmyFjh+REKsC2Tjc06HaUcmoCVxaUBgHIhf07Y+enZ5fp/vf/43qeulQ0XM7sdAtI793R96HI9Km648fkkkSqvJUuDRXO8aOvkTAOlFJoQCAFJClbOQaBQQoMkxTINdEPH9ULCMMaxbaRUpGlKkqRX4FVKGEs620rUtpq4CV9yXW/2ns0t99spX0U3/02QiNroYF+nqZuvbDVbV03COjDMlRM5EjTVXS3fvpFYsZTyrKZp+ZxObzVvYusGhi4wdZ04VSRSIYDID2h5Ic2mT8sLCMOYzS2XVKZoCKIoQUMjjCVC10gVFPN5ysU8XpCwf9cAtdpGEeB/AqWCE11aWP7EesM/ZSfNP7+0EHbs3TV+1YArwO4MfOnEnvaPnpqubTbr9dO6pr3X8/2/7ygX26p5k0SlCK5ItmKbWLqGKQSJTFFSoWRK04+4vLKB6wW03ABTNwjDmCCKiRKJkXltL4yRSiA0TSGgo1rdzn2ztLoOwOziyudn17x77z7onD13cfqqAJvAKFeOMWzkC6UeX5jdbpRsaZro8Tz/V1WaunHghVGicEyNSKboQqMZJRhCQ8oEmUjcIKTpBshEUrBtio6NLgQtPyBOJE3PRyaStVodqRQqVTRavmr4sTB041LLC+0slP3OF9T1+a3Zxc7b9u/5yPcKLID2TJ0DYPX43p6fu7AWrIF6rOV6f6ZQAhCJZtYNTRBn2z5Ng7a8RStO0DVBkkiUlGi6Rhgl+F5IFMbouo7rRfhhTN62UUJQLhexLRs3DIklIkpk0PCT11zPS7JMaG7nS55fXDu9VR34xNTy+tr3Cmxly1AB8Hs622/ZjNJ+HYoykT+j69r2wMKP5GyqaypOwLEM5SWSVigpWgZ+IgmTBJRCi2NKtoFhGtRaHp4fYZk6OcfCDyLiRBJEEW4Y4waKWKGaftR0/fCroF7Jgp7hnQ53fGyE6csLv79e23z4e/HSItvrTmSJtODmfYMfO3NhfmKr5eaKxcIXPM9f2t4a6kKj3TZuacmUMFGiu+SIWCriVF7J7pk6ptAIAZWCbuhoAhQCzdBBaTiOQy6XI4xT5YYRKCXcIDntOPYDj3/r9N9mWtYF9ALrWXWDza36VVmW8lw5OlgE6sBpLySuNVo/Cnw7CAK5Q0NEmKZJTpMHLMtWUYq26SW6VGAYembTOoapkyqNOE2xHQelG0gEXpiAptEKY7XphuFGoyXbndic7BPKFP7//vIT5/44G0ftSDq4wObViqVFthPalu4isOD5/rcy9R7LbHv7WdJUxUut+JRlaL2aprXphrB9qVQrlFiGLrw4JVUQK5AIEqHjBpFKFEITBoFENfx4c2WjuXDrUNJ727jBSIcSBwaMwx1tldwLF7a+lgG7mQC2MolflUjLzuykLftUdjwbA142+P91liqX16MH7yqWBroMqmUDLyFtxiKN0NKtKEn9SKogTNRGvaWabkCqNLXa9NKl9a2VMzOrXx+vhGNv321zebaBYRpcXvTV0b74lz58ct/bdpRzljLoq1ZqcTKYy0AtK3L72X9JVhVMMg1RgJbP5wuHxjoO//xxcef0vMvJm6ts+Zp4/KWafmbRXdts+m5k5J93DJkbK5vHUxkJITQ1t7gcN1Nz5vLa5peUgnfd1/e+szMe3zzbYs9EiaWkcvTcc3NfvevW4tc+98+5s3912eX/BexnBe04m1G5YxC5Q52sTPLDcRTd8sl71Nv+8kXdPTMTBz/dGXacXTPCMNbCT93f1fWhP579Q2j6dWClxhPZZBmZr6gCb2svO3t6qpZ6/Fm/dWoxfPIDLflDDz8z99vnloK/3dW38e/+4/tGf/fTX5755LVI8YSZymzXYHfOqMqkvpVd54CxA4P5vlAvqi89PfP3F5brS3aq+Jvn1pcfPb124fSFRnrylp77d5RNkmwyrcwploD8B2/r3qOEEb+0Lv8QWEsTpW6f7MkpmWivzYfrR4btT0B+ZHJ88A1P8TSA2UzKGmD+8B5zNPRD0dtWHsrplE3L5qETvWVQ0aKr+x97R+Ew6IVsIs8BLwELmafdyplGZbIUGlEYGWut8NfzjjNpxam4a1QdB9Z1jbwfSH7nJ4f+/dnp+TccOM7sei3TgvLMuplsLgUEUsnJ7lLBqwUM5pI2YLrDTpwwEtxztKcGPAGcAp4HngXmgKYhlIg2EzYWWkRReELCVlKLWF2MASzdE4G35qnVmfrw9aoP17OKfwGQX359/excq1TYajSfnUqdNNoKT/zDlHgYaOnNRHlrLqbSXgGmd5jI+Uyte5qRrD06Q9Nqb/sw1NbCIFj64gWTFaUfA37kken6oyA/HHUMfwqWuV6tANwJ/BrwF9le+W7gs6OVwnYq4k9vGuy8cP/+8jPQb/4L6/0w8BPAFxHi+I7//puZyx/YMc5f2MXKEa5z07Ii2k8AN2c7KwG8e8czd+Rs+wN2tTM33Nv9L/XRA9wP3PVdGpf7rue6rsYL/x8HbwtumjbAVwAAAABJRU5ErkJggg==
-// @date           14.03.2017
-// @version        2.10.56
+// @date           15.03.2017
+// @version        2.10.57
 // @license        GPL version 3 or any later version; http://www.gnu.org/copyleft/gpl.html
 // @include        /^http:\/\/(|www\.|s\d+\.)au\.myfreefarm\.com\/.*$/
 // @include        /^http:\/\/(|www\.|s\d+\.)veselaferma\.com\/.*$/
@@ -170,6 +170,7 @@ const CHANGELOG=[["2.0","29.05.2014",[["Migration nach openuserjs.org","Migratio
                 ,["2.10.54","08.01.2017",[["Bugfix Olympia Offer","Bugfix Olympia Offer"]]]
                 ,["2.10.55","27.01.2017",[["Die Option (Limitiere günstigste Angebote) hinzugefügt, um die Anzahl der einfließenden Preise zur Berechnung des beobachteten Preises zu ändern.","Added option (Limit cheapest offers) to change the amount of cheapest offers for calculate all observed prices "]]]
                 ,["2.10.56","14.03.2017",[["Anpassung an Spiel-Update 14.03.2017","Fix for game update 14.03.2017"]]]
+                ,["2.10.57","15.03.2017",[["Bugfix Strickerei, Ölfabrik","Bugfix Knitting, Oelfactory"]]]
                 ];
 if(!VERSIONfunctionFile){
     alert("Hi, I am the Berater-Script.\nThe function-file is missing.\nPlease install me again.");
@@ -7482,7 +7483,8 @@ function buildInfoPanelOptions(){
                         questData["main"][3]["given"] = new Object();
                         questData["main"][3]["data"] = gatherQuestData("main","3",questData["main"][3]["nr"]);
                         GM_setValueCache(COUNTRY+"_"+SERVER+"_"+USERNAME+"_questData",implode(questData,"handleQuestData/questData"));
-                        unsafeData.questData=questData.clone();
+                        //unsafeData.questData=questData.clone();
+                        unsafeData.questData=Object.assign({}, questData);
                         var help = help + "_cooldown:_SetValues_QuestNumber_" + questData["main"][3]["nr"] + " ";
                     } else {
                         // main questseries 3 is accessible - do nothing
@@ -7498,7 +7500,8 @@ function buildInfoPanelOptions(){
                     questData["main"][3]["given"] = new Object();
                     questData["main"][3]["time"] = 0;
                     GM_setValueCache(COUNTRY+"_"+SERVER+"_"+USERNAME+"_questData",implode(questData,"handleQuestData/questData"));
-                    unsafeData.questData=questData.clone();
+                    //unsafeData.questData=questData.clone();
+                    unsafeData.questData=Object.assign({}, questData);
                     var help = help + "3_Accomplished: SetLastQuestNumber_QuestNumber_" + questData["main"][3]["nr"] + " ";
                 } else if (USERLEVEL >= 40
                     && speedlink_farm5.style.display!="block"){
@@ -7518,7 +7521,8 @@ function buildInfoPanelOptions(){
                         questData["main"][2]["given"] = new Object();
                         questData["main"][2]["data"] = gatherQuestData("main","2",questData["main"][2]["nr"]);
                         GM_setValueCache(COUNTRY+"_"+SERVER+"_"+USERNAME+"_questData",implode(questData,"handleQuestData/questData"));
-                        unsafeData.questData=questData.clone();
+                        //unsafeData.questData=questData.clone();
+                        unsafeData.questData=Object.assign({}, questData);
                         var help = help + "_cooldown:_SetValues_QuestNumber_" + questData["main"][2]["nr"] + " ";
                     } else {
                         // main questseries 2 is accessible - do nothing
@@ -7533,7 +7537,8 @@ function buildInfoPanelOptions(){
                     questData["main"][2]["given"] = new Object();
                     questData["main"][2]["time"] = 0;
                     GM_setValueCache(COUNTRY+"_"+SERVER+"_"+USERNAME+"_questData",implode(questData,"handleQuestData/questData"));
-                    unsafeData.questData=questData.clone();
+                    //unsafeData.questData=questData.clone();
+                    unsafeData.questData=Object.assign({}, questData);
                     var help = help + "2_Accomplished:_SetLastQuestNumber_" + questData["main"][2]["nr"] + " ";
                 }
                 if (USERLEVEL >= 10
@@ -7549,7 +7554,8 @@ function buildInfoPanelOptions(){
                         questData["main"][1]["given"] = new Object();
                         questData["main"][1]["data"] = gatherQuestData("main","1",questData["main"][1]["nr"]);
                         GM_setValueCache(COUNTRY+"_"+SERVER+"_"+USERNAME+"_questData",implode(questData,"handleQuestData/questData"));
-                        unsafeData.questData=questData.clone();
+                        //unsafeData.questData=questData.clone();
+                        unsafeData.questData=Object.assign({}, questData);
                         var help = help + "_cooldown:_SetValues_QuestNumber_" + questData["main"][1]["nr"] + " ";
                     } else {
                         // main questseries 1 is accessible - do nothing
@@ -7564,7 +7570,8 @@ function buildInfoPanelOptions(){
                     questData["main"][1]["given"] = new Object();
                     questData["main"][1]["time"] = 0;
                     GM_setValueCache(COUNTRY+"_"+SERVER+"_"+USERNAME+"_questData",implode(questData,"handleQuestData/questData"));
-                    unsafeData.questData=questData.clone();
+                    //unsafeData.questData=questData.clone();
+                    unsafeData.questData=Object.assign({}, questData);
                     var help = help + "1_Accomplished:_SetLastQuestNumber_" + questData["main"][1]["nr"] + " ";
                 }
                 var help = help + "FORESTRY ";
@@ -7584,7 +7591,8 @@ function buildInfoPanelOptions(){
                             questData["forestry"][1]["data"][0][v][3]=true;
                         }
                         GM_setValueCache(COUNTRY+"_"+SERVER+"_"+USERNAME+"_questData",implode(questData,"handleQuestData/questData"));
-                        unsafeData.questData=questData.clone();
+                        //unsafeData.questData=questData.clone();
+                        unsafeData.questData=Object.assign({}, questData);
                         var help = help + "_cooldown:_SetValues_QuestNumber_" + questData["forestry"][1]["nr"] + " ";
                     } else {
                         // forestry questseries 1 is accessible - do nothing
@@ -7599,7 +7607,8 @@ function buildInfoPanelOptions(){
                     questData["forestry"][1]["given"] = new Object();
                     questData["forestry"][1]["time"] = 0;
                     GM_setValueCache(COUNTRY+"_"+SERVER+"_"+USERNAME+"_questData",implode(questData,"handleQuestData/questData"));
-                    unsafeData.questData=questData.clone();
+                    //unsafeData.questData=questData.clone();
+                    unsafeData.questData=Object.assign({}, questData);
                     var help = help + "1_Accomplished:_SetLastQuestNumber_" + questData["forestry"][1]["nr"] + " ";
                 }
                 if (USERLEVEL>20
@@ -7617,7 +7626,8 @@ function buildInfoPanelOptions(){
                             questData["forestry"][2]["data"][0][v][3]=true;
                         }
                         GM_setValueCache(COUNTRY+"_"+SERVER+"_"+USERNAME+"_questData",implode(questData,"handleQuestData/questData"));
-                        unsafeData.questData=questData.clone();
+                        //unsafeData.questData=questData.clone();
+                        unsafeData.questData=Object.assign({}, questData);
                         var help = help + "_cooldown:_SetValues_QuestNumber_" + questData["forestry"][2]["nr"] + " ";
                     } else {
                         // forestry questseries 2 is accessible - do nothing
@@ -7632,11 +7642,12 @@ function buildInfoPanelOptions(){
                     questData["forestry"][2]["given"] = new Object();
                     questData["forestry"][2]["time"] = 0;
                     GM_setValueCache(COUNTRY+"_"+SERVER+"_"+USERNAME+"_questData",implode(questData,"handleQuestData/questData"));
-                    unsafeData.questData=questData.clone();
+                    //unsafeData.questData=questData.clone();
+                    unsafeData.questData=Object.assign({}, questData);
                     var help = help + "2_Accomplished:_SetLastQuestNumber_" + questData["forestry"][2]["nr"] + " ";
                 }
                 console.log(help);
-                // console.log(implode(unsafeData.questData));
+                //console.log(implode(unsafeData.questData));
                 help=null;
             });
         },false);
@@ -11972,7 +11983,8 @@ try{
             unsafeWindow._questsHandler(status);
         }catch(err){GM_logError("_questsHandler","","",err);}
         try{
-            handleQuestLine();
+            window.setTimeout(handleQuestLine,3000);
+            //handleQuestLine();
         }catch(err){GM_logError("questsHandler","","",err);}
     });
     unsafeOverwriteFunction("showQuestBoxLine",function(){
@@ -14873,7 +14885,7 @@ try{
             unsafeWindow._farmAction(mode,farm,position,s,d,b,a);
         }catch(err){GM_logError("_farmAction","mode="+mode,"",err);}
     });
-
+/*
     unsafeOverwriteFunction("ajaxActionResponse", function(b, c, d, e) {
         // b = Sowas, wie der Request bei farmActionResponse
         // c = Begriff, der die Aktion beschreibt (bspw. "start" bei Start der Strickerei)
@@ -14883,9 +14895,21 @@ try{
             unsafeWindow._ajaxActionResponse(b, c, d, e);
         } catch (err) { GM_logError("_ajaxActionResponse", "mode=" + mode, "", err); }
 
+        console.log("+++++++++++ajaxActionResponse+++++++++++");
+        console.log(implode(b));
+        console.log(implode(c));
+        console.log(implode(d));
+        console.log(implode(e));
+        console.log("+++++++++++ajaxActionResponse+++++++++++");
+
         // Werfe Event à la "gameFactory_start_3_6". Falls auch nicht-Factories hier rein laufen, könnte man überlegen, den Prefix umzubenennen
-        raiseEvent("gameFactory_"+c+"_"+d.farm+"_"+d.position);
+        //doKnitting(d.position);
+
+
+        //raiseEvent("gameFactory_"+c+"_"+d.farm+"_"+d.position);
     });
+*/
+
 
     unsafeOverwriteFunction("farmActionResponse", function(request, mode, farmNR, zoneNr, B, d, b, a) {
         try {
@@ -14944,11 +14968,23 @@ try{
                     case "harvestproduction":
                         {
                             var zoneNrF = zoneNr + 6 * (farmNR - 1);
+                            switch (zones.getBuilding(zoneNrF)){
+                                case 13:
+                                case 14:
+                                    raiseEvent("gameFactoryOilCropped");
+                                    break;
+                                case 16:
+                                    raiseEvent("gameFactoryKnittingCropped");
+                                    break;
+                                default:
+                                    raiseEvent("harvestproduction");
+                            }
+                            /*
                             if (16 == zones.getBuilding(zoneNrF)) {
-                                raiseEvent("gameFactoryKnittingCropped");
+                                raiseEvent("gameFactoryCropped");
                             } else {
                                 raiseEvent("harvestproduction");
-                            }
+                            }*/
                             break;
                         }
                     case "megafield_plant":
@@ -15322,10 +15358,10 @@ try{
     // Oil factory, special oil factory
     function doFactoryOil(zoneNr){
         //GM_log("doFactoryOil "+unsafeWindow.currentposition);
-        var zoneNrF=zoneNr+6*gameLocation.get()[1];
+        /*var zoneNrF=zoneNr+6*gameLocation.get()[1];
         showBlase(zoneNrF);
-        drawZoneNavi(zoneNrF,$("innermaincontainer"));
-        raiseEvent("gameOpenFactoryOil");
+        drawZoneNavi(zoneNrF,$("innermaincontainer"));*/
+        //raiseEvent("gameOpenFactoryOil");
     }
     function doPony(zoneNr){
         var zoneNrF=zoneNr+6*gameLocation.get()[1];
@@ -15391,11 +15427,12 @@ try{
     }
 
     // Read production data of the currently opened oil factory
-    function doFactoryOil2(zoneNr) {
+    /*function doFactoryOil2(zoneNr) {
         try {
             var zoneNrF = zoneNr + 6 * gameLocation.get()[1];
             var zoneNrS;
-            var data = unsafeWindow.innerinfos_data[1]; // unsafeWindow.oilproduction;
+            //var data = unsafeWindow.innerinfos_data[1]; // unsafeWindow.oilproduction;
+            var data = unsafeWindow.factory.data;
             var newDiv, newDiv1;
             var tempZoneProductionData = [[{}], 0, 0, true];
             var tempZoneProductionDataSlot;
@@ -15441,11 +15478,9 @@ try{
             var tempZoneProductionData = null;
             newDiv = null;
             newDiv1 = null;
-        } catch (err) { GM_logError("buildOilpressInner", "", "", err); console.log(err); }
-    }
-
-    // Read production data of the currently opened knitting factory
-    function doKnitting(zoneNr) {
+        } catch (err) { GM_logError("doFactoryOil2", "", "", err); console.log(err); }
+    }*/
+    function doFactoryOil2(zoneNr) {
         try {
             var zoneNrF = zoneNr + 6 * gameLocation.get()[1];
             var zoneNrS;
@@ -15455,7 +15490,96 @@ try{
             var newDiv, newDiv1;
             var tempZoneProductionData = [[{}], 0, 0, true];
             var tempZoneProductionDataSlot;
-            var data = unsafeWindow.innerinfos_data[1]; // unsafeWindow.strickerei_data;
+            //var data = unsafeWindow.innerinfos_data[1]; // unsafeWindow.strickerei_data;
+            var data = unsafeWindow.factory.data;
+            for (var slot = 1; slot <= 3; slot++) {
+                zoneNrS = zoneNrF + "." + slot;
+                if ((slot == 1) || (!data.slots[slot]["block"])) {
+                    zones.setBlock(zoneNrS, "");
+                    tempZoneProductionDataSlot = [[{}], 0, 0, true];
+                    tempZoneProductionData[1]++;
+                    tempZoneProductionData[2]++;
+                    tempZoneProductionDataSlot[1]++;
+                    tempZoneProductionDataSlot[2]++;
+                    if (data.slots[slot]) {
+                        var iPrTyp = 0;
+                        var iProd = data.slots[slot].pid;
+                        if (iProd) {
+                            var iAmount = data.slots[slot].amount;
+                            var iPoints = iAmount * prodPoints[iPrTyp][iProd];
+                            if (data.slots[slot].ready) {
+                                var iTime = Math.min(now - unsafeWindow.Zeit.Verschiebung, zones.getEndtime(zoneNrS));
+                            } else {
+                                var iTime = now + data.slots[slot].remain - unsafeWindow.Zeit.Verschiebung;
+                            }
+                            //production_slot_info2_6_1
+                            newDiv = $("production_slot_info" + farmNr + "_" + zoneNr + "_" + slot).parentNode;
+                            newDiv1 = createElement("div", {
+                                "style": " position:absolute;bottom: 70px; left: 102px;"
+                            }, newDiv);
+                            pointsFormat(iPoints, "div", newDiv1);
+                            tempZoneProductionData[1]--;
+                            if (!tempZoneProductionData[0][iPrTyp][iProd]) { tempZoneProductionData[0][iPrTyp][iProd] = []; }
+                            tempZoneProductionData[0][iPrTyp][iProd].push([iAmount, iPoints, iTime, NEVER]);
+                            tempZoneProductionDataSlot[1]--;
+                            if (!tempZoneProductionDataSlot[0][iPrTyp][iProd]) { tempZoneProductionDataSlot[0][iPrTyp][iProd] = []; }
+                            tempZoneProductionDataSlot[0][iPrTyp][iProd].push([iAmount, iPoints, iTime, NEVER]);
+                            // auto-cropping
+                            if (data.slots[slot].ready && (top.unsafeData.autoAction == null) && valAutoCrop["farm"] && (newDiv = $("strickerei_slot" + slot))) {
+                                top.unsafeData.autoAction = "berater: oil crop";
+                                window.setTimeout(function(div) {
+                                    click(div);
+                                    top.unsafeData.autoAction = null;
+                                }, 500, newDiv);
+                            }
+                        }
+                    }
+                    zones.setProduction(zoneNrF + "." + slot, tempZoneProductionDataSlot.clone());
+                } else {
+                    zones.setBlock(zoneNrS, "b");
+                }
+            }
+            zones.setProduction(zoneNrF, tempZoneProductionData.clone());
+            var tempZoneProductionData = null;
+            newDiv = null;
+            newDiv1 = null;
+            raiseEvent("gameOpenFactoryOil");
+        } catch (err) {
+            GM_logError("doFactoryOil2", "", "", err);
+            console.log(err);
+        }
+    }
+
+
+
+    // Read production data of the currently opened knitting factory
+    function doKnitting(zoneNr) {
+        try {
+            /*
+            console.log("+++++++++++++++++ doKnitting"+zoneNr);
+            console.log("===                            ===");
+            console.log(print_r(unsafeWindow.factory.data, "", true, "\n"));
+            console.log("===                            ===");
+
+            console.log("===                            ===");
+            console.log(print_r(unsafeWindow.innerinfos_data[1], "", true, "\n"));
+            console.log("===                            ===");
+
+            console.log("===                            ===");
+            console.log(print_r(unsafeWindow.building_inner_data, "", true, "\n"));
+            console.log("===                            ===");
+*/
+
+            var zoneNrF = zoneNr + 6 * gameLocation.get()[1];
+            var zoneNrS;
+            var farmNr = gameLocation.get()[1] + 1;
+            showBlase(zoneNrF);
+            drawZoneNavi(zoneNrF, $("innermaincontainer"));
+            var newDiv, newDiv1;
+            var tempZoneProductionData = [[{}], 0, 0, true];
+            var tempZoneProductionDataSlot;
+            //var data = unsafeWindow.innerinfos_data[1]; // unsafeWindow.strickerei_data;
+            var data = unsafeWindow.factory.data;
             for (var slot = 1; slot <= 3; slot++) {
                 zoneNrS = zoneNrF + "." + slot;
                 if ((slot == 1) || (!data.slots[slot]["block"])) {
@@ -15508,9 +15632,31 @@ try{
             newDiv = null;
             newDiv1 = null;
             raiseEvent("gameOpenFactoryKnitting");
-        } catch (err) { GM_logError("buildStrickereiInner", "", "", err);
-            console.log(err); }
+        } catch (err) {
+            GM_logError("doKnitting", "", "", err);
+            console.log(err);
+        }
     }
+
+    /**********************************************************
+    * Events Factory Object (Strickerei/Knitting, Öl/Oel)
+    **********************************************************/
+    //factory.prototype.response(b,a,c)
+    unsafeOverwriteObjFunction("factory","response",function(b,a,c){
+        try{
+             unsafeWindow.factory._response(b,a,c);
+        }catch(err){GM_logError("factory.response","","",err);}
+        try{
+            /*console.log("+++++++++++response+++++++++++");
+            console.log(implode(b));
+            console.log(implode(a));
+            console.log(implode(c));
+            console.log("+++++++++++response+++++++++++");*/
+            doKnitting(c.position);
+            raiseEvent("gameFactory_"+a+"_"+c.farm+"_"+c.position);
+        }catch(err){GM_logError("factory.response","","",err);}
+
+    });
 
     //Fuelstation
 
@@ -15691,6 +15837,7 @@ try{
                         break; // Oil
                     case "14":
                         doFactoryOil(zoneNr);
+                        doFactoryOil2(zoneNr);
                         break; // Special Oil
                     case "16":
                         doKnitting(zoneNr);
@@ -21534,7 +21681,8 @@ try{
         #farm_production_checker_icon{position:absolute!important;top:240px!important;}\
         #map_stock_overview_link{position:absolute!important;top:372px!important;}\
         #weatherlink{top:-88px!important;}\
-        #farm_speedlinks{top:11px!important;}"
+        #farm_speedlinks{top:11px!important;}\
+        #teaser_links{top:-40px!important;-65px !important}"
     );
     GM_addStyle(
          ".market_buy{width:30px!important;}\n"
