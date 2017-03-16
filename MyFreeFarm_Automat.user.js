@@ -5164,6 +5164,7 @@ try{
             var time=NEVER;
             var NowServer=unsafeWindow.Zeit.Server;
             for(var v=1;v<=120;v++){
+                if("v"==unsafeWindow.garten_kategorie[v]||"hr"==unsafeWindow.garten_kategorie[v]||"ex"==unsafeWindow.garten_kategorie[v]||"alpin"==unsafeWindow.garten_kategorie[v]){ // only plants
                     var z=parseInt(unsafeWindow.garten_zeit[v],10);
                     if(z>0){
                         time=Math.min(time,z-NowServer);
@@ -5407,6 +5408,7 @@ try{
             GM_logInfo("autoFarmPlantPremium","runId="+runId+" step="+step,"","(Premium) "+getText("automat_planting"));
             var leereFelder=0;
             for(var v=1;v<=120;v++){
+                if("v"==unsafeWindow.garten_kategorie[v]||"hr"==unsafeWindow.garten_kategorie[v]||"ex"==unsafeWindow.garten_kategorie[v]||"alpin"==unsafeWindow.garten_kategorie[v]){
                     if(!unsafeWindow.garten_prod[v]){ leereFelder++; }
                 }else{
                     if((unsafeWindow.garten_kategorie[v]!="z") && (unsafeWindow.garten_kategorie[v]!="u")){ leereFelder++; }
