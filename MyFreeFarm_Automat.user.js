@@ -2336,7 +2336,7 @@ try{
                 if ((unsafeData.prodTyp[0][iProd]=="ex")) {continue;}
             }
             //farm 6 nur Bergkräuter
-            if (zoneNrS==31){
+            if (zoneNrS==31||zoneNrS==32||zoneNrS==33||zoneNrS==34||zoneNrS==35||zoneNrS==36){
                 if ((unsafeData.prodTyp[0][iProd]!="alpin")) {continue;}
             } else {
                 if ((unsafeData.prodTyp[0][iProd]=="alpin")) {continue;}
