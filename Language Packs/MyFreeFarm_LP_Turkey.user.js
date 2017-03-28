@@ -3,10 +3,10 @@
 // @namespace   https://github.com/BastianKanaan/GMscripts_MyFreeFarm
 // @author      BastianKanaan
 // @description Language pack "Swedish" for MyFreeFarm Scripts
-// @date        11.02.2016
-// @version     1.0.7
+// @date        28.03.2017
+// @version     1.0.8
 // @license     GPL version 3 or any later version; http://www.gnu.org/copyleft/gpl.html
-// @include     /^http:\/\/(|www\.|s\d+\.)tr\.myfreefarm\.com\/.*$/
+// @include     /^(http|https):\/\/(|www\.|s\d+\.)tr\.myfreefarm\.com\/.*$/
 // @grant       GM_log
 // ==/UserScript==
 

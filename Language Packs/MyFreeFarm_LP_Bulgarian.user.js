@@ -3,10 +3,10 @@
 // @namespace   https://github.com/BastianKanaan/GMscripts_MyFreeFarm
 // @author      BastianKanaan
 // @description Language pack "Bulgarian" for MyFreeFarm Scripts
-// @date        26.11.2015
-// @version     1.0.7
+// @date        28.03.2017
+// @version     1.0.8
 // @license     GPL version 3 or any later version; http://www.gnu.org/copyleft/gpl.html
-// @include     /^http:\/\/(|www\.|s\d+\.)veselaferma.com\/.*$/
+// @include     /^(http|https):\/\/(|www\.|s\d+\.)veselaferma.com\/.*$/
 // @grant       GM_log
 // ==/UserScript==
 
@@ -47,13 +47,13 @@ try{
         // - The subject: Replace the variable information by ".+". Prefix brackets with "\".
         text[LANGUAGE]["msgSubjectMarketsale"]="xxx";
         // - The content: The text where the information is stated. The information has to be replaced by "(.+?)".
-        text[LANGUAGE]["msgContentMarketsale"]="(.+) закупи от пазара\\s*(\\d+)x (.+?) за сума\\s*<br>\\s*(.+?) кД\\."; 
+        text[LANGUAGE]["msgContentMarketsale"]="(.+) закупи от пазара\\s*(\\d+)x (.+?) за сума\\s*<br>\\s*(.+?) кД\\.";
         // *************
         // Take from a message sent if you sell something via contract.
         // - The subject.
         text[LANGUAGE]["msgSubjectContractsale"]="xxx";
         // - The content: The text where the general information is stated. The information has to be replaced by "(.+?)".
-        text[LANGUAGE]["msgContentContractsale"]="(.+) подписа Ваш договор!<br>\\s*<br>\\s*Вие продадохте следните продукти:\\s*<br>([\\S\\s]*)\\s*<br>\\s*Плащане на стойност (.+?) кД е преведено в сметката Ви\\."; 
+        text[LANGUAGE]["msgContentContractsale"]="(.+) подписа Ваш договор!<br>\\s*<br>\\s*Вие продадохте следните продукти:\\s*<br>([\\S\\s]*)\\s*<br>\\s*Плащане на стойност (.+?) кД е преведено в сметката Ви\\.";
         // - The line-pattern for the detailed selling list (equals the replaced information above).
         text[LANGUAGE]["msgContentContractsaleList"]="\\s*(\\d+)x\\s*(.+?)\\s*<br>";
         // - A contract which was sent to you was canceld before you were able to accept it
@@ -80,7 +80,7 @@ try{
         // Take the subjects from messages sent if weed occurred on your field.
         text[LANGUAGE]["msgSubjectWeed1"]="xxx";
         text[LANGUAGE]["msgSubjectWeed2"]="xxx";
-    
+
 // And all the other texts you can enter what you want ****************************************************************
         text[LANGUAGE]["above"]="above";
         text[LANGUAGE]["absolute"]="Amount required";
@@ -597,8 +597,8 @@ try{
         text[LANGUAGE]["automat_QueTimeNextReady"] = "Следващото е готово в:";
         text[LANGUAGE]["automat_QueTimeRound"] = "Average each turn:";
         text[LANGUAGE]["automat_QueRackMode"]="(Режи-шкаф)";
-        text[LANGUAGE]["automat_queueshow"]="Редактирай опашка"; 
-        text[LANGUAGE]["automat_zoneXWaiting"]="Зона \"%1%\ изчаква"; 
+        text[LANGUAGE]["automat_queueshow"]="Редактирай опашка";
+        text[LANGUAGE]["automat_zoneXWaiting"]="Зона \"%1%\ изчаква";
         //For the Mill
         //%PRODNAME% = product name, %FLDFROM% = field nr from, %FLDTO% = field nr until,
         text[LANGUAGE]["automat_MillQueue"] = "Мелница-опашка";
@@ -703,7 +703,7 @@ window.setTimeout(function(){
     compareObjectsExistance(text,top.unsafeData.text);
     GM_log("END COMPARING");
 },1000);
-*/  
+*/
     if(undefined===top.unsafeData.COUNTRY){
         top.unsafeData.LANGUAGE=LANGUAGE;
         top.unsafeData.COUNTRY=COUNTRY;
@@ -715,5 +715,5 @@ window.setTimeout(function(){
         top.unsafeData.regDelimDeci=regDelimDeci;
         top.unsafeData.dateFormatDM=dateFormatDM;
         top.unsafeData.dateFormatDMY=dateFormatDMY;
-    }    
+    }
 }catch(err){ GM_log("ERROR\npage="+location.href+"\n"+err); }
