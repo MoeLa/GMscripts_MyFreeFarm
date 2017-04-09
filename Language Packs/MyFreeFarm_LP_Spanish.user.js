@@ -3,10 +3,10 @@
 // @namespace   https://github.com/BastianKanaan/GMscripts_MyFreeFarm
 // @author      BastianKanaan
 // @description Language pack "Spanish" for MyFreeFarm Scripts
-// @date        26.11.2015
-// @version     1.0.7
+// @date        28.03.2017
+// @version     1.0.8
 // @license     GPL version 3 or any later version; http://www.gnu.org/copyleft/gpl.html
-// @include     /^http:\/\/(|www\.|s\d+\.)migranjalinda\.es\/.*$/
+// @include     /^(http|https):\/\/(|www\.|s\d+\.)migranjalinda\.es\/.*$/
 // @grant       GM_log
 // ==/UserScript==
 
@@ -80,7 +80,7 @@ try{
         // Take the subjects from messages sent if weed occurred on your field.
         text[LANGUAGE]["msgSubjectWeed1"]="xxx";
         text[LANGUAGE]["msgSubjectWeed2"]="xxx";
-    
+
 // And all the other texts you can enter what you want ****************************************************************
         text[LANGUAGE]["above"]="above";
         text[LANGUAGE]["absolute"]="Amount required";
@@ -597,8 +597,8 @@ try{
         text[LANGUAGE]["automat_QueTimeNextReady"] = "Next is ready at:";
         text[LANGUAGE]["automat_QueTimeRound"] = "Average each turn:";
         text[LANGUAGE]["automat_QueRackMode"]="(Rack mode)";
-        text[LANGUAGE]["automat_queueshow"]="Click to edit the queue"; 
-        text[LANGUAGE]["automat_zoneXWaiting"]="Zone \"%1%\" is waiting"; 
+        text[LANGUAGE]["automat_queueshow"]="Click to edit the queue";
+        text[LANGUAGE]["automat_zoneXWaiting"]="Zone \"%1%\" is waiting";
         //For the Mill
         //%PRODNAME% = product name, %FLDFROM% = field nr from, %FLDTO% = field nr until,
         text[LANGUAGE]["automat_MillQueue"] = "Mill Queue";
@@ -715,5 +715,5 @@ window.setTimeout(function(){
         top.unsafeData.regDelimDeci=regDelimDeci;
         top.unsafeData.dateFormatDM=dateFormatDM;
         top.unsafeData.dateFormatDMY=dateFormatDMY;
-    }    
+    }
 }catch(err){ GM_log("ERROR\npage="+location.href+"\n"+err); }

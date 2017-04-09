@@ -1,12 +1,12 @@
 ﻿// ==UserScript==
-// @name        MyFreeFarm LP Hungary
+// @name        MyFreeFarm LP Brasilia
 // @namespace   https://github.com/BastianKanaan/GMscripts_MyFreeFarm
 // @author      BastianKanaan
-// @description Language pack "Hungary" for MyFreeFarm Scripts
+// @description Language pack "Portuguese" for MyFreeFarm Scripts
 // @date        28.03.2017
 // @version     1.0.8
 // @license     GPL version 3 or any later version; http://www.gnu.org/copyleft/gpl.html
-// @include     /^(http|https):\/\/(|www\.|s\d+\.)enkicsitanyam.hu\/.*$/
+// @include     /^(http|https):\/\/(|www\.|s\d+\.)myfreefarm\.com\.br\/.*$/
 // @grant       GM_log
 // ==/UserScript==
 
@@ -25,8 +25,8 @@ try{
     const GFX = "http://mff.wavecdn.de/mff/"; // The path to the in-game images
 
 // Important constants ************************************************************************************************
-    const COUNTRY="HU"; // The country ISO-code (2 digits)
-    const LANGUAGE="hu"; // The language ISO-code (2 digits)
+    const COUNTRY="BR"; // The country ISO-code (2 digits)
+    const LANGUAGE="br"; // The language ISO-code (2 digits)
     const delimThou="."; // The separator for thousands (e.g. in 1,000).
     const regDelimThou="\\."; // = delimThou. "." has to be masked to "\\."!
     const regDelimThouShift="([\\d\\.])(\\d)\\.(\\d{1,2}\\D)"; // = "([\\d"+delimThou+"])(\\d)"+delimThou+"(\\d{1,2}\\D)"
@@ -47,13 +47,13 @@ try{
         // - The subject: Replace the variable information by ".+". Prefix brackets with "\".
         text[LANGUAGE]["msgSubjectMarketsale"]="xxx";
         // - The content: The text where the information is stated. The information has to be replaced by "(.+?)".
-        text[LANGUAGE]["msgContentMarketsale"]="(.*) bought (\\d+)x (.+?) for<br> (.+?) pD from you\\.";
+        text[LANGUAGE]["msgContentMarketsale"]="(.+) te ha comprado\\s*(\\d+) (.+?)\\s*<br>\\s*por (.+?) MG en el mercado\\.";
         // *************
         // Take from a message sent if you sell something via contract.
         // - The subject.
         text[LANGUAGE]["msgSubjectContractsale"]="xxx";
         // - The content: The text where the general information is stated. The information has to be replaced by "(.+?)".
-        text[LANGUAGE]["msgContentContractsale"]="(.+) has signed a contract of yours!<br><br> The following products have been sold:<br>(.+?)<br> The amount of (.+?) pD has been credited to your account\\."; // The text where the general information is stated. The information has to be replaced by "(.+?)".
+        text[LANGUAGE]["msgContentContractsale"]="¡(.+) ha firmado un contrato tuyo!<br><br>\\s*Los siguientes productos se han vendido:<br>([\\S\\s]*)\\s*<br>\\s*El importe del contrato de (.+?) MG se ha sumado a tu cuenta\\.";
         // - The line-pattern for the detailed selling list (equals the replaced information above).
         text[LANGUAGE]["msgContentContractsaleList"]="\\s*(\\d+)x\\s*(.+?)\\s*<br>";
         // - A contract which was sent to you was canceld before you were able to accept it
@@ -154,7 +154,7 @@ try{
         text[LANGUAGE]["farmi"]="Farmie";
         text[LANGUAGE]["farmis"]="Farmies";
         text[LANGUAGE]["farmpedia"]="Forum";
-        text[LANGUAGE]["farmpediaUrl"]="http://forum.enkicsitanyam.hu/";
+        text[LANGUAGE]["farmpediaUrl"]="http://board.myfreefarm.de/viewtopic.php?p=55566#p55566";
         text[LANGUAGE]["farmzone"]="Building place %1% of %2%. farm";
         text[LANGUAGE]["feed"]="Feed";
         text[LANGUAGE]["fields"]="Fields";

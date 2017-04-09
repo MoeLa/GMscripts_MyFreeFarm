@@ -3,10 +3,10 @@
 // @namespace   https://github.com/BastianKanaan/GMscripts_MyFreeFarm
 // @author      BastianKanaan
 // @description Language pack "Danish" for MyFreeFarm Scripts
-// @date        26.11.2015
-// @version     1.0.7
+// @date        28.03.2017
+// @version     1.0.8
 // @license     GPL version 3 or any later version; http://www.gnu.org/copyleft/gpl.html
-// @include     /^http:\/\/(|www\.|s\d+\.)myfreefarm.dk\/.*$/
+// @include     /^(http|https):\/\/(|www\.|s\d+\.)myfreefarm.dk\/.*$/
 // @grant       GM_log
 // ==/UserScript==
 
@@ -26,7 +26,7 @@ try{
 
 // Important constants ************************************************************************************************
     const COUNTRY="DK"; // The country ISO-code (2 digits)
-    const LANGUAGE="dk"; // The language ISO-code (2 digits)        
+    const LANGUAGE="dk"; // The language ISO-code (2 digits)
     const delimThou="."; // The separator for thousands (e.g. in 1,000).
     const regDelimThou="\\."; // = delimThou. "." has to be masked to "\\."!
     const regDelimThouShift="([\\d\\.])(\\d)\\.(\\d{1,2}\\D)"; // = "([\\d"+delimThou+"])(\\d)"+delimThou+"(\\d{1,2}\\D)"
@@ -47,13 +47,13 @@ try{
         // - The subject: Replace the variable information by ".+". Prefix brackets with "\".
         text[LANGUAGE]["msgSubjectMarketsale"]="xxx";
         // - The content: The text where the information is stated. The information has to be replaced by "(.+?)".
-        text[LANGUAGE]["msgContentMarketsale"]="(.+) har ved markedspladsen købt\\s*(\\d+)x (.+?) af dig<br>\\s*for(.+?) kD\\."; 
+        text[LANGUAGE]["msgContentMarketsale"]="(.+) har ved markedspladsen købt\\s*(\\d+)x (.+?) af dig<br>\\s*for(.+?) kD\\.";
         // *************
         // Take from a message sent if you sell something via contract.
         // - The subject.
         text[LANGUAGE]["msgSubjectContractsale"]="xxx";
         // - The content: The text where the general information is stated. The information has to be replaced by "(.+?)".
-        text[LANGUAGE]["msgContentContractsale"]="(.+) har underskrevet en kontrakt fra dig!<br><br>\\s*Følgende produkter blev solgt:<br>([\\S\\s]*)\\s*<br>\\s*Kontraktsummen på (.+?) kD blev indsat på din konto\\."; 
+        text[LANGUAGE]["msgContentContractsale"]="(.+) har underskrevet en kontrakt fra dig!<br><br>\\s*Følgende produkter blev solgt:<br>([\\S\\s]*)\\s*<br>\\s*Kontraktsummen på (.+?) kD blev indsat på din konto\\.";
         // - The line-pattern for the detailed selling list (equals the replaced information above).
         text[LANGUAGE]["msgContentContractsaleList"]="\\s*(\\d+)x\\s*(.+?)\\s*<br>";
         // - A contract which was sent to you was canceld before you were able to accept it
@@ -80,7 +80,7 @@ try{
         // Take the subjects from messages sent if weed occurred on your field.
         text[LANGUAGE]["msgSubjectWeed1"]="xxx";
         text[LANGUAGE]["msgSubjectWeed2"]="xxx";
-    
+
 // And all the other texts you can enter what you want ****************************************************************
         text[LANGUAGE]["above"]="above";
         text[LANGUAGE]["absolute"]="Amount required";
@@ -597,8 +597,8 @@ try{
         text[LANGUAGE]["automat_QueTimeNextReady"] = "Next is ready at:";
         text[LANGUAGE]["automat_QueTimeRound"] = "Average each turn:";
         text[LANGUAGE]["automat_QueRackMode"]="(Rack mode)";
-        text[LANGUAGE]["automat_queueshow"]="Click to edit the queue"; 
-        text[LANGUAGE]["automat_zoneXWaiting"]="Zone \"%1%\" is waiting"; 
+        text[LANGUAGE]["automat_queueshow"]="Click to edit the queue";
+        text[LANGUAGE]["automat_zoneXWaiting"]="Zone \"%1%\" is waiting";
         //For the Mill
         //%PRODNAME% = product name, %FLDFROM% = field nr from, %FLDTO% = field nr until,
         text[LANGUAGE]["automat_MillQueue"] = "Mill Queue";
@@ -715,5 +715,5 @@ window.setTimeout(function(){
         top.unsafeData.regDelimDeci=regDelimDeci;
         top.unsafeData.dateFormatDM=dateFormatDM;
         top.unsafeData.dateFormatDMY=dateFormatDMY;
-    }    
+    }
 }catch(err){ GM_log("ERROR\npage="+location.href+"\n"+err); }

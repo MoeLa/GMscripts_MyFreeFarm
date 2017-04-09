@@ -3,10 +3,10 @@
 // @namespace   https://github.com/BastianKanaan/GMscripts_MyFreeFarm
 // @author      BastianKanaan
 // @description Language pack "Polish" for MyFreeFarm Scripts
-// @date        26.11.2015
-// @version     1.0.7
+// @date        28.03.2017
+// @version     1.0.8
 // @license     GPL version 3 or any later version; http://www.gnu.org/copyleft/gpl.html
-// @include     /^http:\/\/(|www\.|s\d+\.)wolnifarmerzy.pl\/.*$/
+// @include     /^(http|https):\/\/(|www\.|s\d+\.)wolnifarmerzy.pl\/.*$/
 // @grant       GM_log
 // ==/UserScript==
 
@@ -26,7 +26,7 @@ try{
 
 // Important constants ************************************************************************************************
     const COUNTRY="PL"; // The country ISO-code (2 digits)
-    const LANGUAGE="pl"; // The language ISO-code (2 digits)        
+    const LANGUAGE="pl"; // The language ISO-code (2 digits)
     const delimThou="."; // The separator for thousands (e.g. in 1,000).
     const regDelimThou="\\."; // = delimThou. "." has to be masked to "\\."!
     const regDelimThouShift="([\\d\\.])(\\d)\\.(\\d{1,2}\\D)"; // = "([\\d"+delimThou+"])(\\d)"+delimThou+"(\\d{1,2}\\D)"
@@ -47,13 +47,13 @@ try{
         // - The subject: Replace the variable information by ".+". Prefix brackets with "\".
         text[LANGUAGE]["msgSubjectMarketsale"]="xxx";
         // - The content: The text where the information is stated. The information has to be replaced by "(.+?)".
-        text[LANGUAGE]["msgContentMarketsale"]="(.+) zakupil od Ciebie na targu\\s*(\\d+)x (.+?) za kwote\\s*<br>\\s*(.+?) ft\\."; 
+        text[LANGUAGE]["msgContentMarketsale"]="(.+) zakupil od Ciebie na targu\\s*(\\d+)x (.+?) za kwote\\s*<br>\\s*(.+?) ft\\.";
         // *************
         // Take from a message sent if you sell something via contract.
         // - The subject.
         text[LANGUAGE]["msgSubjectContractsale"]="xxx";
         // - The content: The text where the general information is stated. The information has to be replaced by "(.+?)".
-        text[LANGUAGE]["msgContentContractsale"]="(.+) podpisal wyslana mu przez Ciebie umowe!<br>\\s*<br>\\s*Sprzedales nastepujace produkty:\\s*<br>([\\S\\s]*)\\s*<br>\\s*Naleznosc za produkty w wysokosci (.+?) ft zostala przelana na Twoje konto\\."; 
+        text[LANGUAGE]["msgContentContractsale"]="(.+) podpisal wyslana mu przez Ciebie umowe!<br>\\s*<br>\\s*Sprzedales nastepujace produkty:\\s*<br>([\\S\\s]*)\\s*<br>\\s*Naleznosc za produkty w wysokosci (.+?) ft zostala przelana na Twoje konto\\.";
         // - The line-pattern for the detailed selling list (equals the replaced information above).
         text[LANGUAGE]["msgContentContractsaleList"]="\\s*(\\d+)x\\s*(.+?)\\s*<br>";
         // - A contract which was sent to you was canceld before you were able to accept it
@@ -80,14 +80,14 @@ try{
         // Take the subjects from messages sent if weed occurred on your field.
         text[LANGUAGE]["msgSubjectWeed1"]="xxx";
         text[LANGUAGE]["msgSubjectWeed2"]="xxx";
-    
+
 // And all the other texts you can enter what you want ****************************************************************
         text[LANGUAGE]["above"] = "Suma prod. powyzej";
         text[LANGUAGE]["absolute"] = "Potrzebne";
         text[LANGUAGE]["accountActive"]="Konto aktywne";
         text[LANGUAGE]["accounts"] = "Konta";
         text[LANGUAGE]["activation"] = "Aktywuje";
-        text[LANGUAGE]["additionalFarmi"] = "%1% dodatkowy klient dziennie"; 
+        text[LANGUAGE]["additionalFarmi"] = "%1% dodatkowy klient dziennie";
         text[LANGUAGE]["additionalForestFarmiSlot"] = "%1% dodatkowe miejsce w kolejce klientów lesnych";
         text[LANGUAGE]["additionalLogCapacity"] = "Zwieksza pojemnosc drewutni o %1%";
         text[LANGUAGE]["advertisingEnds"] = "Kampania reklamowa konczy sie dzis";
@@ -105,7 +105,7 @@ try{
         text[LANGUAGE]["boughtTickets"] = "Kupione losy";
         text[LANGUAGE]["buy"] = "Kupuj";
         text[LANGUAGE]["buyers"] = "Kupcy";
-        text[LANGUAGE]["calcTo"] = "Wyliczone do"; 
+        text[LANGUAGE]["calcTo"] = "Wyliczone do";
         text[LANGUAGE]["carpentry"] = "Stolarnia";
         text[LANGUAGE]["city"] = "Miasto";
         text[LANGUAGE]["change"]="Change";
@@ -123,7 +123,7 @@ try{
         text[LANGUAGE]["contractsReceived"] = "Umowy otrzymane";
         text[LANGUAGE]["contractsSent"] = "Umowy wyslane";
         text[LANGUAGE]["copyToTextFile"]="Copy this string to a text-file";
-        text[LANGUAGE]["couldNotGetRank"]="Nie mozna okreslic twojego miejsca w rankingu."; 
+        text[LANGUAGE]["couldNotGetRank"]="Nie mozna okreslic twojego miejsca w rankingu.";
         text[LANGUAGE]["couldNotGetUpdateInfoOfX"]="Nie znaleziono aktualizacji skryptu %1%"
         text[LANGUAGE]["createStorageString"]="Create storage string";
         text[LANGUAGE]["cropped"] = "Wysiewanie";
@@ -150,18 +150,18 @@ try{
         text[LANGUAGE]["exchangedLots"] = "Wymienione losy";
         text[LANGUAGE]["farm"] = "Farma";
         text[LANGUAGE]["farmersmarket"]=unsafeWindow.t_farmers_market;
-        text[LANGUAGE]["farmX"] = "%1%. farme"; 
+        text[LANGUAGE]["farmX"] = "%1%. farme";
         text[LANGUAGE]["farmi"] = "Klient";
         text[LANGUAGE]["farmis"] = "Klienci";
         text[LANGUAGE]["farmpedia"] = "Forum";
         text[LANGUAGE]["farmpediaUrl"] = "http://forum.wolnifarmerzy.pl/";
-        text[LANGUAGE]["farmzone"] = "%1% miejsce pod zabudowe na %2% farmie";  
+        text[LANGUAGE]["farmzone"] = "%1% miejsce pod zabudowe na %2% farmie";
         text[LANGUAGE]["feed"] = "Karmienie";
         text[LANGUAGE]["fields"]="Fields";
         text[LANGUAGE]["filter"] = "Filtr";
         text[LANGUAGE]["filterForX"] = "Filtrowanie po %1%";
         text[LANGUAGE]["finished"] = "Gotowe";
-        text[LANGUAGE]["foodworld"] = unsafeWindow.foodworld_title; 
+        text[LANGUAGE]["foodworld"] = unsafeWindow.foodworld_title;
         text[LANGUAGE]["forest"] = "Las";
         text[LANGUAGE]["forestry"] = "Lesnictwo";
         text[LANGUAGE]["formatNumbers"] = "Format liczb";
@@ -261,7 +261,7 @@ try{
         text[LANGUAGE]["production"] = "Produkcja";
         text[LANGUAGE]["productOverview"] = "Przeglad produktów";
         text[LANGUAGE]["products"] = "Produkty";
-        text[LANGUAGE]["productTimeSaving"] = "%1% minut oszczednosci dla %2%";  
+        text[LANGUAGE]["productTimeSaving"] = "%1% minut oszczednosci dla %2%";
         text[LANGUAGE]["profit"] = "Zysk";
         text[LANGUAGE]["profitTable"] = "Kalkulacja zysków dziennych";
         text[LANGUAGE]["quantity"] = "Ilosc";
@@ -269,7 +269,7 @@ try{
         text[LANGUAGE]["quest_forestry"]="Quest Lesny";
         text[LANGUAGE]["quest_main"]="Quest farmy";
         text[LANGUAGE]["quest_veterinary"]="Veterinary quest series";
-        text[LANGUAGE]["questfoodworld1"]="Questy piknikowe";     
+        text[LANGUAGE]["questfoodworld1"]="Questy piknikowe";
         text[LANGUAGE]["questforestry1"]="Questy I (lesne)";
         text[LANGUAGE]["questforestry2"]="Questy II (lesne)";
         text[LANGUAGE]["questmain1"]="Questy I (farma)";
@@ -392,12 +392,12 @@ try{
         text[LANGUAGE]["category_r2"]="Przepisy - dajace punkty";
         text[LANGUAGE]["category_p0"]="Power-Ups - produkty";
         text[LANGUAGE]["category_p1"]="Power-Ups - zwiekszajace wydajnosc";
-        text[LANGUAGE]["category_p2"]="Power-Ups - dajace punkty";  
+        text[LANGUAGE]["category_p2"]="Power-Ups - dajace punkty";
         // settings
         text[LANGUAGE]["settings_valAutoWater"]=["Automatyczne podlewanie", "Rosliny beda automatycznie podlewane (jesli masz konto Premium)."];
         text[LANGUAGE]["settings_valAssumeWater"]=["Kontynuuj podlewanie", "Jest to wazne dla roslin rosnacych dluzej niz 24h. Na podstawie przewidywanego czasu zbioru jesli podlewanie jest mozliwe, to jest kontynuowane."];
         text[LANGUAGE]["settings_valAutoCrop"]=["Automatyczne zbiory", "Po wejsciu na pole wszystkie plony zostana automatycznie zebrane."];
-        text[LANGUAGE]["settings_valWaterNeeded"]=["Info o podlewaniu","Czy ma byc wyswietlana ikona informujaca o niepodlanym polu?"];        
+        text[LANGUAGE]["settings_valWaterNeeded"]=["Info o podlewaniu","Czy ma byc wyswietlana ikona informujaca o niepodlanym polu?"];
         text[LANGUAGE]["settings_valCropMsg"]=["Autozamykanie zbiorów", "Zaznacz jesli denerwuje cie wyskakujaca plansza z iloscia zebranych plonów."];
         text[LANGUAGE]["settings_valLimitEmptyFields"]=["Puste miejsca", "Jesli ilosc pustych miejsc przekroczy ta wartosc, to pole bedzie oznaczone jako puste."];
         text[LANGUAGE]["settings_valLimitEmptyFields_forest"]=["Puste miejsca w lesie", "Jesli ilosc pustych miejsc przekroczy ta wartosc, to pole bedzie oznaczone jako puste."];
@@ -409,7 +409,7 @@ try{
         text[LANGUAGE]["settings_valMinRack"]=[, " Produkt jest oznaczany, jesli jego ilosc w regale spadnie ponizej tego poziomu. Mozesz ustalic rózne wartosci zaleznie od kategorii."];
         text[LANGUAGE]["settings_valMinRackPlantsize"]=["Uwzglednij rozmiar sadzonki", "Przykladowo zboze potrzebuje tylko polowe powyzszej wartosci."];
         text[LANGUAGE]["settings_valMinRackGrowing"]=["Produkcja w toku", "Uwzglednia ilosc produktów bedacych w trakcie produkcji/wzrostu i gotowych przez bonusy."];
-        text[LANGUAGE]["settings_valMinRackQuest"]=["Produkty do Questów","Uwzglednia ilosc potrzebna do wykonania Questa."];   
+        text[LANGUAGE]["settings_valMinRackQuest"]=["Produkty do Questów","Uwzglednia ilosc potrzebna do wykonania Questa."];
         text[LANGUAGE]["settings_valMinRackRecursive"]=["Produkty rekurencyjnie", "Dodaj produkty wymagane do produkcji brakujacych towarów i przelicz ponownie dla takiego stanu (uzyteczne przy produkcji lesnej)"];
         text[LANGUAGE]["settings_valMinRackFarmis"]=["Produkty klientów", "Dodaje ilosc produktów potrzebnych dla klientów, którzy placa wiecej niz ustalone minimum."]
         text[LANGUAGE]["settings_valMinRackForestryFarmis"]=["Produkty klientów Lasu", "Dodaje ilosc produktów potrzebnych dla klientów Lasu."];
@@ -426,7 +426,7 @@ try{
         text[LANGUAGE]["settings_valMarketMessages"]=["Ilosc zachowanych rynkowych wiadomosci", "Zaznacz ile wiadomosci ma byc przechowywanych, nawet jesli sa starsze niz maksymalnie 7 dni."];
         text[LANGUAGE]["settings_valMessageRe"]=["Skrót tematu", "Zamienia \"Re:Re:\" na \"Re:\" w temacie wiadomosci, gdy na nia odpowiadasz."];
       text[LANGUAGE]["settings_valMessagesSystemMarkRead"]=["Auto odczyt wiadomosci","Automatycznie odczytywanie wiadomosci systemowych."];
-      text[LANGUAGE]["settings_valFoodworldFarmiPlacing"]=["Obsluga klientów strefy pikniku","Klienci stefy pikniku beda automatycznie umieszczani na wolnych miejscach."]; 
+      text[LANGUAGE]["settings_valFoodworldFarmiPlacing"]=["Obsluga klientów strefy pikniku","Klienci stefy pikniku beda automatycznie umieszczani na wolnych miejscach."];
         text[LANGUAGE]["settings_valAutoLogin"]=["Automatyczne logowanie", "Po wprowadzeniu nazwy uzytkownika i hasla nastepuje automatyczne logowanie. Pozwala to zachowac ciaglosc grania. Przy wielu kontach musi byc dozwolone wyskakiwanie okienek."];
         text[LANGUAGE]["settings_valUpdate"]=["Aktualizacja", "Automatycznie sprawdza czy jest nowsza wersja tego skryptu."];
         text[LANGUAGE]["settings_valServerTimeOffset"]=["Czas serwera", ""];
@@ -535,7 +535,7 @@ try{
         text[LANGUAGE]["automat_settings_farmiReject"] =  "Odrzucaj klientów ponizej :";
         text[LANGUAGE]["automat_settings_farmiAccept"] = "Akceptuj klientów powyzej:";
         text[LANGUAGE]["automat_settings_farmiAcceptBelowMinValue"] = "Akceptuj klientów, których obsluga spowoduje spadek towaru w Regale ponizej minimum.";
-        text[LANGUAGE]["automat_settings_farmiRemoveMissing"] = "Usuwaj klientów dla których brakuje towaru i z najnizsza wydajnoscia. Próg:";  
+        text[LANGUAGE]["automat_settings_farmiRemoveMissing"] = "Usuwaj klientów dla których brakuje towaru i z najnizsza wydajnoscia. Próg:";
         text[LANGUAGE]["automat_fields"] = "Pola";
         text[LANGUAGE]["automat_titleGeneral"] = "Lista glówna";;
         text[LANGUAGE]["automat_titleQueue"] = "Lista";
@@ -598,13 +598,13 @@ try{
         text[LANGUAGE]["automat_QueTimeRound"] =  "Srednio na ture:";
         text[LANGUAGE]["automat_QueRackMode"]="(Tryb regalu)"
         text[LANGUAGE]["automat_queueshow"]="Kliknij aby edytowac kolejke";
-        text[LANGUAGE]["automat_zoneXWaiting"]="Zone \"%1%\" is waiting"; 
+        text[LANGUAGE]["automat_zoneXWaiting"]="Zone \"%1%\" is waiting";
         //For the Mill
         //%PRODNAME% = product name, %FLDFROM% = field nr from, %FLDTO% = field nr until,
         text[LANGUAGE]["automat_MillQueue"] =  "Lista Mlyna";
         text[LANGUAGE]["automat_MillDoWork"] ="Mlyn jest obslugiwany automatycznie.";
         text[LANGUAGE]["automat_MillDontWork"] = "Mlyn jest pomijany. Wymagana obsluga reczna";
-        text[LANGUAGE]["automat_MillClearAddAll"] ="Wyczysc liste mlyna i dodaj ponownie wszystkie przepisy";     
+        text[LANGUAGE]["automat_MillClearAddAll"] ="Wyczysc liste mlyna i dodaj ponownie wszystkie przepisy";
         text[LANGUAGE]["automat_MillShuffle"] = "(Tryb losowy)";
         text[LANGUAGE]["automat_MillInRow1"] = "(Nr. %FLDFROM%)";
         text[LANGUAGE]["automat_MillInRowX"] = "(Nr. %FLDFROM% do %FLDTO%)";
@@ -649,11 +649,11 @@ try{
         text[LANGUAGE]["automat_title_off_forestry"] = "Pokaz tylko las<br>+Ctrl: Schowaj las";
         text[LANGUAGE]["automat_title_on_foodworld"] = "Pokaz tylko piknik<br>+Ctrl: Pokaz piknik";
         text[LANGUAGE]["automat_title_off_foodworld"] = "Pokaz tylko piknik<br>+Ctrl: Schowaj piknik";
-        text[LANGUAGE]["automat_title_on_type1"] ="Pokaz tylko pola<br>+Ctrl: Pokaz pola";  
-        text[LANGUAGE]["automat_title_off_type1"] = "Pokaz tylko pola<br>+Ctrl: Schowaj pola";  
-        text[LANGUAGE]["automat_title_on_type2"] = "Pokaz tylko zagrody<br>+Ctrl: Pokaz zagrody";  
-        text[LANGUAGE]["automat_title_off_type2"] = "Pokaz tylko zagrody<br>+Ctrl: Schowaj zagrody";  
-        text[LANGUAGE]["automat_title_on_type3"] = "Pokaz tylko wytwórnie<br>+Ctrl: Pokaz wytwórnie";   
+        text[LANGUAGE]["automat_title_on_type1"] ="Pokaz tylko pola<br>+Ctrl: Pokaz pola";
+        text[LANGUAGE]["automat_title_off_type1"] = "Pokaz tylko pola<br>+Ctrl: Schowaj pola";
+        text[LANGUAGE]["automat_title_on_type2"] = "Pokaz tylko zagrody<br>+Ctrl: Pokaz zagrody";
+        text[LANGUAGE]["automat_title_off_type2"] = "Pokaz tylko zagrody<br>+Ctrl: Schowaj zagrody";
+        text[LANGUAGE]["automat_title_on_type3"] = "Pokaz tylko wytwórnie<br>+Ctrl: Pokaz wytwórnie";
         text[LANGUAGE]["automat_title_off_type3"] = "Pokaz tylko wytwórnie<br>+Ctrl: Schowaj wytwórnie";
         text[LANGUAGE]["automat_title_on_all"] ="Pokaz listy dla wszystkich farm";
         text[LANGUAGE]["automat_title_off_all"] =  "Ukryj listy dla wszystkich farm";
@@ -702,7 +702,7 @@ window.setTimeout(function(){
     compareObjectsExistance(texte,top.unsafeData.texte);
     GM_log("END COMPARING");
 },1000);
-*/  
+*/
     if(undefined===top.unsafeData.COUNTRY){
         top.unsafeData.LANGUAGE=LANGUAGE;
         top.unsafeData.COUNTRY=COUNTRY;
@@ -714,5 +714,5 @@ window.setTimeout(function(){
         top.unsafeData.regDelimDeci=regDelimDeci;
         top.unsafeData.dateFormatDM=dateFormatDM;
         top.unsafeData.dateFormatDMY=dateFormatDMY;
-    }    
+    }
 }catch(err){ GM_log("ERROR\npage="+location.href+"\n"+err); }
