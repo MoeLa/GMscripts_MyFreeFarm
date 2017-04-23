@@ -364,10 +364,15 @@ try{
 }catch(err){ GM_logError("unsafeOverwriteFunction","fooName="+fooName,"",err); }
 };
 
-function unsafeOverwriteObjFunction(fooObj,fooName,newFoo) {
+function unsafeOverwriteObjFunction(fooObj,fooName,newFoo,optional) {
 try{
     if(!unsafeWindow[fooObj][fooName]){
-        GM_logWarning("unsafeOverwriteObjFunction","fooObj"+fooObj+" fooName="+fooName,"","Function does not exist.");
+        if (optional) {
+            // If function doesn't exist and is optional, everything's ok
+            return;
+        } else {
+            GM_logWarning("unsafeOverwriteObjFunction","fooObj"+fooObj+" fooName="+fooName,"","Function does not exist.");
+        }
     }
     if(typeof exportFunction=="function"){
         exportFunction(newFoo, unsafeWindow[fooObj],{"defineAs":"unsafe_"+fooName});
