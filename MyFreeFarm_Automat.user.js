@@ -4,8 +4,8 @@
 // @author         BastianKanaan
 // @description    Extends MyFreeFarm
 // @icon           data:image/png;base64,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
-// @date            30.03.2017
-// @version         2.9.48
+// @date            25.04.2017
+// @version         2.9.49
 // @license         GPL version 3 or any later version; http://www.gnu.org/copyleft/gpl.html
 // @include         /^(http|https):\/\/(|www\.|s\d+\.)au\.myfreefarm\.com\/.*$/
 // @include         /^(http|https):\/\/(|www\.|s\d+\.)veselaferma\.com\/.*$/
@@ -54,7 +54,7 @@
 // ==/UserScript==
 
 const VERSION=GM_info["script"]["version"];
-const neededVersionBerater="2.10.46";
+const neededVersionBerater="2.10.63";
 const neededVersionFunctionFile="2.1.11";
 const GM_Home  =GM_info["script"]["namespace"];
 const GM_Source=GM_info["script"]["namespace"];
@@ -138,6 +138,7 @@ const CHANGELOG=[["2.0","29.05.2014",[["Migration nach openuserjs.org","Migratio
                 ,["2.09.46","28.03.2017",[["Bugfix Login, ","Bugfix Login"]]]
                 ,["2.09.47","28.03.2017",[["Bugfix II Login, ","Bugfix II Login"]]]
                 ,["2.09.48","30.03.2017",[["Teeverfeinerung, ","Tea factory"]]]
+                ,["2.09.49","25.04.2017",[["Monsterfruchtaufzucht","megafruit farm"]]]
             ];
 
 if(!VERSIONfunctionFile){
@@ -1630,6 +1631,7 @@ try {
             automatIcons[name][1]=createElement("div",{"id":"divAutomatIcon_"+name,"class":"link divFoodworldIcon","product":PRODSTOP,"zoneNrS":zoneNrS,"style":style},appendTo);
         break;
         case 5: // Pony is fine with standard PRODSTOP icon
+        case 7: //monster fruit culture
         default:
             automatIcons[name][1]=createElement("div",{"id":"divAutomatIcon_"+name,"class":"link divZoneIcon v"+PRODSTOP,"product":PRODSTOP,"zoneNrS":zoneNrS,"style":style},appendTo);
         }
@@ -1673,13 +1675,22 @@ try {
             case 6: //Fuelstation
                 drawFuelstationChooseItemBox(zoneNrS, zoneNrL,$("divChooseBoxInner"));
             break;
+            case 7: //monster fruit culture
+                drawMonsterfruitChooseItemBox(zoneNrS, zoneNrL,$("divChooseBoxInner"));
+            break;
             default:
                 throw("Building type '"+getBuildingTyp(zoneNrS)+"' unknown.");
             }
             zoneNrF=null;zoneNrS=null;zoneNrL=null;
         }catch(err){GM_logError("automatIcon.click","$('"+this.id+"') zoneNrF="+zoneNrF+" zoneNrS="+zoneNrS+" zoneNrL="+zoneNrL,"",err);}
         },false);
-        if(!(zoneNrS=="farmersmarket-4.5"||zoneNrS=="farmersmarket-4.6"||zoneNrS=="farmersmarket-4.7")) {
+        if (zoneNrS=="farmersmarket-3.1"||zoneNrS=="farmersmarket-3.2"||zoneNrS=="farmersmarket-3.3"){
+            automatIcons[name][1].addEventListener("mouseover", function(event){
+                var newnode = top.document.getElementById('megafruit_need_item'+1+'_tt').cloneNode(true);
+                newnode.removeChild(newnode.lastElementChild);
+                toolTip.show(event, newnode.innerHTML);
+            },false);
+        } else if(!(zoneNrS=="farmersmarket-4.5"||zoneNrS=="farmersmarket-4.6"||zoneNrS=="farmersmarket-4.7")) {
             //toolTip von  farmersmarket-4 slot 5 bis 7 ausblenden
             automatIcons[name][1].addEventListener("mouseover", function(event){
                 toolTip.show(event, toolTipProductSmall(this.getAttribute("zoneNrS"),this.getAttribute("zoneNrL"),0,this));
@@ -2534,6 +2545,71 @@ function drawFuelstationChooseItemBox(zoneNrS, zoneNrL, appendTo){
     }
 }
 
+//monster fruit culture
+function drawMonsterfruitChooseItemBox(zoneNrS, zoneNrL, appendTo){
+    try{
+        // GM_log("Begin drawMonsterfruitChooseItemBox :" + zoneNrS+":"+zoneNrL);
+        var zoneNrF=zoneNrS.toString().replace(/\.\d+$/,"");
+        if(zoneNrL===undefined || zoneNrL==null){ zoneNrL=getZoneListId(zoneNrS); }
+        appendTo.innerHTML="";
+        appendTo.setAttribute("zoneNrF",zoneNrF);
+        appendTo.setAttribute("zoneNrS",zoneNrS);
+        appendTo.setAttribute("zoneNrL",zoneNrL);
+        appendTo.setAttribute("queueNum",0);
+        createElement("div",{"id":"divChooseTitle"+zoneNrL,"class":"queueTitle"},appendTo, getZoneName(0,zoneNrS,zoneNrL,null,20,true,true,true));
+        createElement("div",{"id":"divChooseEndTime"+zoneNrL,"class":"queueTime"},appendTo);
+        createElement("div",{"style":"clear:both;"},appendTo);
+        newdiv=createElement("div",{"class":"divChooseItem link v"+PRODSTOP,"id":"divChooseItem"+zoneNrL+"Q0I"+PRODSTOP},appendTo);
+        if(zoneList[zoneNrL][0][0]==PRODSTOP){ newdiv.style.border="2px solid black"; }
+        newdiv.addEventListener("click",function(){
+            var zoneNrF=this.parentNode.getAttribute("zoneNrF");
+            var zoneNrL=this.parentNode.getAttribute("zoneNrL");
+            zoneList[zoneNrL]=DEFAULT_ZONELIST_ITEM_ARRAY.clone();
+            if(this.parentNode==$("divChooseBoxInner")){ click($("divChooseBoxClose")); }
+            updateQueueBox(zoneNrF, zoneNrL);
+        },false);
+        newdiv.addEventListener("mouseover", function(event){
+            var zoneNrF=this.parentNode.getAttribute("zoneNrF");
+            var zoneNrL=this.parentNode.getAttribute("zoneNrL");
+            toolTip.show(event, toolTipProductSmall(zoneNrF, zoneNrL, 0, this));
+        },false);
+
+        var item = unsafeWindow.farmersmarket_data.megafruit;
+        var zoneNrF_h=zoneNrS.split("."); //zoneNrF_h[0]=Zone, zoneNrF_h[1]=Slot
+
+        for (var i=1;i<item.objects[Object.keys(item.objects)[zoneNrF_h[1]-1]].length;i++){
+//if (    (item.objects[Object.keys(item.objects)[zoneNrF_h[1]-1]][i-1].level<=item.level+20))
+            if (   !(item.objects[Object.keys(item.objects)[zoneNrF_h[1]-1]][i-1].hasOwnProperty("buyable"))
+                && (item.objects[Object.keys(item.objects)[zoneNrF_h[1]-1]][i-1].level<=item.level)) {
+                    var newdiv1=createElement("div",{"style":"float:left;width:30px; height:30px;padding-right:10px;"},appendTo);
+                    newdiv=createElement("div",{"class":"divChooseItem divZoneMonsterFruitCultureIcon link megafruit_need_item megafruit_need_item"+item.objects[Object.keys(item.objects)[zoneNrF_h[1]-1]][i-1].oid,"id":"megafruit_need_item"+item.objects[Object.keys(item.objects)[zoneNrF_h[1]-1]][i-1].oid+"divChooseItem"+zoneNrL+"Q0I"+item.objects[Object.keys(item.objects)[zoneNrF_h[1]-1]][i-1].oid},newdiv1);
+                    newdiv.addEventListener("click",function(){
+                        var zoneNrF=this.parentNode.parentNode.getAttribute("zoneNrF");
+                        var zoneNrL=this.parentNode.parentNode.getAttribute("zoneNrL");
+                        zoneList[zoneNrL]=DEFAULT_ZONELIST_ITEM_ARRAY.clone();
+                        zoneList[zoneNrL][0][0]=parseInt(/Q0I(.*)$/.exec(this.id)[1],10);
+                        if(this.parentNode.parentNode==$("divChooseBoxInner")){ click($("divChooseBoxClose")); }
+                        updateQueueBox(zoneNrF, zoneNrL);
+                    },false);
+                    newdiv.addEventListener("mouseover", function(event){
+                        var newnode = top.document.getElementById('megafruit_need_item'+parseInt(/Q0I(.*)$/.exec(this.id)[1],10)+'_tt').cloneNode(true);
+                        newnode.removeChild(newnode.lastElementChild);
+                        toolTip.show(event, newnode.innerHTML);
+                    },false);
+            }
+        }
+        if(appendTo==$("divChooseBoxInner")){
+            $("divChooseBox").style.display="block";
+            $("divChooseBox").style.top=Math.round(255 - $("divChooseBox").offsetHeight/2)+"px";
+        }
+        updateQueueBox(zoneNrF, zoneNrL);
+        zoneFeedCurr=null;zoneProdCurr=null;
+        newdiv=null;appendTo=null;
+    }catch(err){
+        GM_logError("drawMonsterfruitChooseItemBox","zoneNrS="+zoneNrS+" zoneNrF="+zoneNrF,"",err);
+    }
+}
+
 function drawStableChooseFeedBox(zoneNrF, zoneNrL, appendTo){
 try{
     // GM_log("Begin drawStableChooseFeedBox zoneNrF:" + zoneNrF + " zoneNrL:"+zoneNrL);
@@ -3175,6 +3251,13 @@ try{
             case 6: //Fuelstation
                 automatIcons[i][1].setAttribute("class","link divZoneIcon v"+zoneList[zoneNrL][0][0]);
             break;
+            case 7: //monster fruit culture
+                if (zoneList[zoneNrL][0][0] == PRODSTOP) {
+                    automatIcons[i][1].setAttribute("class","link divZoneIcon v"+zoneList[zoneNrL][0][0]);
+                } else {
+                    automatIcons[i][1].setAttribute("class","link divZoneAutoMonsterFruitCultureIcon divZoneIcon megafruit_need_item megafruit_need_item"+zoneList[zoneNrL][0][0]);
+                }
+            break;
             }
             automatIcons[i][1].setAttribute("product",zoneList[zoneNrL][0][0]);
             automatIcons[i][1].setAttribute("zoneBeginTime",implode(zoneTimes,"updateQueueBox/zoneTimes"));
@@ -3574,6 +3657,8 @@ try{
             }
             zoneFeedCurr=null;zoneProdCurr=null;
         break;}
+        case 5: { // Pony - No queue mode support
+        break;}
         case 6:{ // Fuelstation
             $("divChooseItem"+zoneNrL+"Q"+queueNum+"I"+PRODSTOP).style.border=((zoneList[zoneNrL][queueNum][0]==PRODSTOP)?"2px solid black":"");
             if(settings.get("account","showQueueTime"))  {
@@ -3589,7 +3674,7 @@ try{
             }
             zoneFeedCurr=null;zoneProdCurr=null;
         break;}
-        case 5: { // Pony - No queue mode support
+        case 7: { // monster fruit culture  - No queue mode support
         break;}
         case "windmill":{ // (fzWindmill)
             if(settings.get("account","showQueueTime")){
@@ -5046,31 +5131,9 @@ function autoFarm(runId){
                                 break;
                                 case 3:{
                                     switch(getZoneType(handled.zoneNrF)){
-                                    case 13: case 14:{
-                                        //document.addEventListener("gameOpenFactoryOil",function(runId){
+                                    case 13: case 14: case 16: case 21:{
                                         document.addEventListener("gameOpenFactoryOilKnittingTea",function(runId){
                                         return function(){
-                                            //document.removeEventListener("gameOpenFactoryOil",arguments.callee,false);
-                                            document.removeEventListener("gameOpenFactoryOilKnittingTea",arguments.callee,false);
-                                            window.setTimeout(autoFarmFactoryOilKnittingTea,settings.getPause(),runId,1);
-                                        }
-                                        }(runId),false);
-                                    break;}
-                                    case 16:{
-                                        //document.addEventListener("gameOpenFactoryKnitting",function(runId){
-                                        document.addEventListener("gameOpenFactoryOilKnittingTea",function(runId){
-                                        return function(){
-                                            //document.removeEventListener("gameOpenFactoryKnitting",arguments.callee,false);
-                                            document.removeEventListener("gameOpenFactoryOilKnittingTea",arguments.callee,false);
-                                            window.setTimeout(autoFarmFactoryOilKnittingTea,settings.getPause(),runId,1);
-                                        }
-                                        }(runId),false);
-                                    break;}
-                                    case 21:{
-                                        //document.addEventListener("gameOpenFactoryKnitting",function(runId){
-                                        document.addEventListener("gameOpenFactoryOilKnittingTea",function(runId){
-                                        return function(){
-                                            //document.removeEventListener("gameOpenFactoryKnitting",arguments.callee,false);
                                             document.removeEventListener("gameOpenFactoryOilKnittingTea",arguments.callee,false);
                                             window.setTimeout(autoFarmFactoryOilKnittingTea,settings.getPause(),runId,1);
                                         }
@@ -6021,123 +6084,7 @@ function autoFarmPony(runId,step){
     }
     }catch(err){ GM_logError("autoFarmPony","runId="+runId+" step="+step,"",err); }
 }
-/*
-function autoFarmFactoryOil(runId,step){
-    try{
-    if(!step){ step=1; }
-    if(bot.checkRun("autoFarmFactoryOil",runId)){
-        bot.setAction("autoFarmFactoryOil ("+step+")");
-        var action=null,listeningEvent=null;
-        switch(step){
-        case 1:{ // init
-            // TODO check required products earlier (recalcQueue)
-            if(unsafeData.zones.getBlock(handled.zoneNrS)){
-                zoneList[handled.zoneNrL].unshift(DEFAULT_ZONELIST_ITEM.clone());
-                updateQueueBox(handled.zoneNrS);
-                autoFarmFactoryOil(runId,5);
-            }else{
-                if(zoneList[handled.zoneNrL][0][0]!=PRODSTOP){
-                    var req=unsafeData.BUILDING_INPUT[getZoneType(handled.zoneNrS)][zoneList[handled.zoneNrL][0][0]][0];
-                    for(var i=0;i<req.length;i++){
-                        if(unsafeData.prodStock[0][req[i][0]]<req[i][1]){
-                            zoneList[handled.zoneNrL].unshift(DEFAULT_ZONELIST_ITEM.clone());
-                            updateQueueBox(handled.zoneNrS);
-                        }
-                    }
-                }
-                if(unsafeData.zones.getEndtime(handled.zoneNrS)==NEVER){ // empty
-                    window.setTimeout(autoFarmFactoryOil,settings.getPause(),runId,3);
-                }else if(unsafeData.zones.getEndtime(handled.zoneNrS)<=unsafeWindow.Zeit.Server){ // cropable
-                    window.setTimeout(autoFarmFactoryOil,settings.getPause(),runId,step+1);
-                }else{ // busy
-                    window.setTimeout(autoFarmFactoryOil,settings.getPause(),runId,5);
-                }
-            }
-        break;}
-        case 2:{ // crop
-            var div=$("production_slot"+handled.farmNr+"_"+handled.zoneNr+"_"+handled.slot);
-            if(div){
-                listeningEvent="gameFactoryOilCropped";
-                action=function(){
-                    unsafeData.readyZone[handled.zoneNrS][2]=false;
-                    click(div);
-                    div=null;
-                };
-            }else{
-                autoFarmFactoryOil(runId,5);
-            }
-        break;}
-        case 3:{ // open slot
-            if(!unsafeData.readyZone[handled.zoneNrS]){
-                autoFarmFactoryOil(runId,5);
-            }else if((unsafeData.readyZone[handled.zoneNrS][1]!="e")||!unsafeData.readyZone[handled.zoneNrS][2]){
-                // wait for response
-                window.setTimeout(autoFarmFactoryOil,settings.getPause(),runId,step);
-            } else if(zoneList[handled.zoneNrL][0][0]==PRODSTOP){
-                autoFarmFactoryOil(runId,5);
-            }else if(!$("production_slot"+handled.farmNr+"_"+handled.zoneNr+"_"+handled.slot).onclick.toString().match(/factory\.selection/)){
-                GM_logWarning("autoFarmFactoryOil","runId="+runId+" step="+step,"","LOGIC ERROR: onclick="+$("production_slot"+handled.farmNr+"_"+handled.zoneNr+"_"+handled.slot).onclick);
-                autoFarmFactoryOil(runId,5);
-            }else{
-                listeningEvent="gameOpenGlobalCommitBox";
-                action=function(){
-                    click($("production_slot"+handled.farmNr+"_"+handled.zoneNr+"_"+handled.slot));
-                };
-            }
-        break;}
-        case 4:{ // select production
-            var div = $("globalbox");
-            if (div && (div.style.display == "block")) {
-                div = div.querySelector(".tt" + zoneList[handled.zoneNrL][0][0]);
-                if (div) {
-                    listeningEvent = "gameFactory_start_"+handled.farmNr+"_"+handled.zoneNr;
-                    action = function() {
-                        click(div.parentNode);
-                        setNextQueueItem(handled.zoneNrS);
-                        div = null;
-                    };
-                } else {
-                    window.setTimeout(autoFarmFactoryOil, settings.getPause(), runId, step);
-                }
-            } else {
-                window.setTimeout(autoFarmFactoryOil, settings.getPause(), runId, step);
-            }
-        break;}
-        case 5:{ // start other slot or exit
-            var zoneNrS, zoneNrL, help, next = false;
-            for (var slot = 1; slot <= 3; slot++) {
-                zoneNrS = handled.zoneNrF + "." + slot;
-                if ((help = unsafeData.readyZone[zoneNrS]) && help[2]) {
-                    zoneNrL = getZoneListId(zoneNrS);
-                    if (((help[1] == "r") && ((zoneList[zoneNrL][0][0] != PRODSTOP) || !settings.get("account", "disableCropFields"))) || ((help[1] == "e") && (zoneList[zoneNrL][0][0] != PRODSTOP))) {
-                        next = true;
-                        handled.set(zoneNrS);
-                        break;
-                    }
-                }
-            }
-            if (next) {
-                autoFarmFactoryOil(runId, 1);
-            } else {
-                autoZoneFinish(runId, $("cancelscreen"));
-            }
-        break;}
-        }
-        if(listeningEvent){
-            document.addEventListener(listeningEvent,function(listeningEvent,runId,step){
-                return function(){
-                    document.removeEventListener(listeningEvent,arguments.callee,false);
-                    window.setTimeout(autoFarmFactoryOil,settings.getPause(),runId,step+1);
-                };
-            }(listeningEvent,runId,step),false);
-        }
-        if(action){ action(); }
-        listeningEvent=null;action=null;
-    }
-    }catch(err){ GM_logError("autoFarmFactoryOil","runId="+runId+" step="+step,"",err); }
-}*/
 
-//document.removeEventListener("gameOpenFactoryOilKnittingTea",arguments.callee,false);
 function autoFarmFactoryOilKnittingTea(runId,step){
     try{
     if(!step){ step=1; }
@@ -6254,122 +6201,6 @@ function autoFarmFactoryOilKnittingTea(runId,step){
     }catch(err){ GM_logError("autoFarmFactoryOilKnittingTea","runId="+runId+" step="+step,"",err); }
 }
 
-/*
-function autoFarmFactoryKnitting(runId,step){
-    try{
-    if(!step){ step=1; }
-    if(bot.checkRun("autoFarmFactoryKnitting",runId)){
-        bot.setAction("autoFarmFactoryKnitting ("+step+")");
-        var action=null,listeningEvent=null;
-        switch(step){
-        case 1:{ // init
-            // TODO check required products earlier (recalcQueue)
-            if(unsafeData.zones.getBlock(handled.zoneNrS)){
-                zoneList[handled.zoneNrL].unshift(DEFAULT_ZONELIST_ITEM.clone());
-                updateQueueBox(handled.zoneNrS);
-                autoFarmFactoryKnitting(runId,5);
-            }else{
-                if(zoneList[handled.zoneNrL][0][0]!=PRODSTOP){
-                    var req=unsafeData.BUILDING_INPUT[getZoneType(handled.zoneNrS)][zoneList[handled.zoneNrL][0][0]][0];
-                    for(var i=0;i<req.length;i++){
-                        if(unsafeData.prodStock[0][req[i][0]]<req[i][1]){
-                            zoneList[handled.zoneNrL].unshift(DEFAULT_ZONELIST_ITEM.clone());
-                            updateQueueBox(handled.zoneNrS);
-                        }
-                    }
-                }
-                if(unsafeData.zones.getEndtime(handled.zoneNrS)==NEVER){ // empty
-                    window.setTimeout(autoFarmFactoryKnitting,settings.getPause(),runId,3);
-                }else if(unsafeData.zones.getEndtime(handled.zoneNrS)<=unsafeWindow.Zeit.Server){ // cropable
-                    window.setTimeout(autoFarmFactoryKnitting,settings.getPause(),runId,step+1);
-                }else{ // busy
-                    window.setTimeout(autoFarmFactoryKnitting,settings.getPause(),runId,5);
-                }
-            }
-        break;}
-        case 2:{ // crop
-            var div=$("production_slot"+handled.farmNr+"_"+handled.zoneNr+"_"+handled.slot);
-            if(div){
-                listeningEvent="gameFactoryKnittingCropped";
-                action=function(){
-                    unsafeData.readyZone[handled.zoneNrS][2]=false;
-                    click(div);
-                    div=null;
-                };
-            }else{
-                autoFarmFactoryKnitting(runId,5);
-            }
-        break;}
-        case 3:{ // open slot
-            if(!unsafeData.readyZone[handled.zoneNrS]){
-                autoFarmFactoryKnitting(runId,5);
-            }else if((unsafeData.readyZone[handled.zoneNrS][1]!="e")||!unsafeData.readyZone[handled.zoneNrS][2]){
-                // wait for response
-                window.setTimeout(autoFarmFactoryKnitting,settings.getPause(),runId,step);
-            } else if(zoneList[handled.zoneNrL][0][0]==PRODSTOP){
-                autoFarmFactoryKnitting(runId,5);
-            }else if(!$("production_slot"+handled.farmNr+"_"+handled.zoneNr+"_"+handled.slot).onclick.toString().match(/factory\.selection/)){
-                GM_logWarning("autoFarmFactoryKnitting","runId="+runId+" step="+step,"","LOGIC ERROR: onclick="+$("production_slot"+handled.farmNr+"_"+handled.zoneNr+"_"+handled.slot).onclick);
-                autoFarmFactoryKnitting(runId,5);
-            }else{
-                listeningEvent="gameOpenGlobalCommitBox";
-                action=function(){
-                    click($("production_slot"+handled.farmNr+"_"+handled.zoneNr+"_"+handled.slot));
-                };
-            }
-        break;}
-        case 4:{ // select production
-            var div = $("globalbox");
-            if (div && (div.style.display == "block")) {
-                div = div.querySelector(".tt" + zoneList[handled.zoneNrL][0][0]);
-                if (div) {
-                    listeningEvent = "gameFactory_start_"+handled.farmNr+"_"+handled.zoneNr;
-                    action = function() {
-                        click(div.parentNode);
-                        setNextQueueItem(handled.zoneNrS);
-                        div = null;
-                    };
-                } else {
-                    window.setTimeout(autoFarmFactoryKnitting, settings.getPause(), runId, step);
-                }
-            } else {
-                window.setTimeout(autoFarmFactoryKnitting, settings.getPause(), runId, step);
-            }
-        break;}
-        case 5:{ // start other slot or exit
-            var zoneNrS, zoneNrL, help, next = false;
-            for (var slot = 1; slot <= 3; slot++) {
-                zoneNrS = handled.zoneNrF + "." + slot;
-                if ((help = unsafeData.readyZone[zoneNrS]) && help[2]) {
-                    zoneNrL = getZoneListId(zoneNrS);
-                    if (((help[1] == "r") && ((zoneList[zoneNrL][0][0] != PRODSTOP) || !settings.get("account", "disableCropFields"))) || ((help[1] == "e") && (zoneList[zoneNrL][0][0] != PRODSTOP))) {
-                        next = true;
-                        handled.set(zoneNrS);
-                        break;
-                    }
-                }
-            }
-            if (next) {
-                autoFarmFactoryKnitting(runId, 1);
-            } else {
-                autoZoneFinish(runId, $("cancelscreen"));
-            }
-        break;}
-        }
-        if(listeningEvent){
-            document.addEventListener(listeningEvent,function(listeningEvent,runId,step){
-                return function(){
-                    document.removeEventListener(listeningEvent,arguments.callee,false);
-                    window.setTimeout(autoFarmFactoryKnitting,settings.getPause(),runId,step+1);
-                };
-            }(listeningEvent,runId,step),false);
-        }
-        if(action){ action(); }
-        listeningEvent=null;action=null;
-    }
-    }catch(err){ GM_logError("autoFarmFactoryKnitting","runId="+runId+" step="+step,"",err); }
-}*/
-
 function autoFarmFuelstation(runId,step){
   try{
     if(!step){ step=1; }
@@ -6412,10 +6243,6 @@ function autoFarmFuelstation(runId,step){
                 autoFarmFuelstation(runId,8);
             }
         break;}
-
-        //{"zoneNrS":"6.2","slot":2,"zoneNrF":"6","farmNr":1,"zoneNr":6,"zoneNrL":"6.1","zoneBuildingTyp":6}
-        //{"6":[0,"r",true],"6.2":[0,"r",true],"6.3":[0,"r",true],
-
         case 3:{ // open slot
             GM_logInfo("autoFarmFuelstation","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"Open_Slot"+handled.slot);
             if(unsafeData.readyZone[handled.zoneNrS]){
@@ -6471,8 +6298,6 @@ function autoFarmFuelstation(runId,step){
             var farmNR=Math.floor((zoneNrF[0]-1)/6)+1;
             var data=unsafeWindow.farms_data.farms[farmNR][unsafeData.zones.getLocation(zoneNrF[0]).zoneNr];
             var iLimit=data.data.constants.slot_level[data.data.data.slots[zoneNrF[1]].level].limit;
-            //var produktPoints=$("globalbox").querySelector('.fuelstation_product_select_item_points').innerHTML.replace(".","");
-            //Beta
             var produktPoints=data.data.data.slots[zoneNrF[1]].products[zoneList[handled.zoneNrL][0][0]].points;
             var max = Math.ceil(iLimit/produktPoints);
             if(input){
@@ -8052,8 +7877,12 @@ try{
     if(settings.get("account","botUseFarmersmarket")&&bot.checkRun("autoFarmersmarketBuilding",runId)){
         bot.setAction("autoFarmersmarketBuilding ("+step+")");
         var help,help2,action=null,listeningEvent=null;
+        console.log("-------step---------");
+        console.log(step);
+        console.log("-------Step--------");
         switch(step){
         case 1:{ // check required products
+
             if((zoneList[handled.zoneNrL][0][0]!=PRODSTOP)&&(help=unsafeData.readyZone[handled.zoneNrS])&&help[2]&&((help[1]=="r")||(help[1]=="e"))){
                 help=unsafeData.prodRequire[0][zoneList[handled.zoneNrL][0][0]]
                 if(typeof help=="object"){
@@ -8159,7 +7988,12 @@ try{
                     }else{
                         autoFarmersmarketBuilding(runId,9); // -> exit
                     }
-                break;}
+                    break;}
+                case 7:{
+                    //monster fruit culture -> nothing to harvest
+                    unsafeData.readyZone[handled.zoneNrS][1]="e";
+                    autoFarmersmarketBuilding(runId,step+1);; // next step
+                    break;}
                 }
             }else{
                 autoFarmersmarketBuilding(runId,step+1);
@@ -8314,6 +8148,20 @@ try{
                         autoFarmersmarketBuilding(runId,9); // -> exit
                     }
                 break;}
+                case 7: { //monster fruit culture -> open item_bar
+                    GM_logInfo("autoFarmersmarketBuilding","runId="+runId+" step="+step,"",handled.zoneNrF.capitalize()+" automat<br>showNeedsMegaFruit");
+                    var key = Object.keys(unsafeWindow.farmersmarket_data.megafruit.objects)[handled.slot-1]; //keys = {water,light, fertilize}
+                    var help = $("megafruit_need_"+key+"_img");
+                    if (help){
+                        action=function(){ click(help);};
+                        listeningEvent="gameShowNeedsMegaFruit";
+                    } else {
+                        console.log("Step 5 -> Skipping to exit after 'showNeedsMegaFruit failed'");
+                        console.log(help);
+                        autoFarmersmarketBuilding(runId,9); // -> exit
+                    }
+
+                    break;}
                 }
             }else{
                 GM_logInfo("autoFarmersmarketBuilding","runId="+runId+" step="+step,"","Zone not empty."); //TODO text
@@ -8380,9 +8228,9 @@ try{
                         listeningEvent="gameProductionSelectionCommit";
                     }else if(helpDown || helpUp) {
                         // link not visible, we need to scroll
-                        if (directionDown && !helpDown) { // Scroll-Down-Mode, but at bottom?
+                        if (directionDown && (helpDown.style.display == "none")) { // Scroll-Down-Mode, but at bottom?
                             directionDown = false; // Switch to Scroll-Up-Mode
-                        } else if (!directionDown && !helpUp) { // Scroll-Up-Mode, but at top?
+                        } else if (!directionDown && (helpUp.style.display == "none")) { // Scroll-Up-Mode, but at top?
                             directionDown = true; // Switch to Scroll-Down-Mode
                         }
                         action=function(){
@@ -8432,19 +8280,42 @@ try{
                     autoFarmersmarketBuilding(runId,9); // -> exit
                 }
             break;}
+            case 7: { //monster fruit culture -> select item
+                GM_logInfo("autoFarmersmarketBuilding","runId="+runId+" step="+step,"",handled.zoneNrF.capitalize()+" automat<br>NeedsMegaFruit");
+                var help = $("megafruit_need_item"+zoneList[handled.zoneNrL][0][0]);
+                if (help){
+                    action=function(){ click(help);};
+                    listeningEvent="gameNeedMegaFruit";
+                } else {
+                    console.log("Step 6 -> Skipping to exit after 'NeedsMegaFruit failed'");
+                    console.log(help);
+                    autoFarmersmarketBuilding(runId,9); // -> exit
+                }
+                break;}
             }
         break;}
         case 7:{ // commit
+
             if((help=$("globalbox")) && (help.style.display == "block")){
-                if(help=$("globalbox_button1")){
+                console.log("------- globalbox -------");
+                help = $("globalbox_button1");
+                if(help){
+                    console.log("------- globalbox_button1 -------");
                     GM_logInfo("autoFarmersmarketBuilding","runId="+runId+" step="+step,"",handled.zoneNrF.capitalize()+" automat<br>Start production"); //TODO text
                     action=function(){ click(help); };
-                    listeningEvent="gameFarmersmarketStarted";
+                    if (handled.zoneBuildingTyp==7) {
+                        //monster fruit culture -> buy
+                        console.log("-------gameMegafruit_buyobject---------");
+                        listeningEvent="gameMegafruit_buyobject";
+                    } else {
+                        listeningEvent="gameFarmersmarketStarted";
+                    }
+                    //listeningEvent="gameFarmersmarketStarted";
                     setNextQueueItem(handled.zoneNrS);
-                }else{
-                    autoFarmersmarketBuilding(runId,9); // -> exit
+                } else {
+                autoFarmersmarketBuilding(runId,9); // -> exit
                 }
-            }else{
+            } else {
                 autoFarmersmarketBuilding(runId,9); // -> exit
             }
         break;}
@@ -8452,11 +8323,11 @@ try{
             switch(handled.zoneBuildingTyp){
             case 1:{
                 if((help=$("farmersmarket_pos1_inner"))&&(help=help.querySelector(".flowerarea_modus_water_all"))&&(!help.querySelector(".bonusinfo"))){
-                // premium watering
+                    // premium watering
                     action=function(){ click(help); };
                     listeningEvent="gameFarmersmarketWatered";
                 }else{
-                // non-premium watering
+                    // non-premium watering
                     GM_logInfo("autoFarmersmarketBuilding","runId="+runId+" step="+step,"",handled.zoneNrF.capitalize()+" automat<br>Watering"); //TODO text
                     if(unsafeWindow.farmersmarket_data.flower_area){
                         for(var i=field;i<=unsafeData.BUILDING_SIZE["fl1"];i++){
@@ -8478,7 +8349,22 @@ try{
             break;}
             case 4:{
                 autoFarmersmarketBuilding(runId,9); // -> exit
-            break;}
+                break;}
+            case 7:{
+                //monster fruit culture -> close summary
+                //autoFarmersmarketBuilding(runId,9); // -> exit
+                GM_logInfo("autoFarmersmarketBuilding","runId="+runId+" step="+step,"",handled.zoneNrF.capitalize()+" automat<br>close summary");
+                if((help=$("globalbox")) && (help.style.display == "block")) {
+                    unsafeWindow.hideDiv('globalbox');
+                    unsafeWindow.hideDiv('globaltransp');
+                    autoFarmersmarketBuilding(runId,9); // -> exit
+                }else{
+                    autoFarmersmarketBuilding(runId,9); // -> exit
+                }
+                break;}
+
+                //{"zoneNrS":"6.2","slot":2,"zoneNrF":"6","farmNr":1,"zoneNr":6,"zoneNrL":"6.1","zoneBuildingTyp":6}
+                //{"6":[0,"r",true],"6.2":[0,"r",true],"6.3":[0,"r",true],
             }
         break;}
         case 9:{
@@ -8567,19 +8453,6 @@ try{
             } else {
                 autoFarmersmarketVetTreatment(runId,8); // -> exit
             }
-
-            /*
-
-            if((help=unsafeData.readyZone[handled.zoneNrS])&&help[2]&&(((help[1]=="r")&&(zoneList[handled.zoneNrL][0][0]!=PRODSTOP||!settings.get("account","disableCropFields")))||((help[1]=="e")&&(zoneList[handled.zoneNrL][0][0]!=PRODSTOP)))){
-                if(!unsafeData.gameLocation.check("farmersmarket")){
-                    action=function(){ click($("speedlink_farmersmarket")); };
-                    listeningEvent="gameFarmersmarketOpened";
-                }else{
-                    autoFarmersmarketVetTreatment(runId,step+1);
-                }
-            }else{
-                autoFarmersmarketVetTreatment(runId,8); // -> exit
-            }*/
         break;}
         case 3:{ // open farmersmarket building
             //if((help=unsafeData.readyZone[handled.zoneNrS])&&help[2]&&(((help[1]=="r")&&((zoneList[handled.zoneNrL][0][0]!=PRODSTOP)||(!settings.get("account","disableCropFields"))))||((help[1]=="e")&&(zoneList[handled.zoneNrL][0][0]!=PRODSTOP)))){
@@ -8621,14 +8494,6 @@ try{
         break;}
         case 5:{ // //das rechte zu behandelnde Tier auswählen
             help=unsafeData.readyZone[handled.zoneNrS];
-            //if(zoneList[handled.zoneNrL][0][0]==PRODSTOP){
-            /*if(!botUseVetTreatment){
-                //todo Abfrage ob ein Behandlungsslot frei ist
-                GM_logInfo("autoFarmersmarketVetTreatment","runId="+runId+" step="+step,"","No production selected."); //TODO text
-                autoFarmersmarketVetTreatment(runId,8); // -> exit
-            }else */
-
-
             if(help[1]=="e"||help[1]=="r"){//??????? todo
                 switch(handled.zoneBuildingTyp){
                 case 4:{
@@ -8645,20 +8510,9 @@ try{
                                 autoFarmersmarketVetTreatment(runId,8); // -> exit
                             }
                         } else {
-
                             unsafeData.zones.setEndtime(handled.zoneNrS,animalID);
                             autoFarmersmarketVetTreatment(runId,8); // -> exit
                         }
-                        //autoFarmersmarketVetTreatment(runId,8); // -> exit
-                        /*
-                        var animal_right=$("vet_animal_queue").firstChild;
-                        if (animal_right) {
-                            action=function(){ click(animal_right);};
-                            listeningEvent="gameVet_setslot";
-                        } else {
-                            autoFarmersmarketVetTreatment(runId,8); // -> exit
-                        }
-                        */
                     }
                     else {
                         autoFarmersmarketVetTreatment(runId,step+1); // alle Slots belegt, Behandlung starten
@@ -8678,17 +8532,6 @@ try{
                 if (animal) {
                     action=function(){ click(animal);};
                     listeningEvent="gameShowVetMedicalRecord";
-
-                    /*
-                    click(animal);
-                    var start=$("vet_animal_disease_start"+(handled.slot-4));
-                    if (start) {
-                            action=function(){ click(start);};
-                            listeningEvent="gameShowVetMedicalRecord";
-                    } else {
-                            autoFarmersmarketVetTreatment(runId,8); // -> exit
-                    }
-                    */
                 }
                 else {
                     autoFarmersmarketVetTreatment(runId,8); // -> exit
@@ -10750,6 +10593,8 @@ try{
             ".rotate270 {-webkit-transform: rotate(270deg);-moz-transform: rotate(270deg);filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);}"+
             "#buildinginfo0, #buildinginfo1, #buildinginfo2, #buildinginfo3, #buildinginfo4, #buildinginfo5, #buildinginfo6 {top:52px; !important;}\n"+
             ".divZoneIcon {position:absolute;bottom:0;right:5px;z-index:10;border:2px solid black;border-radius:10px;background-color:#000000;}\n"+
+            ".divZoneAutoMonsterFruitCultureIcon {top:30px; background-color: white; -moz-transform: scale(0.6)}\n"+
+            ".divZoneMonsterFruitCultureIcon {left:-20px; top: -15px; background-color: white; -moz-transform: scale(0.5)}\n"+
             ".divZonePonyIcon {width: 30px; height: 30px; background-size: 100%; background-color: white;}\n"+
             "#divAutomatIconContainer {position:absolute;top:125px;left:1001px;width:76px;margin:2px 0px;}\n"+
             ".divWindmillIcon {position:relative;float:left;height:26px;width:26px;border:2px solid black;border-radius:10px;background-color:#CBAD85;margin:-20px 0 0 -20px;padding:2px;}\n"+
@@ -11059,12 +10904,12 @@ try{
                 var container,help;
                 for(var slot=1;slot<=3;slot++){
                     zoneNrS=zoneNrF+"."+slot;
-                    container=$("forestry_slot"+slot);
+                    container=$("forestry_building_inner_slot"+slot);
                     if(help=container.querySelector(".divForestryIcon")){
                         removeElement(help);
                     }
                     if(!unsafeData.zones.getBlock(zoneNrS)){
-                        drawAutomatIcon(zoneNrS,zoneNrS,container,"left:-20px;bottom:-25px;");
+                        drawAutomatIcon(zoneNrS,zoneNrS,container,"left:90px;bottom:-95px;");
                     }
                 }
                 container=null;help=null;
@@ -11076,14 +10921,15 @@ try{
                 var zoneNrF="carpentry";
                 var zoneNrS;
                 var container,help;
+
                 for(var slot=1;slot<=3;slot++){
                     zoneNrS=zoneNrF+"."+slot;
-                    container=$("forestry_slot"+slot);
+                    container=$("forestry_building_inner_slot"+slot);
                     if(help=container.querySelector(".divForestryIcon")){
                         removeElement(help);
                     }
                     if(!unsafeData.zones.getBlock(zoneNrS)){
-                        drawAutomatIcon(zoneNrS,zoneNrS,container,"left:-20px;bottom:-25px;");
+                        drawAutomatIcon(zoneNrS,zoneNrS,container,"left:90px;bottom:-95px;");
                     }
                 }
                 container=null;help=null;
@@ -11278,59 +11124,6 @@ try{
         }catch(err){GM_logError("eventListener:gameOpenFactoryOilKnittingTea ","","",err);}
         },false);
 
-
-/*
-        err_trace="listener gameOpenFactoryOil";
-        document.addEventListener("gameOpenFactoryOil",function(){ // oil-factory open
-        try{
-            var farmNr = unsafeData.gameLocation.get()[1]+1;
-            var position = unsafeWindow.currentposition;
-
-            var zoneNrF=getFarmZone(unsafeWindow.currentposition);
-            var zoneNrS;
-
-            for(var slot=1;slot<=3;slot++){
-                zoneNrS=zoneNrF+"."+slot;
-                if(!unsafeData.zones.getBlock(zoneNrS)){
-                    drawAutomatIcon(zoneNrS,zoneNrS,$("production_slot_info"+farmNr+"_"+position+"_"+slot).parentNode,"top:60px;left:100px;");
-                }
-            }
-        }catch(err){GM_logError("eventListener:gameOpenFactoryOil ","","",err);}
-        },false);
-*/
-/*
-        err_trace="listener gameOpenFactoryKnitting";
-        document.addEventListener("gameOpenFactoryKnitting",function(){ // Knitting factory open
-        try{
-            var farmNr = unsafeData.gameLocation.get()[1]+1;
-            var position = unsafeWindow.currentposition;
-            var zoneNrF=getFarmZone(unsafeWindow.currentposition);
-            var zoneNrS;
-
-            for(var slot=1;slot<=3;slot++){
-                zoneNrS=zoneNrF+"."+slot;
-                if(!unsafeData.zones.getBlock(zoneNrS)){
-                    drawAutomatIcon(zoneNrS,zoneNrS,$("production_slot_info"+farmNr+"_"+position+"_"+slot).parentNode,"left:100px;");
-
-                }
-            }
-        }catch(err){GM_logError("eventListener:gameOpenFactoryKnitting ","","",err);}
-        },false);
-
-        err_trace="listener gameOpenFuelstation";
-        document.addEventListener("gameOpenFuelstation",function(){ // Fuelstation factory open
-        try{
-            var zoneNrF=getFarmZone(unsafeWindow.currentposition);
-            var zoneNrS;
-            for(var slot=1;slot<=4;slot++){
-                zoneNrS=zoneNrF+"."+slot;
-                if(!unsafeData.zones.getBlock(zoneNrS)){
-                    drawAutomatIcon(zoneNrS,zoneNrS,$("fuelstation_slot"+slot),"left:-10px;");
-                }
-            }
-        }catch(err){GM_logError("eventListener:gameOpenFactoryKnitting ","","",err);}
-        },false);
-*/
         err_trace="listener gameOpenPony";
         document.addEventListener("gameOpenPony",function(){ // pony open
             drawPonyIcons();
@@ -11544,6 +11337,7 @@ try{
         try{
             // Automat icons
             for(var v=1;v<=6;v++){
+                if (v==3) {continue;} //Automat-Icon blockieren (Farmersmarket-3)
                 if(!unsafeData.zones.getBlock("farmersmarket-"+v)){
                     drawAutomatIcon("farmersmarket-"+v,
                                     "farmersmarket-"+v+(unsafeData.zones.isMultiSlot("farmersmarket-"+v)?".1":""),
@@ -11565,6 +11359,8 @@ try{
                         zoneNrS=zoneNrF+"."+slot;
                         switch(id) {
                             case 2: container=$("nursery_slot_item"+slot); break;
+                            case 3: container=$("megafruit_needs").children[slot-1];
+                                    break;
                             case 4: if (slot<=4) {
                                       container=$("pets_productionslot"+slot);
                                     }
@@ -11579,7 +11375,11 @@ try{
                             removeElement(help);
                         }
                         if(container && !unsafeData.zones.getBlock(zoneNrS)){
-                            drawAutomatIcon(zoneNrS,zoneNrS,container,"left:-10px;");
+                            if (id == 3) {
+                                drawAutomatIcon(zoneNrS,zoneNrS,container,"left:25px;");
+                            } else {
+                                drawAutomatIcon(zoneNrS,zoneNrS,container,"left:-10px;");
+                            }
                         }
                     }
                     container=null;help=null;
@@ -12066,7 +11866,6 @@ try{
     COUNTRY=top.unsafeData.COUNTRY;
     LANGUAGE=top.unsafeData.LANGUAGE;
     PAGE=location.pathname.replace(/^\//,"").replace(/\.php.*$/,"");
-
     // **************************************************
     // ChangeData Global
     // -->> add var to delete also to resetVariables
