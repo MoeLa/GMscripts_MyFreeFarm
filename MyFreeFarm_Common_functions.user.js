@@ -3,12 +3,12 @@
 // @namespace      https://github.com/linus--tux/GMscripts_MyFreeFarm
 // @author         BastianKanaan
 // @description    Common functions for MyFreeFarm-Scripts
-// @date           18.10.2016
-// @version        2.1.11
+// @date           11.05.2017
+// @version        2.1.12
 // @license        GPL version 3 or any later version; http://www.gnu.org/copyleft/gpl.html
 // ==/UserScript==
 
-const VERSIONfunctionFile = "2.1.11";
+const VERSIONfunctionFile = "2.1.12";
 var DEVMODE=GM_getValue("devmode",false);
 var DEVMODE_EVENTS=GM_getValue("devmode_events",false);
 var DEVMODE_FUNCTION=GM_getValue("devmode_function",false);
@@ -364,10 +364,15 @@ try{
 }catch(err){ GM_logError("unsafeOverwriteFunction","fooName="+fooName,"",err); }
 };
 
-function unsafeOverwriteObjFunction(fooObj,fooName,newFoo) {
+function unsafeOverwriteObjFunction(fooObj,fooName,newFoo,optional) {
 try{
     if(!unsafeWindow[fooObj][fooName]){
-        GM_logWarning("unsafeOverwriteObjFunction","fooObj"+fooObj+" fooName="+fooName,"","Function does not exist.");
+        if (optional) {
+            // If function doesn't exist and is optional, everything's ok
+            return;
+        } else {
+            GM_logWarning("unsafeOverwriteObjFunction","fooObj"+fooObj+" fooName="+fooName,"","Function does not exist.");
+        }
     }
     if(typeof exportFunction=="function"){
         exportFunction(newFoo, unsafeWindow[fooObj],{"defineAs":"unsafe_"+fooName});
