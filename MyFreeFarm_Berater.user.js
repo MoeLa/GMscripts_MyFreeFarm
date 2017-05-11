@@ -1143,23 +1143,23 @@ function loadProductData(){
     try{
     if(DEVMODE_FUNCTION){ var trackingHandle = tracking.start("berater","loadProductData"); }
 
-    gut=explode(GM_getValue(COUNTRY+"_"+SERVER+"_gut"),"loadProductData/gut",[]);
-    gutBeob=explode(GM_getValue(COUNTRY+"_"+SERVER+"_gutBeob"),"loadProductData/gutBeob",[]);
-    preisBeob=explode(GM_getValue(COUNTRY+"_"+SERVER+"_preisBeob"),"loadProductData/preisBeob",[]); //isNotSent,time,min,max,amount
-    prodName=explode(GM_getValue(COUNTRY+"_"+SERVER+"_prodName"),"loadProductData/prodName",[]);
-    prodId=explode(GM_getValue(COUNTRY+"_"+SERVER+"_prodId"),"loadProductData/prodId",[]);
-    prodPlantSize=explode(GM_getValue(COUNTRY+"_"+SERVER+"_prodPlantSize"),"loadProductData/err/prodPlantSize",[]);
-    prodStock=explode(GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_prodStock"),"loadProductData/prodStock",[]);
-    prodStockMax=explode(GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_prodStockMax"),"loadProductData/prodStockMax",[]);
-    prodYield=explode(GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_prodYield"),"loadProductData/prodYield",[]);
-    prodRequire=explode(GM_getValue(COUNTRY+"_"+SERVER+"_prodRequire"),"loadProductData/prodRequire",[]);
-    prodTyp=explode(GM_getValue(COUNTRY+"_"+SERVER+"_prodTyp"),"loadProductData/prodTyp",[]);//c:coins, v:plant, e:product, u:garbage, z:deco, f:forestry, r:recipe
-    prodGrowTime=explode(GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_prodGrowTime"),"loadProductData/prodGrowTime",[]);
-    prodPoints=explode(GM_getValue(COUNTRY+"_"+SERVER+"_prodPoints"),"loadProductData/prodPoints",[]);
-    prodNameSort=explode(GM_getValue(COUNTRY+"_"+SERVER+"_prodNameSort"),"loadProductData/err/prodNameSort",[]);
-    prodBlock=explode(GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_prodBlock"),"loadProductData/err/prodBlock",[]);
-    prodMinRackInit=explode(GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_prodMinRackInit"),"loadProductData/err/prodMinRackInit",[]);
-    prodMinRack=explode(GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_prodMinRack"),"loadProductData/err/prodMinRack",[]);
+        gut=explode(GM_getValue(COUNTRY+"_"+SERVER+"_gut"),"loadProductData/gut",[]);
+        gutBeob=explode(GM_getValue(COUNTRY+"_"+SERVER+"_gutBeob"),"loadProductData/gutBeob",[]);
+        preisBeob=explode(GM_getValue(COUNTRY+"_"+SERVER+"_preisBeob"),"loadProductData/preisBeob",[]); //isNotSent,time,min,max,amount
+        prodName=explode(GM_getValue(COUNTRY+"_"+SERVER+"_prodName"),"loadProductData/prodName",[]);
+        prodId=explode(GM_getValue(COUNTRY+"_"+SERVER+"_prodId"),"loadProductData/prodId",[]);
+        prodPlantSize=explode(GM_getValue(COUNTRY+"_"+SERVER+"_prodPlantSize"),"loadProductData/err/prodPlantSize",[]);
+        prodStock=explode(GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_prodStock"),"loadProductData/prodStock",[]);
+        prodStockMax=explode(GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_prodStockMax"),"loadProductData/prodStockMax",[]);
+        prodYield=explode(GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_prodYield"),"loadProductData/prodYield",[]);
+        prodRequire=explode(GM_getValue(COUNTRY+"_"+SERVER+"_prodRequire"),"loadProductData/prodRequire",[]);
+        prodTyp=explode(GM_getValue(COUNTRY+"_"+SERVER+"_prodTyp"),"loadProductData/prodTyp",[]);//c:coins, v:plant, e:product, u:garbage, z:deco, f:forestry, r:recipe
+        prodGrowTime=explode(GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_prodGrowTime"),"loadProductData/prodGrowTime",[]);
+        prodPoints=explode(GM_getValue(COUNTRY+"_"+SERVER+"_prodPoints"),"loadProductData/prodPoints",[]);
+        prodNameSort=explode(GM_getValue(COUNTRY+"_"+SERVER+"_prodNameSort"),"loadProductData/err/prodNameSort",[]);
+        prodBlock=explode(GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_prodBlock"),"loadProductData/err/prodBlock",[]);
+        prodMinRackInit=explode(GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_prodMinRackInit"),"loadProductData/err/prodMinRackInit",[]);
+        prodMinRack=explode(GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_prodMinRack"),"loadProductData/err/prodMinRack",[]);
     if(DEVMODE_FUNCTION){ tracking.end("berater",trackingHandle); }
 }catch(err){ GM_logError("loadProductData","","",err); }
 }
@@ -17579,7 +17579,7 @@ try{
                                             tempZoneProductionDataSlot[0][0][iProd].push([iAmount,iPoints,iTime,NEVER]);
                                             zones.setProduction(zoneNrS,tempZoneProductionDataSlot.clone());
                                         }
-                                    }
+                                        }
                                     else {
                                         for (slot=5;slot<=7;slot++){
                                             zoneNrS=zoneNrF+"."+slot;
@@ -20271,7 +20271,7 @@ try{
             raiseEvent("gamegoToOpenOlympiaRun");
         }catch(err){GM_logError("olympia.action_Response","","",err);}
 
-    });
+    }, true);
 
     //olympia.prototype.dialog(l,c)
     unsafeOverwriteObjFunction("olympia","dialog",function(l,c){
@@ -20282,7 +20282,7 @@ try{
             raiseEvent("gameOlympiaOpenDialog");
         }catch(err){GM_logError("olympia.dialog_Response","","",err);}
 
-    });
+    }, true);
     //olympia.prototype.entry(a)
     unsafeOverwriteObjFunction("olympia","entry",function(a){
         try{
@@ -20292,7 +20292,7 @@ try{
             raiseEvent("gameOlympiaEntry");
         }catch(err){GM_logError("olympia.entry_Response","","",err);}
 
-    });
+    }, true);
 
 
     //*********************************************************************************************
@@ -20359,7 +20359,7 @@ try{
             if(nodes["goToMonsterFruitCultureReady"]){
                 if(nodes["goToMonsterFruitCultureReady"]["node"]){ removeElement(nodes["goToMonsterFruitCultureReady"]["node"]); }
                 delete nodes["goToMonsterFruitCultureReady"];
-            }
+    }
         }catch(err){GM_logError("hideGoToMonsterFruitCultureReady","","",err);}
     }
 
@@ -20401,102 +20401,130 @@ try{
     }
 
     // looping ====================================================================================
-    err_trace="looping";
-    function loop1(){
-    if(DEVMODE_FUNCTION){ var trackingHandle = tracking.start("berater","loop1"); }
-        try{
-        //timeMeasureStart("loop1");
-        // test session
-        if (unsafeWindow.rid!=GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_session","")){ unsafeWindow.initZones(1); }
-        else{ GM_setValue2(COUNTRY+"_"+SERVER+"_sessionlost",false,74); }
+    err_trace = "looping";
 
-        now=Math.floor((new Date()).getTime()/1000);
-        todayStr=getDateStr(now,2,false);
-        nowServerOff=unsafeWindow.Zeit.Server+valServerTimeOffset;
-        var help=getDateStr(nowServerOff,2,false);
-
-        if(help!=todayServerStr){
-            todayServerStr=help;
-            setLevelLogId();
-            setLotteryLogId();
-            getDailyRanking();
-            showGoToLottery();
-            raiseEvent("gameNewDay");
+    function loop1() {
+        if (DEVMODE_FUNCTION) {
+            var trackingHandle = tracking.start("berater", "loop1");
         }
+        try {
+            // timeMeasureStart("loop1");
+            // test session
+            if (unsafeWindow.rid != GM_getValue(COUNTRY + "_" + SERVER + "_" + USERNAME + "_session", "")) {
+                unsafeWindow.initZones(1);
+            } else {
+                GM_setValue2(COUNTRY + "_" + SERVER + "_sessionlost", false, 74);
+            }
+
+            now = Math.floor((new Date()).getTime() / 1000);
+            todayStr = getDateStr(now, 2, false);
+            nowServerOff = unsafeWindow.Zeit.Server + valServerTimeOffset;
+            var help = getDateStr(nowServerOff, 2, false);
+
+            if (help != todayServerStr) {
+                todayServerStr = help;
+                setLevelLogId();
+                setLotteryLogId();
+                getDailyRanking();
+                showGoToLottery();
+                raiseEvent("gameNewDay");
+            }
 /*
         console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++");
         console.log(implode(unsafeWindow.job_data));
         console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++");*/
-        /*
-        try {
-            // Christmas Specialoffer 2016
-            var  specialoffer = unsafeWindow.specialoffer;
-            if (specialoffer.data.today) {
-                specialoffer.daily();
+            /*
+            try {
+                // Christmas Specialoffer 2016
+                var  specialoffer = unsafeWindow.specialoffer;
+                if (specialoffer.data.today) {
+                    specialoffer.daily();
+                }
+            } catch(err){ GM_logError("Specialoffer","","",err); }
+            */
+
+            var div = $("newsbox");
+            if (div && div.style.display == "block") {
+                // GM_logInfo("Hide newsbox", "", "", "Hid Newsbox", 0);
+                unsafeWindow.setNewsUnread(1); //hideDiv("newsbox")
             }
-        } catch(err){ GM_logError("Specialoffer","","",err); }
-        */
 
-        if(USERLEVEL>=38){
-            showGoToClothingDonation();
-        }
-        // clock
-        nodes["serverTime"]["node"].innerHTML=todayServerStr+"&nbsp;"+getDaytimeStr(nowServerOff);
-        if(valSessionEndtime){ nodes["sessionTimeLeft"]["node"].innerHTML="("+getTimeStr(valSessionEndtime-now)+")"; }
-        if(DEVMODE){ nodes["sessionTimeNow"]["node"].innerHTML="("+getDaytimeStr(now)+")"; }
-        // questline
-        updateQuestLineTimer();
-        // powerupsymbols
-        for(var v=nodes["containerPowerupSymbols"]["node"].childElementCount-1;v>=0;v--){
-            help=parseInt(nodes["containerPowerupSymbols"]["node"].children[v].getAttribute("end"),10)-unsafeWindow.Zeit.Server;
-            if(help>0){ nodes["containerPowerupSymbols"]["node"].children[v].lastElementChild.innerHTML=getTimeStr(help); }
-            else{ removeElement(nodes["containerPowerupSymbols"]["node"].children[v]); }
-        }
-
-        // timers
-        timer.run();
-        clocks.run();
-
-        // slots
-        var readyZoneAdded=0;
-        for(var i in ALL_SLOTS){
-            if(!ALL_SLOTS.hasOwnProperty(i)){ continue; }
-            if(!zones.getBlock(i)){
-                readyZoneAdded+=zones.checkReady(i);
+            if (USERLEVEL >= 38) {
+                showGoToClothingDonation();
             }
-        }
 
-        if(readyZoneAdded>0){
-            GM_logInfo("loop1","","readyZone="+implode(unsafeData.readyZone,"loop1/readyZone"),"Zone ready",0);
-            raiseEvent("gameZoneReady");
-            // GM_log("unsafeData.readyZone:\n"+print_r(unsafeData.readyZone,"",true,"\n"));
-        }
-        if (-1==totalEndtime){
-            help=getText("cropped").toUpperCase();
-        }else if(totalEndtime+unsafeWindow.Zeit.Verschiebung<=now){
-            help=getText("finished").toUpperCase();
-        }else{
-            help=getTimeStr(totalEndtime+unsafeWindow.Zeit.Verschiebung-now);
-        }
-        var cell;
-        if((cell=$("mainmenue2_incoming"))&&(cell.style.display=="block")){
-            help+=" - !";
-        }else if((cell=$("mainmenue3_incoming"))&&(cell.style.display=="block")){
-            help+=" - !";
-        }
-        cell=null;
-        document.title=help+documentTitle;
+            // clock
+            nodes["serverTime"]["node"].innerHTML = todayServerStr + "&nbsp;" + getDaytimeStr(nowServerOff);
+            if (valSessionEndtime) {
+                nodes["sessionTimeLeft"]["node"].innerHTML = "(" + getTimeStr(valSessionEndtime - now) + ")";
+            }
+            if (DEVMODE) {
+                nodes["sessionTimeNow"]["node"].innerHTML = "(" + getDaytimeStr(now) + ")";
+            }
 
-        //raising events of other pages
-        var raisedEvents=explode(GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_raisedEvents"),"loop1/raisedEvents",{});
-        for(var v in raisedEvents){
-            if(!raisedEvents.hasOwnProperty(v)){ continue; }
-            raiseEvent(v);
-            GM_setValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_raisedEvents","{}");
+            // questline
+            updateQuestLineTimer();
+
+            // powerupsymbols
+            for (var v = nodes["containerPowerupSymbols"]["node"].childElementCount - 1; v >= 0; v--) {
+                help = parseInt(nodes["containerPowerupSymbols"]["node"].children[v].getAttribute("end"), 10) - unsafeWindow.Zeit.Server;
+                if (help > 0) {
+                    nodes["containerPowerupSymbols"]["node"].children[v].lastElementChild.innerHTML = getTimeStr(help);
+                } else {
+                    removeElement(nodes["containerPowerupSymbols"]["node"].children[v]);
+                }
+            }
+
+            // timers
+            timer.run();
+            clocks.run();
+
+            // slots
+            var readyZoneAdded = 0;
+            for (var i in ALL_SLOTS) {
+                if (!ALL_SLOTS.hasOwnProperty(i)) {
+                    continue;
+                }
+                if (!zones.getBlock(i)) {
+                    readyZoneAdded += zones.checkReady(i);
+                }
+            }
+
+            if (readyZoneAdded > 0) {
+                GM_logInfo("loop1", "", "readyZone=" + implode(unsafeData.readyZone, "loop1/readyZone"), "Zone ready", 0);
+                raiseEvent("gameZoneReady");
+                // GM_log("unsafeData.readyZone:\n"+print_r(unsafeData.readyZone,"",true,"\n"));
+            }
+            if (-1 == totalEndtime) {
+                help = getText("cropped").toUpperCase();
+            } else if (totalEndtime + unsafeWindow.Zeit.Verschiebung <= now) {
+                help = getText("finished").toUpperCase();
+            } else {
+                help = getTimeStr(totalEndtime + unsafeWindow.Zeit.Verschiebung - now);
+            }
+            var cell;
+            if ((cell = $("mainmenue2_incoming")) && (cell.style.display == "block")) {
+                help += " - !";
+            } else if ((cell = $("mainmenue3_incoming")) && (cell.style.display == "block")) {
+                help += " - !";
+            }
+            cell = null;
+            document.title = help + documentTitle;
+
+            // raising events of other pages
+            var raisedEvents = explode(GM_getValue(COUNTRY + "_" + SERVER + "_" + USERNAME + "_raisedEvents"), "loop1/raisedEvents", {});
+            for (var v in raisedEvents) {
+                if (!raisedEvents.hasOwnProperty(v)) {
+                    continue;
+                }
+                raiseEvent(v);
+                GM_setValue(COUNTRY + "_" + SERVER + "_" + USERNAME + "_raisedEvents", "{}");
+            }
+            // timeMeasureStop("loop1"); // 4ms
+        } catch (err) { GM_logError("loop1", "", "", err); }
+        if (DEVMODE_FUNCTION) {
+            tracking.end("berater", trackingHandle);
         }
-        // timeMeasureStop("loop1"); // 4ms
-        }catch(err){ GM_logError("loop1","","",err); }
-    if(DEVMODE_FUNCTION){ tracking.end("berater",trackingHandle); }
     }
 
     function loop60(){
