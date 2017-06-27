@@ -142,7 +142,7 @@ const CHANGELOG=[["2.0","29.05.2014",[["Migration nach openuserjs.org","Migratio
                 ,["2.09.50","09.05.2017",[["Speedup Ponyfarm","Speedup Ponyfarm"]]]
                 ,["2.09.51","11.05.2017",[["Newsfenster automatisch schließen","auto close newsbox"]]]
                 ,["2.09.52","18.05.2017",[["Verbesserungen, Bugfix","Improvements, Bugfix"]]]
-                ,["2.10.53","27.06.2017",[["Siebenschlaefer Event","seven sleepers day event"]]]
+                ,["2.09.53","27.06.2017",[["Siebenschlaefer Event","seven sleepers day event"]]]
             ];
 
 if(!VERSIONfunctionFile){
