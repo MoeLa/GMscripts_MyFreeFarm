@@ -20316,7 +20316,7 @@ try{
             try {
                 // Summer 2017
                 var  specialoffer = unsafeWindow.specialoffer;
-                if (specialoffer.data.today) {
+                if (specialoffer && specialoffer.data && specialoffer.data.today) {
                     specialoffer.daily();
                     div = $("specialoffer");
                     if (div) {
