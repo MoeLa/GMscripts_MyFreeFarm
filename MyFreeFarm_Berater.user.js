@@ -4,8 +4,8 @@
 // @author         BastianKanaan
 // @description    Extends MyFreeFarm
 // @icon           data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAYAAAA6/NlyAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB94BGgo6NO+u5q4AAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAS0ElEQVRo3t2aeYxl11ngf+fub3+172t3V1cv7sVuJ3bs7jh2QtoMDoHEwRlCbMJEATRiSaKBQTNBCKGwBwSDNAyTQVGCYJIMEINjxrFix3E73mO7TW/V1VXVtS+v6i13v+ee+aNvQSXDaCTS7W7nSE/v3veuzrm/8y3nO9934Dq08cE+APv9E/1//tDN+16/9+hNJ/l+bXv3jAHw4zf1P/sLdx5TRqXyc++fHPvsGzW+/kbC5vMOyyvrfOSDJz99eM/gj+09fkK9Na/fW8sVzr86NfOl7ydgB+iK46TnVz75wJNtHZX3rcuUI8dvFS9cnuHQ7YcOWprTfvb8pUe/H4BzwH7g0H/59INfq3Z09++ZHBPHbn8LpVKF3WNdWPlOdeIdd962MDf/8vSl+XPX8mW0awxrAiPAgd/4xXf+wdaG74yP7BL9w/vp7x2h1WrRM3SYwf5+8cLz31Yf/w8f/fK1nn3tGkt2D3AE6J7o6xoc7Cjyq//pt3ntm88wMzvDhfMX+dmP/AJJnDKxe0j09HQZDzzwns+9GVW6CBwGjgIdhbz91vfdffjg6soWrhcwf+p5Cu7L3DwhWTkdYvVWCeOEQsFm//5dY1/4wld+880kYQeYBG4CqoD23uMTk0mcQJTQF9R4/48PM3mwDU2HDz5Y5dk/+VPc5YuErZpKooZ9LSVsXOX+BNAB7AUK2X1yx97C7oXpNQb7Nrn5pw5hOA6FthLFYh4hdD7+B8NceHGKi2eqYmTfmAGwb3I3Z85O3fAS1oHubckC6IZ9uGCWCruHN6lWHNIwQRc6BjqkGpqCNEkZPTTG0aFZtuqBPjQ08NPXAvZaAJtA2w7NUQ+9c/Lt5XQOWh5hrY5yfbQoRAYBKvRJ4xgZxcReQD5vMaK9yu9+5j//iWEY4s2g0nYGvO0MxX9/9PTnT1R6P1UqCVJDR/kJdiIQrsIqRghT4KEIpCSNJAuLa3zm7179qJaibnRgDejJgP9JOp3thZueOJvygwdTND0lcFuEWhEtdTALvTTXlmikCV4ScHFhixefXEHSuStKkxveadnAQOas/qm1vHhlq5Uwta6rsUosiCWuVsfJF2itzNMKY+a36sxsNXnhYkI5LLBSWz71ZvDSCkiz739eoyyjMI81VV7Vd6skYLSasrK4gWnnWKt7PL+4wbwbcv6yRKsrZDHXSGqbr74ZAg8t89D9O/stWNbuTS+8+Mzs2hfqstBNnPYOdRpcXNjg4VeXeOqSz/RcghuIb6zr5m+2omQ1NZ2/q7da4c7O+3u6abruDQWsA0PfDTzSVji26QZWJOWFxbr73OTuwcPfeL1ezhcNljydlmdDW+XJ8zPzd/lRsr6vo/xbtkjW26qVwzKJb7INo6OtWl1fWl2LbkQvnQJxJm0NEKZh6yptpNvx9fmt5MXjk72DD798meFyldHDY6xeuMi79nYpJWXqJJH2ajOaqW3UHtvudMsLGOjtYWF55YZahwUggRngEuAC6txa7XHNMF/Z9txRLJNATxnuG2Civ5ORgS56nPTtaPrpr03V9DDwGztht9vVgL0WwBpwGXgKeAVwoyiqNf1gbXtC2goWInLYZUG1UqH25JP4iTr32JnlQ4D92OJm5f83UG93xw2h0gKwsusGcDZbl8eziVADXe33juXlD0QrDRWWcqK2sIDSneSx80sngX6E8IZ7OvvCIPx5Kwnu6eru7J1fWPLLPQMvrtc2v+XknadMzXhdIlr79k2kZ86cv67AaQbqZtd+di8Bdctw9ZerVb3njjvGeOyvT4tG1zD27GX8vqH/wfmlxf6eronRnJqKIt/RCqCcrjNzm+7Nq6GaX52bzxb1K166v7e7HIeRByTXEzgCpjKnlX5HgG3ak+++d39PwcirNAzEsZN38sg/rvPAJ3+WwTb7o3rs3xPWVsYKhQKRq3GmqR2bvrjwIkBfZztL67XvGGhxebVxoyQAomzWLaAL2AVU/u29t9y/d3Skc31pXcTSQG6sENpF3nLLfkwh1ckfua991/4J8fpzL4jXaukTtWbTLBdL7e3t1bzQ9Uaj2Ypv1M3Ddoi5F9iH0Mf/6Jfu/3hff2/n8uqaGpk8KjQErcYmt/YNUe7sxVCJiBPFI5//K0bGB5UoNnNffGL5z8BNLNNMhRDb/uGqbCautoS1LPh4i2ZYRz54fOxT02cv5A/ceozugWFh6RrDh46RMxX9g33IyOeRv36EXYfeQhi02FhaIG9pg1uxuVDbrD8p0zSQUsrvNpEbCTiXpXZGH7xj6NerxTIqidk9Ocljjz6Bcuv09HfxyFe+Stxy6R4a5IlHHuXlp75O4jbxo0jEErW3r3Ty3LL/a2EYXFXYqwksssTdGLC3krf3j7XlbtPRcEyTrz/9Eh0lm5X1TVIl2FxZZGpmjqVLM7SVHSqlAghFEkuWN13hWCb5fOH3Li2sRlwDFbwasJ3AMeCtQLtjm/vcZsDK0ipx4DMx2EGpYGPmHGYvnKVUKVCpFMmZkKQphbxFqlL8WHLq9ByXV+tYmnr4Rk3xlLKU7AGgAmiDbcXROI7xIonne4g0xrYMOtqKKB0sXWekr51c3sa2DNAExZyDbgiUUrx8YYGiKd9+cM/I0I0GrGe7o7EsPQsIYywXTUgF9Uhi6ALimJxlolKJY1uEcYRKFbahUcw5yCQlUQpN03jv8UnZ3T/6e4+/PM14d+F1gIN7x24YYCMLH/PbP1QKdpvrxtQiVHfBVK6fgoypbTZJZYqUkqYb0Gq51BsegecjU4Vp6FimSVuloPte0xsYHHnu+bNzxfvu2P/S6XOXtR86cdMNAWzuyD8DcGig7cFFTzLl6YslS6AZEEcRtVod3wuo111818P3ApIgIooTfM9ndnkLw9AJooR7Dvf/yumZpeMyFY3ZxfUj9905ceGpqcR49+0Hrjuwk9mwBqj+jvKEX6/1zSVO0JeT3cLURck2SJXACTxi10PFCaam02h4+J5HqxnQagUIDUzLIJKSYs7S9/ZXz69uNqtz6631raY7/s4J89w/PPM6B/eOXzdgLfPO5Svxslm9Y9D52DyVxDKNhW4rNUxDo5wzKBo6XqpI/AAZxsRxQj5no3QTJRSWbdBRLWFbFn2dbSgUd9/UN9zd1XVpq+l1P/Pa5ZnaVn38/e84/Nrpc9OMDQ1cF2Anc1gOkPzAwYFfPr0hieL46YG86u0pWMLUBW4sidDo6KzS0dlGV3cbpUKOaql4ZWnK5wmimDSVOI6FF0TIVKGhiYqVjpRLxc/t37/vyEtT66cCzzv4Y3cfefzS5QV2jY2+oYHHdv7qIKAf29VzX1vJmVgMrItFgkP1ZsserFg4to6tGygFVr5AgiBVYDsWmiEIY4lMU8rlIqZloJRASYmuCYIwYrS3Kp77x7nDfhAuOI716GpLqo5c+p5Dk2NDT7905itvFPB2wewo0FMpFQffc3Tgoadn/MgPAtMKG/nx9jwVxyDvGPihBNNB6Dq6YWCaJkLXcf0QhcJ2TDTdQEMgUZiGRhgmxHFCznHQdNT5uZUfHBgc/JlarXYp1osHunPpe7p7B+szC8vfeiNUusCVIwx9QO1Hjw3/4jcvNVLXD6OBkjDiVKiSdaXbpp+gmRapEDTDmI2WS8P1EAIKeQfbsdhqeDRaTYI4wnV9kFBrtIhlSsv1OTTeJ0p5G5toutFonlrf2Lzv23PuZncu/AzkR/fsGrumwGYWZIwD0Vv39LxrvRU4F5fr2sbm5meDVqs43u4IKSFNFZoSRGGEIaCQc+hpr2KYOkopQGEaBuVino5yBamg1fLZaLYo5hyUglimmJbJiSPjTM0utR05eji/Xqutu2H03hdeX/jGB06MPn3h4qVrBiyyRPu+LNAwBkvmQ6emNnyU+l89He0fyosUSxOkKiWIU/woIQgTGq0Av9EijWMsXYNUIVNoNT1sU6fp+bgND5mmyFjh+REKsC2Tjc06HaUcmoCVxaUBgHIhf07Y+enZ5fp/vf/43qeulQ0XM7sdAtI793R96HI9Km648fkkkSqvJUuDRXO8aOvkTAOlFJoQCAFJClbOQaBQQoMkxTINdEPH9ULCMMaxbaRUpGlKkqRX4FVKGEs620rUtpq4CV9yXW/2ns0t99spX0U3/02QiNroYF+nqZuvbDVbV03COjDMlRM5EjTVXS3fvpFYsZTyrKZp+ZxObzVvYusGhi4wdZ04VSRSIYDID2h5Ic2mT8sLCMOYzS2XVKZoCKIoQUMjjCVC10gVFPN5ysU8XpCwf9cAtdpGEeB/AqWCE11aWP7EesM/ZSfNP7+0EHbs3TV+1YArwO4MfOnEnvaPnpqubTbr9dO6pr3X8/2/7ygX26p5k0SlCK5ItmKbWLqGKQSJTFFSoWRK04+4vLKB6wW03ABTNwjDmCCKiRKJkXltL4yRSiA0TSGgo1rdzn2ztLoOwOziyudn17x77z7onD13cfqqAJvAKFeOMWzkC6UeX5jdbpRsaZro8Tz/V1WaunHghVGicEyNSKboQqMZJRhCQ8oEmUjcIKTpBshEUrBtio6NLgQtPyBOJE3PRyaStVodqRQqVTRavmr4sTB041LLC+0slP3OF9T1+a3Zxc7b9u/5yPcKLID2TJ0DYPX43p6fu7AWrIF6rOV6f6ZQAhCJZtYNTRBn2z5Ng7a8RStO0DVBkkiUlGi6Rhgl+F5IFMbouo7rRfhhTN62UUJQLhexLRs3DIklIkpk0PCT11zPS7JMaG7nS55fXDu9VR34xNTy+tr3Cmxly1AB8Hs622/ZjNJ+HYoykT+j69r2wMKP5GyqaypOwLEM5SWSVigpWgZ+IgmTBJRCi2NKtoFhGtRaHp4fYZk6OcfCDyLiRBJEEW4Y4waKWKGaftR0/fCroF7Jgp7hnQ53fGyE6csLv79e23z4e/HSItvrTmSJtODmfYMfO3NhfmKr5eaKxcIXPM9f2t4a6kKj3TZuacmUMFGiu+SIWCriVF7J7pk6ptAIAZWCbuhoAhQCzdBBaTiOQy6XI4xT5YYRKCXcIDntOPYDj3/r9N9mWtYF9ALrWXWDza36VVmW8lw5OlgE6sBpLySuNVo/Cnw7CAK5Q0NEmKZJTpMHLMtWUYq26SW6VGAYembTOoapkyqNOE2xHQelG0gEXpiAptEKY7XphuFGoyXbndic7BPKFP7//vIT5/44G0ftSDq4wObViqVFthPalu4isOD5/rcy9R7LbHv7WdJUxUut+JRlaL2aprXphrB9qVQrlFiGLrw4JVUQK5AIEqHjBpFKFEITBoFENfx4c2WjuXDrUNJ727jBSIcSBwaMwx1tldwLF7a+lgG7mQC2MolflUjLzuykLftUdjwbA142+P91liqX16MH7yqWBroMqmUDLyFtxiKN0NKtKEn9SKogTNRGvaWabkCqNLXa9NKl9a2VMzOrXx+vhGNv321zebaBYRpcXvTV0b74lz58ct/bdpRzljLoq1ZqcTKYy0AtK3L72X9JVhVMMg1RgJbP5wuHxjoO//xxcef0vMvJm6ts+Zp4/KWafmbRXdts+m5k5J93DJkbK5vHUxkJITQ1t7gcN1Nz5vLa5peUgnfd1/e+szMe3zzbYs9EiaWkcvTcc3NfvevW4tc+98+5s3912eX/BexnBe04m1G5YxC5Q52sTPLDcRTd8sl71Nv+8kXdPTMTBz/dGXacXTPCMNbCT93f1fWhP579Q2j6dWClxhPZZBmZr6gCb2svO3t6qpZ6/Fm/dWoxfPIDLflDDz8z99vnloK/3dW38e/+4/tGf/fTX5755LVI8YSZymzXYHfOqMqkvpVd54CxA4P5vlAvqi89PfP3F5brS3aq+Jvn1pcfPb124fSFRnrylp77d5RNkmwyrcwploD8B2/r3qOEEb+0Lv8QWEsTpW6f7MkpmWivzYfrR4btT0B+ZHJ88A1P8TSA2UzKGmD+8B5zNPRD0dtWHsrplE3L5qETvWVQ0aKr+x97R+Ew6IVsIs8BLwELmafdyplGZbIUGlEYGWut8NfzjjNpxam4a1QdB9Z1jbwfSH7nJ4f+/dnp+TccOM7sei3TgvLMuplsLgUEUsnJ7lLBqwUM5pI2YLrDTpwwEtxztKcGPAGcAp4HngXmgKYhlIg2EzYWWkRReELCVlKLWF2MASzdE4G35qnVmfrw9aoP17OKfwGQX359/excq1TYajSfnUqdNNoKT/zDlHgYaOnNRHlrLqbSXgGmd5jI+Uyte5qRrD06Q9Nqb/sw1NbCIFj64gWTFaUfA37kken6oyA/HHUMfwqWuV6tANwJ/BrwF9le+W7gs6OVwnYq4k9vGuy8cP/+8jPQb/4L6/0w8BPAFxHi+I7//puZyx/YMc5f2MXKEa5z07Ii2k8AN2c7KwG8e8czd+Rs+wN2tTM33Nv9L/XRA9wP3PVdGpf7rue6rsYL/x8HbwtumjbAVwAAAABJRU5ErkJggg==
-// @date           11.05.2017
-// @version        2.10.65
+// @date           21.07.2017
+// @version        2.10.70
 // @license        GPL version 3 or any later version; http://www.gnu.org/copyleft/gpl.html
 // @include       /^(http|https):\/\/(|www\.|s\d+\.)au\.myfreefarm\.com\/.*$/
 // @include       /^(http|https):\/\/(|www\.|s\d+\.)veselaferma\.com\/.*$/
@@ -179,6 +179,11 @@ const CHANGELOG=[["2.0","29.05.2014",[["Migration nach openuserjs.org","Migratio
                 ,["2.10.63","25.04.2017",[["Monsterfruchtaufzucht","megafruit farm"]]]
                 ,["2.10.64","09.05.2017",[["Speedup Ponyfarm","Speedup Ponyfarm"]]]
                 ,["2.10.65","11.05.2017",[["Newsfenster automatisch schließen","auto close newsbox"]]]
+                ,["2.10.66","18.05.2017",[["Verbesserungen, Bugfix","Improvements, Bugfix"]]]
+                ,["2.10.67","27.06.2017",[["Siebenschlaefer Event","seven sleepers day event"]]]
+                ,["2.10.68","11.07.2017",[["Fenster Sommer Special schließen","close summer special window"]]]
+                ,["2.10.69","11.07.2017",[["Einfache Lösung für Eisauslieferungs Event (beachte Option: Ice delivery event )","simple solution for ice delivery event (see option: Ice delivery event)"]]]
+                ,["2.10.70","21.07.2017",[["Bugfix","Bugfix"]]]
                 ];
 if(!VERSIONfunctionFile){
     alert("Hi, I am the Berater-Script.\nThe function-file is missing.\nPlease install me again.");
@@ -294,7 +299,7 @@ const PRODUCT_QUEST=[{"117":["main",2,15],"118":["main",2,25],"119":["main",2,35
 // Required products to produce in format -> "prodId": [[type_p1, prodId_p1, amount_p1], [type_p2, prodId_p2, amount_p2], ...]
 // [-1, amount] is money; [0, 0, amount] are coins
 // 13102016
-const PRODUCT_REQUIRE=[{"25":[[0,9,30]],"27":[[0,10,12]],"28":[[0,11,8]],"30":[[0,12,5]],"111":[[0,110,5]],"116":[[0,2,1980]],"117":[[0,7,550]],"118":[[0,4,1020]],"119":[[0,38,650]],"120":[[0,42,110]],"121":[[0,43,100]],"122":[[0,112,130],[0,116,35]],"123":[[0,113,220],[0,117,35]],"124":[[0,114,345],[0,118,35]],"125":[[0,115,80],[0,119,35]],"130":[[0,17,400]],"131":[[0,21,150]],"132":[[0,20,100],[0,10,2]],"133":[[0,19,100],[0,10,2]],"134":[[0,17,400],[0,6,25]],"135":[[0,21,150],[0,6,25]],"136":[[0,2,120]],"137":[[0,1,200]],"138":[[0,1,200],[0,23,30]],"139":[[0,18,150],[0,22,30]],"140":[[0,21,150],[0,22,30]],"141":[[0,26,100],[0,144,3]],"142":[[0,26,100],[0,25,3]],"143":[[0,26,100],[0,25,3],[0,144,3]],"144":[[0,21,450]],"145":[[0,33,300],[0,12,2]],"146":[[0,35,200],[0,10,4],[0,12,2]],"147":[[0,37,60],[0,12,2]],"148":[[0,31,250],[0,26,150],[0,27,7]],"149":[[0,21,300],[0,43,10],[0,22,50],[0,121,4]],"150":[[0,38,60],[0,119,6],[0,17,50]],"152":[[0,151,5]],"155":[[0,152,5],[0,28,6]],"156":[[0,152,8],[0,28,5]],"157":[[0,152,2],[0,28,9]],"161":[[0,1,300],[0,17,150]],"162":[[0,1,250],[0,20,200]],"163":[[0,22,190],[0,26,120]],"164":[[0,1,150],[0,10,30]],"165":[[0,10,10],[0,12,5]],"166":[[0,10,10],[0,27,7]],"167":[[0,40,60],[0,111,10]],"168":[[0,10,10],[0,42,25]],"169":[[0,6,300],[0,9,15],[0,121,3]],"170":[[0,1,200],[0,43,20],[0,121,4]],"200":[[-1,1200],[0,171,24],[0,172,20],[0,173,12]],"201":[[-1,1400],[0,171,25],[0,172,18],[0,174,15]],"202":[[-1,1500],[0,172,22],[0,173,19],[0,174,16]],"203":[[-1,1460],[0,172,19],[0,173,16],[0,175,29]],"204":[[-1,1510],[0,171,7],[0,173,18],[0,174,8],[0,176,21]],"205":[[-1,1622],[0,171,14],[0,173,22],[0,176,10],[0,177,12]],"206":[[-1,1787],[0,174,16],[0,176,9],[0,177,10],[0,178,9]],"207":[[-1,1894],[0,173,15],[0,175,10],[0,177,11],[0,179,8]],"208":[[-1,1950],[0,173,12],[0,175,13],[0,178,15],[0,180,18]],"209":[[-1,2110],[0,171,12],[0,176,21],[0,179,7],[0,181,9]],"210":[[-1,2250],[0,171,12],[0,175,5],[0,179,34],[0,182,11]],"211":[[-1,2357],[0,172,9],[0,176,12],[0,181,22],[0,183,18]],"212":[[-1,2488],[0,171,13],[0,182,13],[0,183,16],[0,184,6]],"213":[[-1,2595],[0,171,3],[0,179,8],[0,185,7],[0,186,9],[0,187,7]],"214":[[0,0,2],[0,171,10],[0,172,14],[0,173,13],[0,174,18]],"215":[[0,0,2],[0,171,12],[0,172,22],[0,174,10],[0,175,19]],"216":[[0,0,2],[0,173,14],[0,175,8],[0,177,19],[0,178,16]],"217":[[0,0,3],[0,171,19],[0,177,5],[0,178,17],[0,180,13]],"218":[[0,0,3],[0,180,9],[0,181,8],[0,182,9],[0,183,9]],"219":[[0,0,3],[0,179,4],[0,182,1],[0,185,6],[0,186,15],[0,187,7]],"220":[[-1,1500],[0,171,70],[0,172,180],[0,173,80],[0,174,80],[0,188,1]],"221":[[-1,1500],[0,171,80],[0,172,50],[0,173,65],[0,174,140],[0,189,1]],"300":[[-1,100],[0,250,240],[0,251,210]],"301":[[-1,200],[0,251,160],[0,252,200]],"302":[[-1,300],[0,252,230],[0,250,210]],"303":[[-1,400],[0,253,220],[0,252,150]],"304":[[-1,500],[0,253,150],[0,254,110]],"305":[[0,0,1],[0,254,90],[0,255,100]],"306":[[0,0,1],[0,256,80],[0,255,80]],"307":[[-1,600],[0,257,210],[0,256,160]],"308":[[0,0,1],[0,258,130],[0,257,160]],"309":[[-1,700],[0,259,190],[0,258,140]],"310":[[0,0,2],[0,260,90],[0,259,90]],"311":[[-1,800],[0,261,390],[0,260,390]],"312":[[0,0,2],[0,262,130],[0,261,150]],"313":[[-1,900],[0,263,180],[0,262,230]],"314":[[0,0,2],[0,264,90],[0,263,80]],"315":[[-1,1000],[0,265,100],[0,264,130]],"316":[[0,0,3],[0,266,130],[0,265,90]],"317":[[-1,1100],[0,267,290],[0,266,260]],"318":[[0,0,3],[0,268,160],[0,267,170]],"319":[[-1,1200],[0,269,130],[0,268,180]],"320":[[-1,1300],[0,270,90],[0,269,80]],"321":[[0,0,3],[0,271,50],[0,270,100]],"322":[[-1,1400],[0,272,380],[0,271,320]],"323":[[0,0,4],[0,273,190],[0,272,160]],"324":[[-1,1500],[0,272,321],[0,274,321]],"325":[[-1,1600],[0,250,480],[0,251,420]],"326":[[-1,1700],[0,251,320],[0,252,400]],"327":[[-1,1800],[0,250,420],[0,252,460]],"328":[[-1,1900],[0,252,300],[0,253,440]],"329":[[-1,2000],[0,253,300],[0,254,200]],"330":[[-1,2100],[0,273,71],[0,275,111]],"331":[[0,0,4],[0,254,180],[0,255,200]],"332":[[0,0,4],[0,255,160],[0,256,160]],"333":[[-1,2200],[0,256,320],[0,257,420]],"334":[[0,0,4],[0,257,320],[0,258,260]],"335":[[-1,2300],[0,272,111],[0,274,90]],"336":[[-1,2400],[0,258,280],[0,259,380]],"337":[[0,0,5],[0,259,180],[0,260,180]],"338":[[-1,2500],[0,260,780],[0,261,780]],"339":[[0,0,5],[0,261,300],[0,262,160]],"340":[[-1,2600],[0,262,460],[0,263,360]],"341":[[0,0,5],[0,263,160],[0,264,180]],"342":[[-1,2700],[0,264,260],[0,265,200]],"343":[[0,0,6],[0,265,180],[0,266,260]],"344":[[0,0,6],[0,256,71],[0,276,51]],"345":[[-1,2800],[0,266,520],[0,267,580]],"346":[[0,0,6],[0,267,340],[0,268,320]],"347":[[-1,2900],[0,268,360],[0,269,260]],"348":[[-1,3000],[0,269,160],[0,270,180]],"349":[[0,0,6],[0,270,200],[0,271,100]],"400":[[-1,3100],[0,271,640],[0,272,760]],"401":[[0,0,7],[0,272,320],[0,273,380]],"402":[[-1,3200],[0,272,181],[0,275,221]],"403":[[0,0,7],[0,257,111],[0,276,141]],"450":[[0,20,190],[0,10,15]],"451":[[0,33,120],[0,111,5]],"452":[[0,34,100],[0,9,15]],"453":[[0,35,150],[0,10,10]],"454":[[0,36,190],[0,10,12]],"455":[[0,37,200],[0,9,8]],"456":[[0,40,40],[0,10,8]],"457":[[0,351,20],[0,9,8]],"458":[[0,356,10],[0,10,12]],"459":[[0,361,18],[0,111,8]],"460":[[0,360,14],[0,10,15]],"461":[[0,357,18],[0,10,16]],"462":[[0,352,16],[0,9,20]],"463":[[0,353,20],[0,10,18]],"464":[[0,359,22],[0,111,14]],"465":[[0,355,12],[0,9,16]],"466":[[0,354,15],[0,111,8],[0,12,5]],"467":[[0,358,14],[0,10,12],[0,9,16]],"468":[[0,10,6],[0,356,20]],"469":[[0,6,40],[0,37,120],[0,352,60]],"470":[[0,351,120],[0,355,50],[0,359,80]],"471":[[0,10,12],[0,351,100],[0,360,40]],"472":[[0,10,20],[0,360,100]],"473":[[0,352,120],[0,357,120]],"474":[[0,6,20],[0,117,6],[0,154,50]],"475":[[0,9,20],[0,44,40],[0,153,40]],"476":[[0,6,15],[0,111,6],[0,115,25]],"477":[[0,1,200],[0,27,12],[0,351,80]],"478":[[0,39,20],[0,111,6]],"479":[[0,1,250],[0,9,10],[0,41,20]],"480":[[0,10,10],[0,12,10],[0,352,30]],"481":[[0,111,6],[0,355,12],[0,359,25]],"482":[[0,1,200],[0,9,8],[0,356,20]],"483":[[0,10,10],[0,111,8],[0,127,15]],"600":[[-1,200],[0,1,340],[0,10,3],[0,12,4]],"601":[[0,0,1],[0,6,60],[0,17,500],[0,111,12]],"602":[[-1,300],[0,1,500],[0,2,200],[0,3,200]],"603":[[-1,600],[0,8,15],[0,108,100],[0,109,150]],"604":[[-1,400],[0,32,50],[0,33,30],[0,34,30]],"605":[[0,0,4],[0,9,12],[0,10,10],[0,27,10]],"606":[[-1,800],[0,3,220],[0,6,150],[0,18,200]],"607":[[0,0,2],[0,5,220],[0,17,500],[0,24,200]],"608":[[0,0,3],[0,1,400],[0,10,8],[0,37,20]],"609":[[0,0,2],[0,35,30],[0,36,10],[0,37,20]],"630":[[0,0,2],[0,28,7],[0,30,12],[0,109,100]],"631":[[0,0,3],[0,11,17],[0,26,20],[0,29,20]],"632":[[0,0,1],[0,7,20],[0,17,300],[0,28,10]],"633":[[0,0,4],[0,2,350],[0,11,12],[0,28,8]],"634":[[-1,300],[0,1,400],[0,6,50],[0,28,5]],"635":[[-1,400],[0,11,10],[0,17,420],[0,38,100]],"636":[[-1,200],[0,19,30],[0,30,5],[0,38,20]],"637":[[-1,600],[0,24,60],[0,34,200],[0,35,30]],"638":[[0,0,2],[0,28,18],[0,153,40]],"639":[[-1,800],[0,9,13],[0,21,100],[0,26,80]],"660":[[0,0,4],[0,11,15],[0,17,450],[0,28,11]],"661":[[0,0,2],[0,4,250],[0,11,17],[0,20,30]],"662":[[0,0,2],[0,4,300],[0,5,75],[0,36,25]],"663":[[-1,800],[0,8,40],[0,11,11],[0,108,140]],"664":[[0,0,1],[0,2,250],[0,7,25],[0,8,25]],"665":[[0,0,3],[0,1,460],[0,4,80],[0,11,17]],"666":[[-1,400],[0,3,100],[0,11,8],[0,18,0]],"667":[[-1,300],[0,1,400],[0,7,30],[0,11,6]],"668":[[-1,200],[0,5,100],[0,6,30],[0,18,200]],"669":[[-1,600],[0,11,10],[0,28,7],[0,33,20]]
+const PRODUCT_REQUIRE=[{"25":[[0,9,30]],"27":[[0,10,12]],"28":[[0,11,8]],"30":[[0,12,5]],"111":[[0,110,5]],"116":[[0,2,1980]],"117":[[0,7,550]],"118":[[0,4,1020]],"119":[[0,38,650]],"120":[[0,42,110]],"121":[[0,43,100]],"122":[[0,112,130],[0,116,35]],"123":[[0,113,220],[0,117,35]],"124":[[0,114,345],[0,118,35]],"125":[[0,115,80],[0,119,35]],"130":[[0,17,400]],"131":[[0,21,150]],"132":[[0,20,100],[0,10,2]],"133":[[0,19,100],[0,10,2]],"134":[[0,17,400],[0,6,25]],"135":[[0,21,150],[0,6,25]],"136":[[0,2,120]],"137":[[0,1,200]],"138":[[0,1,200],[0,23,30]],"139":[[0,18,150],[0,22,30]],"140":[[0,21,150],[0,22,30]],"141":[[0,26,100],[0,144,3]],"142":[[0,26,100],[0,25,3]],"143":[[0,26,100],[0,25,3],[0,144,3]],"144":[[0,21,450]],"145":[[0,33,300],[0,12,2]],"146":[[0,35,200],[0,10,4],[0,12,2]],"147":[[0,37,60],[0,12,2]],"148":[[0,31,250],[0,26,150],[0,27,7]],"149":[[0,21,300],[0,43,10],[0,22,50],[0,121,4]],"150":[[0,38,60],[0,119,6],[0,17,50]],"152":[[0,151,5]],"155":[[0,152,5],[0,28,6]],"156":[[0,152,8],[0,28,5]],"157":[[0,152,2],[0,28,9]],"161":[[0,1,300],[0,17,150]],"162":[[0,1,250],[0,20,200]],"163":[[0,22,190],[0,26,120]],"164":[[0,1,150],[0,10,30]],"165":[[0,10,10],[0,12,5]],"166":[[0,10,10],[0,27,7]],"167":[[0,40,60],[0,111,10]],"168":[[0,10,10],[0,42,25]],"169":[[0,6,300],[0,9,15],[0,121,3]],"170":[[0,1,200],[0,43,20],[0,121,4]],"200":[[-1,1200],[0,171,24],[0,172,20],[0,173,12]],"201":[[-1,1400],[0,171,25],[0,172,18],[0,174,15]],"202":[[-1,1500],[0,172,22],[0,173,19],[0,174,16]],"203":[[-1,1460],[0,172,19],[0,173,16],[0,175,29]],"204":[[-1,1510],[0,171,7],[0,173,18],[0,174,8],[0,176,21]],"205":[[-1,1622],[0,171,14],[0,173,22],[0,176,10],[0,177,12]],"206":[[-1,1787],[0,174,16],[0,176,9],[0,177,10],[0,178,9]],"207":[[-1,1894],[0,173,15],[0,175,10],[0,177,11],[0,179,8]],"208":[[-1,1950],[0,173,12],[0,175,13],[0,178,15],[0,180,18]],"209":[[-1,2110],[0,171,12],[0,176,21],[0,179,7],[0,181,9]],"210":[[-1,2250],[0,171,12],[0,175,5],[0,179,34],[0,182,11]],"211":[[-1,2357],[0,172,9],[0,176,12],[0,181,22],[0,183,18]],"212":[[-1,2488],[0,171,13],[0,182,13],[0,183,16],[0,184,6]],"213":[[-1,2595],[0,171,3],[0,179,8],[0,185,7],[0,186,9],[0,187,7]],"214":[[0,0,2],[0,171,10],[0,172,14],[0,173,13],[0,174,18]],"215":[[0,0,2],[0,171,12],[0,172,22],[0,174,10],[0,175,19]],"216":[[0,0,2],[0,173,14],[0,175,8],[0,177,19],[0,178,16]],"217":[[0,0,3],[0,171,19],[0,177,5],[0,178,17],[0,180,13]],"218":[[0,0,3],[0,180,9],[0,181,8],[0,182,9],[0,183,9]],"219":[[0,0,3],[0,179,4],[0,182,1],[0,185,6],[0,186,15],[0,187,7]],"220":[[-1,1500],[0,171,70],[0,172,180],[0,173,80],[0,174,80],[0,188,1]],"221":[[-1,1500],[0,171,80],[0,172,50],[0,173,65],[0,174,140],[0,189,1]],"300":[[-1,100],[0,250,240],[0,251,210]],"301":[[-1,200],[0,251,160],[0,252,200]],"302":[[-1,300],[0,252,230],[0,250,210]],"303":[[-1,400],[0,253,220],[0,252,150]],"304":[[-1,500],[0,253,150],[0,254,110]],"305":[[0,0,1],[0,254,90],[0,255,100]],"306":[[0,0,1],[0,256,80],[0,255,80]],"307":[[-1,600],[0,257,210],[0,256,160]],"308":[[0,0,1],[0,258,130],[0,257,160]],"309":[[-1,700],[0,259,190],[0,258,140]],"310":[[0,0,2],[0,260,90],[0,259,90]],"311":[[-1,800],[0,261,390],[0,260,390]],"312":[[0,0,2],[0,262,130],[0,261,150]],"313":[[-1,900],[0,263,180],[0,262,230]],"314":[[0,0,2],[0,264,90],[0,263,80]],"315":[[-1,1000],[0,265,100],[0,264,130]],"316":[[0,0,3],[0,266,130],[0,265,90]],"317":[[-1,1100],[0,267,290],[0,266,260]],"318":[[0,0,3],[0,268,160],[0,267,170]],"319":[[-1,1200],[0,269,130],[0,268,180]],"320":[[-1,1300],[0,270,90],[0,269,80]],"321":[[0,0,3],[0,271,50],[0,270,100]],"322":[[-1,1400],[0,272,380],[0,271,320]],"323":[[0,0,4],[0,273,190],[0,272,160]],"324":[[-1,1500],[0,272,321],[0,274,321]],"325":[[-1,1600],[0,250,480],[0,251,420]],"326":[[-1,1700],[0,251,320],[0,252,400]],"327":[[-1,1800],[0,250,420],[0,252,460]],"328":[[-1,1900],[0,252,300],[0,253,440]],"329":[[-1,2000],[0,253,300],[0,254,200]],"330":[[-1,2100],[0,273,71],[0,275,111]],"331":[[0,0,4],[0,254,180],[0,255,200]],"332":[[0,0,4],[0,255,160],[0,256,160]],"333":[[-1,2200],[0,256,320],[0,257,420]],"334":[[0,0,4],[0,257,320],[0,258,260]],"335":[[-1,2300],[0,272,111],[0,274,90]],"336":[[-1,2400],[0,258,280],[0,259,380]],"337":[[0,0,5],[0,259,180],[0,260,180]],"338":[[-1,2500],[0,260,780],[0,261,780]],"339":[[0,0,5],[0,261,300],[0,262,160]],"340":[[-1,2600],[0,262,460],[0,263,360]],"341":[[0,0,5],[0,263,160],[0,264,180]],"342":[[-1,2700],[0,264,260],[0,265,200]],"343":[[0,0,6],[0,265,180],[0,266,260]],"344":[[0,0,6],[0,256,71],[0,276,51]],"345":[[-1,2800],[0,266,520],[0,267,580]],"346":[[0,0,6],[0,267,340],[0,268,320]],"347":[[-1,2900],[0,268,360],[0,269,260]],"348":[[-1,3000],[0,269,160],[0,270,180]],"349":[[0,0,6],[0,270,200],[0,271,100]],"400":[[-1,3100],[0,271,640],[0,272,760]],"401":[[0,0,7],[0,272,320],[0,273,380]],"402":[[-1,3200],[0,272,181],[0,275,221]],"403":[[0,0,7],[0,257,111],[0,276,141]],"450":[[0,20,190],[0,10,15]],"451":[[0,33,120],[0,111,5]],"452":[[0,34,100],[0,9,15]],"453":[[0,35,150],[0,10,10]],"454":[[0,36,190],[0,10,12]],"455":[[0,37,200],[0,9,8]],"456":[[0,40,40],[0,10,8]],"457":[[0,351,20],[0,9,8]],"458":[[0,356,10],[0,10,12]],"459":[[0,361,18],[0,111,8]],"460":[[0,360,14],[0,10,15]],"461":[[0,357,18],[0,10,16]],"462":[[0,352,16],[0,9,20]],"463":[[0,353,20],[0,10,18]],"464":[[0,359,22],[0,111,14]],"465":[[0,355,12],[0,9,16]],"466":[[0,354,15],[0,111,8],[0,12,5]],"467":[[0,358,14],[0,10,12],[0,9,16]],"468":[[0,10,6],[0,356,20]],"469":[[0,6,40],[0,37,120],[0,352,60]],"470":[[0,351,120],[0,355,50],[0,359,80]],"471":[[0,10,12],[0,351,100],[0,360,40]],"472":[[0,10,20],[0,360,100]],"473":[[0,352,120],[0,357,120]],"474":[[0,6,20],[0,117,6],[0,154,50]],"475":[[0,9,20],[0,44,40],[0,153,40]],"476":[[0,6,15],[0,111,6],[0,115,25]],"477":[[0,1,200],[0,27,12],[0,351,80]],"478":[[0,39,20],[0,111,6]],"479":[[0,1,250],[0,9,10],[0,41,20]],"480":[[0,10,10],[0,12,10],[0,352,30]],"481":[[0,111,6],[0,355,12],[0,359,25]],"482":[[0,1,200],[0,9,8],[0,356,20]],"483":[[0,10,10],[0,111,8],[0,127,15]],"600":[[-1,200],[0,1,340],[0,10,3],[0,12,4]],"601":[[0,0,1],[0,6,60],[0,17,500],[0,111,12]],"602":[[-1,300],[0,1,500],[0,2,200],[0,3,200],[0,26,20]],"603":[[-1,600],[0,8,15],[0,108,100],[0,109,150]],"604":[[-1,400],[0,32,50],[0,33,30],[0,34,30]],"605":[[0,0,4],[0,9,12],[0,10,10],[0,27,10]],"606":[[-1,800],[0,3,220],[0,6,150],[0,18,200]],"607":[[0,0,2],[0,5,220],[0,17,500],[0,24,200]],"608":[[0,0,3],[0,1,400],[0,10,8],[0,37,20]],"609":[[0,0,2],[0,35,30],[0,36,10],[0,37,20]],"630":[[0,0,2],[0,28,7],[0,30,12],[0,109,100]],"631":[[0,0,3],[0,11,17],[0,26,20],[0,29,20]],"632":[[0,0,1],[0,7,20],[0,17,300],[0,28,10]],"633":[[0,0,4],[0,2,350],[0,11,12],[0,28,8]],"634":[[-1,300],[0,1,400],[0,6,50],[0,28,5]],"635":[[-1,400],[0,11,10],[0,17,420],[0,38,100]],"636":[[-1,200],[0,19,30],[0,30,5],[0,38,20]],"637":[[-1,600],[0,24,60],[0,34,200],[0,35,30]],"638":[[0,0,2],[0,28,18],[0,153,40]],"639":[[-1,800],[0,9,13],[0,21,100],[0,26,80]],"660":[[0,0,4],[0,11,15],[0,17,450],[0,28,11]],"661":[[0,0,2],[0,4,250],[0,11,17],[0,20,30]],"662":[[0,0,2],[0,4,300],[0,5,75],[0,36,25]],"663":[[-1,800],[0,8,40],[0,11,11],[0,108,140]],"664":[[0,0,1],[0,2,250],[0,7,25],[0,8,25]],"665":[[0,0,3],[0,1,460],[0,4,80],[0,11,17]],"666":[[-1,400],[0,3,100],[0,11,8],[0,18,0]],"667":[[-1,300],[0,1,400],[0,7,30],[0,11,6]],"668":[[-1,200],[0,5,100],[0,6,30],[0,18,200]],"669":[[-1,600],[0,11,10],[0,28,7],[0,33,20]]
 ,"750":[[0,700,30],[0,701,60],[0,702,30]]
 ,"751":[[0,701,100],[0,702,70],[0,703,30]]
 ,"752":[[0,702,100],[0,703,80],[0,704,120]]
@@ -756,6 +761,7 @@ const VARIABLES = {
                     "valLimitEmptyFields":["Option",3],
                     "valMessageRe":["Option",3],
                     "valMessagesSystemMarkRead":["Option",3],
+                    "valMinAlpinFarm6":["Option",3,1],
                     "valMinExFruitsFarms5":["Option",3,1],
                     "valMinRack":["Option",3],
                     "valMinRackE":["Option",5],
@@ -881,7 +887,7 @@ var questData;
 var css_styles=new Object();
 var regMsgContentMarketsale,regMsgContentContractsale,regMsgContentContractsaleList,regMsgSubjectFriend,regMsgSubjectFriendCancel;
 var valAutoWater, valWaterNeeded, valAssumeWater, valAutoCrop, valErnteMsg, valLimitEmptyFields, valStatistik, valClickErrorbox, valGlobaltimeShowCroppedZone;
-var valMoveAnimals, valMinRackMan, valMinRack, valMinRackPlantsize, valMinRackFarmis,valMinRackForestryFarmis,valMinRackFoodworldFarmis,valMinRackFarmersmarketFarmis, valMinRackGrowing, valMinRackRecursive, valFarmiLimits, valFarmiMiniInfo,valMinExFruitsFarms5;
+var valMoveAnimals, valMinRackMan, valMinRack, valMinRackPlantsize, valMinRackFarmis,valMinRackForestryFarmis,valMinRackFoodworldFarmis,valMinRackFarmersmarketFarmis, valMinRackGrowing, valMinRackRecursive, valFarmiLimits, valFarmiMiniInfo,valMinAlpinFarm6,valMinExFruitsFarms5;
 var upjersAds, buyNotePadShowBlocked, show;
 var farmiLog, farmiDailyCount, levelLog, levelLogId, lotteryLog, lotteryLogId, logSales, logSalesId, logDonkey, logDonkeyId, logClothingDonation;
 var zoneAddToGlobalTime;
@@ -1965,7 +1971,7 @@ try{
     }
     return time;
 }catch(err){
-    GM_logError("calcProductionTime","product:"+[productType,productId]+" bonus="+bonus,"",err);
+    GM_logError("calcProductionTime_Berater","product:"+[productType,productId]+" bonus="+bonus,"",err);
     return 0;
 }
 }
@@ -7001,8 +7007,8 @@ function buildInfoPanelOptions(){
             }
         }
 
-                //Min exotic fruits on farm5
-                newtr=createElement("tr",{},newtable);
+        //Min exotic fruits on farm5
+        newtr=createElement("tr",{},newtable);
         newtd=createElement("td",{"align":"center"},newtr);
         newdiv=createElement("div",{"style":"white-space:nowrap;"},newtd);
         newinput=createElement("input",{"id":"valMinExFruitsFarms5","value":valMinExFruitsFarms5,"class":"text","maxlength":"1","size":"3px","style":"background-color:transparent;text-align:center;"},newdiv);
@@ -7021,6 +7027,26 @@ function buildInfoPanelOptions(){
         },false);
         createElement("td",{},newtr,getText("settings_valMinExFruitsFarms5")[0]);
         createElement("td",{},newtr,getText("settings_valMinExFruitsFarms5")[1]);
+        //Min alpin herbs  on farm 6
+        newtr=createElement("tr",{},newtable);
+        newtd=createElement("td",{"align":"center"},newtr);
+        newdiv=createElement("div",{"style":"white-space:nowrap;"},newtd);
+        newinput=createElement("input",{"id":"valMinAlpinFarm6","value":valMinAlpinFarm6,"class":"text","maxlength":"1","size":"3px","style":"background-color:transparent;text-align:center;"},newdiv);
+        newinput.addEventListener("focus",function(){this.style.backgroundColor="lightblue";},false);
+        newinput.addEventListener("blur",function(){this.style.backgroundColor="transparent";},false);
+        newinput.addEventListener("change",function(){
+            var help=parseInt(this.value,10);
+            if (isNaN(help)){
+                this.value=1;
+            }else{
+                help=Math.max(0,Math.min(6,help));
+                valMinAlpinFarm6=help;
+                this.value=help;
+                GM_setValue2(COUNTRY+"_"+SERVER+"_"+USERNAME+"_valMinAlpinFarm6", implode(valMinAlpinFarm6,"buildInfoPanelOptions/valMinAlpinFarm6"),20);
+            }
+        },false);
+        createElement("td",{},newtr,getText("settings_valMinAlpinFarm6")[0]);
+        createElement("td",{},newtr,getText("settings_valMinAlpinFarm6")[1]);
 
         newtr=createElement("tr",{},newtable);
         newtd=createElement("td",{"align":"center"},newtr);
@@ -10111,11 +10137,13 @@ try{
     valMinRackGrowing=GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_valMinRackGrowing",true);
     valMinRackRecursive=GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_valMinRackRecursive",false);
     valFarmiLimits=explode(GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_valFarmiLimits"),"do_main/valFarmiLimits",[90,100]);
-        unsafeData.valFarmiLimits=valFarmiLimits.clone();
-        valMinExFruitsFarms5=GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_valMinExFruitsFarms5",implode(valMinExFruitsFarms5,"buildInfoPanelOptions/valMinExFruitsFarms5"));
-        if (isNaN(valMinExFruitsFarms5)){
-        valMinExFruitsFarms5=VARIABLES["USER"]["valMinExFruitsFarms5"][2];
-        }
+    unsafeData.valFarmiLimits=valFarmiLimits.clone();
+    valMinExFruitsFarms5=GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_valMinExFruitsFarms5",implode(valMinExFruitsFarms5,"buildInfoPanelOptions/valMinExFruitsFarms5"));
+    if (isNaN(valMinExFruitsFarms5)){
+    valMinExFruitsFarms5=VARIABLES["USER"]["valMinExFruitsFarms5"][2];
+    }
+
+    valMinAlpinFarm6=GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_valMinAlpinFarm6",implode(valMinAlpinFarm6,"buildInfoPanelOptions/valMinAlpinFarm6"));
 
     valFarmiMiniInfo=GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_valFarmiMiniInfo",true);
 
@@ -15197,13 +15225,6 @@ try{
                         {
                             var zoneNrF = zoneNr + 6 * (farmNR - 1);
                             switch (zones.getBuilding(zoneNrF)){
-                                /*case 13:
-                                case 14:
-                                    raiseEvent("gameFactoryOilCropped");
-                                    break;
-                                case 16:
-                                    raiseEvent("gameFactoryKnittingCropped");
-                                    break;*/
                                 case 13:
                                 case 14:
                                 case 16:
@@ -15676,7 +15697,20 @@ try{
             var newDiv, newDiv1;
             var tempZoneProductionData = [[{}], 0, 0, true];
             var tempZoneProductionDataSlot;
-            //var data = unsafeWindow.innerinfos_data[1]; // unsafeWindow.strickerei_data;
+            /*
+            console.log("+++++++++++++++++ doKnitting"+zoneNr);
+            console.log("===                            ===");
+            console.log(print_r(unsafeWindow.factory.data, "", true, "\n"));
+            console.log("===                            ===");
+
+            console.log("===                            ===");
+            console.log(print_r(unsafeWindow.innerinfos_data[1], "", true, "\n"));
+            console.log("===                            ===");
+
+            console.log("===                            ===");
+            console.log(print_r(unsafeWindow.building_inner_data, "", true, "\n"));
+            console.log("===                            ===");
+            */
             var data = unsafeWindow.factory.data;
             for (var slot = 1; slot <= 3; slot++) {
                 zoneNrS = zoneNrF + "." + slot;
@@ -15735,163 +15769,7 @@ try{
             console.log(err);
         }
     }
-/*
-    function doFactoryOil(zoneNr) {
-        try {
-            var zoneNrF = zoneNr + 6 * gameLocation.get()[1];
-            var zoneNrS;
-            var farmNr = gameLocation.get()[1] + 1;
-            showBlase(zoneNrF);
-            drawZoneNavi(zoneNrF, $("innermaincontainer"));
-            var newDiv, newDiv1;
-            var tempZoneProductionData = [[{}], 0, 0, true];
-            var tempZoneProductionDataSlot;
-            //var data = unsafeWindow.innerinfos_data[1]; // unsafeWindow.strickerei_data;
-            var data = unsafeWindow.factory.data;
-            for (var slot = 1; slot <= 3; slot++) {
-                zoneNrS = zoneNrF + "." + slot;
-                if ((slot == 1) || (!data.slots[slot]["block"])) {
-                    zones.setBlock(zoneNrS, "");
-                    tempZoneProductionDataSlot = [[{}], 0, 0, true];
-                    tempZoneProductionData[1]++;
-                    tempZoneProductionData[2]++;
-                    tempZoneProductionDataSlot[1]++;
-                    tempZoneProductionDataSlot[2]++;
-                    if (data.slots[slot]) {
-                        var iPrTyp = 0;
-                        var iProd = data.slots[slot].pid;
-                        if (iProd) {
-                            var iAmount = data.slots[slot].amount;
-                            var iPoints = iAmount * prodPoints[iPrTyp][iProd];
-                            if (data.slots[slot].ready) {
-                                var iTime = Math.min(now - unsafeWindow.Zeit.Verschiebung, zones.getEndtime(zoneNrS));
-                            } else {
-                                var iTime = now + data.slots[slot].remain - unsafeWindow.Zeit.Verschiebung;
-                            }
-                            //production_slot_info2_6_1
-                            newDiv = $("production_slot_info" + farmNr + "_" + zoneNr + "_" + slot).parentNode;
-                            newDiv1 = createElement("div", {
-                                "style": " position:absolute;bottom: 70px; left: 102px;"
-                            }, newDiv);
-                            pointsFormat(iPoints, "div", newDiv1);
-                            tempZoneProductionData[1]--;
-                            if (!tempZoneProductionData[0][iPrTyp][iProd]) { tempZoneProductionData[0][iPrTyp][iProd] = []; }
-                            tempZoneProductionData[0][iPrTyp][iProd].push([iAmount, iPoints, iTime, NEVER]);
-                            tempZoneProductionDataSlot[1]--;
-                            if (!tempZoneProductionDataSlot[0][iPrTyp][iProd]) { tempZoneProductionDataSlot[0][iPrTyp][iProd] = []; }
-                            tempZoneProductionDataSlot[0][iPrTyp][iProd].push([iAmount, iPoints, iTime, NEVER]);
-                            // auto-cropping
-                            if (data.slots[slot].ready && (top.unsafeData.autoAction == null) && valAutoCrop["farm"] && (newDiv = $("strickerei_slot" + slot))) {
-                                top.unsafeData.autoAction = "berater: oil crop";
-                                window.setTimeout(function(div) {
-                                    click(div);
-                                    top.unsafeData.autoAction = null;
-                                }, 500, newDiv);
-                            }
-                        }
-                    }
-                    zones.setProduction(zoneNrF + "." + slot, tempZoneProductionDataSlot.clone());
-                } else {
-                    zones.setBlock(zoneNrS, "b");
-                }
-            }
-            zones.setProduction(zoneNrF, tempZoneProductionData.clone());
-            var tempZoneProductionData = null;
-            newDiv = null;
-            newDiv1 = null;
-            raiseEvent("gameOpenFactoryOil");
-        } catch (err) {
-            GM_logError("doFactoryOil", "", "", err);
-            console.log(err);
-        }
-    }*/
 
-    // Read production data of the currently opened knitting factory
-    /*function doKnitting(zoneNr) {
-        try {
-
-            console.log("+++++++++++++++++ doKnitting"+zoneNr);
-            console.log("===                            ===");
-            console.log(print_r(unsafeWindow.factory.data, "", true, "\n"));
-            console.log("===                            ===");
-
-            console.log("===                            ===");
-            console.log(print_r(unsafeWindow.innerinfos_data[1], "", true, "\n"));
-            console.log("===                            ===");
-
-            console.log("===                            ===");
-            console.log(print_r(unsafeWindow.building_inner_data, "", true, "\n"));
-            console.log("===                            ===");
-
-
-            var zoneNrF = zoneNr + 6 * gameLocation.get()[1];
-            var zoneNrS;
-            var farmNr = gameLocation.get()[1] + 1;
-            showBlase(zoneNrF);
-            drawZoneNavi(zoneNrF, $("innermaincontainer"));
-            var newDiv, newDiv1;
-            var tempZoneProductionData = [[{}], 0, 0, true];
-            var tempZoneProductionDataSlot;
-            //var data = unsafeWindow.innerinfos_data[1]; // unsafeWindow.strickerei_data;
-            var data = unsafeWindow.factory.data;
-            for (var slot = 1; slot <= 3; slot++) {
-                zoneNrS = zoneNrF + "." + slot;
-                if ((slot == 1) || (!data.slots[slot]["block"])) {
-                    zones.setBlock(zoneNrS, "");
-                    tempZoneProductionDataSlot = [[{}], 0, 0, true];
-                    tempZoneProductionData[1]++;
-                    tempZoneProductionData[2]++;
-                    tempZoneProductionDataSlot[1]++;
-                    tempZoneProductionDataSlot[2]++;
-                    if (data.slots[slot]) {
-                        var iPrTyp = 0;
-                        var iProd = data.slots[slot].pid;
-                        if (iProd) {
-                            var iAmount = data.slots[slot].amount;
-                            var iPoints = iAmount * prodPoints[iPrTyp][iProd];
-                            if (data.slots[slot].ready) {
-                                var iTime = Math.min(now - unsafeWindow.Zeit.Verschiebung, zones.getEndtime(zoneNrS));
-                            } else {
-                                var iTime = now + data.slots[slot].remain - unsafeWindow.Zeit.Verschiebung;
-                            }
-                            //production_slot_info2_6_1
-                            newDiv = $("production_slot_info" + farmNr + "_" + zoneNr + "_" + slot).parentNode;
-                            newDiv1 = createElement("div", {
-                                "style": " position:absolute;bottom: 70px; left: 102px;"
-                            }, newDiv);
-                            pointsFormat(iPoints, "div", newDiv1);
-                            tempZoneProductionData[1]--;
-                            if (!tempZoneProductionData[0][iPrTyp][iProd]) { tempZoneProductionData[0][iPrTyp][iProd] = []; }
-                            tempZoneProductionData[0][iPrTyp][iProd].push([iAmount, iPoints, iTime, NEVER]);
-                            tempZoneProductionDataSlot[1]--;
-                            if (!tempZoneProductionDataSlot[0][iPrTyp][iProd]) { tempZoneProductionDataSlot[0][iPrTyp][iProd] = []; }
-                            tempZoneProductionDataSlot[0][iPrTyp][iProd].push([iAmount, iPoints, iTime, NEVER]);
-                            // auto-cropping
-                            if (data.slots[slot].ready && (top.unsafeData.autoAction == null) && valAutoCrop["farm"] && (newDiv = $("strickerei_slot" + slot))) {
-                                top.unsafeData.autoAction = "berater: knitting crop";
-                                window.setTimeout(function(div) {
-                                    click(div);
-                                    top.unsafeData.autoAction = null;
-                                }, 500, newDiv);
-                            }
-                        }
-                    }
-                    zones.setProduction(zoneNrF + "." + slot, tempZoneProductionDataSlot.clone());
-                } else {
-                    zones.setBlock(zoneNrS, "b");
-                }
-            }
-            zones.setProduction(zoneNrF, tempZoneProductionData.clone());
-            var tempZoneProductionData = null;
-            newDiv = null;
-            newDiv1 = null;
-            raiseEvent("gameOpenFactoryKnitting");
-        } catch (err) {
-            GM_logError("doKnitting", "", "", err);
-            console.log(err);
-        }
-    }
-*/
     /**********************************************************
     * Events Factory Object (Strickerei/Knitting, Öl/Oel)
     **********************************************************/
@@ -16033,48 +15911,6 @@ try{
         }catch(err){GM_logError("buildFuelstation","","",err);}
     });
 
-    //calcPointsFuelstation
-    //h:
-    //m:
-    //e:
-    /*
-    unsafeOverwriteFunction("calcPointsFuelstation",function(h, m, e){
-        try{
-            unsafeWindow._calcPointsFuelstation(h, m, e);
-        }catch(err){GM_logError("_calcPointsFuelstation","","",err);}
-        try{
-            GM_log("calcPointsFuelstation "+"h"+h+"m"+m+"e"+e);
-        }catch(err){GM_logError("calcPointsFuelstation","","",err);}
-    });
-    */
-
-    //fuelstationStats()
-    /*
-    unsafeOverwriteFunction("fuelstationStats",function(){
-        try{
-            unsafeWindow._fuelstationStats();
-        }catch(err){GM_logError("_fuelstationStats","","",err);}
-        try{
-            GM_log("fuelstationStats ");
-        }catch(err){GM_logError("fuelstationStats","","",err);}
-    });
-    */
-    //updateFuelstation()
-    /*
-    unsafeOverwriteFunction("updateFuelstation",function(){
-        try{
-            unsafeWindow._updateFuelstation();
-        }catch(err){GM_logError("_updateFuelstation","","",err);}
-        try{
-            GM_log("updateFuelstation ");
-        }catch(err){GM_logError("updateFuelstation","","",err);}
-    });
-    */
-    //closeFuelstationHelp()
-    //openFuelstationHelp()
-    //setFuelstationHelp(a)
-    //fuelstationCheckLevelAdd(a, d)
-    //updateFuelstationLevel(e, n)
 
     unsafeOverwriteFunction("innerInfosResponse", function(zoneNr) {
         // oil, knitting, factory, pony, megafield, fuelstation
@@ -16376,11 +16212,17 @@ try{
         try{
             if($("globalbox")){
                 var vehicleLocation=unsafeWindow.farms_data.map.vehicles[unsafeWindow.map_current_route][unsafeWindow.map_current_vehicle].current;
+                var valueMin = 0;
                 if (prodTyp[0][d]=="ex" && vehicleLocation==5){
-                    if (prodStock[vehicleLocation][d]-$("map_vehicle_slot_fill_input").value<valMinExFruitsFarms5*120/prodPlantSize[0][d]){
-                        $("map_vehicle_slot_fill_input").value=prodStock[vehicleLocation][d]-valMinExFruitsFarms5*120/prodPlantSize[0][d];
+                    valueMin = valMinExFruitsFarms5*120/prodPlantSize[0][d];
+                } else if (prodTyp[0][d]=="alpin" && vehicleLocation==6) {
+                    valueMin = valMinAlpinFarm6*120/prodPlantSize[0][d];
+                }
+                if (valueMin>0) {
+                    if (prodStock[vehicleLocation][d]-$("map_vehicle_slot_fill_input").value < valueMin){
+                        $("map_vehicle_slot_fill_input").value=Math.max(prodStock[vehicleLocation][d]-valueMin,0);
                         var container = $("globalbox_content");
-                        var newdiv=createElement("div",{"style":"color:red;font-weight:bold;"},container,getText("remainFarm5").replace(/%1%/,valMinExFruitsFarms5*120/prodPlantSize[0][d]));
+                        var newdiv=createElement("div",{"style":"color:red;font-weight:bold;"},container,getText("remainFarm").replace(/%1%/,valueMin).replace(/%2%/,vehicleLocation));
                         setTimeout(function (){
                             newdiv.parentNode.removeChild(newdiv);
                         }, 3000);
@@ -17218,12 +17060,6 @@ try{
                                 drugsArray[drugsID]=vet_data.animals.queue[queueID].diseases[diseasesCount].phase;
                             }
                             break;
-                            /*var test = vet_data.animals.queue[queueID].diseases[diseasesCount].phase;
-                            //var test1 = drugsArray[drugsID]?drugsArray[drugsID]+vet_data.animals.queue[queueID].diseases[diseasesCount].phase:vet_data.animals.queue[queueID].diseases[diseasesCount].phase;
-                            var test1 = vet_data.animals.queue[queueID].diseases[diseasesCount].phase + (drugsArray[drugsID]?drugsArray[drugsID]:0);
-
-                            console.log(prodStock[0][drugsID]+" "+drugsID+" test"+test+" test1: "+test1);
-                            */
                         }
                     }
                 }
@@ -17325,9 +17161,7 @@ try{
                                 zones.setBonus(zoneNrF,5);
                                 if(unsafeWindow.farmersmarket_data.flower_area){
                                     for(var slot in unsafeWindow.farmersmarket_data.flower_area){
-
                                         if(!unsafeWindow.farmersmarket_data.flower_area.hasOwnProperty(slot)){continue;}
-
                                         item=unsafeWindow.farmersmarket_data.flower_area[slot];
                                         iProd=parseInt(item["pid"],10);
                                         if(item["remain"]){
@@ -17413,10 +17247,11 @@ try{
                             case 3:{ //monster fruit culture
                                 //13102016
                                 zones.setBonus(zoneNrF,0);
+                                /*
                                 console.log("=== START LESE monster fruit culture ===");
                                 console.log(print_r(unsafeWindow.farmersmarket_data.megafruit, "", true, "\n"));
                                 console.log("=== END LESE monster fruit culture ===");
-
+                                */
                                 if((!currBlock)&&(unsafeWindow.farmersmarket_data.megafruit)) {
                                     if(unsafeWindow.farmersmarket_data.megafruit.current) {
                                         zones.setBonus(zoneNrF,0);
@@ -17866,12 +17701,7 @@ try{
                 case 'need':
                         raiseEvent("gameNeedMegaFruit");
                     break;
-                /*case 'start':
-                        doFarmersMarketData();
-                    break;*/
-
                 default:
-
             }
         }catch(err){GM_logError("dialogMegaFruit","","",err);}
     });
@@ -17879,15 +17709,6 @@ try{
     /**********************************************************
     * Tierzucht / Animal breeding 13102016
     **********************************************************/
-    /*unsafeOverwriteObjFunction("pets","init",function(){
-        try{
-             unsafeWindow.pets._init();
-        }catch(err){GM_logError("pets.init","","",err);}
-        try{
-        }catch(err){GM_logError("InitResponse","","",err);}
-
-    });*/
-
     //Open Farmersmarket Pos4
     unsafeOverwriteObjFunction("pets","buildProductionSlots",function(){
         try{
@@ -20295,6 +20116,64 @@ try{
 
     }, true);
 
+    /**********************************************************
+    * Events Siebenschlaefer
+    **********************************************************/
+    unsafeOverwriteObjFunction("loginevent","init",function(){
+        try{
+             unsafeWindow.loginevent._init();
+        }catch(err){GM_logError("loginevent.init","","",err);}
+        try{
+            raiseEvent("gamegoToOpenSiebenSchlaeferRun");
+        }catch(err){GM_logError("loginevent.init","","",err);}
+
+    }, true);
+
+    unsafeOverwriteObjFunction("loginevent","getday",function(){
+        try{
+             unsafeWindow.loginevent._getday();
+        }catch(err){GM_logError("loginevent.getday","","",err);}
+        try{
+            raiseEvent("gamePressEventButton");
+        }catch(err){GM_logError("loginevent.getday","","",err);}
+
+    }, true);
+
+    /**********************************************************
+    * Events DeliveryEvent
+    **********************************************************/
+    unsafeOverwriteObjFunction("deliveryevent","init",function(){
+        try{
+             unsafeWindow.deliveryevent._init();
+        }catch(err){GM_logError("deliveryevent.init","","",err);}
+        try{
+            raiseEvent("gamegoToOpenDeliveryevent");
+        }catch(err){GM_logError("deliveryevent.init","","",err);}
+
+    }, true);
+
+    unsafeOverwriteObjFunction("deliveryevent","startTourCheckCommit",function(c){
+        try{
+             unsafeWindow.deliveryevent._startTourCheckCommit(c);
+        }catch(err){GM_logError("deliveryevent.startTourCheckCommit","","",err);}
+        try{
+            raiseEvent("gamePressSpotButton");
+        }catch(err){GM_logError("deliveryevent.startTourCheckCommit","","",err);}
+
+    }, true);
+
+    unsafeOverwriteObjFunction("deliveryevent","startTour",function(a){
+        try{
+             unsafeWindow.deliveryevent._startTour(a);
+        }catch(err){GM_logError("deliveryevent.startTour","","",err);}
+        try{
+            raiseEvent("gameDeliveryStart");
+        }catch(err){GM_logError("deliveryevent.startTour","","",err);}
+
+    }, true);
+
+
+
 
     //*********************************************************************************************
     // buyPetsParts
@@ -20430,19 +20309,23 @@ try{
                 showGoToLottery();
                 raiseEvent("gameNewDay");
             }
-/*
-        console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++");
-        console.log(implode(unsafeWindow.job_data));
-        console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++");*/
             /*
-            try {
-                // Christmas Specialoffer 2016
-                var  specialoffer = unsafeWindow.specialoffer;
-                if (specialoffer.data.today) {
-                    specialoffer.daily();
-                }
-            } catch(err){ GM_logError("Specialoffer","","",err); }
+            console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++");
+            console.log(implode(unsafeWindow.job_data));
+            console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++");
             */
+            try {
+                // Summer 2017
+                var  specialoffer = unsafeWindow.specialoffer;
+                if (specialoffer && specialoffer.data && specialoffer.data.today) {
+                    specialoffer.daily();
+                    div = $("specialoffer");
+                    if (div) {
+                        unsafeWindow.hideDiv('globalbox');
+                        unsafeWindow.hideDiv('globaltransp');
+                    }
+                }
+            }catch(err){ GM_logError("Specialoffer","","",err); }
 
             var div = $("newsbox");
             if (div && div.style.display == "block") {
@@ -22670,7 +22553,7 @@ try{
         text["de"]["fw2"]="Imbissbude";
         text["de"]["fw3"]="Konditorei";
         text["de"]["fw4"]="Eiscafe";
-        text["de"]["gamecurrency"]=unsafeWindow.gamecurrency;
+        text["de"]["gamecurrency"]=unsafeWindow.gamecurrency?unsafeWindow.gamecurrency:"kT";
         text["de"]["gain"]="Erzeugnis";
         text["de"]["general"]="Allgemein";
         text["de"]["given"]="Gegeben";
@@ -22796,7 +22679,7 @@ try{
         text["de"]["reloadRequired"]="(Reload benötigt)";
         text["de"]["relogin"]="Session endet bald.<br>Neuer Login in %1%.";
         text["de"]["remaining"]="Verbleibend";
-        text["de"]["remainFarm5"]="eine Anzahl von %1% für die Anpflanzung eines Feldes verbleiben auf Farm 5";
+        text["de"]["remainFarm"]="eine Anzahl von %1% für die Anpflanzung eines Feldes verbleiben auf Farm %2%";
         text["de"]["requestingUpdateInfoOfX"]="Fordere Update-Informationen für %1% an ..."
         text["de"]["requestingUserStatistic"]="Fordere Benutzer-Statistik an ...";
         text["de"]["requirement"]="Bedarf";
@@ -22917,6 +22800,7 @@ try{
         text["de"]["settings_valContractLogAmount"]=["Anzahl gemerkte Verträge","Deine letzten erhaltenen und gesendeten Verträge werden gespeichert und somit kann ein Verlauf angezeigt werden."];
         text["de"]["settings_valFarmiLimits"]=["Farmi Grenzen","Die Farmis sind in 3 Klassen eingeteilt, je nachdem wie gut ihre Bezahl-Rate ist."];
         text["de"]["settings_valFarmiMiniInfo"]=["Farmi Mini Info","Zeigt einen kleinen Kreis unter jedem Farmi mit der jeweiligen Klasse der Bezahl-Rate."];
+        text["de"]["settings_valMinAlpinFarm6"]=["Bergkräuter","Korrektur der Transportmenge (Anzahl Felder)"];
         text["de"]["settings_valMinExFruitsFarms5"]=["Exotische Früchte","Korrektur der Transportmenge (Anzahl Felder)"];
         text["de"]["settings_valMinRackMan"]=["Detail Konfiguration","Du editierst die Anzahl selbst *hier*"];
         text["de"]["settings_valMinRack"]=[,"Ein Produkt wird markiert, falls der Lagerbestand unter diese Grenze fällt. Du kannst verschiedene Werte abhängig von der Kategorie einstellen."];
@@ -23226,7 +23110,7 @@ try{
         text["en"]["reloadRequired"]="(Reload required)";
         text["en"]["relogin"]="Session ends soon.<br>New login in %1%.";
         text["en"]["remaining"]="Remaining";
-        text["en"]["remainFarm5"]="a number of %1% for planting one field remaining on farm 5";
+        text["en"]["remainFarm"]="a number of %1% for planting one field remaining on farm %2%";
         text["en"]["requestingUpdateInfoOfX"]="Requesting update information for %1% ..."
         text["en"]["requestingUserStatistic"]="Requesting user statistic ...";
         text["en"]["requirement"]="Need";
@@ -23347,6 +23231,7 @@ try{
         text["en"]["settings_valContractLogAmount"]=["Number contracts kept","Your last sent and received contracts are kept so that a history of them can be shown."];
         text["en"]["settings_valFarmiLimits"]=["Farmie Limits","The farmies are marked in 3 cases depending on their payment-rate."];
         text["en"]["settings_valFarmiMiniInfo"]=["Farmie Mini Info","Displays a small circle below each farmie showing its case of payment-rate."];
+        text["en"]["settings_valMinAlpinFarm6"]=["Mountain herbs","Correction of transport amount (number of fields)"];
         text["en"]["settings_valMinExFruitsFarms5"]=["Exotic Fruits","Correction of transport amount (number of fields)"];
         text["en"]["settings_valMinRackMan"]=["Detail configuration","You edit the amount on your own *here*"];
         text["en"]["settings_valMinRack"]=[,"A product is marked if its amount in your rack is falling below this value. You can enter different values depending on the category."];
