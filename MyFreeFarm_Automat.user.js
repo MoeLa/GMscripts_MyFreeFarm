@@ -4,8 +4,8 @@
 // @author         BastianKanaan
 // @description    Extends MyFreeFarm
 // @icon           data:image/png;base64,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
-// @date            06.08.2017
-// @version         2.9.56
+// @date            28.08.2017
+// @version         2.9.57
 // @license         GPL version 3 or any later version; http://www.gnu.org/copyleft/gpl.html
 // @include         /^(http|https):\/\/(|www\.|s\d+\.)au\.myfreefarm\.com\/.*$/
 // @include         /^(http|https):\/\/(|www\.|s\d+\.)veselaferma\.com\/.*$/
@@ -146,6 +146,7 @@ const CHANGELOG=[["2.0","29.05.2014",[["Migration nach openuserjs.org","Migratio
                 ,["2.09.54","11.07.2017",[["Einfache Lösung für Eisauslieferungs Event (beachte Option: Ice delivery event )","simple solution for ice delivery event (see option: Ice delivery event)"]]]
                 ,["2.09.55","12.07.2017",[["Bugfix Eisauslieferungsevent","bugfix ice delivery event"]]]
                 ,["2.09.56","06.08.2017",[["Bugfix Tieraufzuch","Bugfix Animal Breeding"]]]
+                ,["2.09.57","28.08.2017",[["Wettessen","SpeedEating"],["Bugfix","Bugfix"]]]
             ];
 
 if(!VERSIONfunctionFile){
@@ -2616,6 +2617,7 @@ function drawMonsterfruitChooseItemBox(zoneNrS, zoneNrL, appendTo){
                 && (item.objects[Object.keys(item.objects)[zoneNrF_h[1]-1]][i].level<=item.level)) {
                     var newdiv1=createElement("div",{"style":"float:left;width:30px; height:30px;padding-right:10px;"},appendTo);
                     newdiv=createElement("div",{"class":"divChooseItem divZoneMonsterFruitCultureIcon link megafruit_need_item megafruit_need_item"+item.objects[Object.keys(item.objects)[zoneNrF_h[1]-1]][i].oid,"id":"megafruit_need_item"+item.objects[Object.keys(item.objects)[zoneNrF_h[1]-1]][i].oid+"divChooseItem"+zoneNrL+"Q0I"+item.objects[Object.keys(item.objects)[zoneNrF_h[1]-1]][i].oid},newdiv1);
+                    if(zoneList[zoneNrL][0][0]==parseInt(item.objects[Object.keys(item.objects)[zoneNrF_h[1]-1]][i].oid)){ newdiv.style.border="4px solid black"; }
                     newdiv.addEventListener("click",function(){
                         var zoneNrF=this.parentNode.parentNode.getAttribute("zoneNrF");
                         var zoneNrL=this.parentNode.parentNode.getAttribute("zoneNrL");
@@ -5858,12 +5860,13 @@ function autoFarmFactory(runId, step) {
                             } else {
                                 var startProductionButton = $("production_slot" + handled.farmNr + "_" + handled.zoneNr + "_1");
                                 var req=unsafeData.BUILDING_INPUT[getZoneType(handled.zoneNrS)][zoneList[handled.zoneNrL][0][0]][0];
+                                var stockNr = (handled.farmNr<=4)?0:(handled.farmNr==5)?5:6;
                                 for(var i=0;i<req.length;i++){
                                     if (checkGuildJobProduct(handled.zoneNrL)) {
                                         if (unsafeWindow.job_data.guild_job_data.stock[req[i][0]] && unsafeWindow.job_data.guild_job_data.stock[req[i][0]] < req[i][1]) {
                                             startProductionButton = false;
                                         }
-                                    } else if(unsafeData.prodStock[0][req[i][0]]<req[i][1]){
+                                    } else if(unsafeData.prodStock[stockNr][req[i][0]]<req[i][1]){
                                         startProductionButton = false;
                                     }
                                 }
@@ -8081,8 +8084,9 @@ try{
                 } else {
                     autoFarmersmarketVetTreatment(runId,1);
                 }
-            }
-            else {
+            } else if (handled.zoneNrF=="farmersmarket-6" && handled.zoneBuildingTyp==8) {
+                autoFarmersmarketSpeedEating(runId,1);
+            } else {
                 autoFarmersmarketBuilding(runId,1);
             }
         }
@@ -8100,9 +8104,7 @@ try{
     if(settings.get("account","botUseFarmersmarket")&&bot.checkRun("autoFarmersmarketBuilding",runId)){
         bot.setAction("autoFarmersmarketBuilding ("+step+")");
         var help,help2,action=null,listeningEvent=null;
-        console.log("-------step---------");
-        console.log(step);
-        console.log("-------Step--------");
+
         switch(step){
         case 1:{ // check required products
 
@@ -8561,9 +8563,6 @@ try{
                     autoFarmersmarketBuilding(runId,9); // -> exit
                 }
                 break;}
-
-                //{"zoneNrS":"6.2","slot":2,"zoneNrF":"6","farmNr":1,"zoneNr":6,"zoneNrL":"6.1","zoneBuildingTyp":6}
-                //{"6":[0,"r",true],"6.2":[0,"r",true],"6.3":[0,"r",true],
             }
         break;}
         case 9:{
@@ -8608,7 +8607,6 @@ try{
  }catch(err){ GM_logError("autoFarmersmarketBuilding","runId="+runId+" step="+step,"",err); }
 }
 
-
 //autoFarmersmarketVetTreatment
 function autoFarmersmarketVetTreatment(runId, step){
 try{
@@ -8641,7 +8639,6 @@ try{
             autoFarmersmarketVetTreatment(runId,step+1);
         break;}
         case 2:{ // open farmersmarket
-            //if( (help=unsafeData.readyZone[handled.zoneNrS])&&help[2]&&(help[1]=="r"||help[1]=="e")&&botUseVetTreatment) {
             if( (help=unsafeData.readyZone[handled.zoneNrS])&&help[2]&&(help[1]=="r"||help[1]=="e")) {
                 if(!unsafeData.gameLocation.check("farmersmarket")){
                     action=function(){ click($("speedlink_farmersmarket")); };
@@ -8654,8 +8651,6 @@ try{
             }
         break;}
         case 3:{ // open farmersmarket building
-            //if((help=unsafeData.readyZone[handled.zoneNrS])&&help[2]&&(((help[1]=="r")&&((zoneList[handled.zoneNrL][0][0]!=PRODSTOP)||(!settings.get("account","disableCropFields"))))||((help[1]=="e")&&(zoneList[handled.zoneNrL][0][0]!=PRODSTOP)))){
-            //if( (help=unsafeData.readyZone[handled.zoneNrS])&&help[2]&&(help[1]=="r"||help[1]=="e")&&botUseVetTreatment) {
             if( (help=unsafeData.readyZone[handled.zoneNrS])&&help[2]&&(help[1]=="r"||help[1]=="e")) {
                 //GM_logInfo("autoFarmersmarketVetTreatment","runId="+runId+" step="+step,"",handled.zoneNrF.capitalize()+" automat<br>Opening Step:"); //TODO text
                 help=/-(\d)$/.exec(handled.zoneNrF)[1]; // determine which building to work on
@@ -8672,8 +8667,6 @@ try{
         break;}
         case 4:{ // harvest
             help=unsafeData.readyZone[handled.zoneNrS];
-             //if((unsafeData.readyZone[handled.zoneNrS][1]=="r")&&((zoneList[handled.zoneNrL][0][0]!=PRODSTOP)||(!settings.get("account","disableCropFields")))){
-            // if( (help)&&help[2]&&help[1]=="r"&&botUseVetTreatment) {
             if( (help)&&help[2]&&help[1]=="r") {
                 //GM_logInfo("autoFarmersmarketVetTreatment","runId="+runId+" step="+step,"",handled.zoneNrF.capitalize()+" automat<br>Cropping"); //TODO text
                 switch(handled.zoneBuildingTyp){
@@ -8971,6 +8964,129 @@ try{
         help=null;listeningEvent=null;action=null;
     }
  }catch(err){ GM_logError("autoFarmersmarketAnimalBreeding","runId="+runId+" step="+step,"",err); }
+}
+
+//autoFarmersmarketSpeedEating
+function autoFarmersmarketSpeedEating(runId, step){
+try{
+    GM_log("autoFarmersmarketSpeedEating runId="+runId+" step="+step+" handled.zoneNrS="+handled.zoneNrS);
+    //TODO Option
+    var botUseSpeedEating = true;
+    //if(settings.get("account","botUseVetTreatment")&&bot.checkRun("autoFarmersmarketSpeedEating",runId)){
+    if(botUseSpeedEating&&bot.checkRun("autoFarmersmarketSpeedEating",runId)){
+        bot.setAction("autoFarmersmarketSpeedEating ("+step+")");
+        var help,help2,action=null,listeningEvent=null;
+//{"zoneNrS":"farmersmarket-6.1","slot":1,"zoneNrF":"farmersmarket-6","farmNr":null,"zoneNr":"farmersmarket","zoneNrL":"farmersmarket-6.1","zoneBuildingTyp":8}
+        switch(step){
+        case 1:{ // open farmersmarket
+            if((help=unsafeData.readyZone[handled.zoneNrS])&&help[2]&&( (help[1]=="r")||(help[1]=="e"))) {
+                if(!unsafeData.gameLocation.check("farmersmarket")){
+                    GM_logInfo("autoFarmersmarketSpeedEating","runId="+runId+" step="+step,"",handled.zoneNrF.capitalize()+" Goto Farmersmarket");
+                    action=function(){ click($("speedlink_farmersmarket")); };
+                    listeningEvent="gameFarmersmarketOpened";
+                }else{
+                    autoFarmersmarketSpeedEating(runId,step+1);
+                }
+            } else {
+                autoFarmersmarketSpeedEating(runId,7); // -> exit
+            }
+
+        break;}
+        case 2:{ // open farmersmarket building
+            if( (help=unsafeData.readyZone[handled.zoneNrS])&&help[2]&&(help[1]=="r"||help[1]=="e")) {
+                help=/-(\d)$/.exec(handled.zoneNrF)[1]; // determine which building to work on
+                if($("farmersmarket_pos"+help+"_inner").style.display != "block"){
+                    GM_logInfo("autoFarmersmarketSpeedEating","runId="+runId+" step="+step,"",handled.zoneNrF.capitalize()+" Open SpeedEating ");
+                    action=function(){ click($("farmersmarket_pos"+help+"_click")); };
+                    listeningEvent="gameFarmersmarketOpened"+help;
+                }else{
+                    GM_logInfo("autoFarmersmarketSpeedEating","runId="+runId+" step="+step,"",handled.zoneNrF.capitalize()+" SpeedEating is open");
+                    autoFarmersmarketSpeedEating(runId,step+1);
+                }
+            }else{
+                autoFarmersmarketSpeedEating(runId,7); // -> exit
+            }
+        break;}
+        case 3:{ // open slot
+            GM_logInfo("autoFarmersmarketSpeedEating","runId="+runId+" step="+step,"",handled.zoneNrF.capitalize()+" look for viewer and click viewers");
+            var item = unsafeWindow.farmersmarket_data.foodcontest;
+            var help;
+            for (var i = 1; i<=4&&!help;i++) {
+                if(item.blocks[i].block) { continue; }
+                for (var j in item.blocks[i].pin){
+                    if(!item.blocks[i].pin.hasOwnProperty(j)){ continue; }
+                    if(item.blocks[i].pin[j].remain<0) {
+                        help="foodcontest_block_crowd"+i+"_pin_"+j;
+                        break;
+                    }
+                }
+            }
+            if (help = $(help)) {
+                step=step-1;
+                action=function(){ click(help);};
+                listeningEvent="gameSpeedEatingCacheClick";
+            } else {
+                autoFarmersmarketSpeedEating(runId,4); // feed fighter
+            }
+
+            //help = $("foodcontest_blocks").querySelectorAll('div[class*="pin"]');
+
+        break;}
+        case 4:{ // feed fighter
+            GM_logInfo("autoFarmersmarketSpeedEating","runId="+runId+" step="+step,"",handled.zoneNrF.capitalize()+" feed fighter");
+            var help = $("foodcontest_stage_fighter_bubble");
+            if (help&&help.style.display != "none"){
+                step=2; //new bubbles
+                action=function(){ click(help);};
+                // feed fighter
+                listeningEvent="gameSpeedEatingFeedFighter";
+            } else {
+                autoFarmersmarketSpeedEating(runId,5); // Mergin
+            }
+        break;}
+        case 5:{ // Mergin
+            GM_logInfo("autoFarmersmarketSpeedEating","runId="+runId+" step="+step,"",handled.zoneNrF.capitalize()+" Merge Cache");
+            var help = $("foodcontest_merch_bubble");
+            if (help&&help.style.display != "none"){
+                action=function(){ click(help);};
+                listeningEvent="gameSpeedEatingOpenMergeCash";
+            } else {
+                autoFarmersmarketSpeedEating(runId,7); // -> exit
+            }
+        break;}
+        case 6: { // Close GlobalBox sale overview
+            GM_logInfo("autoFarmersmarketSpeedEating","runId="+runId+" step="+step,"",handled.zoneNrF.capitalize()+" close sale overview");
+            if((help=$("globalbox")) && (help.style.display == "block")) {
+                unsafeWindow.hideDiv('globalbox');
+                unsafeWindow.hideDiv('globaltransp');
+                autoFarmersmarketBuilding(runId,7); // -> exit
+            }else{
+                autoFarmersmarketBuilding(runId,7); // -> exit
+            }
+        break;}
+        case 7:{
+            GM_logInfo("autoFarmersmarketSpeedEating","runId="+runId,"zoneNrL="+handled.zoneNrL+" zoneNrS="+handled.zoneNrS,"start other slot or exit");
+            var help=/-(\d)$/.exec(handled.zoneNrF)[1];
+            var div=$("farmersmarket_pos"+help+"_inner").querySelector(".big_close");
+            if (!div) {
+                div=$("farmersmarket_pos"+help+"_inner").querySelector(".mini_close");
+            }
+            autoZoneFinish(runId,div);
+        break;}
+        }
+
+        if(listeningEvent){
+            document.addEventListener(listeningEvent,function(listeningEvent,runId,step){
+                return function(){
+                    document.removeEventListener(listeningEvent,arguments.callee,false);
+                    window.setTimeout(autoFarmersmarketSpeedEating,settings.getPause(),runId,step+1);
+                };
+            }(listeningEvent,runId,step),false);
+        }
+        if(action){ action(); }
+        help=null;listeningEvent=null;action=null;
+    }
+ }catch(err){ GM_logError("autoFarmersmarketSpeedEating","runId="+runId+" step="+step,"",err); }
 }
 
 function autoFoodworld(runId){
@@ -9341,7 +9457,9 @@ try{
         if(!unsafeData.ALL_SLOTS.hasOwnProperty(fz)){ continue; }
         if(unsafeData.zones.getBlock(fz)){ continue; }
         if(getZoneType(fz)!=currZoneType){ continue; }
-        if(fz=="farmersmarket-4.5"||fz=="farmersmarket-4.6"||fz=="farmersmarket-4.7"){ continue; }
+        //Zone Pairing ausschalten
+        if(fz=="farmersmarket-4.5"||fz=="farmersmarket-4.6"||fz=="farmersmarket-4.7" ||
+           fz=="farmersmarket-5.5"||fz=="farmersmarket-5.6"||fz=="farmersmarket-5.7" ){ continue; }
         zones.push(fz);
     }
     // build table
@@ -9358,7 +9476,9 @@ try{
     for(var lz in zoneList){
         if(!zoneList.hasOwnProperty(lz)){ continue; }
         if(lz==0 || lz=="windmill"){ continue; }
-        if(lz=="farmersmarket-4.5"||lz=="farmersmarket-4.6"||lz=="farmersmarket-4.7"){ continue; }
+        //Zone Pairing ausschalten
+        if(lz=="farmersmarket-4.5"||lz=="farmersmarket-4.6"||lz=="farmersmarket-4.7" ||
+           lz=="farmersmarket-5.5"||lz=="farmersmarket-5.6"||lz=="farmersmarket-5.7"){ continue; }
         var extendedList=extendedListReg.exec(lz);
         if((!extendedList && currZoneType!=getZoneType(lz)) || (extendedList && currZoneType!=1)) continue;
         newtr=createElement("tr",{"style":"line-height:18px;"},newtable);
@@ -9618,7 +9738,7 @@ function buildInfoPanelOverview(mode){
             }
         }
 
-        newdiv=createElement("div",{style:"overflow-y:auto;overflow-x:hidden;width:100%;height:"+($("infoPanelInner").clientHeight-35)+"px;"},$("infoPanelInner"));
+        newdiv=createElement("div",{style:"overflow-y:auto;overflow-x:hidden;width:100%;height:"+($("infoPanelInner").clientHeight-75)+"px;"},$("infoPanelInner"));
         newtable=createElement("table",{"class":"border1",style:"width:100%;"},newdiv);
         var newtr,newtd,zoneNrS;
         // collect all handled zones
@@ -9626,6 +9746,7 @@ function buildInfoPanelOverview(mode){
         for(var i in unsafeData.ALL_SLOTS){
             if(!unsafeData.ALL_SLOTS.hasOwnProperty(i)){ continue; }
             if(unsafeData.zones.getBlock(i)){ continue; }
+            if (i=="farmersmarket-5.5"||i=="farmersmarket-5.6"||i=="farmersmarket-5.7" ) {continue;}
             if(unsafeData.ALL_SLOTS[i]=="farm"){
                 if(mode["filterZone"].search(unsafeData.ALL_SLOTS[i]+Math.ceil(parseInt(i,10)/6))!=-1){
                     zones.push([unsafeData.ALL_SLOTS[i]+Math.ceil(parseInt(i,10)/6),i]);
@@ -9696,6 +9817,18 @@ function buildInfoPanelOverview(mode){
                     newtd=createElement("td",{"id":"tdAutoMatOverview_"+zoneNrL},newtr);
                     drawFuelstationChooseItemBox(zoneNrS, zoneNrL,newtd);
                 }
+            break;}
+            case 7:{ //monster fruit culture
+                if((mode["filterType"].search("3,")!=-1) && !$("tdAutoMatOverview_"+zoneNrL)){
+                    newtr=createElement("tr",{},newtable);
+                    newtd=createElement("td",{"id":"tdAutoMatOverview_"+zoneNrL},newtr);
+                    //drawFuelstationChooseItemBox(zoneNrS, zoneNrL,newtd);
+                    drawMonsterfruitChooseItemBox(zoneNrS, zoneNrL,newtd);
+                }
+            break;
+            }
+            case 8:{ //speed eating
+
             break;}
             default:{
                 if(!$("tdAutoMatOverview_"+zoneNrL)){
@@ -10581,7 +10714,9 @@ function buildInfoPanelZonePairing(){
         for(var i in unsafeData.ALL_SLOTS){
             if(!unsafeData.ALL_SLOTS.hasOwnProperty(i)){ continue; }
             if(unsafeData.zones.getBlock(i)){ continue; }
-            //if(i=="farmersmarket-4.5"||i=="farmersmarket-4.6"||i=="farmersmarket-4.7"){ continue; }
+            //monster fruit culture, animal treatment and speed eating not show
+            if(i=="farmersmarket-3.1"||i=="farmersmarket-3.2"||i=="farmersmarket-3.3" ||
+               i=="farmersmarket-6.1"||i=="farmersmarket-6.2") { continue; }
             zoneType=getZoneType(i);
             if(!slotCount[zoneType]){ slotCount[zoneType]=0; }
             slotCount[zoneType]++;
@@ -11567,7 +11702,7 @@ try{
         try{
             // Automat icons
             for(var v=1;v<=6;v++){
-                if (v==3) {continue;} //Automat-Icon blockieren (Farmersmarket-3)
+                if (v==3 || v == 6) {continue;} //Automat-Icon blockieren (Farmersmarket-3)
                 if(!unsafeData.zones.getBlock("farmersmarket-"+v)){
                     drawAutomatIcon("farmersmarket-"+v,
                                     "farmersmarket-"+v+(unsafeData.zones.isMultiSlot("farmersmarket-"+v)?".1":""),

@@ -4,8 +4,8 @@
 // @author         BastianKanaan
 // @description    Extends MyFreeFarm
 // @icon           data:image/png;base64,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
-// @date           06.08.2017
-// @version        2.10.71
+// @date           28.08.2017
+// @version        2.10.72
 // @license        GPL version 3 or any later version; http://www.gnu.org/copyleft/gpl.html
 // @include       /^(http|https):\/\/(|www\.|s\d+\.)au\.myfreefarm\.com\/.*$/
 // @include       /^(http|https):\/\/(|www\.|s\d+\.)veselaferma\.com\/.*$/
@@ -185,6 +185,7 @@ const CHANGELOG=[["2.0","29.05.2014",[["Migration nach openuserjs.org","Migratio
                 ,["2.10.69","11.07.2017",[["Einfache Lösung für Eisauslieferungs Event (beachte Option: Ice delivery event )","simple solution for ice delivery event (see option: Ice delivery event)"]]]
                 ,["2.10.70","21.07.2017",[["Bugfix","Bugfix"]]]
                 ,["2.10.71","06.08.2017",[["Bugfix Tieraufzuch","Bugfix Animal Breeding"]]]
+                ,["2.10.72","28.08.2017",[["Wettessen","SpeedEating"],["Bugfix","Bugfix"]]]
                 ];
 if(!VERSIONfunctionFile){
     alert("Hi, I am the Berater-Script.\nThe function-file is missing.\nPlease install me again.");
@@ -394,19 +395,19 @@ unsafeData.PRODUCT2BUILDING=PRODUCT2BUILDING.clone();
 const BUILDING2PRODUCT=[,,[9],[10],[11],[12],,[25,144],[27,111],[28,152],[30],[91],[110],[116,117,118,119,120,121],[122,123,124,125],[151],[155,156,157],,,,[350],[750,751,752,753,754,755,756,757,758,759]];
 unsafeData.BUILDING2PRODUCT=BUILDING2PRODUCT.clone();
 // task_new_building
-        /*  TYPE             NUMBER
-            Empty            0
-            Field            1
-            Stable           2
-            Factory          3
-            Foodworld        4
-            Farmersmarket    4
-            Pony             5
-            Monster fruit culture     7
-        */
+/*  TYPE             NUMBER
+    Empty                   0
+    Field                   1
+    Stable                  2
+    Factory                 3
+    Foodworld               4
+    Farmersmarket           4
+    Pony                    5
+    Monster fruit culture   7
+                        GM_logInfo("autoFarmersmarketSpeedEating","runId="+runId+" step="+step,"",handled.zoneNrF.capitalize()+" Open SpeedEating ");ting            8
+*/
 //13102016
-const BUILDINGTYPE={"0":0,"1":1,"2":2,"3":2,"4":2,"5":2,"6":0,"7":3,"8":3,"9":3,"10":3,"11":2,"12":2,"13":3,"14":3,"15":2,"16":3,"17":0,"18":5,"19":0,"20":6,"21":3,"fl1":1,"fl2":4,"fl3":7,"fl4":4,"fl5":4,"fw1":4,"fw2":4,"fw3":4,"fw4":4};
-
+const BUILDINGTYPE={"0":0,"1":1,"2":2,"3":2,"4":2,"5":2,"6":0,"7":3,"8":3,"9":3,"10":3,"11":2,"12":2,"13":3,"14":3,"15":2,"16":3,"17":0,"18":5,"19":0,"20":6,"21":3,"fl1":1,"fl2":4,"fl3":7,"fl4":4,"fl5":4,"fl6":8,"fw1":4,"fw2":4,"fw3":4,"fw4":4};
 unsafeData.BUILDINGTYPE=BUILDINGTYPE.clone();
 // task_new_building
 const BUILDING_SIZE={"1":120,"forest":25,"fl1":36,"megafield":[11,9]};
@@ -414,7 +415,7 @@ unsafeData.BUILDING_SIZE=BUILDING_SIZE.clone();
 // task_new_building
 
 //13102016
-const BUILDING_SLOTS={"13":3,"14":3,"16":3,"18":3,"20":4,"21":3,"windmill":2,"sawmill":3,"carpentry":3,"fw1":3,"fw2":3,"fw3":3,"fw4":3,"fl0":17,"fl2":3,"fl3":3,"fl4":7,"fl5":4,"megafield":99};
+const BUILDING_SLOTS={"13":3,"14":3,"16":3,"18":3,"20":4,"21":3,"windmill":2,"sawmill":3,"carpentry":3,"fw1":3,"fw2":3,"fw3":3,"fw4":3,"fl0":17,"fl2":3,"fl3":3,"fl4":7,"fl5":7,"megafield":99};
 
 unsafeData.BUILDING_SLOTS=BUILDING_SLOTS.clone();
 // Needed input of a zone
@@ -585,7 +586,7 @@ const QUESTS =
                         [[[0,702,51450],[0,28,1482]],, 6750000],
                         [[[0,703,32484],[0,40,38981]],, 6800000],
                         [[[0,708,39375],[0,706,31500]],, 6850000],
-                        [[[0,709,26512],[0,152,1178]],, 6900000,[[8,"32"]]]
+                        [[[0,709,26512],[0,152,1178]],, 6900000,[[8,"36"]]]
                     ]
                         }
                         ,"forestry":{"1":[,[[[0,4,3300],[0,19,4500],[0,24,1400]],,51520],[[[0,5,2600],[0,17,8000],[0,91,50]],,50360],[[[0,6,1250],[0,21,6600],[0,18,7300]],,0,[[1,1,1,5],[8,"forest"],[9,1,1],[9,1,21]]],[[[0,22,1400],[0,7,750]],,48630],[[[0,25,64],[0,3,3200],[1,21,8]],,50800],[[[0,8,650],[0,27,85],[0,4,4800],[0,91,25]],,0,[[8,"sawmill"],[9,1,41],[9,1,42],[9,1,43]]],[[[0,10,420],[0,19,1600]],,39360],[[[0,2,6000],[0,22,2100],[0,21,1800]],,38980],[[[0,24,1800],[1,21,12],[1,41,10]],,0,[[1,1,2,5],[9,1,2],[9,1,22],[9,1,44],[9,1,45],[9,1,46]]],[[[0,3,3200],[0,5,3150],[0,20,1900]],,36200],[[[0,27,40],[0,18,7700]],,39240],[[[0,91,60],[1,22,30],[1,44,12]],,0,[[8,"carpentry"],[9,1,101]]],[[[0,8,300],[0,6,2000]],,39600],[[[0,17,16000],[1,22,30],[1,42,10]],,34520],[[[0,11,90],[1,101,6],[1,22,18]],,0,[[10]]],[[[0,22,800],[0,7,430],[0,2,2200]],,32642],[[[0,10,380]],,30400],[[[0,9,460],[1,41,20]],,0,[[9,1,102]]],[[[0,19,2600],[0,3,3000],[0,18,5400],[0,4,1200]],,31740],[[[0,91,15],[0,26,1700]],,31420],[[[0,25,35],[0,5,2800],[1,102,4]],,0,[[9,1,103]]],[[[0,24,1900],[0,6,1400]],,31060],[[[0,20,1350],[0,23,1250],[0,1,4900]],,30230],[[[0,12,75],[0,21,2500],[1,45,15]],,0,[[1,1,3,5],[9,1,3],[9,1,23],[9,1,47],[9,1,48],[9,1,49]]],[[[0,8,310],[0,9,240]],,31520],[[[0,7,130],[0,6,400],[0,27,30]],,32562],[[[0,3,5400],[1,23,18],[1,103,3]],,0,[[9,1,104]]],[[[0,11,185]],,31450],[[[0,22,1900],[0,91,22],[0,2,2600]],,30940],[[[0,10,110],[1,41,32],[1,101,24]],,0,[[9,1,105]]],[[[0,25,55],[1,46,27]],,35025],[[[0,20,2300],[0,23,1350],[1,43,36]],,34485],[[[0,5,2000],[1,104,12],[1,47,72]],,0,[[9,1,106]]],[[[0,26,2100],[0,8,150]],,36600],[[[0,3,2200],[0,18,4500],[0,19,3000],[0,4,1400],[0,17,2800]],,37520],[[[0,9,600],[1,106,20]],,0,[[9,1,107]]],[[[0,7,700]],,37380],[[[0,29,1400],[0,12,40]],,42000],[[[0,1,45000],[1,107,52],[1,48,18]],,0,[[9,1,108]]],[[[0,5,3000],[0,11,240]],,44400],[[[0,3,5800],[0,9,380],[0,21,2400]],,46970],[[[0,6,1600],[1,102,12],[1,23,48]],,0,[[9,1,109]]],[[[0,25,75]],,48500],[[[0,29,1200],[0,8,1300],[0,17,20000],[0,2,5600],[1,49,24]],,50340,[[5,1]]],[[[0,20,5400],[0,10,100],[1,42,35]],,52325],[[[0,26,450],[0,25,45],[0,9,850]],,52510],[[[0,5,18000],[0,4,3600],[1,109,50]],,0,[[1,1,4,5],[9,1,4],[9,1,24],[9,1,50],[9,1,51],[9,1,52]]],[[[0,11,100],[0,3,9200],[1,45,30],[1,103,18]],,52207],[[[0,91,50],[0,22,3300],[0,18,4000],[1,46,45]],,52953],[[[1,101,40],[1,21,80],[1,48,30]],,0,[[9,1,111]]],[[[0,21,3000],[0,23,1600],[0,6,800]],,51960],[[[0,25,50],[0,24,2200],[1,43,60]],,53008],[[[1,104,70],[1,107,55],[1,24,60]],,0,[[9,1,112]]],[[[0,8,500],[0,7,450]],,50730],[[[0,91,35],[0,2,3500],[0,29,1200],[1,23,30]],,52432],[[[0,11,290],[1,52,30]],,50496,[[5,1]]],[[[0,10,360],[0,9,720],[1,106,100]],,52200],[[[0,27,75],[1,112,15]],,50049,[[11,1]]],[[[0,23,2000],[0,12,60],[1,42,50],[1,102,20]],,53630],[[[1,50,65],[1,47,30],[1,111,50]],,0,[[9,1,110]]],[[[0,109,3500],[0,24,2500],[1,48,30]],,50792],[[[0,11,275],[1,22,60]],,51934],[[[0,10,250],[0,12,100],[1,41,50],[1,23,33]],,0,[[1,1,5,5],[9,1,5],[9,1,25],[9,1,53],[9,1,54],[9,1,55]]],[[[0,9,250],[0,23,4000]],,51800],[[[0,25,90],[0,18,6400],[0,21,1000],[1,44,50]],,55282],[[[0,108,7500],[1,53,15],[1,112,5]],,0,[[9,1,115]]],[[[0,6,500],[0,22,6250]],,48650],[[[0,3,9700],[0,17,30000],[0,5,2200],[1,25,36]],,51590],[[[0,91,50],[1,115,26],[1,101,62]],,0,[[9,1,116]]],[[[0,112,2900],[0,12,80],[1,22,32]],,54505],[[[0,108,3700],[0,11,200]],,51020],[[[0,27,125],[1,115,22]],,0,[[9,1,118]]],[[[0,29,2700],[1,104,27]],,54896],[[[0,10,380],[0,19,5100],[1,50,65],[1,109,8]],,52508],[[[0,91,40],[1,118,10],[1,50,80],[1,107,65]],,0,[[9,1,117],[7,5]]]]
@@ -1816,6 +1817,23 @@ function goToMonsterFruitCultureReady(){
     }catch(err){GM_logError("goToMonsterFruitCultureReady","","",err);}
 }
 
+function goToSpeedEatingReady(){
+    try{
+        var div;
+        if(gameLocation.check("farmersmarket",0)){
+            if(div=$("farmersmarket_pos6_click")){
+                click(div);
+            }
+        }else if(div=$("speedlink_farmersmarket")){
+            document.addEventListener("gameFarmersmarketOpened",function(){
+                document.removeEventListener("gameFarmersmarketOpened",arguments.callee,false);
+                window.setTimeout(goToSpeedEatingReady,100);
+            },false);
+            click(div);
+        }
+        div=null;
+    }catch(err){GM_logError("goToSpeedEatingReady","","",err);}
+}
 
 function goToBuyPetsParts(){
     try{
@@ -8856,17 +8874,21 @@ function calcAllSlots() {
         }
       }
     }
-    unsafeData.ALL_SLOTS = ALL_SLOTS.clone(); // for Automat
 
+    unsafeData.ALL_SLOTS = ALL_SLOTS.clone(); // for Automat
     //todo: Look for a better solution
     //this extra is for checkReady
     //Animal Treatment of Veterinary
-    vetTreatment = GM_getValue(COUNTRY + "_" + SERVER + "_" + USERNAME + "_vetTreatment", true);
-    if (vetTreatment) {
+
+    //vetTreatment = GM_getValue(COUNTRY + "_" + SERVER + "_" + USERNAME + "_vetTreatment", true);
+/*    if (vetTreatment) {
       for (var i = 5; i <= 7; i++) {
         ALL_SLOTS["farmersmarket-5." + i] = "farmersmarket";
       }
     }
+
+    unsafeData.ALL_SLOTS = ALL_SLOTS.clone(); // for Automat
+    */
   } catch (err) { GM_logError("calcAllSlots", "", "", err); }
 }
 function toolTipZoneProduction(zoneNrS){
@@ -15206,6 +15228,18 @@ try{
                     case "flowerarea_water_all":
                         raiseEvent("gameFarmersmarketWatered");
                         break;
+                    case "foodcontest_feed":
+                        doFarmersMarketData();
+                        raiseEvent("gameSpeedEatingFeedFighter");
+                        break;
+                    case "foodcontest_merchpin":
+                        doFarmersMarketData();
+                        raiseEvent("gameSpeedEatingOpenMergeCash");
+                        break;
+                    case "foodcontest_pincache":
+                        doFarmersMarketData();
+                        raiseEvent("gameSpeedEatingCacheClick");
+                        break;
                     case "fuelstation_harvest":
                         doFuelstation(zoneNr);
                         raiseEvent("gameFuelstationHarvest");
@@ -15609,12 +15643,13 @@ try{
 
         var cand=$("innercontent").getElementsByClassName("feedproduct");
         for(var v=0;v<cand.length;v++){
+            var stockNr = (unsafeWindow.farm<=4)?0:(unsafeWindow.farm==5)?5:6;
             var currProd=parseInt(cand[v].getElementsByTagName("div")[1].getAttribute("class").replace("l",""),10);
             var str="blackbox"+(prodStock[0][currProd]<prodMinRack[0][currProd]?" lowrack":"");
             if(!$(cand[v].id+"_rackamount")){ createElement("div",{"id":cand[v].id+"_rackamount","style":"position:absolute;top:-25px;left:-2px;font-weight:bold;"},cand[v]); }
             newdiv=$(cand[v].id+"_rackamount");
             if(newdiv.getAttribute("class")!=str){ newdiv.setAttribute("class",str); }
-            newdiv.innerHTML=numberFormatPrefixed(prodStock[0][currProd]);
+            newdiv.innerHTML=numberFormatPrefixed(prodStock[stockNr][currProd]);
         }
         if (valAutoCrop["farm"]&&(div=$("commitboxcrop"))&&(div.style.display=="block")&&(div=$("commitboxfootercrop"))){
             window.setTimeout(function(div){ click(div); },500,div.firstElementChild);
@@ -17042,6 +17077,8 @@ try{
 
     // Farmersmarket
     // return AnimalID or Time of next ready tinkture
+
+    vetTreatment = GM_getValue(COUNTRY + "_" + SERVER + "_" + USERNAME + "_vetTreatment", true);
     unsafeWindow.findTreatedAnimal=function() {
         try {
             var vet_data=unsafeWindow.farmersmarket_data.vet;
@@ -17520,6 +17557,59 @@ try{
                                     showGoToVetFarmi(); // Determine, if Discharge-Sick-Animals-Icon is shown
                                 }
                             break;}
+                            case 6:{ //Speed eating
+                                zones.setBonus(zoneNrF,0);
+
+                                console.log("=== START LESE Speed eating ===");
+                                console.log(print_r(unsafeWindow.farmersmarket_data.foodcontest, "", true, "\n"));
+                                console.log("=== END LESE Speed eating ===");
+                                if((!currBlock)&&(unsafeWindow.farmersmarket_data.foodcontest)) {
+                                    if(unsafeWindow.farmersmarket_data.foodcontest.current) {
+                                        tempZoneProductionData=[[{},{}],0,0,true];
+                                        zones.setBlock(zoneNrF,"");
+
+                                        item = unsafeWindow.farmersmarket_data.foodcontest;
+                                        iProd=item.current.pid; iAmount=0; iPoints=0;
+
+                                        if (item.current.remain>=0) {
+                                            var remain = item.current.feedremain; //Remain feed fighter
+
+                                            for (var i = 1; i<=4;i++) { //Zuschauer
+                                                if(item.blocks[i].block) { continue; }
+                                                for (var j in item.blocks[i].pin){
+                                                    if(!item.blocks[i].pin.hasOwnProperty(j)){ continue; }
+                                                    remain = Math.min(remain,item.blocks[i].pin[j].remain);
+                                                }
+                                            }
+
+                                            remain = Math.min(remain,item.current.data.merchpin_remain);
+
+                                            if(remain > 0) {
+                                                iTime = nowServer+remain;
+                                            } else {
+                                                iTime = nowServer+remain;
+                                                tempZoneProductionData[1]++;
+                                            }
+                                        } else {
+                                            //Speed eating ready
+                                            showGoToSpeedEatingReady();
+                                            iTime=nowServer+(60*60*3);
+                                        }
+                                        tempZoneProductionData[2]++;
+
+                                        if(!tempZoneProductionData[0][0][iProd]) {
+                                            tempZoneProductionData[0][0][iProd]=[];
+                                        }
+                                        tempZoneProductionData[0][0][iProd].push([iAmount,iPoints,iTime,NEVER]);
+                                    } else {
+                                        //to do
+                                        tempZoneProductionData=[[{},{}],0,0,true];
+                                        zones.setProduction(zoneNrS,tempZoneProductionDataSlot.clone());
+                                    }
+                                    zones.setProduction(zoneNrF,tempZoneProductionData.clone());
+                                }
+                            break;}
+
                             default: currBlock="blpqs"; // Block farm
                             }
                             zones.setBlock(zoneNrF,currBlock);
@@ -18078,6 +18168,21 @@ try{
         try{
 
         }catch(err){GM_logError("_moveVet","","",err);}
+    });
+
+    /**********************************************************
+    * Wettessen / Speed eating
+    **********************************************************/
+    //Open Farmersmarket Pos6
+    unsafeOverwriteFunction("initFoodcontest",function(a){
+        try{
+             unsafeWindow._initFoodcontest(a);
+        }catch(err){GM_logError("initFoodcontest","","",err);}
+        try{
+            doFarmersMarketData();
+            raiseEvent("gameFarmersmarketOpened6");
+        }catch(err){GM_logError("initFoodcontest","","",err);}
+
     });
 
     // events forestry ==============================================================================
@@ -20191,6 +20296,27 @@ try{
     // buyPetsParts
     //*********************************************************************************************
     //22102016
+    function showGoToMonsterFruitCultureReady(){
+        try{
+            if(!nodes["goToMonsterFruitCultureReady"]){
+                nodes["goToMonsterFruitCultureReady"]=new Object();
+                nodes["goToMonsterFruitCultureReady"]["node"]=createElement("div",{"id":"divGoToMonsterFruitCultureReady","class":"link blinking","style":"height:70px;width:70px;background:url('"+GFX+"megafruit_harvest_button2.png') 0px 0px;border:2px solid black;border-radius:35px;margin-bottom:5px;opacity:1;"},$("fixedDivRight"));
+                nodes["goToMonsterFruitCultureReady"]["node"].addEventListener("mouseover",function(event){ toolTip.show(event,getText("showGoToMonsterFruitCultureReady")); },false);
+                nodes["goToMonsterFruitCultureReady"]["node"].addEventListener("click",function(event){ goToMonsterFruitCultureReady(); },false);
+            }
+        }catch(err){GM_logError("showGoToMonsterFruitCultureReady","","",err);}
+    }
+
+    function hideGoToMonsterFruitCultureReady(){
+        try{
+            if(nodes["goToMonsterFruitCultureReady"]){
+                if(nodes["goToMonsterFruitCultureReady"]["node"]){ removeElement(nodes["goToMonsterFruitCultureReady"]["node"]); }
+                delete nodes["goToMonsterFruitCultureReady"];
+            }
+        }catch(err){GM_logError("hideGoToMonsterFruitCultureReady","","",err);}
+    }
+
+
     function showGoToBuyPetsParts(){
         try{
             if(unsafeWindow.pets&&(unsafeWindow.pets.data.daily==1)){
@@ -20235,24 +20361,24 @@ try{
         }catch(err){GM_logError("hideGoToAnimalBreedingReady","","",err);}
     }
 
-    function showGoToMonsterFruitCultureReady(){
+    function showGoToSpeedEatingReady(){
         try{
-            if(!nodes["goToMonsterFruitCultureReady"]){
-                nodes["goToMonsterFruitCultureReady"]=new Object();
-                nodes["goToMonsterFruitCultureReady"]["node"]=createElement("div",{"id":"divGoToMonsterFruitCultureReady","class":"link blinking","style":"height:70px;width:70px;background:url('"+GFX+"megafruit_harvest_button2.png') 0px 0px;border:2px solid black;border-radius:35px;margin-bottom:5px;opacity:1;"},$("fixedDivRight"));
-                nodes["goToMonsterFruitCultureReady"]["node"].addEventListener("mouseover",function(event){ toolTip.show(event,getText("showGoToMonsterFruitCultureReady")); },false);
-                nodes["goToMonsterFruitCultureReady"]["node"].addEventListener("click",function(event){ goToMonsterFruitCultureReady(); },false);
+            if(!nodes["goToSpeedEatingReady"]){
+                nodes["goToSpeedEatingReady"]=new Object();
+                nodes["goToSpeedEatingReady"]["node"]=createElement("div",{"id":"divGoToSpeedEatingReady","class":"link blinking","style":"height:70px;width:70px;background:url('"+GFX+"eater_middle_eat2.gif') 0px 0px;border:2px solid black;border-radius:35px;margin-bottom:5px;opacity:1;"},$("fixedDivRight"));
+                nodes["goToSpeedEatingReady"]["node"].addEventListener("mouseover",function(event){ toolTip.show(event,getText("showGoToSpeedEatingReady")); },false);
+                nodes["goToSpeedEatingReady"]["node"].addEventListener("click",function(event){ goToSpeedEatingReady(); },false);
             }
-        }catch(err){GM_logError("showGoToMonsterFruitCultureReady","","",err);}
+        }catch(err){GM_logError("showGoToSpeedEatingReady","","",err);}
     }
 
-    function hideGoToMonsterFruitCultureReady(){
+    function hideGoToSpeedEatingReady(){
         try{
-            if(nodes["goToMonsterFruitCultureReady"]){
-                if(nodes["goToMonsterFruitCultureReady"]["node"]){ removeElement(nodes["goToMonsterFruitCultureReady"]["node"]); }
-                delete nodes["goToMonsterFruitCultureReady"];
-    }
-        }catch(err){GM_logError("hideGoToMonsterFruitCultureReady","","",err);}
+            if(nodes["goToSpeedEatingReady"]){
+                if(nodes["goToSpeedEatingReady"]["node"]){ removeElement(nodes["goToSpeedEatingReady"]["node"]); }
+                delete nodes["goToSpeedEatingReady"];
+            }
+        }catch(err){GM_logError("hideGoToSpeedEatingReady","","",err);}
     }
 
     // on load execute ============================================================================
@@ -22572,6 +22698,7 @@ try{
         text["de"]["goods"]="Waren";
         text["de"]["showGoToAnimalBreedingReady"]="Tieraufzucht fertig!";
         text["de"]["showGoToMonsterFruitCultureReady"]="Monsterfruchtzucht fertig!";
+        text["de"]["showGoToSpeedEatingReady"]="Wettessen fertig!";
         text["de"]["goTobuyPetsParts"]="Zum Puzzleteilekauf";
         text["de"]["goToClothingDonation"]="Zur Kleiderspende";
         text["de"]["goToDonkey"]="Zum Goldesel Waltraud";
@@ -22859,7 +22986,7 @@ try{
         text["de"]["settings_vet"]=["Tierarzt (Behandlung kranker Tiere)", "Ein blinkender Icon zeigt an, wenn ein geheiltes Tier entlassen werden kann."];
         text["de"]["settings_vetAutoSet"]=["Automatisches Setzen", "Wird ein krankes Tier angeklickt, wird es direkt auf eine freie Liege gelegt."];
         text["de"]["settings_valVetNoCoinDrugs"]=["Keine Coin-Tinkturen", "Ignoriere Tinkturen, die in der Herstellung Coins kosten."];
-                text["de"]["settings_vetTreatment"]=["Tier heilen", "Tierdaten werden eingelesen"];
+        text["de"]["settings_vetTreatment"]=["Tier heilen", "Tierdaten werden eingelesen"];
 
         // help
         text["de"]["help_0"]=[,"This is small introduction to the functions of the Adviser-Script. Not all changes are written here, go find them yourself ... Sometimes a mouse-over helps. <br>At the bottom you see a button to visit the <a href=\""+GM_Home+"\" target=\"_blank\">homepage</a>. Next to it, there is the button for the options. You should look at them and configure as you desire.<br>Generally the script only knows what you have seen. So just visit the field if something is wrong."];
@@ -23003,6 +23130,7 @@ try{
         text["en"]["goods"]="Goods";
         text["en"]["showGoToAnimalBreedingReady"]="Animalbreeding is ready!";
         text["en"]["showGoToMonsterFruitCultureReady"]="Monster fruit culture is ready!";
+        text["en"]["showGoToSpeedEatingReady"]="Speed eating is ready!";
         text["en"]["goTobuyPetsParts"]="Go to buy puzzle parts";
         text["en"]["goToClothingDonation"]="Go to clothing donation";
         text["en"]["goToDonkey"]="Go to donkey Luke";
@@ -23452,4 +23580,32 @@ try{
     }
 }catch(err){GM_logError("scriptWait","","err_trace="+err_trace+" location.href="+location.href,err);}
 }
+
 scriptInit();
+
+
+/*
+function test() {
+    console.log("test");
+
+    if($("loginbutton")){
+        console.log("tes3t");
+        scriptInit();
+    } else if ($("farm_main")){
+        console.log("tes2t");
+        scriptInit();*/
+        /*document.addEventListener("beraterDone",function(){
+            start_script();
+            document.removeEventListener("beraterDone",arguments.callee,false);
+        },false);*/
+/*    } else {
+        window.setTimeout(test,1000);
+    }
+}
+
+window.addEventListener("load", function load(event){
+    window.removeEventListener("load", load, false);
+    console.log("load" + implode(event));
+    window.setTimeout(test,1000);
+},false);
+*/
