@@ -7530,7 +7530,6 @@ try{
             help =  $("map_vehiclesheet_inner").querySelector('div[onclick*="mapDialog(\'fillVehicleSlot_product\', '+vehicle+', '+productId+')"]');
             if (help) {
                 help = help.parentNode.parentNode.parentNode.querySelector('div[onclick*="map_current_vehicle='+vehicle+'; mapDialog(\'send_vehicle\')"]');
-                alert(help);
                 if (help) {
                   action=function(){ click(help); }
                   listeningEvent="gameSendVehicle";
