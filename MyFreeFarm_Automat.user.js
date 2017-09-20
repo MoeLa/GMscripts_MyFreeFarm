@@ -1,4 +1,4 @@
-// ==UserScript==
+﻿// ==UserScript==
 // @name           MyFreeFarm Automat
 // @namespace      https://github.com/BastianKanaan/GMscripts_MyFreeFarm
 // @author         BastianKanaan
@@ -7470,7 +7470,8 @@ try{
 
             } else {
                 var stockNr = (unsafeWindow.farms_data.map.vehicles[garage][vehicle].current==1)?0:unsafeWindow.farms_data.map.vehicles[garage][vehicle].current;
-                if(unsafeData.prodStock[stockNr][settings.get("account","garage"+garage+"ProductFrom"+unsafeWindow.farms_data.map.vehicles[garage][vehicle].current)]<=1000){
+                var DeliveryQuantity = GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_DeliveryQuantityFarm"+eval("4 + garage"),1000)
+                if(unsafeData.prodStock[stockNr][settings.get("account","garage"+garage+"ProductFrom"+unsafeWindow.farms_data.map.vehicles[garage][vehicle].current)]<=DeliveryQuantity){
                     //settings.set("account","garage"+garage+"ProductFrom"+unsafeWindow.farms_data.map.vehicles[garage][vehicle].current,0);
                     settings.set("account","garage"+garage,0);
                     autoVehicles(runId, 9);  //exit
@@ -11950,6 +11951,7 @@ try{
                     var newtr=createElement("tr",{},newtable);
 
                     createElement("td",{},newtr,getText("automat_mapHeadingVehicle"));
+                    createElement("td",{},newtr,getText("automat_mapVehicleDeliveryQuantity"));
                     createElement("td",{},newtr,getText("automat_mapToFarm").replace(/%1%/,"1").replace(/%2%/,4+id));
                     createElement("td",{},newtr,getText("automat_mapToFarm").replace(/%1%/,4+id).replace(/%2%/,1));
 
@@ -11972,6 +11974,24 @@ try{
                     }
                     selectVehicle.addEventListener("change",function(){
                         settings.set("account","garage"+id,this.value);
+                    },false);
+
+                    newtd = createElement("td",{},newtr);
+                    var DeliveryQuantity = createElement("input",{
+                        "id":"input_DeliveryQuantity",
+                        "value":GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_DeliveryQuantityFarm"+eval("4 + id"),1000),
+                        "size":"5px",
+                        "style":"text-align:center;"
+                    },newtd);
+                    DeliveryQuantity.addEventListener("keyup",function(){
+                        var valDeliveryQuantity=parseInt(this.value,10);
+                        if (isNaN(valDeliveryQuantity)){
+                            this.value="";
+                        }else{
+                            this.value=valDeliveryQuantity;
+                            if (valDeliveryQuantity<1) {valDeliveryQuantity=1} // only allow values > 0
+                            GM_setValue2(COUNTRY+"_"+SERVER+"_"+USERNAME+"_DeliveryQuantityFarm"+eval("4 + id"), valDeliveryQuantity,1000);
+                        }
                     },false);
 
                     newtd = createElement("td",{},newtr);
@@ -12706,6 +12726,7 @@ try{
         text["de"]["automat_zoneXWaiting"]="Zone \"%1%\" wartet";
         //mapVehicle
         text["de"]["automat_mapHeadingVehicle"]="Fahrzeug";
+        text["de"]["automat_mapVehicleDeliveryQuantity"]="Mindestmenge";
         text["de"]["automat_mapOutOfService"]="Leerfahrt";
         text["de"]["automat_mapToFarm"]="von Farm %1% nach Farm %2%";
         //For the Mill
@@ -12935,6 +12956,7 @@ try{
         text["en"]["automat_zoneXWaiting"]="Zone \"%1%\" is waiting";
         //mapVehicle
         text["en"]["automat_mapHeadingVehicle"]="Vehicle";
+        text["en"]["automat_mapVehicleDeliveryQuantity"]="Minimum quantity";
         text["en"]["automat_mapOutOfService"]="Out of service";
         text["en"]["automat_mapToFarm"]="from farm %1% to farm %2%";
         //For the Mill
