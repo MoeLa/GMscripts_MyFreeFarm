@@ -15294,6 +15294,9 @@ try{
                             }
                             break;
                         }
+                    case "map_sendvehicle":
+                        raiseEvent("gameMapSendVehicle");
+                        break;
                     case "megafield_plant":
                         raiseEvent("gameMegafieldPlanted");
                         break;
@@ -16261,34 +16264,6 @@ try{
                 raiseEvent("gameMegafieldDialogAutoplant");
             }
         }catch(err){GM_logError("dialogMegafield","","",err);}
-    });
-
-    //event vehicle
-    unsafeOverwriteFunction("mapCalcVehicleSlot",function(d){
-        try{
-            unsafeWindow._mapCalcVehicleSlot(d);
-        }catch(err){GM_logError("_mapCalcVehicleSlot","","",err);}
-        try{
-            if($("globalbox")){
-                var vehicleLocation=unsafeWindow.farms_data.map.vehicles[unsafeWindow.map_current_route][unsafeWindow.map_current_vehicle].current;
-                var valueMin = 0;
-                if (prodTyp[0][d]=="ex" && vehicleLocation==5){
-                    valueMin = valMinExFruitsFarms5*120/prodPlantSize[0][d];
-                } else if (prodTyp[0][d]=="alpin" && vehicleLocation==6) {
-                    valueMin = valMinAlpinFarm6*120/prodPlantSize[0][d];
-                }
-                if (valueMin>0) {
-                    if (prodStock[vehicleLocation][d]-$("map_vehicle_slot_fill_input").value < valueMin){
-                        $("map_vehicle_slot_fill_input").value=Math.max(prodStock[vehicleLocation][d]-valueMin,0);
-                        var container = $("globalbox_content");
-                        var newdiv=createElement("div",{"style":"color:red;font-weight:bold;"},container,getText("remainFarm").replace(/%1%/,valueMin).replace(/%2%/,vehicleLocation));
-                        setTimeout(function (){
-                            newdiv.parentNode.removeChild(newdiv);
-                        }, 3000);
-                    }
-                }
-            }
-        }catch(err){GM_logError("mapCalcVehicleSlot","","",err);}
     });
 
     // Club
@@ -18209,6 +18184,80 @@ try{
         }catch(err){GM_logError("initFoodcontest","","",err);}
 
     });
+
+    /**********************************************************
+    * Vehicle Farm 5 und 6
+    **********************************************************/
+    unsafeOverwriteFunction("openMap",function(){
+        try{
+            unsafeWindow._openMap();
+        }catch(err){GM_logError("openMap","","",err);}
+        try{
+            raiseEvent("gamegoToMap");
+        }catch(err){GM_logError("openMap","","",err);}
+    });
+
+
+    unsafeOverwriteFunction("mapCalcVehicleSlot",function(d){
+        try{
+            unsafeWindow._mapCalcVehicleSlot(d);
+        }catch(err){GM_logError("_mapCalcVehicleSlot","","",err);}
+        try{
+            if($("globalbox")){
+                var vehicleLocation=unsafeWindow.farms_data.map.vehicles[unsafeWindow.map_current_route][unsafeWindow.map_current_vehicle].current;
+                var valueMin = 0;
+                if (prodTyp[0][d]=="ex" && vehicleLocation==5){
+                    valueMin = valMinExFruitsFarms5*120/prodPlantSize[0][d];
+                } else if (prodTyp[0][d]=="alpin" && vehicleLocation==6) {
+                    valueMin = valMinAlpinFarm6*120/prodPlantSize[0][d];
+                }
+                if (valueMin>0) {
+                    if (prodStock[vehicleLocation][d]-$("map_vehicle_slot_fill_input").value < valueMin){
+                        $("map_vehicle_slot_fill_input").value=Math.max(prodStock[vehicleLocation][d]-valueMin,0);
+                        var container = $("globalbox_content");
+                        var newdiv=createElement("div",{"style":"color:red;font-weight:bold;"},container,getText("remainFarm").replace(/%1%/,valueMin).replace(/%2%/,vehicleLocation));
+                        setTimeout(function (){
+                            newdiv.parentNode.removeChild(newdiv);
+                        }, 3000);
+                    }
+                }
+            }
+        }catch(err){GM_logError("mapCalcVehicleSlot","","",err);}
+    });
+
+    unsafeOverwriteFunction("mapDialog",function(m,J,K){
+        try{
+             unsafeWindow._mapDialog(m,J,K);
+        }catch(err){GM_logError("mapDialog","","",err);}
+        try{
+            switch (m) {
+                case 'openVehicleSheet':
+                    raiseEvent("gameMapVehicle"+J);
+                    break;
+                case 'fillVehicleSlot':
+                    raiseEvent("gameFillVehicleSlot"+J);
+                    break;
+                case 'fillVehicleSlot_product':
+                    raiseEvent("gameFillVehicleSlotProduct"+J)
+                    break
+                case 'send_vehicle':
+                    raiseEvent("gameSendVehicle");
+                    break;
+                default:
+            }
+        }catch(err){GM_logError("initFoodcontest","","",err);}
+    });
+
+/*    unsafeOverwriteFunction("openMap",function(){
+        try{
+            unsafeWindow._openMap();
+        }catch(err){GM_logError("openMap","","",err);}
+        try{
+            raiseEvent("gamegoToMap");
+        }catch(err){GM_logError("openMap","","",err);}
+    });*/
+
+    /*mapSetVehicleSlot*/
 
     // events forestry ==============================================================================
     err_trace="events forestry";
