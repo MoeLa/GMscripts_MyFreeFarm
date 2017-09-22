@@ -115,8 +115,6 @@ try{
         text[LANGUAGE]["clickCtrl"] = "Ctrl+Klik";
         text[LANGUAGE]["clickDouble"] = "Dwuklik";
         text[LANGUAGE]["clickToChange"] = "Kliknij aby zmienić";
-
-
         text[LANGUAGE]["coins"]=unsafeWindow.t_coins;
         text[LANGUAGE]["commission"] = "Prowizja";
         text[LANGUAGE]["confirmUseObservedPrices"] = "Czy przyjąć średnią rynkową jako ceny na targu?";
@@ -307,7 +305,6 @@ try{
         text[LANGUAGE]["seed"]="Seed";
         text[LANGUAGE]["seedPerField"]="Seed per field";
         text[LANGUAGE]["sendContract"] = "Wysłać umowę";
-
         text[LANGUAGE]["sendingXObservedPricesToServer"]="Wysyłanie %1% obserwowanych cen na serwer ...";
         text[LANGUAGE]["sentContractNrX"]="Wyślij umowę nr %1%."
         text[LANGUAGE]["server"] = "Serwer";
@@ -597,10 +594,10 @@ try{
         text[LANGUAGE]["automat_QueTimeToGo"] =  "Pozostały czas wzrostu:";
         text[LANGUAGE]["automat_QueTimeReady"] = "Gotowe o:";
         text[LANGUAGE]["automat_QueTimeFirstReady"] = "Pierwsze gotowe o:"
-
-
-
-
+        text[LANGUAGE]["automat_QueTimeNextReady"] = "Następne gotowe o:";
+        text[LANGUAGE]["automat_QueTimeRound"] =  "Średnio na turę:";
+        text[LANGUAGE]["automat_QueRackMode"]="(Tryb regału)"
+        text[LANGUAGE]["automat_queueshow"]="Kliknij aby edytować kolejkę";
         text[LANGUAGE]["automat_zoneXWaiting"]="Zone \"%1%\" is waiting";
         //For the Mill
         //%PRODNAME% = product name, %FLDFROM% = field nr from, %FLDTO% = field nr until,
