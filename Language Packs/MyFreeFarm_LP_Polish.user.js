@@ -64,21 +64,21 @@ try{
         // Take the subject from a message sent if you won in a competition.
         text[LANGUAGE]["msgSubjectCongratulation"]="xxx";
         // Take the subject from a message sent if you got a gift.
-        text[LANGUAGE]["msgSubjectCongratulation2"]="xxx";
+        text[LANGUAGE]["msgSubjectCongratulation2"]="Gratulacje";
         // Take the subject from a message sent if somebody wants to add you as friend. The person has to be replaced by "(.+)".
         text[LANGUAGE]["msgSubjectFriend"]="(.+) chce zostać twoim przyjacielem";
         // Take the subject from a message sent if somebody has canceled your friendship. The person has to be replaced by "(.+)".
-        text[LANGUAGE]["msgSubjectFriendEnd"]="xxx";
+        text[LANGUAGE]["msgSubjectFriendEnd"]="(.+) wymówił Ci przyjaźń.";
         // Take the subject from a message sent if you reach the next level.
         text[LANGUAGE]["msgSubjectLevel"]="Gratulacje! Osiągnąłeś kolejny poziom!";
         // Take the subject from a message sent if you have to renew premium mode
         text[LANGUAGE]["msgSubjectPremium"]="xxx";
         // Take the subject from a message sent if you got a present.
-        text[LANGUAGE]["msgSubjectPresent"]="xxx";
+        text[LANGUAGE]["msgSubjectPresent"]="Prezent dla Ciebie";
         // Take the subjects from messages sent if a quest was completed.
         text[LANGUAGE]["msgSubjectQuest"]="^Quest: .+ zakończony$";
         // Take the subjects from messages sent if weed occurred on your field.
-        text[LANGUAGE]["msgSubjectWeed1"]="xxx";
+        text[LANGUAGE]["msgSubjectWeed1"]="Och nie!";
         text[LANGUAGE]["msgSubjectWeed2"]="xxx";
 
 // And all the other texts you can enter what you want ****************************************************************
