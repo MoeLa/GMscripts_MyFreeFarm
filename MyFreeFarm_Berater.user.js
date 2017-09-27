@@ -14331,7 +14331,7 @@ try{
             help=currMsg.body.replace(/\s+/g," ");
             if([getText("msgSubjectCongratulation"),getText("msgSubjectCongratulation2"),getText("msgSubjectContractReject"),getText("msgSubjectContractCancel"),getText("msgSubjectContractNew"),getText("msgSubjectPresent"),getText("msgSubjectCoins"),getText("msgSubjectLevel"),getText("msgSubjectWeed1"),getText("msgSubjectWeed2"),getText("msgSubjectPremium")].contains(currMsg.subject)){
                 // New message without handling
-            }else if([getText("msgSubjectFriend"),getText("msgSubjectFriendEnd")].contains(currMsg.subject)){
+            }else if(currMsg.subject.match(regMsgSubjectFriend)||currMsg.subject.match(regMsgSubjectFriendEnd)){
                 // New message without handling
             }else if(currMsg.subject.match(regMsgSubjectQuest)){
                 // New message without handling
