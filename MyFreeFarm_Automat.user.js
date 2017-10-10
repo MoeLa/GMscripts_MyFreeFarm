@@ -296,7 +296,6 @@ var botArbiter=new function(){
             case "donkey":                  priority=  5;fkt=autoDonkey;            break;
             case "lottery":                 priority=  5;fkt=autoLottery;           break;
             case "buyPetsParts":            priority=  5;fkt=autobuyPetsParts;      break;
-            case "vehicles":                priority=  5;fkt=autoVehicles;          break;
             case "activatePowerUp":         priority=  5;fkt=autoActivatePowerUp;   break;
             case "farmi":                   priority=  5;fkt=autoFarmi;             break;
             case "goOlympiaRun":            priority=  5;fkt=autoOlympiaRun;        break;
@@ -423,17 +422,6 @@ var botArbiter=new function(){
             if(settings.get("account","botUsebuyPetsParts") && $("divGoTobuyPetsParts")) {
                 botArbiter.add("buyPetsParts");
             }
-
-            if(settings.get("account","garage1")>0) {
-                if (isNaN(unsafeWindow.farms_data.map.vehicles[1][settings.get("account","garage1")].remain)){
-                    botArbiter.add("vehicles");
-                }
-            } else if (settings.get("account","garage2")>0) {
-                if (isNaN(unsafeWindow.farms_data.map.vehicles[2][settings.get("account","garage2")].remain)){
-                    botArbiter.add("vehicles");
-                }
-            }
-
             //27062017
             if ($("loginevent_link")){
                 for(var a in unsafeWindow.loginevent.data.config.rewards) {
@@ -7416,179 +7404,6 @@ try{
 }catch(err){ GM_logError("autobuyPetsParts","runId="+runId+" step="+step,"",err); }
 }
 
-function autoVehicles(runId, step, vehicle, garage) {
-try{
-    if (bot.checkRun("autoVehicles", runId)) {
-        var help, action=null, listeningEvent=null;
-        if (!step) { step=1; }
-        bot.setAction("autoVehicles (" + step + ")");
-        /*
-                    console.log("=== START LESE farms_data.map ===");
-                    console.log(print_r(unsafeWindow.farms_data.map, "", true, "\n"));
-                    console.log("=== END LESE farms_data.map ===");
-        */
-        switch (step) {
-        case 1: { // open map
-            GM_logInfo("autoVehicles","runId="+runId+" step="+step,"","open map");
-            if(help =$("mainmenue1")) {
-                action=function(){ click(help); }
-                listeningEvent="gamegoToMap";
-            } else {
-                autoVehicles(runId, 9);  //exit
-            }
-            break; }
-
-        case 2: { // open garage
-            GM_logInfo("autoVehicles","runId="+runId+" step="+step,"","open garage");
-            //var garage;
-            if(settings.get("account","garage1")>0) {
-                if (isNaN(unsafeWindow.farms_data.map.vehicles[1][settings.get("account","garage1")].remain)){
-                    garage=1;
-                    vehicle=settings.get("account","garage1");
-                }
-            } else if (settings.get("account","garage2")>0) {
-                if (isNaN(unsafeWindow.farms_data.map.vehicles[2][settings.get("account","garage2")].remain)){
-                    garage=2;
-                    vehicle=settings.get("account","garage2");
-                }
-            }
-
-            if(vehicle && (help=$("map_vehicle_shop"+garage))) {
-                action=function(){ click(help); }
-                listeningEvent="gameMapVehicle"+garage;
-            }
-            break; }
-        case 3: { // open slot vehicle or go step, if choose "out of service"
-            GM_logInfo("autoVehicles","runId="+runId+" step="+step,"","open first slot vehicle");
-            if (settings.get("account","garage"+garage+"ProductFrom"+unsafeWindow.farms_data.map.vehicles[garage][vehicle].current)==0) {
-                //out of service => drive without products
-                help =  $("map_vehiclesheet_inner").querySelector('div[onclick*="map_current_vehicle='+vehicle+'; mapDialog(\'send_vehicle\')"]');
-                if (help) {
-                    action=function(){ click(help); }
-                    listeningEvent="gameSendVehicle";
-                    step=7;
-                }
-
-            } else {
-                var stockNr = (unsafeWindow.farms_data.map.vehicles[garage][vehicle].current==1)?0:unsafeWindow.farms_data.map.vehicles[garage][vehicle].current;
-                if(unsafeData.prodStock[stockNr][settings.get("account","garage"+garage+"ProductFrom"+unsafeWindow.farms_data.map.vehicles[garage][vehicle].current)]<=1000){
-                    //settings.set("account","garage"+garage+"ProductFrom"+unsafeWindow.farms_data.map.vehicles[garage][vehicle].current,0);
-                    settings.set("account","garage"+garage,0);
-                    autoVehicles(runId, 9);  //exit
-                } else {
-                    help =  $("map_vehiclesheet_inner").querySelector('div[onclick*="mapDialog(\'fillVehicleSlot\', '+vehicle+', '+1+')"]');
-                    if (help) {
-                        action=function(){ click(help); }
-                        listeningEvent="gameFillVehicleSlot"+vehicle;
-                    }
-                }
-            }
-            break; }
-        case 4: { // click category
-            GM_logInfo("autoVehicles","runId="+runId+" step="+step,"","click category");
-            var productId = settings.get("account","garage"+garage+"ProductFrom"+unsafeWindow.farms_data.map.vehicles[garage][vehicle].current);
-            help = $("map_vehicle_fill_slot_category_"+unsafeData.prodTyp[0][productId]);
-            if (help) {
-                action=function(){ click(help); }
-                listeningEvent="gameFillVehicleSlot"+vehicle;
-            }
-            break; }
-        case 5:{
-            GM_logInfo("autoVehicles","runId="+runId+" step="+step,"","click product");
-            var productId = settings.get("account","garage"+garage+"ProductFrom"+unsafeWindow.farms_data.map.vehicles[garage][vehicle].current);
-            help = $("globalbox_content").querySelector('div[onclick*="mapDialog(\'fillVehicleSlot_product\', '+vehicle+', '+productId+')"]');
-            var helpRight=$("map_vehicle_fill_slot_arrow_right");
-
-            if (help) {
-                action=function(){ click(help); }
-                listeningEvent="gameFillVehicleSlotProduct"+vehicle;
-            } else if (helpRight.style.display == "block") {
-                action=function(){ click(helpRight); }
-                step--;
-                listeningEvent="gameFillVehicleSlot"+vehicle;
-            } else {
-                //Product not find -> Exit and set vehicle to -------
-                //settings.set("account","garage"+garage+"ProductFrom"+unsafeWindow.farms_data.map.vehicles[garage][vehicle].current,0);
-                settings.set("account","garage"+garage,0);
-                GM_logInfo("autoVehicles","runId="+runId+" step="+step,"","gotoExit");
-            }
-            break; }
-        case 6:{
-            GM_logInfo("autoVehicles","runId="+runId+" step="+step,"","load product");
-            var input = $("map_vehicle_slot_fill_input");
-            if (input) {
-                input.value=unsafeWindow.farms_data.map.config.vehicles[vehicle].capacity;
-                keyup(input);
-                listeningEvent="gameMapVehicle"+garage;
-                action=function(){
-                    click($("globalbox").querySelector("button"));
-                };
-            }
-            break; }
-        case 7:{
-            GM_logInfo("autoVehicles","runId="+runId+" step="+step,"","click send vehicle");
-            var productId = settings.get("account","garage"+garage+"ProductFrom"+unsafeWindow.farms_data.map.vehicles[garage][vehicle].current);
-            help =  $("map_vehiclesheet_inner").querySelector('div[onclick*="mapDialog(\'fillVehicleSlot_product\', '+vehicle+', '+productId+')"]');
-            if (help) {
-                help = help.parentNode.parentNode.parentNode.querySelector('div[onclick*="map_current_vehicle='+vehicle+'; mapDialog(\'send_vehicle\')"]');
-                if (help) {
-                  action=function(){ click(help); }
-                  listeningEvent="gameSendVehicle";
-                } else {
-                  //not enough fuel
-                  settings.set("account","garage"+garage,0);
-                  autoVehicles(runId, 9);  //exit
-                }
-            }
-            break; }
-            /*
-            "garage1":0,"garage1ProductFrom1":0,"garage1ProductFrom5":0,"garage2":0,
-            "garage2ProductFrom1":0,"garage2ProductFrom6":0
-            {"id":"157","type":"4","current":"1","route":"1","startdate":"0",
-            "duration":"0","data":null,"count_tours":"880","count_products":"454508",
-            "duration_original":900,"remain":null}
-
-            var stockNr = (handled.farmNr<=4)?0:(handled.farmNr==5)?5:6;
-
-            if(["v","ex","e","o","alpin"].indexOf(unsafeData.prodTyp[0][iProd]) >= 0){
-            */
-            //onclick="map_current_vehicle_slot=1; mapDialog('fillVehicleSlot_product', 4, 35)
-
-        case 8: {
-            GM_logInfo("autoVehicles","runId="+runId+" step="+step,"","send vehicle");
-            if ($("globalbox").style.display == "block") {
-                action=function(){ click($("globalbox_button1")); }
-                listeningEvent="gameMapSendVehicle";
-            }
-            break;}
-        case 9: { // exit --- todo
-            //var div=$("globalbox").querySelector(".mini_close");
-
-            if((help=$("globalbox")) && (help.style.display == "block")) {
-                unsafeWindow.hideDiv('globalbox');
-                unsafeWindow.hideDiv('globaltransp');
-                autoVehicles(runId, 9);  //exit
-            }else{
-              GM_logInfo("autoVehicles","runId="+runId+" step="+step,"","goto farm 1");
-              autoZoneFinish(runId, $("speedlink_farm1"));
-            }
-            break;}
-        }
-
-        if (listeningEvent) {
-            document.addEventListener(listeningEvent, function(listeningEvent, runId, step){
-                return function() {
-                    document.removeEventListener(listeningEvent, arguments.callee, false);
-                    window.setTimeout(autoVehicles, settings.getPause(), runId, step+1,vehicle,garage);
-                };
-            } (listeningEvent, runId, step), false);
-        }
-        if (action) { action(); }
-        help=null; listeningEvent=null; action=null;
-    }
-}catch(err){ GM_logError("autoVehicles","runId="+runId+" step="+step,"",err); }
-}
-
 function autoClothingDonation(runId, step) {
 try{
     if (bot.checkRun("autoClothingDonation", runId)) {
@@ -11961,86 +11776,6 @@ try{
                 }
             }(v),false);
         }
-
-        for(var v=1;v<=2;v++){
-            err_trace="listener gameMapVehicle"+v;
-            document.addEventListener("gameMapVehicle"+v,function(id){
-                return function(){
-                try{
-                    var item = unsafeWindow.farms_data.map;
-                    var container = $("map_vehiclesheet_inner");
-                    var newNode = createElement("div",{"id":"divVehicle","class":"","style":"height:50px"});
-                    var newtable=createElement("table",{"border":"0","class":"","style":"width:100%"},newNode);
-                    var newtr=createElement("tr",{},newtable);
-
-                    createElement("td",{},newtr,getText("automat_mapHeadingVehicle"));
-                    createElement("td",{},newtr,getText("automat_mapToFarm").replace(/%1%/,"1").replace(/%2%/,4+id));
-                    createElement("td",{},newtr,getText("automat_mapToFarm").replace(/%1%/,4+id).replace(/%2%/,1));
-
-                    newtr=createElement("tr",{},newtable);
-
-                    var newtd = createElement("td",{},newtr);
-
-                    var selectVehicle = createElement("select", {
-                        "id": "vehicleSelection",
-                        "size":"1",
-                        "name": "vehicleSelection"+id,
-                        "style": "margin: 0px 0px 0px 10px"
-                    }, newtd, false);
-                    createElement("option", {"value":0}, selectVehicle, "-----------"); // Add vehicles to combobox
-                    for (var i in item.vehicles[id]) {
-                        if(!item.vehicles[id].hasOwnProperty(i)){ continue; }
-                        if (parseInt(item.vehicles[id][i].route,10) == id) {
-                            createElement("option", {"value":i}, selectVehicle, item.config.vehicles[i].name); // Add vehicles to combobox
-                        }
-                    }
-                    selectVehicle.addEventListener("change",function(){
-                        settings.set("account","garage"+id,this.value);
-                    },false);
-
-                    newtd = createElement("td",{},newtr);
-                    var selectProductFromFarm1 = createElement("select", {
-                        "id": "selectProductFromFarm1",
-                        "size":"1",
-                        "name": "selectProductFromFarm1",
-                        "style": "margin: 0px 0px 0px 10px"
-                    }, newtd, false);
-                    selectProductFromFarm1.addEventListener("change",function(){
-                        settings.set("account","garage"+id+"ProductFrom1",this.value)
-                    },false);
-                    createElement("option", {"value":0}, selectProductFromFarm1, getText("automat_mapOutOfService"));
-
-                    newtd = createElement("td",{},newtr);
-                    var selectProductFromFarm5 = createElement("select", {
-                        "id": "selectProductFromFarm5",
-                        "size":"1",
-                        "name": "selectProductFromFarm5",
-                        "style": "margin: 0px 0px 0px 10px"
-                    }, newtd, false);
-                    selectProductFromFarm5.addEventListener("change",function(){
-                        settings.set("account","garage"+id+"ProductFrom"+(id+4),this.value)
-                    },false);
-                    createElement("option", {"value":0}, selectProductFromFarm5, getText("automat_mapOutOfService"));
-
-                    for(var iProd=1;iProd<unsafeData.prodName[0].length;iProd++){
-                        if(unsafeData.prodBlock[0][iProd]&&unsafeData.prodBlock[0][iProd].match(/[uvlq]/)) {continue;}
-                        if(["v","ex","e","o","alpin"].indexOf(unsafeData.prodTyp[0][iProd]) >= 0){
-                            createElement("option", {"value":iProd}, selectProductFromFarm1, unsafeData.prodName[0][iProd]); // Add product to combobox
-                            createElement("option", {"value":iProd}, selectProductFromFarm5, unsafeData.prodName[0][iProd]); // Add product to combobox
-                        }
-                    }
-
-                    selectVehicle.value = settings.get("account","garage"+id); // Init combobox on startup
-                    selectProductFromFarm1.value = settings.get("account","garage"+id+"ProductFrom1"); // Init combobox on startup
-                    selectProductFromFarm5.value = settings.get("account","garage"+id+"ProductFrom"+(id+4)); // Init combobox on startup
-
-                    container.insertBefore(newNode, container.firstChild);
-                    container=null;help=null;
-                }catch(err){GM_logError("eventListener:gameFarmersmarketOpened"+id+"","","",err);}
-                }
-            }(v),false);
-        }
-
         //Bot Start-Stop-Button
         err_trace="Start-Stop-Button";
         newdiv=createElement("div",{"id":"divAutomatButtonBot","class":"link beraterButtonIcon hoverBgGreen"},$("divBeraterButtons"));
@@ -12730,10 +12465,6 @@ try{
         text["de"]["automat_QueRackMode"]="(Regal Modus)";
         text["de"]["automat_queueshow"]="Klick zum Ändern der Queue";
         text["de"]["automat_zoneXWaiting"]="Zone \"%1%\" wartet";
-        //mapVehicle
-        text["de"]["automat_mapHeadingVehicle"]="Fahrzeug";
-        text["de"]["automat_mapOutOfService"]="Leerfahrt";
-        text["de"]["automat_mapToFarm"]="von Farm %1% nach Farm %2%";
         //For the Mill
         //%PRODNAME% = product name, %FLDFROM% = field nr from, %FLDTO% = field nr until,
         text["de"]["automat_MillQueue"] = "Mühlen-Queue";
@@ -12961,10 +12692,6 @@ try{
         text["en"]["automat_QueRackMode"]="(Rack mode)";
         text["en"]["automat_queueshow"]="Click to edit the queue";
         text["en"]["automat_zoneXWaiting"]="Zone \"%1%\" is waiting";
-        //mapVehicle
-        text["en"]["automat_mapHeadingVehicle"]="Vehicle";
-        text["en"]["automat_mapOutOfService"]="Out of service";
-        text["en"]["automat_mapToFarm"]="from farm %1% to farm %2%";
         //For the Mill
         //%PRODNAME% = product name, %FLDFROM% = field nr from, %FLDTO% = field nr until,
         text["en"]["automat_MillQueue"] = "Mill Queue";
