@@ -1,19 +1,17 @@
-/// <reference path="index.d.ts" />
+/// <reference path="./typescripted/index.d.ts" />
+/// <reference path="./typescripted/ci.d.ts" />
+/// <reference path="./typescripted/mff_all_171130.d.ts" />
 // ==UserScript==
 // @name           MyFreeFarm Common functions
 // @namespace      https://github.com/linus--tux/GMscripts_MyFreeFarm
-// @author         BastianKanaan, Linus, Moe
+// @author         BastianKanaan
 // @description    Common functions for MyFreeFarm-Scripts
-// @date           04.12.2017
-// @version        3.0.0
+// @date           11.05.2017
+// @version        2.1.12
 // @license        GPL version 3 or any later version; http://www.gnu.org/copyleft/gpl.html
 // ==/UserScript==
 
-import { MyString as String,
-         MyArray as Array,
-         MyObject as Object } from "./custom_interfaces";
-import Window from "../test/mff_all_modulized";
-declare var unsafeWindow: Window;
+declare var prodName, prodTyp, prodId;
 
 const VERSIONfunctionFile = "2.1.12";
 var DEVMODE=GM_getValue("devmode",false);
@@ -38,14 +36,6 @@ try{
     return this.charAt(0).toUpperCase() + this.slice(1);
 }catch(err){ GM_logError("String.prototype.capitalize","","",err); }
 };
-
-// interface Array<T> {  
-//     equals: (val: T[]) => boolean;
-//     contains: (val) => boolean;
-//     shuffle: () => void;
-//     swap: (v1, v2) => void;
-// }
-
 Array.prototype.contains = function(searchElement){
 try{
     return (this.indexOf(searchElement)!=-1);
@@ -105,15 +95,6 @@ try{
     temp=null;
 }catch(err){ GM_logError("Array.prototype.swap","from, to","",err); }
 };
-
-// interface Object {  
-//     equals: (val) => boolean;
-//     order: any[];
-//     sortObj: (sortfkt ,descending: boolean) => void;
-//     isEmpty: () => boolean;
-//     length: () => number;
-//     clone: () => any;
-// }
 Object.prototype.equals = function(that) {
 try{
     //For the first loop, we only check for types
@@ -184,26 +165,14 @@ try{
         sorted.push([i,this[i]]);
     }
     // Define default sorting function
-    if (typeof sortfkt != "function") {
-        sortfkt = function (a, b) {
-            if (isNaN(a[0])) {
-                if (isNaN(b[0])) {
-                    // both strings
-                    return a.compareTo(b);
-                    // ((a[0] > b[0]) - (a[0] < b[0]));
-                } else {
-                    // string > number
-                    return 1;
-                }
+    if(typeof sortfkt!="function"){
+        sortfkt = function(a,b){
+            if(isNaN(a[0])){
+                if(isNaN(b[0])){ return a[0].compareTo(b[0]) ; }// ((a[0]>b[0])-(a[0]<b[0])); } // both strings
+                else { return 1; } // string > number
             } else {
-                if (isNaN(b[0])) {
-                    // number < string
-                    return -1;
-                }
-                else {
-                    // both numbers
-                    return (a[0] - b[0]);
-                }
+                if(isNaN(b[0])){ return -1; } // number < string
+                else { return (a[0]-b[0]); } // both numbers
             }
         };
     }
@@ -257,7 +226,7 @@ try{
 
 // FUNCTIONS *************************************************************************************************************
 
-function GM_setValueCache(name,value,debugName){
+function GM_setValueCache(name,value,debugName?){
 try{
     window.setTimeout(function(){
         GM_setValue(name,value);
@@ -269,19 +238,15 @@ function GM_setValue2(name,value,debugName){
 try{
     GM_setValue(name,value);
     if(GM_getValue(name)!=value){
-        GM_logInfo("GM_setValue2","name="+name+" debugName="+debugName,"","Saved value not equal to value",null);
-        GM_setValueCache(name,value,"GM_setValue2-try");
+        GM_logInfo("GM_setValue2","name="+name+" debugName="+debugName,"","Saved value not equal to value");
+        GM_setValueCache(name,value);
     }
 }catch(err){
     GM_logError("GM_setValue2","name="+name+" debugName="+debugName,"",err);
-    GM_setValueCache(name,value,"GM_setValue2-catch");
+    GM_setValueCache(name,value);
 }
 }
-
-const COUNTRY;
-const SERVER;
-
-function GM_logInfo(name,parameters,variables,text,type){
+function GM_logInfo(name,parameters,variables,text,type?){
 try{
     if((undefined===type)||OPTION_LOGGING[type]){
         console.log((COUNTRY?COUNTRY.toUpperCase():"")+"-"+(SERVER?SERVER:"")+": Information\n"+name+"\n"+parameters+"\n"+variables+"\n"+text);
@@ -333,11 +298,10 @@ try{
 }catch(err){ GM_logError("unsafe$","ID="+ID,"",err); }
 }
 function unsafe$top(ID) {
-// Moe, 2017-12-04: Is this still needed?
-// try{
-//     return top.window.wrappedJSObject.document.getElementById(ID);
-// }catch(err){ GM_logError("unsafe$top","ID="+ID,"",err); }
-// }
+try{
+    return top.window.wrappedJSObject.document.getElementById(ID);
+}catch(err){ GM_logError("unsafe$top","ID="+ID,"",err); }
+}
 function containerId(node) {
 try{
     node = node.parentNode;
@@ -346,6 +310,7 @@ try{
             node = node.parentNode;
         } else {
             throw("No parent node found.");
+            // break;
         }
     }
     return node.id;
@@ -440,7 +405,7 @@ try{
             if(DEVMODE_EVENTS){ logBubble.add("raiseEventTop set "+name); }
             var raisedEvents = explode(GM_getValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_raisedEvents"),"raiseEventTop","{}");
             raisedEvents[name] = PAGE;
-            GM_setValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_raisedEvents",implode(raisedEvents, "raiseEventTop"));
+            GM_setValue(COUNTRY+"_"+SERVER+"_"+USERNAME+"_raisedEvents",implode(raisedEvents));
         },0);
     } else {
         if(DEVMODE_EVENTS){ logBubble.add("raiseEventTop "+name); }
@@ -463,7 +428,7 @@ try{
             T = T.parentNode;
             str += ".child";
         }
-        GM_logInfo("click","node.id="+(node&&node.id?node.id:"?"),"","Click on "+str,"click");
+        GM_logInfo("click","node.id="+(node&&node.id?node.id:"?"),"","Click on "+str);
     }
     // if (node.href){ location.href = node.href; }
 }catch(err){
@@ -515,12 +480,17 @@ try{
 function keyup(node,keycode,ctrlKeyArg,altKeyArg,shiftKeyArg) {
 try{
     if (!keycode) keycode=0;
-    let event = new KeyboardEvent("keyup", {
-        code: keycode,
-        ctrlKey: ctrlKeyArg,
-        altKey: altKeyArg,
-        shiftKey: shiftKeyArg
-    });
+    let keyboardEventInit: KeyboardEventInit = {
+        bubbles: true,
+        cancelable: true,
+        view: null,
+        ctrlKey: !!ctrlKeyArg,
+        altKey: !!altKeyArg,
+        shiftKey: !!shiftKeyArg,
+        metaKey: false,
+        code: keycode      
+    };
+    var event = new KeyboardEvent("keyup", keyboardEventInit);
     node.dispatchEvent(event);
 }catch(err){
     GM_logError("keyup","node.id="+(node&&node.id?node.id:"?")+" keycode="+keycode+" ctrlKeyArg="+ctrlKeyArg+" altKeyArg="+altKeyArg+" shiftKeyArg="+shiftKeyArg,"",err);
@@ -530,12 +500,17 @@ try{
 function keydown(node,keycode,ctrlKeyArg,altKeyArg,shiftKeyArg){
 try{
     if (!keycode) keycode=0;
-    let event = new KeyboardEvent("keydown", {
-        code: keycode,
-        ctrlKey: ctrlKeyArg,
-        altKey: altKeyArg,
-        shiftKey: shiftKeyArg
-    });
+    let keyboardEventInit: KeyboardEventInit = {
+        bubbles: true,
+        cancelable: true,
+        view: null,
+        ctrlKey: !!ctrlKeyArg,
+        altKey: !!altKeyArg,
+        shiftKey: !!shiftKeyArg,
+        metaKey: false,
+        code: keycode      
+    };
+    var event = new KeyboardEvent("keydown", keyboardEventInit);
     node.dispatchEvent(event);
 }catch(err){
     GM_logError("keydown","node.id="+(node&&node.id?node.id:"?")+" keycode="+keycode+" ctrlKeyArg="+ctrlKeyArg+" altKeyArg="+altKeyArg+" shiftKeyArg="+shiftKeyArg,"",err);
@@ -552,7 +527,7 @@ try{
 function timeMeasureStop(str){
 try{
     if(timeMeasure[str]){
-        GM_logInfo("timeMeasure","str="+str,"",((new Date()).getTime()-timeMeasure[str])+"ms","timeMeasureStop");
+        GM_logInfo("timeMeasure","str="+str,"",((new Date()).getTime()-timeMeasure[str])+"ms");
         delete timeMeasure[str];
     }
 }catch(err){ GM_logError("timeMeasureStop","str="+str,"",err); }
@@ -560,29 +535,29 @@ try{
 
 //---------------------------------------------------------------------------------------------------------------------------
 
-function getElementLeft(id, toElem) {
-    try {
-        let element: HTMLElement = document.getElementById(id);
-        let xPos: number = element.offsetLeft;
-        let tempEl: HTMLElement = <HTMLElement> element.offsetParent;
+function getElementLeft(id,toElem) {
+try{
+    var element = document.getElementById(id);
+    var xPos = element.offsetLeft;
+    var tempEl = element.offsetParent as HTMLElement;
         while (tempEl != toElem.parenNode) {
             xPos += tempEl.offsetLeft;
-            tempEl = <HTMLElement> tempEl.offsetParent;
+            tempEl = tempEl.offsetParent as HTMLElement;
         }
-        return xPos;
-    } catch (err) { GM_logError("getElementLeft", "id=" + id, "", err); }
+    return xPos; //parseInt(xPos,10);
+}catch(err){ GM_logError("getElementLeft","id="+id,"",err); }
 }
-function getElementTop(id, toElem) {
-    try {
-        let element = document.getElementById(id);
-        let yPos = element.offsetTop;
-        let tempEl = element.offsetParent as HTMLElement;
-        while (tempEl != toElem.parenNode) {
+function getElementTop(id,toElem) {
+try{
+    var element = document.getElementById(id);
+    var yPos = element.offsetTop;
+    var tempEl = element.offsetParent as HTMLElement;
+    while (tempEl != toElem.parenNode) {
             yPos += tempEl.offsetTop;
             tempEl = tempEl.offsetParent as HTMLElement;
         }
-        return yPos;
-    } catch (err) { GM_logError("getElementTop", "id=" + id, "", err); }
+    return yPos; //parseInt(yPos,10);
+}catch(err){ GM_logError("getElementTop","id="+id,"",err); }
 }
 function getOffset(el){
 try{
@@ -603,19 +578,21 @@ try{
     return refNode.nextSibling ? refNode.parentNode.insertBefore(newNode, refNode.nextSibling) : refNode.parentNode.appendChild(newNode);
 }catch(err){ GM_logError("insertAfter","","",err); }
 }
-function removeAllCSS(reg) {
-    try {
-        // The function seems to be not working.
-        // "SecurityError: The operation is insecure."
-        return;
-        // for (var i = document.styleSheets.length - 1; i >= 0; i--) {
-        //     for (var j = document.styleSheets[i].cssRules.length - 1; j >= 0; j--) {
-        //         if(document.styleSheets[i].cssRules[j].selectorText&&(document.styleSheets[i].cssRules[j].selectorText.match(reg))){
-        //             document.styleSheets[i].deleteRule(j);
-        //         }
-        //     }
-        // }
-    } catch (err) { GM_logError("removeAllCSS", "reg=" + reg, "", err); }
+function removeAllCSS(reg){
+try{
+// The function seems to be not working.
+// "SecurityError: The operation is insecure."
+return;
+    // for (var i = document.styleSheets.length - 1; i >= 0; i--) {
+    //     for (var j = document.styleSheets[i].cssRules.length - 1; j >= 0; j--) {
+    //         if(document.styleSheets[i].cssRules[j].selectorText&&(document.styleSheets[i].cssRules[j].selectorText.match(reg))){
+    //             document.styleSheets[i].deleteRule(j);
+    //         }
+    //     }
+    // }
+}catch(err){ 
+    // GM_logError("removeAllCSS","reg="+reg,"i="+i+" j="+j,err); 
+}
 }
 
 //---------------------------------------------------------------------------------------------------------------------------
@@ -833,7 +810,7 @@ try{
 }catch(err){ GM_logError("getFormattedTime","str="+str,"",err); }
 }
 //TODO name? getDaytime, time2daytime
-function getDaytimeStr(time,hideSeconds,paddHours){ // was uhrzeit
+function getDaytimeStr(time,hideSeconds?,paddHours?){ // was uhrzeit
 try{
     var time2 = new Date(time*1000);
     var str,help;
@@ -864,39 +841,33 @@ function getDateStr(time,hideyear){ //TODO CHANGED THE ARGUMENTS
 }
 */
 //TODO name? getDate, time2date
-function getDateStr(time, yearformat, padd) { //in seconds //was datum
-    // yearformat:
-    // 0 -> 01.02.
-    // 1 -> 01.02.11
-    // 2 -> 01.02.2011 (default)
-    // padd:
-    // true -> 01.02.2011 (default)
-    // false -> 1.2.2011
-    try {
-        if (typeof yearformat != "number") { yearformat = 2; }
-        if (typeof padd != "boolean") { padd = true; }
+function getDateStr(time,yearformat,padd){ //in seconds //was datum
+// yearformat:
+// 0 -> 01.02.
+// 1 -> 01.02.11
+// 2 -> 01.02.2011 (default)
+// padd:
+// true -> 01.02.2011 (default)
+// false -> 1.2.2011
+try{
+    if(typeof yearformat!="number"){ yearformat = 2; }
+    if(typeof padd!="boolean"){ padd = true; }
 
-        var time2 = new Date(time * 1000);
-        var str, help;
-        switch (yearformat) {
-            case 0:
-                str = "day.month";
-                break;
-            case 1:
-                str = ("day.month.year").replace("year", time2.getFullYear().toString().slice(-2));
-                break;
-            case 2:
-                str = ("day.month.year").replace("year", time2.getFullYear().toString());
-                break;
-        }
-        help = time2.getDate();
-        str = str.replace("day", ((padd && help < 10) ? "0" : "") + help);
-        help = 1 + time2.getMonth();
-        str = str.replace("month", ((padd && help < 10) ? "0" : "") + help);
-        return str;
-    } catch (err) { GM_logError("getDateStr", "time=" + time + " yearformat=" + yearformat + " padd=" + padd, "", err); }
+    var time2 = new Date(time*1000);
+    var str,help;
+    switch(yearformat){
+        case 0: str = "day.month"; break;
+        case 1: str = ("day.month.year").replace("year",time2.getFullYear().toString().slice(-2)); break;
+        case 2: str = ("day.month.year").replace("year",time2.getFullYear().toString()); break;
+    }
+    help = time2.getDate();
+    str = str.replace("day",((padd&&help<10)?"0":"")+help);
+    help = 1+time2.getMonth();
+    str = str.replace("month",((padd&&help<10)?"0":"")+help);
+    return str;
+}catch(err){ GM_logError("getDateStr","time="+time+" yearformat="+yearformat+" padd="+padd,"",err); }
 }
-function getFormattedDateStr(time,yearformat,padd?){
+function getFormattedDateStr(time,yearformat?,padd?){
 // yearformat:
 // 0 -> 01.02.
 // 1 -> 01.02.11
@@ -923,26 +894,23 @@ try{
 }catch(err){ GM_logError("getFormattedDateStr","time="+time+" yearformat="+yearformat+" padd="+padd,"",err); }
 }
 //TODO name? getDateText
-function getDateText(time, yearformat) { // was datumDay
-    try {
-        var time2 = Math.floor(time);
-        let tempDate: Date = new Date();
-        var today = Date.UTC(tempDate.getFullYear(),
-            tempDate.getMonth(),
-            tempDate.getDate(), 0, 0, 0) / 1000; //begin of this day.
-
-        if (time2 < today) {
-            return getFormattedDateStr(time, yearformat);
-        } else if (time2 < (today + (1 * 24 * 60 * 60))) {
-            return getText("day0");
-        } else if (getText("day1") && (time2 < (today + (2 * 24 * 60 * 60)))) {
-            return getText("day1");
-        } else if (getText("day2") && (time2 < (today + (3 * 24 * 60 * 60)))) {
-            return getText("day2");
-        } else {
-            return getFormattedDateStr(time, yearformat);
-        }
-    } catch (err) { GM_logError("getDateText", "time=" + time + " yearformat=" + yearformat, "", err); }
+function getDateText(time,yearformat){ // was datumDay
+try{
+    var time2 = Math.floor(time);
+    let d: Date = new Date();
+    let today: number = Date.UTC(d.getFullYear(), d.getMonth(), d.getDate())/1000;
+    if (time2 < today){
+        return getFormattedDateStr(time,yearformat);
+    } else if (time2 < (today+(1*24*60*60))){
+        return getText("day0");
+    } else if (getText("day1") && (time2 < (today+(2*24*60*60)))){
+        return getText("day1");
+    } else if (getText("day2") && (time2 < (today+(3*24*60*60)))){
+        return getText("day2");
+    } else {
+        return getFormattedDateStr(time,yearformat);
+    }
+}catch(err){ GM_logError("getDateText","time="+time+" yearformat="+yearformat,"",err); }
 }
 function countDays(time1,time2){ //in seconds
 // returns number of days from 1 to 2. for example 0 if both on one day.
@@ -956,38 +924,38 @@ try{
 }catch(err){ GM_logError("countDays","time1="+time1+" time2="+time2,"",err); }
 }
 //---------------------------------------------------------------------------------------------------------------------------
-function explode(str: any, debugName, defaultReturn) {
-    try {
-        /*
-        if(debugName===undefined){
-            debugName = "";
-            GM_logWarning("explode","debugName="+debugName,"","DebugName not set.");
-        }else if(typeof defaultReturn===undefined){
-            GM_logWarning("explode","debugName="+debugName,"","DefaultReturn not set.");
-        }
-        */
-        if (!str) {
-            if (undefined === defaultReturn) {
-                throw ("Argument is undefined.");
-            } else {
-                return defaultReturn;
-            }
-        }
-        if (typeof str != "number" && typeof str != "string") {
-            throw ("Argument is not a string nor a number.");
-        }
-        return JSON.parse(str as string);
-    } catch (err) {
-        if (undefined === defaultReturn) {
-            GM_logError("explode", "str=" + str + " debugName=" + debugName + " defaultReturn=", "", err);
-            throw ("ERROR in function 'explode'");
-        } else {
-            GM_logWarning("explode", "str=" + str + " debugName=" + debugName + " defaultReturn=" + implode(defaultReturn, "explode\error"), "", "Function returns given default. " + err);
+function explode(str:string,debugName,defaultReturn){
+try{
+    /*
+    if(debugName===undefined){
+        debugName = "";
+        GM_logWarning("explode","debugName="+debugName,"","DebugName not set.");
+    }else if(typeof defaultReturn===undefined){
+        GM_logWarning("explode","debugName="+debugName,"","DefaultReturn not set.");
+    }
+    */
+    if(!str){
+        if(undefined===defaultReturn){
+            throw ("Argument is undefined.");
+        }else{
             return defaultReturn;
         }
     }
+    if(typeof str != "number" && typeof str != "string"){
+        throw ("Argument is not a string nor a number.");
+    }
+    return JSON.parse(str);
+}catch(err){
+    if(undefined===defaultReturn){
+        GM_logError("explode","str="+str+" debugName="+debugName+" defaultReturn=","",err);
+        throw ("ERROR in function 'explode'");
+    } else {
+        GM_logWarning("explode","str="+str+" debugName="+debugName+" defaultReturn="+implode(defaultReturn,"explode\error"),"","Function returns given default. "+err);
+        return defaultReturn;
+    }
 }
-function implode(arr,debugName){
+}
+function implode(arr,debugName?){
 try{
     /*
     if(debugName===undefined){
@@ -1010,39 +978,39 @@ try{
     return encoded;
 }catch(err){ GM_logError("enc","str="+str+" sh="+sh,"",err); }
 }
-function print_r(arr, line, showType, linebreak) {
-    try {
-        var str = "";
-        if (!line) { line = ""; }
-        if (!showType) { showType = false; }
-        if (!linebreak) { linebreak = "<br/>"; }
-        if (typeof arr == "object") {
-            for (var i in arr) {
-                try {
-                    if (!arr.hasOwnProperty(i)) { continue; }
-                    var type = (arr instanceof Array);
-                    // GM_logInfo("print_r","","","i:" + i + " : " + typeof arr[i] + " | " + arr + "\n");
-                    if (typeof arr[i] == "string" || typeof arr[i] == "number" || typeof arr[i] == "boolean") {
-                        str += line + (type ? "[" : "{") + i + (type ? "]" : "}") + " = " + arr[i] + ((showType) ? " (" + typeof (arr[i]) + ")" : "") + linebreak;
-                    } else if (typeof arr[i] == "undefined") {
-                        str += line + (type ? "[" : "{") + i + (type ? "]" : "}") + " = " + linebreak;
-                    } else if (typeof arr[i] != "function") {
-                        str += print_r(arr[i], line + (type ? "[" : "{") + i + (type ? "]" : "}"), showType, linebreak);
-                    }
-                } catch (err) {
-                    GM_logError("print_r", "", "i=" + i, err);
-                    continue;
+function print_r(arr,line,showType,linebreak){
+try{
+    var str = "";
+    if (!line){ line=""; }
+    if (!showType){ showType=false; }
+    if (!linebreak){ linebreak="<br/>"; }
+    if(typeof arr == "object"){
+        for (var i in arr ){
+            try{
+                if(!arr.hasOwnProperty(i)){ continue; }
+                var type = (arr instanceof Array);
+                // GM_logInfo("print_r","","","i:" + i + " : " + typeof arr[i] + " | " + arr + "\n");
+                if (typeof arr[i] == "string" || typeof arr[i] == "number" || typeof arr[i] == "boolean") {
+                    str += line + (type?"[":"{") + i + (type?"]":"}") + " = " + arr[i] + ((showType)?" ("+typeof(arr[i])+")":"") + linebreak;
+                } else if(typeof arr[i] == "undefined"){
+                    str += line + (type?"[":"{") + i + (type?"]":"}") + " = " + linebreak;
+                } else if(typeof arr[i] != "function"){
+                    str += print_r(arr[i],line +(type?"[":"{") + i + (type?"]":"}"),showType,linebreak);
                 }
+            }catch(err){
+                GM_logError("print_r","","i="+i,err);
+                continue;
             }
-            if (!i) { str += line + " = " + "undefined" + linebreak; }
-        } else {
-            str += " = " + arr;
         }
-        return str;
-    } catch (err) {
-        GM_logError("print_r", "", "", err);
-        throw ("ERROR in function 'print_r'");
+        if(!i){str += line + " = " + "undefined" + linebreak;}
+    }else{
+        str += " = " + arr;
     }
+    return str;
+} catch (err){
+    GM_logError("print_r","","",err);
+    throw ("ERROR in function 'print_r'");
+}
 }
 function print_r_time(arr,line){
 try{
@@ -1053,7 +1021,7 @@ try{
             if(!arr.hasOwnProperty(i)){ continue; }
             // GM_logInfo("print_r_time","","i="+i+" arr="+typeof arr[i]+"|"+arr,"");
             if (typeof arr[i] == "string" || typeof arr[i] == "number" || typeof arr[i] == "boolean") {
-                str += line + "[" + i + "] = " + getDaytimeStr(arr[i], false, false) + "<br/>";
+                str += line + "[" + i + "] = " + getDaytimeStr(arr[i]) + "<br/>";
             } else if(typeof arr[i] == "undefined"){
                 str += line + "[" + i + "] = " + "<br/>";
             } else {
@@ -1088,33 +1056,33 @@ try{
 }
 
 //---------------------------------------------------------------------------------------------------------------------------
-var prodId;
-function produktPic(type: number, product, append) {
-    try {
-        var prodNum = isNaN(parseInt(product, 10)) ? prodId[product] : parseInt(product, 10);
-        // var type = parseInt(type, 10);
-        var newdiv = createElement("div", { "type": type, "prod": prodNum, "style": "display:inline-block;position:relative;margin-right:3px;border:none;vertical-align:bottom;" }, false, false);
-        switch (type) {
-            case 0: case 4:
-                if (prodNum > 0) {
-                    newdiv.setAttribute("class", "kp" + prodNum);
-                } else {
-                    createElement("img", { "src": GFX + "menu/coins.gif", "style": "height:15px;width:15px;border:none;top:0px;vertical-align:bottom;" }, newdiv, false);
-                }
-                break;
-            case 1: newdiv.setAttribute("class", "f_m_symbol" + prodNum); break;
-            case 2: newdiv.setAttribute("class", "fmm" + prodNum); break;
-            case 3: newdiv.setAttribute("class", "fmm" + prodNum); break;
-            default: throw ("Unknown type");
+
+function produktPic(type,product,append){
+try{
+    var prodNum = isNaN(parseInt(product,10))?prodId[product]:parseInt(product,10);
+    var type_temp = parseInt(type,10);
+    var newdiv = createElement("div",{"type":type_temp,"prod":prodNum,"style":"display:inline-block;position:relative;margin-right:3px;border:none;vertical-align:bottom;"});
+    switch(type_temp){
+    case 0:case 4:
+        if (prodNum>0){
+            newdiv.setAttribute("class","kp"+prodNum);
+        } else {
+            createElement("img",{"src":GFX+"menu/coins.gif","style":"height:15px;width:15px;border:none;top:0px;vertical-align:bottom;"},newdiv);
         }
-        if (append) { append.appendChild(newdiv); }
-        return newdiv;
-    } catch (err) {
-        GM_logError("produktPic", "type=" + type + " product=" + product, "", err);
-        return null;
+    break;
+    case 1: newdiv.setAttribute("class","f_m_symbol"+prodNum); break;
+    case 2: newdiv.setAttribute("class","fmm"+prodNum); break;
+    case 3: newdiv.setAttribute("class","fmm"+prodNum); break;
+    default: throw("Unknown type");
     }
+    if (append){ append.appendChild(newdiv); }
+    return newdiv;
+} catch(err){
+    GM_logError("produktPic","type="+type+" product="+product,"",err);
+    return null;
 }
-function numberFormat(number,decimals?: number,dec_point?: string,thousands_sep?: string){
+}
+function numberFormat(number,decimals?,dec_point?,thousands_sep?){
 // http://kevin.vanzonneveld.net
 // +   original by: Jonas Raoni Soares Silva (http://www.jsfromhell.com)
 // +   improved by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
@@ -1148,10 +1116,10 @@ try{
 
     var s = (prec > 0) ? n.toFixed(prec) : Math.round(n).toFixed(prec); //fix for IE parseFloat(0.55).toFixed(0) = 0;
 
-    let abs = Math.abs(n).toFixed(prec);
+    var abs = Math.abs(n).toFixed(prec);
     var _, i;
 
-    if (parseFloat(abs) >= 1000) {
+    if (Math.abs(n) >= 1000) {
         _ = abs.split(/\D/);
         i = _[0].length % 3 || 3;
 
@@ -1201,17 +1169,17 @@ try{
 
 function pointsFormat(number,containertype,append){
 try{
-    var newspan = createElement(containertype,{"style":"white-space:nowrap;"},append?append:false, false);
+    var newspan = createElement(containertype,{"style":"white-space:nowrap;"},append?append:false);
     newspan.addEventListener("mouseover",function(event){ toolTip.show(event,getText("points")); },false);
 //  createElement("img",{"src":GFX+"points.gif","style":"border:0px;width:12px;height:12px;margin-right:2px;"},newspan);
-    createElement("img",{"src":"data:image/gif;base64,R0lGODlhHgAeAMQfAP/ilv/Zdv/SWdikGv/VZkQ0CP/EJYhnEXdaDvO5HuqyHf/dgv/npf/MRLeLFpZyEsWWGP/FK//KO/7BH+KsHP/PT//gjqN8FP/HMayDFW1TDf/INWNLDH5gD6dmAAAAACH5BAEAAB8ALAAAAAAeAB4AAAX/4CeO5OgthFeubOtZaSu7b6rOuOgBljDdudluUVEAgyzPa9GgKJEui4VJcRyhJmlAUr1ilQCURAF5Yk2MMEGSoCS8JKV8rmRYAoLNZGKg+wkBCxYADIWGag0YBhESFYALC3gSEwoDHhINAo+DPCgVEhERGA0VAqYNEVUXD3MJE6OaBAQCnxEGixi5BmQPCBxyOh4OEAMJjA0SG7a3EwlkFx0F0mYmSg8ZEAp8tnuUAxkI0gXASR4XDgPazM0DDgfi1DQerswJzt/h5DkeohETFAMCQoA27gsyA1UyZHDg4MIBDXBoCBiToQOCDg8erOoQTwiBChMycBCnAeODAwciTq7wIAADBA3TPBQoiTJlECUNBkQbJ0cDzZQqTTRQ8CBmMJ8XbeKYd+FXvJ4aEAT9oAQCx4hKEEgN6mHAhY4llHRQ6qLMVKoeyJY7G+xKCAA7","style":"border:0px;width:12px;height:12px;margin-right:2px;"},newspan, false);
+    createElement("img",{"src":"data:image/gif;base64,R0lGODlhHgAeAMQfAP/ilv/Zdv/SWdikGv/VZkQ0CP/EJYhnEXdaDvO5HuqyHf/dgv/npf/MRLeLFpZyEsWWGP/FK//KO/7BH+KsHP/PT//gjqN8FP/HMayDFW1TDf/INWNLDH5gD6dmAAAAACH5BAEAAB8ALAAAAAAeAB4AAAX/4CeO5OgthFeubOtZaSu7b6rOuOgBljDdudluUVEAgyzPa9GgKJEui4VJcRyhJmlAUr1ilQCURAF5Yk2MMEGSoCS8JKV8rmRYAoLNZGKg+wkBCxYADIWGag0YBhESFYALC3gSEwoDHhINAo+DPCgVEhERGA0VAqYNEVUXD3MJE6OaBAQCnxEGixi5BmQPCBxyOh4OEAMJjA0SG7a3EwlkFx0F0mYmSg8ZEAp8tnuUAxkI0gXASR4XDgPazM0DDgfi1DQerswJzt/h5DkeohETFAMCQoA27gsyA1UyZHDg4MIBDXBoCBiToQOCDg8erOoQTwiBChMycBCnAeODAwciTq7wIAADBA3TPBQoiTJlECUNBkQbJ0cDzZQqTTRQ8CBmMJ8XbeKYd+FXvJ4aEAT9oAQCx4hKEEgN6mHAhY4llHRQ6qLMVKoeyJY7G+xKCAA7","style":"border:0px;width:12px;height:12px;margin-right:2px;"},newspan);
     createElement("span",{},newspan,numberFormat(number));
     return newspan;
 }catch(err){ GM_logError("pointsFormat","number="+number+" containertype="+containertype,"",err); }
 }
 function coinsFormat(number,append){
 try{
-    var newdiv = createElement("div",{"style":"display:inline-block;height:16px;"}, false, false);
+    var newdiv = createElement("div",{"style":"display:inline-block;height:16px;"});
     newdiv.addEventListener("mouseover",function(event){ toolTip.show(event,prodName[0]); },false);
     var newdiv1 = produktPic(0,0,newdiv);
     createElement("span",{},newdiv,numberFormat(number));
@@ -1234,11 +1202,11 @@ try{
 }
 //---------------------------------------------------------------------------------------------------------------------------
 
-function getRandom(min: number,max: number){
+function getRandom(min,max){
 try{
     if ( min > max ){return( -1 );  }
     if ( min == max ){return( min );}
-    return( min +  Math.random() * ( max-min+1 ) );
+    return( min + Math.random() * ( max-min+1 ) );
 }catch(err){ GM_logError("getRandom","min="+min+" max="+max,"",err); }
 }
 function compareVersions(version1,version2){
@@ -1448,7 +1416,7 @@ if(top.unsafeData.logBubble){
         };
         this.test=function(){
         try{
-            GM_logInfo("logBubble.test","","","","");
+            GM_logInfo("logBubble.test","","","");
             logBubble.add("logBubble.test");
         }catch(err){ GM_logError("logBubble.test","","",err); }
         };
@@ -1525,7 +1493,7 @@ if(location.search!=""){
     }
 }
 const sortObjFunctions = {
-    "desc":function(a,b){return b[0]-a[0];},
+    "desc":function(a,b){return a[0].compareTo(b[0]) ; }, //((b[0]>a[0])-(b[0]<a[0]));},
     "int":function(a,b){return (parseInt(a[0],10)-parseInt(b[0],10));},
     "float":function(a,b){return (parseFloat(a[0])-parseFloat(b[0]));},
     "date":function(a,b){return (getTime(a[0])-getTime(b[0]));},
@@ -1541,7 +1509,7 @@ const sortObjFunctions = {
 // Strings
 var LANGUAGE = null;
 var text = new Object();
-function getText(id:string,noWarning?:boolean){
+function getText(id,noWarning?){
 try{
     if(text[LANGUAGE]&&text[LANGUAGE][id]){
         return text[LANGUAGE][id];

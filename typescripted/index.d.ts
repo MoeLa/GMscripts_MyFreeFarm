@@ -233,21 +233,3 @@ interface GMXMLHttpRequestResult extends GMXMLHttpRequestAsyncResult, GMXMLHttpR
  * @see      {@link http://wiki.greasespot.net/GM_setClipboard}
  */
 declare function GM_xmlhttpRequest(options: GMXMLHttpRequestOptions): GMXMLHttpRequestResult;
-
-// Eigener Sheat
-declare function cloneInto(obj, targetScope, options?);
-
-/**
- * 
- * @param func The function to export.
- * @param targetScope The object to attach the function to. This does not have to be the global window object: it could be any other object in the target window, or an object created by the caller.
- * @param options Optional parameter that supplies additional options.
- *                The following options are currently defined:
- *                   defineAs: determines the name of the function in targetScope. If this is omitted, you need to assign the return value of exportFunction() to an object in the target scope.
- *                   allowCallbacks: deprecated/redundant from Firefox 34. This option allows the exported function to accept callbacks as arguments. Boolean, defaulting to false. This option is new in Firefox 33. From Firefox 34 onwards this option has no effect: the exported function is always able to accept callbacks as arguments.
- *                   allowCrossOriginArguments: do not check that arguments to the exported function are subsumed by the caller: this allows the caller to pass objects with a different origin into the exported function, which can then use its privileged status to make cross-origin requests with them. Boolean, defaulting to false. This option is new in Firefox 34.
- * @return The placeholder function which has been created in the target context.
- * 
- * @see {@link https://developer.mozilla.org/en-US/docs/Mozilla/Tech/XPCOM/Language_Bindings/Components.utils.exportFunction}
- */
-declare function exportFunction(func, targetScope, options?): {};
