@@ -9,6 +9,12 @@
 // @license        GPL version 3 or any later version; http://www.gnu.org/copyleft/gpl.html
 // ==/UserScript==
 
+import { MyString as String,
+         MyArray as Array,
+         MyObject as Object } from "./custom_interfaces";
+import Window from "../test/mff_all_modulized";
+declare var unsafeWindow: Window;
+
 const VERSIONfunctionFile = "2.1.12";
 var DEVMODE=GM_getValue("devmode",false);
 var DEVMODE_EVENTS=GM_getValue("devmode_events",false);
@@ -19,11 +25,6 @@ var DEVMODE_LOG_ERROR=GM_getValue("devmode_log_error",true);
 var OPTION_LOGGING=GM_getValue("logging",[false,false,true]); // [developer, function call, events]
 
 // PROTOTYPES ************************************************************************************************************
-interface String {  
-    reverse: () => string;
-    capitalize: () => string;
-}
-
 String.prototype.reverse = function(){
 try{
     var splitext = this.split("");
@@ -38,12 +39,12 @@ try{
 }catch(err){ GM_logError("String.prototype.capitalize","","",err); }
 };
 
-interface Array<T> {  
-    equals: (val: T[]) => boolean;
-    contains: (val) => boolean;
-    shuffle: () => void;
-    swap: (v1, v2) => void;
-}
+// interface Array<T> {  
+//     equals: (val: T[]) => boolean;
+//     contains: (val) => boolean;
+//     shuffle: () => void;
+//     swap: (v1, v2) => void;
+// }
 
 Array.prototype.contains = function(searchElement){
 try{
@@ -105,14 +106,14 @@ try{
 }catch(err){ GM_logError("Array.prototype.swap","from, to","",err); }
 };
 
-interface Object {  
-    equals: (val) => boolean;
-    order: any[];
-    sortObj: (sortfkt ,descending: boolean) => void;
-    isEmpty: () => boolean;
-    length: () => number;
-    clone: () => any;
-}
+// interface Object {  
+//     equals: (val) => boolean;
+//     order: any[];
+//     sortObj: (sortfkt ,descending: boolean) => void;
+//     isEmpty: () => boolean;
+//     length: () => number;
+//     clone: () => any;
+// }
 Object.prototype.equals = function(that) {
 try{
     //For the first loop, we only check for types
