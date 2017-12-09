@@ -358,7 +358,7 @@ try{
     }
 }catch(err){ GM_logError("removeElement","node.id="+(node&&node.id?node.id:"?"),"",err); }
 }
-function createElement(type, attributes, append, inner){
+function createElement(type, attributes, append?, inner?){
 try{
     var node = document.createElement(type);
     for (var attr in attributes) {
@@ -896,7 +896,7 @@ function getDateStr(time, yearformat, padd) { //in seconds //was datum
         return str;
     } catch (err) { GM_logError("getDateStr", "time=" + time + " yearformat=" + yearformat + " padd=" + padd, "", err); }
 }
-function getFormattedDateStr(time,yearformat,padd){
+function getFormattedDateStr(time,yearformat,padd?){
 // yearformat:
 // 0 -> 01.02.
 // 1 -> 01.02.11
@@ -926,9 +926,11 @@ try{
 function getDateText(time, yearformat) { // was datumDay
     try {
         var time2 = Math.floor(time);
-        var today = new Date(new Date().getFullYear(),
-            new Date().getMonth(),
-            new Date().getDate(), 0, 0, 0) / 1000; //begin of this day.
+        let tempDate: Date = new Date();
+        var today = Date.UTC(tempDate.getFullYear(),
+            tempDate.getMonth(),
+            tempDate.getDate(), 0, 0, 0) / 1000; //begin of this day.
+
         if (time2 < today) {
             return getFormattedDateStr(time, yearformat);
         } else if (time2 < (today + (1 * 24 * 60 * 60))) {
@@ -1112,7 +1114,7 @@ function produktPic(type: number, product, append) {
         return null;
     }
 }
-function numberFormat(number,decimals,dec_point,thousands_sep){
+function numberFormat(number,decimals?: number,dec_point?: string,thousands_sep?: string){
 // http://kevin.vanzonneveld.net
 // +   original by: Jonas Raoni Soares Silva (http://www.jsfromhell.com)
 // +   improved by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
@@ -1199,17 +1201,17 @@ try{
 
 function pointsFormat(number,containertype,append){
 try{
-    var newspan = createElement(containertype,{"style":"white-space:nowrap;"},append?append:false);
+    var newspan = createElement(containertype,{"style":"white-space:nowrap;"},append?append:false, false);
     newspan.addEventListener("mouseover",function(event){ toolTip.show(event,getText("points")); },false);
 //  createElement("img",{"src":GFX+"points.gif","style":"border:0px;width:12px;height:12px;margin-right:2px;"},newspan);
-    createElement("img",{"src":"data:image/gif;base64,R0lGODlhHgAeAMQfAP/ilv/Zdv/SWdikGv/VZkQ0CP/EJYhnEXdaDvO5HuqyHf/dgv/npf/MRLeLFpZyEsWWGP/FK//KO/7BH+KsHP/PT//gjqN8FP/HMayDFW1TDf/INWNLDH5gD6dmAAAAACH5BAEAAB8ALAAAAAAeAB4AAAX/4CeO5OgthFeubOtZaSu7b6rOuOgBljDdudluUVEAgyzPa9GgKJEui4VJcRyhJmlAUr1ilQCURAF5Yk2MMEGSoCS8JKV8rmRYAoLNZGKg+wkBCxYADIWGag0YBhESFYALC3gSEwoDHhINAo+DPCgVEhERGA0VAqYNEVUXD3MJE6OaBAQCnxEGixi5BmQPCBxyOh4OEAMJjA0SG7a3EwlkFx0F0mYmSg8ZEAp8tnuUAxkI0gXASR4XDgPazM0DDgfi1DQerswJzt/h5DkeohETFAMCQoA27gsyA1UyZHDg4MIBDXBoCBiToQOCDg8erOoQTwiBChMycBCnAeODAwciTq7wIAADBA3TPBQoiTJlECUNBkQbJ0cDzZQqTTRQ8CBmMJ8XbeKYd+FXvJ4aEAT9oAQCx4hKEEgN6mHAhY4llHRQ6qLMVKoeyJY7G+xKCAA7","style":"border:0px;width:12px;height:12px;margin-right:2px;"},newspan);
+    createElement("img",{"src":"data:image/gif;base64,R0lGODlhHgAeAMQfAP/ilv/Zdv/SWdikGv/VZkQ0CP/EJYhnEXdaDvO5HuqyHf/dgv/npf/MRLeLFpZyEsWWGP/FK//KO/7BH+KsHP/PT//gjqN8FP/HMayDFW1TDf/INWNLDH5gD6dmAAAAACH5BAEAAB8ALAAAAAAeAB4AAAX/4CeO5OgthFeubOtZaSu7b6rOuOgBljDdudluUVEAgyzPa9GgKJEui4VJcRyhJmlAUr1ilQCURAF5Yk2MMEGSoCS8JKV8rmRYAoLNZGKg+wkBCxYADIWGag0YBhESFYALC3gSEwoDHhINAo+DPCgVEhERGA0VAqYNEVUXD3MJE6OaBAQCnxEGixi5BmQPCBxyOh4OEAMJjA0SG7a3EwlkFx0F0mYmSg8ZEAp8tnuUAxkI0gXASR4XDgPazM0DDgfi1DQerswJzt/h5DkeohETFAMCQoA27gsyA1UyZHDg4MIBDXBoCBiToQOCDg8erOoQTwiBChMycBCnAeODAwciTq7wIAADBA3TPBQoiTJlECUNBkQbJ0cDzZQqTTRQ8CBmMJ8XbeKYd+FXvJ4aEAT9oAQCx4hKEEgN6mHAhY4llHRQ6qLMVKoeyJY7G+xKCAA7","style":"border:0px;width:12px;height:12px;margin-right:2px;"},newspan, false);
     createElement("span",{},newspan,numberFormat(number));
     return newspan;
 }catch(err){ GM_logError("pointsFormat","number="+number+" containertype="+containertype,"",err); }
 }
 function coinsFormat(number,append){
 try{
-    var newdiv = createElement("div",{"style":"display:inline-block;height:16px;"});
+    var newdiv = createElement("div",{"style":"display:inline-block;height:16px;"}, false, false);
     newdiv.addEventListener("mouseover",function(event){ toolTip.show(event,prodName[0]); },false);
     var newdiv1 = produktPic(0,0,newdiv);
     createElement("span",{},newdiv,numberFormat(number));
@@ -1232,11 +1234,11 @@ try{
 }
 //---------------------------------------------------------------------------------------------------------------------------
 
-function getRandom(min,max){
+function getRandom(min: number,max: number){
 try{
     if ( min > max ){return( -1 );  }
     if ( min == max ){return( min );}
-    return( min + parseInt( Math.random() * ( max-min+1 ),10 ) );
+    return( min +  Math.random() * ( max-min+1 ) );
 }catch(err){ GM_logError("getRandom","min="+min+" max="+max,"",err); }
 }
 function compareVersions(version1,version2){
@@ -1446,7 +1448,7 @@ if(top.unsafeData.logBubble){
         };
         this.test=function(){
         try{
-            GM_logInfo("logBubble.test","","","");
+            GM_logInfo("logBubble.test","","","","");
             logBubble.add("logBubble.test");
         }catch(err){ GM_logError("logBubble.test","","",err); }
         };
@@ -1523,9 +1525,9 @@ if(location.search!=""){
     }
 }
 const sortObjFunctions = {
-    "desc":function(a,b){return ((b[0]>a[0])-(b[0]<a[0]));},
+    "desc":function(a,b){return b[0]-a[0];},
     "int":function(a,b){return (parseInt(a[0],10)-parseInt(b[0],10));},
-    "float":function(a,b){return (parseFloat(a[0],10)-parseFloat(b[0],10));},
+    "float":function(a,b){return (parseFloat(a[0])-parseFloat(b[0]));},
     "date":function(a,b){return (getTime(a[0])-getTime(b[0]));},
     "productId":function(a,b){
         if(prodTyp[0][a[0]]==prodTyp[0][b[0]]){
@@ -1539,7 +1541,7 @@ const sortObjFunctions = {
 // Strings
 var LANGUAGE = null;
 var text = new Object();
-function getText(id,noWarning){
+function getText(id:string,noWarning?:boolean){
 try{
     if(text[LANGUAGE]&&text[LANGUAGE][id]){
         return text[LANGUAGE][id];
