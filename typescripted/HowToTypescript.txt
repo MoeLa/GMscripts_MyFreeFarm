@@ -3,10 +3,11 @@ Neuer Header
 /// <reference path="./typescripted/ci.d.ts" />
 /// <reference path="./typescripted/mff_all_171130.d.ts" />
 
-// Variables coming from Berater
+// For Common_functions: Variables coming from Berater
 declare var prodName, prodTyp, prodId;
 
-Greasemonkey-Declarations von https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/greasemonkey
+
+Greasemonkey-Declarations in index.d.ts sind von https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/greasemonkey
 
 * Aktuelle mff_all_*.js beziehen
 * Umbenennen in mff_all_*.ts

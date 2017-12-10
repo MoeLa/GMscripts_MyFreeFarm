@@ -1232,7 +1232,7 @@ try{
 }catch(err){ GM_logError("compareVersions","version1="+version1+" version2="+version2,"",err); }
 }
 
-function alert2(text,yesText,noText,yesFkt,noFkt){
+function alert2(text,yesText,noText?,yesFkt?,noFkt?){
 try{
     var newdiv = createElement("div",{"style":"display:block;z-index:9999;position:fixed;top:0px;left:0px;width:100%;height:100%;"},top.document.body);
     createElement("div",{"style":"display:block;position:fixed;top:0px;left:0px;width:100%;height:100%;background-color:black;opacity:0.7;"},newdiv);

@@ -27,6 +27,7 @@ interface Window {
     toolTip: () => void;
     _GFX: string;
     forestry_user_buildings: any;
+    market_filter_name: string;
 }
 // Custom interfaces END
 
