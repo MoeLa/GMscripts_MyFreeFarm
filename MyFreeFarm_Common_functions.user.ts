@@ -168,7 +168,7 @@ try{
     if(typeof sortfkt!="function"){
         sortfkt = function(a,b){
             if(isNaN(a[0])){
-                if(isNaN(b[0])){ return a[0].compareTo(b[0]) ; }// ((a[0]>b[0])-(a[0]<b[0])); } // both strings
+                if(isNaN(b[0])){ return (a[0]<b[0])?-1:((a[0]>b[0])?1:0); } // both strings
                 else { return 1; } // string > number
             } else {
                 if(isNaN(b[0])){ return -1; } // number < string
@@ -1493,7 +1493,7 @@ if(location.search!=""){
     }
 }
 const sortObjFunctions = {
-    "desc":function(a,b){return a[0].compareTo(b[0]) ; }, //((b[0]>a[0])-(b[0]<a[0]));},
+    "desc":function(a,b){return (a[0]<b[0])?-1:((a[0]>b[0])?1:0); },
     "int":function(a,b){return (parseInt(a[0],10)-parseInt(b[0],10));},
     "float":function(a,b){return (parseFloat(a[0])-parseFloat(b[0]));},
     "date":function(a,b){return (getTime(a[0])-getTime(b[0]));},
