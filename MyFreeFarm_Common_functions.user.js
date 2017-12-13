@@ -1914,11 +1914,11 @@ function getText(id, noWarning) {
     }
 }
 var delimThou = ".";
-var regDelimThou = "\\.";
+var regDelimThou = new RegExp("\\.");
 var regDelimThouShift = "([\\d\\.])(\\d)\\.(\\d{1,2}\\D)";
 var regDelimThouDelete = "(\\d)\\.(\\.*)(\\d{1,2}\\D)";
 var delimDeci = ",";
-var regDelimDeci = ",";
+var regDelimDeci = new RegExp(",");
 var dateFormatDM = "day.month.";
 var dateFormatDMY = "day.month.year";
 var timeFormatHM = "hour:min";

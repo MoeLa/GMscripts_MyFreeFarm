@@ -20,14 +20,38 @@ interface Object {
     clone: () => any;
 }
 
+interface UnsafeData {
+        LANGUAGE: string;
+        COUNTRY: string;
+        prodNameSort: Object;
+        prodName: Object;
+        prodStock: Object;
+        prodBlock: Object;
+        prodTyp: Object;
+        delimDeci: string; // ","
+        regDelimDeci: string; // ","
+        delimThou: string; // "."
+        regDelimThou: string; // "."
+        beraterVersion: string;
+        beraterDone: boolean;
+}
+
 interface Window {
-    greaseMonkeyData: Object;
+    greaseMonkeyData: UnsafeData;
     wrappedJSObject: Window;
     unsafeData: any;
     toolTip: () => void;
     _GFX: string;
     forestry_user_buildings: any;
+
     market_filter_name: string;
+    market_filter_pid: number;
+    market_filter_own: number;
+    market_guild_filter: number;
+
+    t_money: string; // "Geld"
+    t_points: string; // "Punkte"
+    guildquestlist_level: string; "Level: "
 }
 // Custom interfaces END
 

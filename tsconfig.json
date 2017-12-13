@@ -10,6 +10,7 @@
         // "./typescripted/index.d.ts",
         // "./typescripted/ci.d.ts",
         // "./typescripted/mff_all_171130.d.ts",
-        "MyFreeFarm_Common_functions.user.ts"
+        "MyFreeFarm_Common_functions.user.ts",
+        "MyFreeFarm_Rackoverview.user.ts"
     ]
 }
