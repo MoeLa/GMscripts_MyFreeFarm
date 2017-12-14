@@ -58,15 +58,15 @@
 declare var gameLocation;
 
 const VERSION = GM_info["script"]["version"];
-const neededVersionBerater = "2.5.3";
-const neededVersionFunctionFile = "2.1.7";
+const neededVersionBeraterForRack = "2.5.3";
+const neededVersionFunctionFileForRack = "2.1.7";
 const GM_Home = GM_info["script"]["namespace"];
 const GM_Source = GM_info["script"]["namespace"];
 
 if (!VERSIONfunctionFile) {
     alert("Hi, I am the MyFreeFarm Rackoverview-Script.\nThe function-file is missing.\nPlease install me again.");
     location.href = GM_Source;
-} else if (compareVersions(neededVersionFunctionFile, VERSIONfunctionFile) > 0) {
+} else if (compareVersions(neededVersionFunctionFileForRack, VERSIONfunctionFile) > 0) {
     alert("Hi, I am the MyFreeFarm Rackoverview-Script.\nThe function-file is too old.\nPlease install me again.");
     location.href = GM_Source;
 }
@@ -81,7 +81,8 @@ const IMAGES = {
 const EMPTYFILE = ["FARMNAME", 0, [], 0, 1, 1, 0, []];
 var FARMNAME = null;
 var FARMNR = null;
-var bestand = new Array();
+/** Each element represents an account. */
+let bestand = new Array();
 var prodTotal = new Array;
 var productStatTime = 0;
 var todayTime: any = new Date();
@@ -90,20 +91,23 @@ todayTime = Math.round(new Date(todayTime.getFullYear(), todayTime.getMonth(), t
 function showMarket(pid) {
     try {
         if ((gameLocation[0] != "city") || (gameLocation[1] != 1)) {
-            document.addEventListener("gameCity1", function (pid) {
+            var x = function (pid) {
                 return function () {
-                    document.removeEventListener("gameCity1", arguments.callee, false);
+                    document.removeEventListener("gameCity1", x, false);
                     showMarket(pid);
                 };
-            }(pid), false);
+            }
+            document.addEventListener("gameCity1", x(pid), false);
             click($("speedlink_city1"));
         } else if ($("market").style.display != "block") {
-            document.addEventListener("gameOpenMarket", function (pid) {
+            var x = function (pid) {
                 return function () {
-                    document.removeEventListener("gameOpenMarket", arguments.callee, false);
+                    document.removeEventListener("gameOpenMarket", x, false);
                     showMarket(pid);
                 };
-            }(pid), false);
+            }
+
+            document.addEventListener("gameOpenMarket", x(pid), false);
             unsafeWindow.close_page();
             unsafeWindow.hideDiv("shop");
             unsafeWindow.hideDiv("wbwcontainer");
@@ -142,23 +146,34 @@ function closeInfoPanel() {
     } catch (err) { GM_logError("closeInfoPanel", "no parameters", err, "Error, when calling closeInfoPanel"); }
 }
 
-function buildInfoPanel(mode, mode2?) {
-    if (typeof mode2 == "undefined") { mode2 = ""; }
+/**
+ * Displays the info panel.
+ * 
+ * @param mode e.g. 'rackoverview'
+ * @param shownTypes  e.g. '"o"', when showing oil products. Other modes: v, e, ex, z, fw1fw2fw3fw4, flfla, hr, md
+ * 
+ */
+function buildInfoPanel(mode, shownTypes?) {
+    if (typeof shownTypes == "undefined") {
+        shownTypes = "";
+    }
     var container, newtable, newthead, newtbody, newtfoot, newtr, newtd, newtd1, newdiv1, newinput;
-    var div, div1;
+    var div;
     if (!(div = $("infoPanel"))) {
-        div1 = $("garten_komplett");
-        div = createElement("div", { "id": "infoPanel", "mode": "", "style": "position:absolute;top:50px;left:" + (div1 ? 20 : 100) + "px;width:660px;height:580px;background-color:#b8a789;z-index:100;display:none;" }, div1 ? div1 : ALL);
+        // infoPanel has not been created so far => create frame now
+        let gardenArea = $("garten_komplett"); // Area between products & quick jump icons and post box & xp bar
+        div = createElement("div", { "id": "infoPanel", "mode": "", "style": "position:absolute;top:50px;left:" + (gardenArea ? 20 : 100) + "px;width:660px;height:580px;background-color:#b8a789;z-index:100;display:none;" }, gardenArea ? gardenArea : ALL);
         createElement("img", { "src": GFX + "guild/help_back.jpg", "style": "position:absolute;top:0;left:0;width:100%;height:100%;z-index:-1;" }, div);
         createElement("div", { "id": "infoPanelInner", "style": "position:absolute;width:595px;height:89%;margin:5%;overflow:none;" }, div);
-        div1 = createElement("img", { "id": "infoPanelClose", "class": "link", "src": GFX + "close.jpg", "style": "position:absolute;top:8px;right:8px;width:20px;height:20px;" }, div);
-        div1.addEventListener("click", closeInfoPanel, false);
+        let closeIcon = createElement("img", { "id": "infoPanelClose", "class": "link", "src": GFX + "close.jpg", "style": "position:absolute;top:8px;right:8px;width:20px;height:20px;" }, div);
+        closeIcon.addEventListener("click", closeInfoPanel, false);
     }
-    if ((div.style.zIndex == "101") && (mode == div.getAttribute("mode")) && (implode(mode2, "mode2") == div.getAttribute("mode2"))) {
+    // Close infoPanel, when rachoverview icon is clicked while being open
+    if ((div.style.zIndex == "102") && (mode == div.getAttribute("mode"))) {
         closeInfoPanel();
     } else {
         div.setAttribute("mode", mode);
-        div.setAttribute("mode2", implode(mode2, "mode2"));
+        div.setAttribute("mode2", implode(shownTypes, "mode2"));
         div.style.display = "block";
         div.style.zIndex = "102";
         div.style.width = "800px";
@@ -170,203 +185,302 @@ function buildInfoPanel(mode, mode2?) {
         div.style.width = "90%";
         div.style.height = "85%";
         div.style.overflow = "auto";
-
         div.style.background = "";
 
+        // Multiframe is some native info box. Put it behind our infoPanel.
         $("multiframe").style.zIndex = "99";
-        //$("transp100").style.display = "block";
 
         switch (mode) {
             case "rackoverview": {
-                if (mode2) {
-                    GM_setValue(LNG + "_" + SERVER + "_" + FARMNAME + "_modeRackoverview", mode2);
+                if (shownTypes) {
+                    // Remember current shownTypes
+                    GM_setValue(LNG + "_" + SERVER + "_" + FARMNAME + "_modeRackoverview", shownTypes);
                 } else {
-                    mode2 = GM_getValue(LNG + "_" + SERVER + "_" + FARMNAME + "_modeRackoverview", "cveoz");
+                    // Read shownTypes from database
+                    shownTypes = GM_getValue(LNG + "_" + SERVER + "_" + FARMNAME + "_modeRackoverview", "cveoz");
                 }
 
+                /** Box containing the selectors for product categories */
                 var newdiv = createElement("div", { "id": "offertypeselector", "class": "productSort", "style": "position:absolute;top:0px;left:0px;-moz-user-select:none;" }, div);
                 newdiv.addEventListener("mouseover", function (event) {
-                    var mouseOverText = event.target.getAttribute("mouseOverText");
+                    let mouseOverText: string = event.target.getAttribute("mouseOverText");
                     if (mouseOverText) {
-                        //15.03
                         mouseOverText = '<div>' + getText("click") + '&nbsp;/&nbsp;' + getText("clickCtrl") + '</div><div>' + mouseOverText + '</div>';
                         toolTip.show(event, mouseOverText);
                     }
                 }, false);
 
-                //Filter Pflanzen
+                // Filter plants
+                /** Icon for type 'plants' */
                 var newdiv1 = createElement("div", { "mouseOverText": text[LNG]["category_v"], "class": "rackcat1v", "style": "float:left;width:27px;height:39px;background:url('" + GFX + "rack_sort_top.png') repeat scroll 0px 0px transparent;" }, newdiv);
-                if (mode2.match(/v/)) {
+                if (shownTypes.match(/v/)) {
+                    // Plants selected => green background
                     newdiv1.style.backgroundPosition = " 0px -78px";
                 } else {
-                    newdiv1.addEventListener("mouseout", function () { this.style.backgroundPosition = " 0px 0px"; }, false);
-                    newdiv1.addEventListener("mouseover", function () { this.style.backgroundPosition = " 0px -39px"; }, false);
+                    // Plants hidden => Add mouseover-behaviour
+                    newdiv1.addEventListener("mouseout", function () {
+                        this.style.backgroundPosition = " 0px 0px";
+                    }, false);
+                    newdiv1.addEventListener("mouseover", function () {
+                        this.style.backgroundPosition = " 0px -39px";
+                    }, false);
                 }
                 newdiv1.addEventListener("click", function (event) {
                     if (event.ctrlKey) {
-                        if (mode2.match(/v/)) { mode2 = mode2.replace(/v/, ""); }
-                        else { mode2 += "v"; }
-                    } else { mode2 = "v"; }
+                        // Ctrl pressed...
+                        if (shownTypes.match(/v/)) {
+                            // Plants shown => Hide them
+                            shownTypes = shownTypes.replace(/v/, "");
+                        } else {
+                            // Add plants to shown types
+                            shownTypes += "v";
+                        }
+                    } else {
+                        // Show only plants
+                        shownTypes = "v";
+                    }
                     $("infoPanel").setAttribute("mode", "");
-                    buildInfoPanel("rackoverview", mode2);
+                    buildInfoPanel("rackoverview", shownTypes);
                 }, false);
 
-                //Filter fortschrittliche Produkte
+                // Filter 'fortschrittliche Produkte'
                 newdiv1 = createElement("div", { "mouseOverText": text[LNG]["category_e"], "class": "link", "style": "float:left;width:27px;height:39px;background:url('" + GFX + "rack_sort_top.png') repeat scroll -27px 0px transparent;" }, newdiv);
-                if (mode2.match(/e(?!x)/)) {
+                if (shownTypes.match(/e(?!x)/)) {
                     newdiv1.style.backgroundPosition = "-27px -78px";
                 } else {
-                    newdiv1.addEventListener("mouseout", function () { this.style.backgroundPosition = "-30px 0px"; }, false);
-                    newdiv1.addEventListener("mouseover", function () { this.style.backgroundPosition = "-30px -39px"; }, false);
+                    newdiv1.addEventListener("mouseout", function () {
+                        this.style.backgroundPosition = "-30px 0px";
+                    }, false);
+                    newdiv1.addEventListener("mouseover", function () {
+                        this.style.backgroundPosition = "-30px -39px";
+                    }, false);
                 }
                 newdiv1.addEventListener("click", function (event) {
                     if (event.ctrlKey) {
-                        if (mode2.match(/e(?!x)/)) { mode2 = mode2.replace(/e(?!x)/, ""); }
-                        else { mode2 += "e"; }
-                    } else { mode2 = "e"; }
+                        if (shownTypes.match(/e(?!x)/)) {
+                            shownTypes = shownTypes.replace(/e(?!x)/, "");
+                        } else {
+                            shownTypes += "e";
+                        }
+                    } else {
+                        shownTypes = "e";
+                    }
                     $("infoPanel").setAttribute("mode", "");
-                    buildInfoPanel("rackoverview", mode2);
+                    buildInfoPanel("rackoverview", shownTypes);
                 }, false);
 
-                //Filter exotische Produkte
+                // Filter 'exotic products'
                 newdiv1 = createElement("div", { "mouseOverText": text[LNG]["category_ex"], "class": "link", "style": "float:left;width:54px;height:39px;background:url('" + IMAGES["racksortexotProd"] + "') repeat scroll 0px 0px transparent;" }, newdiv);
-                if (mode2.match(/e(?=x)/)) {
+                if (shownTypes.match(/e(?=x)/)) {
                     newdiv1.style.backgroundPosition = " 0px -78px";
                 } else {
-                    newdiv1.addEventListener("mouseout", function () { this.style.backgroundPosition = " 0px 0px"; }, false);
-                    newdiv1.addEventListener("mouseover", function () { this.style.backgroundPosition = " 0px -39px"; }, false);
+                    newdiv1.addEventListener("mouseout", function () {
+                        this.style.backgroundPosition = " 0px 0px";
+                    }, false);
+                    newdiv1.addEventListener("mouseover", function () {
+                        this.style.backgroundPosition = " 0px -39px";
+                    }, false);
                 }
                 newdiv1.addEventListener("click", function (event) {
                     if (event.ctrlKey) {
-                        if (mode2.match(/e(?=x)/)) { mode2 = mode2.replace(/ex/, ""); }
-                        else { mode2 += "ex"; }
-                    } else { mode2 = "ex"; }
+                        if (shownTypes.match(/e(?=x)/)) {
+                            shownTypes = shownTypes.replace(/ex/, "");
+                        } else {
+                            shownTypes += "ex";
+                        }
+                    } else {
+                        shownTypes = "ex";
+                    }
                     $("infoPanel").setAttribute("mode", "");
-                    buildInfoPanel("rackoverview", mode2);
+                    buildInfoPanel("rackoverview", shownTypes);
                 }, false);
 
-                //Filter Öl
+                // Filter oil
                 newdiv1 = createElement("div", { "mouseOverText": text[LNG]["category_o"], "class": "link", "style": "float:left;width:54px;height:39px;background:url('" + GFX + "rack_sort_top.png') repeat scroll -53px 0px transparent;" }, newdiv);
-                if (mode2.match(/o/)) {
+                if (shownTypes.match(/o/)) {
                     newdiv1.style.backgroundPosition = "-53px -78px";
                 } else {
-                    newdiv1.addEventListener("mouseout", function () { this.style.backgroundPosition = "-53px 0px"; }, false);
-                    newdiv1.addEventListener("mouseover", function () { this.style.backgroundPosition = "-53px -39px"; }, false);
+                    newdiv1.addEventListener("mouseout", function () {
+                        this.style.backgroundPosition = "-53px 0px";
+                    }, false);
+                    newdiv1.addEventListener("mouseover", function () {
+                        this.style.backgroundPosition = "-53px -39px";
+                    }, false);
                 }
                 newdiv1.addEventListener("click", function (event) {
                     if (event.ctrlKey) {
-                        if (mode2.match(/o/)) { mode2 = mode2.replace(/o/, ""); }
-                        else { mode2 += "o"; }
-                    } else { mode2 = "o"; }
+                        if (shownTypes.match(/o/)) {
+                            shownTypes = shownTypes.replace(/o/, "");
+                        } else {
+                            shownTypes += "o";
+                        }
+                    } else {
+                        shownTypes = "o";
+                    }
                     $("infoPanel").setAttribute("mode", "");
-                    buildInfoPanel("rackoverview", mode2);
+                    buildInfoPanel("rackoverview", shownTypes);
                 }, false);
 
-                //Filter Baumarkt
+                // Filter 'Baumarkt'
                 newdiv1 = createElement("div", { "mouseOverText": text[LNG]["category_z"], "class": "link", "style": "float:left;width:54px;height:39px;background:url('" + GFX + "rack_sort_top.png') repeat scroll -159px 0px transparent;" }, newdiv);
-                if (mode2.match(/z/)) {
+                if (shownTypes.match(/z/)) {
                     newdiv1.style.backgroundPosition = "-159px -78px";
                 } else {
-                    newdiv1.addEventListener("mouseout", function () { this.style.backgroundPosition = "-159px 0px"; }, false);
-                    newdiv1.addEventListener("mouseover", function () { this.style.backgroundPosition = "-159px -39px"; }, false);
+                    newdiv1.addEventListener("mouseout", function () {
+                        this.style.backgroundPosition = "-159px 0px";
+                    }, false);
+                    newdiv1.addEventListener("mouseover", function () {
+                        this.style.backgroundPosition = "-159px -39px";
+                    }, false);
                 }
                 newdiv1.addEventListener("click", function (event) {
                     if (event.ctrlKey) {
-                        if (mode2.match(/z/)) { mode2 = mode2.replace(/z/, ""); }
-                        else { mode2 += "z"; }
-                    } else { mode2 = "z"; }
+                        if (shownTypes.match(/z/)) {
+                            shownTypes = shownTypes.replace(/z/, "");
+                        } else {
+                            shownTypes += "z";
+                        }
+                    } else {
+                        shownTypes = "z";
+                    }
                     $("infoPanel").setAttribute("mode", "");
-                    buildInfoPanel("rackoverview", mode2);
+                    buildInfoPanel("rackoverview", shownTypes);
                 }, false);
 
-                //Filter Picknick
+                // Filter farmerworld
                 newdiv1 = createElement("div", { "mouseOverText": text[LNG]["category_fw"], "class": "link", "style": "float:left;width:54px;height:39px;background:url('" + GFX + "rack_sort_top.png') repeat scroll -106px 0px transparent;" }, newdiv);
-                if (mode2.match(/fw1fw2fw3fw4/)) {
+                if (shownTypes.match(/fw1fw2fw3fw4/)) {
                     newdiv1.style.backgroundPosition = "-106px -78px";
                 } else {
-                    newdiv1.addEventListener("mouseout", function () { this.style.backgroundPosition = "-106px 0px"; }, false);
-                    newdiv1.addEventListener("mouseover", function () { this.style.backgroundPosition = "-106px -39px"; }, false);
+                    newdiv1.addEventListener("mouseout", function () {
+                        this.style.backgroundPosition = "-106px 0px";
+                    }, false);
+                    newdiv1.addEventListener("mouseover", function () {
+                        this.style.backgroundPosition = "-106px -39px";
+                    }, false);
                 }
                 newdiv1.addEventListener("click", function (event) {
                     if (event.ctrlKey) {
-                        if (mode2.match(/fw1fw2fw3fw4/)) { mode2 = mode2.replace(/fw1fw2fw3fw4/, ""); }
-                        else { mode2 += "fw1fw2fw3fw4"; }
-                    } else { mode2 = "fw1fw2fw3fw4"; }
+                        if (shownTypes.match(/fw1fw2fw3fw4/)) {
+                            shownTypes = shownTypes.replace(/fw1fw2fw3fw4/, "");
+                        } else { shownTypes += "fw1fw2fw3fw4"; }
+                    } else {
+                        shownTypes = "fw1fw2fw3fw4";
+                    }
                     $("infoPanel").setAttribute("mode", "");
-                    buildInfoPanel("rackoverview", mode2);
+                    buildInfoPanel("rackoverview", shownTypes);
                 }, false);
 
-                //Filter Blumen
+                // Filter flower
                 newdiv1 = createElement("div", { "mouseOverText": text[LNG]["category_fl"] + " " + text[LNG]["category_fla"], "class": "link", "style": "float:left;width:54px;height:39px;background:url('" + GFX + "rack_sort_top.png') repeat scroll -212px 0px transparent;" }, newdiv);
-                if (mode2.match(/flfla/)) {
+                if (shownTypes.match(/flfla/)) {
                     newdiv1.style.backgroundPosition = "-212px -78px";
                 } else {
-                    newdiv1.addEventListener("mouseout", function () { this.style.backgroundPosition = "-212px 0px"; }, false);
-                    newdiv1.addEventListener("mouseover", function () { this.style.backgroundPosition = "-212px -39px"; }, false);
+                    newdiv1.addEventListener("mouseout", function () {
+                        this.style.backgroundPosition = "-212px 0px";
+                    },
+                        false);
+                    newdiv1.addEventListener("mouseover", function () {
+                        this.style.backgroundPosition = "-212px -39px";
+                    }, false);
                 }
                 newdiv1.addEventListener("click", function (event) {
                     if (event.ctrlKey) {
-                        if (mode2.match(/flfla/)) { mode2 = mode2.replace(/flfla/, ""); }
-                        else { mode2 += "flfla"; }
-                    } else { mode2 = "flfla"; }
+                        if (shownTypes.match(/flfla/)) {
+                            shownTypes = shownTypes.replace(/flfla/, "");
+                        } else {
+                            shownTypes += "flfla";
+                        }
+                    } else {
+                        shownTypes = "flfla";
+                    }
                     $("infoPanel").setAttribute("mode", "");
-                    buildInfoPanel("rackoverview", mode2);
+                    buildInfoPanel("rackoverview", shownTypes);
                 }, false);
 
-                //Filter Kräuter
+                // Filter herbs
                 newdiv1 = createElement("div", { "mouseOverText": text[LNG]["category_hr"] + " " + text[LNG]["category_md"], "class": "link", "style": "float:left;width:27px;height:39px;background:url('" + IMAGES["racksortVeterinary"] + "') repeat scroll 0px 0px transparent;" }, newdiv);
-                if (mode2.match(/hr/)) {
+                if (shownTypes.match(/hr/)) {
                     newdiv1.style.backgroundPosition = "0px -78px";
                 } else {
-                    newdiv1.addEventListener("mouseout", function () { this.style.backgroundPosition = "0px 0px"; }, false);
-                    newdiv1.addEventListener("mouseover", function () { this.style.backgroundPosition = "0px -39px"; }, false);
+                    newdiv1.addEventListener("mouseout", function () {
+                        this.style.backgroundPosition = "0px 0px";
+                    }, false);
+                    newdiv1.addEventListener("mouseover", function () {
+                        this.style.backgroundPosition = "0px -39px";
+                    }, false);
                 }
                 newdiv1.addEventListener("click", function (event) {
                     if (event.ctrlKey) {
-                        if (mode2.match(/hr/)) { mode2 = mode2.replace(/hr/, ""); }
-                        else { mode2 += "hr"; }
-                    } else { mode2 = "hr"; }
+                        if (shownTypes.match(/hr/)) {
+                            shownTypes = shownTypes.replace(/hr/, "");
+                        } else {
+                            shownTypes += "hr";
+                        }
+                    } else {
+                        shownTypes = "hr";
+                    }
                     $("infoPanel").setAttribute("mode", "");
-                    buildInfoPanel("rackoverview", mode2);
+                    buildInfoPanel("rackoverview", shownTypes);
                 }, false);
 
-                //Filter Tinkturen
+                // Filter tinctures
                 newdiv1 = createElement("div", { "mouseOverText": text[LNG]["category_md"] + " " + text[LNG]["category_md"], "class": "link", "style": "float:left;width:27px;height:39px;background:url('" + IMAGES["racksortVeterinary"] + "') repeat scroll -26px 0px transparent;" }, newdiv);
-                if (mode2.match(/md/)) {
+                if (shownTypes.match(/md/)) {
                     newdiv1.style.backgroundPosition = "-26px -78px";
                 } else {
-                    newdiv1.addEventListener("mouseout", function () { this.style.backgroundPosition = "-26px 0px"; }, false);
-                    newdiv1.addEventListener("mouseover", function () { this.style.backgroundPosition = "-26px -39px"; }, false);
+                    newdiv1.addEventListener("mouseout", function () {
+                        this.style.backgroundPosition = "-26px 0px";
+                    }, false);
+                    newdiv1.addEventListener("mouseover", function () {
+                        this.style.backgroundPosition = "-26px -39px";
+                    }, false);
                 }
                 newdiv1.addEventListener("click", function (event) {
                     if (event.ctrlKey) {
-                        if (mode2.match(/md/)) { mode2 = mode2.replace(/md/, ""); }
-                        else { mode2 += "md"; }
-                    } else { mode2 = "md"; }
+                        if (shownTypes.match(/md/)) {
+                            shownTypes = shownTypes.replace(/md/, "");
+                        } else {
+                            shownTypes += "md";
+                        }
+                    } else {
+                        shownTypes = "md";
+                    }
                     $("infoPanel").setAttribute("mode", "");
-                    buildInfoPanel("rackoverview", mode2);
+                    buildInfoPanel("rackoverview", shownTypes);
                 }, false);
 
+                /** Table within the rack is built up */
                 var newtable = createElement("table", { "border": "1", "height": "500px", "style": "position:absolute;top:50px;left:0px;-moz-user-select:none;" }, div);
                 newtable.addEventListener("mouseover", function (event) {
                     var node = event.target;
-                    while ((node != this) && (!node.getAttribute("mouseOverText"))) { node = node.parentNode; }
-                    //     if(node!=this){ showToolTip(event,node.getAttribute("mouseOverText"),this); }
+                    while ((node != this) && (!node.getAttribute("mouseOverText"))) {
+                        node = node.parentNode;
+                    }
+                    if (node != this) {
+                        // Node is some product the first column
+                        toolTip.show(event, node.getAttribute("mouseOverText"));
+                    }
                 }, false);
+
+                // Top left cell is empty
                 var newtr = createElement("tr", {}, newtable);
                 var newtd = createElement("td", {}, newtr);
+
+                // Create a row for each account (with the name)
                 for (var farm = 0; farm < bestand.length; farm++) {
                     createElement("td", { "style": "text-align:center;" + (FARMNR == farm ? "background-color:#CCCCFF;" : "") }, newtr, bestand[farm][0]);
                 }
+                // Add sigma for 'sum' column
                 if (bestand.length > 1) {
-                    createElement("td", { "style": "text-align:center;" }, newtr, "\u03A3");
+                    createElement("td", { "id": "moeZumFinden", "style": "text-align:center;" }, newtr, "\u03A3");
                 }
                 //benötige ich nicht
                 //createElement("td",{"style":"text-align:center;",title:getDateStr(productStatTime/1000)},newtr,"Stat Total");
                 //createElement("td",{"style":"text-align:center;"},newtr,"Total");
 
                 var oldclass = "c";
-                mode2 += oldclass;
+                shownTypes += oldclass;
 
                 newtr = createElement("tr", {}, newtable);
                 newtd = createElement("td", {}, newtr, unsafeWindow.t_money);
@@ -405,7 +519,7 @@ function buildInfoPanel(mode, mode2?) {
                     var showProduct = false;
                     for (var farm = 0; farm < bestand.length; farm++) {
                         var regEx_prodTyp = (unsafeData.prodTyp[0][w] == "e" ? "e(?!x)" : unsafeData.prodTyp[0][w]);
-                        if ((!showProduct) && (mode2.search(regEx_prodTyp) > -1)) {
+                        if ((!showProduct) && (shownTypes.search(regEx_prodTyp) > -1)) {
                             if ((bestand[farm][2][w] > -1)) { showProduct = true; }
                         }
                     }
@@ -593,7 +707,7 @@ function do_main() {
     }
 
     // Updatecheck
-    if ((!unsafeData.beraterVersion) || (compareVersions(neededVersionBerater, unsafeData.beraterVersion) > 0)) {
+    if ((!unsafeData.beraterVersion) || (compareVersions(neededVersionBeraterForRack, unsafeData.beraterVersion) > 0)) {
         alert2(text[LNG]["rackoverview"]["shouldUpdateBerater"], text["ok"]);
     }
     // time,version on server,last checked version
@@ -693,9 +807,10 @@ window.addEventListener("load", function () {
     if (unsafeData.beraterDone) {
         do_main();
     } else {
-        document.addEventListener("beraterDone", function () {
+        var x = function () {
             do_main();
-            document.removeEventListener("beraterDone", arguments.callee, false);
-        }, false);
+            document.removeEventListener("beraterDone", x, false);
+        };
+        document.addEventListener("beraterDone", x, false);
     }
 }, false);

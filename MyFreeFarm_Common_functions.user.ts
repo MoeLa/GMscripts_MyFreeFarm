@@ -1257,7 +1257,9 @@ try{
 }
 
 // CONSTANTS / GLOBALS ************************************************************************************************
-// DOM
+/**
+ * This variable is initialized with the &lt;body&gt;-element of the document.
+ */
 var ALL = null;
 var container = null;
 // Objects ************************************************************************************************************
