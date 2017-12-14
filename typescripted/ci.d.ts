@@ -26,6 +26,7 @@ interface UnsafeData {
         prodNameSort: Object;
         prodName: Object;
         prodStock: Object;
+        /** Blocked products */
         prodBlock: Object;
         prodTyp: Object;
         delimDeci: string; // ","

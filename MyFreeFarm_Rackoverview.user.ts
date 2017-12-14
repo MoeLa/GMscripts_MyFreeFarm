@@ -1,6 +1,7 @@
 /// <reference path="./typescripted/index.d.ts" />
 /// <reference path="./typescripted/ci.d.ts" />
 /// <reference path="./typescripted/mff_all_171130.d.ts" />
+// / <reference path="./MyFreeFarm_Berater.user.js" />
 // ==UserScript==
 // @name           MyFreeFarm Rackoverview
 // @namespace      https://github.com/BastianKanaan/GMscripts_MyFreeFarm
@@ -88,13 +89,13 @@ var productStatTime = 0;
 var todayTime: any = new Date();
 todayTime = Math.round(new Date(todayTime.getFullYear(), todayTime.getMonth(), todayTime.getDate(), 0, 0, 0, 0).getTime() / 1000);
 
-function showMarket(pid) {
+function showMarket1(pid) {
     try {
         if ((gameLocation[0] != "city") || (gameLocation[1] != 1)) {
             var x = function (pid) {
                 return function () {
                     document.removeEventListener("gameCity1", x, false);
-                    showMarket(pid);
+                    showMarket1(pid);
                 };
             }
             document.addEventListener("gameCity1", x(pid), false);
@@ -103,7 +104,7 @@ function showMarket(pid) {
             var x = function (pid) {
                 return function () {
                     document.removeEventListener("gameOpenMarket", x, false);
-                    showMarket(pid);
+                    showMarket1(pid);
                 };
             }
 
@@ -475,16 +476,11 @@ function buildInfoPanel(mode, shownTypes?) {
                 if (bestand.length > 1) {
                     createElement("td", { "id": "moeZumFinden", "style": "text-align:center;" }, newtr, "\u03A3");
                 }
-                //benötige ich nicht
-                //createElement("td",{"style":"text-align:center;",title:getDateStr(productStatTime/1000)},newtr,"Stat Total");
-                //createElement("td",{"style":"text-align:center;"},newtr,"Total");
 
-                var oldclass = "c";
-                shownTypes += oldclass;
-
+                // Create row 'Geld'
                 newtr = createElement("tr", {}, newtable);
                 newtd = createElement("td", {}, newtr, unsafeWindow.t_money);
-                var sum = 0; var sum5 = 0;
+                var sum = 0;
                 for (var farm = 0; farm < bestand.length; farm++) {
                     sum += bestand[farm][1];
                     createElement("td", { "style": "text-align:right;" + (FARMNR == farm ? "background-color:#CCCCFF;" : "") }, newtr, numberFormat(bestand[farm][1]));
@@ -493,6 +489,7 @@ function buildInfoPanel(mode, shownTypes?) {
                     createElement("td", { "style": "text-align:right;" }, newtr, numberFormat(sum));
                 }
 
+                // Create row 'Punkte'
                 newtr = createElement("tr", {}, newtable);
                 newtd = createElement("td", {}, newtr, unsafeWindow.t_points);
                 for (var farm = 0; farm < bestand.length; farm++) {
@@ -502,6 +499,7 @@ function buildInfoPanel(mode, shownTypes?) {
                     createElement("td", { "style": "text-align:right;" }, newtr, "");
                 }
 
+                // Create row 'Level'
                 newtr = createElement("tr", {}, newtable);
                 newtd = createElement("td", {}, newtr, unsafeWindow.guildquestlist_level.replace(/:/, ""));
                 for (var farm = 0; farm < bestand.length; farm++) {
@@ -510,39 +508,50 @@ function buildInfoPanel(mode, shownTypes?) {
                 if (bestand.length > 1) {
                     createElement("td", { "style": "text-align:right;" }, newtr, "");
                 }
-                if (bestand.length > 1) {
-                    createElement("td", { "style": "text-align:right;" }, newtr, "");
-                }
-                var zCount = 0; //zur Formatierung jeder zweiten Zeile
+
+                /** product type of the last created row, like 'c' (for coins) */
+                var oldType = "c";
+                shownTypes += oldType;
+
+                var zCount = 0; // Zur Formatierung jeder zweiten Zeile
                 for (var v = 0; v < unsafeData.prodNameSort[0].length; v++) {
+                    /** a product id */
                     var w = unsafeData.prodNameSort[0][v];
                     var showProduct = false;
+                    // Step 1: Should product w be shown?
                     for (var farm = 0; farm < bestand.length; farm++) {
                         var regEx_prodTyp = (unsafeData.prodTyp[0][w] == "e" ? "e(?!x)" : unsafeData.prodTyp[0][w]);
                         if ((!showProduct) && (shownTypes.search(regEx_prodTyp) > -1)) {
-                            if ((bestand[farm][2][w] > -1)) { showProduct = true; }
+                            if ((bestand[farm][2][w] > -1)) {
+                                // At least one account has product w enabled
+                                showProduct = true;
+                                break;
+                            }
                         }
                     }
                     if (showProduct) {
                         zCount++;
-                        if (oldclass != unsafeData.prodTyp[0][w]) {
+                        if (oldType != unsafeData.prodTyp[0][w]) {
+                            // Product w has another type than its predecessor => create an empty placeholder row
                             createElement("td", { "colspan": bestand.length + 3 }, createElement("tr", {}, newtable));
-                            oldclass = unsafeData.prodTyp[0][w];
+                            oldType = unsafeData.prodTyp[0][w];
                         }
                         newtr = createElement("tr", {}, newtable);
                         newtd = createElement("td", { "style": (zCount % 2 == 0 ? "background-color:#eeeeee;" : "") }, newtr);
                         produktPic(0, w, newtd);
-                        if (!unsafeData.prodBlock[0][w].match(/[lt]/)) { // if (unsafeData.prodBlock[w].match(/^[lt]*$/)) {
+                        if (!unsafeData.prodBlock[0][w].match(/[lt]/)) {
                             newtd.setAttribute("mouseOverText", text[LNG]["goToMarketOfX"].replace("%1%", unsafeData.prodName[0][w]));
                             createElement("span", { "id": w }, newtd, unsafeData.prodName[0][w]);
-                            //newa = createElement("a",{"id":w},newtd,unsafeData.prodName[0][w]);
-                            //newa.setAttribute("class","link");
-                            //newa.addEventListener("click",function(){showMarket(this.id);},false);
+                            newtd.setAttribute("class","link");
+                            newtd.addEventListener("click", function () {
+                                // TODO: Call showMarket(this.id);
+                            }, false);
                         } else {
                             createElement("span", { "id": w }, newtd, unsafeData.prodName[0][w]);
                         }
 
-                        sum = 0; sum5 = 0;
+                        sum = 0;
+                        var sum5 = 0;
                         for (var farm = 0; farm < bestand.length; farm++) {
                             if (bestand[farm][2][w] > -1) { //product amount
                                 sum += bestand[farm][2][w];
@@ -756,10 +765,14 @@ function do_main() {
 
     document.addEventListener("gameUpdateRack", function () {
         try {
-            // Money
-            bestand[FARMNR][1] = parseInt($("bar").innerHTML.replace(regDelimThou, ""), 10);
+            console.log("Moe, Rack");
+            console.log(unsafeData.prodBlock);
+            // Money, e.g. "4.698.559,85 kT"
+            var money = $("bar").innerHTML;
+            bestand[FARMNR][1] = parseInt(money.split(delimThou).join(""), 10);
             // Coins
-            bestand[FARMNR][2][0] = parseInt($("coins").innerHTML.replace(regDelimThou, ""), 10);
+            var coins = $("coins").innerHTML;
+            bestand[FARMNR][2][0] = parseInt(coins.replace(regDelimThou, ""), 10);
 
             // Rack
             for (var v = 1; v < unsafeData.prodName[0].length; v++) {
