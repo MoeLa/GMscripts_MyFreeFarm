@@ -1928,7 +1928,8 @@ var timeFormatHMS = "hour:min:sec";
 var COUNTRY = null;
 var SERVER = null;
 var PAGE = null;
-var GFX = null; // http://mff.wavecdn.de/mff/
+/** URL part of grafic files, e.g. http://mff.wavecdn.de/mff/ */
+var GFX = null;
 var USERNAME = null;
 // Numbers
 var now = Math.floor((new Date()).getTime() / 1000);
