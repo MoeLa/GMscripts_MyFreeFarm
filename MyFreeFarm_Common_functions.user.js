@@ -1141,14 +1141,6 @@ function countDays(time1, time2) {
 //---------------------------------------------------------------------------------------------------------------------------
 function explode(str, debugName, defaultReturn) {
     try {
-        /*
-        if(debugName===undefined){
-            debugName = "";
-            GM_logWarning("explode","debugName="+debugName,"","DebugName not set.");
-        }else if(typeof defaultReturn===undefined){
-            GM_logWarning("explode","debugName="+debugName,"","DefaultReturn not set.");
-        }
-        */
         if (!str) {
             if (undefined === defaultReturn) {
                 throw ("Argument is undefined.");
@@ -1173,14 +1165,13 @@ function explode(str, debugName, defaultReturn) {
         }
     }
 }
+/**
+ *
+ * @param arr
+ * @param debugName
+ */
 function implode(arr, debugName) {
     try {
-        /*
-        if(debugName===undefined){
-            GM_logWarning("implode","arr="+JSON.stringify(arr),"","DebugName not set.");
-            debugName = "";
-        }
-        */
         return JSON.stringify(arr);
     }
     catch (err) {
@@ -1588,6 +1579,23 @@ catch (err) {
 }
 var STAT_SERVER = { "AE": "http://mff.metrax.eu", "AU": "http://mff.metrax.eu", "BG": "http://mff.metrax.eu", "BR": "http://mff.metrax.eu", "DE": "http://mff.metrax.eu", "DK": "http://mff.metrax.eu", "ES": "http://mff.metrax.eu", "FR": "http://mff.metrax.eu", "GR": "http://mff.metrax.eu", "HR": "http://mff.metrax.eu", "HU": "http://mff.metrax.eu", "IR": "http://mff.metrax.eu", "IT": "http://mff.metrax.eu", "NL": "http://mff.metrax.eu", "NO": "http://mff.metrax.eu", "NZ": "http://mff.metrax.eu", "PL": "http://mff.metrax.eu", "PT": "http://mff.metrax.eu", "RO": "http://mff.metrax.eu", "RU": "http://mff.metrax.eu", "SE": "http://mff.metrax.eu", "TH": "http://mff.metrax.eu", "TR": "http://mff.metrax.eu", "UK": "http://mff.metrax.eu", "US": "http://mff.metrax.eu", "VN": "http://mff.metrax.eu" };
 // Helping Classes ****************************************************************************************************
+var SerializationHelper = /** @class */ (function () {
+    function SerializationHelper() {
+    }
+    SerializationHelper.toInstance = function (obj, json) {
+        var jsonObj = JSON.parse(json);
+        if (typeof obj["fromJSON"] === "function") {
+            obj["fromJSON"](jsonObj);
+        }
+        else {
+            for (var propName in jsonObj) {
+                obj[propName] = jsonObj[propName];
+            }
+        }
+        return obj;
+    };
+    return SerializationHelper;
+}());
 if (top.unsafeData.toolTip) {
     var toolTip = top.unsafeData.toolTip;
 }

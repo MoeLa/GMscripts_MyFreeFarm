@@ -924,50 +924,42 @@ try{
 }catch(err){ GM_logError("countDays","time1="+time1+" time2="+time2,"",err); }
 }
 //---------------------------------------------------------------------------------------------------------------------------
-function explode(str:string,debugName,defaultReturn){
-try{
-    /*
-    if(debugName===undefined){
-        debugName = "";
-        GM_logWarning("explode","debugName="+debugName,"","DebugName not set.");
-    }else if(typeof defaultReturn===undefined){
-        GM_logWarning("explode","debugName="+debugName,"","DefaultReturn not set.");
-    }
-    */
-    if(!str){
-        if(undefined===defaultReturn){
-            throw ("Argument is undefined.");
-        }else{
+function explode(str: string, debugName: string, defaultReturn) {
+    try {
+        if (!str) {
+            if (undefined === defaultReturn) {
+                throw ("Argument is undefined.");
+            } else {
+                return defaultReturn;
+            }
+        }
+        if (typeof str != "number" && typeof str != "string") {
+            throw ("Argument is not a string nor a number.");
+        }
+
+        return JSON.parse(str);
+    } catch (err) {
+        if (undefined === defaultReturn) {
+            GM_logError("explode", "str=" + str + " debugName=" + debugName + " defaultReturn=", "", err);
+            throw ("ERROR in function 'explode'");
+        } else {
+            GM_logWarning("explode", "str=" + str + " debugName=" + debugName + " defaultReturn=" + implode(defaultReturn, "explode\error"), "", "Function returns given default. " + err);
             return defaultReturn;
         }
     }
-    if(typeof str != "number" && typeof str != "string"){
-        throw ("Argument is not a string nor a number.");
-    }
-    return JSON.parse(str);
-}catch(err){
-    if(undefined===defaultReturn){
-        GM_logError("explode","str="+str+" debugName="+debugName+" defaultReturn=","",err);
-        throw ("ERROR in function 'explode'");
-    } else {
-        GM_logWarning("explode","str="+str+" debugName="+debugName+" defaultReturn="+implode(defaultReturn,"explode\error"),"","Function returns given default. "+err);
-        return defaultReturn;
-    }
 }
-}
-function implode(arr,debugName?){
-try{
-    /*
-    if(debugName===undefined){
-        GM_logWarning("implode","arr="+JSON.stringify(arr),"","DebugName not set.");
-        debugName = "";
+/**
+ * 
+ * @param arr 
+ * @param debugName 
+ */
+function implode(arr, debugName?) {
+    try {
+        return JSON.stringify(arr);
+    } catch (err) {
+        GM_logError("implode", "debugName=" + debugName, "", err);
+        throw ("ERROR in function 'implode'");
     }
-    */
-    return JSON.stringify(arr);
-} catch (err){
-    GM_logError("implode","debugName="+debugName,"",err);
-    throw ("ERROR in function 'implode'");
-}
 }
 function enc(str,sh) {
 try{
@@ -1273,6 +1265,23 @@ try{
 }catch(err){ GM_logError("top.unsafeData","","location.href="+location.href,err); }
 const STAT_SERVER = {"AE":"http://mff.metrax.eu","AU":"http://mff.metrax.eu","BG":"http://mff.metrax.eu","BR":"http://mff.metrax.eu","DE":"http://mff.metrax.eu","DK":"http://mff.metrax.eu","ES":"http://mff.metrax.eu","FR":"http://mff.metrax.eu","GR":"http://mff.metrax.eu","HR":"http://mff.metrax.eu","HU":"http://mff.metrax.eu","IR":"http://mff.metrax.eu","IT":"http://mff.metrax.eu","NL":"http://mff.metrax.eu","NO":"http://mff.metrax.eu","NZ":"http://mff.metrax.eu","PL":"http://mff.metrax.eu","PT":"http://mff.metrax.eu","RO":"http://mff.metrax.eu","RU":"http://mff.metrax.eu","SE":"http://mff.metrax.eu","TH":"http://mff.metrax.eu","TR":"http://mff.metrax.eu","UK":"http://mff.metrax.eu","US":"http://mff.metrax.eu","VN":"http://mff.metrax.eu"};
 // Helping Classes ****************************************************************************************************
+class SerializationHelper {
+    static toInstance<T>(obj: T, json: string) : T {
+        var jsonObj = JSON.parse(json);
+
+        if (typeof obj["fromJSON"] === "function") {
+            obj["fromJSON"](jsonObj);
+        }
+        else {
+            for (var propName in jsonObj) {
+                obj[propName] = jsonObj[propName]
+            }
+        }
+
+        return obj;
+    }
+}
+
 if(top.unsafeData.toolTip){
     var toolTip=top.unsafeData.toolTip;
 }else{

@@ -91,25 +91,32 @@ class Farm {
         public farm5: any[],
         public farm6: any[]) { }
 
-    getCellValue(productId: number): string {
+    public getCellValue(productId: number): string {
+        return Farm.calculateCellValue(productId, this.farmMain[productId], this.farm5[productId], this.farm6[productId]);
+    }
+
+    public static calculateCellValue(productId: number, main: number, farm5: number, farm6: number): string {
         if (productId > 0) {
-            let result: string = numberFormat(this.farmMain[productId]);
-            if (this.farm5[productId] > 0) {
-                result += "<br/>" + numberFormat(this.farm5[productId]) + " (Farm5)";
+            let result: string = numberFormat(main);
+            if (farm5 > 0) {
+                result += "<br/>" + numberFormat(farm5) + " (Farm5)";
             }
-            if (this.farm6[productId] > 0) {
-                result += "<br/>" + numberFormat(this.farm6[productId]) + " (Farm6)";
+            if (farm6 > 0) {
+                result += "<br/>" + numberFormat(farm6) + " (Farm6)";
             }
 
             return result;
         } else {
-            return numberFormat(this.farmMain[productId]);
+            return numberFormat(main);
         }
     }
+
+    public static createDefault(): Farm {
+        return new Farm("FARMNAME", 0, 0, 1, [], [], []);
+    }
+
 }
 
-/** Name of Account, money, [products main farm], points, level, [products farm5], a number, an array */
-const EMPTYFILE: Farm = new Farm("FARMNAME", 0, 0, 1, [], [], []);
 /** Name of current account */
 var FARMNAME = null;
 /** Index of current farm/account in 'bestand' */
@@ -524,6 +531,9 @@ function buildInfoPanel(mode, shownTypes?) {
                     $("infoPanel").setAttribute("mode", "");
                     buildInfoPanel("rackoverview", shownTypes);
                 }, false);
+                console.log("Moe, type icons created");
+                console.log("unsafeData.prodStock");
+                console.log(unsafeData.prodStock);
 
                 /** Table within the rack is built up */
                 var newtable = createElement("table", { "border": "1", "height": "500px", "style": "position:absolute;top:50px;left:0px;-moz-user-select:none;" }, div);
@@ -596,7 +606,7 @@ function buildInfoPanel(mode, shownTypes?) {
                     for (var farm = 0; farm < bestand.length; farm++) {
                         var regEx_prodTyp = (unsafeData.prodTyp[0][w] == "e" ? "e(?!x)" : unsafeData.prodTyp[0][w]);
                         if ((!showProduct) && (shownTypes.search(regEx_prodTyp) > -1)) {
-                            if ((bestand[farm].farmMain[w] > -1)) {
+                            if ((bestand[farm].farmMain[w] > -1) || (bestand[farm].farm5[w] > -1) || (bestand[farm].farm6[w] > -1)) {
                                 // At least one account has product w enabled
                                 showProduct = true;
                                 break;
@@ -610,6 +620,7 @@ function buildInfoPanel(mode, shownTypes?) {
                             createElement("td", { "colspan": bestand.length + 3 }, createElement("tr", {}, newtable));
                             oldType = unsafeData.prodTyp[0][w];
                         }
+
                         newtr = createElement("tr", {}, newtable);
                         newtd = createElement("td", { "style": (zCount % 2 == 0 ? "background-color:#eeeeee;" : "") }, newtr);
                         produktPic(0, w, newtd);
@@ -626,18 +637,24 @@ function buildInfoPanel(mode, shownTypes?) {
                         let sumOfFarm5: number = 0;
                         let sumOfFarm6: number = 0;
                         for (var farm = 0; farm < bestand.length; farm++) {
-                            if (bestand[farm].farmMain[w] > -1) {
-                                sum += bestand[farm].farmMain[w];
-                                sumOfFarm5 += bestand[farm].farm5[w];
-                                sumOfFarm6 += bestand[farm].farm6[w];
-                                createElement("td", { "style": "text-align:right;" + (FARMNR == farm ? "background-color:#CCCCFF;" : (zCount % 2 == 0 ? "background-color:#eeeeee;" : "")) }, newtr, bestand[farm].getCellValue(w));
-                            } else {
-                                // Product 'w' not yet unlocked on account 'farm'
-                                createElement("td", { "style": "text-align:right;" + (FARMNR == farm ? "background-color:#CCCCFF;" : (zCount % 2 == 0 ? "background-color:#eeeeee;" : "")) }, newtr, "--");
+                            let f: Farm = bestand[farm] as Farm;
+                            try {
+                                if (bestand[farm].farmMain[w] > -1) {
+                                    sum += bestand[farm].farmMain[w];
+                                    sumOfFarm5 += bestand[farm].farm5[w];
+                                    sumOfFarm6 += bestand[farm].farm6[w];
+                                    createElement("td", { "style": "text-align:right;" + (FARMNR == farm ? "background-color:#CCCCFF;" : (zCount % 2 == 0 ? "background-color:#eeeeee;" : "")) }, newtr, bestand[farm].getCellValue(w));
+                                } else {
+                                    // Product 'w' not yet unlocked on account 'farm'
+                                    createElement("td", { "style": "text-align:right;" + (FARMNR == farm ? "background-color:#CCCCFF;" : (zCount % 2 == 0 ? "background-color:#eeeeee;" : "")) }, newtr, "--");
+                                }
+                            } catch (e) {
+                                console.log(e);
                             }
+
                         }
                         if (bestand.length > 1) {
-                            createElement("td", { "style": "text-align:right;" + (FARMNR == farm ? "background-color:#CCCCFF;" : (zCount % 2 == 0 ? "background-color:#eeeeee;" : "")) }, newtr, (w > 0 ? numberFormat(sum) + "<br/>" + numberFormat(sumOfFarm5) : numberFormat(sum)));
+                            createElement("td", { "style": "text-align:right;" + (FARMNR == farm ? "background-color:#CCCCFF;" : (zCount % 2 == 0 ? "background-color:#eeeeee;" : "")) }, newtr, Farm.calculateCellValue(w, sum, sumOfFarm5, sumOfFarm6));
                         }
                     }
                 }
@@ -646,11 +663,12 @@ function buildInfoPanel(mode, shownTypes?) {
                 newtr = createElement("button", { "class": "link", "style": "position:absolute;top:25px;left:450px" }, div, "Clear all data");
                 newtr.addEventListener("click", function () {
                     FARMNR = 0;
-                    bestand = [EMPTYFILE];
+                    bestand = [Farm.createDefault()];
                     bestand[FARMNR].name = FARMNAME;
                     for (var v = 0; v < unsafeData.prodName[0].length; v++) {
                         bestand[FARMNR].farmMain[v] = -1;
                         bestand[FARMNR].farm5[v] = -1;
+                        bestand[FARMNR].farm6[v] = -1;
                     }
                     GM_setValue(LNG + "_" + SERVER + "_rackoverview", implode(bestand, "bestand"));
                     closeInfoPanel();
@@ -790,36 +808,44 @@ function do_main() {
     var updateCheck = explode(GM_getValue("updateCheck"), "do_main/updateCheck", [0, VERSION, VERSION]);
 
     FARMNAME = $("username").innerHTML;
-    bestand = explode(GM_getValue(LNG + "_" + SERVER + "_rackoverview"), "bestand", []);
-    if (!(bestand instanceof Array)) {
-        bestand = new Array();
-        console.log("Resetting 'bestand' to empty array");
-    }
-    // Determine FARMNR and clear 'bestand' of false/duplicate items
-    for (var farm = 0; farm < bestand.length; farm++) {
-        if (bestand[farm].name == FARMNAME) {
-            // We found the index of the current account...
-            if (FARMNR == null) {
-                FARMNR = farm; // ... remember it in FARMNR.
-            } else {
-                // We already found the matching item in 'bestand' (in a lower index) => Remove this one.
-                bestand.splice(farm--, 1);
+    // Note: explodedBestand contains only objects with the same attributes like a Farm-object. We need to convert into proper Farm-instances for using methods.
+    let explodedBestand: Farm[] = explode(GM_getValue(LNG + "_" + SERVER + "_rackoverview"), "bestand", []);
+    bestand = [];
+    if (explodedBestand instanceof Array) {
+        for (var i = 0; i < explodedBestand.length; i++) {
+            let f = explodedBestand[i];
+            if (!('name' in f)) {
+                // Current f doesn't have attribute 'name' => Not a farm => skip it
+                continue;
             }
+
+            // Did we find the index of the current account...
+            if (f.name == FARMNAME) {
+                if (FARMNR == null) {
+                    FARMNR = i; // ... remember it in FARMNR.
+                } else {
+                    // We already found the matching item in 'explodedBestand' (in a lower index) => Get lost of this one.
+                    continue;
+                }
+            }
+
+            bestand.push(new Farm(f.name, f.money, f.points, f.level, f.farmMain, f.farm5, f.farm6));
         }
     }
 
     if (FARMNR == null) {
         // No item for current account found in 'bestand' => Create one
         FARMNR = bestand.length;
-        bestand.push(EMPTYFILE);
+        bestand.push(Farm.createDefault());
         bestand[FARMNR].name = FARMNAME;
         for (let productId = 0; productId < unsafeData.prodName[0].length; productId++) {
             bestand[FARMNR].farmMain[productId] = -1;
             bestand[FARMNR].farm5[productId] = -1;
+            bestand[FARMNR].farm6[productId] = -1;
         }
         GM_setValue(LNG + "_" + SERVER + "_rackoverview", implode(bestand, "bestand"));
     } else {
-        // FARMNR has been successfully set => Check (and correct if necessary) the product attributes of main farm and farm5.
+        // FARMNR has been successfully set => Check (and correct if necessary) the product attributes of main farm, farm5 and farm6.
         if (!(bestand[FARMNR].farmMain instanceof Array)) {
             bestand[FARMNR].farmMain = [];
             for (var productId = 0; productId < unsafeData.prodName[0].length; productId++) {
@@ -832,43 +858,43 @@ function do_main() {
                 bestand[FARMNR].farm5[productId] = -1;
             }
         }
+        if (!(bestand[FARMNR].farm6 instanceof Array)) {
+            bestand[FARMNR].farm6 = [];
+            for (var productId = 0; productId < unsafeData.prodName[0].length; productId++) {
+                bestand[FARMNR].farm6[productId] = -1;
+            }
+        }
     }
 
     document.addEventListener("gameUpdateRack", function () {
         try {
-            console.log("Moe, gameUpdateRack");
-            // console.log(unsafeData.prodBlock);
-            // console.log(unsafeWindow);
-            // console.log(bestand);
             // Money, e.g. "4.698.559,85 kT"
             var money = $("bar").innerHTML;
             bestand[FARMNR].money = parseInt(money.split(delimThou).join(""), 10);
             // Points
-            bestand[FARMNR].points = parseInt($("pkt").innerHTML.replace(regDelimThou, ""), 10);
+            var points = $("pkt").innerHTML;
+            bestand[FARMNR].points = parseInt(points.split(regDelimThou).join(""), 10);
             // Level
-            bestand[FARMNR].level = parseInt($("levelnum").innerHTML.replace(regDelimThou, ""), 10);
+            var level = $("levelnum").innerHTML;
+            bestand[FARMNR].level = parseInt(level, 10);
             // Coins
             var coins = $("coins").innerHTML;
-            bestand[FARMNR].farmMain[0] = parseInt(coins.replace(regDelimThou, ""), 10);
-            // Rack of main farm
+            bestand[FARMNR].farmMain[0] = parseInt(coins.split(regDelimThou).join(""), 10);
+            // Copy data from prodStock
             for (let v: number = 1; v < unsafeData.prodName[0].length; v++) {
                 if (unsafeData.prodName[0][v] == undefined) { continue; }
+
                 if (unsafeData.prodBlock[0][v].match(/l/)) {
                     bestand[FARMNR].farmMain[v] = -1;
+                    bestand[FARMNR].farm5[v] = -1;
+                    bestand[FARMNR].farm6[v] = -1;
                 } else {
                     bestand[FARMNR].farmMain[v] = (unsafeData.prodStock[0][v] ? unsafeData.prodStock[0][v] : 0);
-                }
-            }
-            console.log(bestand[FARMNR].farmMain);
-            // Rack of farm 5
-            for (var v = 1; v < unsafeData.prodName[0].length; v++) {
-                if (unsafeData.prodName[0][v] == undefined) { continue; }
-                if (unsafeData.prodBlock[0][v].match(/l/)) {
-                    bestand[FARMNR].farm5[v] = -1;
-                } else {
                     bestand[FARMNR].farm5[v] = (unsafeData.prodStock[5][v] ? unsafeData.prodStock[5][v] : 0);
+                    bestand[FARMNR].farm6[v] = (unsafeData.prodStock[6][v] ? unsafeData.prodStock[6][v] : 0);
                 }
             }
+
             GM_setValue(LNG + "_" + SERVER + "_rackoverview", implode(bestand, "bestand"));
         } catch (err) { GM_logError("gameUpdateRack\n" + err); }
     }, false);
