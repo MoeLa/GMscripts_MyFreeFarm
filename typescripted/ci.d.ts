@@ -52,7 +52,8 @@ interface Window {
 
     t_money: string; // "Geld"
     t_points: string; // "Punkte"
-    guildquestlist_level: string; "Level: "
+    lng_t_premium: string; // "Premium"
+    guildquestlist_level: string; // "Level: "
 }
 // Custom interfaces END
 
