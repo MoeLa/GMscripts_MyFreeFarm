@@ -6,8 +6,8 @@
 // @namespace      https://github.com/linus--tux/GMscripts_MyFreeFarm
 // @author         BastianKanaan
 // @description    Common functions for MyFreeFarm-Scripts
-// @date           11.05.2017
-// @version        2.1.12
+// @date           20.12.2017
+// @version        2.2.0
 // @license        GPL version 3 or any later version; http://www.gnu.org/copyleft/gpl.html
 // ==/UserScript==
 var VERSIONfunctionFile = "2.1.12";

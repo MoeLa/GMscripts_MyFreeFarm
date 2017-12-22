@@ -538,10 +538,10 @@ function buildInfoPanel(mode, shownTypes) {
                 var sumMoney = 0;
                 for (var farm = 0; farm < bestand.length; farm++) {
                     sumMoney += bestand[farm].money;
-                    createElement("td", { "style": "text-align:right;" + (FARMNR == farm ? "background-color:#CCCCFF;" : "") }, newtr, numberFormat(bestand[farm].money));
+                    createElement("td", { "style": "text-align:right;" + (FARMNR == farm ? "background-color:#CCCCFF;" : "") }, newtr, numberFormat(bestand[farm].money) + " " + getText("gamecurrency"));
                 }
                 if (bestand.length > 1) {
-                    createElement("td", { "style": "text-align:right;" }, newtr, numberFormat(sumMoney));
+                    createElement("td", { "style": "text-align:right;" }, newtr, numberFormat(sumMoney) + " " + getText("gamecurrency"));
                 }
                 // Create row 'Punkte'
                 newtr = createElement("tr", {}, newtable);
@@ -672,7 +672,7 @@ function do_main() {
         case "de": {
             if (top.unsafeData.text["de"]["rackoverview"] == undefined) {
                 text["de"]["rackoverview"] = new Object();
-                text["de"]["rackoverview"]["msgUpdate"] = "Es liegt eine neue Script-Version fuer den Rackoverview vor. Diese installieren?";
+                text["de"]["rackoverview"]["msgUpdate"] = "Es liegt eine neue Script-Version für den Rackoverview vor. Diese installieren?";
                 text["de"]["rackoverview"]["shouldUpdateBerater"] = "Du solltest das Berater-Script aktualisieren!<br>Der Rackoverview-Script wird nicht ordnungsgemaess arbeiten.";
             }
             break;
