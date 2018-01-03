@@ -1579,11 +1579,11 @@ function updateProductDataFarm() {
         //13102016
         prodNameSort[0] = [0].concat(help["v"], help["ex"], help["e"], help["o"], help["fw1"], help["fw2"], help["fw3"], help["fw4"], help["fl"], help["fla"], help["hr"], help["md"], help["breed"], help["alpin"], help["tea"], help["z"]);
         // quest boni
-        for (var v = 1; v < questData["main"]["1"]["nr"]; v++) {
-            if (QUESTS["main"]["1"][v] && QUESTS["main"]["1"][v][3]) {
-                for (var w = 0; w < QUESTS["main"]["1"][v][3].length; w++) {
-                    if (QUESTS["main"]["1"][v][3][w][0] == 4) {
-                        prodGrowTime[QUESTS["main"]["1"][v][3][w][1]][QUESTS["main"]["1"][v][3][w][2]] -= QUESTS["main"]["1"][v][3][w][3];
+        for (var idx = 1; idx < questData["main"]["1"]["nr"]; idx++) {
+            if (QUESTS["main"]["1"][idx] && QUESTS["main"]["1"][idx][3]) {
+                for (var w = 0; w < QUESTS["main"]["1"][idx][3].length; w++) {
+                    if (QUESTS["main"]["1"][idx][3][w][0] == 4) {
+                        prodGrowTime[QUESTS["main"]["1"][idx][3][w][1]][QUESTS["main"]["1"][idx][3][w][2]] -= QUESTS["main"]["1"][idx][3][w][3];
                     }
                 }
             }
@@ -11750,7 +11750,6 @@ function do_main() {
                     else {
                         return 0;
                     }
-                    break;
                 }
                 case 2: {
                     if (data.length > 1) {
@@ -11762,7 +11761,6 @@ function do_main() {
                     else {
                         return 0;
                     }
-                    break;
                 }
             }
         }
@@ -20180,7 +20178,6 @@ function do_main() {
                     }
                     if (typeof animalID == "string") {
                         return animalID;
-                        break;
                     }
                     drugsArray = {};
                 }
