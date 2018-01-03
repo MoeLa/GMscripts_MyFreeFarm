@@ -11,7 +11,7 @@
 // @license        GPL version 3 or any later version; http://www.gnu.org/copyleft/gpl.html
 // ==/UserScript==
 
-declare var prodName, prodTyp, prodId;
+declare var prodName: any[], prodTyp: any[], prodId: any[];
 
 const VERSIONfunctionFile = "2.1.12";
 var DEVMODE = GM_getValue("devmode", false);

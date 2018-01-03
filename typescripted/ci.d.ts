@@ -21,20 +21,31 @@ interface Object {
 }
 
 interface UnsafeData {
-        LANGUAGE: string;
-        COUNTRY: string;
-        prodNameSort: Object;
-        prodName: Object;
-        prodStock: Object;
-        /** Blocked products */
-        prodBlock: Object;
-        prodTyp: Object;
-        delimDeci: string; // ","
-        regDelimDeci: string; // ","
-        delimThou: string; // "."
-        regDelimThou: string; // "."
-        beraterVersion: string;
-        beraterDone: boolean;
+    LANGUAGE: string;
+    COUNTRY: string;
+    prodNameSort: Object;
+    prodName: Object;
+    prodStock: Object;
+    /** Blocked products */
+    prodBlock: Object;
+    prodTyp: Object;
+    delimDeci: string; // ","
+    regDelimDeci: string; // ","
+    delimThou: string; // "."
+    regDelimThou: string; // "."
+    beraterVersion: string;
+    beraterDone: boolean;
+
+    ALL_ZONES: Object;
+    PRODUCT_MAP: Object;
+    PRODUCT2BUILDING: Object;
+    BUILDING2PRODUCT: Object;
+    BUILDINGTYPE: Object;
+    BUILDING_SIZE: Object;
+    BUILDING_SLOTS: Object;
+    BUILDING_INPUT: Object;
+    FUELSTATION_INPUT: Object;
+    QUESTS: Object;
 }
 
 interface Window {
@@ -54,6 +65,42 @@ interface Window {
     t_points: string; // "Punkte"
     lng_t_premium: string; // "Premium"
     guildquestlist_level: string; // "Level: "
+
+    currentuserlevel: string;
+
+    prodMinRackAddon: {
+        newdata: any[];
+        busy: boolean;
+    };
+
+    vet_data: VetData;
+    pets: Pets;
+
+    produkt_name: any;
+    produkt_x: any;
+    produkt_y: any;
+    produkt_ernte: any;
+    produkt_category: any;
+    produkt_zeit: any;
+    produkt_points: any;
+    produkt_level: any;
+    produkt_name_forestry: any;
+}
+
+interface VetData {
+    drugs: {};
+    info: {
+        level: number;
+    }
+}
+
+interface Pets {
+    data: {
+        block: number;
+        data: {
+            level: number;
+        }
+    }
 }
 // Custom interfaces END
 
