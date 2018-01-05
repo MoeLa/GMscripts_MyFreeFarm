@@ -46,6 +46,17 @@ interface UnsafeData {
     BUILDING_INPUT: Object;
     FUELSTATION_INPUT: Object;
     QUESTS: Object;
+
+    gameLocation: Object;
+    readyZone: any;
+    zones: any;
+    prodMinRackInit: any[];
+    prodMinRack: any[];
+    prodMinRackSettings: any;
+    getQuestBestAlternative(arr: any);
+    questData: any;
+    setCalcToQuest(type, campaign, nr);
+    npcSaison: any;
 }
 
 interface Window {
@@ -85,6 +96,36 @@ interface Window {
     produkt_points: any;
     produkt_level: any;
     produkt_name_forestry: any;
+
+    forestry_unlock: number;
+    /** All possible recipes for mill. Note: The array contains only one element that contains 42 recipes in a complicated structure */
+    formulas: any[];
+    /** All possible buildings. Note: The array contains only one element that contains 23 buildings in a complicated structure */
+    buildinginfos: any[];
+    /** Information about all farmis. Note: The info is in the first element of the array. */
+    farmisinfo: any[];
+    /** Waiting farmis */
+    farmilist: any[]
+
+    /** Current account's power ups */
+    poweruprack: {};
+
+    megafield_data: MegafieldData;
+    city: number;
+    gclr(); // Something for the tutorial
+    clr();
+    cityname1: string; // "Klein Muhstein"
+    premium: number; // e.g. 1
+    servertimetime: number;
+    farms_data: FarmsData;
+    initGuildsearch(); // TODO: Does this function still exist?
+    stats_searchGuild(); // TODO: Does this function still exist?
+    buildInfoPanel(mode, mode2);
+    buildInfoPanelAutomat(mode, mode2);
+    buildInfoPanelMenu(mode2);
+    quest_reward_6: string; // "Bauernhausitem"
+    t_vet_quest_bonus: any;
+    t_foodworld_reward_bonus: string; // "Mampfis zahlen nun %PERCENT%% mehr"
 }
 
 interface VetData {
@@ -101,6 +142,34 @@ interface Pets {
             level: number;
         }
     }
+}
+
+interface MegafieldData {
+    job: {
+        products: any;
+    }
+
+    tour: {
+        duration: number;
+        remain: number;
+        start: number;
+        steps: any[];
+        vid: number;
+    }
+    
+    vehicle_slots: {}
+
+    area: {}
+    area_free: {};
+    job_start: string; // Yep, that's a string for what ever reason
+}
+
+interface FarmsData {
+    farms: {};
+    count: number;
+    freegardenspeedup: number;
+    freegardenspeedup2: number;
+    blocked: any;
 }
 // Custom interfaces END
 

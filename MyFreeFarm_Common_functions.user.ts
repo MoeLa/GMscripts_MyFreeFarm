@@ -233,7 +233,7 @@ function GM_setValueCache(name, value, debugName?) {
         }, 0);
     } catch (err) { GM_logError("GM_setValueCache", "name=" + name + " debugName=" + debugName, "", err); }
 }
-function GM_setValue2(name, value, debugName) {
+function GM_setValue2(name, value, debugName?) {
     // for developing / finding security errors, use debugName unique for optimal tracking
     try {
         GM_setValue(name, value);
@@ -924,7 +924,7 @@ function countDays(time1, time2) { //in seconds
     } catch (err) { GM_logError("countDays", "time1=" + time1 + " time2=" + time2, "", err); }
 }
 //---------------------------------------------------------------------------------------------------------------------------
-function explode(str: string, debugName: string, defaultReturn) {
+function explode(str: string, debugName: string, defaultReturn?) {
     try {
         if (!str) {
             if (undefined === defaultReturn) {
@@ -1562,7 +1562,7 @@ var todayServerStr;
 // nowServerOff = unsafeWindow.Zeit.Server+OFFSET;
 // todayServerStr = getDateStr(nowServerOff,2,false);
 var valServerTimeOffset = 0;
-const NEVER = 2147483000; //upper limit of signed long
+const NEVER: number = 2147483000; //upper limit of signed long
 
 // ON LOAD ***************************************************************************************************************
 

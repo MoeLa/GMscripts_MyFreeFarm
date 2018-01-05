@@ -1648,22 +1648,23 @@ function updateProductDataForestry() {
             // prodStock
             // prodStockMax
             prodYield[1][v] = PRODUCT_YIELD[1][v];
-            if (v == 105 || v == 108 || v == 116 || v == 117 || v == 119 || v == 120 || v == 148) {
-                prodTyp[1][v] = "f5";
-            } // farmhouse-items from carpentry
-            else if (v == 300) {
+            var vAsNumber = parseInt(v, 10);
+            if (vAsNumber == 105 || vAsNumber == 108 || vAsNumber == 116 || vAsNumber == 117 || vAsNumber == 119 || vAsNumber == 120 || vAsNumber == 148) {
+                prodTyp[1][v] = "f5"; // farmhouse-items from carpentry
+            }
+            else if (vAsNumber == 300) {
                 prodTyp[1][v] = "u";
             } //if(v==300){ prodTyp[1][v]="f1"; }
-            else if (v < 20) {
+            else if (vAsNumber < 20) {
                 prodTyp[1][v] = "f1";
             } // saplings
-            else if (v < 40) {
+            else if (vAsNumber < 40) {
                 prodTyp[1][v] = "f2";
             } // logs
-            else if (v < 100) {
+            else if (vAsNumber < 100) {
                 prodTyp[1][v] = "f3";
             } // sawmill-products
-            else if (v < 500) {
+            else if (vAsNumber < 500) {
                 prodTyp[1][v] = "f4";
             } // carpentry-products
             else {
@@ -1680,7 +1681,7 @@ function updateProductDataForestry() {
                 if ((unsafeWindow.forestry_unlock === undefined) || (PRODUCT_QUEST[1][v] && (questData[PRODUCT_QUEST[1][v][0]][PRODUCT_QUEST[1][v][1]]["nr"] <= PRODUCT_QUEST[1][v][2]))) {
                     prodBlock[1][v] += "q";
                 }
-                if (v == 113 || v == 114 || v == 133) {
+                if (vAsNumber == 113 || vAsNumber == 114 || vAsNumber == 133) {
                     prodBlock[1][v] += "s";
                 }
                 if (help[prodTyp[1][v]]) {
@@ -1738,7 +1739,7 @@ function updateProductDataWindmill() {
             if (!unsafeWindow.formulas[0].hasOwnProperty(v)) {
                 continue;
             }
-            pId = unsafeWindow.formulas[0][v][0];
+            var pId = unsafeWindow.formulas[0][v][0];
             // GM_log("updateProductDataWindmill loop formulas v="+v+" pId="+pId);
             prodName[2][pId] = "*" + unsafeWindow.formulas[0][v][2];
             prodId[2][prodName[2][pId]] = pId;
@@ -1860,8 +1861,8 @@ function updateProductDataPowerup() {
                 prodBlock[3][pId] += "s";
             }
         }
-        for (var v = 0; v < prodName[3].length; v++) {
-            prodId[3][prodName[3][v]] = v;
+        for (var i = 0; i < prodName[3].length; i++) {
+            prodId[3][prodName[3][i]] = i;
         }
         // prodTyp[3].sortObj();
         var help = { "p0": [], "p1": [], "p2": [] };
@@ -2085,21 +2086,7 @@ var gameLocation = new function () {
     };
 };
 unsafeData.gameLocation = gameLocation;
-/*
-function checkRequest(request){
-    if((request.readyState==4)&&(request.status==200)){
-        var response=request.responseText;
-        if(response!=0){
-            var result=eval('('+response+')');
-            if(result[0]!=0){
-                return result;
-            }
-        }
-    }
-    return null;
-}
-*/
-// function for validation of AJAX-response. taken from game and shrunk on return value
+// Function for validation of AJAX-response. taken from game and shrunk on return value
 function checkRequest(request, mode) {
     try {
         if (request.readyState == 4 && request.status == 200) {
@@ -2152,11 +2139,12 @@ function showShopframePage(page) {
     var cell = $top("shop");
     if (cell) {
         if (top.window.wrappedJSObject.city != 1) {
-            top.document.addEventListener("gameCity1", function () {
+            var f = function () {
                 GM_logInfo("showShopframePage", "page=" + page, "", "Arrived in city 1");
-                top.document.removeEventListener("gameCity1", arguments.callee, false);
+                top.document.removeEventListener("gameCity1", f, false);
                 showShopframePage(page);
-            }, false);
+            };
+            top.document.addEventListener("gameCity1", f, false);
             click($top("speedlink_city1"));
         }
         else if (cell.style.display != "block") {
@@ -2186,18 +2174,19 @@ function showMessage(from, page, msg) {
 function showSeedVendor(productId) {
     try {
         if (!gameLocation.check("city", 1)) {
-            top.document.addEventListener("gameCity1", function (productId) {
+            var f = function (productId) {
                 return function () {
-                    top.document.removeEventListener("gameCity1", arguments.callee, false);
+                    top.document.removeEventListener("gameCity1", f, false);
                     window.setTimeout(showSeedVendor, 100, productId);
                 };
-            }(productId), false);
+            };
+            top.document.addEventListener("gameCity1", f(productId), false);
             GM_logInfo("showSeedVendor", "productId=" + productId, "", getText("goToX").replace(/%1%/, unsafeWindow.cityname1));
             click($top("speedlink_city1"));
         }
         else if (undefined === productId) {
             GM_logInfo("showSeedVendor", "productId=" + productId, "", getText("goToX").replace(/%1%/, getText("seedVendor")));
-            unsafeWindow.shopAction("shopinit", 1);
+            unsafeWindow.shopAction("shopinit", 1, null);
         }
         else {
             GM_logInfo("showSeedVendor", "productId=" + productId, "", getText("goToX").replace(/%1%/, getText("seedVendor")));
@@ -2211,10 +2200,11 @@ function showSeedVendor(productId) {
 function showLottery() {
     var div = $top("speedlink_city2");
     if (div && ($top("lotterycontainer"))) {
-        top.document.addEventListener("gameCity2", function () {
+        var f = function () {
             click($top("cityzone_2_8"));
-            top.document.removeEventListener("gameCity2", arguments.callee, false);
-        }, false);
+            top.document.removeEventListener("gameCity2", f, false);
+        };
+        top.document.addEventListener("gameCity2", f, false);
         click(div);
     }
     div = null;
@@ -2229,10 +2219,11 @@ function goToAnimalBreedingReady() {
             }
         }
         else if (div = $("speedlink_farmersmarket")) {
-            document.addEventListener("gameFarmersmarketOpened", function () {
-                document.removeEventListener("gameFarmersmarketOpened", arguments.callee, false);
+            var f = function () {
+                document.removeEventListener("gameFarmersmarketOpened", f, false);
                 window.setTimeout(goToAnimalBreedingReady, 100);
-            }, false);
+            };
+            document.addEventListener("gameFarmersmarketOpened", f, false);
             click(div);
         }
         div = null;
@@ -2250,10 +2241,11 @@ function goToMonsterFruitCultureReady() {
             }
         }
         else if (div = $("speedlink_farmersmarket")) {
-            document.addEventListener("gameFarmersmarketOpened", function () {
-                document.removeEventListener("gameFarmersmarketOpened", arguments.callee, false);
+            var f = function () {
+                document.removeEventListener("gameFarmersmarketOpened", f, false);
                 window.setTimeout(goToMonsterFruitCultureReady, 100);
-            }, false);
+            };
+            document.addEventListener("gameFarmersmarketOpened", f, false);
             click(div);
         }
         div = null;
@@ -2271,10 +2263,11 @@ function goToSpeedEatingReady() {
             }
         }
         else if (div = $("speedlink_farmersmarket")) {
-            document.addEventListener("gameFarmersmarketOpened", function () {
-                document.removeEventListener("gameFarmersmarketOpened", arguments.callee, false);
+            var f = function () {
+                document.removeEventListener("gameFarmersmarketOpened", f, false);
                 window.setTimeout(goToSpeedEatingReady, 100);
-            }, false);
+            };
+            document.addEventListener("gameFarmersmarketOpened", f, false);
             click(div);
         }
         div = null;
@@ -2287,15 +2280,17 @@ function goToBuyPetsParts() {
     try {
         var div = $("pets_parts");
         var listeningEvent = null;
+        var action;
         if (div && (div = div.querySelector(".buy"))) {
             click(div);
         }
         else if (!(gameLocation.check("farm", 0)) && (div = $("speedlink_farm1"))) {
-            document.addEventListener("gameFarmOpened", function () {
-                document.removeEventListener("gameFarmOpened", arguments.callee, false);
+            var f = function () {
+                document.removeEventListener("gameFarmOpened", f, false);
                 action = function () { click($("pets_parts_link")); };
                 listeningEvent = "gamegoToBuyPetsParts";
-            }, false);
+            };
+            document.addEventListener("gameFarmOpened", f, false);
             listeningEvent = "gameFarmOpened";
             action = function () { click(div); };
         }
@@ -2304,12 +2299,13 @@ function goToBuyPetsParts() {
             listeningEvent = "gamegoToOpenPetsParts";
         }
         if (listeningEvent) {
-            document.addEventListener(listeningEvent, function (listeningEvent) {
+            var f1 = function (listeningEvent) {
                 return function () {
-                    document.removeEventListener(listeningEvent, arguments.callee, false);
+                    document.removeEventListener(listeningEvent, f1, false);
                     window.setTimeout(function () { goToBuyPetsParts(); }, 300);
                 };
-            }(listeningEvent), false);
+            };
+            document.addEventListener(listeningEvent, f1(listeningEvent), false);
         }
         if (action) {
             action();
@@ -2331,10 +2327,11 @@ function goToDonkey() {
             }
         }
         else if (div = $("speedlink_farm1")) {
-            document.addEventListener("gameFarmOpened", function () {
-                document.removeEventListener("gameFarmOpened", arguments.callee, false);
+            var f = function () {
+                document.removeEventListener("gameFarmOpened", f, false);
                 window.setTimeout(goToDonkey, 100);
-            }, false);
+            };
+            document.addEventListener("gameFarmOpened", f, false);
             click(div);
         }
         div = null;
@@ -2347,10 +2344,11 @@ function goToClothingDonation() {
     try {
         var div = $top("speedlink_city2");
         if (div && $top("clothingdonation_link")) {
-            top.document.addEventListener("gameCity2", function () {
+            var f = function () {
                 click($top("clothingdonation_link_2"));
-                top.document.removeEventListener("gameCity2", arguments.callee, false);
-            }, false);
+                top.document.removeEventListener("gameCity2", f, false);
+            };
+            top.document.addEventListener("gameCity2", f, false);
             click(div);
         }
         div = null;
@@ -2368,10 +2366,11 @@ function goToVet() {
             }
         }
         else if (div = $("speedlink_farmersmarket")) {
-            document.addEventListener("gameFarmersmarketOpened", function () {
-                document.removeEventListener("gameFarmersmarketOpened", arguments.callee, false);
+            var f = function () {
+                document.removeEventListener("gameFarmersmarketOpened", f, false);
                 window.setTimeout(goToVet, 100);
-            }, false);
+            };
+            document.addEventListener("gameFarmersmarketOpened", f, false);
             click(div);
         }
         div = null;
@@ -2413,6 +2412,7 @@ function showStatisticFullscreen(pid) {
     newobject = null;
     newimg = null;
 }
+// Is implemented in Automat as well. TODO: Rename or refactor!
 function calcProductionTime(buildingType, productType, productId, bonus, feedTime, feedAmount) {
     // bonus like 0.85
     try {
@@ -3340,7 +3340,7 @@ var zones = new function () {
                 var t1 = timeBegin ? timeBegin : 0;
                 var t2 = timeEnd ? timeEnd : NEVER;
                 var production = {}, zoneErnteCurr;
-                var iType, sProd;
+                var iType_1, sProd_1;
                 if (t1 <= t2) {
                     for (var i = 0, il = cropByTime.length; i < il; i++) {
                         if (cropByTime[i][0] < t1) {
@@ -3349,15 +3349,15 @@ var zones = new function () {
                         if (t2 < cropByTime[i][0]) {
                             break;
                         }
-                        iType = cropByTime[i][1];
-                        sProd = cropByTime[i][2];
-                        if (!production[iType]) {
-                            production[iType] = {};
+                        iType_1 = cropByTime[i][1];
+                        sProd_1 = cropByTime[i][2];
+                        if (!production[iType_1]) {
+                            production[iType_1] = {};
                         }
-                        if (!production[iType][sProd]) {
-                            production[iType][sProd] = 0;
+                        if (!production[iType_1][sProd_1]) {
+                            production[iType_1][sProd_1] = 0;
                         }
-                        production[iType][sProd] += cropByTime[i][3];
+                        production[iType_1][sProd_1] += cropByTime[i][3];
                     }
                     if ((!timeBegin) && (!timeEnd)) {
                         totalCrop = production;
@@ -3526,9 +3526,6 @@ function calcTotalRecursive() {
 function calcTotalFarmis() {
     try {
         totalFarmis[0] = new Object();
-        var farmiNr = -1;
-        // GM_log("farmisinfo:\n"+print_r(unsafeWindow.farmisinfo,"",true,"\n"));
-        // GM_log("farmilist:\n"+print_r(unsafeWindow.farmilist,"",true,"\n"));
         if (top.window.wrappedJSObject.farmisinfo && top.window.wrappedJSObject.farmisinfo[0]) {
             for (var farmiNr in top.window.wrappedJSObject.farmisinfo[0]) {
                 if (!top.window.wrappedJSObject.farmisinfo[0].hasOwnProperty(farmiNr)) {
@@ -3541,23 +3538,22 @@ function calcTotalFarmis() {
                             var pid = top.window.wrappedJSObject.farmisinfo[0][farmiNr]["p" + i];
                             var amount = parseInt(top.window.wrappedJSObject.farmisinfo[0][farmiNr]["a" + i], 10);
                             if ((pid > 0) && (amount > 0)) {
-                                if (totalFarmis[0][pid])
+                                if (totalFarmis[0][pid]) {
                                     totalFarmis[0][pid] += amount;
-                                else
+                                }
+                                else {
                                     totalFarmis[0][pid] = amount;
+                                }
                             }
                         }
                     }
                 }
             }
-            // totalFarmis[0].sortObj();
         }
     }
     catch (err) {
         GM_logError("calcTotalFarmis", "", "", err);
     }
-    //GM_log("calcTotalFarmis totalFarmis:"+implode(totalFarmis[0]));
-    //calcProdMinRack(); //TODO possible security error this in wrappedJSObject .. and the calcProMinRack/doBuyNotePad is in unsafeWindow
 }
 function calcTotalPowerups() {
     try {
@@ -3698,8 +3694,8 @@ function calcTotalEndtime() {
                 var zoneNrF = ALL_ZONES[i][j];
                 // Nicht geblockt UND Gebäude auf Bauplatz UND (Farm ODER 'In globaler Zeit'-Flag gesetzt)
                 if ((!zones.getBlock(zoneNrF)) && (zones.getBuilding(zoneNrF) != 0) && ((i == "farm") || zoneAddToGlobalTime[zoneNrF])) {
-                    help = zones.getEndtime(zoneNrF);
-                    if (help == NEVER) {
+                    var help_12 = zones.getEndtime(zoneNrF);
+                    if (help_12 == NEVER) {
                         if (valGlobaltimeShowCroppedZone[i]) {
                             totalEndtime = -1;
                             GM_setValueCache(COUNTRY + "_" + SERVER + "_" + USERNAME + "_totalEndtime", totalEndtime);
@@ -3707,7 +3703,7 @@ function calcTotalEndtime() {
                         }
                     }
                     else {
-                        totalEndtime = Math.min(totalEndtime, help);
+                        totalEndtime = Math.min(totalEndtime, help_12);
                         if (valWaterNeeded[i]) {
                             totalEndtime = Math.min(totalEndtime, zones.getWatertime(zoneNrF));
                         }
@@ -3739,7 +3735,7 @@ function calcProdMinRackInit() {
             if (!prodName.hasOwnProperty(type)) {
                 continue;
             }
-            if (type == 1) {
+            if (parseInt(type, 10) == 1) {
                 if ((!prodMinRackInit[type]) || (typeof prodMinRackInit[type] != "object") || (prodMinRackInit[type] instanceof Array)) {
                     prodMinRackInit[type] = {};
                 }
@@ -3951,7 +3947,7 @@ function calcProdMinRack(caller) {
                     if (prodMinRack[type][prod] < 0) {
                         prodMinRack[type][prod] = 0;
                     }
-                    else if ((type == 0) && (prodBlock[0][prod].match(/l/))) {
+                    else if ((parseInt(type, 10) == 0) && (prodBlock[0][prod].match(/l/))) {
                         prodMinRack[type][prod] = 0;
                     }
                 }
@@ -3960,7 +3956,11 @@ function calcProdMinRack(caller) {
         }
         err_trace = "save";
         unsafeData.prodMinRack = prodMinRack.clone();
-        unsafeData.prodMinRackSettings = { "valMinRackGrowing": valMinRackGrowing, "valMinRackFarmis": valMinRackFarmis, "valMinRackFarmis": valMinRackFarmis, "valMinRackRecursive": valMinRackRecursive };
+        unsafeData.prodMinRackSettings = {
+            "valMinRackGrowing": valMinRackGrowing,
+            "valMinRackFarmis": valMinRackFarmis,
+            "valMinRackRecursive": valMinRackRecursive
+        };
         GM_setValueCache(COUNTRY + "_" + SERVER + "_" + USERNAME + "_prodMinRack", implode(prodMinRack, "calcProdMinRack/prodMinRack"));
         doBuyNotepad();
         doRack();
@@ -4299,12 +4299,13 @@ function handleQuestLine() {
                                             unsafeWindow.initCampaigns();
                                         }
                                         else {
-                                            document.addEventListener("gameCity2", function () {
-                                                document.removeEventListener("gameCity2", arguments.callee, false);
+                                            var f = function () {
+                                                document.removeEventListener("gameCity2", f, false);
                                                 unsafeWindow.close_page();
                                                 unsafeWindow.showDiv("transp3");
                                                 unsafeWindow.initCampaigns();
-                                            }, false);
+                                            };
+                                            document.addEventListener("gameCity2", f, false);
                                             click($("speedlink_city2"));
                                         }
                                     }, false);
@@ -4317,10 +4318,11 @@ function handleQuestLine() {
                                             click($("foodworld_questblock"));
                                         }
                                         else {
-                                            document.addEventListener("gameFoodworldOpened", function () {
-                                                document.removeEventListener("gameFoodworldOpened", arguments.callee, false);
+                                            var f = function () {
+                                                document.removeEventListener("gameFoodworldOpened", f, false);
                                                 click($("foodworld_questblock"));
-                                            }, false);
+                                            };
+                                            document.addEventListener("gameFoodworldOpened", f, false);
                                             click($("speedlink_foodworld"));
                                         }
                                     }, false);
@@ -4440,7 +4442,7 @@ function do_stats() {
             canddiv = $("rankingcontent").getElementsByClassName("stats_name");
             for (var v = 0; v < canddiv.length; v++) {
                 thisUser = /(.*?)&nbsp;/.exec(canddiv[v].firstElementChild.innerHTML + "&nbsp;")[1];
-                thisGuild = /&nbsp;\[(.*?)\]&nbsp;/.exec(canddiv[v].firstElementChild.innerHTML + "&nbsp;");
+                var thisGuild = /&nbsp;\[(.*?)\]&nbsp;/.exec(canddiv[v].firstElementChild.innerHTML + "&nbsp;");
                 var help = canddiv[v].firstElementChild.innerHTML.replace(thisUser, "<a href='stats.php?search=1&searchterm=" + thisUser + "'>" + thisUser + "</a>");
                 if (thisGuild)
                     help = help.replace(thisGuild[0], "&nbsp;[<a href='stats.php?guildsearch=" + thisGuild[1] + "'>" + thisGuild[1] + "</a>]&nbsp;");
@@ -4547,6 +4549,7 @@ unsafeWindow.buildInfoPanel = function (mode, mode2) {
         GM_logError("buildInfoPanel", "mode=" + implode(mode, "buildInfoPanel/mode") + " mode2=" + implode(mode2, "buildInfoPanel/mode2"), "", err);
     }
 };
+// Also implemented in Rackoverview: TODO: Rename or refactor
 function closeInfoPanel() {
     try {
         var div;
@@ -4563,9 +4566,10 @@ function closeInfoPanel() {
         GM_logError("closeInfoPanel", "", "", err);
     }
 }
+// Also implemented in Automat: TODO: Rename or refactor
 function buildInfoPanelChangelog() {
     try {
-        var table, tr, td, div;
+        var table, tr, td, div, newdiv;
         var container = $("infoPanelInner");
         container.innerHTML = "";
         // Head
@@ -4703,7 +4707,7 @@ function buildInfoPanelStock(mode) {
                     createElement("div", { "class": "link rackcat1e" + (mode["filterCategory"]["e", "tea"] ? "_active" : ""), "filter": '["e","tea"]', "mouseOverText": getText("category_e"), "style": "float:left;" }, newdiv);
                     createElement("div", { "class": "link rackcat10" + (mode["filterCategory"]["o"] ? "_active" : ""), "filter": '["o"]', "mouseOverText": getText("category_o"), "style": "float:left;" }, newdiv);
                     createElement("div", { "class": "link rackcat15" + (mode["filterCategory"]["c"] || mode["filterCategory"]["z"] ? "_active" : ""), "filter": '["c","z"]', "mouseOverText": getText("category_c") + "<br>" + getText("category_z"), "style": "float:left;" }, newdiv);
-                    newdiv1 = createElement("div", { "style": "float:left;width:53px;" }, newdiv);
+                    var newdiv1 = createElement("div", { "style": "float:left;width:53px;" }, newdiv);
                     for (var i = 1; i <= 4; i = i + 2) {
                         createElement("div", { "class": "link rackcat2" + i + (mode["filterCategory"]["fw" + i] ? "_active" : ""), "filter": '["fw' + i + '"]', "mouseOverText": getText("category_fw" + i), "style": "float:left;" }, newdiv1);
                         if (i == 3) {
@@ -4721,21 +4725,21 @@ function buildInfoPanelStock(mode) {
             case 1:
                 {
                     for (var i = 1; i <= 5; i++) {
-                        newdiv1 = createElement("div", { "class": "category_f" + i + (mode["filterCategory"]["f" + i] ? "_active" : "") + " link", "filter": '["f' + i + '"]', "mouseOverText": getText("category_f" + i), "style": "display:inline-block;" }, newdiv);
+                        createElement("div", { "class": "category_f" + i + (mode["filterCategory"]["f" + i] ? "_active" : "") + " link", "filter": '["f' + i + '"]', "mouseOverText": getText("category_f" + i), "style": "display:inline-block;" }, newdiv);
                     }
                 }
                 break;
             case 2:
                 {
                     for (var i = 0; i <= 2; i++) {
-                        newdiv1 = createElement("div", { "class": "category_r" + i + (mode["filterCategory"]["r" + i] ? "_active" : "") + " link", "filter": '["r' + i + '"]', "mouseOverText": getText("category_r" + i), "style": "display:inline-block;" }, newdiv);
+                        createElement("div", { "class": "category_r" + i + (mode["filterCategory"]["r" + i] ? "_active" : "") + " link", "filter": '["r' + i + '"]', "mouseOverText": getText("category_r" + i), "style": "display:inline-block;" }, newdiv);
                     }
                 }
                 break;
             case 3:
                 {
                     for (var i = 0; i <= 2; i++) {
-                        newdiv1 = createElement("div", { "class": "category_r" + i + (mode["filterCategory"]["p" + i] ? "_active" : "") + " link", "filter": '["p' + i + '"]', "mouseOverText": getText("category_p" + i), "style": "display:inline-block;" }, newdiv);
+                        createElement("div", { "class": "category_r" + i + (mode["filterCategory"]["p" + i] ? "_active" : "") + " link", "filter": '["p' + i + '"]', "mouseOverText": getText("category_p" + i), "style": "display:inline-block;" }, newdiv);
                     }
                 }
                 break;
