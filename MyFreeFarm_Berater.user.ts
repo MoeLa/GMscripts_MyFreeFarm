@@ -934,13 +934,13 @@ var prodMinRackInit = new Array(); // initial minimal rack amounts
 // integer<0 is possible and means something like "product is produced"
 // call: unsafeWindow.prodMinRackAddon.add(type,1,"Mill-Queue",20000);
 // call: unsafeWindow.prodMinRackAddon.remove(type,1,"Mill-Queue");
-var prodMinRackAddon = new Array(new Array(), new Object()); // additional minimal rack data from addons
+var prodMinRackAddon = new Array(new Array(), {}); // additional minimal rack data from addons
 unsafeWindow.prodMinRackAddon = {
     newdata: [],
     busy: false
 };
 var prodMinRack = new Array(); // + quest amount - field and powerup amounts
-var prodNameSort = new Array(); // sorted by type(cveoz)
+let prodNameSort: string[][] = new Array(); // sorted by type(cveoz)
 var prodStock = new Array();
 var prodStockMax = new Array();//if not id is undefined then there is no max
 var prodPlantSize = new Array();
@@ -5265,15 +5265,15 @@ function buildInfoPanelZones() {
                 newtd.addEventListener("click", function () {
                     closeInfoPanel();
                     if ($("citymaincontainer").style.display == "block") {
-                        unsafeWindow.initZones(1);
+                        unsafeWindow.initZones(1, null);
                         unsafeWindow.showMain();
                     }
-                    unsafeWindow.showCart(parseInt(this.getAttribute("name"), 10));
+                    unsafeWindow.showCart(parseInt(this.getAttribute("name"), 10), null);
                 }, false);
                 newtd = createElement("td", {}, newtr);
-                var cash = parseFloat(top.window.wrappedJSObject.farmisinfo[0][farmiNr]["price"], 10);
+                var cash = parseFloat(top.window.wrappedJSObject.farmisinfo[0][farmiNr]["price"]);
                 var wert = 0;
-                for (var i = 1; i <= 7; i++) { // 7=maxanzahl produkte pro farmi
+                for (let i = 1; i <= 7; i++) { // 7=maxanzahl produkte pro farmi
                     var pid = parseInt(top.window.wrappedJSObject.farmisinfo[0][farmiNr]["p" + i], 10);
                     var amount = parseInt(top.window.wrappedJSObject.farmisinfo[0][farmiNr]["a" + i], 10);
                     if ((pid > 0) && (amount > 0)) {
@@ -5333,10 +5333,10 @@ function buildInfoPanelZones() {
             createElement("td", { "colspan": "6" }, newtr, "---");
         }
         for (var w = 0; w < prodNameSort[0].length; w++) {
-            var v = prodNameSort[0][w];
+            let v = prodNameSort[0][w];
             if ((!prodBlock[0][v].match(/t/)) && (!prodBlock[0][v].match(/l/))) {
                 var amount1 = (farmiSum[v] ? farmiSum[v] : 0) - prodStock[0][v];
-                var amount = amount1 + prodMinRack[0][v];
+                let amount: number = amount1 + prodMinRack[0][v];
                 if (amount > 0) {
                     newdiv = createElement("div", {}, newtdfehlt);
                     produktPic(0, v, newdiv);
@@ -5372,20 +5372,25 @@ function buildInfoPanelLottery(mode?) {
         }
         GM_setValue(COUNTRY + "_" + SERVER + "_" + USERNAME + "_modeInfoPanelLottery", implode(mode, "buildInfoPanelLottery/mode"));
         // implode data older than last month
-        var stichtag = new Date();
-        stichtag = Math.round(((new Date(stichtag.getFullYear(), stichtag.getMonth() - 1, 1)).getTime()) / 1000);
-        var month;
-        for (var v = lotteryLog.length - 1; v >= 0; v--) {
+        var tempDate = new Date();
+        tempDate.setDate(0);
+        tempDate.setHours(0,0,0,0);
+
+        let stichtag: number = Math.round(tempDate.getTime() / 1000);
+        for (let v = lotteryLog.length - 1; v >= 0; v--) {
             if (lotteryLog[v][0].match(/\d+\.\d+\.\d+/)) {
                 if (getTime(lotteryLog[v][0]) < stichtag) {
-                    month = /\d+\.(\d+)\.(\d+)/.exec(lotteryLog[v][0]);
-                    if (month[1].length == 1) {
-                        month = month[2] + "-0" + month[1];
+                    var monthRegExp = /\d+\.(\d+)\.(\d+)/.exec(lotteryLog[v][0]);
+                    var month;
+                    if (monthRegExp[1].length == 1) {
+                        month = monthRegExp[2] + "-0" + monthRegExp[1];
                     } else {
-                        month = month[2] + "-" + month[1];
+                        month = monthRegExp[2] + "-" + monthRegExp[1];
                     }
                     for (var w = 0; w < lotteryLog.length; w++) {
-                        if (lotteryLog[w][0] == month) { break; }
+                        if (lotteryLog[w][0] == month) { 
+                            break; 
+                        }
                     }
                     if (!lotteryLog[w]) {
                         lotteryLog[w] = [month, [], [], {}, []];
@@ -5406,8 +5411,10 @@ function buildInfoPanelLottery(mode?) {
                     }
                     // lotteryLog[w][2].sortObj(sortObjFunctions["productId"]);
                     if (lotteryLog[v][3]) {
-                        for (var p = 0; p < lotteryLog[v][3].length; p++) {
-                            if (!lotteryLog[w][4][lotteryLog[v][3][p]]) { lotteryLog[w][4][lotteryLog[v][3][p]] = 0; }
+                        for (let p = 0; p < lotteryLog[v][3].length; p++) {
+                            if (!lotteryLog[w][4][lotteryLog[v][3][p]]) { 
+                                lotteryLog[w][4][lotteryLog[v][3][p]] = 0; 
+                            }
                             lotteryLog[w][4][lotteryLog[v][3][p]]++;
                         }
                     }
@@ -5442,7 +5449,7 @@ function buildInfoPanelLottery(mode?) {
         if (mode["total"]) {
             // prepare data
             var lotteryLogTotal = [[], [], {}, []];
-            for (var v = lotteryLog.length - 1; v >= 0; v--) {
+            for (let v = lotteryLog.length - 1; v >= 0; v--) {
                 if (lotteryLog[v][0].match(/\d+\.\d+\.\d+/)) {
                     if (lotteryLog[v][1] > 0) {
                         if (lotteryLog[v][2] && (!lotteryLog[v][2].isEmpty())) {
@@ -5460,8 +5467,10 @@ function buildInfoPanelLottery(mode?) {
                     }
                     // lotteryLogTotal[2].sortObj(sortObjFunctions["productId"]);
                     if (lotteryLog[v][3]) {
-                        for (var p = 0; p < lotteryLog[v][3].length; p++) {
-                            if (!lotteryLogTotal[3][lotteryLog[v][3][p]]) { lotteryLogTotal[3][lotteryLog[v][3][p]] = 0; }
+                        for (let p = 0; p < lotteryLog[v][3].length; p++) {
+                            if (!lotteryLogTotal[3][lotteryLog[v][3][p]]) { 
+                                lotteryLogTotal[3][lotteryLog[v][3][p]] = 0; 
+                            }
                             lotteryLogTotal[3][lotteryLog[v][3][p]]++;
                         }
                     }
@@ -5491,11 +5500,11 @@ function buildInfoPanelLottery(mode?) {
             newtd = createElement("td", {}, newtr);
             newdiv = createElement("div", { "style": "margin-bottom:3px;" }, newtd);
             newdiv.addEventListener("mouseover", function (event) { toolTip.show(event, getText("keptLots")); }, false);
-            var c = 0;
-            for (var i = 0; i < lotteryLogTotal[0].length; i++) {
+            let c: number = 0;
+            for (let i = 0; i < lotteryLogTotal[0].length; i++) {
                 if (lotteryLogTotal[0][i] > 0) {
                     c += lotteryLogTotal[0][i];
-                    newdiv1 = createElement("div", { "style": "position:relative;display:inline-block;margin-right:2px;" }, newdiv);
+                    var newdiv1 = createElement("div", { "style": "position:relative;display:inline-block;margin-right:2px;" }, newdiv);
                     createElement("img", { "style": "width:20px;border:0;", "src": GFX + "city/" + i + ".jpg" }, newdiv1);
                     createElement("span", {}, newdiv1, lotteryLogTotal[0][i]);
                 }
@@ -5508,14 +5517,17 @@ function buildInfoPanelLottery(mode?) {
             for (var i = 0; i < lotteryLogTotal[1].length; i++) {
                 if (lotteryLogTotal[1][i] > 0) {
                     changedLots += lotteryLogTotal[1][i];
-                    newdiv1 = createElement("div", { "style": "position:relative;display:inline-block;margin-right:2px;" }, newdiv);
+                    var newdiv1 = createElement("div", { "style": "position:relative;display:inline-block;margin-right:2px;" }, newdiv);
                     createElement("img", { "style": "width:20px;border:0;", "src": GFX + "city/" + i + ".jpg" }, newdiv1);
                     createElement("span", {}, newdiv1, lotteryLogTotal[1][i]);
                 }
             }
-            if (changedLots > 0) { createElement("div", { "style": "position:relative;display:inline-block;" }, newdiv, "&nbsp;=&nbsp;" + changedLots + "×"); }
+            if (changedLots > 0) { 
+                createElement("div", { "style": "position:relative;display:inline-block;" }, newdiv, "&nbsp;=&nbsp;" + changedLots + "×"); 
+            }
 
-            var c, sum = 0;
+            c = 0;
+            var sum = 0;
             newtable1 = createElement("table", { "style": "display:inline-block;padding-right:5px;margin-right:5px;", "border": "0", "cellspacing": "0" }, newtd);
             for (var prod in lotteryLogTotal[2]) {
                 if (!lotteryLogTotal[2].hasOwnProperty(prod)) { continue; }
@@ -5554,7 +5566,7 @@ function buildInfoPanelLottery(mode?) {
             createElement("th", { "style": "white-space:nowrap;" }, newtr, getText("dailyTicket"));
             createElement("th", { "style": "white-space:nowrap;" }, newtr, getText("boughtTickets"));
 
-            for (var v = lotteryLog.length - 1; v >= 0; v--) {
+            for (let v = lotteryLog.length - 1; v >= 0; v--) {
                 newtr = createElement("tr", {}, newtable);
                 createElement("td", {}, newtr, lotteryLog[v][0]);
 
@@ -5590,7 +5602,7 @@ function buildInfoPanelLottery(mode?) {
                     newtd = createElement("td", {}, newtr);
                     newdiv = createElement("div", { "style": "margin-bottom:3px;" }, newtd);
                     newdiv.addEventListener("mouseover", function (event) { toolTip.show(event, getText("keptLots")); }, false);
-                    var c = 0;
+                    c = 0;
                     for (var i = 0; i < lotteryLog[v][1].length; i++) {
                         if (lotteryLog[v][1][i] > 0) {
                             c += lotteryLog[v][1][i];
@@ -5657,15 +5669,17 @@ function buildInfoPanelDonkey(mode?) {
         GM_setValue(COUNTRY + "_" + SERVER + "_" + USERNAME + "_modeInfoPanelDonkey", implode(mode, "buildInfoPanelDonkey/mode"));
         // implode data older than last month
         try {
-            var stichtag = new Date();
-            stichtag = Math.round(((new Date(stichtag.getFullYear(), stichtag.getMonth() - 1, 1)).getTime()) / 1000);
+            var tempDate = new Date();
+            tempDate.setDate(0);
+            tempDate.setHours(0, 0, 0, 0);
+            var stichtag = Math.round(tempDate.getTime() / 1000);
             var month;
-            for (var v = logDonkey.length - 1; v >= 0; v--) {
+            for (let v = logDonkey.length - 1; v >= 0; v--) {
                 for (var w = logDonkey[v][2].length - 1; w >= 0; w--) {
                     if (!logDonkey[v][2][w][3]) { logDonkey[v][2][w][3] = 1; }
                 }
             }
-            for (var v = logDonkey.length - 1; v >= 0; v--) {
+            for (let v = logDonkey.length - 1; v >= 0; v--) {
                 if (logDonkey[v][0].match(/\d+\.\d+\.\d+/)) {
                     if (getTime(logDonkey[v][0]) < stichtag) {
                         month = /\d+\.(\d+)\.(\d+)/.exec(logDonkey[v][0]);
@@ -5698,7 +5712,7 @@ function buildInfoPanelDonkey(mode?) {
             }
             logDonkey.sort(sortObjFunctions["date"]);
             logDonkeyId = {};
-            for (var v = logDonkey.length - 1; v >= 0; v--) {
+            for (let v = logDonkey.length - 1; v >= 0; v--) {
                 logDonkeyId[logDonkey[v][0]] = v;
             }
             GM_setValue(COUNTRY + "_" + SERVER + "_" + USERNAME + "_logDonkey", implode(logDonkey, "buildInfoPanelWaltraud/logDonkey"));
@@ -5842,7 +5856,7 @@ function buildInfoPanelDonkey(mode?) {
             createElement("th", { "style": "white-space:nowrap;" }, newtr, getText("points"));
             createElement("th", { "style": "white-space:nowrap;" }, newtr, getText("goods"));
 
-            for (var v = logDonkey.length - 1; v >= 0; v--) {
+            for (let v = logDonkey.length - 1; v >= 0; v--) {
                 newtr = createElement("tr", {}, newtable);
                 createElement("td", {}, newtr, logDonkey[v][0]);
                 newtd = createElement("td", {}, newtr);
@@ -5941,10 +5955,9 @@ function buildInfoPanelClothingDonation(mode?) {
             createElement("th", { "style": "white-space:nowrap;" }, newtr, getText("reward"));
 
             for (var i = 0; i < logClothingDonation.length; i++) {
-                var v = logClothingDonation[i];
+                let v = logClothingDonation[i];
                 newtr = createElement("tr", {}, newtable);
-                createElement("td", {}, newtr,
-                    getFormattedDateStr(v.createdate) + " (" + getDaytimeStr(v.createdate, true, true) + "h)");
+                createElement("td", {}, newtr, getFormattedDateStr(v.createdate) + " (" + getDaytimeStr(v.createdate, true, true) + "h)");
                 newtd = createElement("td", {}, newtr);
                 for (var j in v.in) {
                     if (!v.in.hasOwnProperty(j)) { continue; }
@@ -5959,7 +5972,7 @@ function buildInfoPanelClothingDonation(mode?) {
 
                 newtd = createElement("td", {}, newtr);
 
-                for (var j = 0; j < v.gambleInfo.length; j++) {
+                for (let j = 0; j < v.gambleInfo.length; j++) {
                     newdiv = createElement("div", {}, newtd);
                     var prefixDate = v.gambleInfo[j]["gambledate"] == 0 ? v.createdate : v.gambleInfo[j]["gambledate"];
                     createElement("span", {}, newdiv, getFormattedDateStr(prefixDate) + " (" + getDaytimeStr(prefixDate, true, true) + "h): ");
@@ -6021,7 +6034,7 @@ function buildInfoPanelFarmies(mode?) {
         }, false);
 
         // selection bar on the right side
-        newdiv1 = createElement("div", { "class": "link", "style": "position:absolute;top:0;right:0;border:1px solid black;" }, container);
+        var newdiv1 = createElement("div", { "class": "link", "style": "position:absolute;top:0;right:0;border:1px solid black;" }, container);
         newdiv1.addEventListener("mouseover", function (event) {
             var node = event.target;
             var mouseOverText = node.getAttribute("mouseOverText");
@@ -6032,7 +6045,7 @@ function buildInfoPanelFarmies(mode?) {
             if (mouseOverText) { toolTip.show(event, mouseOverText); }
             node = null; mouseOverText = null;
         }, false);
-        for (var v = 200; v > -1; v--) {
+        for (let v = 200; v > -1; v--) {
             newdiv = createElement("div", { "class": "hoverBgRed", "style": "width:20px;height:2.5px;", "mouseOverText": v + "%" }, newdiv1);
             if (v <= mode["limit"]) { newdiv.style.backgroundColor = "blue"; }
             if (v == 90 || v == 100) newdiv.style.borderTop = "1px solid black";
@@ -6051,7 +6064,8 @@ function buildInfoPanelFarmies(mode?) {
         var borderTop;
         var c = 0;
         var prev = null;
-        for (var v = 0; v < farmiLog.length; v++) {
+        var newtd1;
+        for (let v = 0; v < farmiLog.length; v++) {
             countFarmisAll++;
             newtr = createElement("tr", { "class": "hoverBgCc9" }, newtable);
             if (prev == null) {
@@ -6107,8 +6121,11 @@ function buildInfoPanelFarmies(mode?) {
         for (var v in newFarmiumsatz) {
             if (!newFarmiumsatz.hasOwnProperty(v)) { continue; }
             newFarmiumsatz[v] = Math.round(100 * newFarmiumsatz[v]) / 100;
-            for (var w = 0; w < levelLog.length; w++) {
-                if (levelLog[w][0] == v) { levelLog[w][5] = newFarmiumsatz[v]; break; } //dont override all because data could be joined to monthly
+            for (let w = 0; w < levelLog.length; w++) {
+                if (levelLog[w][0] == v) { 
+                    levelLog[w][5] = newFarmiumsatz[v]; 
+                    break; 
+                } //dont override all because data could be joined to monthly
             }
         }
         GM_setValue2(COUNTRY + "_" + SERVER + "_" + USERNAME + "_levelLog", implode(levelLog, "buildInfoPanelFarmies/levelLog"), 70);
@@ -6118,7 +6135,7 @@ function buildInfoPanelFarmies(mode?) {
         }
 
         if (countFarmisAll > 0) {
-            newtr = createElement("tr");
+            newtr = createElement("tr", {});
             newtable.insertBefore(newtr, newtable.children[1]);
             createElement("td", {}, newtr, getText("total") + "<br>(" + countFarmisOk + ")");
             newtd = createElement("td", { "id": "tdTotalProducts" }, newtr);
@@ -6271,7 +6288,7 @@ function buildInfoPanelFormulas(mode?) {
                 toolTip.show(event, mouseOverText);
             }
         }, false);
-        for (var v = 0; v <= 2; v++) {
+        for (let v = 0; v <= 2; v++) {
             createElement("div", { "class": "link category_r" + v + (mode["filterType"].search(v + ",") != -1 ? "_active" : ""), "filter": v + ",", "style": "display:inline-block;", "mouseOverText": getText("category_r" + v) }, newtd);
         }
 
@@ -6379,13 +6396,13 @@ function buildInfoPanelFormulas(mode?) {
                     if (unsafeWindow.formulas[0][v][6] > 0) {
                         sum1 = unsafeWindow.formulas[0][v][6];
                         sum -= sum1;
-                        newspan = createElement("div", {}, newtd, moneyFormatInt(sum1));
+                        createElement("div", {}, newtd, moneyFormatInt(sum1));
                         newtd.setAttribute("value", sum1);
                     }
                     if (unsafeWindow.formulas[0][v][7] > 0) {
                         sum1 = unsafeWindow.formulas[0][v][7] * gut[0];
                         sum -= sum1;
-                        newspan = createElement("div", { "class": "link hoverBgLightblue" }, newtd, coinsFormat(unsafeWindow.formulas[0][v][7], createElement("div")).parentNode.innerHTML);
+                        var newspan = createElement("div", { "class": "link hoverBgLightblue" }, newtd, coinsFormat(unsafeWindow.formulas[0][v][7], createElement("div", {})).parentNode.innerHTML);
                         newspan.addEventListener("mouseover", function (event) { showGoToMarketToolTip(event, "0"); }, false);
                         newspan.addEventListener("click", function () { showMarket("0"); }, false);
                         createElement("div", { "style": "clear:both;" }, newtd, "(" + moneyFormatInt(sum1) + ")");
@@ -6438,9 +6455,9 @@ function buildInfoPanelMegafield() {
                 try {
                     var v = this.parentNode.getAttribute("v");
                     if (!logMegafieldJob[v][1]) {
-                        toolTip.show(event, getText("jobCurrent") + "<br>" + getText("remaining") + ": " + getTimeStr(logMegafieldJob[v][0] + 168 * 60 * 60 - unsafeWindow.Zeit.Server));
+                        toolTip.show(event, getText("jobCurrent") + "<br>" + getText("remaining") + ": " + getTimeStr(logMegafieldJob[v][0] + 168 * 60 * 60 - unsafeWindow.Zeit.Server, false));
                     } else if (logMegafieldJob[v][3]) {
-                        toolTip.show(event, getText("jobComplete") + "<br>" + getText("remaining") + ": " + getTimeStr(logMegafieldJob[v][0] + 168 * 60 * 60 - logMegafieldJob[v][1]));
+                        toolTip.show(event, getText("jobComplete") + "<br>" + getText("remaining") + ": " + getTimeStr(logMegafieldJob[v][0] + 168 * 60 * 60 - logMegafieldJob[v][1], false));
                     } else {
                         toolTip.show(event, getText("jobIncomplete"));
                     }
@@ -6455,7 +6472,7 @@ function buildInfoPanelMegafield() {
                     var v = this.parentNode.getAttribute("v");
                     var container, div, table, tr = [], td;
                     var amountEach, amount, price, help, sum = [0, 0];
-                    container = createElement("div");
+                    container = createElement("div", {});
                     table = createElement("table", { "border": "1" }, container);
                     for (var i = 0; i < 6; i++) {
                         tr.push(createElement("tr", {}, table));
@@ -6548,7 +6565,7 @@ unsafeWindow.buildInfoPanelMenu = function (mode) {
         }, false);
         newdiv1.classList.add("link");
         newdiv1.addEventListener("click", function (event) {
-            unsafeWindow.buildInfoPanel("changelog");
+            unsafeWindow.buildInfoPanel("changelog", "");
         }, false);
         if (USERNAME) {
             newdiv1 = createElement("div", { "id": "infoPanelNaviOptions", "class": "link naviItem", "style": "margin-top:5px;width:95px;" }, newdiv, getText("options"));
@@ -6589,14 +6606,16 @@ unsafeWindow.buildInfoPanelMenu = function (mode) {
         createElement("img", { "style": "border:none;", "src": "https://www.paypalobjects.com/" + ((LANGUAGE == "de") ? "de_DE/DE" : "en_US") + "/i/btn/btn_donate_LG.gif" }, newdiv1);
 
         // call automat
-        if (unsafeWindow.buildInfoPanelAutomatMenu) { unsafeWindow.buildInfoPanelAutomatMenu(mode); }
+        if (unsafeWindow.buildInfoPanelAutomatMenu) { 
+            unsafeWindow.buildInfoPanelAutomatMenu(mode); 
+        }
         // switch call
         switch (mode) {
             case "options": buildInfoPanelOptions(); break;
             case "accounts": buildInfoPanelAccounts(false); break;
             case "hotkeys": buildInfoPanelHotkeys(); break;
             case "css": buildInfoPanelCss(); break;
-            case "import": buildInfoPanelImport(); break;
+            case "import": buildInfoPanelImport(undefined, undefined, undefined); break;
         }
         container = null; newdiv = null; newdiv1 = null;
     } catch (err) { GM_logError("buildInfoPanelMenu", "", "", err); }
@@ -6707,7 +6726,7 @@ function buildInfoPanelOptions() {
         newtd = createElement("td", {}, newtr, getText("settings_valMoveAnimals")[1]);
         for (var v = 0; v < ANIMAL_MOVE.length; v++) {
             if (ANIMAL_MOVE[v]) {
-                newspan = createElement("span", { "style": "display:inline-block;margin-right:15px;" }, newtd);
+                var newspan = createElement("span", { "style": "display:inline-block;margin-right:15px;" }, newtd);
                 produktPic(0, BUILDING2PRODUCT[v][0], newspan);
                 newinput = createElement("input", { "id": "inputvalMoveAnimals" + v, "type": "checkbox", "class": "link", "checked": valMoveAnimals[v] }, newspan);
                 newinput.addEventListener("click", function () {
@@ -6798,7 +6817,7 @@ function buildInfoPanelOptions() {
 
         newtd1 = null;
         for (var j = 0; j < ALL_ZONES["farmersmarket"].length; j++) {
-            zoneNrF = ALL_ZONES["farmersmarket"][j];
+            var zoneNrF = ALL_ZONES["farmersmarket"][j];
             if (zones.isProductional(zoneNrF)) {
                 newtr = createElement("tr", {}, newtable);
                 newtd = createElement("td", { "align": "center" }, newtr);
@@ -7138,13 +7157,13 @@ function buildInfoPanelOptions() {
             var cand = $("infoPanelR").getElementsByClassName("minRackConfig");
             if (valMinRackMan) {
                 for (var v = 0; v < cand.length; v++) {
-                    cand[v].disabled = true;
-                    cand[v].parentNode.parentNode.style.opacity = 0.6;
+                    (<HTMLInputElement> cand[v]).disabled = true;
+                    (<HTMLElement> cand[v].parentNode.parentNode).style.opacity = "0.6";
                 }
             } else {
                 for (var v = 0; v < cand.length; v++) {
-                    cand[v].disabled = false;
-                    cand[v].parentNode.parentNode.style.opacity = 1;
+                    (<HTMLInputElement> cand[v]).disabled = false;
+                    (<HTMLElement> cand[v].parentNode.parentNode).style.opacity = "1";
                 }
                 calcProdMinRackInit();
             }
@@ -7156,8 +7175,8 @@ function buildInfoPanelOptions() {
             unsafeWindow.buildInfoPanel("stock", { "page": 2 });
         }, false);
 
-        newTd1 = null;
-        for (var v in valMinRack) {
+        var newTd1 = null;
+        for (let v in valMinRack) {
             if (!valMinRack.hasOwnProperty(v)) { continue; }
             newtr = createElement("tr", {}, newtable);
             newtd = createElement("td", { "align": "center" }, newtr);
@@ -7421,7 +7440,7 @@ function buildInfoPanelOptions() {
         newinput.addEventListener("blur", function () { this.style.backgroundColor = "transparent"; }, false);
         newinput.addEventListener("change", function () {
             var valVerkaufLimitDown = parseInt(this.value, 10);
-            var valVerkaufLimitUp = parseInt($("inputvalVerkaufLimitUp").value, 10);
+            var valVerkaufLimitUp = parseInt((<HTMLInputElement> $("inputvalVerkaufLimitUp")).value, 10);
             valVerkaufLimitDown = Math.min(valVerkaufLimitDown, valVerkaufLimitUp);
             if (isNaN(valVerkaufLimitDown)) {
                 this.value = "";
@@ -7436,7 +7455,7 @@ function buildInfoPanelOptions() {
         newinput.addEventListener("focus", function () { this.style.backgroundColor = "lightblue"; }, false);
         newinput.addEventListener("blur", function () { this.style.backgroundColor = "transparent"; }, false);
         newinput.addEventListener("change", function () {
-            var valVerkaufLimitDown = parseInt($("inputvalVerkaufLimitDown").value, 10);
+            var valVerkaufLimitDown = parseInt((<HTMLInputElement> $("inputvalVerkaufLimitDown")).value, 10);
             var valVerkaufLimitUp = parseInt(this.value, 10);
             valVerkaufLimitUp = Math.max(valVerkaufLimitDown, valVerkaufLimitUp);
             if (isNaN(valVerkaufLimitUp)) {
@@ -7522,25 +7541,25 @@ function buildInfoPanelOptions() {
         newinput = createElement("input", { "type": "checkbox", "class": "link", "checked": highlightProducts[0] }, newdiv);
         newinput.addEventListener("click", function () {
             highlightProducts[0] = this.checked;
-            $("highlightProducts0").disabled = highlightProducts[0];
-            $("highlightProducts1").disabled = highlightProducts[0];
+            (<HTMLSelectElement> $("highlightProducts0")).disabled = highlightProducts[0];
+            (<HTMLSelectElement> $("highlightProducts1")).disabled = highlightProducts[0];
             if (highlightProducts[0]) {
                 // todo calc highlightProducts[1]
-                $("highlightProducts0").value = -1;
-                $("highlightProducts1").value = -1;
+                (<HTMLSelectElement> $("highlightProducts0")).value = "-1";
+                (<HTMLSelectElement> $("highlightProducts1")).value = "-1";
             } else {
                 var i = 0;
                 for (var prod in highlightProducts[1]) {
                     if (!highlightProducts[1].hasOwnProperty(prod)) { continue; }
                     if (i > 1) { continue; }
-                    $("highlightProducts" + i).value = prod;
+                    (<HTMLSelectElement> $("highlightProducts" + i)).value = prod;
                     i++;
                 }
             }
             GM_setValue2(COUNTRY + "_" + SERVER + "_" + USERNAME + "_highlightProducts", implode(highlightProducts, "buildInfoPanelOptions/highlightProducts"), 42);
         }, false);
         createElement("span", {}, newdiv, getText("useQuestProducts"));
-        for (var i = 0; i < 2; i++) {
+        for (let i = 0; i < 2; i++) {
             newinput = createElement("select", { "id": "highlightProducts" + i, "class": "link" }, newtd);
             createElement("option", { "value": "-1" }, newinput, "--");
             for (var v = 0; v < prodNameSort[0].length; v++) {
@@ -7554,17 +7573,17 @@ function buildInfoPanelOptions() {
             }
             newinput.addEventListener("change", function () {
                 highlightProducts[1] = {};
-                highlightProducts[1][$("highlightProducts0").value] = true;
-                highlightProducts[1][$("highlightProducts1").value] = true;
+                highlightProducts[1][(<HTMLSelectElement> $("highlightProducts0")).value] = true;
+                highlightProducts[1][(<HTMLSelectElement> $("highlightProducts1")).value] = true;
                 GM_setValue2(COUNTRY + "_" + SERVER + "_" + USERNAME + "_highlightProducts", implode(highlightProducts, "buildInfoPanelOptions/highlightProducts"), 43);
             }, false);
         }
         if (!highlightProducts[0]) {
-            var i = 0;
+            let i = 0;
             for (var prod in highlightProducts[1]) {
                 if (!highlightProducts[1].hasOwnProperty(prod)) { continue; }
                 if (i > 1) { continue; }
-                $("highlightProducts" + i).value = prod;
+                (<HTMLSelectElement> $("highlightProducts" + i)).value = prod;
                 i++;
             }
         }
@@ -7859,14 +7878,14 @@ function buildInfoPanelOptions() {
                 if (USERLEVEL >= 42
                     && unsafeWindow.quests_status.hasOwnProperty("main")
                     && unsafeWindow.quests_status["main"].hasOwnProperty("4")
-                    && speedlink_farm6.style.display == "block") {
+                    && $("speedlink_farm6").style.display == "block") {
                     // main questseries 4 exists and is not accomplished
                     var help = help + "4_NotAccomplished";
                     if (!isNaN(parseInt(unsafeWindow.quests_status["main"][4]["remain"], 10))) {
                         // cooldown-time is active - quest is not accessible
                         questData["main"][4] = INIT_questData["main"][4].clone();
                         questData["main"][4]["nr"] = unsafeWindow.quests_status["main"][4]["questid"];
-                        questData["main"][4]["time"] = (parseInt(unsafeWindow.Zeit.Server, 10) + parseInt(unsafeWindow.quests_status["main"][4]["remain"], 10));
+                        questData["main"][4]["time"] = (unsafeWindow.Zeit.Server + parseInt(unsafeWindow.quests_status["main"][4]["remain"], 10));
                         questData["main"][4]["given"] = new Object();
                         questData["main"][4]["data"] = gatherQuestData("main", "4", questData["main"][4]["nr"]);
                         GM_setValueCache(COUNTRY + "_" + SERVER + "_" + USERNAME + "_questData", implode(questData, "handleQuestData/questData"));
@@ -7881,14 +7900,14 @@ function buildInfoPanelOptions() {
                 if (USERLEVEL >= 40
                     && unsafeWindow.quests_status.hasOwnProperty("main")
                     && unsafeWindow.quests_status["main"].hasOwnProperty("3")
-                    && speedlink_farm5.style.display == "block") {
+                    && $("speedlink_farm5").style.display == "block") {
                     // main questseries 3 exists and is not accomplished
                     var help = help + "3_NotAccomplished";
                     if (!isNaN(parseInt(unsafeWindow.quests_status["main"][3]["remain"], 10))) {
                         // cooldown-time is active - quest is not accessible
                         questData["main"][3] = INIT_questData["main"][3].clone();
                         questData["main"][3]["nr"] = unsafeWindow.quests_status["main"][3]["questid"];
-                        questData["main"][3]["time"] = (parseInt(unsafeWindow.Zeit.Server, 10) + parseInt(unsafeWindow.quests_status["main"][3]["remain"], 10));
+                        questData["main"][3]["time"] = (unsafeWindow.Zeit.Server + parseInt(unsafeWindow.quests_status["main"][3]["remain"], 10));
                         questData["main"][3]["given"] = new Object();
                         questData["main"][3]["data"] = gatherQuestData("main", "3", questData["main"][3]["nr"]);
                         GM_setValueCache(COUNTRY + "_" + SERVER + "_" + USERNAME + "_questData", implode(questData, "handleQuestData/questData"));
@@ -7900,7 +7919,7 @@ function buildInfoPanelOptions() {
                         var help = help + "_accessible:_DoNothing ";
                     }
                 } else if (USERLEVEL >= 40
-                    && speedlink_farm5.style.display == "block"
+                    && $("speedlink_farm5").style.display == "block"
                     && (!unsafeWindow.quests_status.hasOwnProperty("main")
                         || !unsafeWindow.quests_status["main"].hasOwnProperty("3"))) {
                     // no main questseries - or main questseries 3 has no properties: questseries must be accomplished
@@ -7913,7 +7932,7 @@ function buildInfoPanelOptions() {
                     unsafeData.questData = Object.assign({}, questData);
                     var help = help + "3_Accomplished: SetLastQuestNumber_QuestNumber_" + questData["main"][3]["nr"] + " ";
                 } else if (USERLEVEL >= 40
-                    && speedlink_farm5.style.display != "block") {
+                    && $("speedlink_farm5").style.display != "block") {
                     // Farm 5 is not released - main questseries 3 is not accessible - do nothing
                     var help = help + "3_NoFarm5:_DoNothing ";
                 }
@@ -7926,7 +7945,7 @@ function buildInfoPanelOptions() {
                         // cooldown-time is active - quest is not accessible
                         questData["main"][2] = INIT_questData["main"][2].clone();
                         questData["main"][2]["nr"] = unsafeWindow.quests_status["main"][2]["questid"];
-                        questData["main"][2]["time"] = (parseInt(unsafeWindow.Zeit.Server, 10) + parseInt(unsafeWindow.quests_status["main"][2]["remain"], 10));
+                        questData["main"][2]["time"] = (unsafeWindow.Zeit.Server + parseInt(unsafeWindow.quests_status["main"][2]["remain"], 10));
                         questData["main"][2]["given"] = new Object();
                         questData["main"][2]["data"] = gatherQuestData("main", "2", questData["main"][2]["nr"]);
                         GM_setValueCache(COUNTRY + "_" + SERVER + "_" + USERNAME + "_questData", implode(questData, "handleQuestData/questData"));
@@ -7959,7 +7978,7 @@ function buildInfoPanelOptions() {
                         // cooldown-time is active - quest is not accessible
                         questData["main"][1] = INIT_questData["main"][1].clone();
                         questData["main"][1]["nr"] = unsafeWindow.quests_status["main"][1]["questid"];
-                        questData["main"][1]["time"] = (parseInt(unsafeWindow.Zeit.Server, 10) + parseInt(unsafeWindow.quests_status["main"][1]["remain"], 10));
+                        questData["main"][1]["time"] = (unsafeWindow.Zeit.Server + parseInt(unsafeWindow.quests_status["main"][1]["remain"], 10));
                         questData["main"][1]["given"] = new Object();
                         questData["main"][1]["data"] = gatherQuestData("main", "1", questData["main"][1]["nr"]);
                         GM_setValueCache(COUNTRY + "_" + SERVER + "_" + USERNAME + "_questData", implode(questData, "handleQuestData/questData"));
@@ -7993,7 +8012,7 @@ function buildInfoPanelOptions() {
                         // cooldown-time is active - quest is not accessible
                         questData["forestry"][1] = INIT_questData["forestry"][1].clone();
                         questData["forestry"][1]["nr"] = 1 + parseInt(unsafeWindow.quests_status["forestry"][1]["questid"], 10);
-                        questData["forestry"][1]["time"] = (parseInt(unsafeWindow.Zeit.Server, 10) + parseInt(unsafeWindow.quests_status["forestry"][1]["remain"], 10));
+                        questData["forestry"][1]["time"] = (unsafeWindow.Zeit.Server + parseInt(unsafeWindow.quests_status["forestry"][1]["remain"], 10));
                         questData["forestry"][1]["given"] = new Object();
                         questData["forestry"][1]["data"] = QUESTS["forestry"][1][(questData["forestry"][1]["nr"])];
                         for (var v = 0; v < (questData["forestry"][1]["data"][0].length); v++) {
@@ -8028,7 +8047,7 @@ function buildInfoPanelOptions() {
                         // cooldown-time is active - quest is not accessible
                         questData["forestry"][2] = INIT_questData["forestry"][2].clone();
                         questData["forestry"][2]["nr"] = 1 + parseInt(unsafeWindow.quests_status["forestry"][2]["questid"], 10);
-                        questData["forestry"][2]["time"] = (parseInt(unsafeWindow.Zeit.Server, 10) + parseInt(unsafeWindow.quests_status["forestry"][2]["remain"], 10));
+                        questData["forestry"][2]["time"] = (unsafeWindow.Zeit.Server + parseInt(unsafeWindow.quests_status["forestry"][2]["remain"], 10));
                         questData["forestry"][2]["given"] = new Object();
                         questData["forestry"][2]["data"] = QUESTS["forestry"][2][(questData["forestry"][2]["nr"])];
                         for (var v = 0; v < (questData["forestry"][2]["data"][0].length); v++) {
@@ -8065,12 +8084,12 @@ function buildInfoPanelOptions() {
         if (DEVMODE) {
             if (unsafeWindow.quests_status.hasOwnProperty("main")
                 && unsafeWindow.quests_status["main"].hasOwnProperty("3")
-                && speedlink_farm5.style.display == "block") {
+                && $("speedlink_farm5").style.display == "block") {
                 newtr = createElement("tr", {}, newtable);
                 newtd = createElement("td", { "align": "center" }, newtr);
                 var newsel = createElement("select", { "id": "SetQuestMain3To", "style": "width:auto;height:18px;margin-left:5px;" }, newtd);
                 createElement("option", { "value": -1 }, newsel, getText("hide"));
-                for (var i = 1; i < QUESTS["main"][3].length; i++) {
+                for (let i = 1; i < QUESTS["main"][3].length; i++) {
                     createElement("option", { "value": i }, newsel, i);
                 }
                 createElement("option", { "value": (QUESTS["main"][3].length)++ }, newsel, getText("lastQuest"));
@@ -8346,16 +8365,12 @@ function buildInfoPanelImport(mode, showData, onlyThisAccount) {
         container = createElement("div", { "id": "beraterDataImportContainer", "style": "position:absolute;top:30px;left:5px;height:485px;width:475px;overflow:auto;" }, container);
         switch (mode) {
             case "export": {
-                // if (showData&&(!onlyThisAccount)){
-                //  if(!confirm("Attention! Showing all data of all accounts can slow down your browser. Continue?")){
-                //      showData=false;
-                //  }
-                // }
                 createElement("div", {}, container, "Click the lines to remove them.");
 
                 var newdiv = createElement("div", {}, container);
                 var newinput = createElement("input", { "type": "checkbox", "checked": showData }, newdiv);
                 newinput.addEventListener("click", function () {
+                    // TODO: Is this code still used?
                     showExportData(this.checked, onlyThisAccount);
                 }, false);
                 createElement("span", {}, newdiv, "Show the data");
@@ -8363,6 +8378,7 @@ function buildInfoPanelImport(mode, showData, onlyThisAccount) {
                 newdiv = createElement("div", {}, container);
                 newinput = createElement("input", { "type": "checkbox", "checked": onlyThisAccount }, newdiv);
                 newinput.addEventListener("click", function () {
+                    // TODO: Is this code still used?
                     showExportData(showData, this.checked);
                 }, false);
                 createElement("span", {}, newdiv, "Only this account");
@@ -8379,10 +8395,11 @@ function buildInfoPanelImport(mode, showData, onlyThisAccount) {
                 }, false);
                 var newtable = createElement("table", { "border": "1", "class": "hoverRowBgCc9", "style": "width:100%" }, container);
                 var newtr, newtd;
+                // TODO: Is this code still used?
                 var help = cloneInto(GM_listValues(), unsafeWindow);
                 help.sort();
                 if (onlyThisAccount) {
-                    for (var v = 0; v < help.length; v++) {
+                    for (let v = 0; v < help.length; v++) {
                         if (help[v].search(COUNTRY + "_" + SERVER + "_" + USERNAME) != -1) {
                             var help2 = GM_getValue(help[v]);
                             var help3 = "s";
@@ -8423,6 +8440,7 @@ function buildInfoPanelImport(mode, showData, onlyThisAccount) {
                 var newdiv = createElement("div", {}, container);
                 var newinput = createElement("input", { "type": "checkbox", "checked": showData }, newdiv);
                 newinput.addEventListener("click", function () {
+                    // TODO: Is this code still used?
                     showImportData(this.checked, onlyThisAccount);
                 }, false);
                 createElement("span", {}, newdiv, "Show the data");
@@ -8430,6 +8448,7 @@ function buildInfoPanelImport(mode, showData, onlyThisAccount) {
                 newdiv = createElement("div", {}, container);
                 newinput = createElement("input", { "type": "checkbox", "checked": onlyThisAccount }, newdiv);
                 newinput.addEventListener("click", function () {
+                    // TODO: Is this code still used?
                     showImportData(showData, this.checked);
                 }, false);
                 createElement("span", {}, newdiv, "Only this account");
@@ -8485,19 +8504,17 @@ function buildInfoPanelLevel() {
     try {
         var container = $("infoPanelInner");
         container.innerHTML = "";
-        // GM_log("levelLog:\n"+print_r(levelLog,"",true,"\n"));
-        newdiv = createElement("div", { "style": "height:400px;overflow:auto;color:black;" }, container);
-        // todayStr=getDateStr(now,2,false);
+        var newdiv = createElement("div", { "style": "height:400px;overflow:auto;color:black;" }, container);
         levelLog[levelLogId][1] = parseInt($("pkt").innerHTML.replace(/\D/g, ""), 10);
         var totalumsatz = [0, 0, [0, 0]];
         var day, days;
 
-        newtable = createElement("table", { "border": "1", "style": "width:100%;" }, newdiv);
-        thead = createElement("thead", {}, newtable); // sortable table
-        newtbody = createElement("tbody", { "class": "hoverRowBgCc9" }, newtable);
-        newtfoot = createElement("tfoot", {}, newtable);
+        var newtable = createElement("table", { "border": "1", "style": "width:100%;" }, newdiv);
+        var thead = createElement("thead", {}, newtable); // sortable table
+        var newtbody = createElement("tbody", { "class": "hoverRowBgCc9" }, newtable);
+        var newtfoot = createElement("tfoot", {}, newtable);
 
-        newtr = createElement("tr", { "class": "borderBottom2" }, thead);
+        var newtr = createElement("tr", { "class": "borderBottom2" }, thead);
         createElement("th", { "class": "link", "sortdir": "Asc", "style": "border-right:2px solid black;" }, newtr, getText("day"));
         createElement("th", { "class": "link", "sortdir": "Asc" }, newtr, getText("points"));
         createElement("th", { "class": "link", "sortdir": "Asc" }, newtr, "+");
@@ -8577,17 +8594,17 @@ function buildInfoPanelLevel() {
 
         newdiv = createElement("div", { "style": "height:106px;margin-top:10px;overflow:auto;color:black;" }, container);
         for (var w = 0; w < prodNameSort[0].length; w++) {
-            var v = prodNameSort[0][w];
+            let v: string = prodNameSort[0][w];
             if ((!prodBlock[0][v].match(/t/)) && (buyNotePadShowBlocked || (!prodBlock[0][v].match(/[vlq]/)))) {
                 if (0 < prodMinRack[0][v]) {
                     if (prodStock[0][v] == 0) {
-                        newdiv1 = createElement("div", { "class": "link hoverBgCc9", "prod": v, "style": "line-height:16px;" }, newdiv);
+                        var newdiv1 = createElement("div", { "class": "link hoverBgCc9", "prod": v, "style": "line-height:16px;" }, newdiv);
                         newdiv1.addEventListener("mouseover", function (event) { showGoToMarketToolTip(event, this.getAttribute("prod")); }, false);
                         newdiv1.addEventListener("click", function () { showMarket(this.getAttribute("prod")); }, false);
                         produktPic(0, v, newdiv1);
                         createElement("span", { "style": "font-weight:bold;" }, newdiv1, getText("stockXmissing").replace(/%1%/, prodName[0][v]));
                     } else if (prodStock[0][v] < prodMinRack[0][v]) {
-                        newdiv1 = createElement("div", { "class": "link hoverBgCc9", "prod": v, "style": "line-height:16px;" }, newdiv);
+                        var newdiv1 = createElement("div", { "class": "link hoverBgCc9", "prod": v, "style": "line-height:16px;" }, newdiv);
                         newdiv1.addEventListener("mouseover", function (event) { showGoToMarketToolTip(event, this.getAttribute("prod")); }, false);
                         newdiv1.addEventListener("click", function () { showMarket(this.getAttribute("prod")); }, false);
                         produktPic(0, v, newdiv1);
@@ -8613,7 +8630,7 @@ function buildInfoPanelMessages(mode?) {
             logSales = explode(GM_getValue(COUNTRY + "_" + SERVER + "_" + USERNAME + "_logSales"), "buildInfoPanelMessages/logSales", []);
             logSales.sort(sortObjFunctions["int"], true);
             logSalesId = new Object();
-            for (var v = logSales.length - 1; v >= 0; v--) {
+            for (let v = logSales.length - 1; v >= 0; v--) {
                 logSalesId[logSales[v][0]] = v;
             }
         }
@@ -8653,7 +8670,7 @@ function buildInfoPanelMessages(mode?) {
 
         switch (mode["type"]) {
             case 1: {
-                for (var v = logSales.length - 1; v > -1; v--) {
+                for (let v = logSales.length - 1; v > -1; v--) {
                     if (logSales[v][2].match(regFilterPlayer)) {
                         help = false;
                         if (typeof logSales[v][3][0] != "object") {
@@ -8696,7 +8713,7 @@ function buildInfoPanelMessages(mode?) {
                 createElement("th", {}, newtr, getText("price"));
                 createElement("th", {}, newtr, getText("turnover"));
                 createElement("th", {}, newtr, getText("profit"));
-                eventListenerScroll = function () {
+                var eventListenerScroll = function () {
                     if ((parseInt(this.scrollTop, 10) + parseInt(this.style.height, 10)) > 0.95 * parseInt(this.scrollHeight, 10)) {
                         plot();
                     }
@@ -8780,7 +8797,7 @@ function buildInfoPanelMessages(mode?) {
                 break;
             }
             case 2: {
-                for (var v = logSales.length - 1; v > -1; v--) {
+                for (let v = logSales.length - 1; v > -1; v--) {
                     if (logSales[v][2].match(regFilterPlayer)) {
                         if (typeof logSales[v][3][0] != "object") {
                             if (!plotLogSales[logSales[v][3][0]]) { plotLogSales[logSales[v][3][0]] = [logSales[v][3][0], 0, 0, 0]; }
@@ -8814,7 +8831,7 @@ function buildInfoPanelMessages(mode?) {
                 createElement("th", {}, newtr, "Ø");
                 createElement("th", {}, newtr, getText("profit"));
                 createElement("th", {}, newtr, "Ø");
-                for (var v = plotLogSales.length - 1; v > -1; v--) {
+                for (let v = plotLogSales.length - 1; v > -1; v--) {
                     if (!plotLogSales[v]) { continue; }
                     sumTurnover += plotLogSales[v][2];
                     sumProfit += plotLogSales[v][3];
@@ -8827,20 +8844,24 @@ function buildInfoPanelMessages(mode?) {
                     createElement("span", {}, newtd, prodName[0][plotLogSales[v][0]]);
                     createElement("td", { "align": "right", "style": "padding-right:3px;border-right:1px solid black" }, newtr, numberFormat(plotLogSales[v][1], 0));
                     createElement("td", { "align": "right" }, newtr, moneyFormat(plotLogSales[v][2]));
-                    createElement("td", { "align": "right", "style": "padding-right:3px;border-right:1px solid black" }, newtr, moneyFormat(plotLogSales[v][2] / plotLogSales[v][1], 2));
+                    createElement("td", { "align": "right", "style": "padding-right:3px;border-right:1px solid black" }, newtr, moneyFormat(plotLogSales[v][2] / plotLogSales[v][1]));
                     createElement("td", { "align": "right" }, newtr, moneyFormat(plotLogSales[v][3]));
-                    createElement("td", { "align": "right", "style": "padding-right:20px;" }, newtr, moneyFormat(plotLogSales[v][3] / plotLogSales[v][1], 2));
+                    createElement("td", { "align": "right", "style": "padding-right:20px;" }, newtr, moneyFormat(plotLogSales[v][3] / plotLogSales[v][1]));
                 }
                 break;
             }
             case 3: {
                 plotLogSales = new Object();
-                for (var v = logSales.length - 1; v > -1; v--) {
+                for (let v = logSales.length - 1; v > -1; v--) {
                     if (typeof logSales[v][3][0] != "object") {
                         soldProducts[logSales[v][3][0]] = true;
                         if ((mode["filterProduct"] == -1) || (mode["filterProduct"] == logSales[v][3][0])) {
-                            if (!plotLogSales[logSales[v][2]]) { plotLogSales[logSales[v][2]] = [logSales[v][2], {}, 0, 0]; }
-                            if (!plotLogSales[logSales[v][2]][1][logSales[v][3][0]]) { plotLogSales[logSales[v][2]][1][logSales[v][3][0]] = 0; }
+                            if (!plotLogSales[logSales[v][2]]) { 
+                                plotLogSales[logSales[v][2]] = [logSales[v][2], {}, 0, 0]; 
+                            }
+                            if (!plotLogSales[logSales[v][2]][1][logSales[v][3][0]]) { 
+                                plotLogSales[logSales[v][2]][1][logSales[v][3][0]] = 0; 
+                            }
                             plotLogSales[logSales[v][2]][1][logSales[v][3][0]] += logSales[v][3][1];
                             plotLogSales[logSales[v][2]][2] += logSales[v][4];
                             plotLogSales[logSales[v][2]][3] += 0.9 * logSales[v][4];
@@ -8848,8 +8869,12 @@ function buildInfoPanelMessages(mode?) {
                     } else if (logSales[v][3].length == 1) {
                         soldProducts[logSales[v][3][0][0]] = true;
                         if ((mode["filterProduct"] == -1) || (mode["filterProduct"] == logSales[v][3][0][0])) {
-                            if (!plotLogSales[logSales[v][2]]) { plotLogSales[logSales[v][2]] = [logSales[v][2], {}, 0, 0]; }
-                            if (!plotLogSales[logSales[v][2]][1][logSales[v][3][0][0]]) { plotLogSales[logSales[v][2]][1][logSales[v][3][0][0]] = 0; }
+                            if (!plotLogSales[logSales[v][2]]) { 
+                                plotLogSales[logSales[v][2]] = [logSales[v][2], {}, 0, 0]; 
+                            }
+                            if (!plotLogSales[logSales[v][2]][1][logSales[v][3][0][0]]) { 
+                                plotLogSales[logSales[v][2]][1][logSales[v][3][0][0]] = 0; 
+                            }
                             plotLogSales[logSales[v][2]][1][logSales[v][3][0][0]] += logSales[v][3][0][1];
                             plotLogSales[logSales[v][2]][2] += logSales[v][4];
                             plotLogSales[logSales[v][2]][3] += logSales[v][4];
@@ -8873,7 +8898,7 @@ function buildInfoPanelMessages(mode?) {
                     }
                 }
                 help = [];
-                for (var i in plotLogSales) {
+                for (let i in plotLogSales) {
                     if (!plotLogSales.hasOwnProperty(i)) { continue; }
                     help.push(plotLogSales[i]);
                 }
@@ -8883,7 +8908,7 @@ function buildInfoPanelMessages(mode?) {
                 createElement("th", {}, newtr, getText("products"));
                 createElement("th", {}, newtr, getText("turnover"));
                 createElement("th", {}, newtr, getText("profit"));
-                for (var v = plotLogSales.length - 1; v > -1; v--) {
+                for (let v = plotLogSales.length - 1; v > -1; v--) {
                     if (!plotLogSales[v]) { continue; }
                     sumTurnover += plotLogSales[v][2];
                     sumProfit += plotLogSales[v][3];
@@ -8893,7 +8918,7 @@ function buildInfoPanelMessages(mode?) {
                     }, false);
                     createElement("td", {}, newtr, plotLogSales[v][0]);
                     newtd = createElement("td", {}, newtr);
-                    for (var i in plotLogSales[v][1]) {
+                    for (let i in plotLogSales[v][1]) {
                         if (!plotLogSales[v][1].hasOwnProperty(i)) { continue; }
                         div = createElement("div", {}, newtd);
                         produktPic(0, i, div);
@@ -8920,7 +8945,7 @@ function buildInfoPanelMessages(mode?) {
             }, false);
             cell = createElement("select", { "class": "link" }, newtd);
             createElement("option", { "value": -1 }, cell, "---");
-            for (var v = 0; v < prodNameSort[0].length; v++) {
+            for (let v = 0; v < prodNameSort[0].length; v++) {
                 if (soldProducts[prodNameSort[0][v]]) {
                     createElement("option", { "value": prodNameSort[0][v] }, cell, prodName[0][prodNameSort[0][v]]);
                 }
@@ -8966,12 +8991,13 @@ function goToZone(zoneNrF) {
                         click(div);
                     }
                 } else if (div = $("speedlink_farm" + (1 + currLocation.farmNr))) {
-                    document.addEventListener("gameFarmOpened", function (zoneNrF) {
+                    var f1 = function (zoneNrF) {
                         return function () {
-                            document.removeEventListener("gameFarmOpened", arguments.callee, false);
+                            document.removeEventListener("gameFarmOpened", f1, false);
                             window.setTimeout(goToZone, 100, zoneNrF);
                         }
-                    }(zoneNrF), false);
+                    };
+                    document.addEventListener("gameFarmOpened", f1(zoneNrF), false);
                     click(div);
                 }
                 break;
@@ -8998,12 +9024,13 @@ function goToZone(zoneNrF) {
                         click(div);
                     }
                 } else if (div = $("speedlink_forestry")) {
-                    document.addEventListener("gameOpenForestry", function (zoneNrF) {
+                    var f1 = function (zoneNrF) {
                         return function () {
-                            document.removeEventListener("gameOpenForestry", arguments.callee, false);
+                            document.removeEventListener("gameOpenForestry", f1, false);
                             window.setTimeout(goToZone, 100, zoneNrF);
                         }
-                    }(zoneNrF), false);
+                    };
+                    document.addEventListener("gameOpenForestry", f1(zoneNrF), false);
                     click(div);
                 }
                 break;
@@ -9014,12 +9041,13 @@ function goToZone(zoneNrF) {
                         click(div);
                     }
                 } else if (div = $("speedlink_foodworld")) {
-                    document.addEventListener("gameFoodworldOpened", function (zoneNrF) {
+                    var f1 = function (zoneNrF) {
                         return function () {
-                            document.removeEventListener("gameFoodworldOpened", arguments.callee, false);
+                            document.removeEventListener("gameFoodworldOpened", f1, false);
                             window.setTimeout(goToZone, 100, zoneNrF);
                         }
-                    }(zoneNrF), false);
+                    };
+                    document.addEventListener("gameFoodworldOpened", f1(zoneNrF), false);
                     click(div);
                 }
                 break;
@@ -9030,12 +9058,13 @@ function goToZone(zoneNrF) {
                         click(div);
                     }
                 } else if (div = $("speedlink_farmersmarket")) {
-                    document.addEventListener("gameFarmersmarketOpened", function (zoneNrF) {
+                    var f1 = function (zoneNrF) {
                         return function () {
-                            document.removeEventListener("gameFarmersmarketOpened", arguments.callee, false);
+                            document.removeEventListener("gameFarmersmarketOpened", f1, false);
                             window.setTimeout(goToZone, 100, zoneNrF);
                         }
-                    }(zoneNrF), false);
+                    };
+                    document.addEventListener("gameFarmersmarketOpened", f1(zoneNrF), false);
                     click(div);
                 }
                 break;
@@ -9082,7 +9111,7 @@ function calcAllSlots() {
 function toolTipZoneProduction(zoneNrS) {
     try {
         var currLocation = zones.getLocation(zoneNrS);
-        var content = createElement("div");
+        var content = createElement("div", {});
         var time, endDay, table, tr, td;
         var help;
         table = createElement("table", { "border": "0", "cellspacing": "0", "cellpadding": "0" }, content);
@@ -9134,7 +9163,7 @@ function toolTipZoneProduction(zoneNrS) {
                         if (help[k][3] > 0) { pointsFormat(help[k][3], "div", td); }
                     } else if (zones.getBuilding(zoneNrS) == "fl4" && help[k][1] == 0) {
                         //Tieraufzucht
-                        var item = unsafeWindow.pets.data.breed;
+                        let item = unsafeWindow.pets.data.breed;
                         tr = createElement("tr", {}, table);
                         td = createElement("td", {}, tr);
                         createElement("img", { "src": GFX + "/breed/Paw_00.png", "style": "height:15px;width:15px;border:none;top:0px;vertical-align:bottom;" }, td);
@@ -9145,7 +9174,7 @@ function toolTipZoneProduction(zoneNrS) {
                         createElement("span", {}, td, numberFormat(item.breedpoints));
                     } else if (zones.getBuilding(zoneNrS) == "fl3") {
                         //monster fruit culture
-                        item = unsafeWindow.farmersmarket_data.megafruit;
+                        let item = unsafeWindow.farmersmarket_data.megafruit;
 
                         tr = createElement("tr", {}, table);
                         td = createElement("td", { "colspan": 2 }, tr);
@@ -9186,7 +9215,7 @@ function toolTipZoneProduction(zoneNrS) {
 }
 function toolTipSales(nr) {
     try {
-        var content = createElement("div");
+        var content = createElement("div", {});
         var table, tr, td;
         var time;
         if (logSales[nr]) {
@@ -9240,27 +9269,29 @@ function toolTipSales(nr) {
 function showMarket(pid) {
     try {
         if (!gameLocation.check("city", 1)) {
-            document.addEventListener("gameCity1", function (pid) {
+            var f1 = function (pid) {
                 return function () {
-                    document.removeEventListener("gameCity1", arguments.callee, false);
+                    document.removeEventListener("gameCity1", f1, false);
                     showMarket(pid);
                 };
-            }(pid), false);
+            };
+            document.addEventListener("gameCity1", f1(pid), false);
             click($("speedlink_city1"));
         } else if ($("market").style.display != "block") {
-            document.addEventListener("gameOpenMarket", function (pid) {
+            var f1 = function (pid) {
                 return function () {
-                    document.removeEventListener("gameOpenMarket", arguments.callee, false);
+                    document.removeEventListener("gameOpenMarket", f1, false);
                     showMarket(pid);
                 };
-            }(pid), false);
+            };
+            document.addEventListener("gameOpenMarket", f1(pid), false);
             unsafeWindow.close_page();
             unsafeWindow.hideDiv("shop");
             unsafeWindow.hideDiv("wbwcontainer");
             unsafeWindow.hideDiv("adcolumn");
             $("transp3").style.visibility = "visible";
             unsafeWindow.showDiv("transp3");
-            unsafeWindow.marketAction("marketinit");
+            unsafeWindow.marketAction("marketinit", undefined, undefined);
         } else {
             closeInfoPanel();
             unsafeWindow.market_filter_pid = parseInt(pid, 10);
@@ -9274,26 +9305,28 @@ function showMarket(pid) {
 function showMarketStall() {
     try {
         if (!gameLocation.check("city", 1)) {
-            document.addEventListener("gameCity1", function () {
-                document.removeEventListener("gameCity1", arguments.callee, false);
+            var f = function () {
+                document.removeEventListener("gameCity1", f, false);
                 showMarketStall();
-            }, false);
+            };
+            document.addEventListener("gameCity1", f, false);
             click($("speedlink_city1"));
         } else if ($("market").style.display != "block") {
-            document.addEventListener("gameOpenMarket", function () {
-                document.removeEventListener("gameOpenMarket", arguments.callee, false);
+            var f = function () {
+                document.removeEventListener("gameOpenMarket", f, false);
                 showMarketStall();
-            }, false);
+            };
+            document.addEventListener("gameOpenMarket", f, false);
             unsafeWindow.close_page();
             unsafeWindow.showDiv("transp3");
             unsafeWindow.$("transp3").style.visibility = "visible";
-            unsafeWindow.marketAction("marketinit");
+            unsafeWindow.marketAction("marketinit", undefined, undefined);
         } else {
             unsafeWindow.setMarketNavi(3);
             unsafeWindow.market_guild_filter = 0;
             unsafeWindow.market_filter_pid = -1;
             unsafeWindow.market_filter_own = 1;
-            unsafeWindow.showOffers();
+            unsafeWindow.showOffers(undefined);
         }
     } catch (err) { GM_logError("showMarketStall", "", "", err); }
 }
@@ -9355,7 +9388,7 @@ function quicklinks() {
                         newdiv1.addEventListener("mouseout", function () { this.style.opacity = "0"; $("quicklinksName").innerHTML = "&nbsp;"; }, false);
                     }
                 }
-                divquick = null; newtable = null; newtr = null; newtd = null; newa = null; newdiv1 = null;
+                divquick = null; newtable = null; newtr = null; newtd = null; newdiv1 = null;
             }
             newdiv = null;
         }

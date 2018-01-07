@@ -57,6 +57,13 @@ interface UnsafeData {
     questData: any;
     setCalcToQuest(type, campaign, nr);
     npcSaison: any;
+
+    valAutoWater: any;
+    valAutoCrop: any;
+    valFarmiLimits: any[];
+    zoneAddToGlobalTime: any[];
+
+    ALL_SLOTS: any;
 }
 
 interface Window {
@@ -105,7 +112,8 @@ interface Window {
     /** Information about all farmis. Note: The info is in the first element of the array. */
     farmisinfo: any[];
     /** Waiting farmis */
-    farmilist: any[]
+    farmilist: any[];
+    farmisaway: any[];
 
     /** Current account's power ups */
     poweruprack: {};
@@ -126,6 +134,21 @@ interface Window {
     quest_reward_6: string; // "Bauernhausitem"
     t_vet_quest_bonus: any;
     t_foodworld_reward_bonus: string; // "Mampfis zahlen nun %PERCENT%% mehr"
+    t_donkey_farmiadd: string; // "heutiger Zusatzfarmi"
+    /** Note: This method is only available, if Automat is installed */
+    buildInfoPanelAutomatMenu(mode);
+
+    farmersmarket_data: FarmersmarketData;
+    foodworld_title: string; // "Picknickarea"
+    Zeit: {
+        Client: number;
+        Server: number;
+        UpdateIntervall: number;
+        Verschiebung: number;
+    }
+    customerarecalled: string; // "%FARMI% Farmis"
+    farm: number;
+    market_nav: number;
 }
 
 interface VetData {
@@ -138,6 +161,11 @@ interface VetData {
 interface Pets {
     data: {
         block: number;
+        breed: {
+            money: string;
+            points: string;
+            breedpoints: string;
+        };
         data: {
             level: number;
         }
@@ -156,7 +184,7 @@ interface MegafieldData {
         steps: any[];
         vid: number;
     }
-    
+
     vehicle_slots: {}
 
     area: {}
@@ -170,6 +198,26 @@ interface FarmsData {
     freegardenspeedup: number;
     freegardenspeedup2: number;
     blocked: any;
+}
+
+// Note: An attribute might only be there, if the building is unlocked
+interface FarmersmarketData {
+    vet: {
+
+    };
+    megafruit: {
+        // Note: Since I/Moe haven't a megafruit plant, I'm not sure about the attribute types.
+        current: {
+            pid: any;
+            points: any;
+            rewards: {
+                fruits: any;
+                money: any;
+                parts: any
+                points: any;
+            }
+        }
+    }
 }
 // Custom interfaces END
 

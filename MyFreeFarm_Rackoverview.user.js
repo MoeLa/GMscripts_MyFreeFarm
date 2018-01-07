@@ -538,10 +538,10 @@ function buildInfoPanel(mode, shownTypes) {
                 var sumMoney = 0;
                 for (var farm = 0; farm < bestand.length; farm++) {
                     sumMoney += bestand[farm].money;
-                    createElement("td", { "style": "text-align:right;" + (FARMNR == farm ? "background-color:#CCCCFF;" : "") }, newtr, numberFormat(bestand[farm].money) + " " + getText("gamecurrency"));
+                    createElement("td", { "style": "text-align:right;" + (FARMNR == farm ? "background-color:#CCCCFF;" : "") }, newtr, moneyFormatInt(bestand[farm].money));
                 }
                 if (bestand.length > 1) {
-                    createElement("td", { "style": "text-align:right;" }, newtr, numberFormat(sumMoney) + " " + getText("gamecurrency"));
+                    createElement("td", { "style": "text-align:right;" }, newtr, moneyFormatInt(sumMoney));
                 }
                 // Create row 'Punkte'
                 newtr = createElement("tr", {}, newtable);

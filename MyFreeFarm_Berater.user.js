@@ -918,7 +918,7 @@ var prodMinRackInit = new Array(); // initial minimal rack amounts
 // integer<0 is possible and means something like "product is produced"
 // call: unsafeWindow.prodMinRackAddon.add(type,1,"Mill-Queue",20000);
 // call: unsafeWindow.prodMinRackAddon.remove(type,1,"Mill-Queue");
-var prodMinRackAddon = new Array(new Array(), new Object()); // additional minimal rack data from addons
+var prodMinRackAddon = new Array(new Array(), {}); // additional minimal rack data from addons
 unsafeWindow.prodMinRackAddon = {
     newdata: [],
     busy: false
@@ -2425,6 +2425,9 @@ function calcProductionTime(buildingType, productType, productId, bonus, feedTim
             case 2:
                 var totalTime = prodGrowTime[productType][productId] * 60 * bonus;
                 time = totalTime;
+                if (!feedTime) {
+                    feedTime = 1;
+                }
                 if (!feedAmount) {
                     feedAmount = Math.ceil(totalTime / feedTime);
                 }
@@ -4792,7 +4795,7 @@ function buildInfoPanelStock(mode) {
                                 newdiv = createElement("td", {}, newtr);
                                 produktPic(mode["prodType"], v, newdiv);
                                 newdiv = createElement("td", {}, newtr);
-                                newa = createElement("a", { "prodId": v }, newdiv, prodName[mode["prodType"]][v]);
+                                var newa = createElement("a", { "prodId": v }, newdiv, prodName[mode["prodType"]][v]);
                                 if (currProdBlock.match(/l/)) {
                                     newtr.setAttribute("mouseOverText", getText("levelXneeded").replace(/%1%/, /l(\d+)/.exec(currProdBlock)[1]));
                                     newa.style.textDecoration = "none";
@@ -4819,7 +4822,7 @@ function buildInfoPanelStock(mode) {
                                         newtd.innerHTML = numberFormat(NPC[mode["prodType"]][v], 2);
                                     }
                                     else if (NPC[mode["prodType"]][v].match(/^f/)) {
-                                        newtd.innerHTML = "(" + numberFormat(parseFloat(NPC[mode["prodType"]][v].replace("f", ""), 10), 2) + ")";
+                                        newtd.innerHTML = "(" + numberFormat(parseFloat(NPC[mode["prodType"]][v].replace("f", "")), 2) + ")";
                                     }
                                     else if (NPC[mode["prodType"]][v].match(/^c/)) {
                                         coinsFormat(parseInt(NPC[mode["prodType"]][v].replace("c", ""), 10), newtd);
@@ -4860,13 +4863,13 @@ function buildInfoPanelStock(mode) {
                                 }
                                 else {
                                     createElement("span", { "style": "font-size:0;" }, newtd, numberFormat(gut[v], 2));
-                                    newinput = createElement("input", { "id": "inp" + v, "tabindex": parseInt(w, 10) + 1, "value": numberFormat(gut[v], 2), "class": "text", "size": "10", "maxlength": "10", "style": "text-align:right; background-color:transparent; color:black;" }, newtd);
+                                    var newinput = createElement("input", { "id": "inp" + v, "tabindex": (w + 1), "value": numberFormat(gut[v], 2), "class": "text", "size": "10", "maxlength": "10", "style": "text-align:right; background-color:transparent; color:black;" }, newtd);
                                     newinput.addEventListener("blur", function () {
                                         this.value = numberFormat(gut[this.id.replace("inp", "")], 2);
                                     }, false);
                                     newinput.addEventListener("change", function () {
                                         var currId = this.id.replace("inp", "");
-                                        var preis = Math.max(0, parseFloat(this.value.replace(regDelimThou, "").replace(regDelimDeci, "."), 10));
+                                        var preis = Math.max(0, parseFloat(this.value.replace(regDelimThou, "").replace(regDelimDeci, ".")));
                                         var thisNode = this;
                                         var yesFkt = function () {
                                             gut[currId] = preis;
@@ -4908,7 +4911,7 @@ function buildInfoPanelStock(mode) {
                         }
                     }
                     catch (err) {
-                        GM_logError("buildInfoPanelStock", "mode=" + implode(mode, "buildInfoPanelStock/mode"), "", "v=" + v, err);
+                        GM_logError("buildInfoPanelStock", "mode=" + implode(mode, "buildInfoPanelStock/mode"), "", "v=" + v);
                     }
                 }
                 break;
@@ -4971,7 +4974,7 @@ function buildInfoPanelStock(mode) {
                                 }
                                 newtd = createElement("td", { "align": "right", "style": "padding-right:20px" }, newtr);
                                 if (valMinRackMan) {
-                                    newinput = createElement("input", { "tabindex": parseInt(w, 10) + 1, "value": numberFormat(prodMinRackInit[mode["prodType"]][v]), "class": "text", "size": "10", "maxlength": "10", "style": "text-align:right; background-color:transparent; color:black;" }, newtd);
+                                    newinput = createElement("input", { "tabindex": w + 1, "value": numberFormat(prodMinRackInit[mode["prodType"]][v]), "class": "text", "size": "10", "maxlength": "10", "style": "text-align:right; background-color:transparent; color:black;" }, newtd);
                                     newinput.addEventListener("blur", function () {
                                         this.value = numberFormat(parseInt(this.value.replace(regDelimThou, ""), 10));
                                     }, false);
@@ -5065,13 +5068,13 @@ function buildInfoPanelProfit(mode) {
         var profit = new Array();
         var c = -1;
         var help, currBuilding, preis, preisBeob, menge, bonus, currInput;
-        for (var v = 0; v < prodName[0].length; v++) {
+        for (var v_1 = 0; v_1 < prodName[0].length; v_1++) {
             try {
-                if ((mode["showAll"] || (!prodBlock[0][v])) && (prodGrowTime[0][v])) {
-                    if (mode["filterCategory"][prodTyp[0][v]]) {
+                if ((mode["showAll"] || (!prodBlock[0][v_1])) && (prodGrowTime[0][v_1])) {
+                    if (mode["filterCategory"][prodTyp[0][v_1]]) {
                         profit[++c] = new Object();
-                        profit[c]["id"] = v;
-                        currBuilding = PRODUCT2BUILDING[0][v];
+                        profit[c]["id"] = v_1;
+                        currBuilding = PRODUCT2BUILDING[0][v_1];
                         if (!mode["buildingLevel"][currBuilding]) {
                             mode["buildingLevel"][currBuilding] = 1;
                         }
@@ -5091,40 +5094,40 @@ function buildInfoPanelProfit(mode) {
                                 }
                                 profit[c]["input"] = [];
                                 profit[c]["input"][0] = [[]];
-                                profit[c]["dauer"] = calcProductionTime(1, 0, v, bonus);
+                                profit[c]["dauer"] = calcProductionTime(1, 0, v_1, bonus, 0, 0);
                                 profit[c]["runs"] = 86400 / profit[c]["dauer"];
-                                preis = gut[v];
-                                preisBeob = (gutBeob[v] ? gutBeob[v] : 0);
-                                if (!isNaN(NPC[0][v])) {
-                                    preis = Math.min(NPC[0][v], preis);
-                                    preisBeob = Math.min(NPC[0][v], preisBeob);
+                                preis = gut[v_1];
+                                preisBeob = (gutBeob[v_1] ? gutBeob[v_1] : 0);
+                                if (!isNaN(NPC[0][v_1])) {
+                                    preis = Math.min(NPC[0][v_1], preis);
+                                    preisBeob = Math.min(NPC[0][v_1], preisBeob);
                                 }
-                                menge = profit[c]["runs"] * (BUILDING_SIZE[currBuilding] / prodPlantSize[0][v]);
-                                profit[c]["input"][0][0][0] = [v, menge, preis, preisBeob];
-                                profit[c]["menge"] = menge * prodYield[0][v];
-                                profit[c]["punkte"] = menge * prodPoints[0][v];
+                                menge = profit[c]["runs"] * (BUILDING_SIZE[currBuilding] / prodPlantSize[0][v_1]);
+                                profit[c]["input"][0][0][0] = [v_1, menge, preis, preisBeob];
+                                profit[c]["menge"] = menge * prodYield[0][v_1];
+                                profit[c]["punkte"] = menge * prodPoints[0][v_1];
                                 help = profit[c]["input"][0][0];
                                 break;
                             }
                             case 2: {
-                                if (!mode["feed"][v]) {
-                                    mode["feed"][v] = [0, 0];
+                                if (!mode["feed"][v_1]) {
+                                    mode["feed"][v_1] = [0, 0];
                                 }
-                                if (typeof mode["feed"][v][0] != "number") {
-                                    mode["feed"][v][0] = 0;
+                                if (typeof mode["feed"][v_1][0] != "number") {
+                                    mode["feed"][v_1][0] = 0;
                                 }
-                                if (typeof mode["feed"][v][1] != "number") {
-                                    mode["feed"][v][1] = 0;
+                                if (typeof mode["feed"][v_1][1] != "number") {
+                                    mode["feed"][v_1][1] = 0;
                                 }
                                 profit[c]["input"] = [];
                                 help = [];
-                                for (var alt = 0; alt < BUILDING_INPUT[currBuilding][v].length; alt++) {
+                                for (var alt = 0; alt < BUILDING_INPUT[currBuilding][v_1].length; alt++) {
                                     profit[c]["input"][alt] = [[], []];
                                     help[alt] = [[], []];
-                                    help[alt][0] = calcProductionTime(2, 0, v, bonus, BUILDING_INPUT[currBuilding][v][alt][0][1] / BUILDING_UPGRADES[currBuilding][profit[c]["level"] - 1][3]);
-                                    help[alt][1] = calcProductionTime(2, 0, v, bonus, BUILDING_INPUT[currBuilding][v][alt][0][1] / BUILDING_UPGRADES[currBuilding][profit[c]["level"] - 1][3], 1);
-                                    for (var i = 0; i < BUILDING_INPUT[currBuilding][v][alt].length; i++) {
-                                        currInput = BUILDING_INPUT[currBuilding][v][alt][i];
+                                    help[alt][0] = calcProductionTime(2, 0, v_1, bonus, BUILDING_INPUT[currBuilding][v_1][alt][0][1] / BUILDING_UPGRADES[currBuilding][profit[c]["level"] - 1][3], 0);
+                                    help[alt][1] = calcProductionTime(2, 0, v_1, bonus, BUILDING_INPUT[currBuilding][v_1][alt][0][1] / BUILDING_UPGRADES[currBuilding][profit[c]["level"] - 1][3], 1);
+                                    for (var i = 0; i < BUILDING_INPUT[currBuilding][v_1][alt].length; i++) {
+                                        currInput = BUILDING_INPUT[currBuilding][v_1][alt][i];
                                         preis = gut[currInput[0]];
                                         preisBeob = (gutBeob[currInput[0]] ? gutBeob[currInput[0]] : 0);
                                         if (!isNaN(NPC[0][currInput[0]])) {
@@ -5137,37 +5140,37 @@ function buildInfoPanelProfit(mode) {
                                         profit[c]["input"][alt][0][i] = [currInput[0], menge, preis, preisBeob];
                                     }
                                 }
-                                if (!help[mode["feed"][v][0]]) {
-                                    mode["feed"][v][0] = 0;
+                                if (!help[mode["feed"][v_1][0]]) {
+                                    mode["feed"][v_1][0] = 0;
                                 }
-                                if (!help[mode["feed"][v][0]][mode["feed"][v][1]]) {
-                                    mode["feed"][v][1] = 0;
+                                if (!help[mode["feed"][v_1][0]][mode["feed"][v_1][1]]) {
+                                    mode["feed"][v_1][1] = 0;
                                 }
-                                profit[c]["dauer"] = help[mode["feed"][v][0]][mode["feed"][v][1]][0];
+                                profit[c]["dauer"] = help[mode["feed"][v_1][0]][mode["feed"][v_1][1]][0];
                                 profit[c]["runs"] = 86400 / profit[c]["dauer"];
-                                profit[c]["menge"] = profit[c]["runs"] * BUILDING_UPGRADES[currBuilding][profit[c]["level"] - 1][3] * prodYield[0][v];
-                                profit[c]["punkte"] = profit[c]["menge"] * prodPoints[0][v];
-                                help = profit[c]["input"][mode["feed"][v][0]][mode["feed"][v][1]];
+                                profit[c]["menge"] = profit[c]["runs"] * BUILDING_UPGRADES[currBuilding][profit[c]["level"] - 1][3] * prodYield[0][v_1];
+                                profit[c]["punkte"] = profit[c]["menge"] * prodPoints[0][v_1];
+                                help = profit[c]["input"][mode["feed"][v_1][0]][mode["feed"][v_1][1]];
                                 break;
                             }
                             case 3: {
-                                if (!mode["feed"][v]) {
-                                    mode["feed"][v] = [0, 0];
+                                if (!mode["feed"][v_1]) {
+                                    mode["feed"][v_1] = [0, 0];
                                 }
-                                if (typeof mode["feed"][v][0] != "number") {
-                                    mode["feed"][v][0] = 0;
+                                if (typeof mode["feed"][v_1][0] != "number") {
+                                    mode["feed"][v_1][0] = 0;
                                 }
-                                if (typeof mode["feed"][v][1] != "number") {
-                                    mode["feed"][v][1] = 0;
+                                if (typeof mode["feed"][v_1][1] != "number") {
+                                    mode["feed"][v_1][1] = 0;
                                 }
                                 profit[c]["input"] = [];
                                 help = [];
-                                for (var alt = 0; alt < BUILDING_INPUT[currBuilding][v].length; alt++) {
+                                for (var alt = 0; alt < BUILDING_INPUT[currBuilding][v_1].length; alt++) {
                                     profit[c]["input"][alt] = [[]];
                                     help[alt] = [[]];
-                                    help[alt][0][0] = calcProductionTime(3, 0, v, bonus);
-                                    for (var i = 0; i < BUILDING_INPUT[currBuilding][v][alt].length; i++) {
-                                        currInput = BUILDING_INPUT[currBuilding][v][alt][i];
+                                    help[alt][0][0] = calcProductionTime(3, 0, v_1, bonus, 0);
+                                    for (var i = 0; i < BUILDING_INPUT[currBuilding][v_1][alt].length; i++) {
+                                        currInput = BUILDING_INPUT[currBuilding][v_1][alt][i];
                                         preis = gut[currInput[0]];
                                         preisBeob = (gutBeob[currInput[0]] ? gutBeob[currInput[0]] : 0);
                                         if (!isNaN(NPC[0][currInput[0]])) {
@@ -5178,26 +5181,26 @@ function buildInfoPanelProfit(mode) {
                                         profit[c]["input"][alt][0][i] = [currInput[0], menge, preis, preisBeob];
                                     }
                                 }
-                                if (!help[mode["feed"][v][0]]) {
-                                    mode["feed"][v][0] = 0;
+                                if (!help[mode["feed"][v_1][0]]) {
+                                    mode["feed"][v_1][0] = 0;
                                 }
-                                if (!help[mode["feed"][v][0]][mode["feed"][v][1]]) {
-                                    mode["feed"][v][1] = 0;
+                                if (!help[mode["feed"][v_1][0]][mode["feed"][v_1][1]]) {
+                                    mode["feed"][v_1][1] = 0;
                                 }
-                                profit[c]["dauer"] = help[mode["feed"][v][0]][mode["feed"][v][1]][0];
+                                profit[c]["dauer"] = help[mode["feed"][v_1][0]][mode["feed"][v_1][1]][0];
                                 profit[c]["runs"] = 86400 / profit[c]["dauer"];
-                                profit[c]["menge"] = profit[c]["runs"] * BUILDING_UPGRADES[currBuilding][profit[c]["level"] - 1][3] * prodYield[0][v];
-                                profit[c]["punkte"] = profit[c]["menge"] * prodPoints[0][v];
-                                help = profit[c]["input"][mode["feed"][v][0]][mode["feed"][v][1]];
+                                profit[c]["menge"] = profit[c]["runs"] * BUILDING_UPGRADES[currBuilding][profit[c]["level"] - 1][3] * prodYield[0][v_1];
+                                profit[c]["punkte"] = profit[c]["menge"] * prodPoints[0][v_1];
+                                help = profit[c]["input"][mode["feed"][v_1][0]][mode["feed"][v_1][1]];
                                 break;
                             }
                             case 4: {
                                 profit[c]["input"] = [];
                                 profit[c]["input"][0] = [[]];
-                                profit[c]["dauer"] = calcProductionTime(BUILDINGTYPE[currBuilding], 0, v, bonus);
+                                profit[c]["dauer"] = calcProductionTime(BUILDINGTYPE[currBuilding], 0, v_1, bonus);
                                 profit[c]["runs"] = 86400 / profit[c]["dauer"];
-                                for (var i = 0; i < prodRequire[0][v].length; i++) {
-                                    currInput = prodRequire[0][v][i];
+                                for (var i = 0; i < prodRequire[0][v_1].length; i++) {
+                                    currInput = prodRequire[0][v_1][i];
                                     switch (currInput[0]) {
                                         case -1: {
                                             preis = 1;
@@ -5219,8 +5222,8 @@ function buildInfoPanelProfit(mode) {
                                         }
                                     }
                                 }
-                                profit[c]["menge"] = profit[c]["runs"] * BUILDING_UPGRADES[currBuilding][profit[c]["level"] - 1][3] * prodYield[0][v];
-                                profit[c]["punkte"] = profit[c]["menge"] * prodPoints[0][v];
+                                profit[c]["menge"] = profit[c]["runs"] * BUILDING_UPGRADES[currBuilding][profit[c]["level"] - 1][3] * prodYield[0][v_1];
+                                profit[c]["punkte"] = profit[c]["menge"] * prodPoints[0][v_1];
                                 help = profit[c]["input"][0][0];
                                 break;
                             }
@@ -5232,7 +5235,7 @@ function buildInfoPanelProfit(mode) {
                                 profit[c]["dauer"] = 60 * parseInt(BUILDING_UPGRADES[currBuilding][profit[c]["level"] - 1][5], 10); // Value in seconds
                                 profit[c]["runs"] = 86400 / profit[c]["dauer"];
                                 profit[c]["menge"] = profit[c]["runs"] * BUILDING_UPGRADES[currBuilding][profit[c]["level"] - 1][4];
-                                profit[c]["punkte"] = profit[c]["menge"] * prodPoints[0][v];
+                                profit[c]["punkte"] = profit[c]["menge"] * prodPoints[0][v_1];
                                 help = profit[c]["input"][0][0];
                                 break;
                             }
@@ -5246,9 +5249,9 @@ function buildInfoPanelProfit(mode) {
                                 help = profit[c]["input"][0][0];
                         }
                         menge = profit[c]["menge"];
-                        preis = mode["perc"] * gut[v];
-                        preisBeob = mode["perc"] * (gutBeob[v] ? gutBeob[v] : 0);
-                        profit[c]["output"] = [v, menge, preis, preisBeob];
+                        preis = mode["perc"] * gut[v_1];
+                        preisBeob = mode["perc"] * (gutBeob[v_1] ? gutBeob[v_1] : 0);
+                        profit[c]["output"] = [v_1, menge, preis, preisBeob];
                         profit[c]["gut"] = menge * preis;
                         profit[c]["gutBeob"] = menge * preisBeob;
                         for (var i = 0; i < help.length; i++) {
@@ -5260,7 +5263,7 @@ function buildInfoPanelProfit(mode) {
                 }
             }
             catch (err) {
-                GM_logError("buildInfoPanelProfit.calcArray", "", 'err_trace="' + err_trace + '" v=' + v, "Error at calculating data of '" + prodName[0][v] + "': '" + err + "'");
+                GM_logError("buildInfoPanelProfit.calcArray", "", 'err_trace="' + err_trace + '" v=' + v_1, "Error at calculating data of '" + prodName[0][v_1] + "': '" + err + "'");
             }
         }
         profit.sort(function (a, b) { return b[mode["sort"]] - a[mode["sort"]]; });
@@ -5311,7 +5314,7 @@ function buildInfoPanelProfit(mode) {
         createElement("div", { "class": "link rackcat1v" + (mode["filterCategory"]["v", "ex"] ? "_active" : ""), "filter": '["v","ex"]', "mouseOverText": getText("category_v"), "style": "float:left;" }, newdiv);
         createElement("div", { "class": "link rackcat1e" + (mode["filterCategory"]["e", "tea"] ? "_active" : ""), "filter": '["e","tea"]', "mouseOverText": getText("category_e"), "style": "float:left;" }, newdiv);
         createElement("div", { "class": "link rackcat10" + (mode["filterCategory"]["o"] ? "_active" : ""), "filter": '["o"]', "mouseOverText": getText("category_o"), "style": "float:left;" }, newdiv);
-        newdiv1 = createElement("div", { "style": "float:left;width:53px;" }, newdiv);
+        var newdiv1 = createElement("div", { "style": "float:left;width:53px;" }, newdiv);
         for (var i = 1; i <= 4; i = i + 2) {
             createElement("div", { "class": "link rackcat2" + i + (mode["filterCategory"]["fw" + i] ? "_active" : ""), "filter": '["fw' + i + '"]', "mouseOverText": getText("category_fw" + i), "style": "float:left;" }, newdiv1);
             if (i == 3) {
@@ -5365,37 +5368,37 @@ function buildInfoPanelProfit(mode) {
             buildInfoPanelProfit({ "sort": "gutBeob" });
         }, false);
         err_trace = "tablebody";
-        for (var v = 0; v < profit.length; v++) {
+        for (var v_2 = 0; v_2 < profit.length; v_2++) {
             try {
-                var buildingNr = PRODUCT2BUILDING[0][profit[v]["id"]];
+                var buildingNr = PRODUCT2BUILDING[0][profit[v_2]["id"]];
                 var buildingName = getBuildingName(buildingNr);
-                newtr = createElement("tr", { "nr": v, "prod": profit[v]["id"], "class": "hoverBgCc9", "style": "color:black;" }, table);
+                newtr = createElement("tr", { "nr": v_2, "prod": profit[v_2]["id"], "class": "hoverBgCc9", "style": "color:black;" }, table);
                 newtd = createElement("td", {}, newtr);
                 newtd = createElement("div", { "style": "position:relative;height:100%;" }, newtd);
-                produktPic(0, profit[v]["id"], newtd);
-                newtable1 = createElement("table");
+                produktPic(0, profit[v_2]["id"], newtd);
+                newtable1 = createElement("table", {});
                 newtr1 = createElement("tr", {}, newtable1);
                 createElement("td", {}, newtr1, getText("dailyYield"));
-                createElement("td", { "style": "text-align:right;padding-left:10px;" }, newtr1, numberFormat(profit[v]["menge"], 1));
+                createElement("td", { "style": "text-align:right;padding-left:10px;" }, newtr1, numberFormat(profit[v_2]["menge"], 1));
                 newtr1 = createElement("tr", {}, newtable1);
                 createElement("td", {}, newtr1, getText("yield"));
-                createElement("td", { "style": "text-align:right;padding-left:10px;" }, newtr1, numberFormat(profit[v]["menge"] / profit[v]["runs"]));
+                createElement("td", { "style": "text-align:right;padding-left:10px;" }, newtr1, numberFormat(profit[v_2]["menge"] / profit[v_2]["runs"]));
                 newtr1 = createElement("tr", {}, newtable1);
                 createElement("td", {}, newtr1, getText("dailyRuns"));
-                createElement("td", { "style": "text-align:right;padding-left:10px;" }, newtr1, numberFormat(profit[v]["runs"], 3));
-                newspan = createElement("span", { "class": "link", "data": newtable1.innerHTML }, newtd, prodName[0][profit[v]["id"]]);
+                createElement("td", { "style": "text-align:right;padding-left:10px;" }, newtr1, numberFormat(profit[v_2]["runs"], 3));
+                newspan = createElement("span", { "class": "link", "data": newtable1.innerHTML }, newtd, prodName[0][profit[v_2]["id"]]);
                 newspan.addEventListener("mouseover", function (event) {
                     showGoToMarketToolTip(event, this.parentNode.parentNode.parentNode.getAttribute("prod"), this.getAttribute("data"));
                 }, false);
                 newspan.addEventListener("click", function () {
                     showMarket(this.parentNode.parentNode.parentNode.getAttribute("prod"));
                 }, false);
-                if (typeof profit[v]["level"] == "number") {
+                if (typeof profit[v_2]["level"] == "number") {
                     help = mode["buildingLevel"].clone();
-                    help[buildingNr] = (profit[v]["level"] + 1) % (profit[v]["maxlevel"] + 1);
+                    help[buildingNr] = (profit[v_2]["level"] + 1) % (profit[v_2]["maxlevel"] + 1);
                     newspan = createElement("span", { "mouseOverText": "<table cellspacing=0><tr><th class='lightBg'>" + buildingName + "</th></tr><tr><td>" + getText("upgradeLevel") + "</td></tr><tr><td>(" + getText("clickToChange") + ")</td></tr></table>", "class": "link", "nextLevel": implode(help, "nextLevel") }, newtd); // ,"mouseOverText":"max "+profit[v]["maxlevel"]
-                    for (var w = 1; w <= profit[v]["maxlevel"]; w++) {
-                        createElement("img", { "src": w <= profit[v]["level"] ? GFX + "star.png" : IMAGES["starGrey"] }, newspan);
+                    for (var w = 1; w <= profit[v_2]["maxlevel"]; w++) {
+                        createElement("img", { "src": w <= profit[v_2]["level"] ? GFX + "star.png" : IMAGES["starGrey"] }, newspan);
                     }
                     newspan.addEventListener("click", function () {
                         var prod = this.parentNode.parentNode.parentNode.getAttribute("prod");
@@ -5403,37 +5406,37 @@ function buildInfoPanelProfit(mode) {
                         buildInfoPanelProfit({ "jumpTo": prod, "buildingLevel": nextLevel });
                     }, false);
                 }
-                if (profit[v]["input"] && (profit[v]["input"].length > 1)) {
-                    newspan = produktPic(0, profit[v]["input"][mode["feed"][profit[v]["id"]][0]][mode["feed"][profit[v]["id"]][1]][0][0], newtd);
-                    newdiv = createElement("div");
+                if (profit[v_2]["input"] && (profit[v_2]["input"].length > 1)) {
+                    newspan = produktPic(0, profit[v_2]["input"][mode["feed"][profit[v_2]["id"]][0]][mode["feed"][profit[v_2]["id"]][1]][0][0], newtd);
+                    newdiv = createElement("div", {});
                     newtable1 = createElement("table", { "cellspacing": 0 }, newdiv);
                     newtr1 = createElement("tr", {}, newtable1);
                     createElement("th", { "colspan": 2, "class": "lightBg" }, newtr1, buildingName);
                     newtr1 = createElement("tr", {}, newtable1);
                     createElement("td", { "colspan": 2 }, newtr1, getText("feed") + ":");
-                    for (var i = 0; i < profit[v]["input"].length; i++) {
-                        for (var j = 0; j < profit[v]["input"][i].length; j++) {
+                    for (var i = 0; i < profit[v_2]["input"].length; i++) {
+                        for (var j = 0; j < profit[v_2]["input"][i].length; j++) {
                             newtr1 = createElement("tr", {}, newtable1);
-                            var help = ((profit[v]["input"].length > 1) && (mode["feed"][profit[v]["id"]][0] == i) && (mode["feed"][profit[v]["id"]][1] == j)) ? "background-color:#BB6600;" : "";
-                            createElement("td", { "style": "text-align:right;" + help }, newtr1, numberFormat(profit[v]["input"][i][j][0][1], 1));
-                            createElement("td", { "style": help }, newtr1, prodName[0][profit[v]["input"][i][j][0][0]]);
+                            var help_13 = ((profit[v_2]["input"].length > 1) && (mode["feed"][profit[v_2]["id"]][0] == i) && (mode["feed"][profit[v_2]["id"]][1] == j)) ? "background-color:#BB6600;" : "";
+                            createElement("td", { "style": "text-align:right;" + help_13 }, newtr1, numberFormat(profit[v_2]["input"][i][j][0][1], 1));
+                            createElement("td", { "style": help_13 }, newtr1, prodName[0][profit[v_2]["input"][i][j][0][0]]);
                         }
                     }
                     newtr1 = createElement("tr", {}, newtable1);
                     createElement("td", { "colspan": 2 }, newtr1, "(" + getText("clickToChange") + ")");
                     newspan.setAttribute("class", newspan.getAttribute("class") + " link");
                     help = mode["feed"].clone();
-                    if (1 + mode["feed"][profit[v]["id"]][1] < profit[v]["input"][mode["feed"][profit[v]["id"]][0]].length) {
-                        help[profit[v]["id"]] = [help[profit[v]["id"]][0], 1 + help[profit[v]["id"]][1]];
+                    if (1 + mode["feed"][profit[v_2]["id"]][1] < profit[v_2]["input"][mode["feed"][profit[v_2]["id"]][0]].length) {
+                        help[profit[v_2]["id"]] = [help[profit[v_2]["id"]][0], 1 + help[profit[v_2]["id"]][1]];
                     }
-                    else if (1 + mode["feed"][profit[v]["id"]][0] < profit[v]["input"].length) {
-                        help[profit[v]["id"]] = [1 + help[profit[v]["id"]][0], 0];
+                    else if (1 + mode["feed"][profit[v_2]["id"]][0] < profit[v_2]["input"].length) {
+                        help[profit[v_2]["id"]] = [1 + help[profit[v_2]["id"]][0], 0];
                     }
                     else {
-                        help[profit[v]["id"]] = [0, 0];
+                        help[profit[v_2]["id"]] = [0, 0];
                     }
                     newspan.setAttribute("nextFeed", implode(help, "nextFeed.click"));
-                    profit[v]["input"][mode["feed"][profit[v]["id"]][0]][mode["feed"][profit[v]["id"]][1]];
+                    profit[v_2]["input"][mode["feed"][profit[v_2]["id"]][0]][mode["feed"][profit[v_2]["id"]][1]];
                     newspan.addEventListener("click", function () {
                         var prod = this.parentNode.parentNode.parentNode.getAttribute("prod");
                         var nextFeed = explode(this.getAttribute("nextFeed"), "nextFeed.click", {});
@@ -5441,69 +5444,69 @@ function buildInfoPanelProfit(mode) {
                     }, false);
                     newspan.setAttribute("mouseOverText", newdiv.innerHTML);
                 }
-                createElement("td", { "style": "text-align:right;" }, newtr, getTimeStr(profit[v]["dauer"], 1));
-                createElement("td", { "style": "text-align:right;" }, newtr, getDaytimeStr(now + profit[v]["dauer"], 1) + "&nbsp;" + getText("shortOClock"));
-                newdiv = createElement("div");
+                createElement("td", { "style": "text-align:right;" }, newtr, getTimeStr(profit[v_2]["dauer"], 1));
+                createElement("td", { "style": "text-align:right;" }, newtr, getDaytimeStr(now + profit[v_2]["dauer"], 1) + "&nbsp;" + getText("shortOClock"));
+                newdiv = createElement("div", {});
                 newtable1 = createElement("table", { "cellspacing": 0 }, newdiv);
                 newtr1 = createElement("tr", {}, newtable1);
                 createElement("th", { "colspan": 2, "class": "lightBg" }, newtr1, buildingName);
                 newtr1 = createElement("tr", {}, newtable1);
                 createElement("td", {}, newtr1, getText("points"));
-                createElement("td", { "style": "padding-left:10px;" }, newtr1, numberFormat(profit[v]["punkte"] / profit[v]["runs"]));
+                createElement("td", { "style": "padding-left:10px;" }, newtr1, numberFormat(profit[v_2]["punkte"] / profit[v_2]["runs"]));
                 newtr1 = createElement("tr", {}, newtable1);
                 createElement("td", {}, newtr1, getText("dailyRuns"));
-                createElement("td", {}, newtr1, numberFormat(profit[v]["runs"], 3));
-                createElement("td", { "style": "text-align:right;padding-left:10px;", "mouseOverText": newdiv.innerHTML }, newtr, numberFormat(profit[v]["punkte"]));
-                newdiv = createElement("div");
+                createElement("td", {}, newtr1, numberFormat(profit[v_2]["runs"], 3));
+                createElement("td", { "style": "text-align:right;padding-left:10px;", "mouseOverText": newdiv.innerHTML }, newtr, numberFormat(profit[v_2]["punkte"]));
+                newdiv = createElement("div", {});
                 newtable1 = createElement("table", { "cellspacing": 0 }, newdiv);
                 newtr1 = createElement("tr", {}, newtable1);
                 createElement("th", { "colspan": 6, "class": "lightBg" }, newtr1, buildingName);
                 newtr1 = createElement("tr", {}, newtable1);
                 createElement("td", { "colspan": 4 }, newtr1);
                 createElement("td", { "colspan": 2, "style": "text-align:center;" }, newtr1, getText("observed"));
-                if (profit[v]["input"]) {
-                    if (profit[v]["input"].length > 1) {
-                        help = profit[v]["input"][mode["feed"][profit[v]["id"]][0]][mode["feed"][profit[v]["id"]][1]];
+                if (profit[v_2]["input"]) {
+                    if (profit[v_2]["input"].length > 1) {
+                        help = profit[v_2]["input"][mode["feed"][profit[v_2]["id"]][0]][mode["feed"][profit[v_2]["id"]][1]];
                     }
                     else {
-                        help = profit[v]["input"][0][0];
+                        help = profit[v_2]["input"][0][0];
                     }
                     for (var j = 0; j < help.length; j++) {
                         newtr1 = createElement("tr", {}, newtable1);
                         if (prodName[0][help[j][0]]) {
-                            createElement("td", { "style": "text-align:right;" }, newtr1, numberFormat(help[j][1] / profit[v]["runs"]));
+                            createElement("td", { "style": "text-align:right;" }, newtr1, numberFormat(help[j][1] / profit[v_2]["runs"]));
                             createElement("td", {}, newtr1, prodName[0][help[j][0]]);
                             createElement("td", { "style": "text-align:right;padding-left:10px;" }, newtr1, "(" + moneyFormat(help[j][2]) + ")");
-                            createElement("td", { "style": "text-align:right;" }, newtr1, moneyFormatInt(-help[j][1] * help[j][2] / profit[v]["runs"]));
+                            createElement("td", { "style": "text-align:right;" }, newtr1, moneyFormatInt(-help[j][1] * help[j][2] / profit[v_2]["runs"]));
                             createElement("td", { "style": "text-align:right;padding-left:10px;" }, newtr1, "(" + moneyFormat(help[j][3]) + ")");
-                            createElement("td", { "style": "text-align:right;" }, newtr1, moneyFormatInt(-help[j][1] * help[j][3] / profit[v]["runs"]));
+                            createElement("td", { "style": "text-align:right;" }, newtr1, moneyFormatInt(-help[j][1] * help[j][3] / profit[v_2]["runs"]));
                         }
                         else {
                             createElement("td", { "colspan": 3 }, newtr1);
-                            createElement("td", { "style": "text-align:right;" }, newtr1, moneyFormatInt(-help[j][1] * help[j][2] / profit[v]["runs"]));
+                            createElement("td", { "style": "text-align:right;" }, newtr1, moneyFormatInt(-help[j][1] * help[j][2] / profit[v_2]["runs"]));
                             createElement("td", { "style": "text-align:right;padding-left:10px;" }, newtr1);
-                            createElement("td", { "style": "text-align:right;" }, newtr1, moneyFormatInt(-help[j][1] * help[j][3] / profit[v]["runs"]));
+                            createElement("td", { "style": "text-align:right;" }, newtr1, moneyFormatInt(-help[j][1] * help[j][3] / profit[v_2]["runs"]));
                         }
                     }
                 }
                 newtr1 = createElement("tr", {}, newtable1);
-                createElement("td", { "style": "text-align:right;" }, newtr1, numberFormat(profit[v]["output"][1] / profit[v]["runs"]));
-                createElement("td", {}, newtr1, prodName[0][profit[v]["output"][0]]);
-                createElement("td", { "style": "text-align:right;padding-left:10px;" }, newtr1, "(" + moneyFormat(profit[v]["output"][2]) + ")");
-                createElement("td", { "style": "border-bottom:1px solid black;text-align:right;" }, newtr1, moneyFormatInt(profit[v]["output"][1] * profit[v]["output"][2] / profit[v]["runs"]));
-                createElement("td", { "style": "text-align:right;padding-left:10px;" }, newtr1, "(" + moneyFormat(profit[v]["output"][3]) + ")");
-                createElement("td", { "style": "border-bottom:1px solid black;text-align:right;" }, newtr1, moneyFormatInt(profit[v]["output"][1] * profit[v]["output"][3] / profit[v]["runs"]));
+                createElement("td", { "style": "text-align:right;" }, newtr1, numberFormat(profit[v_2]["output"][1] / profit[v_2]["runs"]));
+                createElement("td", {}, newtr1, prodName[0][profit[v_2]["output"][0]]);
+                createElement("td", { "style": "text-align:right;padding-left:10px;" }, newtr1, "(" + moneyFormat(profit[v_2]["output"][2]) + ")");
+                createElement("td", { "style": "border-bottom:1px solid black;text-align:right;" }, newtr1, moneyFormatInt(profit[v_2]["output"][1] * profit[v_2]["output"][2] / profit[v_2]["runs"]));
+                createElement("td", { "style": "text-align:right;padding-left:10px;" }, newtr1, "(" + moneyFormat(profit[v_2]["output"][3]) + ")");
+                createElement("td", { "style": "border-bottom:1px solid black;text-align:right;" }, newtr1, moneyFormatInt(profit[v_2]["output"][1] * profit[v_2]["output"][3] / profit[v_2]["runs"]));
                 newtr1 = createElement("tr", {}, newtable1);
                 createElement("td", { "style": "border-bottom:1px solid black;", "colspan": 3 }, newtr1);
-                createElement("td", { "style": "border-bottom:1px solid black;text-align:right;" }, newtr1, moneyFormatInt(profit[v]["gut"] / profit[v]["runs"]));
+                createElement("td", { "style": "border-bottom:1px solid black;text-align:right;" }, newtr1, moneyFormatInt(profit[v_2]["gut"] / profit[v_2]["runs"]));
                 createElement("td", { "style": "border-bottom:1px solid black;padding-left:10px;" }, newtr1);
-                createElement("td", { "style": "border-bottom:1px solid black;text-align:right;" }, newtr1, moneyFormatInt(profit[v]["gutBeob"] / profit[v]["runs"]));
+                createElement("td", { "style": "border-bottom:1px solid black;text-align:right;" }, newtr1, moneyFormatInt(profit[v_2]["gutBeob"] / profit[v_2]["runs"]));
                 newtr1 = createElement("tr", {}, newtable1);
                 createElement("td", { "colspan": 2 }, newtr1, getText("dailyRuns"));
-                createElement("td", { "colspan": 4, "style": "padding-left:10px;" }, newtr1, numberFormat(profit[v]["runs"], 3));
-                createElement("td", { "style": "text-align:right;", "mouseOverText": newdiv.innerHTML }, newtr, moneyFormatInt(profit[v]["gut"]));
-                createElement("td", { "style": "text-align:right;", "mouseOverText": newdiv.innerHTML }, newtr, moneyFormatInt(profit[v]["gutBeob"]));
-                if (mode["jumpTo"] && (mode["jumpTo"] == profit[v]["id"])) {
+                createElement("td", { "colspan": 4, "style": "padding-left:10px;" }, newtr1, numberFormat(profit[v_2]["runs"], 3));
+                createElement("td", { "style": "text-align:right;", "mouseOverText": newdiv.innerHTML }, newtr, moneyFormatInt(profit[v_2]["gut"]));
+                createElement("td", { "style": "text-align:right;", "mouseOverText": newdiv.innerHTML }, newtr, moneyFormatInt(profit[v_2]["gutBeob"]));
+                if (mode["jumpTo"] && (mode["jumpTo"] == profit[v_2]["id"])) {
                     delete mode["jumpTo"];
                     table.scrollTop = newtr.offsetTop;
                     newspan = createElement("div", { "id": "vanishDiv", "style": "position:absolute;top:0;left:0;height:15px;width:100%;background-color:blue;opacity:0.7;" }, newtr.firstElementChild.firstElementChild);
@@ -5511,9 +5514,9 @@ function buildInfoPanelProfit(mode) {
                         try {
                             var div = $("vanishDiv");
                             if (div) {
-                                var opac = parseFloat(div.style.opacity, 10) - 0.05;
+                                var opac = parseFloat(div.style.opacity) - 0.05;
                                 if (opac > 0) {
-                                    div.style.opacity = opac;
+                                    div.style.opacity = opac.toString();
                                 }
                                 else {
                                     removeElement(div);
@@ -5529,7 +5532,7 @@ function buildInfoPanelProfit(mode) {
                 }
             }
             catch (err) {
-                GM_logError("buildInfoPanelProfit.tablebody", "", 'err_trace="' + err_trace + '" v=' + v, "Error at displaying data of '" + prodName[0][profit[v]["id"]] + "': '" + err + "'");
+                GM_logError("buildInfoPanelProfit.tablebody", "", 'err_trace="' + err_trace + '" v=' + v_2, "Error at displaying data of '" + prodName[0][profit[v_2]["id"]] + "': '" + err + "'");
             }
         }
         // foot line
@@ -5638,24 +5641,24 @@ function buildInfoPanelQuests(mode) {
         err_trace = "table.body";
         var questCurr, item, str, mouseOver;
         var questDone, questTotal = {};
-        for (var v = 1; v < QUESTS[mode["type"]][mode["campaign"]].length; v++) {
-            if (questCurr = QUESTS[mode["type"]][mode["campaign"]][v]) {
+        for (var v_3 = 1; v_3 < QUESTS[mode["type"]][mode["campaign"]].length; v_3++) {
+            if (questCurr = QUESTS[mode["type"]][mode["campaign"]][v_3]) {
                 tr = createElement("tr", { "class": "hoverBgCc9 borderBottom1dashedGrey" }, table); // white-space:nowrap;
                 if ((!questData[mode["type"]]) || (!questData[mode["type"]][mode["campaign"]])) {
                     questDone = true;
                 }
-                else if (questData[mode["type"]][mode["campaign"]]["nr"] > v) {
+                else if (questData[mode["type"]][mode["campaign"]]["nr"] > v_3) {
                     questDone = true;
                     tr.style.opacity = 0.6;
                 }
-                else if (questData[mode["type"]][mode["campaign"]]["nr"] == v) {
+                else if (questData[mode["type"]][mode["campaign"]]["nr"] == v_3) {
                     questDone = false;
                     tr.style.backgroundColor = "lightblue";
                 }
                 else {
                     questDone = false;
                 }
-                createElement("td", {}, tr, v);
+                createElement("td", {}, tr, v_3);
                 td = createElement("td", {}, tr); // icon, name
                 td1 = createElement("td", { "style": "padding-right:10px;text-align:right;" }, tr); // amount
                 td2 = createElement("td", { "style": "padding-right:10px;text-align:right;" }, tr); // value
@@ -5715,7 +5718,7 @@ function buildInfoPanelQuests(mode) {
                                     div.addEventListener("mouseover", function (event) {
                                         var data = explode(this.getAttribute("data"), "buildInfoPanelQuests/data");
                                         var container, table, tr;
-                                        container = createElement("div");
+                                        container = createElement("div", {});
                                         table = createElement("table", {}, container);
                                         tr = createElement("tr", {}, table);
                                         createElement("td", {}, tr, getText("inventory"));
@@ -5770,7 +5773,7 @@ function buildInfoPanelQuests(mode) {
                                 div.addEventListener("mouseover", function (event) {
                                     var data = explode(this.getAttribute("data"), "buildInfoPanelQuests/data");
                                     var container, table, tr;
-                                    container = createElement("div");
+                                    container = createElement("div", {});
                                     table = createElement("table", {}, container);
                                     tr = createElement("tr", {}, table);
                                     createElement("td", {}, tr, getText("inventory"));
@@ -5943,8 +5946,8 @@ function buildInfoPanelQuests(mode) {
         span = createElement("select", { "id": "selectQuestCalcTo", "style": "width:auto;height:18px;margin-left:5px;", "mode": implode(mode, "buildInfoPanelQuests/selectQuestCalcTo") }, div);
         createElement("option", { "value": -1 }, span, getText("hide"));
         createElement("option", { "value": 0 }, span, "--");
-        for (var i = questData[mode["type"]][mode["campaign"]]["nr"]; i < QUESTS[mode["type"]][mode["campaign"]].length; i++) {
-            createElement("option", { "value": i }, span, i);
+        for (var i_1 = questData[mode["type"]][mode["campaign"]]["nr"]; i_1 < QUESTS[mode["type"]][mode["campaign"]].length; i_1++) {
+            createElement("option", { "value": i_1 }, span, i_1);
         }
         span.addEventListener("change", function () {
             if (isNaN(this.value)) {
@@ -5979,8 +5982,8 @@ function buildInfoPanelQuests(mode) {
                 err_trace = "calc object";
                 var obj = new Object();
                 var questCurr, item, help;
-                for (var v = questData[mode["type"]][mode["campaign"]]["nr"]; v <= questData[mode["type"]][mode["campaign"]]["calcTo"]; v++) {
-                    questCurr = QUESTS[mode["type"]][mode["campaign"]][v];
+                for (var v_4 = questData[mode["type"]][mode["campaign"]]["nr"]; v_4 <= questData[mode["type"]][mode["campaign"]]["calcTo"]; v_4++) {
+                    questCurr = QUESTS[mode["type"]][mode["campaign"]][v_4];
                     if (questCurr) {
                         for (var i = 0; i < questCurr[0].length; i++) {
                             if (questCurr[0][i]) {
@@ -6026,6 +6029,7 @@ function buildInfoPanelQuests(mode) {
                             continue;
                         }
                         help = (prodStock[type][prod] ? prodStock[type][prod] : 0);
+                        var help_Menge;
                         if (obj[type][prod] > help) {
                             help_Menge = obj[type][prod] - help;
                         }
@@ -6057,7 +6061,7 @@ function buildInfoPanelQuests(mode) {
                         arr.sort(function (a, b) { return (b[3] - a[3]); });
                         break;
                     case "relative":
-                        arr.sort(function (a, b) { if (parseInt(b[4] - a[4], 10) > 0) {
+                        arr.sort(function (a, b) { if (b[4] - a[4] > 0) {
                             return (b[4] - a[4]);
                         }
                         else {
@@ -6065,7 +6069,7 @@ function buildInfoPanelQuests(mode) {
                         } ; });
                         break;
                     case "relativeValue":
-                        arr.sort(function (a, b) { if (parseInt(b[5] - a[5], 10) > 0) {
+                        arr.sort(function (a, b) { if (b[5] - a[5] > 0) {
                             return (b[5] - a[5]);
                         }
                         else {
@@ -6149,8 +6153,6 @@ function buildInfoPanelQuests(mode) {
                 err_trace = "saving";
                 container = null;
                 table = null;
-                thead = null;
-                tbody = null;
                 tr = null;
                 td = null;
                 span = null;
@@ -6170,8 +6172,6 @@ function buildInfoPanelQuests(mode) {
         err_trace = "saving";
         container = null;
         table = null;
-        thead = null;
-        tbody = null;
         tr = null;
         td = null;
         span = null;
@@ -6195,13 +6195,13 @@ function buildInfoPanelZones() {
         createElement("div", { "class": "tnormal borderBottom1Black", "align": "center", "style": "line-height:30px;font-weight:bold;" }, container, getText("overview"));
         container = createElement("div", { "style": "width:595px;height:485px;overflow:auto;" }, container);
         // Zones
-        newtable = createElement("table", { "style": "width:100%;", "border": "1" }, container);
+        var newtable = createElement("table", { "style": "width:100%;", "border": "1" }, container);
         for (var i in ALL_ZONES) {
             if (!ALL_ZONES.hasOwnProperty(i)) {
                 continue;
             }
             c = 0;
-            newtr = createElement("tr", {}, newtable);
+            var newtr = createElement("tr", {}, newtable);
             createElement("th", { "colspan": "6" }, newtr, getText(i));
             for (var j = 0; j < ALL_ZONES[i].length; j++) {
                 zoneNrF = ALL_ZONES[i][j];
@@ -6209,7 +6209,7 @@ function buildInfoPanelZones() {
                     if (c % 3 == 0) {
                         newtr = createElement("tr", { "style": "width:100%;" }, newtable);
                     }
-                    newtd = createElement("td", { "style": "width:33%;", "colspan": "2", "zoneNrF": zoneNrF, "class": "link hoverBgCc9" }, newtr);
+                    var newtd = createElement("td", { "style": "width:33%;", "colspan": "2", "zoneNrF": zoneNrF, "class": "link hoverBgCc9" }, newtr);
                     newtd.addEventListener("mouseover", function (event) {
                         toolTip.show(event, toolTipZoneProduction(this.getAttribute("zoneNrF")));
                     }, false);
@@ -6217,9 +6217,9 @@ function buildInfoPanelZones() {
                         closeInfoPanel();
                         goToZone(this.getAttribute("zoneNrF"));
                     }, false);
-                    newdiv = createElement("div", { "style": "position:relative;top:0;height:70px;overflow:hidden;" }, newtd);
+                    var newdiv = createElement("div", { "style": "position:relative;top:0;height:70px;overflow:hidden;" }, newtd);
                     createElement("div", { "class": "zoneBg70_" + zones.getBuilding(zoneNrF), "style": "position:absolute;opacity:0.3;" }, newdiv);
-                    newdiv1 = createElement("div", { "style": "position:absolute;top:0;height:61px;width:100%;overflow:auto;" }, newdiv);
+                    var newdiv1 = createElement("div", { "style": "position:absolute;top:0;height:61px;width:100%;overflow:auto;" }, newdiv);
                     newdiv = createElement("div", {}, newdiv1);
                     help = zones.getEndtime(zoneNrF);
                     if (help != NEVER) {
@@ -6268,7 +6268,7 @@ function buildInfoPanelZones() {
         newtd.addEventListener("mouseover", function (event) { toolTip.show(event, getText("toSeedVendor")); }, false);
         newtd.addEventListener("click", function (event) {
             closeInfoPanel();
-            showSeedVendor();
+            // showSeedVendor();
         }, false);
         newtr = createElement("tr", {}, newtable);
         newtd = createElement("td", {}, newtr);
@@ -6277,13 +6277,13 @@ function buildInfoPanelZones() {
             if (!totalErnte.hasOwnProperty(i)) {
                 continue;
             }
-            for (var k in totalErnte[i]) {
-                if (!totalErnte[i].hasOwnProperty(k)) {
+            for (var k_1 in totalErnte[i]) {
+                if (!totalErnte[i].hasOwnProperty(k_1)) {
                     continue;
                 }
                 newdiv = createElement("div", {}, newtd);
-                produktPic(i, k, newdiv);
-                createElement("div", { "style": "display:inline-block;" }, newdiv, numberFormat(totalErnte[i][k]) + " " + prodName[i][k]);
+                produktPic(i, k_1, newdiv);
+                createElement("div", { "style": "display:inline-block;" }, newdiv, numberFormat(totalErnte[i][k_1]) + " " + prodName[i][k_1]);
             }
         }
         pointsFormat(totalPunkte, "div", newtd);
@@ -6310,17 +6310,17 @@ function buildInfoPanelZones() {
                 newtd.addEventListener("click", function () {
                     closeInfoPanel();
                     if ($("citymaincontainer").style.display == "block") {
-                        unsafeWindow.initZones(1);
+                        unsafeWindow.initZones(1, null);
                         unsafeWindow.showMain();
                     }
-                    unsafeWindow.showCart(parseInt(this.getAttribute("name"), 10));
+                    unsafeWindow.showCart(parseInt(this.getAttribute("name"), 10), null);
                 }, false);
                 newtd = createElement("td", {}, newtr);
-                var cash = parseFloat(top.window.wrappedJSObject.farmisinfo[0][farmiNr]["price"], 10);
+                var cash = parseFloat(top.window.wrappedJSObject.farmisinfo[0][farmiNr]["price"]);
                 var wert = 0;
-                for (var i = 1; i <= 7; i++) {
-                    var pid = parseInt(top.window.wrappedJSObject.farmisinfo[0][farmiNr]["p" + i], 10);
-                    var amount = parseInt(top.window.wrappedJSObject.farmisinfo[0][farmiNr]["a" + i], 10);
+                for (var i_2 = 1; i_2 <= 7; i_2++) {
+                    var pid = parseInt(top.window.wrappedJSObject.farmisinfo[0][farmiNr]["p" + i_2], 10);
+                    var amount = parseInt(top.window.wrappedJSObject.farmisinfo[0][farmiNr]["a" + i_2], 10);
                     if ((pid > 0) && (amount > 0)) {
                         newdiv = createElement("div", {}, newtd);
                         produktPic(0, pid, newdiv);
@@ -6383,14 +6383,14 @@ function buildInfoPanelZones() {
             createElement("td", { "colspan": "6" }, newtr, "---");
         }
         for (var w = 0; w < prodNameSort[0].length; w++) {
-            var v = prodNameSort[0][w];
-            if ((!prodBlock[0][v].match(/t/)) && (!prodBlock[0][v].match(/l/))) {
-                var amount1 = (farmiSum[v] ? farmiSum[v] : 0) - prodStock[0][v];
-                var amount = amount1 + prodMinRack[0][v];
-                if (amount > 0) {
+            var v_5 = prodNameSort[0][w];
+            if ((!prodBlock[0][v_5].match(/t/)) && (!prodBlock[0][v_5].match(/l/))) {
+                var amount1 = (farmiSum[v_5] ? farmiSum[v_5] : 0) - prodStock[0][v_5];
+                var amount_1 = amount1 + prodMinRack[0][v_5];
+                if (amount_1 > 0) {
                     newdiv = createElement("div", {}, newtdfehlt);
-                    produktPic(0, v, newdiv);
-                    newdiv1 = createElement("div", { "style": "display:inline-block;", "class": "link hoverBgCc9", "name": v }, newdiv, numberFormat(amount) + (amount1 > 0 ? "&nbsp;(" + numberFormat(amount1) + ")" : "") + "&nbsp;" + prodName[0][v]);
+                    produktPic(0, v_5, newdiv);
+                    newdiv1 = createElement("div", { "style": "display:inline-block;", "class": "link hoverBgCc9", "name": v_5 }, newdiv, numberFormat(amount_1) + (amount1 > 0 ? "&nbsp;(" + numberFormat(amount1) + ")" : "") + "&nbsp;" + prodName[0][v_5]);
                     newdiv1.addEventListener("mouseover", function (event) { showGoToMarketToolTip(event, this.getAttribute("name")); }, false);
                     newdiv1.addEventListener("click", function () { showMarket(this.getAttribute("name")); }, false);
                 }
@@ -6435,18 +6435,20 @@ function buildInfoPanelLottery(mode) {
         }
         GM_setValue(COUNTRY + "_" + SERVER + "_" + USERNAME + "_modeInfoPanelLottery", implode(mode, "buildInfoPanelLottery/mode"));
         // implode data older than last month
-        var stichtag = new Date();
-        stichtag = Math.round(((new Date(stichtag.getFullYear(), stichtag.getMonth() - 1, 1)).getTime()) / 1000);
-        var month;
-        for (var v = lotteryLog.length - 1; v >= 0; v--) {
-            if (lotteryLog[v][0].match(/\d+\.\d+\.\d+/)) {
-                if (getTime(lotteryLog[v][0]) < stichtag) {
-                    month = /\d+\.(\d+)\.(\d+)/.exec(lotteryLog[v][0]);
-                    if (month[1].length == 1) {
-                        month = month[2] + "-0" + month[1];
+        var tempDate = new Date();
+        tempDate.setDate(0);
+        tempDate.setHours(0, 0, 0, 0);
+        var stichtag = Math.round(tempDate.getTime() / 1000);
+        for (var v_6 = lotteryLog.length - 1; v_6 >= 0; v_6--) {
+            if (lotteryLog[v_6][0].match(/\d+\.\d+\.\d+/)) {
+                if (getTime(lotteryLog[v_6][0]) < stichtag) {
+                    var monthRegExp = /\d+\.(\d+)\.(\d+)/.exec(lotteryLog[v_6][0]);
+                    var month;
+                    if (monthRegExp[1].length == 1) {
+                        month = monthRegExp[2] + "-0" + monthRegExp[1];
                     }
                     else {
-                        month = month[2] + "-" + month[1];
+                        month = monthRegExp[2] + "-" + monthRegExp[1];
                     }
                     for (var w = 0; w < lotteryLog.length; w++) {
                         if (lotteryLog[w][0] == month) {
@@ -6456,39 +6458,39 @@ function buildInfoPanelLottery(mode) {
                     if (!lotteryLog[w]) {
                         lotteryLog[w] = [month, [], [], {}, []];
                     }
-                    if (lotteryLog[v][1] > 0) {
-                        if (lotteryLog[v][2] && (!lotteryLog[v][2].isEmpty())) {
-                            if (!lotteryLog[w][2][lotteryLog[v][1]]) {
-                                lotteryLog[w][2][lotteryLog[v][1]] = 0;
+                    if (lotteryLog[v_6][1] > 0) {
+                        if (lotteryLog[v_6][2] && (!lotteryLog[v_6][2].isEmpty())) {
+                            if (!lotteryLog[w][2][lotteryLog[v_6][1]]) {
+                                lotteryLog[w][2][lotteryLog[v_6][1]] = 0;
                             }
-                            lotteryLog[w][2][lotteryLog[v][1]]++;
-                            for (var p in lotteryLog[v][2]) {
-                                if (!lotteryLog[v][2].hasOwnProperty(p)) {
+                            lotteryLog[w][2][lotteryLog[v_6][1]]++;
+                            for (var p in lotteryLog[v_6][2]) {
+                                if (!lotteryLog[v_6][2].hasOwnProperty(p)) {
                                     continue;
                                 }
                                 if (!lotteryLog[w][3][p]) {
                                     lotteryLog[w][3][p] = 0;
                                 }
-                                lotteryLog[w][3][p] += lotteryLog[v][2][p];
+                                lotteryLog[w][3][p] += lotteryLog[v_6][2][p];
                             }
                         }
                         else {
-                            if (!lotteryLog[w][1][lotteryLog[v][1]]) {
-                                lotteryLog[w][1][lotteryLog[v][1]] = 0;
+                            if (!lotteryLog[w][1][lotteryLog[v_6][1]]) {
+                                lotteryLog[w][1][lotteryLog[v_6][1]] = 0;
                             }
-                            lotteryLog[w][1][lotteryLog[v][1]]++;
+                            lotteryLog[w][1][lotteryLog[v_6][1]]++;
                         }
                     }
                     // lotteryLog[w][2].sortObj(sortObjFunctions["productId"]);
-                    if (lotteryLog[v][3]) {
-                        for (var p = 0; p < lotteryLog[v][3].length; p++) {
-                            if (!lotteryLog[w][4][lotteryLog[v][3][p]]) {
-                                lotteryLog[w][4][lotteryLog[v][3][p]] = 0;
+                    if (lotteryLog[v_6][3]) {
+                        for (var p_1 = 0; p_1 < lotteryLog[v_6][3].length; p_1++) {
+                            if (!lotteryLog[w][4][lotteryLog[v_6][3][p_1]]) {
+                                lotteryLog[w][4][lotteryLog[v_6][3][p_1]] = 0;
                             }
-                            lotteryLog[w][4][lotteryLog[v][3][p]]++;
+                            lotteryLog[w][4][lotteryLog[v_6][3][p_1]]++;
                         }
                     }
-                    lotteryLog.splice(v, 1);
+                    lotteryLog.splice(v_6, 1);
                 }
             }
         }
@@ -6518,38 +6520,38 @@ function buildInfoPanelLottery(mode) {
         if (mode["total"]) {
             // prepare data
             var lotteryLogTotal = [[], [], {}, []];
-            for (var v = lotteryLog.length - 1; v >= 0; v--) {
-                if (lotteryLog[v][0].match(/\d+\.\d+\.\d+/)) {
-                    if (lotteryLog[v][1] > 0) {
-                        if (lotteryLog[v][2] && (!lotteryLog[v][2].isEmpty())) {
-                            if (!lotteryLogTotal[1][lotteryLog[v][1]]) {
-                                lotteryLogTotal[1][lotteryLog[v][1]] = 0;
+            for (var v_7 = lotteryLog.length - 1; v_7 >= 0; v_7--) {
+                if (lotteryLog[v_7][0].match(/\d+\.\d+\.\d+/)) {
+                    if (lotteryLog[v_7][1] > 0) {
+                        if (lotteryLog[v_7][2] && (!lotteryLog[v_7][2].isEmpty())) {
+                            if (!lotteryLogTotal[1][lotteryLog[v_7][1]]) {
+                                lotteryLogTotal[1][lotteryLog[v_7][1]] = 0;
                             }
-                            lotteryLogTotal[1][lotteryLog[v][1]]++;
-                            for (var p in lotteryLog[v][2]) {
-                                if (!lotteryLog[v][2].hasOwnProperty(p)) {
+                            lotteryLogTotal[1][lotteryLog[v_7][1]]++;
+                            for (var p in lotteryLog[v_7][2]) {
+                                if (!lotteryLog[v_7][2].hasOwnProperty(p)) {
                                     continue;
                                 }
                                 if (!lotteryLogTotal[2][p]) {
                                     lotteryLogTotal[2][p] = 0;
                                 }
-                                lotteryLogTotal[2][p] += lotteryLog[v][2][p];
+                                lotteryLogTotal[2][p] += lotteryLog[v_7][2][p];
                             }
                         }
                         else {
-                            if (!lotteryLogTotal[0][lotteryLog[v][1]]) {
-                                lotteryLogTotal[0][lotteryLog[v][1]] = 0;
+                            if (!lotteryLogTotal[0][lotteryLog[v_7][1]]) {
+                                lotteryLogTotal[0][lotteryLog[v_7][1]] = 0;
                             }
-                            lotteryLogTotal[0][lotteryLog[v][1]]++;
+                            lotteryLogTotal[0][lotteryLog[v_7][1]]++;
                         }
                     }
                     // lotteryLogTotal[2].sortObj(sortObjFunctions["productId"]);
-                    if (lotteryLog[v][3]) {
-                        for (var p = 0; p < lotteryLog[v][3].length; p++) {
-                            if (!lotteryLogTotal[3][lotteryLog[v][3][p]]) {
-                                lotteryLogTotal[3][lotteryLog[v][3][p]] = 0;
+                    if (lotteryLog[v_7][3]) {
+                        for (var p_2 = 0; p_2 < lotteryLog[v_7][3].length; p_2++) {
+                            if (!lotteryLogTotal[3][lotteryLog[v_7][3][p_2]]) {
+                                lotteryLogTotal[3][lotteryLog[v_7][3][p_2]] = 0;
                             }
-                            lotteryLogTotal[3][lotteryLog[v][3][p]]++;
+                            lotteryLogTotal[3][lotteryLog[v_7][3][p_2]]++;
                         }
                     }
                 }
@@ -6558,23 +6560,23 @@ function buildInfoPanelLottery(mode) {
                         if (j == 2) {
                             continue;
                         }
-                        for (var i = 0; i < lotteryLog[v][j + 1].length; i++) {
-                            if (lotteryLog[v][j + 1][i] > 0) {
+                        for (var i = 0; i < lotteryLog[v_7][j + 1].length; i++) {
+                            if (lotteryLog[v_7][j + 1][i] > 0) {
                                 if (!lotteryLogTotal[j][i]) {
                                     lotteryLogTotal[j][i] = 0;
                                 }
-                                lotteryLogTotal[j][i] += lotteryLog[v][j + 1][i];
+                                lotteryLogTotal[j][i] += lotteryLog[v_7][j + 1][i];
                             }
                         }
                     }
-                    for (var prod in lotteryLog[v][3]) {
-                        if (!lotteryLog[v][3].hasOwnProperty(prod)) {
+                    for (var prod in lotteryLog[v_7][3]) {
+                        if (!lotteryLog[v_7][3].hasOwnProperty(prod)) {
                             continue;
                         }
                         if (!lotteryLogTotal[2][prod]) {
                             lotteryLogTotal[2][prod] = 0;
                         }
-                        lotteryLogTotal[2][prod] += lotteryLog[v][3][prod];
+                        lotteryLogTotal[2][prod] += lotteryLog[v_7][3][prod];
                     }
                 }
             }
@@ -6585,17 +6587,17 @@ function buildInfoPanelLottery(mode) {
             newtd = createElement("td", {}, newtr);
             newdiv = createElement("div", { "style": "margin-bottom:3px;" }, newtd);
             newdiv.addEventListener("mouseover", function (event) { toolTip.show(event, getText("keptLots")); }, false);
-            var c = 0;
-            for (var i = 0; i < lotteryLogTotal[0].length; i++) {
-                if (lotteryLogTotal[0][i] > 0) {
-                    c += lotteryLogTotal[0][i];
-                    newdiv1 = createElement("div", { "style": "position:relative;display:inline-block;margin-right:2px;" }, newdiv);
-                    createElement("img", { "style": "width:20px;border:0;", "src": GFX + "city/" + i + ".jpg" }, newdiv1);
-                    createElement("span", {}, newdiv1, lotteryLogTotal[0][i]);
+            var c_1 = 0;
+            for (var i_3 = 0; i_3 < lotteryLogTotal[0].length; i_3++) {
+                if (lotteryLogTotal[0][i_3] > 0) {
+                    c_1 += lotteryLogTotal[0][i_3];
+                    var newdiv1 = createElement("div", { "style": "position:relative;display:inline-block;margin-right:2px;" }, newdiv);
+                    createElement("img", { "style": "width:20px;border:0;", "src": GFX + "city/" + i_3 + ".jpg" }, newdiv1);
+                    createElement("span", {}, newdiv1, lotteryLogTotal[0][i_3]);
                 }
             }
-            if (c > 0) {
-                createElement("div", { "style": "position:relative;display:inline-block;" }, newdiv, "&nbsp;=&nbsp;" + c + "×");
+            if (c_1 > 0) {
+                createElement("div", { "style": "position:relative;display:inline-block;" }, newdiv, "&nbsp;=&nbsp;" + c_1 + "×");
             }
             var changedLots = 0;
             newdiv = createElement("div", { "style": "" }, newtd);
@@ -6603,7 +6605,7 @@ function buildInfoPanelLottery(mode) {
             for (var i = 0; i < lotteryLogTotal[1].length; i++) {
                 if (lotteryLogTotal[1][i] > 0) {
                     changedLots += lotteryLogTotal[1][i];
-                    newdiv1 = createElement("div", { "style": "position:relative;display:inline-block;margin-right:2px;" }, newdiv);
+                    var newdiv1 = createElement("div", { "style": "position:relative;display:inline-block;margin-right:2px;" }, newdiv);
                     createElement("img", { "style": "width:20px;border:0;", "src": GFX + "city/" + i + ".jpg" }, newdiv1);
                     createElement("span", {}, newdiv1, lotteryLogTotal[1][i]);
                 }
@@ -6611,7 +6613,8 @@ function buildInfoPanelLottery(mode) {
             if (changedLots > 0) {
                 createElement("div", { "style": "position:relative;display:inline-block;" }, newdiv, "&nbsp;=&nbsp;" + changedLots + "×");
             }
-            var c, sum = 0;
+            c_1 = 0;
+            var sum = 0;
             newtable1 = createElement("table", { "style": "display:inline-block;padding-right:5px;margin-right:5px;", "border": "0", "cellspacing": "0" }, newtd);
             for (var prod in lotteryLogTotal[2]) {
                 if (!lotteryLogTotal[2].hasOwnProperty(prod)) {
@@ -6623,9 +6626,9 @@ function buildInfoPanelLottery(mode) {
                 produktPic(0, prod, createElement("td", {}, newtr1));
                 createElement("td", { "style": "text-align:right;" }, newtr1, numberFormat(lotteryLogTotal[2][prod]));
                 createElement("td", { "style": "padding-right:5px;" }, newtr1, prodName[0][prod]);
-                c = lotteryLogTotal[2][prod] * gut[prod];
-                sum += c;
-                createElement("td", { "style": "text-align:right;" }, newtr1, moneyFormat(c));
+                c_1 = lotteryLogTotal[2][prod] * gut[prod];
+                sum += c_1;
+                createElement("td", { "style": "text-align:right;" }, newtr1, moneyFormat(c_1));
             }
             newtr1 = createElement("tr", {}, newtable1);
             createElement("td", { "colspan": "2" }, newtr1);
@@ -6635,56 +6638,56 @@ function buildInfoPanelLottery(mode) {
             createElement("td", { "colspan": "2" }, newtr1);
             createElement("td", {}, newtr1, "Ø");
             createElement("td", { "style": "text-align:right;" }, newtr1, moneyFormat(sum / changedLots));
-            c = 0;
+            c_1 = 0;
             newtd = createElement("td", {}, newtr);
             for (var i = 0; i < lotteryLogTotal[3].length; i++) {
                 if (lotteryLogTotal[3][i] > 0) {
-                    c += lotteryLogTotal[3][i];
+                    c_1 += lotteryLogTotal[3][i];
                     newdiv1 = createElement("div", { "style": "position:relative;display:inline-block;margin-right:2px;" }, newdiv);
                     createElement("img", { "style": "width:20px;border:0;", "src": GFX + "city/" + i + ".jpg" }, newdiv1);
                     createElement("span", {}, newdiv1, lotteryLogTotal[3][i]);
                 }
             }
-            if (c > 0) {
-                createElement("div", { "style": "position:relative;display:inline-block;" }, newdiv, "&nbsp;=&nbsp;" + c + "×");
+            if (c_1 > 0) {
+                createElement("div", { "style": "position:relative;display:inline-block;" }, newdiv, "&nbsp;=&nbsp;" + c_1 + "×");
             }
         }
         else {
             createElement("th", { "style": "white-space:nowrap;" }, newtr, getText("day"));
             createElement("th", { "style": "white-space:nowrap;" }, newtr, getText("dailyTicket"));
             createElement("th", { "style": "white-space:nowrap;" }, newtr, getText("boughtTickets"));
-            for (var v = lotteryLog.length - 1; v >= 0; v--) {
+            for (var v_8 = lotteryLog.length - 1; v_8 >= 0; v_8--) {
                 newtr = createElement("tr", {}, newtable);
-                createElement("td", {}, newtr, lotteryLog[v][0]);
-                if (lotteryLog[v][0].match(/\d+\.\d+\.\d+/)) {
+                createElement("td", {}, newtr, lotteryLog[v_8][0]);
+                if (lotteryLog[v_8][0].match(/\d+\.\d+\.\d+/)) {
                     newtd = createElement("td", {}, newtr);
                     newdiv = createElement("div", { "style": "display:inline-block;margin-right:3px;vertical-align:top;" }, newtd);
-                    if (lotteryLog[v][1] > 0) {
-                        createElement("img", { "style": "width:20px;border:0;", "src": GFX + "city/" + lotteryLog[v][1] + ".jpg" }, newdiv);
+                    if (lotteryLog[v_8][1] > 0) {
+                        createElement("img", { "style": "width:20px;border:0;", "src": GFX + "city/" + lotteryLog[v_8][1] + ".jpg" }, newdiv);
                     }
-                    if (lotteryLog[v][2]) {
+                    if (lotteryLog[v_8][2]) {
                         var c, sum = 0;
                         newtable1 = createElement("table", { "style": "display:inline-block;border-right:1px solid black;padding-right:5px;margin-right:5px;", "border": "0", "cellspacing": "0" }, newtd);
-                        for (var prod in lotteryLog[v][2]) {
-                            if (!lotteryLog[v][2].hasOwnProperty(prod)) {
+                        for (var prod in lotteryLog[v_8][2]) {
+                            if (!lotteryLog[v_8][2].hasOwnProperty(prod)) {
                                 continue;
                             }
                             newtr1 = createElement("tr", { "class": "link hoverBgLightblue", "prod": prod }, newtable1);
                             newtr1.addEventListener("mouseover", function (event) { showGoToMarketToolTip(event, this.getAttribute("prod")); }, false);
                             newtr1.addEventListener("click", function () { showMarket(this.getAttribute("prod")); }, false);
                             produktPic(0, prod, createElement("td", {}, newtr1));
-                            createElement("td", { "style": "text-align:right;" }, newtr1, numberFormat(lotteryLog[v][2][prod]));
+                            createElement("td", { "style": "text-align:right;" }, newtr1, numberFormat(lotteryLog[v_8][2][prod]));
                             createElement("td", { "style": "padding-right:5px;" }, newtr1, prodName[0][prod]);
-                            c = lotteryLog[v][2][prod] * gut[prod];
+                            c = lotteryLog[v_8][2][prod] * gut[prod];
                             sum += c;
                             createElement("td", { "style": "text-align:right;" }, newtr1, moneyFormat(c));
                         }
                         createElement("div", { "style": "display:inline-block;vertical-align:bottom;" }, newtd, moneyFormat(sum));
                     }
                     newtd = createElement("td", {}, newtr);
-                    if (lotteryLog[v][3]) {
-                        for (var w = 0; w < lotteryLog[v][3].length; w++) {
-                            createElement("img", { "style": "width:20px;border:0;", "src": GFX + "city/" + lotteryLog[v][3][w] + ".jpg" }, newtd);
+                    if (lotteryLog[v_8][3]) {
+                        for (var w = 0; w < lotteryLog[v_8][3].length; w++) {
+                            createElement("img", { "style": "width:20px;border:0;", "src": GFX + "city/" + lotteryLog[v_8][3][w] + ".jpg" }, newtd);
                         }
                     }
                 }
@@ -6692,13 +6695,13 @@ function buildInfoPanelLottery(mode) {
                     newtd = createElement("td", {}, newtr);
                     newdiv = createElement("div", { "style": "margin-bottom:3px;" }, newtd);
                     newdiv.addEventListener("mouseover", function (event) { toolTip.show(event, getText("keptLots")); }, false);
-                    var c = 0;
-                    for (var i = 0; i < lotteryLog[v][1].length; i++) {
-                        if (lotteryLog[v][1][i] > 0) {
-                            c += lotteryLog[v][1][i];
+                    c = 0;
+                    for (var i = 0; i < lotteryLog[v_8][1].length; i++) {
+                        if (lotteryLog[v_8][1][i] > 0) {
+                            c += lotteryLog[v_8][1][i];
                             newdiv1 = createElement("div", { "style": "position:relative;display:inline-block;margin-right:2px;" }, newdiv);
                             createElement("img", { "style": "width:20px;border:0;", "src": GFX + "city/" + i + ".jpg" }, newdiv1);
-                            createElement("span", {}, newdiv1, lotteryLog[v][1][i]);
+                            createElement("span", {}, newdiv1, lotteryLog[v_8][1][i]);
                         }
                     }
                     if (c > 0) {
@@ -6707,39 +6710,39 @@ function buildInfoPanelLottery(mode) {
                     var changedLots = 0;
                     newdiv = createElement("div", { "style": "" }, newtd);
                     newdiv.addEventListener("mouseover", function (event) { toolTip.show(event, getText("exchangedLots")); }, false);
-                    for (var i = 0; i < lotteryLog[v][2].length; i++) {
-                        if (lotteryLog[v][2][i] > 0) {
-                            changedLots += lotteryLog[v][2][i];
+                    for (var i = 0; i < lotteryLog[v_8][2].length; i++) {
+                        if (lotteryLog[v_8][2][i] > 0) {
+                            changedLots += lotteryLog[v_8][2][i];
                             newdiv1 = createElement("div", { "style": "position:relative;display:inline-block;margin-right:2px;" }, newdiv);
                             createElement("img", { "style": "width:20px;border:0;", "src": GFX + "city/" + i + ".jpg" }, newdiv1);
-                            createElement("span", {}, newdiv1, lotteryLog[v][2][i]);
+                            createElement("span", {}, newdiv1, lotteryLog[v_8][2][i]);
                         }
                     }
                     if (changedLots > 0) {
                         createElement("div", { "style": "position:relative;display:inline-block;" }, newdiv, "&nbsp;=&nbsp;" + changedLots + "×");
                     }
                     var sum = 0;
-                    for (var prod in lotteryLog[v][3]) {
-                        if (!lotteryLog[v][3].hasOwnProperty(prod)) {
+                    for (var prod in lotteryLog[v_8][3]) {
+                        if (!lotteryLog[v_8][3].hasOwnProperty(prod)) {
                             continue;
                         }
                         newdiv = createElement("div", { "class": "link hoverBgLightblue", "prod": prod, "style": "position:relative;display:inline-block;margin-right:3px;" }, newtd);
                         newdiv.addEventListener("mouseover", function (event) { showGoToMarketToolTip(event, this.getAttribute("prod")); }, false);
                         newdiv.addEventListener("click", function () { showMarket(this.getAttribute("prod")); }, false);
                         produktPic(0, prod, newdiv);
-                        createElement("span", { "style": "text-align:right;" }, newdiv, numberFormat(lotteryLog[v][3][prod]));
-                        c = lotteryLog[v][3][prod] * gut[prod];
+                        createElement("span", { "style": "text-align:right;" }, newdiv, numberFormat(lotteryLog[v_8][3][prod]));
+                        c = lotteryLog[v_8][3][prod] * gut[prod];
                         sum += c;
                     }
                     createElement("div", {}, newtd, moneyFormat(sum) + "&nbsp;(Ø" + moneyFormat(sum / changedLots) + ")");
                     c = 0;
                     newtd = createElement("td", {}, newtr);
-                    for (var i = 0; i < lotteryLog[v][4].length; i++) {
-                        if (lotteryLog[v][4][i] > 0) {
-                            c += lotteryLog[v][4][i];
+                    for (var i = 0; i < lotteryLog[v_8][4].length; i++) {
+                        if (lotteryLog[v_8][4][i] > 0) {
+                            c += lotteryLog[v_8][4][i];
                             newdiv1 = createElement("div", { "style": "position:relative;display:inline-block;margin-right:2px;" }, newdiv);
                             createElement("img", { "style": "width:20px;border:0;", "src": GFX + "city/" + i + ".jpg" }, newdiv1);
-                            createElement("span", {}, newdiv1, lotteryLog[v][4][i]);
+                            createElement("span", {}, newdiv1, lotteryLog[v_8][4][i]);
                         }
                     }
                     if (c > 0) {
@@ -6782,20 +6785,22 @@ function buildInfoPanelDonkey(mode) {
         GM_setValue(COUNTRY + "_" + SERVER + "_" + USERNAME + "_modeInfoPanelDonkey", implode(mode, "buildInfoPanelDonkey/mode"));
         // implode data older than last month
         try {
-            var stichtag = new Date();
-            stichtag = Math.round(((new Date(stichtag.getFullYear(), stichtag.getMonth() - 1, 1)).getTime()) / 1000);
+            var tempDate = new Date();
+            tempDate.setDate(0);
+            tempDate.setHours(0, 0, 0, 0);
+            var stichtag = Math.round(tempDate.getTime() / 1000);
             var month;
-            for (var v = logDonkey.length - 1; v >= 0; v--) {
-                for (var w = logDonkey[v][2].length - 1; w >= 0; w--) {
-                    if (!logDonkey[v][2][w][3]) {
-                        logDonkey[v][2][w][3] = 1;
+            for (var v_9 = logDonkey.length - 1; v_9 >= 0; v_9--) {
+                for (var w = logDonkey[v_9][2].length - 1; w >= 0; w--) {
+                    if (!logDonkey[v_9][2][w][3]) {
+                        logDonkey[v_9][2][w][3] = 1;
                     }
                 }
             }
-            for (var v = logDonkey.length - 1; v >= 0; v--) {
-                if (logDonkey[v][0].match(/\d+\.\d+\.\d+/)) {
-                    if (getTime(logDonkey[v][0]) < stichtag) {
-                        month = /\d+\.(\d+)\.(\d+)/.exec(logDonkey[v][0]);
+            for (var v_10 = logDonkey.length - 1; v_10 >= 0; v_10--) {
+                if (logDonkey[v_10][0].match(/\d+\.\d+\.\d+/)) {
+                    if (getTime(logDonkey[v_10][0]) < stichtag) {
+                        month = /\d+\.(\d+)\.(\d+)/.exec(logDonkey[v_10][0]);
                         if (month[1].length == 1) {
                             month = month[2] + "-0" + month[1];
                         }
@@ -6810,26 +6815,26 @@ function buildInfoPanelDonkey(mode) {
                         if (!logDonkey[w]) {
                             logDonkey[w] = [month, 0, []];
                         }
-                        logDonkey[w][1] += logDonkey[v][1];
-                        for (var i = logDonkey[v][2].length - 1; i >= 0; i--) {
+                        logDonkey[w][1] += logDonkey[v_10][1];
+                        for (var i = logDonkey[v_10][2].length - 1; i >= 0; i--) {
                             for (var j = logDonkey[w][2].length - 1; j >= 0; j--) {
-                                if ((logDonkey[v][2][i][0] == logDonkey[w][2][j][0]) && (logDonkey[v][2][i][1] == logDonkey[w][2][j][1]) && (logDonkey[v][2][i][2] == logDonkey[w][2][j][2])) {
-                                    logDonkey[w][2][j][3] += logDonkey[v][2][i][3];
+                                if ((logDonkey[v_10][2][i][0] == logDonkey[w][2][j][0]) && (logDonkey[v_10][2][i][1] == logDonkey[w][2][j][1]) && (logDonkey[v_10][2][i][2] == logDonkey[w][2][j][2])) {
+                                    logDonkey[w][2][j][3] += logDonkey[v_10][2][i][3];
                                     break;
                                 }
                             }
                             if (j < 0) {
-                                logDonkey[w][2].push(logDonkey[v][2][i]);
+                                logDonkey[w][2].push(logDonkey[v_10][2][i]);
                             }
                         }
-                        logDonkey.splice(v, 1);
+                        logDonkey.splice(v_10, 1);
                     }
                 }
             }
             logDonkey.sort(sortObjFunctions["date"]);
             logDonkeyId = {};
-            for (var v = logDonkey.length - 1; v >= 0; v--) {
-                logDonkeyId[logDonkey[v][0]] = v;
+            for (var v_11 = logDonkey.length - 1; v_11 >= 0; v_11--) {
+                logDonkeyId[logDonkey[v_11][0]] = v_11;
             }
             GM_setValue(COUNTRY + "_" + SERVER + "_" + USERNAME + "_logDonkey", implode(logDonkey, "buildInfoPanelWaltraud/logDonkey"));
         }
@@ -6974,26 +6979,26 @@ function buildInfoPanelDonkey(mode) {
             createElement("th", { "style": "white-space:nowrap;" }, newtr, getText("day"));
             createElement("th", { "style": "white-space:nowrap;" }, newtr, getText("points"));
             createElement("th", { "style": "white-space:nowrap;" }, newtr, getText("goods"));
-            for (var v = logDonkey.length - 1; v >= 0; v--) {
+            for (var v_12 = logDonkey.length - 1; v_12 >= 0; v_12--) {
                 newtr = createElement("tr", {}, newtable);
-                createElement("td", {}, newtr, logDonkey[v][0]);
+                createElement("td", {}, newtr, logDonkey[v_12][0]);
                 newtd = createElement("td", {}, newtr);
-                pointsFormat(logDonkey[v][1], "span", newtd);
+                pointsFormat(logDonkey[v_12][1], "span", newtd);
                 newtd = createElement("td", {}, newtr);
-                if (logDonkey[v][2]) {
-                    for (var w = 0; w < logDonkey[v][2].length; w++) {
-                        switch (logDonkey[v][2][w][0]) {
+                if (logDonkey[v_12][2]) {
+                    for (var w = 0; w < logDonkey[v_12][2].length; w++) {
+                        switch (logDonkey[v_12][2][w][0]) {
                             case 1: {
-                                newdiv = createElement("div", { "class": "hoverBgLightblue", "prod": logDonkey[v][2][w][2] }, newtd);
-                                if (logDonkey[v][2][w][1] == 0) {
+                                newdiv = createElement("div", { "class": "hoverBgLightblue", "prod": logDonkey[v_12][2][w][2] }, newtd);
+                                if (logDonkey[v_12][2][w][1] == 0) {
                                     newdiv.classList.add("link");
                                     newdiv.addEventListener("mouseover", function (event) { showGoToMarketToolTip(event, this.getAttribute("prod")); }, false);
                                     newdiv.addEventListener("click", function () { showMarket(this.getAttribute("prod")); }, false);
                                 }
-                                produktPic(logDonkey[v][2][w][1], logDonkey[v][2][w][2], newdiv);
-                                createElement("span", {}, newdiv, numberFormat(logDonkey[v][2][w][3]) + "&nbsp;" + prodName[logDonkey[v][2][w][1]][logDonkey[v][2][w][2]]);
-                                if ((logDonkey[v][2][w][1] == 0) && (gut[logDonkey[v][2][w][2]])) {
-                                    createElement("span", { "style": "padding-left:5px;" }, newdiv, "(" + moneyFormat(logDonkey[v][2][w][3] * gut[logDonkey[v][2][w][2]]) + ")");
+                                produktPic(logDonkey[v_12][2][w][1], logDonkey[v_12][2][w][2], newdiv);
+                                createElement("span", {}, newdiv, numberFormat(logDonkey[v_12][2][w][3]) + "&nbsp;" + prodName[logDonkey[v_12][2][w][1]][logDonkey[v_12][2][w][2]]);
+                                if ((logDonkey[v_12][2][w][1] == 0) && (gut[logDonkey[v_12][2][w][2]])) {
+                                    createElement("span", { "style": "padding-left:5px;" }, newdiv, "(" + moneyFormat(logDonkey[v_12][2][w][3] * gut[logDonkey[v_12][2][w][2]]) + ")");
                                 }
                                 break;
                             }
@@ -7001,26 +7006,26 @@ function buildInfoPanelDonkey(mode) {
                                 newdiv = createElement("div", {}, newtd);
                                 createElement("img", { "src": GFX + "adbonus.gif", "style": "border:0;height:15px;" }, newdiv);
                                 createElement("span", {}, newdiv, unsafeWindow.t_donkey_farmiadd);
-                                if (logDonkey[v][2][w][3] > 1) {
-                                    createElement("span", {}, newdiv, " (" + logDonkey[v][2][w][3] + "x)");
+                                if (logDonkey[v_12][2][w][3] > 1) {
+                                    createElement("span", {}, newdiv, " (" + logDonkey[v_12][2][w][3] + "x)");
                                 }
                                 break;
                             }
                             case 12: {
                                 newdiv = createElement("div", {}, newtd);
                                 createElement("span", {}, newdiv, unsafeWindow.quest_reward_6 + ": ");
-                                createElement("img", { "src": GFX + "farmhouse/thumbs/" + logDonkey[v][2][w][1] + ".jpg", "style": "border:0;height:50px;width:50px;" }, newdiv);
-                                if (logDonkey[v][2][w][3] > 1) {
-                                    createElement("span", {}, newdiv, " (" + logDonkey[v][2][w][3] + "x)");
+                                createElement("img", { "src": GFX + "farmhouse/thumbs/" + logDonkey[v_12][2][w][1] + ".jpg", "style": "border:0;height:50px;width:50px;" }, newdiv);
+                                if (logDonkey[v_12][2][w][3] > 1) {
+                                    createElement("span", {}, newdiv, " (" + logDonkey[v_12][2][w][3] + "x)");
                                 }
                                 break;
                             }
                             case 13: {
                                 newdiv = createElement("div", {}, newtd);
                                 createElement("span", {}, newdiv, getText("shadowboxitem") + ": ");
-                                createElement("img", { "src": GFX + "gifts/" + logDonkey[v][2][w][1] + ".gif", "style": "border:0;height:50px;width:50px;" }, newdiv);
-                                if (logDonkey[v][2][w][3] > 1) {
-                                    createElement("span", {}, newdiv, " (" + logDonkey[v][2][w][3] + "x)");
+                                createElement("img", { "src": GFX + "gifts/" + logDonkey[v_12][2][w][1] + ".gif", "style": "border:0;height:50px;width:50px;" }, newdiv);
+                                if (logDonkey[v_12][2][w][3] > 1) {
+                                    createElement("span", {}, newdiv, " (" + logDonkey[v_12][2][w][3] + "x)");
                                 }
                                 break;
                             }
@@ -7087,12 +7092,12 @@ function buildInfoPanelClothingDonation(mode) {
             createElement("th", { "style": "white-space:nowrap;" }, newtr, getText("donation"));
             createElement("th", { "style": "white-space:nowrap;" }, newtr, getText("reward"));
             for (var i = 0; i < logClothingDonation.length; i++) {
-                var v = logClothingDonation[i];
+                var v_13 = logClothingDonation[i];
                 newtr = createElement("tr", {}, newtable);
-                createElement("td", {}, newtr, getFormattedDateStr(v.createdate) + " (" + getDaytimeStr(v.createdate, true, true) + "h)");
+                createElement("td", {}, newtr, getFormattedDateStr(v_13.createdate) + " (" + getDaytimeStr(v_13.createdate, true, true) + "h)");
                 newtd = createElement("td", {}, newtr);
-                for (var j in v["in"]) {
-                    if (!v["in"].hasOwnProperty(j)) {
+                for (var j in v_13["in"]) {
+                    if (!v_13["in"].hasOwnProperty(j)) {
                         continue;
                     }
                     newdiv = createElement("div", { "class": "hoverBgLightblue", "prod": j }, newtd);
@@ -7100,17 +7105,17 @@ function buildInfoPanelClothingDonation(mode) {
                     newdiv.addEventListener("mouseover", function (event) { showGoToMarketToolTip(event, this.getAttribute("prod")); }, false);
                     newdiv.addEventListener("click", function () { showMarket(this.getAttribute("prod")); }, false);
                     produktPic(0, j, newdiv);
-                    createElement("span", {}, newdiv, numberFormat(v["in"][j]["amount"]) + "&nbsp;" + prodName[0][j]);
+                    createElement("span", {}, newdiv, numberFormat(v_13["in"][j]["amount"]) + "&nbsp;" + prodName[0][j]);
                 }
                 newtd = createElement("td", {}, newtr);
-                for (var j = 0; j < v.gambleInfo.length; j++) {
+                for (var j_1 = 0; j_1 < v_13.gambleInfo.length; j_1++) {
                     newdiv = createElement("div", {}, newtd);
-                    var prefixDate = v.gambleInfo[j]["gambledate"] == 0 ? v.createdate : v.gambleInfo[j]["gambledate"];
+                    var prefixDate = v_13.gambleInfo[j_1]["gambledate"] == 0 ? v_13.createdate : v_13.gambleInfo[j_1]["gambledate"];
                     createElement("span", {}, newdiv, getFormattedDateStr(prefixDate) + " (" + getDaytimeStr(prefixDate, true, true) + "h): ");
-                    var color = v.gambleInfo[j]["gain"] > 0 ? "green" : "red";
-                    createElement("span", { "style": "color:" + color + ";" }, newdiv, moneyFormat(v.gambleInfo[j]["gain"]));
-                    if (v.gambleInfo[j]["gain"] > 0) {
-                        var w = v.gambleInfo[j]["out"];
+                    var color = v_13.gambleInfo[j_1]["gain"] > 0 ? "green" : "red";
+                    createElement("span", { "style": "color:" + color + ";" }, newdiv, moneyFormat(v_13.gambleInfo[j_1]["gain"]));
+                    if (v_13.gambleInfo[j_1]["gain"] > 0) {
+                        var w = v_13.gambleInfo[j_1]["out"];
                         for (var k in w) {
                             if (!w.hasOwnProperty(k)) {
                                 continue;
@@ -7182,7 +7187,7 @@ function buildInfoPanelFarmies(mode) {
             mouseOverText = null;
         }, false);
         // selection bar on the right side
-        newdiv1 = createElement("div", { "class": "link", "style": "position:absolute;top:0;right:0;border:1px solid black;" }, container);
+        var newdiv1 = createElement("div", { "class": "link", "style": "position:absolute;top:0;right:0;border:1px solid black;" }, container);
         newdiv1.addEventListener("mouseover", function (event) {
             var node = event.target;
             var mouseOverText = node.getAttribute("mouseOverText");
@@ -7196,12 +7201,12 @@ function buildInfoPanelFarmies(mode) {
             node = null;
             mouseOverText = null;
         }, false);
-        for (var v = 200; v > -1; v--) {
-            newdiv = createElement("div", { "class": "hoverBgRed", "style": "width:20px;height:2.5px;", "mouseOverText": v + "%" }, newdiv1);
-            if (v <= mode["limit"]) {
+        for (var v_14 = 200; v_14 > -1; v_14--) {
+            newdiv = createElement("div", { "class": "hoverBgRed", "style": "width:20px;height:2.5px;", "mouseOverText": v_14 + "%" }, newdiv1);
+            if (v_14 <= mode["limit"]) {
                 newdiv.style.backgroundColor = "blue";
             }
-            if (v == 90 || v == 100)
+            if (v_14 == 90 || v_14 == 100)
                 newdiv.style.borderTop = "1px solid black";
             newdiv.addEventListener("click", function () {
                 buildInfoPanelFarmies({ "limit": parseInt(this.getAttribute("mouseOverText"), 10) });
@@ -7216,18 +7221,19 @@ function buildInfoPanelFarmies(mode) {
         var borderTop;
         var c = 0;
         var prev = null;
-        for (var v = 0; v < farmiLog.length; v++) {
+        var newtd1;
+        for (var v_15 = 0; v_15 < farmiLog.length; v_15++) {
             countFarmisAll++;
             newtr = createElement("tr", { "class": "hoverBgCc9" }, newtable);
             if (prev == null) {
                 borderTop = "2px solid black;";
-                newtd1 = createElement("td", { "style": "border-top:" + borderTop }, newtr, farmiLog[v][1]);
+                newtd1 = createElement("td", { "style": "border-top:" + borderTop }, newtr, farmiLog[v_15][1]);
                 c = 1;
             }
-            else if (farmiLog[v][1] != farmiLog[prev][1]) {
+            else if (farmiLog[v_15][1] != farmiLog[prev][1]) {
                 borderTop = "2px solid black;";
                 newtd1.innerHTML += "<br>(" + c + ")";
-                newtd1 = createElement("td", { "style": "border-top:" + borderTop }, newtr, farmiLog[v][1]);
+                newtd1 = createElement("td", { "style": "border-top:" + borderTop }, newtr, farmiLog[v_15][1]);
                 c = 1;
             }
             else {
@@ -7236,33 +7242,33 @@ function buildInfoPanelFarmies(mode) {
             }
             newtd = createElement("td", { "style": "border-top:" + borderTop }, newtr);
             var wert = 0;
-            for (var w in farmiLog[v][3]) {
-                if (!farmiLog[v][3].hasOwnProperty(w)) {
+            for (var w in farmiLog[v_15][3]) {
+                if (!farmiLog[v_15][3].hasOwnProperty(w)) {
                     continue;
                 }
                 newdiv = createElement("div", { "style": "line-height:16px;" }, newtd);
                 produktPic(0, w, newdiv);
-                createElement("div", { "style": "display:inline-block;" }, newdiv, numberFormat(farmiLog[v][3][w]) + "&nbsp;" + prodName[0][w]);
-                wert += farmiLog[v][3][w] * gut[w];
+                createElement("div", { "style": "display:inline-block;" }, newdiv, numberFormat(farmiLog[v_15][3][w]) + "&nbsp;" + prodName[0][w]);
+                wert += farmiLog[v_15][3][w] * gut[w];
             }
-            totalPrice += farmiLog[v][2];
+            totalPrice += farmiLog[v_15][2];
             totalWert += wert;
             newtd = createElement("td", { "style": "text-align:right;border-top:" + borderTop }, newtr);
-            createElement("div", {}, newtd, moneyFormatInt(farmiLog[v][2]));
-            newdiv = createElement("div", {}, newtd, numberFormat(100 * farmiLog[v][2] / wert, 1) + "%");
-            if (100 * farmiLog[v][2] > mode["limit"] * wert) {
+            createElement("div", {}, newtd, moneyFormatInt(farmiLog[v_15][2]));
+            newdiv = createElement("div", {}, newtd, numberFormat(100 * farmiLog[v_15][2] / wert, 1) + "%");
+            if (100 * farmiLog[v_15][2] > mode["limit"] * wert) {
                 countFarmisOk++;
-                for (var w in farmiLog[v][3]) {
-                    if (!farmiLog[v][3].hasOwnProperty(w)) {
+                for (var w in farmiLog[v_15][3]) {
+                    if (!farmiLog[v_15][3].hasOwnProperty(w)) {
                         continue;
                     }
                     if (totalProducts[w] === undefined) {
                         totalProducts[w] = [0, 0];
                     }
                     totalProducts[w][0]++;
-                    totalProducts[w][1] += farmiLog[v][3][w];
+                    totalProducts[w][1] += farmiLog[v_15][3][w];
                 }
-                totalPriceOk += farmiLog[v][2];
+                totalPriceOk += farmiLog[v_15][2];
                 totalWertOk += wert;
             }
             else {
@@ -7272,13 +7278,13 @@ function buildInfoPanelFarmies(mode) {
             createElement("div", { "mouseOverText": "100%" }, newtd, moneyFormatInt(wert));
             createElement("div", { "mouseOverText": "90%" }, newtd, moneyFormatInt(0.9 * wert));
             newtd = createElement("td", { "style": "text-align:right;border-top:" + borderTop }, newtr);
-            createElement("div", { "mouseOverText": "100%" }, newtd, (farmiLog[v][2] > wert ? "+" : "") + moneyFormatInt(farmiLog[v][2] - wert));
-            createElement("div", { "mouseOverText": "90%" }, newtd, (farmiLog[v][2] > 0.9 * wert ? "+" : "") + moneyFormatInt(farmiLog[v][2] - 0.9 * wert));
-            if (!newFarmiumsatz[farmiLog[v][1]]) {
-                newFarmiumsatz[farmiLog[v][1]] = 0;
+            createElement("div", { "mouseOverText": "100%" }, newtd, (farmiLog[v_15][2] > wert ? "+" : "") + moneyFormatInt(farmiLog[v_15][2] - wert));
+            createElement("div", { "mouseOverText": "90%" }, newtd, (farmiLog[v_15][2] > 0.9 * wert ? "+" : "") + moneyFormatInt(farmiLog[v_15][2] - 0.9 * wert));
+            if (!newFarmiumsatz[farmiLog[v_15][1]]) {
+                newFarmiumsatz[farmiLog[v_15][1]] = 0;
             }
-            newFarmiumsatz[farmiLog[v][1]] += farmiLog[v][2];
-            prev = v;
+            newFarmiumsatz[farmiLog[v_15][1]] += farmiLog[v_15][2];
+            prev = v_15;
         }
         if (countFarmisAll > 0) {
             newtd1.innerHTML += "<br>(" + c + ")";
@@ -7288,9 +7294,9 @@ function buildInfoPanelFarmies(mode) {
                 continue;
             }
             newFarmiumsatz[v] = Math.round(100 * newFarmiumsatz[v]) / 100;
-            for (var w = 0; w < levelLog.length; w++) {
-                if (levelLog[w][0] == v) {
-                    levelLog[w][5] = newFarmiumsatz[v];
+            for (var w_1 = 0; w_1 < levelLog.length; w_1++) {
+                if (levelLog[w_1][0] == v) {
+                    levelLog[w_1][5] = newFarmiumsatz[v];
                     break;
                 } //dont override all because data could be joined to monthly
             }
@@ -7303,7 +7309,7 @@ function buildInfoPanelFarmies(mode) {
             totalProducts[v][2] = totalProducts[v][1] / totalProducts[v][0];
         }
         if (countFarmisAll > 0) {
-            newtr = createElement("tr");
+            newtr = createElement("tr", {});
             newtable.insertBefore(newtr, newtable.children[1]);
             createElement("td", {}, newtr, getText("total") + "<br>(" + countFarmisOk + ")");
             newtd = createElement("td", { "id": "tdTotalProducts" }, newtr);
@@ -7480,8 +7486,8 @@ function buildInfoPanelFormulas(mode) {
                 toolTip.show(event, mouseOverText);
             }
         }, false);
-        for (var v = 0; v <= 2; v++) {
-            createElement("div", { "class": "link category_r" + v + (mode["filterType"].search(v + ",") != -1 ? "_active" : ""), "filter": v + ",", "style": "display:inline-block;", "mouseOverText": getText("category_r" + v) }, newtd);
+        for (var v_16 = 0; v_16 <= 2; v_16++) {
+            createElement("div", { "class": "link category_r" + v_16 + (mode["filterType"].search(v_16 + ",") != -1 ? "_active" : ""), "filter": v_16 + ",", "style": "display:inline-block;", "mouseOverText": getText("category_r" + v_16) }, newtd);
         }
         newdiv = createElement("div", { "style": "height:465px;width:100%;overflow:auto;" }, container);
         newtable = createElement("table", { "style": "line-height:16px;width:100%", "border": "1", "cellspacing": 0 }, newdiv);
@@ -7589,13 +7595,13 @@ function buildInfoPanelFormulas(mode) {
                     if (unsafeWindow.formulas[0][v][6] > 0) {
                         sum1 = unsafeWindow.formulas[0][v][6];
                         sum -= sum1;
-                        newspan = createElement("div", {}, newtd, moneyFormatInt(sum1));
+                        createElement("div", {}, newtd, moneyFormatInt(sum1));
                         newtd.setAttribute("value", sum1);
                     }
                     if (unsafeWindow.formulas[0][v][7] > 0) {
                         sum1 = unsafeWindow.formulas[0][v][7] * gut[0];
                         sum -= sum1;
-                        newspan = createElement("div", { "class": "link hoverBgLightblue" }, newtd, coinsFormat(unsafeWindow.formulas[0][v][7], createElement("div")).parentNode.innerHTML);
+                        var newspan = createElement("div", { "class": "link hoverBgLightblue" }, newtd, coinsFormat(unsafeWindow.formulas[0][v][7], createElement("div", {})).parentNode.innerHTML);
                         newspan.addEventListener("mouseover", function (event) { showGoToMarketToolTip(event, "0"); }, false);
                         newspan.addEventListener("click", function () { showMarket("0"); }, false);
                         createElement("div", { "style": "clear:both;" }, newtd, "(" + moneyFormatInt(sum1) + ")");
@@ -7656,10 +7662,10 @@ function buildInfoPanelMegafield() {
                 try {
                     var v = this.parentNode.getAttribute("v");
                     if (!logMegafieldJob[v][1]) {
-                        toolTip.show(event, getText("jobCurrent") + "<br>" + getText("remaining") + ": " + getTimeStr(logMegafieldJob[v][0] + 168 * 60 * 60 - unsafeWindow.Zeit.Server));
+                        toolTip.show(event, getText("jobCurrent") + "<br>" + getText("remaining") + ": " + getTimeStr(logMegafieldJob[v][0] + 168 * 60 * 60 - unsafeWindow.Zeit.Server, false));
                     }
                     else if (logMegafieldJob[v][3]) {
-                        toolTip.show(event, getText("jobComplete") + "<br>" + getText("remaining") + ": " + getTimeStr(logMegafieldJob[v][0] + 168 * 60 * 60 - logMegafieldJob[v][1]));
+                        toolTip.show(event, getText("jobComplete") + "<br>" + getText("remaining") + ": " + getTimeStr(logMegafieldJob[v][0] + 168 * 60 * 60 - logMegafieldJob[v][1], false));
                     }
                     else {
                         toolTip.show(event, getText("jobIncomplete"));
@@ -7684,7 +7690,7 @@ function buildInfoPanelMegafield() {
                     var v = this.parentNode.getAttribute("v");
                     var container, div, table, tr = [], td;
                     var amountEach, amount, price, help, sum = [0, 0];
-                    container = createElement("div");
+                    container = createElement("div", {});
                     table = createElement("table", { "border": "1" }, container);
                     for (var i = 0; i < 6; i++) {
                         tr.push(createElement("tr", {}, table));
@@ -7792,7 +7798,7 @@ unsafeWindow.buildInfoPanelMenu = function (mode) {
         }, false);
         newdiv1.classList.add("link");
         newdiv1.addEventListener("click", function (event) {
-            unsafeWindow.buildInfoPanel("changelog");
+            unsafeWindow.buildInfoPanel("changelog", "");
         }, false);
         if (USERNAME) {
             newdiv1 = createElement("div", { "id": "infoPanelNaviOptions", "class": "link naviItem", "style": "margin-top:5px;width:95px;" }, newdiv, getText("options"));
@@ -7851,7 +7857,7 @@ unsafeWindow.buildInfoPanelMenu = function (mode) {
                 buildInfoPanelCss();
                 break;
             case "import":
-                buildInfoPanelImport();
+                buildInfoPanelImport(undefined, undefined, undefined);
                 break;
         }
         container = null;
@@ -7961,7 +7967,7 @@ function buildInfoPanelOptions() {
         newtd = createElement("td", {}, newtr, getText("settings_valMoveAnimals")[1]);
         for (var v = 0; v < ANIMAL_MOVE.length; v++) {
             if (ANIMAL_MOVE[v]) {
-                newspan = createElement("span", { "style": "display:inline-block;margin-right:15px;" }, newtd);
+                var newspan = createElement("span", { "style": "display:inline-block;margin-right:15px;" }, newtd);
                 produktPic(0, BUILDING2PRODUCT[v][0], newspan);
                 newinput = createElement("input", { "id": "inputvalMoveAnimals" + v, "type": "checkbox", "class": "link", "checked": valMoveAnimals[v] }, newspan);
                 newinput.addEventListener("click", function () {
@@ -8049,7 +8055,7 @@ function buildInfoPanelOptions() {
         createElement("td", {}, newtr, getText("settings_valLimitEmptyFields")[1]);
         newtd1 = null;
         for (var j = 0; j < ALL_ZONES["farmersmarket"].length; j++) {
-            zoneNrF = ALL_ZONES["farmersmarket"][j];
+            var zoneNrF = ALL_ZONES["farmersmarket"][j];
             if (zones.isProductional(zoneNrF)) {
                 newtr = createElement("tr", {}, newtable);
                 newtd = createElement("td", { "align": "center" }, newtr);
@@ -8402,13 +8408,13 @@ function buildInfoPanelOptions() {
             if (valMinRackMan) {
                 for (var v = 0; v < cand.length; v++) {
                     cand[v].disabled = true;
-                    cand[v].parentNode.parentNode.style.opacity = 0.6;
+                    cand[v].parentNode.parentNode.style.opacity = "0.6";
                 }
             }
             else {
                 for (var v = 0; v < cand.length; v++) {
                     cand[v].disabled = false;
-                    cand[v].parentNode.parentNode.style.opacity = 1;
+                    cand[v].parentNode.parentNode.style.opacity = "1";
                 }
                 calcProdMinRackInit();
             }
@@ -8419,14 +8425,14 @@ function buildInfoPanelOptions() {
         newtd.addEventListener("click", function () {
             unsafeWindow.buildInfoPanel("stock", { "page": 2 });
         }, false);
-        newTd1 = null;
-        for (var v in valMinRack) {
-            if (!valMinRack.hasOwnProperty(v)) {
+        var newTd1 = null;
+        for (var v_17 in valMinRack) {
+            if (!valMinRack.hasOwnProperty(v_17)) {
                 continue;
             }
             newtr = createElement("tr", {}, newtable);
             newtd = createElement("td", { "align": "center" }, newtr);
-            newinput = createElement("input", { "id": "inputvalMinRack_" + v, "class": "text minRackConfig", "value": valMinRack[v], "maxlength": "4", "size": "5px", "style": "background-color:transparent;text-align:center;" }, newtd);
+            newinput = createElement("input", { "id": "inputvalMinRack_" + v_17, "class": "text minRackConfig", "value": valMinRack[v_17], "maxlength": "4", "size": "5px", "style": "background-color:transparent;text-align:center;" }, newtd);
             if (valMinRackMan) {
                 newinput.disabled = true;
                 newtr.style.opacity = 0.6;
@@ -8445,7 +8451,7 @@ function buildInfoPanelOptions() {
                     calcProdMinRackInit();
                 }
             }, false);
-            createElement("td", {}, newtr, getText("category_" + v));
+            createElement("td", {}, newtr, getText("category_" + v_17));
             if (newTd1 == null) {
                 newTd1 = createElement("td", {}, newtr, getText("settings_valMinRack")[1]);
             }
@@ -8795,8 +8801,8 @@ function buildInfoPanelOptions() {
             $("highlightProducts1").disabled = highlightProducts[0];
             if (highlightProducts[0]) {
                 // todo calc highlightProducts[1]
-                $("highlightProducts0").value = -1;
-                $("highlightProducts1").value = -1;
+                $("highlightProducts0").value = "-1";
+                $("highlightProducts1").value = "-1";
             }
             else {
                 var i = 0;
@@ -8814,8 +8820,8 @@ function buildInfoPanelOptions() {
             GM_setValue2(COUNTRY + "_" + SERVER + "_" + USERNAME + "_highlightProducts", implode(highlightProducts, "buildInfoPanelOptions/highlightProducts"), 42);
         }, false);
         createElement("span", {}, newdiv, getText("useQuestProducts"));
-        for (var i = 0; i < 2; i++) {
-            newinput = createElement("select", { "id": "highlightProducts" + i, "class": "link" }, newtd);
+        for (var i_4 = 0; i_4 < 2; i_4++) {
+            newinput = createElement("select", { "id": "highlightProducts" + i_4, "class": "link" }, newtd);
             createElement("option", { "value": "-1" }, newinput, "--");
             for (var v = 0; v < prodNameSort[0].length; v++) {
                 if ((!prodBlock[0][prodNameSort[0][v]].match(/t/)) && (!prodBlock[0][prodNameSort[0][v]].match(/l/))) {
@@ -8834,16 +8840,16 @@ function buildInfoPanelOptions() {
             }, false);
         }
         if (!highlightProducts[0]) {
-            var i = 0;
+            var i_5 = 0;
             for (var prod in highlightProducts[1]) {
                 if (!highlightProducts[1].hasOwnProperty(prod)) {
                     continue;
                 }
-                if (i > 1) {
+                if (i_5 > 1) {
                     continue;
                 }
-                $("highlightProducts" + i).value = prod;
-                i++;
+                $("highlightProducts" + i_5).value = prod;
+                i_5++;
             }
         }
         newtr = createElement("tr", {}, newtable);
@@ -9119,14 +9125,14 @@ function buildInfoPanelOptions() {
                 if (USERLEVEL >= 42
                     && unsafeWindow.quests_status.hasOwnProperty("main")
                     && unsafeWindow.quests_status["main"].hasOwnProperty("4")
-                    && speedlink_farm6.style.display == "block") {
+                    && $("speedlink_farm6").style.display == "block") {
                     // main questseries 4 exists and is not accomplished
                     var help = help + "4_NotAccomplished";
                     if (!isNaN(parseInt(unsafeWindow.quests_status["main"][4]["remain"], 10))) {
                         // cooldown-time is active - quest is not accessible
                         questData["main"][4] = INIT_questData["main"][4].clone();
                         questData["main"][4]["nr"] = unsafeWindow.quests_status["main"][4]["questid"];
-                        questData["main"][4]["time"] = (parseInt(unsafeWindow.Zeit.Server, 10) + parseInt(unsafeWindow.quests_status["main"][4]["remain"], 10));
+                        questData["main"][4]["time"] = (unsafeWindow.Zeit.Server + parseInt(unsafeWindow.quests_status["main"][4]["remain"], 10));
                         questData["main"][4]["given"] = new Object();
                         questData["main"][4]["data"] = gatherQuestData("main", "4", questData["main"][4]["nr"]);
                         GM_setValueCache(COUNTRY + "_" + SERVER + "_" + USERNAME + "_questData", implode(questData, "handleQuestData/questData"));
@@ -9142,14 +9148,14 @@ function buildInfoPanelOptions() {
                 if (USERLEVEL >= 40
                     && unsafeWindow.quests_status.hasOwnProperty("main")
                     && unsafeWindow.quests_status["main"].hasOwnProperty("3")
-                    && speedlink_farm5.style.display == "block") {
+                    && $("speedlink_farm5").style.display == "block") {
                     // main questseries 3 exists and is not accomplished
                     var help = help + "3_NotAccomplished";
                     if (!isNaN(parseInt(unsafeWindow.quests_status["main"][3]["remain"], 10))) {
                         // cooldown-time is active - quest is not accessible
                         questData["main"][3] = INIT_questData["main"][3].clone();
                         questData["main"][3]["nr"] = unsafeWindow.quests_status["main"][3]["questid"];
-                        questData["main"][3]["time"] = (parseInt(unsafeWindow.Zeit.Server, 10) + parseInt(unsafeWindow.quests_status["main"][3]["remain"], 10));
+                        questData["main"][3]["time"] = (unsafeWindow.Zeit.Server + parseInt(unsafeWindow.quests_status["main"][3]["remain"], 10));
                         questData["main"][3]["given"] = new Object();
                         questData["main"][3]["data"] = gatherQuestData("main", "3", questData["main"][3]["nr"]);
                         GM_setValueCache(COUNTRY + "_" + SERVER + "_" + USERNAME + "_questData", implode(questData, "handleQuestData/questData"));
@@ -9163,7 +9169,7 @@ function buildInfoPanelOptions() {
                     }
                 }
                 else if (USERLEVEL >= 40
-                    && speedlink_farm5.style.display == "block"
+                    && $("speedlink_farm5").style.display == "block"
                     && (!unsafeWindow.quests_status.hasOwnProperty("main")
                         || !unsafeWindow.quests_status["main"].hasOwnProperty("3"))) {
                     // no main questseries - or main questseries 3 has no properties: questseries must be accomplished
@@ -9177,7 +9183,7 @@ function buildInfoPanelOptions() {
                     var help = help + "3_Accomplished: SetLastQuestNumber_QuestNumber_" + questData["main"][3]["nr"] + " ";
                 }
                 else if (USERLEVEL >= 40
-                    && speedlink_farm5.style.display != "block") {
+                    && $("speedlink_farm5").style.display != "block") {
                     // Farm 5 is not released - main questseries 3 is not accessible - do nothing
                     var help = help + "3_NoFarm5:_DoNothing ";
                 }
@@ -9190,7 +9196,7 @@ function buildInfoPanelOptions() {
                         // cooldown-time is active - quest is not accessible
                         questData["main"][2] = INIT_questData["main"][2].clone();
                         questData["main"][2]["nr"] = unsafeWindow.quests_status["main"][2]["questid"];
-                        questData["main"][2]["time"] = (parseInt(unsafeWindow.Zeit.Server, 10) + parseInt(unsafeWindow.quests_status["main"][2]["remain"], 10));
+                        questData["main"][2]["time"] = (unsafeWindow.Zeit.Server + parseInt(unsafeWindow.quests_status["main"][2]["remain"], 10));
                         questData["main"][2]["given"] = new Object();
                         questData["main"][2]["data"] = gatherQuestData("main", "2", questData["main"][2]["nr"]);
                         GM_setValueCache(COUNTRY + "_" + SERVER + "_" + USERNAME + "_questData", implode(questData, "handleQuestData/questData"));
@@ -9225,7 +9231,7 @@ function buildInfoPanelOptions() {
                         // cooldown-time is active - quest is not accessible
                         questData["main"][1] = INIT_questData["main"][1].clone();
                         questData["main"][1]["nr"] = unsafeWindow.quests_status["main"][1]["questid"];
-                        questData["main"][1]["time"] = (parseInt(unsafeWindow.Zeit.Server, 10) + parseInt(unsafeWindow.quests_status["main"][1]["remain"], 10));
+                        questData["main"][1]["time"] = (unsafeWindow.Zeit.Server + parseInt(unsafeWindow.quests_status["main"][1]["remain"], 10));
                         questData["main"][1]["given"] = new Object();
                         questData["main"][1]["data"] = gatherQuestData("main", "1", questData["main"][1]["nr"]);
                         GM_setValueCache(COUNTRY + "_" + SERVER + "_" + USERNAME + "_questData", implode(questData, "handleQuestData/questData"));
@@ -9261,7 +9267,7 @@ function buildInfoPanelOptions() {
                         // cooldown-time is active - quest is not accessible
                         questData["forestry"][1] = INIT_questData["forestry"][1].clone();
                         questData["forestry"][1]["nr"] = 1 + parseInt(unsafeWindow.quests_status["forestry"][1]["questid"], 10);
-                        questData["forestry"][1]["time"] = (parseInt(unsafeWindow.Zeit.Server, 10) + parseInt(unsafeWindow.quests_status["forestry"][1]["remain"], 10));
+                        questData["forestry"][1]["time"] = (unsafeWindow.Zeit.Server + parseInt(unsafeWindow.quests_status["forestry"][1]["remain"], 10));
                         questData["forestry"][1]["given"] = new Object();
                         questData["forestry"][1]["data"] = QUESTS["forestry"][1][(questData["forestry"][1]["nr"])];
                         for (var v = 0; v < (questData["forestry"][1]["data"][0].length); v++) {
@@ -9298,7 +9304,7 @@ function buildInfoPanelOptions() {
                         // cooldown-time is active - quest is not accessible
                         questData["forestry"][2] = INIT_questData["forestry"][2].clone();
                         questData["forestry"][2]["nr"] = 1 + parseInt(unsafeWindow.quests_status["forestry"][2]["questid"], 10);
-                        questData["forestry"][2]["time"] = (parseInt(unsafeWindow.Zeit.Server, 10) + parseInt(unsafeWindow.quests_status["forestry"][2]["remain"], 10));
+                        questData["forestry"][2]["time"] = (unsafeWindow.Zeit.Server + parseInt(unsafeWindow.quests_status["forestry"][2]["remain"], 10));
                         questData["forestry"][2]["given"] = new Object();
                         questData["forestry"][2]["data"] = QUESTS["forestry"][2][(questData["forestry"][2]["nr"])];
                         for (var v = 0; v < (questData["forestry"][2]["data"][0].length); v++) {
@@ -9337,13 +9343,13 @@ function buildInfoPanelOptions() {
         if (DEVMODE) {
             if (unsafeWindow.quests_status.hasOwnProperty("main")
                 && unsafeWindow.quests_status["main"].hasOwnProperty("3")
-                && speedlink_farm5.style.display == "block") {
+                && $("speedlink_farm5").style.display == "block") {
                 newtr = createElement("tr", {}, newtable);
                 newtd = createElement("td", { "align": "center" }, newtr);
                 var newsel = createElement("select", { "id": "SetQuestMain3To", "style": "width:auto;height:18px;margin-left:5px;" }, newtd);
                 createElement("option", { "value": -1 }, newsel, getText("hide"));
-                for (var i = 1; i < QUESTS["main"][3].length; i++) {
-                    createElement("option", { "value": i }, newsel, i);
+                for (var i_6 = 1; i_6 < QUESTS["main"][3].length; i_6++) {
+                    createElement("option", { "value": i_6 }, newsel, i_6);
                 }
                 createElement("option", { "value": (QUESTS["main"][3].length)++ }, newsel, getText("lastQuest"));
                 newsel.selectedIndex = questData["main"][3]["nr"];
@@ -9657,21 +9663,18 @@ function buildInfoPanelImport(mode, showData, onlyThisAccount) {
         container = createElement("div", { "id": "beraterDataImportContainer", "style": "position:absolute;top:30px;left:5px;height:485px;width:475px;overflow:auto;" }, container);
         switch (mode) {
             case "export": {
-                // if (showData&&(!onlyThisAccount)){
-                //  if(!confirm("Attention! Showing all data of all accounts can slow down your browser. Continue?")){
-                //      showData=false;
-                //  }
-                // }
                 createElement("div", {}, container, "Click the lines to remove them.");
                 var newdiv = createElement("div", {}, container);
                 var newinput = createElement("input", { "type": "checkbox", "checked": showData }, newdiv);
                 newinput.addEventListener("click", function () {
+                    // TODO: Is this code still used?
                     showExportData(this.checked, onlyThisAccount);
                 }, false);
                 createElement("span", {}, newdiv, "Show the data");
                 newdiv = createElement("div", {}, container);
                 newinput = createElement("input", { "type": "checkbox", "checked": onlyThisAccount }, newdiv);
                 newinput.addEventListener("click", function () {
+                    // TODO: Is this code still used?
                     showExportData(showData, this.checked);
                 }, false);
                 createElement("span", {}, newdiv, "Only this account");
@@ -9687,12 +9690,13 @@ function buildInfoPanelImport(mode, showData, onlyThisAccount) {
                 }, false);
                 var newtable = createElement("table", { "border": "1", "class": "hoverRowBgCc9", "style": "width:100%" }, container);
                 var newtr, newtd;
+                // TODO: Is this code still used?
                 var help = cloneInto(GM_listValues(), unsafeWindow);
                 help.sort();
                 if (onlyThisAccount) {
-                    for (var v = 0; v < help.length; v++) {
-                        if (help[v].search(COUNTRY + "_" + SERVER + "_" + USERNAME) != -1) {
-                            var help2 = GM_getValue(help[v]);
+                    for (var v_18 = 0; v_18 < help.length; v_18++) {
+                        if (help[v_18].search(COUNTRY + "_" + SERVER + "_" + USERNAME) != -1) {
+                            var help2 = GM_getValue(help[v_18]);
                             var help3 = "s";
                             if (help2 == "") {
                                 help2 = " ";
@@ -9708,7 +9712,7 @@ function buildInfoPanelImport(mode, showData, onlyThisAccount) {
                             }
                             newtr = createElement("tr", {}, newtable);
                             newtr.addEventListener("click", function () { removeElement(this); }, false);
-                            createElement("td", {}, newtr, help[v].replace(COUNTRY + "_" + SERVER + "_" + USERNAME + "_", ""));
+                            createElement("td", {}, newtr, help[v_18].replace(COUNTRY + "_" + SERVER + "_" + USERNAME + "_", ""));
                             createElement("td", {}, newtr, help3);
                             newtd = createElement("td", { "style": (showData ? "" : "display:none;") }, newtr);
                             createElement("div", { "style": "max-height:100px;width:270px;overflow:auto;" }, newtd, help2);
@@ -9752,12 +9756,14 @@ function buildInfoPanelImport(mode, showData, onlyThisAccount) {
                 var newdiv = createElement("div", {}, container);
                 var newinput = createElement("input", { "type": "checkbox", "checked": showData }, newdiv);
                 newinput.addEventListener("click", function () {
+                    // TODO: Is this code still used?
                     showImportData(this.checked, onlyThisAccount);
                 }, false);
                 createElement("span", {}, newdiv, "Show the data");
                 newdiv = createElement("div", {}, container);
                 newinput = createElement("input", { "type": "checkbox", "checked": onlyThisAccount }, newdiv);
                 newinput.addEventListener("click", function () {
+                    // TODO: Is this code still used?
                     showImportData(showData, this.checked);
                 }, false);
                 createElement("span", {}, newdiv, "Only this account");
@@ -9833,17 +9839,15 @@ function buildInfoPanelLevel() {
     try {
         var container = $("infoPanelInner");
         container.innerHTML = "";
-        // GM_log("levelLog:\n"+print_r(levelLog,"",true,"\n"));
-        newdiv = createElement("div", { "style": "height:400px;overflow:auto;color:black;" }, container);
-        // todayStr=getDateStr(now,2,false);
+        var newdiv = createElement("div", { "style": "height:400px;overflow:auto;color:black;" }, container);
         levelLog[levelLogId][1] = parseInt($("pkt").innerHTML.replace(/\D/g, ""), 10);
         var totalumsatz = [0, 0, [0, 0]];
         var day, days;
-        newtable = createElement("table", { "border": "1", "style": "width:100%;" }, newdiv);
-        thead = createElement("thead", {}, newtable); // sortable table
-        newtbody = createElement("tbody", { "class": "hoverRowBgCc9" }, newtable);
-        newtfoot = createElement("tfoot", {}, newtable);
-        newtr = createElement("tr", { "class": "borderBottom2" }, thead);
+        var newtable = createElement("table", { "border": "1", "style": "width:100%;" }, newdiv);
+        var thead = createElement("thead", {}, newtable); // sortable table
+        var newtbody = createElement("tbody", { "class": "hoverRowBgCc9" }, newtable);
+        var newtfoot = createElement("tfoot", {}, newtable);
+        var newtr = createElement("tr", { "class": "borderBottom2" }, thead);
         createElement("th", { "class": "link", "sortdir": "Asc", "style": "border-right:2px solid black;" }, newtr, getText("day"));
         createElement("th", { "class": "link", "sortdir": "Asc" }, newtr, getText("points"));
         createElement("th", { "class": "link", "sortdir": "Asc" }, newtr, "+");
@@ -9924,22 +9928,22 @@ function buildInfoPanelLevel() {
         createElement("td", {}, newtr, numberFormat(totalumsatz[2][1] / totalumsatz[2][0]));
         newdiv = createElement("div", { "style": "height:106px;margin-top:10px;overflow:auto;color:black;" }, container);
         for (var w = 0; w < prodNameSort[0].length; w++) {
-            var v = prodNameSort[0][w];
-            if ((!prodBlock[0][v].match(/t/)) && (buyNotePadShowBlocked || (!prodBlock[0][v].match(/[vlq]/)))) {
-                if (0 < prodMinRack[0][v]) {
-                    if (prodStock[0][v] == 0) {
-                        newdiv1 = createElement("div", { "class": "link hoverBgCc9", "prod": v, "style": "line-height:16px;" }, newdiv);
+            var v_19 = prodNameSort[0][w];
+            if ((!prodBlock[0][v_19].match(/t/)) && (buyNotePadShowBlocked || (!prodBlock[0][v_19].match(/[vlq]/)))) {
+                if (0 < prodMinRack[0][v_19]) {
+                    if (prodStock[0][v_19] == 0) {
+                        var newdiv1 = createElement("div", { "class": "link hoverBgCc9", "prod": v_19, "style": "line-height:16px;" }, newdiv);
                         newdiv1.addEventListener("mouseover", function (event) { showGoToMarketToolTip(event, this.getAttribute("prod")); }, false);
                         newdiv1.addEventListener("click", function () { showMarket(this.getAttribute("prod")); }, false);
-                        produktPic(0, v, newdiv1);
-                        createElement("span", { "style": "font-weight:bold;" }, newdiv1, getText("stockXmissing").replace(/%1%/, prodName[0][v]));
+                        produktPic(0, v_19, newdiv1);
+                        createElement("span", { "style": "font-weight:bold;" }, newdiv1, getText("stockXmissing").replace(/%1%/, prodName[0][v_19]));
                     }
-                    else if (prodStock[0][v] < prodMinRack[0][v]) {
-                        newdiv1 = createElement("div", { "class": "link hoverBgCc9", "prod": v, "style": "line-height:16px;" }, newdiv);
+                    else if (prodStock[0][v_19] < prodMinRack[0][v_19]) {
+                        var newdiv1 = createElement("div", { "class": "link hoverBgCc9", "prod": v_19, "style": "line-height:16px;" }, newdiv);
                         newdiv1.addEventListener("mouseover", function (event) { showGoToMarketToolTip(event, this.getAttribute("prod")); }, false);
                         newdiv1.addEventListener("click", function () { showMarket(this.getAttribute("prod")); }, false);
-                        produktPic(0, v, newdiv1);
-                        createElement("span", { "style": "font-weight:bold;" }, newdiv1, getText("stockXlow").replace(/%1%/, prodName[0][v]) + " (" + numberFormat(prodStock[0][v]) + ")");
+                        produktPic(0, v_19, newdiv1);
+                        createElement("span", { "style": "font-weight:bold;" }, newdiv1, getText("stockXlow").replace(/%1%/, prodName[0][v_19]) + " (" + numberFormat(prodStock[0][v_19]) + ")");
                     }
                 }
             }
@@ -9972,8 +9976,8 @@ function buildInfoPanelMessages(mode) {
             logSales = explode(GM_getValue(COUNTRY + "_" + SERVER + "_" + USERNAME + "_logSales"), "buildInfoPanelMessages/logSales", []);
             logSales.sort(sortObjFunctions["int"], true);
             logSalesId = new Object();
-            for (var v = logSales.length - 1; v >= 0; v--) {
-                logSalesId[logSales[v][0]] = v;
+            for (var v_20 = logSales.length - 1; v_20 >= 0; v_20--) {
+                logSalesId[logSales[v_20][0]] = v_20;
             }
         }
         var plotLogSales = new Array();
@@ -10012,42 +10016,42 @@ function buildInfoPanelMessages(mode) {
         newtr = createElement("tr", {}, newtable);
         switch (mode["type"]) {
             case 1: {
-                for (var v = logSales.length - 1; v > -1; v--) {
-                    if (logSales[v][2].match(regFilterPlayer)) {
+                for (var v_21 = logSales.length - 1; v_21 > -1; v_21--) {
+                    if (logSales[v_21][2].match(regFilterPlayer)) {
                         help = false;
-                        if (typeof logSales[v][3][0] != "object") {
-                            soldProducts[logSales[v][3][0]] = true;
-                            if ((mode["filterProduct"] == -1) || (mode["filterProduct"] == logSales[v][3][0])) {
-                                sumTurnover += logSales[v][4];
-                                sumProfit += 0.9 * logSales[v][4];
-                                plotLogSales.push([v, Math.round(100 * logSales[v][4] / logSales[v][3][1]) / 100]);
+                        if (typeof logSales[v_21][3][0] != "object") {
+                            soldProducts[logSales[v_21][3][0]] = true;
+                            if ((mode["filterProduct"] == -1) || (mode["filterProduct"] == logSales[v_21][3][0])) {
+                                sumTurnover += logSales[v_21][4];
+                                sumProfit += 0.9 * logSales[v_21][4];
+                                plotLogSales.push([v_21, Math.round(100 * logSales[v_21][4] / logSales[v_21][3][1]) / 100]);
                             }
                         }
-                        else if (logSales[v][3].length == 1) {
-                            soldProducts[logSales[v][3][0][0]] = true;
-                            if ((mode["filterProduct"] == -1) || (mode["filterProduct"] == logSales[v][3][0][0])) {
-                                sumTurnover += logSales[v][4];
-                                sumProfit += logSales[v][4];
-                                plotLogSales.push([v, [Math.round(100 * logSales[v][4] / logSales[v][3][0][1]) / 100]]);
+                        else if (logSales[v_21][3].length == 1) {
+                            soldProducts[logSales[v_21][3][0][0]] = true;
+                            if ((mode["filterProduct"] == -1) || (mode["filterProduct"] == logSales[v_21][3][0][0])) {
+                                sumTurnover += logSales[v_21][4];
+                                sumProfit += logSales[v_21][4];
+                                plotLogSales.push([v_21, [Math.round(100 * logSales[v_21][4] / logSales[v_21][3][0][1]) / 100]]);
                             }
                         }
                         else {
                             help = false;
                             help1 = 0;
-                            for (var i = logSales[v][3].length - 1; i > -1; i--) {
-                                soldProducts[logSales[v][3][i][0]] = true;
-                                help1 += logSales[v][3][i][1] * gut[logSales[v][3][i][0]];
-                                if ((mode["filterProduct"] == -1) || (mode["filterProduct"] == logSales[v][3][i][0])) {
+                            for (var i = logSales[v_21][3].length - 1; i > -1; i--) {
+                                soldProducts[logSales[v_21][3][i][0]] = true;
+                                help1 += logSales[v_21][3][i][1] * gut[logSales[v_21][3][i][0]];
+                                if ((mode["filterProduct"] == -1) || (mode["filterProduct"] == logSales[v_21][3][i][0])) {
                                     help = true;
                                 }
                             }
                             if (help) {
-                                help = [v, []];
-                                for (var i = logSales[v][3].length - 1; i > -1; i--) {
-                                    help[1][i] = Math.round(100 * logSales[v][4] * gut[logSales[v][3][i][0]] / help1) / 100;
-                                    if ((mode["filterProduct"] == -1) || (mode["filterProduct"] == logSales[v][3][i][0])) {
-                                        sumTurnover += logSales[v][3][i][1] * help[1][i];
-                                        sumProfit += logSales[v][3][i][1] * help[1][i];
+                                help = [v_21, []];
+                                for (var i = logSales[v_21][3].length - 1; i > -1; i--) {
+                                    help[1][i] = Math.round(100 * logSales[v_21][4] * gut[logSales[v_21][3][i][0]] / help1) / 100;
+                                    if ((mode["filterProduct"] == -1) || (mode["filterProduct"] == logSales[v_21][3][i][0])) {
+                                        sumTurnover += logSales[v_21][3][i][1] * help[1][i];
+                                        sumProfit += logSales[v_21][3][i][1] * help[1][i];
                                     }
                                 }
                                 plotLogSales.push(help);
@@ -10060,7 +10064,7 @@ function buildInfoPanelMessages(mode) {
                 createElement("th", {}, newtr, getText("price"));
                 createElement("th", {}, newtr, getText("turnover"));
                 createElement("th", {}, newtr, getText("profit"));
-                eventListenerScroll = function () {
+                var eventListenerScroll = function () {
                     if ((parseInt(this.scrollTop, 10) + parseInt(this.style.height, 10)) > 0.95 * parseInt(this.scrollHeight, 10)) {
                         plot();
                     }
@@ -10154,37 +10158,37 @@ function buildInfoPanelMessages(mode) {
                 break;
             }
             case 2: {
-                for (var v = logSales.length - 1; v > -1; v--) {
-                    if (logSales[v][2].match(regFilterPlayer)) {
-                        if (typeof logSales[v][3][0] != "object") {
-                            if (!plotLogSales[logSales[v][3][0]]) {
-                                plotLogSales[logSales[v][3][0]] = [logSales[v][3][0], 0, 0, 0];
+                for (var v_22 = logSales.length - 1; v_22 > -1; v_22--) {
+                    if (logSales[v_22][2].match(regFilterPlayer)) {
+                        if (typeof logSales[v_22][3][0] != "object") {
+                            if (!plotLogSales[logSales[v_22][3][0]]) {
+                                plotLogSales[logSales[v_22][3][0]] = [logSales[v_22][3][0], 0, 0, 0];
                             }
-                            plotLogSales[logSales[v][3][0]][1] += logSales[v][3][1];
-                            plotLogSales[logSales[v][3][0]][2] += logSales[v][4];
-                            plotLogSales[logSales[v][3][0]][3] += 0.9 * logSales[v][4];
+                            plotLogSales[logSales[v_22][3][0]][1] += logSales[v_22][3][1];
+                            plotLogSales[logSales[v_22][3][0]][2] += logSales[v_22][4];
+                            plotLogSales[logSales[v_22][3][0]][3] += 0.9 * logSales[v_22][4];
                         }
-                        else if (logSales[v][3].length == 1) {
-                            if (!plotLogSales[logSales[v][3][0][0]]) {
-                                plotLogSales[logSales[v][3][0][0]] = [logSales[v][3][0][0], 0, 0, 0];
+                        else if (logSales[v_22][3].length == 1) {
+                            if (!plotLogSales[logSales[v_22][3][0][0]]) {
+                                plotLogSales[logSales[v_22][3][0][0]] = [logSales[v_22][3][0][0], 0, 0, 0];
                             }
-                            plotLogSales[logSales[v][3][0][0]][1] += logSales[v][3][0][1];
-                            plotLogSales[logSales[v][3][0][0]][2] += logSales[v][4];
-                            plotLogSales[logSales[v][3][0][0]][3] += logSales[v][4];
+                            plotLogSales[logSales[v_22][3][0][0]][1] += logSales[v_22][3][0][1];
+                            plotLogSales[logSales[v_22][3][0][0]][2] += logSales[v_22][4];
+                            plotLogSales[logSales[v_22][3][0][0]][3] += logSales[v_22][4];
                         }
                         else {
                             help1 = 0;
-                            for (var i = logSales[v][3].length - 1; i > -1; i--) {
-                                help1 += logSales[v][3][i][1] * gut[logSales[v][3][i][0]];
+                            for (var i = logSales[v_22][3].length - 1; i > -1; i--) {
+                                help1 += logSales[v_22][3][i][1] * gut[logSales[v_22][3][i][0]];
                             }
-                            for (var i = logSales[v][3].length - 1; i > -1; i--) {
-                                help = Math.round(100 * logSales[v][3][i][1] * logSales[v][4] * gut[logSales[v][3][i][0]] / help1) / 100;
-                                if (!plotLogSales[logSales[v][3][i][0]]) {
-                                    plotLogSales[logSales[v][3][i][0]] = [logSales[v][3][i][0], 0, 0, 0];
+                            for (var i = logSales[v_22][3].length - 1; i > -1; i--) {
+                                help = Math.round(100 * logSales[v_22][3][i][1] * logSales[v_22][4] * gut[logSales[v_22][3][i][0]] / help1) / 100;
+                                if (!plotLogSales[logSales[v_22][3][i][0]]) {
+                                    plotLogSales[logSales[v_22][3][i][0]] = [logSales[v_22][3][i][0], 0, 0, 0];
                                 }
-                                plotLogSales[logSales[v][3][i][0]][1] += logSales[v][3][i][1];
-                                plotLogSales[logSales[v][3][i][0]][2] += help;
-                                plotLogSales[logSales[v][3][i][0]][3] += help;
+                                plotLogSales[logSales[v_22][3][i][0]][1] += logSales[v_22][3][i][1];
+                                plotLogSales[logSales[v_22][3][i][0]][2] += help;
+                                plotLogSales[logSales[v_22][3][i][0]][3] += help;
                             }
                         }
                     }
@@ -10196,24 +10200,24 @@ function buildInfoPanelMessages(mode) {
                 createElement("th", {}, newtr, "Ø");
                 createElement("th", {}, newtr, getText("profit"));
                 createElement("th", {}, newtr, "Ø");
-                for (var v = plotLogSales.length - 1; v > -1; v--) {
-                    if (!plotLogSales[v]) {
+                for (var v_23 = plotLogSales.length - 1; v_23 > -1; v_23--) {
+                    if (!plotLogSales[v_23]) {
                         continue;
                     }
-                    sumTurnover += plotLogSales[v][2];
-                    sumProfit += plotLogSales[v][3];
-                    newtr = createElement("tr", { "class": "hoverBgCc9 link", "prod": plotLogSales[v][0] }, newtable);
+                    sumTurnover += plotLogSales[v_23][2];
+                    sumProfit += plotLogSales[v_23][3];
+                    newtr = createElement("tr", { "class": "hoverBgCc9 link", "prod": plotLogSales[v_23][0] }, newtable);
                     newtr.addEventListener("click", function () {
                         buildInfoPanelMessages({ "type": 1, "filterProduct": this.getAttribute("prod") });
                     }, false);
                     newtd = createElement("td", {}, newtr);
-                    produktPic(0, plotLogSales[v][0], newtd);
-                    createElement("span", {}, newtd, prodName[0][plotLogSales[v][0]]);
-                    createElement("td", { "align": "right", "style": "padding-right:3px;border-right:1px solid black" }, newtr, numberFormat(plotLogSales[v][1], 0));
-                    createElement("td", { "align": "right" }, newtr, moneyFormat(plotLogSales[v][2]));
-                    createElement("td", { "align": "right", "style": "padding-right:3px;border-right:1px solid black" }, newtr, moneyFormat(plotLogSales[v][2] / plotLogSales[v][1], 2));
-                    createElement("td", { "align": "right" }, newtr, moneyFormat(plotLogSales[v][3]));
-                    createElement("td", { "align": "right", "style": "padding-right:20px;" }, newtr, moneyFormat(plotLogSales[v][3] / plotLogSales[v][1], 2));
+                    produktPic(0, plotLogSales[v_23][0], newtd);
+                    createElement("span", {}, newtd, prodName[0][plotLogSales[v_23][0]]);
+                    createElement("td", { "align": "right", "style": "padding-right:3px;border-right:1px solid black" }, newtr, numberFormat(plotLogSales[v_23][1], 0));
+                    createElement("td", { "align": "right" }, newtr, moneyFormat(plotLogSales[v_23][2]));
+                    createElement("td", { "align": "right", "style": "padding-right:3px;border-right:1px solid black" }, newtr, moneyFormat(plotLogSales[v_23][2] / plotLogSales[v_23][1]));
+                    createElement("td", { "align": "right" }, newtr, moneyFormat(plotLogSales[v_23][3]));
+                    createElement("td", { "align": "right", "style": "padding-right:20px;" }, newtr, moneyFormat(plotLogSales[v_23][3] / plotLogSales[v_23][1]));
                 }
                 break;
             }
