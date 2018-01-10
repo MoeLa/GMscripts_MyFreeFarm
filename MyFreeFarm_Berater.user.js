@@ -2087,6 +2087,7 @@ var gameLocation = new function () {
 };
 unsafeData.gameLocation = gameLocation;
 // Function for validation of AJAX-response. taken from game and shrunk on return value
+// TODO: Can we remove the parameter 'mode'?
 function checkRequest(request, mode) {
     try {
         if (request.readyState == 4 && request.status == 200) {
@@ -2139,12 +2140,12 @@ function showShopframePage(page) {
     var cell = $top("shop");
     if (cell) {
         if (top.window.wrappedJSObject.city != 1) {
-            var f = function () {
+            var f_1 = function () {
                 GM_logInfo("showShopframePage", "page=" + page, "", "Arrived in city 1");
-                top.document.removeEventListener("gameCity1", f, false);
+                top.document.removeEventListener("gameCity1", f_1, false);
                 showShopframePage(page);
             };
-            top.document.addEventListener("gameCity1", f, false);
+            top.document.addEventListener("gameCity1", f_1, false);
             click($top("speedlink_city1"));
         }
         else if (cell.style.display != "block") {
@@ -2174,13 +2175,13 @@ function showMessage(from, page, msg) {
 function showSeedVendor(productId) {
     try {
         if (!gameLocation.check("city", 1)) {
-            var f = function (productId) {
+            var f1_1 = function (productId) {
                 return function () {
-                    top.document.removeEventListener("gameCity1", f, false);
+                    top.document.removeEventListener("gameCity1", f1_1, false);
                     window.setTimeout(showSeedVendor, 100, productId);
                 };
             };
-            top.document.addEventListener("gameCity1", f(productId), false);
+            top.document.addEventListener("gameCity1", f1_1(productId), false);
             GM_logInfo("showSeedVendor", "productId=" + productId, "", getText("goToX").replace(/%1%/, unsafeWindow.cityname1));
             click($top("speedlink_city1"));
         }
@@ -2200,11 +2201,11 @@ function showSeedVendor(productId) {
 function showLottery() {
     var div = $top("speedlink_city2");
     if (div && ($top("lotterycontainer"))) {
-        var f = function () {
+        var f_2 = function () {
             click($top("cityzone_2_8"));
-            top.document.removeEventListener("gameCity2", f, false);
+            top.document.removeEventListener("gameCity2", f_2, false);
         };
-        top.document.addEventListener("gameCity2", f, false);
+        top.document.addEventListener("gameCity2", f_2, false);
         click(div);
     }
     div = null;
@@ -2219,11 +2220,11 @@ function goToAnimalBreedingReady() {
             }
         }
         else if (div = $("speedlink_farmersmarket")) {
-            var f = function () {
-                document.removeEventListener("gameFarmersmarketOpened", f, false);
+            var f_3 = function () {
+                document.removeEventListener("gameFarmersmarketOpened", f_3, false);
                 window.setTimeout(goToAnimalBreedingReady, 100);
             };
-            document.addEventListener("gameFarmersmarketOpened", f, false);
+            document.addEventListener("gameFarmersmarketOpened", f_3, false);
             click(div);
         }
         div = null;
@@ -2241,11 +2242,11 @@ function goToMonsterFruitCultureReady() {
             }
         }
         else if (div = $("speedlink_farmersmarket")) {
-            var f = function () {
-                document.removeEventListener("gameFarmersmarketOpened", f, false);
+            var f_4 = function () {
+                document.removeEventListener("gameFarmersmarketOpened", f_4, false);
                 window.setTimeout(goToMonsterFruitCultureReady, 100);
             };
-            document.addEventListener("gameFarmersmarketOpened", f, false);
+            document.addEventListener("gameFarmersmarketOpened", f_4, false);
             click(div);
         }
         div = null;
@@ -2263,11 +2264,11 @@ function goToSpeedEatingReady() {
             }
         }
         else if (div = $("speedlink_farmersmarket")) {
-            var f = function () {
-                document.removeEventListener("gameFarmersmarketOpened", f, false);
+            var f_5 = function () {
+                document.removeEventListener("gameFarmersmarketOpened", f_5, false);
                 window.setTimeout(goToSpeedEatingReady, 100);
             };
-            document.addEventListener("gameFarmersmarketOpened", f, false);
+            document.addEventListener("gameFarmersmarketOpened", f_5, false);
             click(div);
         }
         div = null;
@@ -2285,12 +2286,12 @@ function goToBuyPetsParts() {
             click(div);
         }
         else if (!(gameLocation.check("farm", 0)) && (div = $("speedlink_farm1"))) {
-            var f = function () {
-                document.removeEventListener("gameFarmOpened", f, false);
+            var f_6 = function () {
+                document.removeEventListener("gameFarmOpened", f_6, false);
                 action = function () { click($("pets_parts_link")); };
                 listeningEvent = "gamegoToBuyPetsParts";
             };
-            document.addEventListener("gameFarmOpened", f, false);
+            document.addEventListener("gameFarmOpened", f_6, false);
             listeningEvent = "gameFarmOpened";
             action = function () { click(div); };
         }
@@ -2299,13 +2300,13 @@ function goToBuyPetsParts() {
             listeningEvent = "gamegoToOpenPetsParts";
         }
         if (listeningEvent) {
-            var f1 = function (listeningEvent) {
+            var f1_2 = function (listeningEvent) {
                 return function () {
-                    document.removeEventListener(listeningEvent, f1, false);
+                    document.removeEventListener(listeningEvent, f1_2, false);
                     window.setTimeout(function () { goToBuyPetsParts(); }, 300);
                 };
             };
-            document.addEventListener(listeningEvent, f1(listeningEvent), false);
+            document.addEventListener(listeningEvent, f1_2(listeningEvent), false);
         }
         if (action) {
             action();
@@ -2327,11 +2328,11 @@ function goToDonkey() {
             }
         }
         else if (div = $("speedlink_farm1")) {
-            var f = function () {
-                document.removeEventListener("gameFarmOpened", f, false);
+            var f_7 = function () {
+                document.removeEventListener("gameFarmOpened", f_7, false);
                 window.setTimeout(goToDonkey, 100);
             };
-            document.addEventListener("gameFarmOpened", f, false);
+            document.addEventListener("gameFarmOpened", f_7, false);
             click(div);
         }
         div = null;
@@ -2344,11 +2345,11 @@ function goToClothingDonation() {
     try {
         var div = $top("speedlink_city2");
         if (div && $top("clothingdonation_link")) {
-            var f = function () {
+            var f_8 = function () {
                 click($top("clothingdonation_link_2"));
-                top.document.removeEventListener("gameCity2", f, false);
+                top.document.removeEventListener("gameCity2", f_8, false);
             };
-            top.document.addEventListener("gameCity2", f, false);
+            top.document.addEventListener("gameCity2", f_8, false);
             click(div);
         }
         div = null;
@@ -2366,11 +2367,11 @@ function goToVet() {
             }
         }
         else if (div = $("speedlink_farmersmarket")) {
-            var f = function () {
-                document.removeEventListener("gameFarmersmarketOpened", f, false);
+            var f_9 = function () {
+                document.removeEventListener("gameFarmersmarketOpened", f_9, false);
                 window.setTimeout(goToVet, 100);
             };
-            document.addEventListener("gameFarmersmarketOpened", f, false);
+            document.addEventListener("gameFarmersmarketOpened", f_9, false);
             click(div);
         }
         div = null;
@@ -4302,13 +4303,13 @@ function handleQuestLine() {
                                             unsafeWindow.initCampaigns();
                                         }
                                         else {
-                                            var f = function () {
-                                                document.removeEventListener("gameCity2", f, false);
+                                            var f_10 = function () {
+                                                document.removeEventListener("gameCity2", f_10, false);
                                                 unsafeWindow.close_page();
                                                 unsafeWindow.showDiv("transp3");
                                                 unsafeWindow.initCampaigns();
                                             };
-                                            document.addEventListener("gameCity2", f, false);
+                                            document.addEventListener("gameCity2", f_10, false);
                                             click($("speedlink_city2"));
                                         }
                                     }, false);
@@ -4321,11 +4322,11 @@ function handleQuestLine() {
                                             click($("foodworld_questblock"));
                                         }
                                         else {
-                                            var f = function () {
-                                                document.removeEventListener("gameFoodworldOpened", f, false);
+                                            var f_11 = function () {
+                                                document.removeEventListener("gameFoodworldOpened", f_11, false);
                                                 click($("foodworld_questblock"));
                                             };
-                                            document.addEventListener("gameFoodworldOpened", f, false);
+                                            document.addEventListener("gameFoodworldOpened", f_11, false);
                                             click($("speedlink_foodworld"));
                                         }
                                     }, false);
@@ -5267,7 +5268,6 @@ function buildInfoPanelProfit(mode) {
             }
         }
         profit.sort(function (a, b) { return b[mode["sort"]] - a[mode["sort"]]; });
-        // console.log("variable:\n"+print_r(profit,"",true,"\n"));
         //head line
         err_trace = "head line";
         var table, newtr, newtd, newspan, newdiv, newtable1, newtr1, newtd1;
@@ -7868,6 +7868,7 @@ unsafeWindow.buildInfoPanelMenu = function (mode) {
         GM_logError("buildInfoPanelMenu", "", "", err);
     }
 };
+// Also implemented in Automat: TODO: Rename or refactor
 function buildInfoPanelOptions() {
     try {
         var container, newdiv, newtable, newtr, newtd, newtr, newtd1, newinput;
@@ -10223,63 +10224,63 @@ function buildInfoPanelMessages(mode) {
             }
             case 3: {
                 plotLogSales = new Object();
-                for (var v = logSales.length - 1; v > -1; v--) {
-                    if (typeof logSales[v][3][0] != "object") {
-                        soldProducts[logSales[v][3][0]] = true;
-                        if ((mode["filterProduct"] == -1) || (mode["filterProduct"] == logSales[v][3][0])) {
-                            if (!plotLogSales[logSales[v][2]]) {
-                                plotLogSales[logSales[v][2]] = [logSales[v][2], {}, 0, 0];
+                for (var v_24 = logSales.length - 1; v_24 > -1; v_24--) {
+                    if (typeof logSales[v_24][3][0] != "object") {
+                        soldProducts[logSales[v_24][3][0]] = true;
+                        if ((mode["filterProduct"] == -1) || (mode["filterProduct"] == logSales[v_24][3][0])) {
+                            if (!plotLogSales[logSales[v_24][2]]) {
+                                plotLogSales[logSales[v_24][2]] = [logSales[v_24][2], {}, 0, 0];
                             }
-                            if (!plotLogSales[logSales[v][2]][1][logSales[v][3][0]]) {
-                                plotLogSales[logSales[v][2]][1][logSales[v][3][0]] = 0;
+                            if (!plotLogSales[logSales[v_24][2]][1][logSales[v_24][3][0]]) {
+                                plotLogSales[logSales[v_24][2]][1][logSales[v_24][3][0]] = 0;
                             }
-                            plotLogSales[logSales[v][2]][1][logSales[v][3][0]] += logSales[v][3][1];
-                            plotLogSales[logSales[v][2]][2] += logSales[v][4];
-                            plotLogSales[logSales[v][2]][3] += 0.9 * logSales[v][4];
+                            plotLogSales[logSales[v_24][2]][1][logSales[v_24][3][0]] += logSales[v_24][3][1];
+                            plotLogSales[logSales[v_24][2]][2] += logSales[v_24][4];
+                            plotLogSales[logSales[v_24][2]][3] += 0.9 * logSales[v_24][4];
                         }
                     }
-                    else if (logSales[v][3].length == 1) {
-                        soldProducts[logSales[v][3][0][0]] = true;
-                        if ((mode["filterProduct"] == -1) || (mode["filterProduct"] == logSales[v][3][0][0])) {
-                            if (!plotLogSales[logSales[v][2]]) {
-                                plotLogSales[logSales[v][2]] = [logSales[v][2], {}, 0, 0];
+                    else if (logSales[v_24][3].length == 1) {
+                        soldProducts[logSales[v_24][3][0][0]] = true;
+                        if ((mode["filterProduct"] == -1) || (mode["filterProduct"] == logSales[v_24][3][0][0])) {
+                            if (!plotLogSales[logSales[v_24][2]]) {
+                                plotLogSales[logSales[v_24][2]] = [logSales[v_24][2], {}, 0, 0];
                             }
-                            if (!plotLogSales[logSales[v][2]][1][logSales[v][3][0][0]]) {
-                                plotLogSales[logSales[v][2]][1][logSales[v][3][0][0]] = 0;
+                            if (!plotLogSales[logSales[v_24][2]][1][logSales[v_24][3][0][0]]) {
+                                plotLogSales[logSales[v_24][2]][1][logSales[v_24][3][0][0]] = 0;
                             }
-                            plotLogSales[logSales[v][2]][1][logSales[v][3][0][0]] += logSales[v][3][0][1];
-                            plotLogSales[logSales[v][2]][2] += logSales[v][4];
-                            plotLogSales[logSales[v][2]][3] += logSales[v][4];
+                            plotLogSales[logSales[v_24][2]][1][logSales[v_24][3][0][0]] += logSales[v_24][3][0][1];
+                            plotLogSales[logSales[v_24][2]][2] += logSales[v_24][4];
+                            plotLogSales[logSales[v_24][2]][3] += logSales[v_24][4];
                         }
                     }
                     else {
                         help1 = 0;
-                        for (var i = logSales[v][3].length - 1; i > -1; i--) {
-                            help1 += logSales[v][3][i][1] * gut[logSales[v][3][i][0]];
+                        for (var i = logSales[v_24][3].length - 1; i > -1; i--) {
+                            help1 += logSales[v_24][3][i][1] * gut[logSales[v_24][3][i][0]];
                         }
-                        for (var i = logSales[v][3].length - 1; i > -1; i--) {
-                            soldProducts[logSales[v][3][i][0]] = true;
-                            if ((mode["filterProduct"] == -1) || (mode["filterProduct"] == logSales[v][3][i][0])) {
-                                help = Math.round(100 * logSales[v][3][i][1] * logSales[v][4] * gut[logSales[v][3][i][0]] / help1) / 100;
-                                if (!plotLogSales[logSales[v][2]]) {
-                                    plotLogSales[logSales[v][2]] = [logSales[v][2], {}, 0, 0];
+                        for (var i = logSales[v_24][3].length - 1; i > -1; i--) {
+                            soldProducts[logSales[v_24][3][i][0]] = true;
+                            if ((mode["filterProduct"] == -1) || (mode["filterProduct"] == logSales[v_24][3][i][0])) {
+                                help = Math.round(100 * logSales[v_24][3][i][1] * logSales[v_24][4] * gut[logSales[v_24][3][i][0]] / help1) / 100;
+                                if (!plotLogSales[logSales[v_24][2]]) {
+                                    plotLogSales[logSales[v_24][2]] = [logSales[v_24][2], {}, 0, 0];
                                 }
-                                if (!plotLogSales[logSales[v][2]][1][logSales[v][3][i][0]]) {
-                                    plotLogSales[logSales[v][2]][1][logSales[v][3][i][0]] = 0;
+                                if (!plotLogSales[logSales[v_24][2]][1][logSales[v_24][3][i][0]]) {
+                                    plotLogSales[logSales[v_24][2]][1][logSales[v_24][3][i][0]] = 0;
                                 }
-                                plotLogSales[logSales[v][2]][1][logSales[v][3][i][0]] += logSales[v][3][i][1];
-                                plotLogSales[logSales[v][2]][2] += help;
-                                plotLogSales[logSales[v][2]][3] += help;
+                                plotLogSales[logSales[v_24][2]][1][logSales[v_24][3][i][0]] += logSales[v_24][3][i][1];
+                                plotLogSales[logSales[v_24][2]][2] += help;
+                                plotLogSales[logSales[v_24][2]][3] += help;
                             }
                         }
                     }
                 }
                 help = [];
-                for (var i in plotLogSales) {
-                    if (!plotLogSales.hasOwnProperty(i)) {
+                for (var i_7 in plotLogSales) {
+                    if (!plotLogSales.hasOwnProperty(i_7)) {
                         continue;
                     }
-                    help.push(plotLogSales[i]);
+                    help.push(plotLogSales[i_7]);
                 }
                 plotLogSales = help.clone();
                 plotLogSales.sort(function (a, b) { return a[3] - b[3]; });
@@ -10287,28 +10288,28 @@ function buildInfoPanelMessages(mode) {
                 createElement("th", {}, newtr, getText("products"));
                 createElement("th", {}, newtr, getText("turnover"));
                 createElement("th", {}, newtr, getText("profit"));
-                for (var v = plotLogSales.length - 1; v > -1; v--) {
-                    if (!plotLogSales[v]) {
+                for (var v_25 = plotLogSales.length - 1; v_25 > -1; v_25--) {
+                    if (!plotLogSales[v_25]) {
                         continue;
                     }
-                    sumTurnover += plotLogSales[v][2];
-                    sumProfit += plotLogSales[v][3];
-                    newtr = createElement("tr", { "class": "hoverBgCc9 link", "player": plotLogSales[v][0] }, newtable);
+                    sumTurnover += plotLogSales[v_25][2];
+                    sumProfit += plotLogSales[v_25][3];
+                    newtr = createElement("tr", { "class": "hoverBgCc9 link", "player": plotLogSales[v_25][0] }, newtable);
                     newtr.addEventListener("click", function () {
                         buildInfoPanelMessages({ "type": 1, "filterPlayer": this.getAttribute("player") });
                     }, false);
-                    createElement("td", {}, newtr, plotLogSales[v][0]);
+                    createElement("td", {}, newtr, plotLogSales[v_25][0]);
                     newtd = createElement("td", {}, newtr);
-                    for (var i in plotLogSales[v][1]) {
-                        if (!plotLogSales[v][1].hasOwnProperty(i)) {
+                    for (var i_8 in plotLogSales[v_25][1]) {
+                        if (!plotLogSales[v_25][1].hasOwnProperty(i_8)) {
                             continue;
                         }
                         div = createElement("div", {}, newtd);
-                        produktPic(0, i, div);
-                        createElement("span", {}, div, numberFormat(plotLogSales[v][1][i]) + " " + prodName[0][i]);
+                        produktPic(0, i_8, div);
+                        createElement("span", {}, div, numberFormat(plotLogSales[v_25][1][i_8]) + " " + prodName[0][i_8]);
                     }
-                    createElement("td", { "align": "right" }, newtr, moneyFormat(plotLogSales[v][2]));
-                    createElement("td", { "align": "right" }, newtr, moneyFormat(plotLogSales[v][3]));
+                    createElement("td", { "align": "right" }, newtr, moneyFormat(plotLogSales[v_25][2]));
+                    createElement("td", { "align": "right" }, newtr, moneyFormat(plotLogSales[v_25][3]));
                 }
                 break;
             }
@@ -10328,9 +10329,9 @@ function buildInfoPanelMessages(mode) {
             }, false);
             cell = createElement("select", { "class": "link" }, newtd);
             createElement("option", { "value": -1 }, cell, "---");
-            for (var v = 0; v < prodNameSort[0].length; v++) {
-                if (soldProducts[prodNameSort[0][v]]) {
-                    createElement("option", { "value": prodNameSort[0][v] }, cell, prodName[0][prodNameSort[0][v]]);
+            for (var v_26 = 0; v_26 < prodNameSort[0].length; v_26++) {
+                if (soldProducts[prodNameSort[0][v_26]]) {
+                    createElement("option", { "value": prodNameSort[0][v_26] }, cell, prodName[0][prodNameSort[0][v_26]]);
                 }
             }
             cell.value = mode["filterProduct"];
@@ -10372,6 +10373,7 @@ function buildInfoPanelMessages(mode) {
         GM_logError("buildInfoPanelMessages", "", "", err);
     }
 }
+// Is called e.g. when you've opened a field and click on the arrow 'Go to nect field'
 function goToZone(zoneNrF) {
     try {
         var currLocation = zones.getLocation(zoneNrF);
@@ -10384,12 +10386,13 @@ function goToZone(zoneNrF) {
                     }
                 }
                 else if (div = $("speedlink_farm" + (1 + currLocation.farmNr))) {
-                    document.addEventListener("gameFarmOpened", function (zoneNrF) {
+                    var f1_3 = function (zoneNrF) {
                         return function () {
-                            document.removeEventListener("gameFarmOpened", arguments.callee, false);
+                            document.removeEventListener("gameFarmOpened", f1_3, false);
                             window.setTimeout(goToZone, 100, zoneNrF);
                         };
-                    }(zoneNrF), false);
+                    };
+                    document.addEventListener("gameFarmOpened", f1_3(zoneNrF), false);
                     click(div);
                 }
                 break;
@@ -10401,6 +10404,7 @@ function goToZone(zoneNrF) {
                     }
                 }
                 else if (div = $("speedlink_city" + currLocation.cityNr)) {
+                    // TODO: Think about how to get rid of arguments.callee here
                     document.addEventListener("gameCity" + currLocation.cityNr, function (zoneNrF, currLocation) {
                         return function () {
                             document.removeEventListener("gameCity" + currLocation.cityNr, arguments.callee, false);
@@ -10418,12 +10422,13 @@ function goToZone(zoneNrF) {
                     }
                 }
                 else if (div = $("speedlink_forestry")) {
-                    document.addEventListener("gameOpenForestry", function (zoneNrF) {
+                    var f1_4 = function (zoneNrF) {
                         return function () {
-                            document.removeEventListener("gameOpenForestry", arguments.callee, false);
+                            document.removeEventListener("gameOpenForestry", f1_4, false);
                             window.setTimeout(goToZone, 100, zoneNrF);
                         };
-                    }(zoneNrF), false);
+                    };
+                    document.addEventListener("gameOpenForestry", f1_4(zoneNrF), false);
                     click(div);
                 }
                 break;
@@ -10435,12 +10440,13 @@ function goToZone(zoneNrF) {
                     }
                 }
                 else if (div = $("speedlink_foodworld")) {
-                    document.addEventListener("gameFoodworldOpened", function (zoneNrF) {
+                    var f1_5 = function (zoneNrF) {
                         return function () {
-                            document.removeEventListener("gameFoodworldOpened", arguments.callee, false);
+                            document.removeEventListener("gameFoodworldOpened", f1_5, false);
                             window.setTimeout(goToZone, 100, zoneNrF);
                         };
-                    }(zoneNrF), false);
+                    };
+                    document.addEventListener("gameFoodworldOpened", f1_5(zoneNrF), false);
                     click(div);
                 }
                 break;
@@ -10452,12 +10458,13 @@ function goToZone(zoneNrF) {
                     }
                 }
                 else if (div = $("speedlink_farmersmarket")) {
-                    document.addEventListener("gameFarmersmarketOpened", function (zoneNrF) {
+                    var f1_6 = function (zoneNrF) {
                         return function () {
-                            document.removeEventListener("gameFarmersmarketOpened", arguments.callee, false);
+                            document.removeEventListener("gameFarmersmarketOpened", f1_6, false);
                             window.setTimeout(goToZone, 100, zoneNrF);
                         };
-                    }(zoneNrF), false);
+                    };
+                    document.addEventListener("gameFarmersmarketOpened", f1_6(zoneNrF), false);
                     click(div);
                 }
                 break;
@@ -10509,7 +10516,7 @@ function calcAllSlots() {
 function toolTipZoneProduction(zoneNrS) {
     try {
         var currLocation = zones.getLocation(zoneNrS);
-        var content = createElement("div");
+        var content = createElement("div", {});
         var time, endDay, table, tr, td;
         var help;
         table = createElement("table", { "border": "0", "cellspacing": "0", "cellpadding": "0" }, content);
@@ -10583,7 +10590,7 @@ function toolTipZoneProduction(zoneNrS) {
                     }
                     else if (zones.getBuilding(zoneNrS) == "fl3") {
                         //monster fruit culture
-                        item = unsafeWindow.farmersmarket_data.megafruit;
+                        var item = unsafeWindow.farmersmarket_data.megafruit;
                         tr = createElement("tr", {}, table);
                         td = createElement("td", { "colspan": 2 }, tr);
                         //createElement("img",{"src":GFX+"/monsterfruit_"+item.current.pid+".png","style":"height:15px;width:15px;border:none;top:0px;vertical-align:bottom;"},td);
@@ -10632,7 +10639,7 @@ function toolTipZoneProduction(zoneNrS) {
 }
 function toolTipSales(nr) {
     try {
-        var content = createElement("div");
+        var content = createElement("div", {});
         var table, tr, td;
         var time;
         if (logSales[nr]) {
@@ -10683,22 +10690,29 @@ function toolTipSales(nr) {
         GM_logError("toolTipSales", "", "", err);
     }
 }
-/*
-  <div style="position:absolute; top:7px; left:8px;" class="tt7">  <div style="z-index: 100; display: none; position: absolute; top: 60px; right: 0px; white-space: nowrap;" class="ttbox" id="market_catitem7">Sonnenblumen (6.061)</div>  </div>
-*/
+// function y(f) {
+//     return function () {
+//         return f.bind(null, y(f)).apply(this, arguments);
+//     };
+// }
 function showMarket(pid) {
     try {
         if (!gameLocation.check("city", 1)) {
-            document.addEventListener("gameCity1", function (pid) {
+            document.addEventListener("gameCity1", function _tempFuncGoToCity1(pid) {
                 return function () {
-                    document.removeEventListener("gameCity1", arguments.callee, false);
+                    document.removeEventListener("gameCity1", _tempFuncGoToCity1, false);
                     showMarket(pid);
                 };
             }(pid), false);
             click($("speedlink_city1"));
         }
         else if ($("market").style.display != "block") {
-            document.addEventListener("gameOpenMarket", function (pid) {
+            // TODO: Invest further thoughts in how to remove arguments.callee in this beauty here!
+            // document.addEventListener("gameOpenMarket", y(function (callee, pid) {
+            //     document.removeEventListener("gameOpenMarket", callee, false);
+            //     showMarket(pid);
+            // }), false);
+            document.addEventListener("gameOpenMarket", function _tempFuncOpenMarket(pid) {
                 return function () {
                     document.removeEventListener("gameOpenMarket", arguments.callee, false);
                     showMarket(pid);
@@ -10710,7 +10724,7 @@ function showMarket(pid) {
             unsafeWindow.hideDiv("adcolumn");
             $("transp3").style.visibility = "visible";
             unsafeWindow.showDiv("transp3");
-            unsafeWindow.marketAction("marketinit");
+            unsafeWindow.marketAction("marketinit", undefined, undefined);
         }
         else {
             closeInfoPanel();
@@ -10728,28 +10742,30 @@ function showMarket(pid) {
 function showMarketStall() {
     try {
         if (!gameLocation.check("city", 1)) {
-            document.addEventListener("gameCity1", function () {
-                document.removeEventListener("gameCity1", arguments.callee, false);
+            var f_12 = function () {
+                document.removeEventListener("gameCity1", f_12, false);
                 showMarketStall();
-            }, false);
+            };
+            document.addEventListener("gameCity1", f_12, false);
             click($("speedlink_city1"));
         }
         else if ($("market").style.display != "block") {
-            document.addEventListener("gameOpenMarket", function () {
-                document.removeEventListener("gameOpenMarket", arguments.callee, false);
+            var f_13 = function () {
+                document.removeEventListener("gameOpenMarket", f_13, false);
                 showMarketStall();
-            }, false);
+            };
+            document.addEventListener("gameOpenMarket", f_13, false);
             unsafeWindow.close_page();
             unsafeWindow.showDiv("transp3");
             unsafeWindow.$("transp3").style.visibility = "visible";
-            unsafeWindow.marketAction("marketinit");
+            unsafeWindow.marketAction("marketinit", undefined, undefined);
         }
         else {
             unsafeWindow.setMarketNavi(3);
             unsafeWindow.market_guild_filter = 0;
             unsafeWindow.market_filter_pid = -1;
             unsafeWindow.market_filter_own = 1;
-            unsafeWindow.showOffers();
+            unsafeWindow.showOffers(undefined);
         }
     }
     catch (err) {
@@ -10762,13 +10778,13 @@ function quicklinks() {
             var newdiv = $("market_navi5");
             if (newdiv) {
                 if (!newdiv.getAttribute("listener_mouseover")) {
-                    newdiv.setAttribute("listener_mouseover", true);
+                    newdiv.setAttribute("listener_mouseover", "true");
                     newdiv.addEventListener("mouseover", function (event) {
                         $("quicklinks").style.display = "block";
                     }, false);
                 }
                 if (!newdiv.getAttribute("listener_mouseout")) {
-                    newdiv.setAttribute("listener_mouseout", true);
+                    newdiv.setAttribute("listener_mouseout", "true");
                     newdiv.addEventListener("mouseout", function (event) {
                         $("quicklinks").style.display = "none";
                     }, false);
@@ -10817,7 +10833,6 @@ function quicklinks() {
                 newtable = null;
                 newtr = null;
                 newtd = null;
-                newa = null;
                 newdiv1 = null;
             }
             newdiv = null;
@@ -10855,7 +10870,7 @@ var timer = new function () {
         try {
             for (var i = running.length - 1; i >= 0; i--) {
                 if (unsafeWindow.Zeit.Server < running[i][2]) {
-                    running[i][1].innerHTML = getTimeStr(running[i][2] - unsafeWindow.Zeit.Server);
+                    running[i][1].innerHTML = getTimeStr(running[i][2] - unsafeWindow.Zeit.Server, undefined);
                 }
                 else {
                     running[i][3]();
@@ -10922,7 +10937,7 @@ function createZoneTimer(name, zoneNrS, type, style, append) {
                         toolTip.show(event, toolTipZoneProduction(zoneNrS));
                     }
                     else {
-                        var newDiv1 = createElement("div");
+                        var newDiv1 = createElement("div", {});
                         var newTable = createElement("table", { "border": "0", "cellspacing": "0", "cellpadding": "0" }, newDiv1);
                         var newTr = createElement("tr", {}, newTable);
                         var newTd = createElement("th", { "class": "lightBg", "colspan": 2 }, newTr, zones.getBuildingName(zoneNrS));
@@ -10976,7 +10991,7 @@ function updateZoneTimer(name, zoneNrS, type) {
         var div;
         if (div = $(name)) {
             if (zones.getBlock(zoneNrS)) {
-                removeZoneTimer(name, type);
+                removeZoneTimer(name);
             }
             else if (type == "zonetimer") {
                 var time = zones.getEndtime(zoneNrS);
@@ -10998,7 +11013,7 @@ function updateZoneTimer(name, zoneNrS, type) {
             else {
                 var time = zones.getWatertime(zoneNrS);
                 if ((time == NEVER) || (time <= unsafeWindow.Zeit.Server)) {
-                    removeZoneTimer(name, type);
+                    removeZoneTimer(name);
                 }
                 else {
                     div.setAttribute("class", "zoneTimerWater");
@@ -11054,7 +11069,7 @@ function showBlase(zoneNrF) {
                 var prod = zones.getEndproduct(zoneNrF);
                 if (prod) {
                     createElement("div", { "class": ["tt", "f_symbol", "fm", "fm", "tt"][prod[0]] + prod[1], "style": "position:absolute;top:5px;left:0;" }, bubble);
-                    newdiv = createElement("div", { "style": "position:absolute;top:5px;left:55px;" }, bubble);
+                    var newdiv = createElement("div", { "style": "position:absolute;top:5px;left:55px;" }, bubble);
                     createElement("font", { "class": "tmenu", "style": "font-weight:bold;" }, createElement("div", {}, newdiv), prodName[prod[0]][prod[1]]);
                 }
                 var newfont = createElement("font", { "class": "tmenu" }, createElement("div", {}, newdiv));
@@ -11158,17 +11173,9 @@ function doBuyNotepad() {
                 case 3:
                     prodMissing.sort(function (a, b) { return (a[1][0] - b[1][0]); });
                     break;
-                case 4:
-                    prodMissing.sort(function (a, b) { return (a[1][0] - b[1][0]); }, true);
-                    break;
+                // case 4: prodMissing.sort(function (a, b) { return (a[1][0] - b[1][0]); }, true); break;
                 case 5:
                     prodMissing.sort(function (a, b) { return (a[1][1] - b[1][1]); });
-                    break;
-                case 6:
-                    prodMissing.sort(function (a, b) { return (a[1][1] - b[1][1]); }, true);
-                    break;
-                case 7:
-                    prodMissing.sort(function (a, b) { return (a[0] - b[0]); }, true);
                     break;
             }
             // creating table
@@ -11187,75 +11194,75 @@ function doBuyNotepad() {
             var newType = null;
             var help = 0; //TODO review
             for (var i = 0; i < prodMissing.length; i++) {
-                var prod = prodMissing[i][0];
-                var amountForFarmis = valMinRackFarmis ? ((totalFarmis[0] && totalFarmis[0][prod] ? totalFarmis[0][prod] : 0) - (prodStock[0] && prodStock[0][prod] ? prodStock[0][prod] : 0)) : 0;
+                var prod_1 = prodMissing[i][0];
+                var amountForFarmis = valMinRackFarmis ? ((totalFarmis[0] && totalFarmis[0][prod_1] ? totalFarmis[0][prod_1] : 0) - (prodStock[0] && prodStock[0][prod_1] ? prodStock[0][prod_1] : 0)) : 0;
                 var str = '<table>';
-                str += '<tr><th colspan="3" class="lightBg">' + getText("goToMarketOfX").replace(/%1%/, prodName[0][prod]) + '</th></tr>';
-                str += '<tr><td>' + getText("minRack") + '</td><td></td><td style="text-align:right;">' + numberFormat(prodMinRackInit[0][prod]) + '</td></tr>';
-                if (megafieldJob && megafieldJob.products && megafieldJob.products[prod] && (megafieldJob.products[prod].have + megafieldJob.products[prod].growing < megafieldJob.products[prod].need)) {
-                    str += '<tr><td>' + getText("megafield") + '</td><td>+</td><td style="text-align:right;">' + numberFormat((megafieldJob.products[prod].need - megafieldJob.products[prod].have - megafieldJob.products[prod].growing) * (megafieldJob.products[prod].amount === undefined ? 1 : megafieldJob.products[prod].amount)) + '</td></tr>';
+                str += '<tr><th colspan="3" class="lightBg">' + getText("goToMarketOfX").replace(/%1%/, prodName[0][prod_1]) + '</th></tr>';
+                str += '<tr><td>' + getText("minRack") + '</td><td></td><td style="text-align:right;">' + numberFormat(prodMinRackInit[0][prod_1]) + '</td></tr>';
+                if (megafieldJob && megafieldJob.products && megafieldJob.products[prod_1] && (megafieldJob.products[prod_1].have + megafieldJob.products[prod_1].growing < megafieldJob.products[prod_1].need)) {
+                    str += '<tr><td>' + getText("megafield") + '</td><td>+</td><td style="text-align:right;">' + numberFormat((megafieldJob.products[prod_1].need - megafieldJob.products[prod_1].have - megafieldJob.products[prod_1].growing) * (megafieldJob.products[prod_1].amount === undefined ? 1 : megafieldJob.products[prod_1].amount)) + '</td></tr>';
                 }
                 for (var k in totalQuest) {
                     if (!totalQuest.hasOwnProperty(k)) {
                         continue;
                     }
-                    if (totalQuest[k][0][prod]) {
-                        str += '<tr><td>' + getText("quest_" + k) + '</td><td>+</td><td style="text-align:right;">' + numberFormat(totalQuest[k][0][prod]) + '</td></tr>';
+                    if (totalQuest[k][0][prod_1]) {
+                        str += '<tr><td>' + getText("quest_" + k) + '</td><td>+</td><td style="text-align:right;">' + numberFormat(totalQuest[k][0][prod_1]) + '</td></tr>';
                     }
                 }
-                if (valMinRackRecursive && totalRecursive[0] && totalRecursive[0][prod]) {
-                    str += '<tr><td>' + getText("recursive") + '</td><td>+</td><td style="text-align:right;">' + numberFormat(totalRecursive[0][prod]) + '</td></tr>';
+                if (valMinRackRecursive && totalRecursive[0] && totalRecursive[0][prod_1]) {
+                    str += '<tr><td>' + getText("recursive") + '</td><td>+</td><td style="text-align:right;">' + numberFormat(totalRecursive[0][prod_1]) + '</td></tr>';
                 }
-                if (valMinRackFarmis && totalFarmis[0] && totalFarmis[0][prod]) {
-                    str += '<tr><td>' + unsafeWindow.customerarecalled.replace(/%FARMI%/, "") + '</td><td>+</td><td style="text-align:right;">' + numberFormat(totalFarmis[0][prod]) + '</td></tr>';
+                if (valMinRackFarmis && totalFarmis[0] && totalFarmis[0][prod_1]) {
+                    str += '<tr><td>' + unsafeWindow.customerarecalled.replace(/%FARMI%/, "") + '</td><td>+</td><td style="text-align:right;">' + numberFormat(totalFarmis[0][prod_1]) + '</td></tr>';
                 }
-                str += '<tr><td>' + getText("inventory") + '</td><td>-</td><td style="text-align:right;">' + numberFormat(prodStock[0][prod]) + '</td></tr>';
+                str += '<tr><td>' + getText("inventory") + '</td><td>-</td><td style="text-align:right;">' + numberFormat(prodStock[0][prod_1]) + '</td></tr>';
                 if (valMinRackGrowing) {
-                    if (totalErnte[0][prod]) {
-                        amountForFarmis -= totalErnte[0][prod];
-                        str += '<tr><td>' + getText("production") + '</td><td>-</td><td style="text-align:right;">' + numberFormat(totalErnte[0][prod]) + '</td></tr>';
+                    if (totalErnte[0][prod_1]) {
+                        amountForFarmis -= totalErnte[0][prod_1];
+                        str += '<tr><td>' + getText("production") + '</td><td>-</td><td style="text-align:right;">' + numberFormat(totalErnte[0][prod_1]) + '</td></tr>';
                     }
-                    if (totalPowerups[prod]) {
-                        amountForFarmis -= totalPowerups[prod];
-                        str += '<tr><td>' + getText("powerups") + '</td><td>-</td><td style="text-align:right;">' + numberFormat(totalPowerups[prod]) + '</td></tr>';
+                    if (totalPowerups[prod_1]) {
+                        amountForFarmis -= totalPowerups[prod_1];
+                        str += '<tr><td>' + getText("powerups") + '</td><td>-</td><td style="text-align:right;">' + numberFormat(totalPowerups[prod_1]) + '</td></tr>';
                     }
                 }
-                if (prodMinRackAddon[0][prod]) {
-                    for (var k in prodMinRackAddon[0][prod]) {
-                        if (!prodMinRackAddon[0][prod].hasOwnProperty(k)) {
+                if (prodMinRackAddon[0][prod_1]) {
+                    for (var k in prodMinRackAddon[0][prod_1]) {
+                        if (!prodMinRackAddon[0][prod_1].hasOwnProperty(k)) {
                             continue;
                         }
-                        str += '<tr><td>' + k + '</td><td>' + (prodMinRackAddon[0][prod][k] > 0 ? '+' : '-') + '</td><td style="text-align:right;">' + numberFormat(prodMinRackAddon[0][prod][k]) + '</td></tr>';
+                        str += '<tr><td>' + k + '</td><td>' + (prodMinRackAddon[0][prod_1][k] > 0 ? '+' : '-') + '</td><td style="text-align:right;">' + numberFormat(prodMinRackAddon[0][prod_1][k]) + '</td></tr>';
                     }
                 }
                 str += '<tr><td colspan="3" style="border-bottom:1px solid black;"></td></tr>';
-                str += '<tr><td>' + getText("marketPrice") + '</td><td></td><td style="text-align:right;">' + moneyFormat(gut[prod]) + '</td></tr>';
+                str += '<tr><td>' + getText("marketPrice") + '</td><td></td><td style="text-align:right;">' + moneyFormat(gut[prod_1]) + '</td></tr>';
                 str += '<tr><td>' + getText("value") + '</td><td></td><td style="text-align:right;">' + moneyFormatInt(prodMissing[i][2]) + '</td></tr>';
-                if (prodRequire[0][prod]) {
+                if (prodRequire[0][prod_1]) {
                     str += '<tr><th colspan="3" class="lightBg">' + getText("requirementPerProduction") + '</th></tr>';
-                    for (j in prodRequire[0][prod]) {
-                        if (!prodRequire[0][prod].hasOwnProperty(j)) {
+                    for (var j in prodRequire[0][prod_1]) {
+                        if (!prodRequire[0][prod_1].hasOwnProperty(j)) {
                             continue;
                         }
-                        if (prodRequire[0][prod][j][0] > -1) {
+                        if (prodRequire[0][prod_1][j][0] > -1) {
                             str += '<tr><td>';
-                            str += prodName[prodRequire[0][prod][j][0]][prodRequire[0][prod][j][1]];
-                            str += '</td><td></td><td style="text-align:right;">' + numberFormat(prodRequire[0][prod][j][2]) + '</td></tr>';
+                            str += prodName[prodRequire[0][prod_1][j][0]][prodRequire[0][prod_1][j][1]];
+                            str += '</td><td></td><td style="text-align:right;">' + numberFormat(prodRequire[0][prod_1][j][2]) + '</td></tr>';
                         }
                     }
-                    if (prodYield[0][prod]) {
+                    if (prodYield[0][prod_1]) {
                         str += '<tr><th colspan="3" class="lightBg">' + getText("yieldPerProduction") + '</th></tr>';
-                        str += '<tr><td>' + prodName[0][prod] + '</td><td></td><td style="text-align:right;">' + numberFormat(prodYield[0][prod]) + '</td></tr>';
+                        str += '<tr><td>' + prodName[0][prod_1] + '</td><td></td><td style="text-align:right;">' + numberFormat(prodYield[0][prod_1]) + '</td></tr>';
                     }
                 }
                 str += '</table>';
-                newType = prodTyp[0][prod];
-                newtr = createElement("tr", { "class": "link hoverBgCc9" + ((drawProductLines && (oldType != null) && (oldType != newType)) ? " borderTop1dashedBlack" : ""), "prod": prod, "mouseOverText": str }, newtable);
+                newType = prodTyp[0][prod_1];
+                newtr = createElement("tr", { "class": "link hoverBgCc9" + ((drawProductLines && (oldType != null) && (oldType != newType)) ? " borderTop1dashedBlack" : ""), "prod": prod_1, "mouseOverText": str }, newtable);
                 oldType = newType;
                 newtr.addEventListener("click", function () { showMarket(this.getAttribute("prod")); }, false);
                 newtr.addEventListener("mouseover", function (event) { toolTip.show(event, this.getAttribute("mouseOverText")); }, false);
                 newtd = createElement("td", {}, newtr);
-                produktPic(0, prod, newtd);
+                produktPic(0, prod_1, newtd);
                 createElement("td", { "style": "text-align:right;" }, newtr, numberFormat(prodMissing[i][1]));
                 if (amountForFarmis > 0) {
                     createElement("td", { "style": "padding-left:3px;text-align:right;" }, newtr, "(" + numberFormat(amountForFarmis) + ")");
@@ -11263,7 +11270,7 @@ function doBuyNotepad() {
                 else {
                     createElement("td", {}, newtr);
                 }
-                createElement("td", { "style": "padding-left:3px;" }, newtr, prodName[0][prod]);
+                createElement("td", { "style": "padding-left:3px;" }, newtr, prodName[0][prod_1]);
             }
             help = null;
             if (newtable.childElementCount == 1) {
@@ -11326,17 +11333,9 @@ function doBuyNotepad() {
                 case 3:
                     prodMissing.sort(function (a, b) { return (a[1][0] - b[1][0]); });
                     break;
-                case 4:
-                    prodMissing.sort(function (a, b) { return (a[1][0] - b[1][0]); }, true);
-                    break;
+                // case 4: prodMissing.sort(function (a, b) { return (a[1][0] - b[1][0]); }, true); break;
                 case 5:
                     prodMissing.sort(function (a, b) { return (a[1][1] - b[1][1]); });
-                    break;
-                case 6:
-                    prodMissing.sort(function (a, b) { return (a[1][1] - b[1][1]); }, true);
-                    break;
-                case 7:
-                    prodMissing.sort(function (a, b) { return (a[0] - b[0]); }, true);
                     break;
             }
             //prodMissing.sortObj();
@@ -11344,70 +11343,70 @@ function doBuyNotepad() {
             oldType = null;
             newType = null;
             for (var i = 0; i < prodMissing.length; i++) {
-                var prod = prodMissing[i][0];
-                var amountForForestryFarmis = valMinRackForestryFarmis ? ((totalFarmis[1] && totalFarmis[1][prod] ? totalFarmis[1][prod] : 0) - (prodStock[1] && prodStock[1][prod] ? prodStock[1][prod] : 0)) : 0;
+                var prod_2 = prodMissing[i][0];
+                var amountForForestryFarmis = valMinRackForestryFarmis ? ((totalFarmis[1] && totalFarmis[1][prod_2] ? totalFarmis[1][prod_2] : 0) - (prodStock[1] && prodStock[1][prod_2] ? prodStock[1][prod_2] : 0)) : 0;
                 var str = '<table>';
-                str += '<tr><th colspan="3" class="lightBg">' + prodName[1][prod] + '</th></tr>';
-                str += '<tr><td>' + getText("minRack") + '</td><td></td><td style="text-align:right;">' + numberFormat(prodMinRackInit[1][prod]) + '</td></tr>';
-                if (totalQuest["main"] && totalQuest["main"][1][prod]) {
-                    str += '<tr><td>' + getText("quest_farm") + '</td><td>+</td><td style="text-align:right;">' + numberFormat(totalQuest["main"][1][prod]) + '</td></tr>';
+                str += '<tr><th colspan="3" class="lightBg">' + prodName[1][prod_2] + '</th></tr>';
+                str += '<tr><td>' + getText("minRack") + '</td><td></td><td style="text-align:right;">' + numberFormat(prodMinRackInit[1][prod_2]) + '</td></tr>';
+                if (totalQuest["main"] && totalQuest["main"][1][prod_2]) {
+                    str += '<tr><td>' + getText("quest_farm") + '</td><td>+</td><td style="text-align:right;">' + numberFormat(totalQuest["main"][1][prod_2]) + '</td></tr>';
                 }
-                if (totalQuest["forestry"] && totalQuest["forestry"][1][prod]) {
-                    str += '<tr><td>' + getText("quest_forestry") + '</td><td>+</td><td style="text-align:right;">' + numberFormat(totalQuest["forestry"][1][prod]) + '</td></tr>';
+                if (totalQuest["forestry"] && totalQuest["forestry"][1][prod_2]) {
+                    str += '<tr><td>' + getText("quest_forestry") + '</td><td>+</td><td style="text-align:right;">' + numberFormat(totalQuest["forestry"][1][prod_2]) + '</td></tr>';
                 }
-                if (valMinRackRecursive && totalRecursive[1] && totalRecursive[1][prod]) {
-                    str += '<tr><td>' + getText("recursive") + '</td><td>+</td><td style="text-align:right;">' + numberFormat(totalRecursive[1][prod]) + '</td></tr>';
+                if (valMinRackRecursive && totalRecursive[1] && totalRecursive[1][prod_2]) {
+                    str += '<tr><td>' + getText("recursive") + '</td><td>+</td><td style="text-align:right;">' + numberFormat(totalRecursive[1][prod_2]) + '</td></tr>';
                 }
-                if (valMinRackForestryFarmis && totalFarmis[1] && totalFarmis[1][prod]) {
-                    str += '<tr><td>' + unsafeWindow.customerarecalled.replace(/%FARMI%/, "") + '</td><td>+</td><td style="text-align:right;">' + numberFormat(totalFarmis[1][prod]) + '</td></tr>';
+                if (valMinRackForestryFarmis && totalFarmis[1] && totalFarmis[1][prod_2]) {
+                    str += '<tr><td>' + unsafeWindow.customerarecalled.replace(/%FARMI%/, "") + '</td><td>+</td><td style="text-align:right;">' + numberFormat(totalFarmis[1][prod_2]) + '</td></tr>';
                 }
-                str += '<tr><td>' + getText("inventory") + '</td><td>-</td><td style="text-align:right;">' + numberFormat(prodStock[1][prod]) + '</td></tr>';
+                str += '<tr><td>' + getText("inventory") + '</td><td>-</td><td style="text-align:right;">' + numberFormat(prodStock[1][prod_2]) + '</td></tr>';
                 if (valMinRackGrowing) {
-                    if (totalErnte[1][prod]) {
-                        amountForForestryFarmis -= totalErnte[1][prod];
-                        str += '<tr><td>' + getText("production") + '</td><td>-</td><td style="text-align:right;">' + numberFormat(totalErnte[1][prod]) + '</td></tr>';
+                    if (totalErnte[1][prod_2]) {
+                        amountForForestryFarmis -= totalErnte[1][prod_2];
+                        str += '<tr><td>' + getText("production") + '</td><td>-</td><td style="text-align:right;">' + numberFormat(totalErnte[1][prod_2]) + '</td></tr>';
                     }
                 }
-                if (prodMinRackAddon[1][prod]) {
-                    for (var k in prodMinRackAddon[1][prod]) {
-                        if (!prodMinRackAddon[1][prod].hasOwnProperty(k)) {
+                if (prodMinRackAddon[1][prod_2]) {
+                    for (var k in prodMinRackAddon[1][prod_2]) {
+                        if (!prodMinRackAddon[1][prod_2].hasOwnProperty(k)) {
                             continue;
                         }
-                        str += '<tr><td>' + k + '</td><td>' + (prodMinRackAddon[1][prod][k] > 0 ? '+' : '-') + '</td><td style="text-align:right;">' + numberFormat(prodMinRackAddon[1][prod][k]) + '</td></tr>';
+                        str += '<tr><td>' + k + '</td><td>' + (prodMinRackAddon[1][prod_2][k] > 0 ? '+' : '-') + '</td><td style="text-align:right;">' + numberFormat(prodMinRackAddon[1][prod_2][k]) + '</td></tr>';
                     }
                 }
-                if (prodRequire[1][prod]) {
+                if (prodRequire[1][prod_2]) {
                     str += '<tr><th colspan="3" class="lightBg">' + getText("requirementPerProduction") + '</th></tr>';
-                    for (j in prodRequire[1][prod]) {
-                        if (!prodRequire[1][prod].hasOwnProperty(j)) {
+                    for (var j in prodRequire[1][prod_2]) {
+                        if (!prodRequire[1][prod_2].hasOwnProperty(j)) {
                             continue;
                         }
-                        if (prodRequire[1][prod][j][0] > -1) {
+                        if (prodRequire[1][prod_2][j][0] > -1) {
                             str += '<tr><td>';
-                            str += prodName[prodRequire[1][prod][j][0]][prodRequire[1][prod][j][1]];
-                            str += '</td><td></td><td style="text-align:right;">' + numberFormat(prodRequire[1][prod][j][2]) + '</td></tr>';
+                            str += prodName[prodRequire[1][prod_2][j][0]][prodRequire[1][prod_2][j][1]];
+                            str += '</td><td></td><td style="text-align:right;">' + numberFormat(prodRequire[1][prod_2][j][2]) + '</td></tr>';
                         }
                     }
                 }
-                if (prodYield[1][prod]) {
+                if (prodYield[1][prod_2]) {
                     str += '<tr><th colspan="3" class="lightBg">' + getText("yieldPerProduction") + '</th></tr>';
-                    str += '<tr><td>' + prodName[1][prod] + '</td><td></td><td style="text-align:right;">' + numberFormat(prodYield[1][prod]) + '</td></tr>';
+                    str += '<tr><td>' + prodName[1][prod_2] + '</td><td></td><td style="text-align:right;">' + numberFormat(prodYield[1][prod_2]) + '</td></tr>';
                 }
                 str += '</table>';
-                newType = prodTyp[1][prod];
-                newtr = createElement("tr", { "class": "hoverBgCc9" + ((drawProductLines && (oldType != null) && (oldType != newType)) ? " borderTop1dashedBlack" : ""), "iProd": prod, "mouseOverText": str, "style": (prodBlock[1][prod].match(/b/) ? "color:red;" : "") }, newtable); //TODO color
+                newType = prodTyp[1][prod_2];
+                newtr = createElement("tr", { "class": "hoverBgCc9" + ((drawProductLines && (oldType != null) && (oldType != newType)) ? " borderTop1dashedBlack" : ""), "iProd": prod_2, "mouseOverText": str, "style": (prodBlock[1][prod_2].match(/b/) ? "color:red;" : "") }, newtable); //TODO color
                 oldType = newType;
                 newtr.addEventListener("mouseover", function (event) { toolTip.show(event, this.getAttribute("mouseOverText")); }, false);
                 newtd = createElement("td", {}, newtr);
-                produktPic(1, prod, newtd);
-                createElement("td", { "style": "text-align:right;" + (prodBlock[1][prod].match(/[lq]/) && prodBlock[1][prod].match(/t/) ? "color:red;" : "") }, newtr, numberFormat(prodMissing[i][1]));
+                produktPic(1, prod_2, newtd);
+                createElement("td", { "style": "text-align:right;" + (prodBlock[1][prod_2].match(/[lq]/) && prodBlock[1][prod_2].match(/t/) ? "color:red;" : "") }, newtr, numberFormat(prodMissing[i][1]));
                 if (amountForForestryFarmis > 0) {
-                    createElement("td", { "style": "padding-left:3px;text-align:right;" + (prodBlock[1][prod].match(/[lq]/) && prodBlock[1][prod].match(/t/) ? "color:red;" : "") }, newtr, "(" + numberFormat(amountForForestryFarmis) + ")");
+                    createElement("td", { "style": "padding-left:3px;text-align:right;" + (prodBlock[1][prod_2].match(/[lq]/) && prodBlock[1][prod_2].match(/t/) ? "color:red;" : "") }, newtr, "(" + numberFormat(amountForForestryFarmis) + ")");
                 }
                 else {
                     createElement("td", {}, newtr);
                 }
-                createElement("td", { "style": "padding-left:3px;" + (prodBlock[1][prod].match(/[lq]/) && prodBlock[1][prod].match(/t/) ? "color:red;" : "") }, newtr, prodName[1][prod]);
+                createElement("td", { "style": "padding-left:3px;" + (prodBlock[1][prod_2].match(/[lq]/) && prodBlock[1][prod_2].match(/t/) ? "color:red;" : "") }, newtr, prodName[1][prod_2]);
             }
             if (newtable.childElementCount == 2) {
                 newtr = createElement("tr", {}, newtable);
@@ -11555,8 +11554,8 @@ function doFarmis() {
                     $("kunde_" + farmiNr).addEventListener("mouseover", function (event) {
                         var farmiNr = this.id.replace("kunde_", "");
                         // toolTip.show(event,print_r(unsafeWindow.farmisinfo[0][farmiNr],"",true));
-                        var cash = parseFloat(unsafeWindow.farmisinfo[0][farmiNr]["price"], 10);
-                        var wert = parseFloat(unsafeWindow.farmisinfo[0][farmiNr]["marketValue"], 10);
+                        var cash = parseFloat(unsafeWindow.farmisinfo[0][farmiNr]["price"]);
+                        var wert = parseFloat(unsafeWindow.farmisinfo[0][farmiNr]["marketValue"]);
                         var cell = $("blase" + farmiNr).firstElementChild.firstElementChild;
                         var ppid, amount;
                         for (var i = 1; i <= 7; i++) {
@@ -11624,7 +11623,7 @@ function doFarmis() {
                         raiseEvent("gameFarmiNew");
                         //todayStr=getDateStr(now,2,false);
                         // add this new farmi
-                        farmiLog.push([farmi_id, todayStr, parseFloat(unsafeWindow.farmisinfo[0][farmiNr]["price"], 10), {}]);
+                        farmiLog.push([farmi_id, todayStr, parseFloat(unsafeWindow.farmisinfo[0][farmiNr]["price"]), {}]);
                         for (var w = 1; w < 8; w++) {
                             if (unsafeWindow.farmisinfo[0][farmiNr]["p" + w] != "0") {
                                 farmiLog[farmiLog_id][3][unsafeWindow.farmisinfo[0][farmiNr]["p" + w]] = parseInt(unsafeWindow.farmisinfo[0][farmiNr]["a" + w], 10);
@@ -11673,7 +11672,8 @@ function doFarmis() {
             }
             err_trace = "alertAdvertEnd";
             if ((unsafeWindow.customerstats) && (unsafeWindow.customerstats["adstart"]) && (unsafeWindow.adrun)) {
-                var endDay = getDateStr(getTime(unsafeWindow.customerstats["adstart"]) + 4 * 86400 - 1);
+                var endDay = getDateStr(getTime(unsafeWindow.customerstats["adstart"]) + 4 * 86400 - 1, undefined, undefined);
+                // TODO: Find out, what that piece of code does here! Then, fix the compile problem.
                 if ((unsafeWindow.customerstats[endDay]) && (parseInt(unsafeWindow.customerstats[endDay]["count"], 10) >= (farmiDailyCount + 2 * unsafeWindow.adrun))) {
                     if (!(cell = $("alertAdvertEnd"))) {
                         createElement("div", { "id": "alertAdvertEnd", "style": "position:absolute;top:65px;left:0;color:white;font-weight:bold;background-color:red;padding:2px;white-space:nowrap;" }, $("customerstats"), getText("advertisingEnds"));
@@ -11718,6 +11718,7 @@ function doFarmis() {
         GM_logError("doFarmis", "", "err_trace=\"" + err_trace + "\"", err);
     }
 }
+// TODO: Maybe, we find a better name here, because Automat and Rackoverview use the same
 function do_main() {
     try {
         function calcObservedPrice(mode, data) {
@@ -11782,7 +11783,7 @@ function do_main() {
         }
         // Check if browser is uptodate
         var newdiv, newdiv1, container, help;
-        if (!createElement("div").children) {
+        if (!createElement("div", {}).children) {
             newdiv = createElement("div", { "class": "alertbubble tbig link" }, ALL, "Your browser could be too old.<br>This script uses functions which need Gecko&nbsp;1.9.1 (Firefox&nbsp;3.5).<br>You will get errors.");
             newdiv.addEventListener("click", function () { removeElement(this); }, false);
         }
@@ -11793,7 +11794,7 @@ function do_main() {
         // Show changelog of new version
         err_trace = "Changelog of new version";
         if (CHANGELOG[CHANGELOG.length - 1][0] != GM_getValue("changelogShownVersion", "")) {
-            container = createElement("div");
+            container = createElement("div", {});
             createElement("div", {}, container, getText("confirmChangelogVersion").replace("%1%", CHANGELOG[CHANGELOG.length - 1][0]));
             newdiv = createElement("ul", {}, container);
             for (var i = 0; i < CHANGELOG[CHANGELOG.length - 1][2].length; i++) {
@@ -11803,7 +11804,7 @@ function do_main() {
                 GM_setValueCache("changelogShownVersion", CHANGELOG[CHANGELOG.length - 1][0]);
             }, function () {
                 GM_setValueCache("changelogShownVersion", CHANGELOG[CHANGELOG.length - 1][0]);
-                unsafeWindow.buildInfoPanel("changelog");
+                unsafeWindow.buildInfoPanel("changelog", undefined);
             });
         }
         // Container Divs
@@ -11853,7 +11854,7 @@ function do_main() {
             newdiv.style.top = "105px";
         }
         else {
-            GM_logWarning("do_main", "", "", "#errorboxgarden not found", 0);
+            GM_logWarning("do_main", "", "", "#errorboxgarden not found");
         }
         err_trace = "Container - divRightBorder";
         newdiv1 = content_table.getElementsByTagName("tr")[1];
@@ -11908,11 +11909,6 @@ function do_main() {
         nodes["sessionTimeNow"]["node"] = createElement("div", { "id": "sessionTimeNow", "style": "float:left;margin-left:2px;" }, newdiv);
         nodes["sessionTimeNow"]["node"].addEventListener("mouseover", function (event) { toolTip.show(event, getText("localTime")); }, false);
         USERLEVEL = parseInt(unsafeWindow.currentuserlevel, 10);
-        /*
-        var new_PRODUCT2BUILDING=PRODUCT2BUILDING.clone();
-        new_PRODUCT2BUILDING[0][154]=1;
-        GM_log(implode(new_PRODUCT2BUILDING));
-        */
         show = explode(GM_getValue(COUNTRY + "_" + SERVER + "_" + USERNAME + "_show"), "do_main/show", {}); // buyNotepad,marketoffersNotepad
         if ((typeof show != "object") || (show instanceof Array)) {
             show = new Object();
@@ -11959,10 +11955,10 @@ function do_main() {
             }
         }
         // Check quest requirements
-        if ((USERLEVEL < 42) || (speedlink_farm6.style.display == "none")) {
+        if ((USERLEVEL < 42) || ($("speedlink_farm6").style.display == "none")) {
             questData["main"]["4"]["nr"] = -1;
         }
-        if ((USERLEVEL < 40) || (speedlink_farm5.style.display == "none")) {
+        if ((USERLEVEL < 40) || ($("speedlink_farm5").style.display == "none")) {
             questData["main"]["3"]["nr"] = -1;
         }
         if (USERLEVEL < 31) {
@@ -12003,7 +11999,7 @@ function do_main() {
         updateProductDataPowerup();
         valMinRackMan = GM_getValue(COUNTRY + "_" + SERVER + "_" + USERNAME + "_valMinRackMan", false);
         valMinRack = explode(GM_getValue(COUNTRY + "_" + SERVER + "_" + USERNAME + "_valMinRack"), "do_main/valMinRack", INIT_valMinRack.clone());
-        bChanged = false;
+        var bChanged = false;
         if ((typeof valMinRack == "object") && !(valMinRack instanceof Array)) {
             for (var v in valMinRack) {
                 if (!valMinRack.hasOwnProperty(v)) {
@@ -12068,7 +12064,9 @@ function do_main() {
         err_trace = "farmis";
         if (newdiv = $("customerstats")) {
             newdiv.setAttribute("class", "link");
-            newdiv.addEventListener("click", function () { unsafeWindow.buildInfoPanel("farmies"); }, false);
+            newdiv.addEventListener("click", function () {
+                unsafeWindow.buildInfoPanel("farmies", undefined);
+            }, false);
             newdiv.addEventListener("mouseover", function () { raiseEvent("gameMegafieldDataDone"); }, false);
         }
         // farmiLog[farmiId]=[date,money,{prod1:amount,...}]
@@ -12077,11 +12075,18 @@ function do_main() {
             farmiLog = [];
         }
         // kick farmis older than 1 month, set this value optional?
-        var dayLastMonth = new Date();
-        dayLastMonth = Math.round(((new Date(dayLastMonth.getFullYear(), dayLastMonth.getMonth() - 1, dayLastMonth.getDate())).getTime()) / 1000);
-        for (var v = farmiLog.length - 1; v >= 0; v--) {
-            if (getTime(farmiLog[v][1]) <= dayLastMonth) {
-                farmiLog.splice(v, 1);
+        var tempDate = new Date();
+        if (tempDate.getMonth() == 0) {
+            tempDate.setMonth(11);
+            tempDate.setFullYear(tempDate.getFullYear() - 1);
+        }
+        else {
+            tempDate.setMonth(tempDate.getMonth() - 1);
+        }
+        var dayLastMonth = Math.round(tempDate.getTime() / 1000);
+        for (var v_27 = farmiLog.length - 1; v_27 >= 0; v_27--) {
+            if (getTime(farmiLog[v_27][1]) <= dayLastMonth) {
+                farmiLog.splice(v_27, 1);
             }
         }
         function calcFarmiCost() {
@@ -12108,7 +12113,7 @@ function do_main() {
                             }
                         }
                     }
-                    unsafeWindow.farmisinfo[0][farmiNr]["costQuotient"] = (priceMissing > 0 ? null : (100 * parseFloat(unsafeWindow.farmisinfo[0][farmiNr]["price"], 10) / wert));
+                    unsafeWindow.farmisinfo[0][farmiNr]["costQuotient"] = (priceMissing > 0 ? null : (100 * parseFloat(unsafeWindow.farmisinfo[0][farmiNr]["price"]) / wert));
                     unsafeWindow.farmisinfo[0][farmiNr]["marketValue"] = (priceMissing > 0 ? 0 : wert);
                 }
                 if (DEVMODE_FUNCTION) {
@@ -12134,7 +12139,8 @@ function do_main() {
                 var prod, menge;
                 var thisFarmiData = new Object();
                 thisFarmiData["cart"] = new Array();
-                thisFarmiData["money"] = parseFloat(unsafeWindow.foodworldfarmis[farmi]["price"], 10);
+                thisFarmiData["money"] = parseFloat(unsafeWindow.foodworldfarmis[farmi]["price"]);
+                // TODO: Why is farmi_bonus.bonus = 1, if there is no bonus? -Doesn't that imply, that we always have 101%?!
                 thisFarmiData["money"] = thisFarmiData["money"] + (thisFarmiData["money"] * (unsafeWindow.foodworld_bonus.bonus ? unsafeWindow.foodworld_bonus.bonus : 1) / 100);
                 for (var i in unsafeWindow.foodworldfarmis[farmi]["products"]) {
                     if (!unsafeWindow.foodworldfarmis[farmi]["products"].hasOwnProperty(i)) {
@@ -12205,7 +12211,7 @@ function do_main() {
                                 newtd = createElement("td", {}, newtr);
                                 cell = createElement("input", { "class": "text", "type": "text", "style": "color:black;text-align:right;width:60px;", "value": numberFormat(thisFarmiData["cart"][v][2] / thisFarmiData["cart"][v][1], 2), "maxlength": "8" }, newtd);
                                 cell.addEventListener("change", function () {
-                                    var help = parseFloat(this.value.replace(regDelimThou, "").replace(regDelimDeci, "."), 10);
+                                    var help = parseFloat(this.value.replace(regDelimThou, "").replace(regDelimDeci, "."));
                                     if (!isNaN(help)) {
                                         if (help < 0) {
                                             help *= -1;
@@ -12222,7 +12228,7 @@ function do_main() {
                                 newtd = createElement("td", {}, newtr);
                                 cell = createElement("input", { "class": "text", "type": "text", "style": "color:black;text-align:right;width:60px;", "value": numberFormat(thisFarmiData["cart"][v][2], 2), "maxlength": "9" }, newtd);
                                 cell.addEventListener("change", function () {
-                                    var help = parseFloat(this.value.replace(regDelimThou, "").replace(regDelimDeci, "."), 10);
+                                    var help = parseFloat(this.value.replace(regDelimThou, "").replace(regDelimDeci, "."));
                                     if (!isNaN(help)) {
                                         if (help < 0) {
                                             help *= -1;
@@ -12445,7 +12451,6 @@ function do_main() {
                     res = null;
                     iProd = null;
                     iTime = null;
-                    maxCapacity = null;
                 }
                 calcTotalZones();
                 // Quest
@@ -12484,7 +12489,7 @@ function do_main() {
                             }
                             totalFarmis[2][c] += foodWorldFarmi[i].products[c];
                         }
-                        var money = parseFloat(foodWorldFarmi[i].price, 10);
+                        var money = parseFloat(foodWorldFarmi[i].price);
                         money = money + (money * (unsafeWindow.foodworld_bonus.bonus ? unsafeWindow.foodworld_bonus.bonus : 1) / 100);
                         var rate = 100 * money / cost;
                         if (rate < valFarmiLimits[0]) {
@@ -12497,7 +12502,7 @@ function do_main() {
                             str = css_styles["farmi_price_above"][1];
                         }
                         if ($("foodworldfarmi" + i)) {
-                            $("foodworldfarmi" + i).setAttribute("rate", rate);
+                            $("foodworldfarmi" + i).setAttribute("rate", rate.toFixed(2));
                             createElement("div", { "id": "foodworldfarmiMiniInfo" + i, "class": "foodworldfarmiMiniInfo" }, $("foodworldfarmi" + i));
                             $("foodworldfarmiMiniInfo" + i).setAttribute("style", str);
                         }
@@ -12583,16 +12588,16 @@ function do_main() {
             }
             try {
                 var children = $("xmasbox_entry_products").getElementsByClassName("xmasbox_entry_item");
-                for (var c in children) {
-                    if (!children.hasOwnProperty(c)) {
+                for (var c_2 in children) {
+                    if (!children.hasOwnProperty(c_2)) {
                         continue;
                     }
-                    var pId = children[c].getElementsByClassName("xmasbox_entry_item_img")[0].className.replace("xmasbox_entry_item_img tt", "");
-                    var points = children[c].getElementsByClassName("xmasbox_entry_item_points")[0].innerHTML;
+                    var pId = children[c_2].getElementsByClassName("xmasbox_entry_item_img")[0].className.replace("xmasbox_entry_item_img tt", "");
+                    var points = parseInt(children[c_2].getElementsByClassName("xmasbox_entry_item_points")[0].innerHTML, 10);
                     var ratio = (gut[pId] / points).toFixed(2);
                     createElement("div", {
                         "style": "position: absolute; bottom: -15px; left: 8px;border: 2px solid rgb(255, 114, 0); background-color: white;width: 70px;text-align: center;"
-                    }, children[c], moneyFormat(ratio) + "/P.");
+                    }, children[c_2], moneyFormat(ratio) + "/P.");
                 }
             }
             catch (err) {
@@ -12615,7 +12620,7 @@ function do_main() {
             }
             try {
                 // Add a Sum-of-Contract dic to dialog
-                var parent = $("globalbox_footer"); // $("globalbox_content"); // globalbox_footer
+                var parent = $("globalbox_footer");
                 var sumDiv = createElement("div", { "id": "contractSum", "style": "font-style: italic;" }, parent, ""); // Will be removed from DOM in 'unsafeOverwriteFunction("contractsProductInCart",...'
                 var fktCalcSum = function () {
                     var amount = parseFloat($("contracts_select_pid_input").value);
@@ -12665,9 +12670,9 @@ function do_main() {
                     "name": "contractPrice"
                 }, div, false);
                 var labelPriceMarketText;
-                var marketPrice = preisBeob[productId][2] ? preisBeob[productId][2] : 0;
-                if (!marketPrice == 0) {
-                    labelPriceMarketText = getText("marketPrice") + " (" + moneyFormat(marketPrice) + ")";
+                var marketPrice_1 = preisBeob[productId][2] ? preisBeob[productId][2] : 0;
+                if (marketPrice_1 > 0) {
+                    labelPriceMarketText = getText("marketPrice") + " (" + moneyFormat(marketPrice_1) + ")";
                 }
                 else {
                     labelPriceMarketText = getText("marketPrice");
@@ -12675,10 +12680,10 @@ function do_main() {
                 var labelPriceMarket = createElement("label", {
                     "for": "contractPriceMarket"
                 }, div, labelPriceMarketText);
-                // Check, if there is a observed market price or we disable the radio button
-                if (!marketPrice == 0) {
+                // Check, if there is an observed market price or we disable the radio button
+                if (marketPrice_1 != 0) {
                     radioPriceMarket.addEventListener("click", function () {
-                        $("contracts_select_price_input").value = marketPrice;
+                        $("contracts_select_price_input").value = marketPrice_1.toString();
                         fktCalcSum();
                     }, false);
                 }
@@ -12688,25 +12693,23 @@ function do_main() {
                     labelPriceMarket.style = "color: gray; font-style: italic;";
                 }
                 createElement("br", {}, div, false);
+                var valNPC_1 = 0;
                 if (NPC[0][productId]) {
                     NPC_isNaN = false;
                     if (!isNaN(NPC[0][productId])) {
-                        var valNPC = NPC[0][productId];
+                        valNPC_1 = NPC[0][productId];
                     }
                     else if (NPC[0][productId].match(/^f/)) {
-                        var valNPC = parseFloat(NPC[0][productId].replace("f", ""), 10);
+                        valNPC_1 = parseFloat(NPC[0][productId].replace("f", ""));
                         var NPC_isNaN = true;
                     }
                     else if (NPC[0][productId].match(/^c/)) {
-                        var valNPC = 0;
+                        valNPC_1 = 0;
                         var NPC_isNaN = true;
                     }
                     else {
-                        var valNPC = 0;
+                        valNPC_1 = 0;
                     }
-                }
-                else {
-                    var valNPC = 0;
                 }
                 var radioPriceNPC = createElement("input", {
                     "id": "contractPriceNPC",
@@ -12714,8 +12717,8 @@ function do_main() {
                     "name": "contractPrice"
                 }, div, false);
                 var labelPriceNPCText; // Are decorated with *, if NPC actually doesn't sell that item
-                if (!valNPC == 0) {
-                    labelPriceNPCText = (NPC_isNaN ? "*" : "") + getText("NPCprice") + (NPC_isNaN ? "*" : "") + " (" + moneyFormat(valNPC) + ")";
+                if (valNPC_1 > 0) {
+                    labelPriceNPCText = (NPC_isNaN ? "*" : "") + getText("NPCprice") + (NPC_isNaN ? "*" : "") + " (" + moneyFormat(valNPC_1) + ")";
                 }
                 else {
                     labelPriceNPCText = (NPC_isNaN ? "*" : "") + getText("NPCprice") + (NPC_isNaN ? "*" : "");
@@ -12725,9 +12728,9 @@ function do_main() {
                 }, div, labelPriceNPCText);
                 NPC_isNaN = null;
                 // Check, if there is a NPC value or we disable the radio button
-                if (!valNPC == 0) {
+                if (valNPC_1 > 0) {
                     radioPriceNPC.addEventListener("click", function () {
-                        $("contracts_select_price_input").value = valNPC;
+                        $("contracts_select_price_input").value = valNPC_1.toString();
                         fktCalcSum();
                     }, false);
                 }
@@ -12739,15 +12742,15 @@ function do_main() {
                 // Set a first selection
                 if (!radioPriceSaved.disabled) {
                     radioPriceSaved.checked = true;
-                    $("contracts_select_price_input").value = value.price;
+                    $("contracts_select_price_input").value = value.price.toString();
                 }
                 else if (!radioPriceMarket.disabled) {
                     radioPriceMarket.checked = true;
-                    $("contracts_select_price_input").value = marketPrice;
+                    $("contracts_select_price_input").value = marketPrice_1.toString();
                 }
                 else if (!radioPriceNPC.disabled) {
                     radioPriceNPC.checked = true;
-                    $("contracts_select_price_input").value = valNPC;
+                    $("contracts_select_price_input").value = valNPC_1.toString();
                 }
                 // Calculate sum and Send-on-Enter
                 $("contracts_select_pid_input").addEventListener("keyup", function (event) {
@@ -12783,10 +12786,14 @@ function do_main() {
              * productId = Id of the clicked product
              */
             try {
-                var amount = $("contracts_select_pid_input").value;
-                var price = $("contracts_select_price_input").value;
+                var amount = parseInt($("contracts_select_pid_input").value, 10);
+                var price = parseInt($("contracts_select_price_input").value, 10);
                 if (amount && price) {
-                    var value = { id: productId, amount: amount, price: price };
+                    var value = {
+                        id: productId,
+                        amount: amount,
+                        price: price
+                    };
                     GM_setValue(COUNTRY + "_" + SERVER + "_" + USERNAME + "_contractsProductInCart_" + productId, value);
                 }
                 removeElement($("contractSum"));
@@ -13007,7 +13014,7 @@ function do_main() {
                                     createElement("img", { "src": GFX + "powerup2.png", "border": "0" }, newdiv);
                                     createElement("div", { "style": "position:absolute;top:3px;left:6px;", "class": "kp" + item[5][1][0] }, newdiv);
                                     createElement("div", { "style": "position:absolute;top:3px;left:22px;font-weight:bold;color:black;" }, newdiv, +item[5][1][1]);
-                                    createElement("div", { "style": "position:absolute;top:64px;right:0;font-weight:bold;", "class": "blackbox" }, newdiv, getTimeStr(item["remain"]));
+                                    createElement("div", { "style": "position:absolute;top:64px;right:0;font-weight:bold;", "class": "blackbox" }, newdiv, getTimeStr(item["remain"], undefined));
                                 }
                                 newdiv = null;
                             }
@@ -13024,7 +13031,7 @@ function do_main() {
                                     createElement("img", { "src": GFX + "powerup3.png", "border": "0" }, newdiv);
                                     createElement("div", { "style": "position:absolute;top:3px;left:6px;", "class": "kp" + item[5][2][0] }, newdiv);
                                     createElement("div", { "style": "position:absolute;top:3px;left:22px;font-weight:bold;color:black;" }, newdiv, +item[5][2][1]);
-                                    createElement("div", { "style": "position:absolute;top:64px;right:0;font-weight:bold;", "class": "blackbox" }, newdiv, getTimeStr(item["remain"]));
+                                    createElement("div", { "style": "position:absolute;top:64px;right:0;font-weight:bold;", "class": "blackbox" }, newdiv, getTimeStr(item["remain"], undefined));
                                 }
                                 newdiv = null;
                             }
@@ -13121,7 +13128,7 @@ function do_main() {
         }
         valKauflimit = explode(GM_getValue(COUNTRY + "_" + SERVER + "_" + USERNAME + "_valKauflimit"), "do_main/valKauflimit", [[85, "990000"], 110]);
         valMessagesSystemMarkRead = GM_getValue(COUNTRY + "_" + SERVER + "_" + USERNAME + "_valMessagesSystemMarkRead", true);
-        valFoodworldFarmiPlacing = GM_getValue(COUNTRY + "_" + SERVER + "_" + USERNAME + "_valFoodworldFarmiPlacing", true);
+        var valFoodworldFarmiPlacing = GM_getValue(COUNTRY + "_" + SERVER + "_" + USERNAME + "_valFoodworldFarmiPlacing", true);
         valGlobaltimeShowCroppedZone = explode(GM_getValue(COUNTRY + "_" + SERVER + "_" + USERNAME + "_valGlobaltimeShowCroppedZone"), "valGlobaltimeShowCroppedZone", null);
         if (!valGlobaltimeShowCroppedZone || (typeof valGlobaltimeShowCroppedZone != "object") || (valGlobaltimeShowCroppedZone instanceof Array)) {
             valGlobaltimeShowCroppedZone = { "farm": true, "farmersmarket": false, "windmill": false, "forestry": false, "foodworld": false };
@@ -13144,8 +13151,8 @@ function do_main() {
         unsafeWindow.gclr();
         newdiv = createElement("img", { "style": "position:absolute;top:0;right:0;height:15px;width:15px;", "class": "link", "src": GFX + "points.gif" }, $("headercontainer"));
         newdiv.addEventListener("mouseover", function (event) { toolTip.show(event, getText("upjersAdvertising")); }, false);
-        newdiv.addEventListener("click", function () { unsafeWindow.buildInfoPanel("upjersAds"); }, false);
-        $("notepad").style.zIndex = 111; // Notizen on top
+        newdiv.addEventListener("click", function () { unsafeWindow.buildInfoPanel("upjersAds", undefined); }, false);
+        $("notepad").style.zIndex = "111"; // Notizen on top
         unsafeWindow.shredderCommit = function () { return; }; // Schredder weg
         // Dragging
         err_trace = "Dragging";
@@ -13153,16 +13160,14 @@ function do_main() {
             $("gameArea").style.position = "absolute";
             $("gameArea").style.top = "5px";
             $("gameArea").style.left = "5px";
-            makeDraggable($("notepad"));
-            makeDraggable($("divGame"), true, false);
-            //makeDraggable("gardenmaincontainer");
-            //makeDraggable("innermaincontainer");
+            makeDraggable($("notepad"), undefined, undefined, undefined);
+            makeDraggable($("divGame"), true, false, undefined);
             $("globaltransp").style.height = "0";
-            //$("transp").style.height="0";
         }
         // speedlinks
         err_trace = "speedlinks";
         if (unsafeWindow.premium != 1) {
+            // make speedlink bar available for non-premium users
             unsafeOverwriteFunction("speedLinks", function () {
                 try {
                     unsafeWindow._speedLinks();
@@ -22229,7 +22234,6 @@ function do_main() {
                         }
                         if (!currBlock) {
                             zones.setBonus(zoneNrF, unsafeWindow.forestry_user_buildings[building]["boni"] ? unsafeWindow.forestry_user_buildings[building]["boni"] : 0);
-                            // maxCapacity=unsafeWindow.forestry_user_buildings[building]?unsafeWindow.forestry_user_buildings[building]["capacity"]:100;
                             res = (unsafeWindow.forestry_user_buildings[building] && unsafeWindow.forestry_user_buildings[building]["slots"]) ? unsafeWindow.forestry_user_buildings[building]["slots"] : {};
                             tempZoneProductionData = [[{}, {}], 0, 0, true];
                             for (var slot = 1; slot <= (iSlotCount == 0 ? 1 : iSlotCount); slot++) {
@@ -22310,7 +22314,6 @@ function do_main() {
                 if (unsafeWindow.forestry_unlock) {
                     var res, zoneNrF, iProd, iProd2, iTime, iWaterTime, building, maxCapacity, div;
                     //GM_log("doForestry zoneNrF:"+zoneNrF);
-                    //maxCapacity=((building=getForestryUserBuilding(1))&&unsafeWindow.forestry_user_buildings[building])?unsafeWindow.forestry_user_buildings[building]['capacity']:100;
                     tempZoneProductionData = [[{}, {}], BUILDING_SIZE["forest"], BUILDING_SIZE["forest"], true];
                     zones.setBlock(zoneNrF, "");
                     currBonus = ((div = $("forestry_forest_button1_info_locked")) && (div.style.display == "block") ? 0 : 5);

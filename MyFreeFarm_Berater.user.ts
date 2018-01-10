@@ -1742,7 +1742,8 @@ var gameLocation = new function () {
 unsafeData.gameLocation = gameLocation;
 
 // Function for validation of AJAX-response. taken from game and shrunk on return value
-function checkRequest(request, mode) {
+// TODO: Can we remove the parameter 'mode'?
+function checkRequest(request, mode?) {
     try {
         if (request.readyState == 4 && request.status == 200) {
             var response = request.responseText;
@@ -1779,7 +1780,7 @@ function showShopframePage(page) {
     var cell = $top("shop");
     if (cell) {
         if (top.window.wrappedJSObject.city != 1) {
-            var f = function () {
+            let f = function () {
                 GM_logInfo("showShopframePage", "page=" + page, "", "Arrived in city 1");
                 top.document.removeEventListener("gameCity1", f, false);
                 showShopframePage(page);
@@ -1811,14 +1812,14 @@ function showMessage(from, page, msg) {
 function showSeedVendor(productId) {
     try {
         if (!gameLocation.check("city", 1)) {
-            var f = function (productId) {
+            let f1 = function (productId) {
                 return function () {
-                    top.document.removeEventListener("gameCity1", f, false);
+                    top.document.removeEventListener("gameCity1", f1, false);
                     window.setTimeout(showSeedVendor, 100, productId);
                 }
             };
 
-            top.document.addEventListener("gameCity1", f(productId), false);
+            top.document.addEventListener("gameCity1", f1(productId), false);
             GM_logInfo("showSeedVendor", "productId=" + productId, "", getText("goToX").replace(/%1%/, unsafeWindow.cityname1));
             click($top("speedlink_city1"));
         } else if (undefined === productId) {
@@ -1833,7 +1834,7 @@ function showSeedVendor(productId) {
 function showLottery() {
     var div = $top("speedlink_city2");
     if (div && ($top("lotterycontainer"))) {
-        var f = function () {
+        let f = function () {
             click($top("cityzone_2_8"));
             top.document.removeEventListener("gameCity2", f, false);
         };
@@ -1853,7 +1854,7 @@ function goToAnimalBreedingReady() {
                 click(div);
             }
         } else if (div = $("speedlink_farmersmarket")) {
-            var f = function () {
+            let f = function () {
                 document.removeEventListener("gameFarmersmarketOpened", f, false);
                 window.setTimeout(goToAnimalBreedingReady, 100);
             };
@@ -1873,7 +1874,7 @@ function goToMonsterFruitCultureReady() {
                 click(div);
             }
         } else if (div = $("speedlink_farmersmarket")) {
-            var f = function () {
+            let f = function () {
                 document.removeEventListener("gameFarmersmarketOpened", f, false);
                 window.setTimeout(goToMonsterFruitCultureReady, 100);
             };
@@ -1893,7 +1894,7 @@ function goToSpeedEatingReady() {
                 click(div);
             }
         } else if (div = $("speedlink_farmersmarket")) {
-            var f = function () {
+            let f = function () {
                 document.removeEventListener("gameFarmersmarketOpened", f, false);
                 window.setTimeout(goToSpeedEatingReady, 100);
             };
@@ -1913,7 +1914,7 @@ function goToBuyPetsParts() {
         if (div && (div = <HTMLElement> div.querySelector(".buy"))) {
             click(div);
         } else if (!(gameLocation.check("farm", 0)) && (div = $("speedlink_farm1"))) {
-            var f = function () {
+            let f = function () {
                 document.removeEventListener("gameFarmOpened", f, false);
                 action = function () { click($("pets_parts_link")); }
                 listeningEvent = "gamegoToBuyPetsParts";
@@ -1928,7 +1929,7 @@ function goToBuyPetsParts() {
         }
 
         if (listeningEvent) {
-            var f1 = function (listeningEvent) {
+            let f1 = function (listeningEvent) {
                 return function () {
                     document.removeEventListener(listeningEvent, f1, false);
                     window.setTimeout(function () { goToBuyPetsParts(); }, 300);
@@ -1951,7 +1952,7 @@ function goToDonkey() {
                 click(div);
             }
         } else if (div = $("speedlink_farm1")) {
-            var f = function () {
+            let f = function () {
                 document.removeEventListener("gameFarmOpened", f, false);
                 window.setTimeout(goToDonkey, 100);
             };
@@ -1965,7 +1966,7 @@ function goToClothingDonation() {
     try {
         var div = $top("speedlink_city2");
         if (div && $top("clothingdonation_link")) {
-            var f = function () {
+            let f = function () {
                 click($top("clothingdonation_link_2"));
                 top.document.removeEventListener("gameCity2", f, false);
             };
@@ -1983,7 +1984,7 @@ function goToVet() {
                 click(div);
             }
         } else if (div = $("speedlink_farmersmarket")) {
-            var f = function () {
+            let f = function () {
                 document.removeEventListener("gameFarmersmarketOpened", f, false);
                 window.setTimeout(goToVet, 100);
             };
@@ -3550,7 +3551,7 @@ function handleQuestLine() {
                                             unsafeWindow.showDiv("transp3");
                                             unsafeWindow.initCampaigns();
                                         } else {
-                                            var f = function () {
+                                            let f = function () {
                                                 document.removeEventListener("gameCity2", f, false);
                                                 unsafeWindow.close_page();
                                                 unsafeWindow.showDiv("transp3");
@@ -3568,7 +3569,7 @@ function handleQuestLine() {
                                         if (gameLocation.check("foodworld")) {
                                             click($("foodworld_questblock"));
                                         } else {
-                                            var f = function () {
+                                            let f = function () {
                                                 document.removeEventListener("gameFoodworldOpened", f, false);
                                                 click($("foodworld_questblock"));
                                             };
@@ -4359,7 +4360,6 @@ function buildInfoPanelProfit(mode?) {
             } catch (err) { GM_logError("buildInfoPanelProfit.calcArray", "", 'err_trace="' + err_trace + '" v=' + v, "Error at calculating data of '" + prodName[0][v] + "': '" + err + "'"); }
         }
         profit.sort(function (a, b) { return b[mode["sort"]] - a[mode["sort"]]; });
-        // console.log("variable:\n"+print_r(profit,"",true,"\n"));
 
         //head line
         err_trace = "head line";
@@ -6620,6 +6620,7 @@ unsafeWindow.buildInfoPanelMenu = function (mode) {
         container = null; newdiv = null; newdiv1 = null;
     } catch (err) { GM_logError("buildInfoPanelMenu", "", "", err); }
 }
+// Also implemented in Automat: TODO: Rename or refactor
 function buildInfoPanelOptions() {
     try {
         var container, newdiv, newtable, newtr, newtd, newtr, newtd1, newinput;
@@ -8980,6 +8981,7 @@ function buildInfoPanelMessages(mode?) {
     } catch (err) { GM_logError("buildInfoPanelMessages", "", "", err); }
 }
 
+// Is called e.g. when you've opened a field and click on the arrow 'Go to nect field'
 function goToZone(zoneNrF) {
     try {
         var currLocation = zones.getLocation(zoneNrF);
@@ -8991,7 +8993,7 @@ function goToZone(zoneNrF) {
                         click(div);
                     }
                 } else if (div = $("speedlink_farm" + (1 + currLocation.farmNr))) {
-                    var f1 = function (zoneNrF) {
+                    let f1 = function (zoneNrF) {
                         return function () {
                             document.removeEventListener("gameFarmOpened", f1, false);
                             window.setTimeout(goToZone, 100, zoneNrF);
@@ -9008,6 +9010,7 @@ function goToZone(zoneNrF) {
                         click(div);
                     }
                 } else if (div = $("speedlink_city" + currLocation.cityNr)) {
+                    // TODO: Think about how to get rid of arguments.callee here
                     document.addEventListener("gameCity" + currLocation.cityNr, function (zoneNrF, currLocation) {
                         return function () {
                             document.removeEventListener("gameCity" + currLocation.cityNr, arguments.callee, false);
@@ -9024,7 +9027,7 @@ function goToZone(zoneNrF) {
                         click(div);
                     }
                 } else if (div = $("speedlink_forestry")) {
-                    var f1 = function (zoneNrF) {
+                    let f1 = function (zoneNrF) {
                         return function () {
                             document.removeEventListener("gameOpenForestry", f1, false);
                             window.setTimeout(goToZone, 100, zoneNrF);
@@ -9041,7 +9044,7 @@ function goToZone(zoneNrF) {
                         click(div);
                     }
                 } else if (div = $("speedlink_foodworld")) {
-                    var f1 = function (zoneNrF) {
+                    let f1 = function (zoneNrF) {
                         return function () {
                             document.removeEventListener("gameFoodworldOpened", f1, false);
                             window.setTimeout(goToZone, 100, zoneNrF);
@@ -9058,7 +9061,7 @@ function goToZone(zoneNrF) {
                         click(div);
                     }
                 } else if (div = $("speedlink_farmersmarket")) {
-                    var f1 = function (zoneNrF) {
+                    let f1 = function (zoneNrF) {
                         return function () {
                             document.removeEventListener("gameFarmersmarketOpened", f1, false);
                             window.setTimeout(goToZone, 100, zoneNrF);
@@ -9262,29 +9265,33 @@ function toolTipSales(nr) {
     } catch (err) { GM_logError("toolTipSales", "", "", err); }
 }
 
-/*
-  <div style="position:absolute; top:7px; left:8px;" class="tt7">  <div style="z-index: 100; display: none; position: absolute; top: 60px; right: 0px; white-space: nowrap;" class="ttbox" id="market_catitem7">Sonnenblumen (6.061)</div>  </div>
-*/
-
+// function y(f) {
+//     return function () {
+//         return f.bind(null, y(f)).apply(this, arguments);
+//     };
+// }
 function showMarket(pid) {
     try {
         if (!gameLocation.check("city", 1)) {
-            var f1 = function (pid) {
+            document.addEventListener("gameCity1", function _tempFuncGoToCity1(pid) {
                 return function () {
-                    document.removeEventListener("gameCity1", f1, false);
+                    document.removeEventListener("gameCity1", _tempFuncGoToCity1, false);
                     showMarket(pid);
                 };
-            };
-            document.addEventListener("gameCity1", f1(pid), false);
+            }(pid), false);
             click($("speedlink_city1"));
         } else if ($("market").style.display != "block") {
-            var f1 = function (pid) {
+            // TODO: Invest further thoughts in how to remove arguments.callee in this beauty here!
+            // document.addEventListener("gameOpenMarket", y(function (callee, pid) {
+            //     document.removeEventListener("gameOpenMarket", callee, false);
+            //     showMarket(pid);
+            // }), false);
+            document.addEventListener("gameOpenMarket", function _tempFuncOpenMarket(pid) {
                 return function () {
-                    document.removeEventListener("gameOpenMarket", f1, false);
+                    document.removeEventListener("gameOpenMarket", arguments.callee, false);
                     showMarket(pid);
                 };
-            };
-            document.addEventListener("gameOpenMarket", f1(pid), false);
+            }(pid), false);
             unsafeWindow.close_page();
             unsafeWindow.hideDiv("shop");
             unsafeWindow.hideDiv("wbwcontainer");
@@ -9305,14 +9312,14 @@ function showMarket(pid) {
 function showMarketStall() {
     try {
         if (!gameLocation.check("city", 1)) {
-            var f = function () {
+            let f = function () {
                 document.removeEventListener("gameCity1", f, false);
                 showMarketStall();
             };
             document.addEventListener("gameCity1", f, false);
             click($("speedlink_city1"));
         } else if ($("market").style.display != "block") {
-            var f = function () {
+            let f = function () {
                 document.removeEventListener("gameOpenMarket", f, false);
                 showMarketStall();
             };
@@ -9336,13 +9343,13 @@ function quicklinks() {
             var newdiv = $("market_navi5");
             if (newdiv) {
                 if (!newdiv.getAttribute("listener_mouseover")) {
-                    newdiv.setAttribute("listener_mouseover", true)
+                    newdiv.setAttribute("listener_mouseover", "true")
                     newdiv.addEventListener("mouseover", function (event) {
                         $("quicklinks").style.display = "block";
                     }, false);
                 }
                 if (!newdiv.getAttribute("listener_mouseout")) {
-                    newdiv.setAttribute("listener_mouseout", true)
+                    newdiv.setAttribute("listener_mouseout", "true")
                     newdiv.addEventListener("mouseout", function (event) {
                         $("quicklinks").style.display = "none";
                     }, false);
@@ -9416,7 +9423,7 @@ var timer = new function () {
         try {
             for (var i = running.length - 1; i >= 0; i--) {
                 if (unsafeWindow.Zeit.Server < running[i][2]) {
-                    running[i][1].innerHTML = getTimeStr(running[i][2] - unsafeWindow.Zeit.Server);
+                    running[i][1].innerHTML = getTimeStr(running[i][2] - unsafeWindow.Zeit.Server, undefined);
                 } else {
                     running[i][3]();
                     running.splice(i, 1);
@@ -9468,7 +9475,7 @@ function createZoneTimer(name, zoneNrS, type, style, append) { // type="zonetime
                     if (type == "zonetimer") {
                         toolTip.show(event, toolTipZoneProduction(zoneNrS));
                     } else { // zonetimerWater
-                        var newDiv1 = createElement("div");
+                        var newDiv1 = createElement("div", {});
                         var newTable = createElement("table", { "border": "0", "cellspacing": "0", "cellpadding": "0" }, newDiv1);
                         var newTr = createElement("tr", {}, newTable);
                         var newTd = createElement("th", { "class": "lightBg", "colspan": 2 }, newTr, zones.getBuildingName(zoneNrS));
@@ -9505,7 +9512,7 @@ function updateZoneTimer(name, zoneNrS, type) {
         var div;
         if (div = $(name)) {
             if (zones.getBlock(zoneNrS)) {
-                removeZoneTimer(name, type);
+                removeZoneTimer(name);
             } else if (type == "zonetimer") {
                 var time = zones.getEndtime(zoneNrS);
                 if (time == NEVER) { // empty
@@ -9523,7 +9530,7 @@ function updateZoneTimer(name, zoneNrS, type) {
             } else {
                 var time = zones.getWatertime(zoneNrS);
                 if ((time == NEVER) || (time <= unsafeWindow.Zeit.Server)) { // watering not possible or needed
-                    removeZoneTimer(name, type);
+                    removeZoneTimer(name);
                 } else { // wait for watering
                     div.setAttribute("class", "zoneTimerWater");
                     timer.add(name, div, time, function (name, zoneNrS, type) { return function () { updateZoneTimer(name, zoneNrS, type); } }(name, zoneNrS, type));
@@ -9567,7 +9574,7 @@ function showBlase(zoneNrF) {
                 var prod = zones.getEndproduct(zoneNrF);
                 if (prod) {
                     createElement("div", { "class": ["tt", "f_symbol", "fm", "fm", "tt"][prod[0]] + prod[1], "style": "position:absolute;top:5px;left:0;" }, bubble);
-                    newdiv = createElement("div", { "style": "position:absolute;top:5px;left:55px;" }, bubble);
+                    var newdiv = createElement("div", { "style": "position:absolute;top:5px;left:55px;" }, bubble);
                     createElement("font", { "class": "tmenu", "style": "font-weight:bold;" }, createElement("div", {}, newdiv), prodName[prod[0]][prod[1]]);
                 }
 
@@ -9650,10 +9657,10 @@ function doBuyNotepad() {
                         }
                     }); break;
                 case 3: prodMissing.sort(function (a, b) { return (a[1][0] - b[1][0]); }); break;
-                case 4: prodMissing.sort(function (a, b) { return (a[1][0] - b[1][0]); }, true); break;
+                // case 4: prodMissing.sort(function (a, b) { return (a[1][0] - b[1][0]); }, true); break;
                 case 5: prodMissing.sort(function (a, b) { return (a[1][1] - b[1][1]); }); break;
-                case 6: prodMissing.sort(function (a, b) { return (a[1][1] - b[1][1]); }, true); break;
-                case 7: prodMissing.sort(function (a, b) { return (a[0] - b[0]); }, true); break;
+                // case 6: prodMissing.sort(function (a, b) { return (a[1][1] - b[1][1]); }, true); break;
+                // case 7: prodMissing.sort(function (a, b) { return (a[0] - b[0]); }, true); break;
             }
             // creating table
             err_trace = "type 0, table";
@@ -9673,7 +9680,7 @@ function doBuyNotepad() {
             var help = 0; //TODO review
 
             for (var i = 0; i < prodMissing.length; i++) {
-                var prod = prodMissing[i][0];
+                let prod = prodMissing[i][0];
                 var amountForFarmis = valMinRackFarmis ? ((totalFarmis[0] && totalFarmis[0][prod] ? totalFarmis[0][prod] : 0) - (prodStock[0] && prodStock[0][prod] ? prodStock[0][prod] : 0)) : 0;
                 var str = '<table>';
                 str += '<tr><th colspan="3" class="lightBg">' + getText("goToMarketOfX").replace(/%1%/, prodName[0][prod]) + '</th></tr>';
@@ -9715,7 +9722,7 @@ function doBuyNotepad() {
                 str += '<tr><td>' + getText("value") + '</td><td></td><td style="text-align:right;">' + moneyFormatInt(prodMissing[i][2]) + '</td></tr>';
                 if (prodRequire[0][prod]) {
                     str += '<tr><th colspan="3" class="lightBg">' + getText("requirementPerProduction") + '</th></tr>';
-                    for (j in prodRequire[0][prod]) {
+                    for (let j in prodRequire[0][prod]) {
                         if (!prodRequire[0][prod].hasOwnProperty(j)) { continue; }
                         if (prodRequire[0][prod][j][0] > -1) {
                             str += '<tr><td>';
@@ -9794,17 +9801,17 @@ function doBuyNotepad() {
                         }
                     }); break;
                 case 3: prodMissing.sort(function (a, b) { return (a[1][0] - b[1][0]); }); break;
-                case 4: prodMissing.sort(function (a, b) { return (a[1][0] - b[1][0]); }, true); break;
+                // case 4: prodMissing.sort(function (a, b) { return (a[1][0] - b[1][0]); }, true); break;
                 case 5: prodMissing.sort(function (a, b) { return (a[1][1] - b[1][1]); }); break;
-                case 6: prodMissing.sort(function (a, b) { return (a[1][1] - b[1][1]); }, true); break;
-                case 7: prodMissing.sort(function (a, b) { return (a[0] - b[0]); }, true); break;
+                // case 6: prodMissing.sort(function (a, b) { return (a[1][1] - b[1][1]); }, true); break;
+                // case 7: prodMissing.sort(function (a, b) { return (a[0] - b[0]); }, true); break;
             }
             //prodMissing.sortObj();
             err_trace = "type 1, table";
             oldType = null;
             newType = null;
             for (var i = 0; i < prodMissing.length; i++) {
-                var prod = prodMissing[i][0];
+                let prod = prodMissing[i][0];
                 var amountForForestryFarmis = valMinRackForestryFarmis ? ((totalFarmis[1] && totalFarmis[1][prod] ? totalFarmis[1][prod] : 0) - (prodStock[1] && prodStock[1][prod] ? prodStock[1][prod] : 0)) : 0;
 
                 var str = '<table>';
@@ -9834,7 +9841,7 @@ function doBuyNotepad() {
                 }
                 if (prodRequire[1][prod]) {
                     str += '<tr><th colspan="3" class="lightBg">' + getText("requirementPerProduction") + '</th></tr>';
-                    for (j in prodRequire[1][prod]) {
+                    for (let j in prodRequire[1][prod]) {
                         if (!prodRequire[1][prod].hasOwnProperty(j)) { continue; }
                         if (prodRequire[1][prod][j][0] > -1) {
                             str += '<tr><td>';
@@ -9929,12 +9936,12 @@ function doRack() {
         var cand = $("rackItems").getElementsByClassName("tklein2");
         if (unsafeWindow.farm != 5 && unsafeWindow.farm != 6) { //Fix Linus--Tux 20151015
             for (var v = 0; v < cand.length; v++) {
-                var currProd = parseInt(cand[v].parentNode.id.replace("rackitem", ""), 10);
-                var cell = $(cand[v].parentNode.id + "format");
+                var currProd = parseInt((<HTMLElement> cand[v].parentNode).id.replace("rackitem", ""), 10);
+                var cell = $((<HTMLElement> cand[v].parentNode).id + "format");
                 if (!cell) {
-                    cell = cand[v].parentNode.parentNode;
+                    cell = <HTMLElement> cand[v].parentNode.parentNode;
                     cell.setAttribute("class", (cell.getAttribute("class") + " link").replace(/(^|\s+)link\s+/g, " ").replace(/^\s+/, ""));
-                    cand[v].style.display = "none";
+                    (<HTMLDivElement> cand[v]).style.display = "none";
                     cell = createElement("div", { "id": "rackitem" + currProd + "format" }, cand[v].parentNode);
                 }
                 var str = numberFormatPrefixed(prodStock[0][currProd]);
@@ -9983,14 +9990,16 @@ function doFarmis() {
                     $("kunde_" + farmiNr).addEventListener("mouseover", function (event) {
                         var farmiNr = this.id.replace("kunde_", "");
                         // toolTip.show(event,print_r(unsafeWindow.farmisinfo[0][farmiNr],"",true));
-                        var cash = parseFloat(unsafeWindow.farmisinfo[0][farmiNr]["price"], 10);
-                        var wert = parseFloat(unsafeWindow.farmisinfo[0][farmiNr]["marketValue"], 10);
-                        var cell = $("blase" + farmiNr).firstElementChild.firstElementChild;
+                        var cash = parseFloat(unsafeWindow.farmisinfo[0][farmiNr]["price"]);
+                        var wert = parseFloat(unsafeWindow.farmisinfo[0][farmiNr]["marketValue"]);
+                        var cell = <HTMLDivElement> $("blase" + farmiNr).firstElementChild.firstElementChild;
                         var ppid, amount;
                         for (var i = 1; i <= 7; i++) { // 7=maxanzahl produkte pro farmi
                             if (cell.style.clear == "both") { // line break after 4 products
-                                cell = cell.nextElementSibling;
-                                if (!cell) { break; }
+                                cell = <HTMLDivElement> cell.nextElementSibling;
+                                if (!cell) { 
+                                    break; 
+                                }
                             }
                             pid = unsafeWindow.farmisinfo[0][farmiNr]["p" + i];
                             amount = parseInt(unsafeWindow.farmisinfo[0][farmiNr]["a" + i], 10);
@@ -10007,10 +10016,10 @@ function doFarmis() {
                                     //cell.setAttribute("style",css_styles["prod_border_none"][1]+"overflow:hidden; margin-right:2px; marign-bottom:2px; float:left; width:15px; height:15px;border-radius:4px;");
                                 }
                             }
-                            cell = cell.nextElementSibling;
+                            cell = <HTMLDivElement> cell.nextElementSibling;
                             if (!cell) { break; }
                         }
-                        cell = $("farmiInfo" + farmiNr);
+                        cell = <HTMLDivElement> $("farmiInfo" + farmiNr);
                         if (!unsafeWindow.farmisinfo[0][farmiNr]["costQuotient"]) {
                             // a price is missing. can't calculate, so display white
                             cell.innerHTML = moneyFormatInt(cash);
@@ -10043,7 +10052,7 @@ function doFarmis() {
                         raiseEvent("gameFarmiNew");
                         //todayStr=getDateStr(now,2,false);
                         // add this new farmi
-                        farmiLog.push([farmi_id, todayStr, parseFloat(unsafeWindow.farmisinfo[0][farmiNr]["price"], 10), {}]);
+                        farmiLog.push([farmi_id, todayStr, parseFloat(unsafeWindow.farmisinfo[0][farmiNr]["price"]), {}]);
                         for (var w = 1; w < 8; w++) {
                             if (unsafeWindow.farmisinfo[0][farmiNr]["p" + w] != "0") {
                                 farmiLog[farmiLog_id][3][unsafeWindow.farmisinfo[0][farmiNr]["p" + w]] = parseInt(unsafeWindow.farmisinfo[0][farmiNr]["a" + w], 10);
@@ -10086,7 +10095,8 @@ function doFarmis() {
             }
             err_trace = "alertAdvertEnd";
             if ((unsafeWindow.customerstats) && (unsafeWindow.customerstats["adstart"]) && (unsafeWindow.adrun)) {
-                var endDay = getDateStr(getTime(unsafeWindow.customerstats["adstart"]) + 4 * 86400 - 1);
+                var endDay = getDateStr(getTime(unsafeWindow.customerstats["adstart"]) + 4 * 86400 - 1, undefined, undefined);
+                // TODO: Find out, what that piece of code does here! Then, fix the compile problem.
                 if ((unsafeWindow.customerstats[endDay]) && (parseInt(unsafeWindow.customerstats[endDay]["count"], 10) >= (farmiDailyCount + 2 * unsafeWindow.adrun))) {
                     if (!(cell = $("alertAdvertEnd"))) {
                         createElement("div", { "id": "alertAdvertEnd", "style": "position:absolute;top:65px;left:0;color:white;font-weight:bold;background-color:red;padding:2px;white-space:nowrap;" }, $("customerstats"), getText("advertisingEnds"));
@@ -10113,6 +10123,7 @@ function doFarmis() {
     } catch (err) { GM_logError("doFarmis", "", "err_trace=\"" + err_trace + "\"", err); }
 }
 
+// TODO: Maybe, we find a better name here, because Automat and Rackoverview use the same
 function do_main() {
     try {
         function calcObservedPrice(mode, data) {
@@ -10175,7 +10186,7 @@ function do_main() {
         }
         // Check if browser is uptodate
         var newdiv, newdiv1, container, help;
-        if (!createElement("div").children) {
+        if (!createElement("div", {}).children) {
             newdiv = createElement("div", { "class": "alertbubble tbig link" }, ALL, "Your browser could be too old.<br>This script uses functions which need Gecko&nbsp;1.9.1 (Firefox&nbsp;3.5).<br>You will get errors.");
             newdiv.addEventListener("click", function () { removeElement(this); }, false);
         }
@@ -10184,7 +10195,7 @@ function do_main() {
         // Show changelog of new version
         err_trace = "Changelog of new version";
         if (CHANGELOG[CHANGELOG.length - 1][0] != GM_getValue("changelogShownVersion", "")) {
-            container = createElement("div");
+            container = createElement("div", {});
             createElement("div", {}, container, getText("confirmChangelogVersion").replace("%1%", CHANGELOG[CHANGELOG.length - 1][0]));
             newdiv = createElement("ul", {}, container);
             for (var i = 0; i < CHANGELOG[CHANGELOG.length - 1][2].length; i++) {
@@ -10196,7 +10207,7 @@ function do_main() {
                 },
                 function () {
                     GM_setValueCache("changelogShownVersion", CHANGELOG[CHANGELOG.length - 1][0]);
-                    unsafeWindow.buildInfoPanel("changelog");
+                    unsafeWindow.buildInfoPanel("changelog", undefined);
                 });
         }
 
@@ -10205,7 +10216,7 @@ function do_main() {
         var nodes = new Object();
         ALL.style.margin = "5px";
         var upjersToolbarHeight = ($("uptoolbar") && $("uptoolbar").style.display != "none") ? 30 : 0;
-        var content_table = document.getElementsByClassName("content_table")[0];
+        var content_table = <HTMLTableElement> document.getElementsByClassName("content_table")[0];
         container = createElement("div", { "id": "gameArea", "align": "center", "style": "margin-top:" + upjersToolbarHeight + "px;" }, ALL);
         newdiv = createElement("div", { "id": "divBeraterButtons", "style": "position:fixed;left:0;top:" + (upjersToolbarHeight + 50) + "px;width:40px;border:1px groove #4D240E;border-radius:0 10px 10px 0;z-index:500;background:url(\"" + GFX + "guild/help_back.jpg\") -25px -25px;" }, container);
         newdiv.addEventListener("mouseover", function (event) {
@@ -10239,7 +10250,7 @@ function do_main() {
             newdiv.style.left = "600px";
             newdiv.style.top = "105px";
         } else {
-            GM_logWarning("do_main", "", "", "#errorboxgarden not found", 0);
+            GM_logWarning("do_main", "", "", "#errorboxgarden not found");
         }
 
         err_trace = "Container - divRightBorder";
@@ -10298,11 +10309,6 @@ function do_main() {
         nodes["sessionTimeNow"]["node"].addEventListener("mouseover", function (event) { toolTip.show(event, getText("localTime")); }, false);
 
         USERLEVEL = parseInt(unsafeWindow.currentuserlevel, 10);
-        /*
-        var new_PRODUCT2BUILDING=PRODUCT2BUILDING.clone();
-        new_PRODUCT2BUILDING[0][154]=1;
-        GM_log(implode(new_PRODUCT2BUILDING));
-        */
         show = explode(GM_getValue(COUNTRY + "_" + SERVER + "_" + USERNAME + "_show"), "do_main/show", {}); // buyNotepad,marketoffersNotepad
         if ((typeof show != "object") || (show instanceof Array)) { show = new Object(); }
         questData = explode(GM_getValue(COUNTRY + "_" + SERVER + "_" + USERNAME + "_questData"), "questData", INIT_questData);
@@ -10331,8 +10337,8 @@ function do_main() {
             }
         }
         // Check quest requirements
-        if ((USERLEVEL < 42) || (speedlink_farm6.style.display == "none")) { questData["main"]["4"]["nr"] = -1; }
-        if ((USERLEVEL < 40) || (speedlink_farm5.style.display == "none")) { questData["main"]["3"]["nr"] = -1; }
+        if ((USERLEVEL < 42) || ($("speedlink_farm6").style.display == "none")) { questData["main"]["4"]["nr"] = -1; }
+        if ((USERLEVEL < 40) || ($("speedlink_farm5").style.display == "none")) { questData["main"]["3"]["nr"] = -1; }
         if (USERLEVEL < 31) { questData["main"]["2"]["nr"] = -1; }
         if (USERLEVEL < 20) { questData["forestry"]["1"]["nr"] = -1; }
         if (questData["forestry"]["1"]["nr"] < 35) { questData["forestry"]["2"]["nr"] = -1; }
@@ -10362,21 +10368,32 @@ function do_main() {
 
         valMinRackMan = GM_getValue(COUNTRY + "_" + SERVER + "_" + USERNAME + "_valMinRackMan", false);
         valMinRack = explode(GM_getValue(COUNTRY + "_" + SERVER + "_" + USERNAME + "_valMinRack"), "do_main/valMinRack", INIT_valMinRack.clone());
-        bChanged = false;
+        let bChanged = false;
         if ((typeof valMinRack == "object") && !(valMinRack instanceof Array)) {
             for (var v in valMinRack) {
                 if (!valMinRack.hasOwnProperty(v)) { continue; }
-                if (INIT_valMinRack[v] === undefined) { delete valMinRack[v]; bChanged = true; }
-                else if (typeof valMinRack[v] != "number") { valMinRack[v] = INIT_valMinRack[v]; bChanged = true; }
+                if (INIT_valMinRack[v] === undefined) { 
+                    delete valMinRack[v]; 
+                    bChanged = true; 
+                } else if (typeof valMinRack[v] != "number") { 
+                    valMinRack[v] = INIT_valMinRack[v]; 
+                    bChanged = true; 
+                }
             }
             for (var v in INIT_valMinRack) {
                 if (!INIT_valMinRack.hasOwnProperty(v)) { continue; }
-                if (valMinRack[v] === undefined) { valMinRack[v] = INIT_valMinRack[v]; bChanged = true; }
+                if (valMinRack[v] === undefined) { 
+                    valMinRack[v] = INIT_valMinRack[v]; 
+                    bChanged = true; 
+                }
             }
         } else {
-            valMinRack = INIT_valMinRack.clone(); bChanged = true;
+            valMinRack = INIT_valMinRack.clone();
+            bChanged = true;
         }
-        if (bChanged) { GM_setValue(COUNTRY + "_" + SERVER + "_" + USERNAME + "_valMinRack", implode(valMinRack, "valMinRack")); }
+        if (bChanged) { 
+            GM_setValue(COUNTRY + "_" + SERVER + "_" + USERNAME + "_valMinRack", implode(valMinRack, "valMinRack")); 
+        }
         valMinRackPlantsize = GM_getValue(COUNTRY + "_" + SERVER + "_" + USERNAME + "_valMinRackPlantsize", false); //Use plant ratio
         valMinRackFarmis = GM_getValue(COUNTRY + "_" + SERVER + "_" + USERNAME + "_valMinRackFarmis", true);
         valMinRackForestryFarmis = GM_getValue(COUNTRY + "_" + SERVER + "_" + USERNAME + "_valMinRackForestryFarmis", true);
@@ -10407,16 +10424,25 @@ function do_main() {
         err_trace = "farmis";
         if (newdiv = $("customerstats")) {
             newdiv.setAttribute("class", "link");
-            newdiv.addEventListener("click", function () { unsafeWindow.buildInfoPanel("farmies"); }, false);
+            newdiv.addEventListener("click", function () { 
+                unsafeWindow.buildInfoPanel("farmies", undefined); 
+            }, false);
             newdiv.addEventListener("mouseover", function () { raiseEvent("gameMegafieldDataDone"); }, false);
         }
         // farmiLog[farmiId]=[date,money,{prod1:amount,...}]
         farmiLog = explode(GM_getValue(COUNTRY + "_" + SERVER + "_" + USERNAME + "_farmiLog"), "do_main/farmiLog", []);
         if (!(farmiLog instanceof Array)) { farmiLog = []; }
         // kick farmis older than 1 month, set this value optional?
-        var dayLastMonth = new Date();
-        dayLastMonth = Math.round(((new Date(dayLastMonth.getFullYear(), dayLastMonth.getMonth() - 1, dayLastMonth.getDate())).getTime()) / 1000);
-        for (var v = farmiLog.length - 1; v >= 0; v--) {
+        var tempDate = new Date();
+        if (tempDate.getMonth() == 0) {
+            tempDate.setMonth(11);
+            tempDate.setFullYear(tempDate.getFullYear() - 1);
+        } else {
+            tempDate.setMonth(tempDate.getMonth() - 1);
+        }
+
+        var dayLastMonth = Math.round(tempDate.getTime() / 1000);
+        for (let v = farmiLog.length - 1; v >= 0; v--) {
             if (getTime(farmiLog[v][1]) <= dayLastMonth) {
                 farmiLog.splice(v, 1);
             }
@@ -10441,7 +10467,7 @@ function do_main() {
                             }
                         }
                     }
-                    unsafeWindow.farmisinfo[0][farmiNr]["costQuotient"] = (priceMissing > 0 ? null : (100 * parseFloat(unsafeWindow.farmisinfo[0][farmiNr]["price"], 10) / wert));
+                    unsafeWindow.farmisinfo[0][farmiNr]["costQuotient"] = (priceMissing > 0 ? null : (100 * parseFloat(unsafeWindow.farmisinfo[0][farmiNr]["price"]) / wert));
                     unsafeWindow.farmisinfo[0][farmiNr]["marketValue"] = (priceMissing > 0 ? 0 : wert);
                 }
                 if (DEVMODE_FUNCTION) { tracking.end("berater", trackingHandle); }
@@ -10459,7 +10485,8 @@ function do_main() {
                 var prod, menge;
                 var thisFarmiData = new Object();
                 thisFarmiData["cart"] = new Array();
-                thisFarmiData["money"] = parseFloat(unsafeWindow.foodworldfarmis[farmi]["price"], 10);
+                thisFarmiData["money"] = parseFloat(unsafeWindow.foodworldfarmis[farmi]["price"]);
+                // TODO: Why is farmi_bonus.bonus = 1, if there is no bonus? -Doesn't that imply, that we always have 101%?!
                 thisFarmiData["money"] = thisFarmiData["money"] + (thisFarmiData["money"] * (unsafeWindow.foodworld_bonus.bonus ? unsafeWindow.foodworld_bonus.bonus : 1) / 100);
                 for (var i in unsafeWindow.foodworldfarmis[farmi]["products"]) {
                     if (!unsafeWindow.foodworldfarmis[farmi]["products"].hasOwnProperty(i)) { continue; }
@@ -10523,7 +10550,7 @@ function do_main() {
                                 newtd = createElement("td", {}, newtr);
                                 cell = createElement("input", { "class": "text", "type": "text", "style": "color:black;text-align:right;width:60px;", "value": numberFormat(thisFarmiData["cart"][v][2] / thisFarmiData["cart"][v][1], 2), "maxlength": "8" }, newtd);
                                 cell.addEventListener("change", function () {
-                                    var help = parseFloat(this.value.replace(regDelimThou, "").replace(regDelimDeci, "."), 10);
+                                    var help = parseFloat(this.value.replace(regDelimThou, "").replace(regDelimDeci, "."));
                                     if (!isNaN(help)) {
                                         if (help < 0) { help *= -1; }
                                         help = Math.round(100 * help) / 100;
@@ -10538,7 +10565,7 @@ function do_main() {
                                 newtd = createElement("td", {}, newtr);
                                 cell = createElement("input", { "class": "text", "type": "text", "style": "color:black;text-align:right;width:60px;", "value": numberFormat(thisFarmiData["cart"][v][2], 2), "maxlength": "9" }, newtd);
                                 cell.addEventListener("change", function () {
-                                    var help = parseFloat(this.value.replace(regDelimThou, "").replace(regDelimDeci, "."), 10);
+                                    var help = parseFloat(this.value.replace(regDelimThou, "").replace(regDelimDeci, "."));
                                     if (!isNaN(help)) {
                                         if (help < 0) { help *= -1; }
                                         help = Math.round(100 * help) / 100;
@@ -10714,7 +10741,6 @@ function do_main() {
                     res = null;
                     iProd = null;
                     iTime = null;
-                    maxCapacity = null;
                 }
                 calcTotalZones();
 
@@ -10751,7 +10777,7 @@ function do_main() {
                             if (!totalFarmis[2][c]) { totalFarmis[2][c] = 0; }
                             totalFarmis[2][c] += foodWorldFarmi[i].products[c];
                         }
-                        var money = parseFloat(foodWorldFarmi[i].price, 10);
+                        var money = parseFloat(foodWorldFarmi[i].price);
                         money = money + (money * (unsafeWindow.foodworld_bonus.bonus ? unsafeWindow.foodworld_bonus.bonus : 1) / 100);
                         var rate = 100 * money / cost;
                         if (rate < valFarmiLimits[0]) { // under 90%
@@ -10762,7 +10788,7 @@ function do_main() {
                             str = css_styles["farmi_price_above"][1];
                         }
                         if ($("foodworldfarmi" + i)) {
-                            $("foodworldfarmi" + i).setAttribute("rate", rate);
+                            $("foodworldfarmi" + i).setAttribute("rate", rate.toFixed(2));
                             createElement("div", { "id": "foodworldfarmiMiniInfo" + i, "class": "foodworldfarmiMiniInfo" }, $("foodworldfarmi" + i));
                             $("foodworldfarmiMiniInfo" + i).setAttribute("style", str);
                         }
@@ -10831,10 +10857,10 @@ function do_main() {
             } catch (err) { GM_logError("_entryCityXmasEvent", "", "", err); }
             try {
                 var children = $("xmasbox_entry_products").getElementsByClassName("xmasbox_entry_item");
-                for (var c in children) {
+                for (let c in children) {
                     if (!children.hasOwnProperty(c)) { continue; }
                     var pId = children[c].getElementsByClassName("xmasbox_entry_item_img")[0].className.replace("xmasbox_entry_item_img tt", "");
-                    var points = children[c].getElementsByClassName("xmasbox_entry_item_points")[0].innerHTML;
+                    var points = parseInt(children[c].getElementsByClassName("xmasbox_entry_item_points")[0].innerHTML, 10);
                     var ratio = (gut[pId] / points).toFixed(2);
                     createElement("div", {
                         "style": "position: absolute; bottom: -15px; left: 8px;border: 2px solid rgb(255, 114, 0); background-color: white;width: 70px;text-align: center;"
@@ -10856,11 +10882,11 @@ function do_main() {
             } catch (err) { GM_logError("contractsDialog", "", "", err); }
             try {
                 // Add a Sum-of-Contract dic to dialog
-                var parent = $("globalbox_footer"); // $("globalbox_content"); // globalbox_footer
+                var parent = <HTMLDivElement> $("globalbox_footer");
                 var sumDiv = createElement("div", { "id": "contractSum", "style": "font-style: italic;" }, parent, ""); // Will be removed from DOM in 'unsafeOverwriteFunction("contractsProductInCart",...'
                 var fktCalcSum = function () {
-                    var amount = parseFloat($("contracts_select_pid_input").value);
-                    var price = parseFloat($("contracts_select_price_input").value);
+                    var amount = parseFloat((<HTMLInputElement> $("contracts_select_pid_input")).value);
+                    var price = parseFloat((<HTMLInputElement> $("contracts_select_price_input")).value);
                     sumDiv.innerHTML = "&Sigma; " + moneyFormat(amount * price);
                 };
 
@@ -10868,7 +10894,7 @@ function do_main() {
                 var value = GM_getValue(COUNTRY + "_" + SERVER + "_" + USERNAME + "_contractsProductInCart_" + productId, {});
 
                 // Draw radio buttons saved-value/market-value
-                parent = $("contracts_button_add_cart").parentNode;
+                parent = <HTMLDivElement> $("contracts_button_add_cart").parentNode;
 
                 var div = createElement("div", {
                     "style": "margin-bottom: 5px; text-align: left; padding-left: 50px;"
@@ -10894,7 +10920,7 @@ function do_main() {
                 // Check, if there is a saved value or we disable the radio button
                 if (productId == value.id) {
                     radioPriceSaved.addEventListener("click", function () {
-                        $("contracts_select_price_input").value = value.price;
+                        (<HTMLInputElement> $("contracts_select_price_input")).value = value.price;
                         fktCalcSum();
                     }, false);
                 } else {
@@ -10911,8 +10937,8 @@ function do_main() {
                     "name": "contractPrice"
                 }, div, false);
                 var labelPriceMarketText;
-                var marketPrice = preisBeob[productId][2] ? preisBeob[productId][2] : 0;
-                if (!marketPrice == 0) {
+                let marketPrice: number = preisBeob[productId][2] ? preisBeob[productId][2] : 0;
+                if (marketPrice > 0) {
                     labelPriceMarketText = getText("marketPrice") + " (" + moneyFormat(marketPrice) + ")";
                 } else {
                     labelPriceMarketText = getText("marketPrice");
@@ -10921,10 +10947,10 @@ function do_main() {
                     "for": "contractPriceMarket"
                 }, div, labelPriceMarketText);
 
-                // Check, if there is a observed market price or we disable the radio button
-                if (!marketPrice == 0) {
+                // Check, if there is an observed market price or we disable the radio button
+                if (marketPrice != 0) {
                     radioPriceMarket.addEventListener("click", function () {
-                        $("contracts_select_price_input").value = marketPrice;
+                        (<HTMLInputElement> $("contracts_select_price_input")).value = marketPrice.toString();
                         fktCalcSum();
                     }, false);
                 } else {
@@ -10934,22 +10960,20 @@ function do_main() {
                 }
 
                 createElement("br", {}, div, false);
-
+                let valNPC: number = 0;
                 if (NPC[0][productId]) {
                     NPC_isNaN = false;
                     if (!isNaN(NPC[0][productId])) {
-                        var valNPC = NPC[0][productId];
+                        valNPC = <number> NPC[0][productId];
                     } else if (NPC[0][productId].match(/^f/)) {
-                        var valNPC = parseFloat(NPC[0][productId].replace("f", ""), 10);
+                        valNPC = parseFloat(NPC[0][productId].replace("f", ""));
                         var NPC_isNaN = true;
                     } else if (NPC[0][productId].match(/^c/)) {
-                        var valNPC = 0;
+                        valNPC = 0;
                         var NPC_isNaN = true;
                     } else {
-                        var valNPC = 0;
+                        valNPC = 0;
                     }
-                } else {
-                    var valNPC = 0;
                 }
 
                 var radioPriceNPC = createElement("input", {
@@ -10958,7 +10982,7 @@ function do_main() {
                     "name": "contractPrice"
                 }, div, false);
                 var labelPriceNPCText; // Are decorated with *, if NPC actually doesn't sell that item
-                if (!valNPC == 0) {
+                if (valNPC > 0) {
                     labelPriceNPCText = (NPC_isNaN ? "*" : "") + getText("NPCprice") + (NPC_isNaN ? "*" : "") + " (" + moneyFormat(valNPC) + ")";
                 } else {
                     labelPriceNPCText = (NPC_isNaN ? "*" : "") + getText("NPCprice") + (NPC_isNaN ? "*" : "");
@@ -10969,9 +10993,9 @@ function do_main() {
                 NPC_isNaN = null;
 
                 // Check, if there is a NPC value or we disable the radio button
-                if (!valNPC == 0) {
+                if (valNPC > 0) {
                     radioPriceNPC.addEventListener("click", function () {
-                        $("contracts_select_price_input").value = valNPC;
+                        (<HTMLInputElement> $("contracts_select_price_input")).value = valNPC.toString();
                         fktCalcSum();
                     }, false);
                 } else {
@@ -10983,13 +11007,13 @@ function do_main() {
                 // Set a first selection
                 if (!radioPriceSaved.disabled) {
                     radioPriceSaved.checked = true;
-                    $("contracts_select_price_input").value = value.price;
+                    (<HTMLInputElement> $("contracts_select_price_input")).value = value.price.toString();
                 } else if (!radioPriceMarket.disabled) {
                     radioPriceMarket.checked = true;
-                    $("contracts_select_price_input").value = marketPrice;
+                    (<HTMLInputElement> $("contracts_select_price_input")).value = marketPrice.toString();
                 } else if (!radioPriceNPC.disabled) {
                     radioPriceNPC.checked = true;
-                    $("contracts_select_price_input").value = valNPC;
+                    (<HTMLInputElement> $("contracts_select_price_input")).value = valNPC.toString();
                 }
 
                 // Calculate sum and Send-on-Enter
@@ -11024,10 +11048,14 @@ function do_main() {
              * productId = Id of the clicked product
              */
             try {
-                var amount = $("contracts_select_pid_input").value;
-                var price = $("contracts_select_price_input").value;
+                var amount = parseInt((<HTMLInputElement> $("contracts_select_pid_input")).value, 10);
+                var price = parseInt((<HTMLInputElement> $("contracts_select_price_input")).value, 10);
                 if (amount && price) {
-                    var value = { id: productId, amount: amount, price: price };
+                    var value = {
+                        id: productId,
+                        amount: amount, 
+                        price: price 
+                    };
                     GM_setValue(COUNTRY + "_" + SERVER + "_" + USERNAME + "_contractsProductInCart_" + productId, value);
                 }
                 removeElement($("contractSum"));
@@ -11218,7 +11246,7 @@ function do_main() {
                                     createElement("img", { "src": GFX + "powerup2.png", "border": "0" }, newdiv);
                                     createElement("div", { "style": "position:absolute;top:3px;left:6px;", "class": "kp" + item[5][1][0] }, newdiv);
                                     createElement("div", { "style": "position:absolute;top:3px;left:22px;font-weight:bold;color:black;" }, newdiv, +item[5][1][1]);
-                                    createElement("div", { "style": "position:absolute;top:64px;right:0;font-weight:bold;", "class": "blackbox" }, newdiv, getTimeStr(item["remain"]));
+                                    createElement("div", { "style": "position:absolute;top:64px;right:0;font-weight:bold;", "class": "blackbox" }, newdiv, getTimeStr(item["remain"], undefined));
                                 }
                                 newdiv = null;
                             }
@@ -11235,7 +11263,7 @@ function do_main() {
                                     createElement("img", { "src": GFX + "powerup3.png", "border": "0" }, newdiv);
                                     createElement("div", { "style": "position:absolute;top:3px;left:6px;", "class": "kp" + item[5][2][0] }, newdiv);
                                     createElement("div", { "style": "position:absolute;top:3px;left:22px;font-weight:bold;color:black;" }, newdiv, +item[5][2][1]);
-                                    createElement("div", { "style": "position:absolute;top:64px;right:0;font-weight:bold;", "class": "blackbox" }, newdiv, getTimeStr(item["remain"]));
+                                    createElement("div", { "style": "position:absolute;top:64px;right:0;font-weight:bold;", "class": "blackbox" }, newdiv, getTimeStr(item["remain"], undefined));
                                 }
                                 newdiv = null;
                             }
@@ -11313,7 +11341,7 @@ function do_main() {
         if (typeof GM_getValue(COUNTRY + "_" + SERVER + "_" + USERNAME + "_valKauflimit", 110) == "number") { GM_deleteValue(COUNTRY + "_" + SERVER + "_" + USERNAME + "_valKauflimit"); }
         valKauflimit = explode(GM_getValue(COUNTRY + "_" + SERVER + "_" + USERNAME + "_valKauflimit"), "do_main/valKauflimit", [[85, "990000"], 110]);
         valMessagesSystemMarkRead = GM_getValue(COUNTRY + "_" + SERVER + "_" + USERNAME + "_valMessagesSystemMarkRead", true);
-        valFoodworldFarmiPlacing = GM_getValue(COUNTRY + "_" + SERVER + "_" + USERNAME + "_valFoodworldFarmiPlacing", true);
+        var valFoodworldFarmiPlacing = GM_getValue(COUNTRY + "_" + SERVER + "_" + USERNAME + "_valFoodworldFarmiPlacing", true);
         valGlobaltimeShowCroppedZone = explode(GM_getValue(COUNTRY + "_" + SERVER + "_" + USERNAME + "_valGlobaltimeShowCroppedZone"), "valGlobaltimeShowCroppedZone", null);
         if (!valGlobaltimeShowCroppedZone || (typeof valGlobaltimeShowCroppedZone != "object") || (valGlobaltimeShowCroppedZone instanceof Array)) {
             valGlobaltimeShowCroppedZone = { "farm": true, "farmersmarket": false, "windmill": false, "forestry": false, "foodworld": false };
@@ -11335,8 +11363,8 @@ function do_main() {
         unsafeWindow.gclr();
         newdiv = createElement("img", { "style": "position:absolute;top:0;right:0;height:15px;width:15px;", "class": "link", "src": GFX + "points.gif" }, $("headercontainer"));
         newdiv.addEventListener("mouseover", function (event) { toolTip.show(event, getText("upjersAdvertising")); }, false);
-        newdiv.addEventListener("click", function () { unsafeWindow.buildInfoPanel("upjersAds"); }, false);
-        $("notepad").style.zIndex = 111; // Notizen on top
+        newdiv.addEventListener("click", function () { unsafeWindow.buildInfoPanel("upjersAds", undefined); }, false);
+        $("notepad").style.zIndex = "111"; // Notizen on top
         unsafeWindow.shredderCommit = function () { return; }; // Schredder weg
 
         // Dragging
@@ -11345,17 +11373,15 @@ function do_main() {
             $("gameArea").style.position = "absolute";
             $("gameArea").style.top = "5px";
             $("gameArea").style.left = "5px";
-            makeDraggable($("notepad"));
-            makeDraggable($("divGame"), true, false);
-            //makeDraggable("gardenmaincontainer");
-            //makeDraggable("innermaincontainer");
+            makeDraggable($("notepad"), undefined, undefined, undefined);
+            makeDraggable($("divGame"), true, false, undefined);
             $("globaltransp").style.height = "0";
-            //$("transp").style.height="0";
         }
 
         // speedlinks
         err_trace = "speedlinks";
         if (unsafeWindow.premium != 1) {
+            // make speedlink bar available for non-premium users
             unsafeOverwriteFunction("speedLinks", function () {
                 try {
                     unsafeWindow._speedLinks();
@@ -11369,7 +11395,7 @@ function do_main() {
                             if ($("speedlink_" + a[b])) {
                                 unsafeWindow.hideDiv($("speedlink_" + a[b]));
                                 $("speedlink_" + a[b]).className = "speedlink link speedlink_" + a[b];
-                                $("speedlink_" + a[b]).onclick = new Function("")
+                                $("speedlink_" + a[b]).onclick = new Function("");
                             }
                         }
                         err_trace = "farm";
@@ -19133,7 +19159,6 @@ function do_main() {
                         }
                         if (!currBlock) {
                             zones.setBonus(zoneNrF, unsafeWindow.forestry_user_buildings[building]["boni"] ? unsafeWindow.forestry_user_buildings[building]["boni"] : 0);
-                            // maxCapacity=unsafeWindow.forestry_user_buildings[building]?unsafeWindow.forestry_user_buildings[building]["capacity"]:100;
                             res = (unsafeWindow.forestry_user_buildings[building] && unsafeWindow.forestry_user_buildings[building]["slots"]) ? unsafeWindow.forestry_user_buildings[building]["slots"] : {};
 
                             tempZoneProductionData = [[{}, {}], 0, 0, true];
@@ -19202,7 +19227,6 @@ function do_main() {
                 if (unsafeWindow.forestry_unlock) {
                     var res, zoneNrF, iProd, iProd2, iTime, iWaterTime, building, maxCapacity, div;
                     //GM_log("doForestry zoneNrF:"+zoneNrF);
-                    //maxCapacity=((building=getForestryUserBuilding(1))&&unsafeWindow.forestry_user_buildings[building])?unsafeWindow.forestry_user_buildings[building]['capacity']:100;
                     tempZoneProductionData = [[{}, {}], BUILDING_SIZE["forest"], BUILDING_SIZE["forest"], true];
                     zones.setBlock(zoneNrF, "");
                     currBonus = ((div = $("forestry_forest_button1_info_locked")) && (div.style.display == "block") ? 0 : 5);

@@ -349,7 +349,7 @@ function unsafeCloneObject(obj) {
         }
     } catch (err) { GM_logError("unsafeCloneObject", "", "", err); }
 }
-function unsafeOverwriteFunction(fooName, newFoo, optional) {
+function unsafeOverwriteFunction(fooName, newFoo, optional?) {
     try {
         if (!unsafeWindow[fooName]) {
             if (optional) {

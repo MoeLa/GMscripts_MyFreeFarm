@@ -18,6 +18,11 @@ interface Object {
     isEmpty: () => boolean;
     length: () => number;
     clone: () => any;
+    /**
+     * 
+     * @see https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
+     */
+    assign(target, ...sources);
 }
 
 interface UnsafeData {
@@ -64,6 +69,9 @@ interface UnsafeData {
     zoneAddToGlobalTime: any[];
 
     ALL_SLOTS: any;
+    botConfigData: any;
+    currentPowerup: any;
+    valWaterNeeded: any;
 }
 
 interface Window {
@@ -89,6 +97,9 @@ interface Window {
     prodMinRackAddon: {
         newdata: any[];
         busy: boolean;
+        add(type, pid, reason, amount);
+        remove(type, pid, reason);
+        removeAll(type, reason);
     };
 
     vet_data: VetData;
@@ -149,6 +160,22 @@ interface Window {
     customerarecalled: string; // "%FARMI% Farmis"
     farm: number;
     market_nav: number;
+
+    inforequirepremium: string; // "Benötigt Premium-Account"
+    questblock: string; // "Kann durch Quests freigespielt werden"
+    customerstats: any;
+    adrun: string | number; // 0, 1 or ""
+    rid: string; // Session-ID à la "12a345c02e1b5c0b73572a873991e6be"
+    foodworldfarmis: any[];
+    foodworld_bonus: {
+        bonus: number;
+    };
+    foodworldtables: any[];
+    foodworldbuildings: any;
+    farmamount: number; // e.g. 5 or 6
+    welcomeblurb: {
+        1: string; // "Willkommen bei <b>My Free Farm</b>.<br>"
+    }
 }
 
 interface VetData {
