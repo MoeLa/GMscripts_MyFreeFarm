@@ -477,7 +477,7 @@ function change(node) {
         throw ("ERROR in function 'change'");
     }
 }
-function keyup(node, keycode, ctrlKeyArg, altKeyArg, shiftKeyArg) {
+function keyup(node, keycode?, ctrlKeyArg?, altKeyArg?, shiftKeyArg?) {
     try {
         if (!keycode) keycode = 0;
         let keyboardEventInit: KeyboardEventInit = {
@@ -894,7 +894,7 @@ function getFormattedDateStr(time, yearformat?, padd?) {
     } catch (err) { GM_logError("getFormattedDateStr", "time=" + time + " yearformat=" + yearformat + " padd=" + padd, "", err); }
 }
 //TODO name? getDateText
-function getDateText(time, yearformat) { // was datumDay
+function getDateText(time, yearformat?) { // was datumDay
     try {
         var time2 = Math.floor(time);
         let d: Date = new Date();
@@ -1169,7 +1169,7 @@ function pointsFormat(number, containertype, append) {
         return newspan;
     } catch (err) { GM_logError("pointsFormat", "number=" + number + " containertype=" + containertype, "", err); }
 }
-function coinsFormat(number, append) {
+function coinsFormat(number, append?) {
     try {
         var newdiv = createElement("div", { "style": "display:inline-block;height:16px;" });
         newdiv.addEventListener("mouseover", function (event) { toolTip.show(event, prodName[0]); }, false);

@@ -13209,7 +13209,7 @@ function do_main() {
                             else {
                                 $("speedlink_city" + b).onclick = new Function("unsafeWindow.travel2City2();");
                             }
-                            if (b == 2 && unsafeWindow.currentuserlevel < 8) {
+                            if (b == 2 && parseInt(unsafeWindow.currentuserlevel, 10) < 8) {
                                 unsafeWindow.hideDiv("speedlink_city" + b);
                             }
                             else {
@@ -13235,7 +13235,7 @@ function do_main() {
                             $("speedlink_forestry").onclick = new Function("unsafeWindow.travel2forestry();");
                         }
                         err_trace = "foodworld";
-                        if (unsafeWindow.currentuserlevel >= 11) {
+                        if (parseInt(unsafeWindow.currentuserlevel, 10) >= 11) {
                             if (unsafeWindow.foodworld_quicknavi) {
                                 $("speedlink_foodworld").classList.remove("speedlink_foodworld");
                                 $("speedlink_foodworld").classList.add("speedlink_foodworld_active");
@@ -13314,13 +13314,6 @@ function do_main() {
                     }
                     else {
                         unsafeWindow.mapGo2Location("picknick", 1);
-                        /* Beta
-                        document.addEventListener("gameCity2",function(){
-                            unsafeWindow.travel2foodworld();
-                            document.removeEventListener("gameCity2",arguments.callee,false);
-                        },false);
-                        unsafeWindow.travel2City2();
-                        */
                     }
                 }
                 catch (err) {
@@ -13489,9 +13482,11 @@ function do_main() {
             createElement("div", { "style": "display:inline-block;margin-bottom:2px;margin-right:2px;text-decoration:underline;vertical-align:top;font-size:11px;" }, newdiv, getText("login"));
             newdiv1 = createElement("div", { "style": "display:inline-block;" }, newdiv);
             createElement("img", { "border": "0", "src": GFX + "menu/logout.gif" }, newdiv1);
-            newdiv.addEventListener("mouseout", function () { $("divOtherAccountsTimes").style.display = "none"; }, false);
+            newdiv.addEventListener("mouseout", function () {
+                $("divOtherAccountsTimes").style.display = "none";
+            }, false);
             function fillDivOtherAccountsTimes() {
-                divOtherAccountsTimes = $("divOtherAccountsTimes");
+                var divOtherAccountsTimes = $("divOtherAccountsTimes");
                 if (divOtherAccountsTimes.style.display == "none") {
                     divOtherAccountsTimes.innerHTML = "";
                 }
@@ -13527,7 +13522,7 @@ function do_main() {
                         newtd = createElement("td", { "style": "padding-left:5px;" }, newtr);
                         var help = unsafeWindow.Zeit.Verschiebung + otherAccs[v][2];
                         if (help > now) {
-                            newtd.innerHTML = getTimeStr(help - now);
+                            newtd.innerHTML = getTimeStr(help - now, undefined);
                         }
                         else {
                             newtd.innerHTML = getText("finished").toLowerCase() + "!";
@@ -13547,9 +13542,9 @@ function do_main() {
                 fillDivOtherAccountsTimes();
             }, false);
             help = NEVER;
-            for (var v = otherAccs.length - 1; v >= 0; v--) {
-                if (otherAccs[v][0] > -1) {
-                    help = Math.min(help, otherAccs[v][2]);
+            for (var v_28 = otherAccs.length - 1; v_28 >= 0; v_28--) {
+                if (otherAccs[v_28][0] > -1) {
+                    help = Math.min(help, otherAccs[v_28][2]);
                 }
             }
             if (help < NEVER) {
@@ -13577,7 +13572,7 @@ function do_main() {
                 }
                 else {
                     window.setTimeout(function () { timerSessionEnd(sec - 1); }, 1000);
-                    $("divSessionEndTime").innerHTML = getTimeStr(sec);
+                    $("divSessionEndTime").innerHTML = getTimeStr(sec, undefined);
                 }
             }
             catch (err) {
@@ -13644,12 +13639,12 @@ function do_main() {
                     }, false);
                     createElement("span", { "style": "margin-right:20px;" }, newdiv, getText("showAll"));
                     var help = {};
-                    for (var v = 0; v < prodBlock[0].length; v++) {
-                        if (prodBlock[0][v] === undefined) {
+                    for (var v_29 = 0; v_29 < prodBlock[0].length; v_29++) {
+                        if (prodBlock[0][v_29] === undefined) {
                             continue;
                         }
-                        if ((!prodBlock[0][v].match(/t/)) && (mode["showAll"] || !prodBlock[0][v].match(/[lq]/))) {
-                            help[prodTyp[0][v]] = true;
+                        if ((!prodBlock[0][v_29].match(/t/)) && (mode["showAll"] || !prodBlock[0][v_29].match(/[lq]/))) {
+                            help[prodTyp[0][v_29]] = true;
                         }
                     }
                     newselect = createElement("select", { "class": "link", "style": "margin-right:20px;" }, newdiv);
@@ -13672,41 +13667,28 @@ function do_main() {
                     // Body
                     newdiv = createElement("div", { "style": "overflow-y:auto;overflow-x:hidden;color:black;padding-top:30px;" }, container);
                     var newdiv1, newimg, newobject;
-                    for (var v = 0; v < prodName[0].length; v++) {
-                        if (prodName[0][v] === undefined) {
+                    for (var v_30 = 0; v_30 < prodName[0].length; v_30++) {
+                        if (prodName[0][v_30] === undefined) {
                             continue;
                         }
-                        if ((prodTyp[0][v] == mode["category"]) && (!prodBlock[0][v].match(/t/)) && (mode["showAll"] || !prodBlock[0][v].match(/[lq]/))) {
-                            newdiv1 = createElement("div", { "id": "stat" + v, "class": "link smallStatistic" }, newdiv);
-                            if (prodBlock[0][v]) {
-                                createElement("div", { "style": "height:14px;font-weight:bold;color:red;" }, newdiv1, prodName[0][v] + ", " + moneyFormat(gut[v]));
+                        if ((prodTyp[0][v_30] == mode["category"]) && (!prodBlock[0][v_30].match(/t/)) && (mode["showAll"] || !prodBlock[0][v_30].match(/[lq]/))) {
+                            newdiv1 = createElement("div", { "id": "stat" + v_30, "class": "link smallStatistic" }, newdiv);
+                            if (prodBlock[0][v_30]) {
+                                createElement("div", { "style": "height:14px;font-weight:bold;color:red;" }, newdiv1, prodName[0][v_30] + ", " + moneyFormat(gut[v_30]));
                             }
                             else {
-                                createElement("div", { "style": "height:14px;font-weight:bold;" }, newdiv1, prodName[0][v] + ", " + numberFormat(prodStock[0][v], 0) + ", " + moneyFormat(gut[v]) + ", " + moneyFormat(gutBeob[v]));
+                                createElement("div", { "style": "height:14px;font-weight:bold;" }, newdiv1, prodName[0][v_30] + ", " + numberFormat(prodStock[0][v_30], 0) + ", " + moneyFormat(gut[v_30]) + ", " + moneyFormat(gutBeob[v_30]));
                             }
-                            var url = STAT_SERVER[COUNTRY] + "/chart.php?w=400&h=200&t=h" + mode["time"] + "&shownpc=" + (mode["npc"] ? 1 : 0) + "&clip=1&lng1=" + COUNTRY + "&server1=" + SERVER + "&product1=" + v + "&color1=green";
+                            var url = STAT_SERVER[COUNTRY] + "/chart.php?w=400&h=200&t=h" + mode["time"] + "&shownpc=" + (mode["npc"] ? 1 : 0) + "&clip=1&lng1=" + COUNTRY + "&server1=" + SERVER + "&product1=" + v_30 + "&color1=green";
                             newobject = createElement("object", { "data": url, "type": "type=image/svg+xml", "width": "400px", "height": "200px" }, newdiv1);
                             createElement("param", { "name": "src", "value": url }, newobject);
-                            createElement("div", { "class": "v" + v, "style": "position:absolute;bottom:10px;left:10px;z-index:2;" }, newdiv1);
+                            createElement("div", { "class": "v" + v_30, "style": "position:absolute;bottom:10px;left:10px;z-index:2;" }, newdiv1);
                             createElement("div", { "style": "position:absolute;top:0;left:0;width:100%;height:100%;z-index:2;" }, newdiv1);
                             newdiv1.addEventListener("click", function () {
                                 showStatisticFullscreen(this.id.replace("stat", ""));
                             }, false);
                         }
                     }
-                    /*
-                    if (isNaN(mode)){
-                    }else{
-                        newdiv1=createElement("div",{"style":"margin:5px;"},newdiv);
-                        createElement("div",{"style":"font-weight:bold"},newdiv1,prodName[0][mode]+", "+numberFormat(prodStock[0][mode],0)+", "+moneyFormat(gut[mode])+", "+moneyFormat(gutBeob[mode]));
-                        var breit=(window.innerWidth-60);
-                        var hoch=(window.innerHeight-130);
-                        var url=STAT_SERVER[COUNTRY]+"/chart.php?w="+breit+"&h="+hoch+"&t=h"+mode["time"]+"&shownpc="+(mode["npc"]?1:0)+"&clip=1&lng1="+COUNTRY+"&server1="+SERVER+"&product1="+mode+"&color1=green";
-                        newobject=createElement("object",{data:url,"type":type="image/svg+xml","width":breit+"px","height":hoch+"px"},newdiv1);
-                        createElement("param",{"name":"src","value":url},newobject);
-                        createElement("div",{"class":"v"+mode,"style":"position:relative;top:-40px;left:10px;z-index:2"},newdiv1);
-                    }
-                    */
                     newdiv1 = null;
                     newimg = null;
                     newobject = null;
@@ -13745,7 +13727,6 @@ function do_main() {
                         }
                         if (c > 0) {
                             GM_logInfo("sendStatData", "", "", getText("sendingXObservedPricesToServer").replace(/%1%/, c));
-                            // GM_log("sendStatData sending:\n" + STAT_SERVER[COUNTRY]+'/add.php?json={\"server\":'+SERVER+',\"COUNTRY\":'+COUNTRY+',\"productcount\":'+c+prodStr+'}')
                             GM_xmlhttpRequest({
                                 method: "POST",
                                 url: STAT_SERVER[COUNTRY] + "/add.php",
@@ -13766,7 +13747,8 @@ function do_main() {
                                 onerror: function (response) {
                                     GM_logError("sendStatData.onerror", "", "", "" + response.responseText);
                                 },
-                                timeout: function (response) {
+                                timeout: 20,
+                                ontimeout: function (response) {
                                     GM_logError("sendStatData.timeout", "", "", "" + response.responseText);
                                 }
                             });
@@ -13803,7 +13785,7 @@ function do_main() {
         }
         if (newdiv = $("rackBottom")) {
             // Spieler suchen
-            newinput = createElement("input", { "value": getText("searchPlayer"), "class": "text", "style": "position:absolute;top:60px;left:125px;width:85px;background:transparent;border:1px solid black;" }, newdiv);
+            var newinput = createElement("input", { "value": getText("searchPlayer"), "class": "text", "style": "position:absolute;top:60px;left:125px;width:85px;background:transparent;border:1px solid black;" }, newdiv);
             newinput.addEventListener("click", function () { this.value = ""; }, false);
             newinput.addEventListener("blur", function () { this.value = getText("searchPlayer"); }, false);
             newinput.addEventListener("keyup", function (event) {
@@ -13845,6 +13827,7 @@ function do_main() {
             newdiv = createElement("div", { "id": "divBeraterButtonsFormulas", "class": "link beraterButtonIcon hoverBgBlue", "mouseOverText": getText("recipes") }, $("divBeraterButtons"));
             createElement("img", { "src": GFX + "farmhouse/catalogue.gif", "style": "position:relative;top:3px;left:0;width:24px;height:24px;" }, newdiv);
             newdiv.addEventListener("click", function () { unsafeWindow.buildInfoPanel("formulas"); }, false);
+            // TODO: Check, if out-dated. Couldn't find that function in Nov 2017!
             if (unsafeWindow.showPowerUps) {
                 unsafeOverwriteFunction("showPowerUps", function () {
                     try {
@@ -13930,11 +13913,11 @@ function do_main() {
         newdiv.addEventListener("click", function () { unsafeWindow.buildInfoPanel("quests", null); }, false);
         err_trace = "Quest - Farmi amount bonus";
         farmiDailyCount = 6;
-        for (var v = 1; v < questData["main"]["1"]["nr"]; v++) {
-            if (QUESTS["main"]["1"][v] && QUESTS["main"]["1"][v][3]) {
-                for (var w = 0; w < QUESTS["main"]["1"][v][3].length; w++) {
-                    if (QUESTS["main"]["1"][v][3][w][0] == 5) {
-                        farmiDailyCount += QUESTS["main"]["1"][v][3][w][1];
+        for (var v_31 = 1; v_31 < questData["main"]["1"]["nr"]; v_31++) {
+            if (QUESTS["main"]["1"][v_31] && QUESTS["main"]["1"][v_31][3]) {
+                for (var w = 0; w < QUESTS["main"]["1"][v_31][3].length; w++) {
+                    if (QUESTS["main"]["1"][v_31][3][w][0] == 5) {
+                        farmiDailyCount += QUESTS["main"]["1"][v_31][3][w][1];
                     }
                 }
             }
@@ -14158,12 +14141,14 @@ function do_main() {
                     }
                     if (unsafeWindow.vet_data.quest.quest_id) {
                         // Quest number
-                        if (questData["veterinary"][campaign]["nr"] != parseInt(unsafeWindow.vet_data.quest.campaign == "2" ? unsafeWindow.vet_data.quest.quest_id + 177 : unsafeWindow.vet_data.quest.quest_id, 10)) {
+                        var tempQuestNumber = unsafeWindow.vet_data.quest.campaign == "2" ? unsafeWindow.vet_data.quest.quest_id + 177 : unsafeWindow.vet_data.quest.quest_id;
+                        if (questData["veterinary"][campaign]["nr"] != tempQuestNumber) {
                             GM_logInfo("handleQuestDataVeterinary", "", "", getText("questSetXToNrY").replace(/%1%/, getText("quest" + "veterinary" + campaign)).replace(/%2%/, unsafeWindow.vet_data.quest.quest_id));
-                            questData["veterinary"][campaign]["nr"] = parseInt(unsafeWindow.vet_data.quest.campaign == "2" ? unsafeWindow.vet_data.quest.quest_id + 177 : unsafeWindow.vet_data.quest.quest_id, 10);
+                            questData["veterinary"][campaign]["nr"] = tempQuestNumber;
                         }
                         // Given
                         questData["veterinary"][campaign]["given"] = new Object();
+                        // TODO: 'data' doesn't exist in unsafeWindow.vet_data.quest (as of Nov 2017). Evaluate!
                         if (unsafeWindow.vet_data.quest.data) {
                             for (var t in unsafeWindow.vet_data.quest.data) {
                                 if (!unsafeWindow.vet_data.quest.data.hasOwnProperty(t)) {
@@ -14214,13 +14199,14 @@ function do_main() {
                     }
                     if (unsafeWindow.pets.data.quest.questid) {
                         // Quest number
-                        if (questData["breed"][campaign]["nr"] != parseInt(unsafeWindow.pets.data.quest.questid, 10)) {
+                        if (questData["breed"][campaign]["nr"] != unsafeWindow.pets.data.quest.questid) {
                             GM_logInfo("handleQuestDataBreed", "", "", getText("questSetXToNrY").replace(/%1%/, getText("quest" + "breed" + campaign)).replace(/%2%/, unsafeWindow.pets.data.quest.questid));
-                            questData["breed"][campaign]["nr"] = parseInt(unsafeWindow.pets.data.quest.questid, 10);
+                            questData["breed"][campaign]["nr"] = unsafeWindow.pets.data.quest.questid;
                         }
                         // Given
                         questData["breed"][campaign]["given"] = new Object();
                         if (unsafeWindow.pets.data.quest.questid) {
+                            // TODO: No 'data' in unsafeWindow.pets.data.quest. Evaluate!
                             for (var t in unsafeWindow.pets.data.quest.data) {
                                 if (!unsafeWindow.pets.data.quest.data.hasOwnProperty(t)) {
                                     continue;
@@ -14259,6 +14245,7 @@ function do_main() {
             // GM_log("setQuest newQuestNr="+newQuestNr);
             try {
                 var err_trace = "Get questdata";
+                // TODO: Aquire a butterfly building and evaluate data!
                 if (unsafeWindow.butterfly && unsafeWindow.butterfly.data.quest) {
                     // GM_log("unsafeWindow.butterfly.data.quest:\n"+print_r(unsafeWindow.pets.data.quest,"",true,"\n"));
                     if (!questData["butterfly"]) {
@@ -14314,7 +14301,7 @@ function do_main() {
         // mouseover showing quest data
         function questLineMouseOver(questType, campaign) {
             try {
-                var container = createElement("div");
+                var container = createElement("div", {});
                 var questDataCurr = questData[questType][campaign];
                 var questCurr = QUESTS[questType][campaign][questDataCurr["nr"]];
                 var questStarted = (questDataCurr["time"] < now);
@@ -14453,7 +14440,7 @@ function do_main() {
                 }
                 tr = createElement("tr", {}, table);
                 createElement("td", {}, tr, getText("start") + ": ");
-                createElement("td", {}, tr, getDateText(questDataCurr["time"]) + " " + getDaytimeStr(questDataCurr["time"]));
+                createElement("td", {}, tr, getDateText(questDataCurr["time"], undefined) + " " + getDaytimeStr(questDataCurr["time"]));
                 div = null;
                 table = null;
                 tr = null;
@@ -14507,13 +14494,14 @@ function do_main() {
             try {
                 var cand = $("questboxobjects").getElementsByClassName("questboxbarout");
                 for (var i = 0; i < cand.length; i++) {
-                    var questWare = parseInt(cand[i].children[0].id.replace("questboxbarin", ""), 10);
+                    var questWare = cand[i].children[0].id.replace("questboxbarin", "");
                     var menge = [0, 0, 0]; //given,stock,total
                     for (var v in unsafeWindow.questdata[c]["data"][1][0]) {
                         if (!unsafeWindow.questdata[c]["data"][1][0].hasOwnProperty(v)) {
                             continue;
                         }
                         if (typeof unsafeWindow.questdata[c]["data"][1][0][v] == "object") {
+                            // Choice between several products to give
                             if (unsafeWindow.questdata[c]["data"][1][0][v][questWare]) {
                                 menge[2] = unsafeWindow.questdata[c]["data"][1][0][v][questWare];
                             }
@@ -14806,12 +14794,12 @@ function do_main() {
                                     createElement("span", {}, td, moneyFormat(NPC[type][v]));
                                 }
                                 else if (NPC[type][v].match(/^f/)) {
-                                    createElement("span", {}, td, "*" + moneyFormat(parseFloat(NPC[type][v].replace("f", ""), 10)));
+                                    createElement("span", {}, td, "*" + moneyFormat(parseFloat(NPC[type][v].replace("f", ""))));
                                 }
                                 else if (NPC[type][v].match(/^c/)) {
                                     coinsFormat(parseInt(NPC[type][v].replace("c", ""), 10), td);
                                 }
-                                td = createElement("td", {}, tr, (type > 0) || (gut[v] === undefined) ? "-" : moneyFormat(gut[v]));
+                                td = createElement("td", {}, tr, (parseInt(type, 10) > 0) || (gut[v] === undefined) ? "-" : moneyFormat(gut[v]));
                                 td = createElement("td", {}, tr, PRODUCT2BUILDING[type][v]);
                             }
                             catch (err) {
@@ -14872,9 +14860,9 @@ function do_main() {
                 createElement("td", {}, tr, "WaterTime");
                 createElement("td", {}, tr, "Ernte");
                 createElement("td", {}, tr, "FieldData");
-                for (var i = 0; i < allZones.length; i++) {
+                for (var i_9 = 0; i_9 < allZones.length; i_9++) {
                     try {
-                        zoneNrS = allZones[i];
+                        zoneNrS = allZones[i_9];
                         style = "color:" + (zones.getBlock(zoneNrS) ? "lightgrey;" : "black;");
                         tr = createElement("tr", {}, table);
                         createElement("td", { "style": style }, tr, zoneNrS);
@@ -14953,7 +14941,7 @@ function do_main() {
                         }
                         td = createElement("td", { "style": style }, tr);
                         if (help = zones.getProduction(zoneNrS)) {
-                            createElement("div", { "style": "white-space:nowrap;" }, td, print_r(help));
+                            createElement("div", { "style": "white-space:nowrap;" }, td, print_r(help, undefined, undefined, undefined));
                         }
                     }
                     catch (err) {
@@ -15235,7 +15223,7 @@ function do_main() {
                         err_trace = "Market page, single product";
                         var preisKlasse = 0;
                         // $("offertypeselector").style.display="none";
-                        market_beraterline.setAttribute("prod", pageId);
+                        market_beraterline.setAttribute("prod", pageId.toString());
                         newdiv1 = createElement("div", {}, market_beraterline.children[0]);
                         newdiv1.addEventListener("mouseover", function (event) {
                             showGoToMarketToolTip(event, this.parentNode.parentNode.getAttribute("prod"));
@@ -15250,7 +15238,7 @@ function do_main() {
                                 newspan = createElement("span", {}, newdiv1, "NPC&nbsp;" + numberFormat(NPC[0][pageId], 2));
                             }
                             else if (NPC[0][pageId].match(/^f/)) {
-                                newspan = createElement("span", {}, newdiv1, "*NPC*&nbsp;" + numberFormat(parseFloat(NPC[0][pageId].replace("f", ""), 10), 2));
+                                newspan = createElement("span", {}, newdiv1, "*NPC*&nbsp;" + numberFormat(parseFloat(NPC[0][pageId].replace("f", "")), 2));
                             }
                             else if (NPC[0][pageId].match(/^c/)) {
                                 newspan = createElement("span", {}, newdiv1, "NPC&nbsp;<span style='display:inline-block;vertical-align:bottom;'>" + coinsFormat(parseInt(NPC[0][pageId].replace("c", ""), 10)).innerHTML + "</span>");
@@ -15267,7 +15255,8 @@ function do_main() {
                         // Link to previous/next product
                         err_trace = "Market page, single product, prev/next";
                         var c = 0;
-                        while ((c < prodNameSort[0].length) && (prodNameSort[0][c] != pageId)) {
+                        var pageIdAsString = pageId.toString();
+                        while ((c < prodNameSort[0].length) && (prodNameSort[0][c] != pageIdAsString)) {
                             c++;
                         }
                         var pageIdVor = c - 1;
@@ -15280,7 +15269,7 @@ function do_main() {
                                 pageIdVor += prodNameSort[0].length;
                             }
                         }
-                        pageIdVor = prodNameSort[0][pageIdVor];
+                        var pageIdVorName = prodNameSort[0][pageIdVor];
                         var pageIdNach = c + 1;
                         if (pageIdNach > prodNameSort[0].length - 1) {
                             pageIdNach = 0;
@@ -15291,12 +15280,12 @@ function do_main() {
                                 pageIdNach = 0;
                             }
                         }
-                        pageIdNach = prodNameSort[0][pageIdNach];
+                        var pageIdNachName = prodNameSort[0][pageIdNach];
                         newdiv1 = createElement("div", {}, market_beraterline.children[0]);
-                        newspan = createElement("div", { "class": "link", "style": "display:inline-block;padding-right:2px;", "prod": pageIdVor }, newdiv1, "<<");
+                        newspan = createElement("div", { "class": "link", "style": "display:inline-block;padding-right:2px;", "prod": pageIdVorName }, newdiv1, "<<");
                         newspan.addEventListener("click", function (event) { showMarket(this.getAttribute("prod")); }, false);
                         newspan.addEventListener("mouseover", function (event) { showGoToMarketToolTip(event, this.getAttribute("prod")); }, false);
-                        newspan = createElement("div", { "class": "link", "style": "display:inline-block;", "prod": pageIdNach }, newdiv1, ">>");
+                        newspan = createElement("div", { "class": "link", "style": "display:inline-block;", "prod": pageIdNachName }, newdiv1, ">>");
                         newspan.addEventListener("click", function (event) { showMarket(this.getAttribute("prod")); }, false);
                         newspan.addEventListener("mouseover", function (event) { showGoToMarketToolTip(event, this.getAttribute("prod")); }, false);
                         // Total amount of all offers
@@ -15324,7 +15313,7 @@ function do_main() {
                             }, false);
                             newinput.addEventListener("change", function () {
                                 var currId = unsafeWindow.market_filter_pid;
-                                var preis = Math.max(0, parseFloat(this.value.replace(regDelimThou, "").replace(regDelimDeci, "."), 10));
+                                var preis = Math.max(0, parseFloat(this.value.replace(regDelimThou, "").replace(regDelimDeci, ".")));
                                 var thisNode = this;
                                 var yesFkt = function () {
                                     gut[currId] = preis;
@@ -15386,17 +15375,6 @@ function do_main() {
                             }, false);
                         }
                     }
-                    // Page of a single user
-                    /*
-                    if(userId!=""){
-                        canda=candtr[3].getElementsByTagName("a");
-                        if(canda[1]){ var thisUser=canda[1].innerHTML; }
-                        newtr=createElement("tr",{},candtable[0]);
-                        newtd=createElement("td",{},newtr);
-                        if (thisUser){igm(thisUser,newtd);}
-                        stats(userId,newtd);
-                    }
-                    */
                 }
                 // Redesign of table
                 err_trace = "Redesign";
@@ -15435,7 +15413,7 @@ function do_main() {
                     }
                     var prodId = parseInt(currOffer["p"], 10);
                     var menge = parseInt(currOffer["a"], 10);
-                    var preis = parseFloat(currOffer["pr"], 10);
+                    var preis = parseFloat(currOffer["pr"]);
                     if ((pageId != -1) && (userId == "") && (unsafeWindow.market_guild_filter == 0)) {
                         createElement("div", {}, row_title, getText("above") + ": " + numberFormat(sum[0]));
                     }
@@ -15525,7 +15503,7 @@ function do_main() {
                                 createElement("span", {}, newdiv1, "NPC");
                             }
                             else if (NPC[0][pageId].match(/^f/)) {
-                                createElement("div", { "class": "market_price" }, newdiv, numberFormat(3 * parseFloat(NPC[0][pageId].replace("f", ""), 10), 2));
+                                createElement("div", { "class": "market_price" }, newdiv, numberFormat(3 * parseFloat(NPC[0][pageId].replace("f", "")), 2));
                                 createElement("div", { "class": "market_amount" }, newdiv, "0");
                                 newdiv1 = createElement("div", { "class": "market_seller" }, newdiv);
                                 createElement("span", {}, newdiv1, "*NPC*");
@@ -15605,6 +15583,7 @@ function do_main() {
                 var currId = unsafeWindow.market_filter_pid;
                 if (currId != -1) {
                     if (lastOffer[currId]) {
+                        // Visible, when you wanna put a product on market
                         $("marketnewoffer_amount").value = lastOffer[currId][0];
                         $("marketnewoffer_price1").value = lastOffer[currId][1];
                         $("marketnewoffer_price2").value = (lastOffer[currId][2] < 10 ? "0" : "") + lastOffer[currId][2];
@@ -15613,51 +15592,14 @@ function do_main() {
                         }
                     }
                     else {
-                        $("marketnewoffer_amount").value = 0;
+                        $("marketnewoffer_amount").value = "0";
                     }
                     keyup($("marketnewoffer_amount"));
-                    /*
-                    if ($("produkt_preis1")){
-                        $("lbl_produkt_max").setAttribute("class",$("lbl_produkt_max").getAttribute("class")+" link");
-                        $("lbl_produkt_max").addEventListener("click",function(){
-                            $("produkt_anzahl").value=this.innerHTML.replace(regDelimThou,"");
-                            keyup($("produkt_anzahl"));
-                        },false);
-                        $("produkt_anzahl").addEventListener("focus",checkPreis,false); // fired when offer-div opens
-                        $("preisschild").addEventListener("keyup",function(event){
-                            checkPreis();
-                            if (event.keyCode==13){
-                                var submitButton=$("preisschild").querySelector("#verkaufe_markt");
-                                if(submitButton.style.display!="none"){ click(submitButton); }
-                                submitButton=null;
-                            }
-                        },false);
-                        if(valJoinPreise){
-                            $("produkt_preis1").setAttribute("tabindex","0");
-                            $("produkt_preis2").setAttribute("tabindex","0");
-                            var newinput=createElement("input",{"id":"produkt_preis_ganz","type":"text","style":"position:absolute;left:0;top:0;background-color:#002300;color:#f0ffef;width:131px;text-align:right;border:1px solid #555;","tabindex":"2","maxlength":"9","name":"p_preis_ganz","class":"text thuge"},$("produkt_preis1").parentNode);
-                            newinput.addEventListener("keyup",function(event){
-                                if (event.keyCode==13){
-                                    var submitButton=$("preisschild").querySelector("#verkaufe_markt");
-                                    if(submitButton.style.display!="none"){ click(submitButton); }
-                                    submitButton=null;
-                                }else{
-                                    var preis=this.value.replace(regDelimThou,"").replace(regDelimDeci,".");
-                                    var preis1=parseInt(preis,10);
-                                    var preis2=(preis.search(/\./)!=-1?(preis+"00").substr(1+preis.search(/\./),2):"00");
-                                    $("produkt_preis1").value=preis1;
-                                    $("produkt_preis2").value=preis2;
-                                    keyup($("produkt_preis1"));
-                                }
-                            },false);
-                            newinput=null;
-                        }
-                    }
-                    */
                     // coins
                     function checkPreisCoins() {
-                        //GM_log("checkPreisCoins "+oldPricesInserted);
+                        // TODO: Evaluate and refactor this whole function!
                         window.setTimeout(function () {
+                            var oldPricesInserted;
                             if (oldPricesInserted == 0) {
                                 lastOffer[0] = [parseInt($("coinsanzahl").value, 10), parseInt($("coinspreis").value, 10), $("coinssollpreis").checked];
                                 try {
@@ -15673,7 +15615,7 @@ function do_main() {
                                     $("coinsanzahl").value = lastOffer[0][0];
                                     $("coinspreis").value = lastOffer[0][1];
                                     $("coinssollpreis").checked = lastOffer[0][2];
-                                    unsafeWindow.chkAmount();
+                                    unsafeWindow.chkAmount(); // Doesn't exist anymore as of Nov 2017
                                     unsafeWindow.calcMarketPrice();
                                 }
                             }
@@ -15687,7 +15629,7 @@ function do_main() {
                                     $("coinsanzahl").value = currAnzahl;
                                 }
                             }
-                            var newtable = createElement("table");
+                            var newtable = createElement("table", {});
                             var newtr;
                             $("divBerInfoCoins").replaceChild(newtable, $("divBerInfoCoins").getElementsByTagName("table")[0]);
                             if (gut[0]) {
@@ -15716,48 +15658,6 @@ function do_main() {
                             newtr = null;
                         }, 200);
                     }
-                    /*
-                        if($("coinsauflager")){
-                            $("coinsauflager").setAttribute("class",$("coinsauflager").getAttribute("class")+" link");
-                            $("coinsauflager").addEventListener("click",function(){
-                                $("coinsanzahl").value=this.innerHTML;
-                                keyup($("coinsanzahl"));
-                            },false);
-                        }
-                        if($("coinspreisschild")){
-                            var newdiv=createElement("div",{"style":"position:absolute;top:0;left:330px;width:150px"},$("coinspreisschild"));
-                            newdiv=createElement("div",{"id":"divBerInfoCoins","style":"float:left;padding:3px;background-color:#002300;border:5px solid #594230;color:#f0ffef;font-weight:bold;"},newdiv);
-                            createElement("table",{},newdiv);
-                            newdiv=null;
-        
-                            $("coinsanzahl").addEventListener("keyup",function(){ this.value=this.value.replace(/\D/g,""); },false);
-                            $("coinspreis").addEventListener("keyup",function(){ this.value=this.value.replace(/\D/g,""); },false);
-                            $("coinspreisschild").addEventListener("click",checkPreisCoins,false);
-                            $("coinspreisschild").addEventListener("keyup",function(event){
-                                checkPreisCoins();
-                                if (event.keyCode==13){
-                                    var submitButton=$("preisschild").querySelector("#verkaufe_markt");
-                                    if(submitButton.style.display!="none"){ click(submitButton); }
-                                    submitButton=null;
-                                }
-                            },false);
-        
-                            // bugfix: no focus when coinspreisschild opens
-                            $("coinspreisschild").addEventListener("DOMAttrModified",function(event){
-                                if((event.target.id=="coinspreisschild")&&(event.attrName=="style")){
-                                    if(event.newValue.match(/display\:\s*block/)){
-                                        if(oldPricesInserted!=0){
-                                            checkPreisCoins(); // fired when offer-div opens
-                                        }
-                                    }else{
-                                        if(oldPricesInserted==0){ oldPricesInserted=-1; }
-                                    }
-                                }
-                            }, false);
-                        }
-        
-                        cand=null;candtable=null;
-        */
                 }
             }
             catch (err) {
@@ -15783,7 +15683,7 @@ function do_main() {
                 berater_box.innerHTML = "";
                 var currId = unsafeWindow.market_filter_pid;
                 if (currId != -1) {
-                    var currPreis = parseFloat($("marketnewoffer_price1").value + "." + $("marketnewoffer_price2").value, 10);
+                    var currPreis = parseFloat($("marketnewoffer_price1").value + "." + $("marketnewoffer_price2").value);
                     var currAnzahl = parseInt($("marketnewoffer_amount").value, 10);
                     // Stock amount
                     err_trace = "Stock amount";
@@ -15796,7 +15696,7 @@ function do_main() {
                     if (protectMinRack) {
                         if (currAnzahl > prodStock[0][currId] - prodMinRack[0][currId]) {
                             currAnzahl = Math.max(0, prodStock[0][currId] - prodMinRack[0][currId]);
-                            $("marketnewoffer_amount").value = currAnzahl;
+                            $("marketnewoffer_amount").value = currAnzahl.toString();
                         }
                     }
                     // Block Submit Button
@@ -15814,10 +15714,10 @@ function do_main() {
                                 }
                             }
                             else if (NPC[0][currId].match(/^f/)) {
-                                if (100 * currPreis < 2 * parseFloat(NPC[0][currId].replace("f", ""), 10)) {
+                                if (100 * currPreis < 2 * parseFloat(NPC[0][currId].replace("f", ""))) {
                                     help = 3;
                                 }
-                                else if (100 * currPreis > 300 * parseFloat(NPC[0][currId].replace("f", ""), 10)) {
+                                else if (100 * currPreis > 300 * parseFloat(NPC[0][currId].replace("f", ""))) {
                                     help = 4;
                                 }
                             }
@@ -15904,7 +15804,7 @@ function do_main() {
                         createElement("td", { "style": "color:#f0ffef;font-weight:bold;text-align:right;" }, newtr, moneyFormatLimit(NPC[0][currId], 100));
                     }
                     else if (NPC[0][currId].match(/^f/)) {
-                        createElement("td", { "style": "color:#f0ffef;font-weight:bold;text-align:right;" }, newtr, "*" + moneyFormatLimit(parseFloat(NPC[0][currId].replace("f", ""), 10), 100));
+                        createElement("td", { "style": "color:#f0ffef;font-weight:bold;text-align:right;" }, newtr, "*" + moneyFormatLimit(parseFloat(NPC[0][currId].replace("f", "")), 100));
                     }
                     else if (NPC[0][currId].match(/^c/)) {
                         coinsFormat(parseInt(NPC[0][currId].replace("c", ""), 10), createElement("td", { "style": "color:#f0ffef;font-weight:bold;text-align:right;" }, newtr));
@@ -15929,7 +15829,7 @@ function do_main() {
             try {
                 for (var i = 0; i < unsafeWindow.market_offers.length; i++) {
                     if (id == unsafeWindow.market_offers[i].id) {
-                        var money = parseFloat($("bar").innerHTML.replace(getText("gamecurrency"), "").replace(/\s+/g, "").replace(regDelimThou, "").replace(regDelimDeci, "."), 10);
+                        var money = parseFloat($("bar").innerHTML.replace(getText("gamecurrency"), "").replace(/\s+/g, "").replace(regDelimThou, "").replace(regDelimDeci, "."));
                         $("marketbuyofferamount").value = Math.min(unsafeWindow.market_offers[i].a, Math.floor(money / unsafeWindow.market_offers[i].pr));
                         window.setTimeout(function () {
                             $("marketbuyofferamount").select();
@@ -15992,7 +15892,7 @@ function do_main() {
                         row = result[1]["offers"][v]; // A received offer
                         offer_id = parseInt(row["id"], 10); // Id of offer
                         prod = parseInt(row["p"], 10); // Id of product in offer
-                        preis = parseFloat(row["pr"], 10); // Price of pruduct
+                        preis = parseFloat(row["pr"]); // Price of pruduct
                         menge = parseInt(row["a"], 10); // Amount
                         typ = prodTyp[0][prod]; // Type of the product
                         if (row["s"]) {
@@ -16092,7 +15992,7 @@ function do_main() {
                                                 continue;
                                             }
                                             // ... it's a string starting with 'f' followed by the price
-                                            gut[v] = parseFloat(NPC[0][v].replace("f", ""), 10);
+                                            gut[v] = parseFloat(NPC[0][v].replace("f", ""));
                                             if (valUse3TimesNpcPrices) {
                                                 gut[v] = 3 * gut[v];
                                             }

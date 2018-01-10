@@ -11420,7 +11420,7 @@ function do_main() {
                             } else {
                                 $("speedlink_city" + b).onclick = new Function("unsafeWindow.travel2City2();")
                             }
-                            if (b == 2 && unsafeWindow.currentuserlevel < 8) {
+                            if (b == 2 && parseInt(unsafeWindow.currentuserlevel, 10) < 8) {
                                 unsafeWindow.hideDiv("speedlink_city" + b)
                             } else {
                                 unsafeWindow.showDiv("speedlink_city" + b)
@@ -11445,7 +11445,7 @@ function do_main() {
                             $("speedlink_forestry").onclick = new Function("unsafeWindow.travel2forestry();")
                         }
                         err_trace = "foodworld";
-                        if (unsafeWindow.currentuserlevel >= 11) {
+                        if (parseInt(unsafeWindow.currentuserlevel, 10) >= 11) {
                             if (unsafeWindow.foodworld_quicknavi) {
                                 $("speedlink_foodworld").classList.remove("speedlink_foodworld");
                                 $("speedlink_foodworld").classList.add("speedlink_foodworld_active")
@@ -11509,13 +11509,6 @@ function do_main() {
                         unsafeWindow.foodworldAction('init');
                     } else {
                         unsafeWindow.mapGo2Location("picknick", 1);
-                        /* Beta
-                        document.addEventListener("gameCity2",function(){
-                            unsafeWindow.travel2foodworld();
-                            document.removeEventListener("gameCity2",arguments.callee,false);
-                        },false);
-                        unsafeWindow.travel2City2();
-                        */
                     }
                 } catch (err) { GM_logError("travel2foodworld", "", "", err); }
             };
@@ -11658,9 +11651,11 @@ function do_main() {
             createElement("div", { "style": "display:inline-block;margin-bottom:2px;margin-right:2px;text-decoration:underline;vertical-align:top;font-size:11px;" }, newdiv, getText("login"));
             newdiv1 = createElement("div", { "style": "display:inline-block;" }, newdiv);
             createElement("img", { "border": "0", "src": GFX + "menu/logout.gif" }, newdiv1);
-            newdiv.addEventListener("mouseout", function () { $("divOtherAccountsTimes").style.display = "none"; }, false);
+            newdiv.addEventListener("mouseout", function () { 
+                $("divOtherAccountsTimes").style.display = "none"; 
+            }, false);
             function fillDivOtherAccountsTimes() {
-                divOtherAccountsTimes = $("divOtherAccountsTimes");
+                var divOtherAccountsTimes = $("divOtherAccountsTimes");
                 if (divOtherAccountsTimes.style.display == "none") {
                     divOtherAccountsTimes.innerHTML = "";
                 } else {
@@ -11692,7 +11687,7 @@ function do_main() {
                         createElement("td", {}, newtr, farmNamen[otherAccs[v][1]]);
                         newtd = createElement("td", { "style": "padding-left:5px;" }, newtr);
                         var help = unsafeWindow.Zeit.Verschiebung + otherAccs[v][2];
-                        if (help > now) { newtd.innerHTML = getTimeStr(help - now); }
+                        if (help > now) { newtd.innerHTML = getTimeStr(help - now, undefined); }
                         else { newtd.innerHTML = getText("finished").toLowerCase() + "!"; }
                     }
                     divOtherAccountsTimes.innerHTML = "";
@@ -11707,7 +11702,7 @@ function do_main() {
                 fillDivOtherAccountsTimes();
             }, false);
             help = NEVER;
-            for (var v = otherAccs.length - 1; v >= 0; v--) {
+            for (let v = otherAccs.length - 1; v >= 0; v--) {
                 if (otherAccs[v][0] > -1) {
                     help = Math.min(help, otherAccs[v][2]);
                 }
@@ -11736,7 +11731,7 @@ function do_main() {
                     }
                 } else {
                     window.setTimeout(function () { timerSessionEnd(sec - 1); }, 1000);
-                    $("divSessionEndTime").innerHTML = getTimeStr(sec);
+                    $("divSessionEndTime").innerHTML = getTimeStr(sec, undefined);
                 }
             } catch (err) { GM_logError("timerSessionEnd", "", "", err); }
         }
@@ -11758,12 +11753,14 @@ function do_main() {
         // Statistik
         err_trace = "Statistic";
         if (STAT_SERVER[COUNTRY]) {
-            function buildStatistik(mode) {
+            function buildStatistik(mode?) {
                 try {
                     var modeDefault = { "category": "c", "npc": true, "showAll": false, "time": 120 };
                     var modeOld = explode(GM_getValue(COUNTRY + "_" + SERVER + "_" + USERNAME + "_modeStatistic"), "buildStatistik/modeOld", modeDefault);
                     if (typeof modeOld != "object") { modeOld = modeDefault; }
-                    if (typeof mode != "object") { mode = modeOld; }
+                    if (typeof mode != "object") { 
+                        mode = modeOld; 
+                    }
                     for (var v in modeDefault) {
                         if (!modeDefault.hasOwnProperty(v)) { continue; }
                         if (mode[v] === undefined) { mode[v] = (modeOld[v] === undefined ? modeDefault[v] : modeOld[v]); }
@@ -11797,7 +11794,7 @@ function do_main() {
                     createElement("span", { "style": "margin-right:20px;" }, newdiv, getText("showAll"));
 
                     var help = {};
-                    for (var v = 0; v < prodBlock[0].length; v++) {
+                    for (let v = 0; v < prodBlock[0].length; v++) {
                         if (prodBlock[0][v] === undefined) { continue; }
                         if ((!prodBlock[0][v].match(/t/)) && (mode["showAll"] || !prodBlock[0][v].match(/[lq]/))) {
                             help[prodTyp[0][v]] = true;
@@ -11823,7 +11820,7 @@ function do_main() {
                     // Body
                     newdiv = createElement("div", { "style": "overflow-y:auto;overflow-x:hidden;color:black;padding-top:30px;" }, container);
                     var newdiv1, newimg, newobject;
-                    for (var v = 0; v < prodName[0].length; v++) {
+                    for (let v = 0; v < prodName[0].length; v++) {
                         if (prodName[0][v] === undefined) { continue; }
                         if ((prodTyp[0][v] == mode["category"]) && (!prodBlock[0][v].match(/t/)) && (mode["showAll"] || !prodBlock[0][v].match(/[lq]/))) {
                             newdiv1 = createElement("div", { "id": "stat" + v, "class": "link smallStatistic" }, newdiv);
@@ -11842,19 +11839,6 @@ function do_main() {
                             }, false);
                         }
                     }
-                    /*
-                    if (isNaN(mode)){
-                    }else{
-                        newdiv1=createElement("div",{"style":"margin:5px;"},newdiv);
-                        createElement("div",{"style":"font-weight:bold"},newdiv1,prodName[0][mode]+", "+numberFormat(prodStock[0][mode],0)+", "+moneyFormat(gut[mode])+", "+moneyFormat(gutBeob[mode]));
-                        var breit=(window.innerWidth-60);
-                        var hoch=(window.innerHeight-130);
-                        var url=STAT_SERVER[COUNTRY]+"/chart.php?w="+breit+"&h="+hoch+"&t=h"+mode["time"]+"&shownpc="+(mode["npc"]?1:0)+"&clip=1&lng1="+COUNTRY+"&server1="+SERVER+"&product1="+mode+"&color1=green";
-                        newobject=createElement("object",{data:url,"type":type="image/svg+xml","width":breit+"px","height":hoch+"px"},newdiv1);
-                        createElement("param",{"name":"src","value":url},newobject);
-                        createElement("div",{"class":"v"+mode,"style":"position:relative;top:-40px;left:10px;z-index:2"},newdiv1);
-                    }
-                    */
                     newdiv1 = null; newimg = null; newobject = null;
 
                     container = null; newdiv = null; newselect = null; newselect = null;
@@ -11887,7 +11871,6 @@ function do_main() {
 
                         if (c > 0) {
                             GM_logInfo("sendStatData", "", "", getText("sendingXObservedPricesToServer").replace(/%1%/, c));
-                            // GM_log("sendStatData sending:\n" + STAT_SERVER[COUNTRY]+'/add.php?json={\"server\":'+SERVER+',\"COUNTRY\":'+COUNTRY+',\"productcount\":'+c+prodStr+'}')
                             GM_xmlhttpRequest({
                                 method: "POST",
                                 url: STAT_SERVER[COUNTRY] + "/add.php",
@@ -11905,7 +11888,8 @@ function do_main() {
                                 onerror: function (response) {
                                     GM_logError("sendStatData.onerror", "", "", "" + response.responseText);
                                 },
-                                timeout: function (response) {
+                                timeout: 20,
+                                ontimeout: function (response) {
                                     GM_logError("sendStatData.timeout", "", "", "" + response.responseText);
                                 }
                             });
@@ -11940,7 +11924,7 @@ function do_main() {
         }
         if (newdiv = $("rackBottom")) {
             // Spieler suchen
-            newinput = createElement("input", { "value": getText("searchPlayer"), "class": "text", "style": "position:absolute;top:60px;left:125px;width:85px;background:transparent;border:1px solid black;" }, newdiv);
+            var newinput = createElement("input", { "value": getText("searchPlayer"), "class": "text", "style": "position:absolute;top:60px;left:125px;width:85px;background:transparent;border:1px solid black;" }, newdiv);
             newinput.addEventListener("click", function () { this.value = ""; }, false);
             newinput.addEventListener("blur", function () { this.value = getText("searchPlayer"); }, false);
             newinput.addEventListener("keyup", function (event) {
@@ -11980,6 +11964,7 @@ function do_main() {
             createElement("img", { "src": GFX + "farmhouse/catalogue.gif", "style": "position:relative;top:3px;left:0;width:24px;height:24px;" }, newdiv);
             newdiv.addEventListener("click", function () { unsafeWindow.buildInfoPanel("formulas"); }, false);
 
+            // TODO: Check, if out-dated. Couldn't find that function in Nov 2017!
             if (unsafeWindow.showPowerUps) { // hofix 13.03.2013
                 unsafeOverwriteFunction("showPowerUps", function () {
                     try {
@@ -12055,7 +12040,7 @@ function do_main() {
         newdiv.addEventListener("click", function () { unsafeWindow.buildInfoPanel("quests", null); }, false);
         err_trace = "Quest - Farmi amount bonus";
         farmiDailyCount = 6;
-        for (var v = 1; v < questData["main"]["1"]["nr"]; v++) {
+        for (let v = 1; v < questData["main"]["1"]["nr"]; v++) {
             if (QUESTS["main"]["1"][v] && QUESTS["main"]["1"][v][3]) {
                 for (var w = 0; w < QUESTS["main"]["1"][v][3].length; w++) {
                     if (QUESTS["main"]["1"][v][3][w][0] == 5) {
@@ -12237,12 +12222,14 @@ function do_main() {
                     }
                     if (unsafeWindow.vet_data.quest.quest_id) {
                         // Quest number
-                        if (questData["veterinary"][campaign]["nr"] != parseInt(unsafeWindow.vet_data.quest.campaign == "2" ? unsafeWindow.vet_data.quest.quest_id + 177 : unsafeWindow.vet_data.quest.quest_id, 10)) {
+                        var tempQuestNumber = unsafeWindow.vet_data.quest.campaign == "2" ? unsafeWindow.vet_data.quest.quest_id + 177 : unsafeWindow.vet_data.quest.quest_id;
+                        if (questData["veterinary"][campaign]["nr"] != tempQuestNumber) {
                             GM_logInfo("handleQuestDataVeterinary", "", "", getText("questSetXToNrY").replace(/%1%/, getText("quest" + "veterinary" + campaign)).replace(/%2%/, unsafeWindow.vet_data.quest.quest_id));
-                            questData["veterinary"][campaign]["nr"] = parseInt(unsafeWindow.vet_data.quest.campaign == "2" ? unsafeWindow.vet_data.quest.quest_id + 177 : unsafeWindow.vet_data.quest.quest_id, 10);
+                            questData["veterinary"][campaign]["nr"] = tempQuestNumber;
                         }
                         // Given
                         questData["veterinary"][campaign]["given"] = new Object();
+                        // TODO: 'data' doesn't exist in unsafeWindow.vet_data.quest (as of Nov 2017). Evaluate!
                         if (unsafeWindow.vet_data.quest.data) {
                             for (var t in unsafeWindow.vet_data.quest.data) {
                                 if (!unsafeWindow.vet_data.quest.data.hasOwnProperty(t)) { continue; }
@@ -12282,19 +12269,24 @@ function do_main() {
                     }
                     if (unsafeWindow.pets.data.quest.questid) {
                         // Quest number
-                        if (questData["breed"][campaign]["nr"] != parseInt(unsafeWindow.pets.data.quest.questid, 10)) {
+                        if (questData["breed"][campaign]["nr"] != unsafeWindow.pets.data.quest.questid) {
                             GM_logInfo("handleQuestDataBreed", "", "", getText("questSetXToNrY").replace(/%1%/, getText("quest" + "breed" + campaign)).replace(/%2%/, unsafeWindow.pets.data.quest.questid));
-                            questData["breed"][campaign]["nr"] = parseInt(unsafeWindow.pets.data.quest.questid, 10);
+                            questData["breed"][campaign]["nr"] = unsafeWindow.pets.data.quest.questid;
                         }
                         // Given
                         questData["breed"][campaign]["given"] = new Object();
                         if (unsafeWindow.pets.data.quest.questid) {
+                            // TODO: No 'data' in unsafeWindow.pets.data.quest. Evaluate!
                             for (var t in unsafeWindow.pets.data.quest.data) {
                                 if (!unsafeWindow.pets.data.quest.data.hasOwnProperty(t)) { continue; }
                                 var prod = parseInt(t, 10);
                                 var type = 0;
-                                if (!questData["breed"][campaign]["given"][type]) { questData["breed"][campaign]["given"][type] = new Object(); }
-                                if (!questData["breed"][campaign]["given"][type][prod]) { questData["breed"][campaign]["given"][type][prod] = 0; }
+                                if (!questData["breed"][campaign]["given"][type]) { 
+                                    questData["breed"][campaign]["given"][type] = new Object(); 
+                                }
+                                if (!questData["breed"][campaign]["given"][type][prod]) { 
+                                    questData["breed"][campaign]["given"][type][prod] = 0; 
+                                }
                                 questData["breed"][campaign]["given"][type][prod] += parseInt(unsafeWindow.pets.data.quest.data[t], 10);
                             }
                         }
@@ -12317,6 +12309,7 @@ function do_main() {
             // GM_log("setQuest newQuestNr="+newQuestNr);
             try {
                 var err_trace = "Get questdata";
+                // TODO: Aquire a butterfly building and evaluate data!
                 if (unsafeWindow.butterfly && unsafeWindow.butterfly.data.quest) {
                     // GM_log("unsafeWindow.butterfly.data.quest:\n"+print_r(unsafeWindow.pets.data.quest,"",true,"\n"));
                     if (!questData["butterfly"]) { questData["butterfly"] = {}; }
@@ -12361,7 +12354,7 @@ function do_main() {
         // mouseover showing quest data
         function questLineMouseOver(questType, campaign) {
             try {
-                var container = createElement("div");
+                var container = createElement("div", {});
                 var questDataCurr = questData[questType][campaign];
                 var questCurr = QUESTS[questType][campaign][questDataCurr["nr"]];
                 var questStarted = (questDataCurr["time"] < now);
@@ -12485,7 +12478,7 @@ function do_main() {
                 }
                 tr = createElement("tr", {}, table);
                 createElement("td", {}, tr, getText("start") + ": ");
-                createElement("td", {}, tr, getDateText(questDataCurr["time"]) + " " + getDaytimeStr(questDataCurr["time"]));
+                createElement("td", {}, tr, getDateText(questDataCurr["time"], undefined) + " " + getDaytimeStr(questDataCurr["time"]));
 
                 div = null;
                 table = null; tr = null; td = null;
@@ -12533,11 +12526,12 @@ function do_main() {
             try {
                 var cand = $("questboxobjects").getElementsByClassName("questboxbarout");
                 for (var i = 0; i < cand.length; i++) {
-                    var questWare = parseInt(cand[i].children[0].id.replace("questboxbarin", ""), 10);
+                    var questWare =cand[i].children[0].id.replace("questboxbarin", "");
                     var menge = [0, 0, 0]; //given,stock,total
                     for (var v in unsafeWindow.questdata[c]["data"][1][0]) {
                         if (!unsafeWindow.questdata[c]["data"][1][0].hasOwnProperty(v)) { continue; }
                         if (typeof unsafeWindow.questdata[c]["data"][1][0][v] == "object") {
+                            // Choice between several products to give
                             if (unsafeWindow.questdata[c]["data"][1][0][v][questWare]) {
                                 menge[2] = unsafeWindow.questdata[c]["data"][1][0][v][questWare];
                             }
@@ -12790,11 +12784,11 @@ function do_main() {
                                 } else if (!isNaN(NPC[type][v])) {
                                     createElement("span", {}, td, moneyFormat(NPC[type][v]));
                                 } else if (NPC[type][v].match(/^f/)) {
-                                    createElement("span", {}, td, "*" + moneyFormat(parseFloat(NPC[type][v].replace("f", ""), 10)));
+                                    createElement("span", {}, td, "*" + moneyFormat(parseFloat(NPC[type][v].replace("f", ""))));
                                 } else if (NPC[type][v].match(/^c/)) {
                                     coinsFormat(parseInt(NPC[type][v].replace("c", ""), 10), td);
                                 }
-                                td = createElement("td", {}, tr, (type > 0) || (gut[v] === undefined) ? "-" : moneyFormat(gut[v]));
+                                td = createElement("td", {}, tr, (parseInt(type, 10) > 0) || (gut[v] === undefined) ? "-" : moneyFormat(gut[v]));
                                 td = createElement("td", {}, tr, PRODUCT2BUILDING[type][v]);
                             } catch (err) { GM_logError("showDataAllProducts", "", "type=" + type + " v=" + v, "(loop) " + err); }
                         }
@@ -12843,7 +12837,7 @@ function do_main() {
                 createElement("td", {}, tr, "FieldData");
 
 
-                for (var i = 0; i < allZones.length; i++) {
+                for (let i = 0; i < allZones.length; i++) {
                     try {
                         zoneNrS = allZones[i];
                         style = "color:" + (zones.getBlock(zoneNrS) ? "lightgrey;" : "black;");
@@ -12907,7 +12901,7 @@ function do_main() {
                         }
                         td = createElement("td", { "style": style }, tr);
                         if (help = zones.getProduction(zoneNrS)) {
-                            createElement("div", { "style": "white-space:nowrap;" }, td, print_r(help));
+                            createElement("div", { "style": "white-space:nowrap;" }, td, print_r(help, undefined, undefined, undefined));
                         }
                     } catch (err) { GM_logError("showDataAllZones", "", "zoneNrS=" + zoneNrS, "(loop) " + err); }
                 }
@@ -13180,7 +13174,7 @@ function do_main() {
                         err_trace = "Market page, single product";
                         var preisKlasse = 0;
                         // $("offertypeselector").style.display="none";
-                        market_beraterline.setAttribute("prod", pageId);
+                        market_beraterline.setAttribute("prod", pageId.toString());
                         newdiv1 = createElement("div", {}, market_beraterline.children[0]);
                         newdiv1.addEventListener("mouseover", function (event) {
                             showGoToMarketToolTip(event, this.parentNode.parentNode.getAttribute("prod"));
@@ -13195,7 +13189,7 @@ function do_main() {
                             if (!isNaN(NPC[0][pageId])) {
                                 newspan = createElement("span", {}, newdiv1, "NPC&nbsp;" + numberFormat(NPC[0][pageId], 2));
                             } else if (NPC[0][pageId].match(/^f/)) {
-                                newspan = createElement("span", {}, newdiv1, "*NPC*&nbsp;" + numberFormat(parseFloat(NPC[0][pageId].replace("f", ""), 10), 2));
+                                newspan = createElement("span", {}, newdiv1, "*NPC*&nbsp;" + numberFormat(parseFloat(NPC[0][pageId].replace("f", "")), 2));
                             } else if (NPC[0][pageId].match(/^c/)) {
                                 newspan = createElement("span", {}, newdiv1, "NPC&nbsp;<span style='display:inline-block;vertical-align:bottom;'>" + coinsFormat(parseInt(NPC[0][pageId].replace("c", ""), 10)).innerHTML + "</span>");
                                 //coinsFormat(parseInt(NPC[0][pageId].replace("c",""),10),newdiv).style.cssFloat="right";
@@ -13210,26 +13204,27 @@ function do_main() {
                         // Link to previous/next product
                         err_trace = "Market page, single product, prev/next";
                         var c = 0;
-                        while ((c < prodNameSort[0].length) && (prodNameSort[0][c] != pageId)) { c++; }
+                        var pageIdAsString = pageId.toString();
+                        while ((c < prodNameSort[0].length) && (prodNameSort[0][c] != pageIdAsString)) { c++; }
                         var pageIdVor = c - 1;
                         if (pageIdVor < 0) { pageIdVor += prodNameSort[0].length; }
                         while (prodBlock[0][prodNameSort[0][pageIdVor]].match(/[ltv]/)) {
                             pageIdVor--;
                             if (pageIdVor < 0) { pageIdVor += prodNameSort[0].length; }
                         }
-                        pageIdVor = prodNameSort[0][pageIdVor];
+                        var pageIdVorName =prodNameSort[0][pageIdVor];
                         var pageIdNach = c + 1;
                         if (pageIdNach > prodNameSort[0].length - 1) { pageIdNach = 0; }
                         while (prodBlock[0][prodNameSort[0][pageIdNach]].match(/[ltv]/)) {
                             pageIdNach++;
                             if (pageIdNach > prodNameSort[0].length - 1) { pageIdNach = 0; }
                         }
-                        pageIdNach = prodNameSort[0][pageIdNach];
+                        var pageIdNachName = prodNameSort[0][pageIdNach];
                         newdiv1 = createElement("div", {}, market_beraterline.children[0]);
-                        newspan = createElement("div", { "class": "link", "style": "display:inline-block;padding-right:2px;", "prod": pageIdVor }, newdiv1, "<<");
+                        newspan = createElement("div", { "class": "link", "style": "display:inline-block;padding-right:2px;", "prod": pageIdVorName }, newdiv1, "<<");
                         newspan.addEventListener("click", function (event) { showMarket(this.getAttribute("prod")); }, false);
                         newspan.addEventListener("mouseover", function (event) { showGoToMarketToolTip(event, this.getAttribute("prod")); }, false);
-                        newspan = createElement("div", { "class": "link", "style": "display:inline-block;", "prod": pageIdNach }, newdiv1, ">>");
+                        newspan = createElement("div", { "class": "link", "style": "display:inline-block;", "prod": pageIdNachName }, newdiv1, ">>");
                         newspan.addEventListener("click", function (event) { showMarket(this.getAttribute("prod")); }, false);
                         newspan.addEventListener("mouseover", function (event) { showGoToMarketToolTip(event, this.getAttribute("prod")); }, false);
 
@@ -13252,11 +13247,13 @@ function do_main() {
                             }, false);
                             newinput.addEventListener("blur", function () {
                                 this.style.backgroundColor = "#589456";
-                                if (!unsafeWindow.market_timer['update']) { unsafeWindow.market_timer['update'] = unsafeWindow.setInterval("marketTimer()", 1000); }
+                                if (!unsafeWindow.market_timer['update']) { 
+                                    unsafeWindow.market_timer['update'] = unsafeWindow.setInterval("marketTimer()", 1000); 
+                                }
                             }, false);
                             newinput.addEventListener("change", function () {
                                 var currId = unsafeWindow.market_filter_pid;
-                                var preis = Math.max(0, parseFloat(this.value.replace(regDelimThou, "").replace(regDelimDeci, "."), 10));
+                                var preis = Math.max(0, parseFloat(this.value.replace(regDelimThou, "").replace(regDelimDeci, ".")));
                                 var thisNode = this;
                                 var yesFkt = function () {
                                     gut[currId] = preis;
@@ -13312,18 +13309,6 @@ function do_main() {
                             }, false);
                         }
                     }
-
-                    // Page of a single user
-                    /*
-                    if(userId!=""){
-                        canda=candtr[3].getElementsByTagName("a");
-                        if(canda[1]){ var thisUser=canda[1].innerHTML; }
-                        newtr=createElement("tr",{},candtable[0]);
-                        newtd=createElement("td",{},newtr);
-                        if (thisUser){igm(thisUser,newtd);}
-                        stats(userId,newtd);
-                    }
-                    */
                 }
 
                 // Redesign of table
@@ -13358,7 +13343,7 @@ function do_main() {
                     }
                     var prodId = parseInt(currOffer["p"], 10);
                     var menge = parseInt(currOffer["a"], 10);
-                    var preis = parseFloat(currOffer["pr"], 10);
+                    var preis = parseFloat(currOffer["pr"]);
                     if ((pageId != -1) && (userId == "") && (unsafeWindow.market_guild_filter == 0)) {
                         createElement("div", {}, row_title, getText("above") + ": " + numberFormat(sum[0]));
                     }
@@ -13441,7 +13426,7 @@ function do_main() {
                                 newdiv1 = createElement("div", { "class": "market_seller" }, newdiv);
                                 createElement("span", {}, newdiv1, "NPC");
                             } else if (NPC[0][pageId].match(/^f/)) {
-                                createElement("div", { "class": "market_price" }, newdiv, numberFormat(3 * parseFloat(NPC[0][pageId].replace("f", ""), 10), 2));
+                                createElement("div", { "class": "market_price" }, newdiv, numberFormat(3 * parseFloat(NPC[0][pageId].replace("f", "")), 2));
                                 createElement("div", { "class": "market_amount" }, newdiv, "0");
                                 newdiv1 = createElement("div", { "class": "market_seller" }, newdiv);
                                 createElement("span", {}, newdiv1, "*NPC*");
@@ -13500,58 +13485,22 @@ function do_main() {
                 var currId = unsafeWindow.market_filter_pid;
                 if (currId != -1) {
                     if (lastOffer[currId]) {
-                        $("marketnewoffer_amount").value = lastOffer[currId][0];
-                        $("marketnewoffer_price1").value = lastOffer[currId][1];
-                        $("marketnewoffer_price2").value = (lastOffer[currId][2] < 10 ? "0" : "") + lastOffer[currId][2];
-                        if ($("marketnewoffer_price_comb")) { $("marketnewoffer_price_comb").value = lastOffer[currId][1] + delimDeci + (lastOffer[currId][2] < 10 ? "0" : "") + lastOffer[currId][2]; }
+                        // Visible, when you wanna put a product on market
+                        (<HTMLInputElement> $("marketnewoffer_amount")).value = lastOffer[currId][0];
+                        (<HTMLInputElement> $("marketnewoffer_price1")).value = lastOffer[currId][1];
+                        (<HTMLInputElement> $("marketnewoffer_price2")).value = (lastOffer[currId][2] < 10 ? "0" : "") + lastOffer[currId][2];
+                        if ($("marketnewoffer_price_comb")) { 
+                            (<HTMLInputElement> $("marketnewoffer_price_comb")).value = lastOffer[currId][1] + delimDeci + (lastOffer[currId][2] < 10 ? "0" : "") + lastOffer[currId][2]; 
+                        }
                     } else {
-                        $("marketnewoffer_amount").value = 0;
+                        (<HTMLInputElement> $("marketnewoffer_amount")).value = "0";
                     }
                     keyup($("marketnewoffer_amount"));
-
-                    /*
-                    if ($("produkt_preis1")){
-                        $("lbl_produkt_max").setAttribute("class",$("lbl_produkt_max").getAttribute("class")+" link");
-                        $("lbl_produkt_max").addEventListener("click",function(){
-                            $("produkt_anzahl").value=this.innerHTML.replace(regDelimThou,"");
-                            keyup($("produkt_anzahl"));
-                        },false);
-                        $("produkt_anzahl").addEventListener("focus",checkPreis,false); // fired when offer-div opens
-                        $("preisschild").addEventListener("keyup",function(event){
-                            checkPreis();
-                            if (event.keyCode==13){
-                                var submitButton=$("preisschild").querySelector("#verkaufe_markt");
-                                if(submitButton.style.display!="none"){ click(submitButton); }
-                                submitButton=null;
-                            }
-                        },false);
-                        if(valJoinPreise){
-                            $("produkt_preis1").setAttribute("tabindex","0");
-                            $("produkt_preis2").setAttribute("tabindex","0");
-                            var newinput=createElement("input",{"id":"produkt_preis_ganz","type":"text","style":"position:absolute;left:0;top:0;background-color:#002300;color:#f0ffef;width:131px;text-align:right;border:1px solid #555;","tabindex":"2","maxlength":"9","name":"p_preis_ganz","class":"text thuge"},$("produkt_preis1").parentNode);
-                            newinput.addEventListener("keyup",function(event){
-                                if (event.keyCode==13){
-                                    var submitButton=$("preisschild").querySelector("#verkaufe_markt");
-                                    if(submitButton.style.display!="none"){ click(submitButton); }
-                                    submitButton=null;
-                                }else{
-                                    var preis=this.value.replace(regDelimThou,"").replace(regDelimDeci,".");
-                                    var preis1=parseInt(preis,10);
-                                    var preis2=(preis.search(/\./)!=-1?(preis+"00").substr(1+preis.search(/\./),2):"00");
-                                    $("produkt_preis1").value=preis1;
-                                    $("produkt_preis2").value=preis2;
-                                    keyup($("produkt_preis1"));
-                                }
-                            },false);
-                            newinput=null;
-                        }
-                    }
-                    */
-
                     // coins
                     function checkPreisCoins() {
-                        //GM_log("checkPreisCoins "+oldPricesInserted);
-                        window.setTimeout(function () { // first let finish the functions
+                        // TODO: Evaluate and refactor this whole function!
+                        window.setTimeout(function () { // first let the functions finish
+                            var oldPricesInserted;
                             if (oldPricesInserted == 0) { //old offer set
                                 lastOffer[0] = [parseInt($("coinsanzahl").value, 10), parseInt($("coinspreis").value, 10), $("coinssollpreis").checked];
                                 try {
@@ -13563,7 +13512,7 @@ function do_main() {
                                     $("coinsanzahl").value = lastOffer[0][0];
                                     $("coinspreis").value = lastOffer[0][1];
                                     $("coinssollpreis").checked = lastOffer[0][2];
-                                    unsafeWindow.chkAmount();
+                                    unsafeWindow.chkAmount(); // Doesn't exist anymore as of Nov 2017
                                     unsafeWindow.calcMarketPrice();
                                 }
                             }
@@ -13578,7 +13527,7 @@ function do_main() {
                                     $("coinsanzahl").value = currAnzahl;
                                 }
                             }
-                            var newtable = createElement("table");
+                            var newtable = createElement("table", {});
                             var newtr;
                             $("divBerInfoCoins").replaceChild(newtable, $("divBerInfoCoins").getElementsByTagName("table")[0]);
                             if (gut[0]) {
@@ -13608,48 +13557,6 @@ function do_main() {
                             newtable = null; newtr = null;
                         }, 200);
                     }
-                    /*
-                        if($("coinsauflager")){
-                            $("coinsauflager").setAttribute("class",$("coinsauflager").getAttribute("class")+" link");
-                            $("coinsauflager").addEventListener("click",function(){
-                                $("coinsanzahl").value=this.innerHTML;
-                                keyup($("coinsanzahl"));
-                            },false);
-                        }
-                        if($("coinspreisschild")){
-                            var newdiv=createElement("div",{"style":"position:absolute;top:0;left:330px;width:150px"},$("coinspreisschild"));
-                            newdiv=createElement("div",{"id":"divBerInfoCoins","style":"float:left;padding:3px;background-color:#002300;border:5px solid #594230;color:#f0ffef;font-weight:bold;"},newdiv);
-                            createElement("table",{},newdiv);
-                            newdiv=null;
-        
-                            $("coinsanzahl").addEventListener("keyup",function(){ this.value=this.value.replace(/\D/g,""); },false);
-                            $("coinspreis").addEventListener("keyup",function(){ this.value=this.value.replace(/\D/g,""); },false);
-                            $("coinspreisschild").addEventListener("click",checkPreisCoins,false);
-                            $("coinspreisschild").addEventListener("keyup",function(event){
-                                checkPreisCoins();
-                                if (event.keyCode==13){
-                                    var submitButton=$("preisschild").querySelector("#verkaufe_markt");
-                                    if(submitButton.style.display!="none"){ click(submitButton); }
-                                    submitButton=null;
-                                }
-                            },false);
-        
-                            // bugfix: no focus when coinspreisschild opens
-                            $("coinspreisschild").addEventListener("DOMAttrModified",function(event){
-                                if((event.target.id=="coinspreisschild")&&(event.attrName=="style")){
-                                    if(event.newValue.match(/display\:\s*block/)){
-                                        if(oldPricesInserted!=0){
-                                            checkPreisCoins(); // fired when offer-div opens
-                                        }
-                                    }else{
-                                        if(oldPricesInserted==0){ oldPricesInserted=-1; }
-                                    }
-                                }
-                            }, false);
-                        }
-        
-                        cand=null;candtable=null;
-        */
                 }
             } catch (err) { GM_logError("openMarketNewOffer", "", "err_trace=" + err_trace, err); }
         });
@@ -13669,8 +13576,8 @@ function do_main() {
                 berater_box.innerHTML = "";
                 var currId = unsafeWindow.market_filter_pid;
                 if (currId != -1) {
-                    var currPreis = parseFloat($("marketnewoffer_price1").value + "." + $("marketnewoffer_price2").value, 10);
-                    var currAnzahl = parseInt($("marketnewoffer_amount").value, 10);
+                    var currPreis = parseFloat((<HTMLInputElement> $("marketnewoffer_price1")).value + "." + (<HTMLInputElement> $("marketnewoffer_price2")).value);
+                    var currAnzahl = parseInt((<HTMLInputElement> $("marketnewoffer_amount")).value, 10);
                     // Stock amount
                     err_trace = "Stock amount";
                     var newdiv;
@@ -13682,7 +13589,7 @@ function do_main() {
                     if (protectMinRack) {
                         if (currAnzahl > prodStock[0][currId] - prodMinRack[0][currId]) {
                             currAnzahl = Math.max(0, prodStock[0][currId] - prodMinRack[0][currId]);
-                            $("marketnewoffer_amount").value = currAnzahl;
+                            (<HTMLInputElement> $("marketnewoffer_amount")).value = currAnzahl.toString();
                         }
                     }
                     // Block Submit Button
@@ -13695,8 +13602,8 @@ function do_main() {
                                 if (100 * currPreis < 20 * NPC[0][currId]) { help = 3; }
                                 else if (100 * currPreis > 300 * NPC[0][currId]) { help = 4; }
                             } else if (NPC[0][currId].match(/^f/)) {
-                                if (100 * currPreis < 2 * parseFloat(NPC[0][currId].replace("f", ""), 10)) { help = 3; }
-                                else if (100 * currPreis > 300 * parseFloat(NPC[0][currId].replace("f", ""), 10)) { help = 4; }
+                                if (100 * currPreis < 2 * parseFloat(NPC[0][currId].replace("f", ""))) { help = 3; }
+                                else if (100 * currPreis > 300 * parseFloat(NPC[0][currId].replace("f", ""))) { help = 4; }
                             }
                         }
                         if ((help != null) && gut[currId]) {
@@ -13760,7 +13667,7 @@ function do_main() {
                     } else if (!isNaN(NPC[0][currId])) {
                         createElement("td", { "style": "color:#f0ffef;font-weight:bold;text-align:right;" }, newtr, moneyFormatLimit(NPC[0][currId], 100));
                     } else if (NPC[0][currId].match(/^f/)) {
-                        createElement("td", { "style": "color:#f0ffef;font-weight:bold;text-align:right;" }, newtr, "*" + moneyFormatLimit(parseFloat(NPC[0][currId].replace("f", ""), 10), 100));
+                        createElement("td", { "style": "color:#f0ffef;font-weight:bold;text-align:right;" }, newtr, "*" + moneyFormatLimit(parseFloat(NPC[0][currId].replace("f", "")), 100));
                     } else if (NPC[0][currId].match(/^c/)) {
                         coinsFormat(parseInt(NPC[0][currId].replace("c", ""), 10), createElement("td", { "style": "color:#f0ffef;font-weight:bold;text-align:right;" }, newtr));
                     }
@@ -13777,7 +13684,7 @@ function do_main() {
             try {
                 for (var i = 0; i < unsafeWindow.market_offers.length; i++) {
                     if (id == unsafeWindow.market_offers[i].id) {
-                        var money = parseFloat($("bar").innerHTML.replace(getText("gamecurrency"), "").replace(/\s+/g, "").replace(regDelimThou, "").replace(regDelimDeci, "."), 10);
+                        var money = parseFloat($("bar").innerHTML.replace(getText("gamecurrency"), "").replace(/\s+/g, "").replace(regDelimThou, "").replace(regDelimDeci, "."));
                         $("marketbuyofferamount").value = Math.min(unsafeWindow.market_offers[i].a, Math.floor(money / unsafeWindow.market_offers[i].pr));
                         window.setTimeout(function () {
                             $("marketbuyofferamount").select();
@@ -13829,7 +13736,7 @@ function do_main() {
                         row = result[1]["offers"][v]; // A received offer
                         offer_id = parseInt(row["id"], 10); // Id of offer
                         prod = parseInt(row["p"], 10); // Id of product in offer
-                        preis = parseFloat(row["pr"], 10); // Price of pruduct
+                        preis = parseFloat(row["pr"]); // Price of pruduct
                         menge = parseInt(row["a"], 10); // Amount
                         typ = prodTyp[0][prod] // Type of the product
                         if (row["s"]) { // Is this my offer?
@@ -13931,7 +13838,7 @@ function do_main() {
                                             if (NPC[0][v] === undefined || NPC[0][v].startsWith("c")) { continue; }
 
                                             // ... it's a string starting with 'f' followed by the price
-                                            gut[v] = parseFloat(NPC[0][v].replace("f", ""), 10);
+                                            gut[v] = parseFloat(NPC[0][v].replace("f", ""));
                                             if (valUse3TimesNpcPrices) {
                                                 gut[v] = 3 * gut[v];
                                             }
@@ -14001,14 +13908,14 @@ function do_main() {
             createElement("img", { "src": GFX + "guild/contract.gif", "style": "width:15px;height:15px;" }, newdiv);
             newdiv.addEventListener("mouseover", function (event) { toolTip.show(event, unsafeWindow.lng_t_notizen); }, false);
             newdiv.addEventListener("click", function () {
-                $("notepadentry").value = GM_getValue(COUNTRY + "_" + SERVER + "_" + USERNAME + "_notepad", "");
+                (<HTMLTextAreaElement> $("notepadentry")).value = GM_getValue(COUNTRY + "_" + SERVER + "_" + USERNAME + "_notepad", "");
                 unsafeWindow.calcNotepadLetters();
                 unsafeWindow.showDiv("notepad");
             }, false);
             newdiv = $("notepadheader");
             newdiv.getElementsByTagName("img")[0].removeAttribute("onclick");
             newdiv.getElementsByTagName("img")[0].addEventListener("click", function () {
-                GM_setValue2(COUNTRY + "_" + SERVER + "_" + USERNAME + "_notepad", $("notepadentry").value, 72);
+                GM_setValue2(COUNTRY + "_" + SERVER + "_" + USERNAME + "_notepad", (<HTMLTextAreaElement> $("notepadentry")).value, 72);
                 unsafeWindow.hideDiv("notepad");
             }, false);
         }

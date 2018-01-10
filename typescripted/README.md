@@ -18,7 +18,7 @@
 4. Compile
 
 ## File descriptions
-_index.d.ts_ is taken from [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/greasemonkey "asd").
+_index.d.ts_ is taken from [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/greasemonkey "DefinitelyTyped-Repository").
 That file describes all functionality provided from the Greasemonkey framework. **IT MUST NOT BE EXTENDED/ALTERED MANUALLY!**
 
 _mff_all_yyMMdd.d.ts_ is generated from the current _mff_all_yyMMdd.js_ and thus more or less provided from Upjers. **IT MUST NOT BE EXTENDED/ALTERED MANUALLY!**

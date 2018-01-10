@@ -92,8 +92,6 @@ interface Window {
     lng_t_premium: string; // "Premium"
     guildquestlist_level: string; // "Level: "
 
-    currentuserlevel: string;
-
     prodMinRackAddon: {
         newdata: any[];
         busy: boolean;
@@ -139,7 +137,7 @@ interface Window {
     farms_data: FarmsData;
     initGuildsearch(); // TODO: Does this function still exist?
     stats_searchGuild(); // TODO: Does this function still exist?
-    buildInfoPanel(mode, mode2);
+    buildInfoPanel(mode, mode2?);
     buildInfoPanelAutomat(mode, mode2);
     buildInfoPanelMenu(mode2);
     quest_reward_6: string; // "Bauernhausitem"
@@ -175,14 +173,41 @@ interface Window {
     farmamount: number; // e.g. 5 or 6
     welcomeblurb: {
         1: string; // "Willkommen bei <b>My Free Farm</b>.<br>"
+    };
+    currentuserlevel: string; // e.g. "48"
+    forestry_quicknavi: number; // observed: 0 or 1
+    foodworld_quicknavi: number; // observed: 0 or 1
+    travel2City2: () => void;
+    initCity(c, n?, a?, b?): void;
+    travel2forestry(): void;
+    initForestry(c?: any): void;
+    travel2foodworld: () => void;
+    foodworldAction(b: any, a?: any, m?: any, h?: any, d?: any, e?: any, n?: any): void;
+    mapGo2Location(a: any, c: any, b?: any): boolean;
+    travel2farmersmarket(): void;
+    logout_remain: number; // Seconds until logout, e.g. 7098
+    /** Is not filled, until questdata is requested (e.g. by clicking on a campain) */
+    questdata: any;
+    butterfly: Butterfly;
+    market_timer: {
+        /** Only exists, when market window is opened! */
+        update: number;
     }
+    showOffers(r?: any): boolean;
+    marketlist_currentpage: number; // e.g. "1"
+    market_offers: any[];
+    lng_t_notizen: string; // "Notizen"
 }
 
 interface VetData {
     drugs: {};
     info: {
         level: number;
-    }
+    };
+    quest: {
+        campaign: string;
+        quest_id: number;
+    };
 }
 
 interface Pets {
@@ -196,6 +221,9 @@ interface Pets {
         data: {
             level: number;
         }
+        quest: {
+            questid: number;
+        };
     }
 }
 
@@ -216,6 +244,7 @@ interface MegafieldData {
 
     area: {}
     area_free: {};
+    block: any; // Not sure about type. Should be boolean or boolean-like (e.g. a number with only 0 or 1)
     job_start: string; // Yep, that's a string for what ever reason
 }
 
@@ -227,6 +256,11 @@ interface FarmsData {
     blocked: any;
 }
 
+interface Butterfly{
+    data: {
+
+    };
+}
 // Note: An attribute might only be there, if the building is unlocked
 interface FarmersmarketData {
     vet: {
