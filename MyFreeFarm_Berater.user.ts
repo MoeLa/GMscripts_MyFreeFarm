@@ -11056,6 +11056,7 @@ function do_main() {
                         amount: amount, 
                         price: price 
                     };
+                    // TODO To fix compile error: Implode here and explode at GM_getValue(...)
                     GM_setValue(COUNTRY + "_" + SERVER + "_" + USERNAME + "_contractsProductInCart_" + productId, value);
                 }
                 removeElement($("contractSum"));
@@ -11477,6 +11478,7 @@ function do_main() {
                         default: {
                             document.addEventListener("gameCity1", function () {
                                 unsafeWindow.travel2City2();
+                                // TODO Check how to get rid of arguments.callee
                                 document.removeEventListener("gameCity1", arguments.callee, false);
                             }, false);
                             unsafeWindow.initCity(1);
@@ -11494,6 +11496,7 @@ function do_main() {
                     } else {
                         document.addEventListener("gameCity2", function () {
                             unsafeWindow.travel2forestry();
+                            // TODO Check how to get rid of arguments.callee
                             document.removeEventListener("gameCity2", arguments.callee, false);
                         }, false);
                         unsafeWindow.travel2City2();
@@ -11522,9 +11525,9 @@ function do_main() {
                         case "city": {
                             document.addEventListener("gameFarmOpened", function () {
                                 unsafeWindow.travel2farmersmarket();
+                                // TODO Check how to get rid of arguments.callee
                                 document.removeEventListener("gameFarmOpened", arguments.callee, false);
                             }, false);
-                            //unsafeWindow.showTravel2Farm(2); Beta
                             unsafeWindow.farmMove(2);
                             break;
                         }
@@ -13892,7 +13895,7 @@ function do_main() {
         if (newdiv = $("marketcreateoffer_stockamount")) {
             newdiv.setAttribute("class", "link");
             newdiv.addEventListener("click", function (event) {
-                var newdiv = $("marketnewoffer_amount");
+                var newdiv = <HTMLInputElement> $("marketnewoffer_amount");
                 if (newdiv) {
                     newdiv.value = prodStock[0][unsafeWindow.market_filter_pid];
                     keyup(newdiv);
@@ -14006,7 +14009,7 @@ function do_main() {
                         onerror: function (response) {
                             GM_logError("getDailyRanking.onerror", "", "", response.responseText);
                         },
-                        timeout: function (response) {
+                        ontimeout: function (response) {
                             GM_logError("getDailyRanking.timeout", "", "", response.responseText);
                         }
                     });
@@ -14031,8 +14034,10 @@ function do_main() {
                     if (levelLog[v][1] < help) { levelLog[v][1] = help; } // monotony
                     help = levelLog[v][1];
                 }
-                var month, stichtag = new Date();
-                stichtag = Math.round(((new Date(stichtag.getFullYear(), stichtag.getMonth() - 2, 1)).getTime()) / 1000);
+                var month;
+                var tempDate = new Date();
+                tempDate.setMonth(tempDate.getMonth() - 2);
+                let stichtag: number = Math.round(tempDate.getTime() / 1000);
                 for (var v = levelLog.length - 1; v >= 0; v--) {
                     if (levelLog[v][0].match(/^\d+\.\d+\.\d+$/)) {
                         if (getTime(levelLog[v][0]) < stichtag) {
@@ -14069,10 +14074,10 @@ function do_main() {
                     newdiv = createElement("div", { "class": "link", "id": "levelProgressBar", "style": "float:left;width:" + levelSize + "px;position:relative;top:-2px;left:18px;" }, content_table.firstElementChild.children[2].firstElementChild);
                     newdiv.addEventListener("click", function () { unsafeWindow.buildInfoPanel("level"); }, false);
                     newdiv.addEventListener("mouseover", function (event) {
-                        var node = event.target;
+                        var node = <HTMLDivElement> event.target;
                         var mouseOverText = node.getAttribute("mouseOverText");
                         while ((node != this) && (!mouseOverText)) {
-                            node = node.parentNode;
+                            node = <HTMLDivElement> node.parentNode;
                             mouseOverText = node.getAttribute("mouseOverText");
                         }
                         if (mouseOverText) { toolTip.show(event, mouseOverText); }
@@ -14099,7 +14104,8 @@ function do_main() {
                                 newdiv1.style.marginLeft = Math.floor(4 + levelSize * (levelLog[v][1] - LEVEL_POINTS[USERLEVEL - 1]) / levelsum) + "px";
                             }
                             help = levelLog[v][0].split(".");
-                            if (new Date(parseInt(help[2], 10), parseInt(help[1], 10) - 1, parseInt(help[0], 10)).getDay() == "0") {
+                            // Mark every first day of the week with red bar
+                            if (new Date(parseInt(help[2], 10), parseInt(help[1], 10) - 1, parseInt(help[0], 10)).getDay() == 0) {
                                 newdiv1.style.borderColor = "red";
                             }
                         }
@@ -14190,7 +14196,7 @@ function do_main() {
                     }
                     case "fl1": {
                         if ((unsafeWindow.mode == 0) && (prodTyp[0][unsafeWindow.selected] == "fl")) {
-                            var bonus = 1 - (zones.getBonus(zoneNrF) / 100);
+                            let bonus = 1 - (zones.getBonus(zoneNrF) / 100);
                             if ((help = zones.getBonusSpecial(zoneNrF)) && (unsafeWindow.selected == help[0])) {
                                 bonus *= 1 - (help[1] / 100);
                             }
@@ -14200,22 +14206,23 @@ function do_main() {
                     }
                 }
                 if (growtime) {
-                    $("lager_zeit").innerHTML = getTimeStr(growtime) + "&nbsp;" + getText("shortHours");
-                    if (divLagerZeitZiel.parentNode.style.display != "block") {
-                        divLagerZeitZiel.parentNode.style.display = "block";
+                    $("lager_zeit").innerHTML = getTimeStr(growtime, false) + "&nbsp;" + getText("shortHours");
+                    let help = <HTMLDivElement> divLagerZeitZiel.parentNode;
+                    if (help.style.display != "block") {
+                        help.style.display = "block";
                     }
                     divLagerZeitZiel.innerHTML = "=&nbsp;" + getDaytimeStr(now + growtime) + "&nbsp;" + getText("shortOClock");
                 } else {
                     hideLagerZeitZiel();
                 }
                 divLagerZeitZiel = null;
-            } catch (err) { GM_logError("showLagerZeitZiel", "zoneNrF=" + zoneNr, "", err); }
+            } catch (err) { GM_logError("showLagerZeitZiel", "zoneNrF=" + zoneNrF, "", err); }
         }
         function hideLagerZeitZiel() {
             try {
-                var divLagerZeitZiel = $("lager_zeit_ziel");
-                if (divLagerZeitZiel.parentNode.style.display != "none") {
-                    divLagerZeitZiel.parentNode.style.display = "none";
+                let divLagerZeitZiel = <HTMLDivElement> $("lager_zeit_ziel").parentNode;
+                if (divLagerZeitZiel.style.display != "none") {
+                    divLagerZeitZiel.style.display = "none";
                 }
                 divLagerZeitZiel = null;
             } catch (err) { GM_logError("hideLagerZeitZiel", "", "", err); }
@@ -14229,8 +14236,7 @@ function do_main() {
                 if ((container = $("gardenmaincontainer")) && ("block" == container.style.display)) {
                     var zoneNr = /parent.cache_me\((\d+?),120/.exec($("gardenarea").innerHTML);
                     if (zoneNr) {
-                        zoneNr = parseInt(zoneNr[1], 10);
-                        showLagerZeitZiel(zoneNr + 6 * gameLocation.get()[1]);
+                        showLagerZeitZiel(parseInt(zoneNr[1], 10) + 6 * gameLocation.get()[1]);
                     }
                 } else if ((container = $("farmersmarket_pos1_inner")) && ("block" == container.style.display)) {
                     showLagerZeitZiel("farmersmarket-1");
@@ -14240,6 +14246,7 @@ function do_main() {
         });
 
         valMoveAnimals = explode(GM_getValue(COUNTRY + "_" + SERVER + "_" + USERNAME + "_valMoveAnimals"), "do_main/valMoveAnimals", []);
+        // TODO: Get rid of unnecessary 'moveAnimals'!
         // executed,speedvert,top,bottom,speedhor,left,right
         function moveAnimals(mode) {
             //GM_log("moveAnimals "+mode);
@@ -14260,8 +14267,8 @@ function do_main() {
         err_trace = "events general";
         // rack
         var prodStockTemp = new Array(); //Stock Farm 1
-        for (var i in unsafeWindow.rackobj) {
-            for (var j in unsafeWindow.rackobj[i]) {
+        for (let i in unsafeWindow.rackobj) {
+            for (let j in unsafeWindow.rackobj[i]) {
                 for (var k in unsafeWindow.rackobj[i][j]) {
                     switch (i) {
                         case "1":
@@ -14280,17 +14287,10 @@ function do_main() {
         // save rack amounts
         for (var v in prodName[0]) {
             if (!prodName[0].hasOwnProperty(v)) { continue; }
-            if (v == 0) { continue; } // Coins
+            if (v == "0") { continue; } // Coins
             //Linus--Tux 20151020
-            var c = (prodStockTemp[v]) ? prodStockTemp[v] : 0;
+            let c = (prodStockTemp[v]) ? prodStockTemp[v] : 0;
             prodStock[0][v] = (c ? parseInt(c, 10) : 0);
-
-            /*if(unsafeWindow.farm==5){continue; } //Linus--Tux 20151028
-            if (!unsafeWindow.rackElement[v]){ prodStock[0][v]=0; } // not available
-            // else if ("undefined" === typeof(unsafeWindow.rackElement[v].id)){ prodStock[0][v]=0; } // empty elements
-            else if ("undefined" === typeof(unsafeWindow.rackElement[v].number)){ prodStock[0][v]=0; } // no stock available
-            else if (!unsafeWindow.rackElement[v].number){ prodStock[0][v]=0; } // no stock available
-            else { prodStock[0][v]=parseInt(unsafeWindow.rackElement[v].number,10); }*/
         }
 
         GM_setValueCache(COUNTRY + "_" + SERVER + "_" + USERNAME + "_prodStock", implode(prodStock, "rack/prodStock"));
@@ -14337,7 +14337,7 @@ function do_main() {
                 // save rack amounts
                 for (var v in prodName[0]) {
                     if (!prodName[0].hasOwnProperty(v)) { continue; }
-                    if (v == 0) { continue; } // Coins
+                    if (v == "0") { continue; } // Coins
                     //Linus--Tux 20151020
                     var c = (prodStockTemp[v]) ? prodStockTemp[v] : 0;
                     prodStock[0][v] = (c ? parseInt(c, 10) : 0);
@@ -14353,40 +14353,6 @@ function do_main() {
                 }, 0);
             } catch (err) { GM_logError("sortRackNew", "type=" + type, "", err); }
         });
-        /*
-        function doRackNavi(){
-        try{
-            if(unsafeWindow.racktype!=2){  // Oil: no navi
-                if(unsafeWindow.userracks>1){
-                    if(unsafeWindow._currRack=="0"){
-                        // Left arrow to last rack
-                        var div = unsafe$("racknavileft");
-                        div.className = "link racknavi";
-                        div.onmouseover = function(e) { unsafeWindow.showDiv("racknavileftinfo"); }
-                        div.onmouseout = function(e) { unsafeWindow.hideDiv("racknavileftinfo"); }
-                        div.onclick = function(e) { unsafeWindow.updateRack(Math.min(unsafeWindow.userracks,(unsafeWindow.premium==1?3:2))-1); }
-                        $("racknavileftinfo").innerHTML = unsafeWindow.rack_tt_info+"&nbsp;"+Math.min(unsafeWindow.userracks,(unsafeWindow.premium==1?3:2));
-                        div=null;
-                    } else if (parseInt(unsafeWindow._currRack,10)==Math.min(unsafeWindow.userracks,(unsafeWindow.premium==1?3:2))-1){
-                        // Right arrow to first rack
-                        var div = unsafe$("racknaviright");
-                        div.className = "link racknavi";
-                        div.onmouseover = function(e) { unsafeWindow.showDiv("racknavirightinfo"); }
-                        div.onmouseout = function(e) { unsafeWindow.hideDiv("racknavirightinfo"); }
-                        div.onclick = function(e) { unsafeWindow.updateRack("0"); }
-                        $("racknavirightinfo").innerHTML = unsafeWindow.rack_tt_info+"&nbsp;1";
-                        div=null;
-                    }
-                }
-            }
-        }catch(err){ GM_logError("doRackNavi","","",err); }
-        }
-        doRackNavi();
-        unsafeOverwriteFunction("initRackNavi",function(){
-            unsafeWindow._initRackNavi();
-            doRackNavi();
-        });
-        */
         if (newdiv = $("rackItems")) {
             newdiv.addEventListener("dblclick", function (event) {
                 try {
@@ -14404,28 +14370,6 @@ function do_main() {
                 } catch (err) { GM_logError("rackItems.dblclick", "", "", err); }
             }, false);
         }
-        /* TODO: function is not existing anymore
-        unsafeOverwriteFunction("linfo",function(title,amount,id,offset,felder,kategorie){
-            unsafeWindow._linfo(title,amount,id,offset,felder,kategorie);
-            var newdiv;
-            var rackPopup=$("rackPopup");
-            if (!isNaN(NPC[0][id])){
-                newdiv=createElement("div",{"class":"tmenu","style":"position:relative;height:13px;width:172px;top:-75px;padding-left:20px;background: url('"+GFX+"lager/flaeche.gif') left top transparent;background-position:0px -155px;"},rackPopup);
-                createElement("span",{"style":"float:left;width:60px;"},newdiv,getText("NPCprice")+": ");
-                createElement("span",{"style":"float:left;width:100px;text-align:right;"},newdiv,moneyFormat(NPC[0][id]));
-            }
-            if(!prodBlock[0][id].match(/t/)){
-                newdiv=createElement("div",{"class":"tmenu","style":"position:relative;height:13px;width:172px;top:-75px;padding-left:20px;background: url('"+GFX+"lager/flaeche.gif') left top transparent;background-position:0px -155px;"},rackPopup);
-                createElement("div",{"style":"display:inline-block;width:60px;"},newdiv,getText("marketPrice")+": ");
-                createElement("div",{"style":"display:inline-block;width:100px;text-align:right;"},newdiv,moneyFormat(gut[id]));
-                newdiv=createElement("div",{"class":"tmenu","style":"position:relative;height:13px;width:172px;top:-75px;padding-left:20px;background: url('"+GFX+"lager/flaeche.gif') left top transparent;background-position:0px -155px;"},rackPopup);
-                createElement("div",{"style":"display:inline-block;width:60px;"},newdiv,getText("value")+": ");
-                createElement("div",{"style":"display:inline-block;width:100px;text-align:right;"},newdiv,moneyFormatInt(gut[id]*prodStock[0][id]));
-                newdiv=createElement("div",{"class":"tmenu","style":"position:relative;height:25px;width:172px;top:-75px;padding-left:20px;background: url('"+GFX+"lager/flaeche.gif') left top transparent;background-position:0px -155px;"},rackPopup);
-                createElement("div",{"style":"width:160px;"},newdiv,getText("clickDouble")+": "+getText("goToMarket"));
-            }
-            newdiv=null;rackPopup=null;
-        }); */
         unsafeOverwriteFunction("globalcommitbox", function (content, onclick, onclick2) {
             try {
                 unsafeWindow._globalcommitbox(content, onclick, onclick2);
@@ -14469,7 +14413,6 @@ function do_main() {
                 unsafeWindow._updatePlayerInfo(money, coins, points, level, deco);
             } catch (err) { GM_logError("_updatePlayerInfo", "", "", err); }
             try {
-                // GM_log("updatePlayerInfo money="+money+" coins="+coins+" points="+points+" level="+level+" deco="+deco);
                 if (money) {
                     if (COUNTRY == "SE") {
                         money = money.replace(/\.(\d\d) /, ",$1 ");
@@ -14545,6 +14488,10 @@ function do_main() {
                 var j, help, help2, help3, help4, currMsg, sender, betreff, time, amount, prod, money, dayStr, price;
                 var div, span;
                 var countRequest = 0;
+                
+                var regMsgSubjectFriendEnd = new RegExp(getText("msgSubjectFriendEnd"));
+                var regMsgSubjectQuest = new RegExp(getText("msgSubjectQuest"));
+                var regMsgSubjectMarketsale = new RegExp(getText("msgSubjectMarketsale"));
                 for (var i = unsafeWindow.messages_data.length - 1; i >= 0; i--) {
                     currMsg = unsafeWindow.messages_data[i];
                     help = currMsg.body.replace(/\s+/g, " ");
@@ -14555,6 +14502,8 @@ function do_main() {
                     } else if (currMsg.subject.match(regMsgSubjectQuest)) {
                         // New message without handling
                     } else if (currMsg.subject.match(regMsgSubjectMarketsale)) {
+                        console.log("Moe, messagesSystem");
+                        console.log(currMsg);
                         // Market sale
                         if (help2 = regMsgContentMarketsale.exec(help)) {
                             // Market sale
@@ -14575,7 +14524,7 @@ function do_main() {
                             time = getTime(currMsg.time);
                             prod = prodId[0][help2[3]];
                             amount = parseInt(help2[2], 10);
-                            money = parseFloat(help2[4].replace(regDelimThou, "").replace(regDelimDeci, "."), 10);
+                            money = parseFloat(help2[4].replace(regDelimThou, "").replace(regDelimDeci, "."));
                             price = Math.round(100 * money / amount) / 100;
                             if (logSalesId[currMsg.nnr] === undefined) {
                                 logSalesId[currMsg.nnr] = logSales.push([currMsg.nnr]) - 1;
@@ -14638,7 +14587,7 @@ function do_main() {
                                 help2[3] = help2[3].replace(/\.(\d\d)$/, ",$1");
                             }
                             sender = help2[1];
-                            money = parseFloat(help2[3].replace(regDelimThou, "").replace(regDelimDeci, "."), 10);
+                            money = parseFloat(help2[3].replace(regDelimThou, "").replace(regDelimDeci, "."));
                             time = getTime(currMsg.time);
                             if (logSalesId[currMsg.nnr] === undefined) {
                                 logSalesId[currMsg.nnr] = logSales.push([currMsg.nnr]) - 1;
@@ -14815,6 +14764,7 @@ function do_main() {
                                         buildinginfo = createElement("div", { "class": "tt", "style": "display:none;" }, this);
                                         var table, tr, td, div;
                                         table = createElement("table", { "border": "0", "cellspacing": "0", "cellpadding": "0" }, buildinginfo);
+                                        let help: string;
                                         switch (BUILDINGTYPE[currZoneType]) {
                                             case 2: {
                                                 help = "";
@@ -14835,14 +14785,14 @@ function do_main() {
                                                         time[0] = Math.min(time[0], calcProductionTime(2, 0, output, 1 - zones.getBonus(zoneNrF) / 100, BUILDING_INPUT[currZoneType][output][alt][0][1] / currAnimals)[0]);
                                                         time[1] = Math.max(time[1], calcProductionTime(2, 0, output, 1 - zones.getBonus(zoneNrF) / 100, BUILDING_INPUT[currZoneType][output][alt][0][1] / currAnimals, 1)[0]);
                                                     }
-                                                    createElement("div", { "style": "line-height:16px;white-space:nowrap;" }, td, getTimeStr(time[0]) + " - " + getTimeStr(time[1]));
+                                                    createElement("div", { "style": "line-height:16px;white-space:nowrap;" }, td, getTimeStr(time[0], false) + " - " + getTimeStr(time[1], false));
                                                     for (var alt = 0; alt < BUILDING_INPUT[currZoneType][output].length; alt++) {
                                                         td = createElement("td", { "style": help + "border-left:1px dashed black;padding:0 5px;" }, tr);
                                                         for (var i = 0; i < BUILDING_INPUT[currZoneType][output][alt].length; i++) {
                                                             div = createElement("div", { "style": "line-height:16px;white-space:nowrap;" }, td);
                                                             produktPic(0, BUILDING_INPUT[currZoneType][output][alt][i][0], div);
                                                             createElement("span", {}, div, "1 - " + numberFormat(calcProductionTime(2, 0, output, 1 - zones.getBonus(zoneNrF) / 100, BUILDING_INPUT[currZoneType][output][alt][0][1] / currAnimals)[1]) + " " + prodName[0][BUILDING_INPUT[currZoneType][output][alt][i][0]]);
-                                                            createElement("div", { "style": "line-height:16px;white-space:nowrap;" }, td, getTimeStr(BUILDING_INPUT[currZoneType][output][alt][i][1] / currAnimals));
+                                                            createElement("div", { "style": "line-height:16px;white-space:nowrap;" }, td, getTimeStr(BUILDING_INPUT[currZoneType][output][alt][i][1] / currAnimals, false));
                                                         }
                                                     }
                                                     help = "border-top:1px solid black;";
@@ -14860,7 +14810,7 @@ function do_main() {
                                                     produktPic(0, output, div);
                                                     createElement("span", {}, div, numberFormat(prodYield[0][output]) + " " + prodName[0][output]);
                                                     pointsFormat(prodYield[0][output] * prodPoints[0][output], "div", td);
-                                                    createElement("div", { "style": "line-height:16px;white-space:nowrap;" }, td, getTimeStr(60 * prodGrowTime[0][output] * (100 - zones.getBonus(zoneNrF)) / 100));
+                                                    createElement("div", { "style": "line-height:16px;white-space:nowrap;" }, td, getTimeStr(60 * prodGrowTime[0][output] * (100 - zones.getBonus(zoneNrF)) / 100, false));
                                                     for (var alt = 0; alt < BUILDING_INPUT[currZoneType][output].length; alt++) {
                                                         td = createElement("td", { "style": help + "border-left:1px dashed black;padding:0 5px;" }, tr);
                                                         for (var i = 0; i < BUILDING_INPUT[currZoneType][output][alt].length; i++) {
@@ -14894,7 +14844,7 @@ function do_main() {
                                                         produktPic(0, product, div);
                                                         createElement("span", {}, div, numberFormat(iAmount) + " " + prodName[0][product]);
                                                         pointsFormat(iPoints, "span", td);
-                                                        createElement("span", { "style": "line-height:16px;white-space:nowrap;" }, td, "  " + getTimeStr(iTime));
+                                                        createElement("span", { "style": "line-height:16px;white-space:nowrap;" }, td, "  " + getTimeStr(iTime, false));
 
                                                     }
                                                     help = "border-top:1px solid black;"
@@ -23809,9 +23759,9 @@ function scriptInit() {
         regMsgContentContractsale = new RegExp(getText("msgContentContractsale"));
         regMsgContentContractsaleList = new RegExp(getText("msgContentContractsaleList"));
         regMsgSubjectFriend = new RegExp(getText("msgSubjectFriend"));
-        regMsgSubjectFriendEnd = new RegExp(getText("msgSubjectFriendEnd"));
-        regMsgSubjectMarketsale = new RegExp(getText("msgSubjectMarketsale"));
-        regMsgSubjectQuest = new RegExp(getText("msgSubjectQuest"));
+        // regMsgSubjectFriendEnd = new RegExp(getText("msgSubjectFriendEnd"));
+        // regMsgSubjectMarketsale = new RegExp(getText("msgSubjectMarketsale"));
+        // regMsgSubjectQuest = new RegExp(getText("msgSubjectQuest"));
         err_trace = "Events";
         if (DEVMODE_EVENTS && (self == top)) {
             var allEvents = new Array();

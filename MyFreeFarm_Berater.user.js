@@ -12794,6 +12794,7 @@ function do_main() {
                         amount: amount,
                         price: price
                     };
+                    // TODO To fix compile error: Implode here and explode at GM_getValue(...)
                     GM_setValue(COUNTRY + "_" + SERVER + "_" + USERNAME + "_contractsProductInCart_" + productId, value);
                 }
                 removeElement($("contractSum"));
@@ -13274,6 +13275,7 @@ function do_main() {
                         default: {
                             document.addEventListener("gameCity1", function () {
                                 unsafeWindow.travel2City2();
+                                // TODO Check how to get rid of arguments.callee
                                 document.removeEventListener("gameCity1", arguments.callee, false);
                             }, false);
                             unsafeWindow.initCity(1);
@@ -13295,6 +13297,7 @@ function do_main() {
                     else {
                         document.addEventListener("gameCity2", function () {
                             unsafeWindow.travel2forestry();
+                            // TODO Check how to get rid of arguments.callee
                             document.removeEventListener("gameCity2", arguments.callee, false);
                         }, false);
                         unsafeWindow.travel2City2();
@@ -13331,9 +13334,9 @@ function do_main() {
                         case "city": {
                             document.addEventListener("gameFarmOpened", function () {
                                 unsafeWindow.travel2farmersmarket();
+                                // TODO Check how to get rid of arguments.callee
                                 document.removeEventListener("gameFarmOpened", arguments.callee, false);
                             }, false);
-                            //unsafeWindow.showTravel2Farm(2); Beta
                             unsafeWindow.farmMove(2);
                             break;
                         }
@@ -16174,7 +16177,7 @@ function do_main() {
                         onerror: function (response) {
                             GM_logError("getDailyRanking.onerror", "", "", response.responseText);
                         },
-                        timeout: function (response) {
+                        ontimeout: function (response) {
                             GM_logError("getDailyRanking.timeout", "", "", response.responseText);
                         }
                     });
@@ -16206,8 +16209,10 @@ function do_main() {
                     } // monotony
                     help = levelLog[v][1];
                 }
-                var month, stichtag = new Date();
-                stichtag = Math.round(((new Date(stichtag.getFullYear(), stichtag.getMonth() - 2, 1)).getTime()) / 1000);
+                var month;
+                var tempDate = new Date();
+                tempDate.setMonth(tempDate.getMonth() - 2);
+                var stichtag = Math.round(tempDate.getTime() / 1000);
                 for (var v = levelLog.length - 1; v >= 0; v--) {
                     if (levelLog[v][0].match(/^\d+\.\d+\.\d+$/)) {
                         if (getTime(levelLog[v][0]) < stichtag) {
@@ -16280,7 +16285,8 @@ function do_main() {
                                 newdiv1.style.marginLeft = Math.floor(4 + levelSize * (levelLog[v][1] - LEVEL_POINTS[USERLEVEL - 1]) / levelsum) + "px";
                             }
                             help = levelLog[v][0].split(".");
-                            if (new Date(parseInt(help[2], 10), parseInt(help[1], 10) - 1, parseInt(help[0], 10)).getDay() == "0") {
+                            // Mark every first day of the week with red bar
+                            if (new Date(parseInt(help[2], 10), parseInt(help[1], 10) - 1, parseInt(help[0], 10)).getDay() == 0) {
                                 newdiv1.style.borderColor = "red";
                             }
                         }
@@ -16395,19 +16401,20 @@ function do_main() {
                     }
                     case "fl1": {
                         if ((unsafeWindow.mode == 0) && (prodTyp[0][unsafeWindow.selected] == "fl")) {
-                            var bonus = 1 - (zones.getBonus(zoneNrF) / 100);
+                            var bonus_1 = 1 - (zones.getBonus(zoneNrF) / 100);
                             if ((help = zones.getBonusSpecial(zoneNrF)) && (unsafeWindow.selected == help[0])) {
-                                bonus *= 1 - (help[1] / 100);
+                                bonus_1 *= 1 - (help[1] / 100);
                             }
-                            growtime = calcGrowDuration(60 * prodGrowTime[0][unsafeWindow.selected], bonus);
+                            growtime = calcGrowDuration(60 * prodGrowTime[0][unsafeWindow.selected], bonus_1);
                         }
                         break;
                     }
                 }
                 if (growtime) {
-                    $("lager_zeit").innerHTML = getTimeStr(growtime) + "&nbsp;" + getText("shortHours");
-                    if (divLagerZeitZiel.parentNode.style.display != "block") {
-                        divLagerZeitZiel.parentNode.style.display = "block";
+                    $("lager_zeit").innerHTML = getTimeStr(growtime, false) + "&nbsp;" + getText("shortHours");
+                    var help_14 = divLagerZeitZiel.parentNode;
+                    if (help_14.style.display != "block") {
+                        help_14.style.display = "block";
                     }
                     divLagerZeitZiel.innerHTML = "=&nbsp;" + getDaytimeStr(now + growtime) + "&nbsp;" + getText("shortOClock");
                 }
@@ -16417,14 +16424,14 @@ function do_main() {
                 divLagerZeitZiel = null;
             }
             catch (err) {
-                GM_logError("showLagerZeitZiel", "zoneNrF=" + zoneNr, "", err);
+                GM_logError("showLagerZeitZiel", "zoneNrF=" + zoneNrF, "", err);
             }
         }
         function hideLagerZeitZiel() {
             try {
-                var divLagerZeitZiel = $("lager_zeit_ziel");
-                if (divLagerZeitZiel.parentNode.style.display != "none") {
-                    divLagerZeitZiel.parentNode.style.display = "none";
+                var divLagerZeitZiel = $("lager_zeit_ziel").parentNode;
+                if (divLagerZeitZiel.style.display != "none") {
+                    divLagerZeitZiel.style.display = "none";
                 }
                 divLagerZeitZiel = null;
             }
@@ -16444,8 +16451,7 @@ function do_main() {
                 if ((container = $("gardenmaincontainer")) && ("block" == container.style.display)) {
                     var zoneNr = /parent.cache_me\((\d+?),120/.exec($("gardenarea").innerHTML);
                     if (zoneNr) {
-                        zoneNr = parseInt(zoneNr[1], 10);
-                        showLagerZeitZiel(zoneNr + 6 * gameLocation.get()[1]);
+                        showLagerZeitZiel(parseInt(zoneNr[1], 10) + 6 * gameLocation.get()[1]);
                     }
                 }
                 else if ((container = $("farmersmarket_pos1_inner")) && ("block" == container.style.display)) {
@@ -16458,6 +16464,7 @@ function do_main() {
             }
         });
         valMoveAnimals = explode(GM_getValue(COUNTRY + "_" + SERVER + "_" + USERNAME + "_valMoveAnimals"), "do_main/valMoveAnimals", []);
+        // TODO: Get rid of unnecessary 'moveAnimals'!
         // executed,speedvert,top,bottom,speedhor,left,right
         function moveAnimals(mode) {
             //GM_log("moveAnimals "+mode);
@@ -16478,18 +16485,18 @@ function do_main() {
         err_trace = "events general";
         // rack
         var prodStockTemp = new Array(); //Stock Farm 1
-        for (var i in unsafeWindow.rackobj) {
-            for (var j in unsafeWindow.rackobj[i]) {
-                for (var k in unsafeWindow.rackobj[i][j]) {
-                    switch (i) {
+        for (var i_10 in unsafeWindow.rackobj) {
+            for (var j_2 in unsafeWindow.rackobj[i_10]) {
+                for (var k in unsafeWindow.rackobj[i_10][j_2]) {
+                    switch (i_10) {
                         case "1":
-                            prodStockTemp[unsafeWindow.rackobj[i][j][k].pid] = parseInt(unsafeWindow.rackobj[i][j][k].amount);
+                            prodStockTemp[unsafeWindow.rackobj[i_10][j_2][k].pid] = parseInt(unsafeWindow.rackobj[i_10][j_2][k].amount);
                             break;
                         case "5":
-                            prodStock[5][unsafeWindow.rackobj[i][j][k].pid] = parseInt(unsafeWindow.rackobj[i][j][k].amount);
+                            prodStock[5][unsafeWindow.rackobj[i_10][j_2][k].pid] = parseInt(unsafeWindow.rackobj[i_10][j_2][k].amount);
                             break;
                         case "6":
-                            prodStock[6][unsafeWindow.rackobj[i][j][k].pid] = parseInt(unsafeWindow.rackobj[i][j][k].amount);
+                            prodStock[6][unsafeWindow.rackobj[i_10][j_2][k].pid] = parseInt(unsafeWindow.rackobj[i_10][j_2][k].amount);
                             break;
                     }
                 }
@@ -16500,18 +16507,12 @@ function do_main() {
             if (!prodName[0].hasOwnProperty(v)) {
                 continue;
             }
-            if (v == 0) {
+            if (v == "0") {
                 continue;
             } // Coins
             //Linus--Tux 20151020
-            var c = (prodStockTemp[v]) ? prodStockTemp[v] : 0;
-            prodStock[0][v] = (c ? parseInt(c, 10) : 0);
-            /*if(unsafeWindow.farm==5){continue; } //Linus--Tux 20151028
-            if (!unsafeWindow.rackElement[v]){ prodStock[0][v]=0; } // not available
-            // else if ("undefined" === typeof(unsafeWindow.rackElement[v].id)){ prodStock[0][v]=0; } // empty elements
-            else if ("undefined" === typeof(unsafeWindow.rackElement[v].number)){ prodStock[0][v]=0; } // no stock available
-            else if (!unsafeWindow.rackElement[v].number){ prodStock[0][v]=0; } // no stock available
-            else { prodStock[0][v]=parseInt(unsafeWindow.rackElement[v].number,10); }*/
+            var c_3 = (prodStockTemp[v]) ? prodStockTemp[v] : 0;
+            prodStock[0][v] = (c_3 ? parseInt(c_3, 10) : 0);
         }
         GM_setValueCache(COUNTRY + "_" + SERVER + "_" + USERNAME + "_prodStock", implode(prodStock, "rack/prodStock"));
         unsafeWindow.updateRackBusy = false;
@@ -16567,7 +16568,7 @@ function do_main() {
                     if (!prodName[0].hasOwnProperty(v)) {
                         continue;
                     }
-                    if (v == 0) {
+                    if (v == "0") {
                         continue;
                     } // Coins
                     //Linus--Tux 20151020
@@ -16590,40 +16591,6 @@ function do_main() {
                 GM_logError("sortRackNew", "type=" + type, "", err);
             }
         });
-        /*
-        function doRackNavi(){
-        try{
-            if(unsafeWindow.racktype!=2){  // Oil: no navi
-                if(unsafeWindow.userracks>1){
-                    if(unsafeWindow._currRack=="0"){
-                        // Left arrow to last rack
-                        var div = unsafe$("racknavileft");
-                        div.className = "link racknavi";
-                        div.onmouseover = function(e) { unsafeWindow.showDiv("racknavileftinfo"); }
-                        div.onmouseout = function(e) { unsafeWindow.hideDiv("racknavileftinfo"); }
-                        div.onclick = function(e) { unsafeWindow.updateRack(Math.min(unsafeWindow.userracks,(unsafeWindow.premium==1?3:2))-1); }
-                        $("racknavileftinfo").innerHTML = unsafeWindow.rack_tt_info+"&nbsp;"+Math.min(unsafeWindow.userracks,(unsafeWindow.premium==1?3:2));
-                        div=null;
-                    } else if (parseInt(unsafeWindow._currRack,10)==Math.min(unsafeWindow.userracks,(unsafeWindow.premium==1?3:2))-1){
-                        // Right arrow to first rack
-                        var div = unsafe$("racknaviright");
-                        div.className = "link racknavi";
-                        div.onmouseover = function(e) { unsafeWindow.showDiv("racknavirightinfo"); }
-                        div.onmouseout = function(e) { unsafeWindow.hideDiv("racknavirightinfo"); }
-                        div.onclick = function(e) { unsafeWindow.updateRack("0"); }
-                        $("racknavirightinfo").innerHTML = unsafeWindow.rack_tt_info+"&nbsp;1";
-                        div=null;
-                    }
-                }
-            }
-        }catch(err){ GM_logError("doRackNavi","","",err); }
-        }
-        doRackNavi();
-        unsafeOverwriteFunction("initRackNavi",function(){
-            unsafeWindow._initRackNavi();
-            doRackNavi();
-        });
-        */
         if (newdiv = $("rackItems")) {
             newdiv.addEventListener("dblclick", function (event) {
                 try {
@@ -16647,28 +16614,6 @@ function do_main() {
                 }
             }, false);
         }
-        /* TODO: function is not existing anymore
-        unsafeOverwriteFunction("linfo",function(title,amount,id,offset,felder,kategorie){
-            unsafeWindow._linfo(title,amount,id,offset,felder,kategorie);
-            var newdiv;
-            var rackPopup=$("rackPopup");
-            if (!isNaN(NPC[0][id])){
-                newdiv=createElement("div",{"class":"tmenu","style":"position:relative;height:13px;width:172px;top:-75px;padding-left:20px;background: url('"+GFX+"lager/flaeche.gif') left top transparent;background-position:0px -155px;"},rackPopup);
-                createElement("span",{"style":"float:left;width:60px;"},newdiv,getText("NPCprice")+": ");
-                createElement("span",{"style":"float:left;width:100px;text-align:right;"},newdiv,moneyFormat(NPC[0][id]));
-            }
-            if(!prodBlock[0][id].match(/t/)){
-                newdiv=createElement("div",{"class":"tmenu","style":"position:relative;height:13px;width:172px;top:-75px;padding-left:20px;background: url('"+GFX+"lager/flaeche.gif') left top transparent;background-position:0px -155px;"},rackPopup);
-                createElement("div",{"style":"display:inline-block;width:60px;"},newdiv,getText("marketPrice")+": ");
-                createElement("div",{"style":"display:inline-block;width:100px;text-align:right;"},newdiv,moneyFormat(gut[id]));
-                newdiv=createElement("div",{"class":"tmenu","style":"position:relative;height:13px;width:172px;top:-75px;padding-left:20px;background: url('"+GFX+"lager/flaeche.gif') left top transparent;background-position:0px -155px;"},rackPopup);
-                createElement("div",{"style":"display:inline-block;width:60px;"},newdiv,getText("value")+": ");
-                createElement("div",{"style":"display:inline-block;width:100px;text-align:right;"},newdiv,moneyFormatInt(gut[id]*prodStock[0][id]));
-                newdiv=createElement("div",{"class":"tmenu","style":"position:relative;height:25px;width:172px;top:-75px;padding-left:20px;background: url('"+GFX+"lager/flaeche.gif') left top transparent;background-position:0px -155px;"},rackPopup);
-                createElement("div",{"style":"width:160px;"},newdiv,getText("clickDouble")+": "+getText("goToMarket"));
-            }
-            newdiv=null;rackPopup=null;
-        }); */
         unsafeOverwriteFunction("globalcommitbox", function (content, onclick, onclick2) {
             try {
                 unsafeWindow._globalcommitbox(content, onclick, onclick2);
@@ -16733,7 +16678,6 @@ function do_main() {
                 GM_logError("_updatePlayerInfo", "", "", err);
             }
             try {
-                // GM_log("updatePlayerInfo money="+money+" coins="+coins+" points="+points+" level="+level+" deco="+deco);
                 if (money) {
                     if (COUNTRY == "SE") {
                         money = money.replace(/\.(\d\d) /, ",$1 ");
@@ -16832,6 +16776,8 @@ function do_main() {
                         // New message without handling
                     }
                     else if (currMsg.subject.match(regMsgSubjectMarketsale)) {
+                        console.log("Moe, messagesSystem");
+                        console.log(currMsg);
                         // Market sale
                         if (help2 = regMsgContentMarketsale.exec(help)) {
                             // Market sale

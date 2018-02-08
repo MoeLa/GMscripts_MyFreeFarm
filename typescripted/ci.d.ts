@@ -72,6 +72,9 @@ interface UnsafeData {
     botConfigData: any;
     currentPowerup: any;
     valWaterNeeded: any;
+
+    money: number; // e.g. 2252446.94
+    carpentry_bonus: number;
 }
 
 interface Window {
@@ -197,6 +200,11 @@ interface Window {
     marketlist_currentpage: number; // e.g. "1"
     market_offers: any[];
     lng_t_notizen: string; // "Notizen"
+
+    updateRackBusy: boolean;
+    infoupdatebuilding: string; // "Gebäude ausbauen
+    error1005: string; // "Du benötigst mindestens Level %LEVEL%, um dieses Feature nutzen zu können."
+    updatetext: string[];
 }
 
 interface VetData {
@@ -256,7 +264,7 @@ interface FarmsData {
     blocked: any;
 }
 
-interface Butterfly{
+interface Butterfly {
     data: {
 
     };
