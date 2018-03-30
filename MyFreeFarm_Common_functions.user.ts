@@ -369,7 +369,7 @@ function unsafeOverwriteFunction(fooName, newFoo, optional?) {
     } catch (err) { GM_logError("unsafeOverwriteFunction", "fooName=" + fooName, "", err); }
 };
 
-function unsafeOverwriteObjFunction(fooObj, fooName, newFoo, optional) {
+function unsafeOverwriteObjFunction(fooObj, fooName, newFoo, optional?) {
     try {
         if (!unsafeWindow[fooObj][fooName]) {
             if (optional) {

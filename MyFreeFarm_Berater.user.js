@@ -1277,6 +1277,7 @@ function updateProductDataFarm() {
             raiseEvent("gameUserlevelUp");
         }
         console.log(unsafeWindow);
+        console.log(unsafeData);
         USERLEVEL = parseInt(unsafeWindow.currentuserlevel, 10);
         if (!(prodName instanceof Array)) {
             prodName = [];
@@ -16763,6 +16764,9 @@ function do_main() {
                 var j, help, help2, help3, help4, currMsg, sender, betreff, time, amount, prod, money, dayStr, price;
                 var div, span;
                 var countRequest = 0;
+                var regMsgSubjectFriendEnd = new RegExp(getText("msgSubjectFriendEnd"));
+                var regMsgSubjectQuest = new RegExp(getText("msgSubjectQuest"));
+                var regMsgSubjectMarketsale = new RegExp(getText("msgSubjectMarketsale"));
                 for (var i = unsafeWindow.messages_data.length - 1; i >= 0; i--) {
                     currMsg = unsafeWindow.messages_data[i];
                     help = currMsg.body.replace(/\s+/g, " ");
@@ -16798,7 +16802,7 @@ function do_main() {
                             time = getTime(currMsg.time);
                             prod = prodId[0][help2[3]];
                             amount = parseInt(help2[2], 10);
-                            money = parseFloat(help2[4].replace(regDelimThou, "").replace(regDelimDeci, "."), 10);
+                            money = parseFloat(help2[4].replace(regDelimThou, "").replace(regDelimDeci, "."));
                             price = Math.round(100 * money / amount) / 100;
                             if (logSalesId[currMsg.nnr] === undefined) {
                                 logSalesId[currMsg.nnr] = logSales.push([currMsg.nnr]) - 1;
@@ -16870,7 +16874,7 @@ function do_main() {
                                 help2[3] = help2[3].replace(/\.(\d\d)$/, ",$1");
                             }
                             sender = help2[1];
-                            money = parseFloat(help2[3].replace(regDelimThou, "").replace(regDelimDeci, "."), 10);
+                            money = parseFloat(help2[3].replace(regDelimThou, "").replace(regDelimDeci, "."));
                             time = getTime(currMsg.time);
                             if (logSalesId[currMsg.nnr] === undefined) {
                                 logSalesId[currMsg.nnr] = logSales.push([currMsg.nnr]) - 1;
@@ -17069,9 +17073,10 @@ function do_main() {
                                         buildinginfo = createElement("div", { "class": "tt", "style": "display:none;" }, this);
                                         var table, tr, td, div;
                                         table = createElement("table", { "border": "0", "cellspacing": "0", "cellpadding": "0" }, buildinginfo);
+                                        var help_15;
                                         switch (BUILDINGTYPE[currZoneType]) {
                                             case 2: {
-                                                help = "";
+                                                help_15 = "";
                                                 for (var output in BUILDING_INPUT[currZoneType]) {
                                                     if (!BUILDING_INPUT[currZoneType].hasOwnProperty(output)) {
                                                         continue;
@@ -17080,7 +17085,7 @@ function do_main() {
                                                         continue;
                                                     }
                                                     tr = createElement("tr", {}, table);
-                                                    td = createElement("td", { "style": help + "padding-right:5px;" }, tr);
+                                                    td = createElement("td", { "style": help_15 + "padding-right:5px;" }, tr);
                                                     div = createElement("div", { "style": "line-height:16px;white-space:nowrap;" }, td);
                                                     produktPic(0, output, div);
                                                     createElement("span", {}, div, numberFormat(prodYield[0][output] * currAnimals) + " " + prodName[0][output]);
@@ -17093,22 +17098,22 @@ function do_main() {
                                                         time[0] = Math.min(time[0], calcProductionTime(2, 0, output, 1 - zones.getBonus(zoneNrF) / 100, BUILDING_INPUT[currZoneType][output][alt][0][1] / currAnimals)[0]);
                                                         time[1] = Math.max(time[1], calcProductionTime(2, 0, output, 1 - zones.getBonus(zoneNrF) / 100, BUILDING_INPUT[currZoneType][output][alt][0][1] / currAnimals, 1)[0]);
                                                     }
-                                                    createElement("div", { "style": "line-height:16px;white-space:nowrap;" }, td, getTimeStr(time[0]) + " - " + getTimeStr(time[1]));
+                                                    createElement("div", { "style": "line-height:16px;white-space:nowrap;" }, td, getTimeStr(time[0], false) + " - " + getTimeStr(time[1], false));
                                                     for (var alt = 0; alt < BUILDING_INPUT[currZoneType][output].length; alt++) {
-                                                        td = createElement("td", { "style": help + "border-left:1px dashed black;padding:0 5px;" }, tr);
+                                                        td = createElement("td", { "style": help_15 + "border-left:1px dashed black;padding:0 5px;" }, tr);
                                                         for (var i = 0; i < BUILDING_INPUT[currZoneType][output][alt].length; i++) {
                                                             div = createElement("div", { "style": "line-height:16px;white-space:nowrap;" }, td);
                                                             produktPic(0, BUILDING_INPUT[currZoneType][output][alt][i][0], div);
                                                             createElement("span", {}, div, "1 - " + numberFormat(calcProductionTime(2, 0, output, 1 - zones.getBonus(zoneNrF) / 100, BUILDING_INPUT[currZoneType][output][alt][0][1] / currAnimals)[1]) + " " + prodName[0][BUILDING_INPUT[currZoneType][output][alt][i][0]]);
-                                                            createElement("div", { "style": "line-height:16px;white-space:nowrap;" }, td, getTimeStr(BUILDING_INPUT[currZoneType][output][alt][i][1] / currAnimals));
+                                                            createElement("div", { "style": "line-height:16px;white-space:nowrap;" }, td, getTimeStr(BUILDING_INPUT[currZoneType][output][alt][i][1] / currAnimals, false));
                                                         }
                                                     }
-                                                    help = "border-top:1px solid black;";
+                                                    help_15 = "border-top:1px solid black;";
                                                 }
                                                 break;
                                             }
                                             case 3: {
-                                                help = "";
+                                                help_15 = "";
                                                 for (var output in BUILDING_INPUT[currZoneType]) {
                                                     if (!BUILDING_INPUT[currZoneType].hasOwnProperty(output)) {
                                                         continue;
@@ -17117,28 +17122,28 @@ function do_main() {
                                                         continue;
                                                     }
                                                     tr = createElement("tr", {}, table);
-                                                    td = createElement("td", { "style": help + "padding-right:10px;" }, tr);
+                                                    td = createElement("td", { "style": help_15 + "padding-right:10px;" }, tr);
                                                     div = createElement("div", { "style": "line-height:16px;white-space:nowrap;" }, td);
                                                     produktPic(0, output, div);
                                                     createElement("span", {}, div, numberFormat(prodYield[0][output]) + " " + prodName[0][output]);
                                                     pointsFormat(prodYield[0][output] * prodPoints[0][output], "div", td);
-                                                    createElement("div", { "style": "line-height:16px;white-space:nowrap;" }, td, getTimeStr(60 * prodGrowTime[0][output] * (100 - zones.getBonus(zoneNrF)) / 100));
+                                                    createElement("div", { "style": "line-height:16px;white-space:nowrap;" }, td, getTimeStr(60 * prodGrowTime[0][output] * (100 - zones.getBonus(zoneNrF)) / 100, false));
                                                     for (var alt = 0; alt < BUILDING_INPUT[currZoneType][output].length; alt++) {
-                                                        td = createElement("td", { "style": help + "border-left:1px dashed black;padding:0 5px;" }, tr);
+                                                        td = createElement("td", { "style": help_15 + "border-left:1px dashed black;padding:0 5px;" }, tr);
                                                         for (var i = 0; i < BUILDING_INPUT[currZoneType][output][alt].length; i++) {
                                                             div = createElement("div", { "style": "line-height:16px;white-space:nowrap;" }, td);
                                                             produktPic(0, BUILDING_INPUT[currZoneType][output][alt][i][0], div);
                                                             createElement("span", {}, div, numberFormat(BUILDING_INPUT[currZoneType][output][alt][i][1]) + " " + prodName[0][BUILDING_INPUT[currZoneType][output][alt][i][0]]);
                                                         }
                                                     }
-                                                    help = "border-top:1px solid black;";
+                                                    help_15 = "border-top:1px solid black;";
                                                 }
                                                 break;
                                             }
                                             //for fuelstation
                                             case 6: {
                                                 GM_log("Fuelstation");
-                                                help = "";
+                                                help_15 = "";
                                                 var data = unsafeWindow.farms_data.farms[farmNR][zoneNr];
                                                 for (var slot = 1; slot <= 4; slot++) {
                                                     if ((slot == 1) || (!data.data.data.slots[slot]["block"])) {
@@ -17148,15 +17153,15 @@ function do_main() {
                                                         var iPoints = iAmount * prodPoints[0][product];
                                                         var iTime = data.data.constants.slot_level[data.data.data.slots[slot].level].duration;
                                                         tr = createElement("tr", {}, table);
-                                                        td = createElement("td", { "style": help + "padding-right:10px;" }, tr);
+                                                        td = createElement("td", { "style": help_15 + "padding-right:10px;" }, tr);
                                                         createElement("div", { "style": "line-height:16px;white-space:nowrap;" }, td, "Slot" + slot);
                                                         div = createElement("div", { "style": "line-height:16px;white-space:nowrap;" }, td);
                                                         produktPic(0, product, div);
                                                         createElement("span", {}, div, numberFormat(iAmount) + " " + prodName[0][product]);
                                                         pointsFormat(iPoints, "span", td);
-                                                        createElement("span", { "style": "line-height:16px;white-space:nowrap;" }, td, "  " + getTimeStr(iTime));
+                                                        createElement("span", { "style": "line-height:16px;white-space:nowrap;" }, td, "  " + getTimeStr(iTime, false));
                                                     }
-                                                    help = "border-top:1px solid black;";
+                                                    help_15 = "border-top:1px solid black;";
                                                 }
                                                 break;
                                             }
@@ -17914,7 +17919,7 @@ function do_main() {
                         case "reallocatebuilding":
                             {
                                 // B=='farm1,zone1,farm2,zone2'
-                                varset = B.split(",");
+                                var set = B.split(",");
                                 var building1 = (6 * parseInt(set[0], 10)) + parseInt(set[1], 10);
                                 var building2 = (6 * parseInt(set[2], 10)) + parseInt(set[3], 10);
                                 zones.swap(building1, building2);
@@ -18083,8 +18088,7 @@ function do_main() {
                 // var zoneNr=/refreshGarden\((\d)\)/.exec($("errorboxfootergarden").parentNode.innerHTML);
                 var zoneNr = /refreshGarden\((\d)\)/.exec($("globalbox_button1").parentNode.innerHTML);
                 if (zoneNr) {
-                    zoneNr = zoneNr[1];
-                    unsafeWindow.refreshGarden(zoneNr);
+                    unsafeWindow.refreshGarden(zoneNr[1]);
                 }
             }
             catch (err) {
@@ -18307,7 +18311,7 @@ function do_main() {
                         }, false);
                     }
                 }
-                var cand = $("innercontent").getElementsByClassName("feedproduct");
+                cand = $("innercontent").getElementsByClassName("feedproduct");
                 for (var v = 0; v < cand.length; v++) {
                     var stockNr = (unsafeWindow.farm <= 4) ? 0 : (unsafeWindow.farm == 5) ? 5 : 6;
                     var currProd = parseInt(cand[v].getElementsByTagName("div")[1].getAttribute("class").replace("l", ""), 10);
@@ -18376,7 +18380,7 @@ function do_main() {
                         // Put this slot's info into slots's proddata
                         dataSlot[0][iPrTyp][iProd].push([iAmount, iPoints, iTime, NEVER]);
                         // Add auto-cropping on open building
-                        newDiv = $("pony" + slot).children[1];
+                        var newDiv = $("pony" + slot).children[1];
                         if (farmi["data"]["remain"] < 1 && (top.unsafeData.autoAction == null) && valAutoCrop["farm"] && (newDiv = $("pony" + slot + "_crop"))) {
                             top.unsafeData.autoAction = "Berater: Pony crop";
                             window.setTimeout(function (div) {
@@ -18404,20 +18408,6 @@ function do_main() {
                 var newDiv, newDiv1;
                 var tempZoneProductionData = [[{}], 0, 0, true];
                 var tempZoneProductionDataSlot;
-                /*
-                console.log("+++++++++++++++++ doKnitting"+zoneNr);
-                console.log("===                            ===");
-                console.log(print_r(unsafeWindow.factory.data, "", true, "\n"));
-                console.log("===                            ===");
-    
-                console.log("===                            ===");
-                console.log(print_r(unsafeWindow.innerinfos_data[1], "", true, "\n"));
-                console.log("===                            ===");
-    
-                console.log("===                            ===");
-                console.log(print_r(unsafeWindow.building_inner_data, "", true, "\n"));
-                console.log("===                            ===");
-                */
                 var data = unsafeWindow.factory.data;
                 for (var slot = 1; slot <= 3; slot++) {
                     zoneNrS = zoneNrF + "." + slot;
@@ -18473,7 +18463,7 @@ function do_main() {
                     }
                 }
                 zones.setProduction(zoneNrF, tempZoneProductionData.clone());
-                var tempZoneProductionData = null;
+                tempZoneProductionData = null;
                 newDiv = null;
                 newDiv1 = null;
                 raiseEvent("gameOpenFactoryOilKnittingTea");
@@ -18535,7 +18525,7 @@ function do_main() {
                         }
                         var pId_parent = children[c].getElementsByClassName("fuelstation_product_select_item_img")[0].childNodes;
                         var pId = pId_parent[1].className.replace("tt", "");
-                        var points = children[c].getElementsByClassName("fuelstation_product_select_item_points")[0].innerHTML.replace(".", "");
+                        var points = parseInt(children[c].getElementsByClassName("fuelstation_product_select_item_points")[0].innerHTML.replace(".", ""), 10);
                         var ratio = (gut[pId] * iLimit / points).toFixed(2);
                         createElement("div", {
                             "style": "position: absolute; bottom: -15px; left: 8px;border: 2px solid rgb(255, 114, 0); background-color: white;width: 85px;text-align: center;"
@@ -18622,7 +18612,7 @@ function do_main() {
                     }
                 }
                 zones.setProduction(zoneNrF, tempZoneProductionData.clone());
-                var tempZoneProductionData = null;
+                tempZoneProductionData = null;
                 newDiv = null;
                 newDiv1 = null;
             }
@@ -19062,7 +19052,7 @@ function do_main() {
                 var newspan = createElement("span", { "style": "margin-right:2px;" }, newdiv);
                 if (data != 0) {
                     createElement("img", { "src": GFX + 'adtime.gif' }, newspan);
-                    createElement("span", { "style": "font-weight:bold;" }, newdiv, getTimeStr(data['remain']));
+                    createElement("span", { "style": "font-weight:bold;" }, newdiv, getTimeStr(data['remain'], undefined));
                     if (data['questtype'] == 1 || data['questtype'] == 2) {
                         var top = 25;
                         var left = 0;
@@ -19071,7 +19061,7 @@ function do_main() {
                             if (data['product' + i] > 0) {
                                 data['sum' + i] = parseInt(data['sum' + i], 10);
                                 data['amount' + i] = parseInt(data['amount' + i], 10);
-                                var barleft = parseInt(Math.round((data['sum' + i] * 100) / data['amount' + i]) - 100, 10);
+                                var barleft = Math.round((data['sum' + i] * 100) / data['amount' + i]) - 100;
                                 if (data['questtype'] == 2) {
                                     data['sum' + i] = moneyFormat(data['sum' + i]);
                                     data['amount' + i] = moneyFormat(data['amount' + i]);
@@ -19204,7 +19194,7 @@ function do_main() {
                         newdiv = canddiv[v].children[1].firstElementChild;
                         var thisUser = /(.*?)&nbsp;/.exec(newdiv.innerHTML);
                         newdiv.innerHTML = newdiv.innerHTML.replace(thisUser[0], "");
-                        newspan = createElement("span");
+                        newspan = createElement("span", {});
                         newspan.innerHTML = "&nbsp;";
                         newdiv.insertBefore(newspan, newdiv.firstElementChild);
                         newa = createElement("a", { "class": "link" });
@@ -19330,21 +19320,21 @@ function do_main() {
                         var clubmembers = new Object();
                         var clubmemberLogSum = new Object();
                         for (var i = 0; i < clubmemberLog.length; i++) {
-                            var u = clubmemberLog[i][0];
-                            clubmemberLogSum[u] = [0, {}];
+                            var u_1 = clubmemberLog[i][0];
+                            clubmemberLogSum[u_1] = [0, {}];
                             for (var j = 0; j < clubmemberLog[i][1].length; j++) {
-                                var v = clubmemberLog[i][1][j][0];
-                                if (v == todayStr) {
+                                var v_32 = clubmemberLog[i][1][j][0];
+                                if (v_32 == todayStr) {
                                     continue;
                                 }
-                                clubmemberLogSum[u][0] += clubmemberLog[i][1][j][1];
+                                clubmemberLogSum[u_1][0] += clubmemberLog[i][1][j][1];
                                 for (var k = 0; k < clubmemberLog[i][1][j][2].length; k++) {
                                     var w = clubmemberLog[i][1][j][2][k][0];
-                                    if (clubmemberLogSum[u][1][w] === undefined) {
-                                        clubmemberLogSum[u][1][w] = 0;
-                                        clubmemberLogSum[u][1].sortObj(sortObjFunctions["productId"]);
+                                    if (clubmemberLogSum[u_1][1][w] === undefined) {
+                                        clubmemberLogSum[u_1][1][w] = 0;
+                                        clubmemberLogSum[u_1][1].sortObj(sortObjFunctions["productId"]);
                                     }
-                                    clubmemberLogSum[u][1][w] += clubmemberLog[i][1][j][2][k][1];
+                                    clubmemberLogSum[u_1][1][w] += clubmemberLog[i][1][j][2][k][1];
                                 }
                             }
                         }
@@ -19362,20 +19352,20 @@ function do_main() {
                                 cell.style.whiteSpace = "nowrap";
                                 cell.style.left = "";
                                 cell.style.right = "30px";
-                                for (var w = 0; w + 1 < cell.childElementCount; w++) {
-                                    if (cell.children[w].style.clear == "both") {
+                                for (var w_2 = 0; w_2 + 1 < cell.childElementCount; w_2++) {
+                                    if (cell.children[w_2].style.clear == "both") {
                                         continue;
                                     }
-                                    var help = parseInt(cell.children[w].getAttribute("class").replace(/kp/, ""), 10);
-                                    var help1 = parseInt(cell.children[++w].innerHTML.replace(/&nbsp;/g, ""), 10);
+                                    var help = parseInt(cell.children[w_2].getAttribute("class").replace(/kp/, ""), 10);
+                                    var help1 = parseInt(cell.children[++w_2].innerHTML.replace(/&nbsp;/g, ""), 10);
                                     clubmembers[thisUser][1][help] = help1;
                                 }
                                 cell.innerHTML = "";
                                 clubmembers[thisUser][1].sortObj(sortObjFunctions["productId"]);
                                 newtable = createElement("table", { "cellspacing": "0", "style": "display:inline-block;vertical-align:top;" }, cell);
                                 var c = 2;
-                                for (var w in clubmembers[thisUser][1]) {
-                                    if (!clubmembers[thisUser][1].hasOwnProperty(w)) {
+                                for (var w_3 in clubmembers[thisUser][1]) {
+                                    if (!clubmembers[thisUser][1].hasOwnProperty(w_3)) {
                                         continue;
                                     }
                                     if (c == 2) {
@@ -19383,15 +19373,15 @@ function do_main() {
                                         newtr = createElement("tr", {}, newtable);
                                     }
                                     c++;
-                                    newtd = createElement("td", { "class": "link hoverBgDarkgreen", "style": "text-align:right;padding-right:5px;", "prod": w }, newtr);
+                                    newtd = createElement("td", { "class": "link hoverBgDarkgreen", "style": "text-align:right;padding-right:5px;", "prod": w_3 }, newtr);
                                     newtd.addEventListener("mouseover", function (event) {
                                         showGoToMarketToolTip(event, this.getAttribute("prod"));
                                     }, false);
                                     newtd.addEventListener("click", function () {
                                         showMarket(this.getAttribute("prod"));
                                     }, false);
-                                    produktPic(0, w, newtd).style.cssFloat = "left";
-                                    createElement("span", {}, newtd, numberFormat(clubmembers[thisUser][1][w]));
+                                    produktPic(0, w_3, newtd).style.cssFloat = "left";
+                                    createElement("span", {}, newtd, numberFormat(clubmembers[thisUser][1][w_3]));
                                 }
                                 var clubmemberLogId = null;
                                 for (var x = 0; x < clubmemberLog.length; x++) {
@@ -19418,19 +19408,19 @@ function do_main() {
                                         clubmemberLog[clubmemberLogId][1].push([todayStr, 0, []]);
                                     }
                                     clubmemberLog[clubmemberLogId][1][clubmemberLogDateId][0] = thisPoints - clubmemberLogSum[thisUser][0];
-                                    for (var w in clubmembers[thisUser][1]) {
-                                        if (!clubmembers[thisUser][1].hasOwnProperty(w)) {
+                                    for (var w_4 in clubmembers[thisUser][1]) {
+                                        if (!clubmembers[thisUser][1].hasOwnProperty(w_4)) {
                                             continue;
                                         }
-                                        var help = clubmembers[thisUser][1][w] - (clubmemberLogSum[thisUser][1][w] === undefined ? 0 : clubmemberLogSum[thisUser][1][w]);
+                                        var help = clubmembers[thisUser][1][w_4] - (clubmemberLogSum[thisUser][1][w_4] === undefined ? 0 : clubmemberLogSum[thisUser][1][w_4]);
                                         for (var x = 0; x < clubmemberLog[clubmemberLogId][1][clubmemberLogDateId][1].length; x++) {
-                                            if (clubmemberLog[clubmemberLogId][1][clubmemberLogDateId][1][x][0] == w) {
+                                            if (clubmemberLog[clubmemberLogId][1][clubmemberLogDateId][1][x][0] == w_4) {
                                                 break;
                                             }
                                         }
                                         if (help > 0) {
                                             if (!clubmemberLog[clubmemberLogId][1][clubmemberLogDateId][1][x]) {
-                                                clubmemberLog[clubmemberLogId][1][clubmemberLogDateId][1][x].push([w, help]);
+                                                clubmemberLog[clubmemberLogId][1][clubmemberLogDateId][1][x].push([w_4, help]);
                                                 clubmemberLog[clubmemberLogId][1][clubmemberLogDateId][1].sort(sortObjFunctions["productId"]);
                                             }
                                             else {
@@ -19449,7 +19439,7 @@ function do_main() {
                                     }
                                     newtr = createElement("tr", { "class": "hoverBgDarkgreen" });
                                     newtable.insertBefore(newtr, newtable.firstElementChild);
-                                    newdiv = createElement("div");
+                                    newdiv = createElement("div", {});
                                     newtable1 = createElement("table", { "cellspacing": "0", "style": "display:inline-block;vertical-align:top;" }, newdiv);
                                     var c = 2;
                                     //var pkte=0;
@@ -19496,10 +19486,10 @@ function do_main() {
         });
         // New mode for questhistory
         function showGuildQuestStatsLastDays(days) {
-            //GM_log("showGuildQuestStatsLastDays "+days);
-            //todayStr=getDateStr(now,2,false);
-            var startDay = new Date();
-            startDay = ((new Date(startDay.getFullYear(), startDay.getMonth(), startDay.getDate() - days)).getTime()) / 1000;
+            var tempDate = new Date();
+            tempDate.setDate(0);
+            tempDate.setHours(0, 0, 0, 0);
+            var startDay = Math.round(tempDate.getTime() / 1000);
             var obj = [0, [], 0, 1, 0];
             var clubmemberLog = explode(GM_getValue(COUNTRY + "_" + SERVER + "_" + USERNAME + "_clubmemberLog"), "showGuildQuestStatsLastDays/clubmemberLog", {});
             var clubmemberLogSum = new Object();
@@ -19544,19 +19534,13 @@ function do_main() {
             else {
                 obj[1].sort(function (a, b) { return (b["p"] - a["p"]); });
             }
-            var request = new Object();
-            request.readyState = 4;
-            request.status = 200;
-            request.responseText = implode(obj, "showGuildQuestStatsLastDays/obj");
+            var request = {
+                readyState: 4,
+                status: 200,
+                responseText: implode(obj, "showGuildQuestStatsLastDays/obj")
+            };
             //GM_log("responseText= "+implode(obj));
             unsafeWindow.showGuildQuestStatsResponse(request, 4, 1, 0); //type,page,self
-            /*
-            request: [1,[
-                {"n":"name1","p":17049,"products":[{"p":"id","a":amount},...],"c":1},
-                ...
-            ],nameCounter,pageNr,highestPoints]
-            on error: [0,text]
-            */
         }
         // Clubquest reformat
         unsafeOverwriteFunction("setGuildQuestRun", function (r) {
@@ -19574,9 +19558,9 @@ function do_main() {
                     for (var v = 0; v < cand.length; v++) {
                         newdiv = cand[v].getElementsByTagName("b")[0];
                         var help = /(\d+)\/(\d+)/.exec(newdiv.innerHTML.replace(regDelimThou, ""));
-                        help[1] = parseInt(help[1], 10);
-                        help[2] = parseInt(help[2], 10);
-                        newdiv.innerHTML = ((help[1] == help[2]) ? "" : (numberFormat(help[2] - help[1]) + "/" + numberFormat(help[2])));
+                        var help1 = parseInt(help[1], 10);
+                        var help2 = parseInt(help[2], 10);
+                        newdiv.innerHTML = ((help1 == help2) ? "" : (numberFormat(help2 - help1) + "/" + numberFormat(help2)));
                         createElement("div", { "style": "position:absolute;top:0;left:0;width:100px;height:15px;color:black;font-weight:bold;text-align:center;" }, cand[v].getElementsByTagName("div")[2], numberFormat(help[1]));
                     }
                     cand = null;
@@ -19603,7 +19587,7 @@ function do_main() {
                         var cand = $("commitboxcontentguild").getElementsByTagName("input")[0];
                         cand.setAttribute("prod", currProd);
                         // maximal value according to minRack
-                        cand.value = Math.max(0, Math.min(cand.value, prodStock[0][currProd] - prodMinRack[0][currProd]));
+                        cand.value = "" + Math.max(0, Math.min(parseInt(cand.value, 10), prodStock[0][currProd] - prodMinRack[0][currProd]));
                         createElement("div", { "id": "commitboxguildLowrack", "class": "blackbox alertbox", "style": "display:none;position:absolute;top:135px;left:0;" }, $("commitboxcontentguild"), getText("alertWillLowRack"));
                         cand.addEventListener("keyup", function () {
                             // warning if more than minRack allows
@@ -19718,7 +19702,7 @@ function do_main() {
                     var cand = container.getElementsByTagName("li");
                     var nextQuest = parseInt(cand[5].children[1].innerHTML, 10) + 1;
                     if (QUESTS["main"]["1"][nextQuest]) {
-                        cand[5].setAttribute("nextQuest", nextQuest);
+                        cand[5].setAttribute("nextQuest", "" + nextQuest);
                         cand[5].addEventListener("mouseover", function (event) {
                             var nextQuest = this.getAttribute("nextQuest");
                             var str = "<div style='border-bottom:1px solid black;'>" + getText("quest_farm") + "&nbsp;" + nextQuest + "</div>";
@@ -19762,8 +19746,8 @@ function do_main() {
                     case 1: {
                         for (var j = unsafeWindow.farmersmarket_data.farmis.length - 1; j > -1; j--) {
                             if (unsafeWindow.farmersmarket_data.farmis[j].id == farmi) {
-                                thisFarmiData["money"] = parseFloat(unsafeWindow.farmersmarket_data.farmis[j]["price"], 10);
-                                thisFarmiData["points"] = parseFloat(unsafeWindow.farmersmarket_data.farmis[j]["points"], 10);
+                                thisFarmiData["money"] = parseFloat(unsafeWindow.farmersmarket_data.farmis[j]["price"]);
+                                thisFarmiData["points"] = parseInt(unsafeWindow.farmersmarket_data.farmis[j]["points"], 10);
                                 for (var i = unsafeWindow.farmersmarket_data.farmis[j].cart.length - 1; i > -1; i--) {
                                     prod = unsafeWindow.farmersmarket_data.farmis[j].cart[i]["pid"];
                                     menge = unsafeWindow.farmersmarket_data.farmis[j].cart[i]["amount"];
@@ -19775,7 +19759,7 @@ function do_main() {
                         break;
                     }
                     default: {
-                        thisFarmiData["money"] = parseFloat(unsafeWindow.farmisinfo[0][farmi]["price"], 10);
+                        thisFarmiData["money"] = parseFloat(unsafeWindow.farmisinfo[0][farmi]["price"]);
                         for (var i = 1; i <= 7; i++) {
                             prod = parseInt(unsafeWindow.farmisinfo[0][farmi]["p" + i], 10);
                             menge = parseInt(unsafeWindow.farmisinfo[0][farmi]["a" + i], 10);
@@ -19862,7 +19846,7 @@ function do_main() {
                                 newtd = createElement("td", {}, newtr);
                                 cell = createElement("input", { "class": "text", "type": "text", "style": "color:black;text-align:right;width:60px;", "value": numberFormat(thisFarmiData["cart"][v][2] / thisFarmiData["cart"][v][1], 2), "maxlength": "8" }, newtd);
                                 cell.addEventListener("change", function () {
-                                    var help = parseFloat(this.value.replace(regDelimThou, "").replace(regDelimDeci, "."), 10);
+                                    var help = parseFloat(this.value.replace(regDelimThou, "").replace(regDelimDeci, "."));
                                     if (!isNaN(help)) {
                                         if (help < 0) {
                                             help *= -1;
@@ -19879,7 +19863,7 @@ function do_main() {
                                 newtd = createElement("td", {}, newtr);
                                 cell = createElement("input", { "class": "text", "type": "text", "style": "color:black;text-align:right;width:60px;", "value": numberFormat(thisFarmiData["cart"][v][2], 2), "maxlength": "9" }, newtd);
                                 cell.addEventListener("change", function () {
-                                    var help = parseFloat(this.value.replace(regDelimThou, "").replace(regDelimDeci, "."), 10);
+                                    var help = parseFloat(this.value.replace(regDelimThou, "").replace(regDelimDeci, "."));
                                     if (!isNaN(help)) {
                                         if (help < 0) {
                                             help *= -1;
@@ -20020,12 +20004,10 @@ function do_main() {
                         }
                     }
                     if (drugsArray) {
-                        //console.log(drugsArray);
                         for (var c in drugsArray) {
                             if (!drugsArray.hasOwnProperty(c)) {
                                 continue;
                             }
-                            //console.log(c+" "+drugsArray[c]);
                             if (prodStock[0][c] >= drugsArray[c]) {
                                 animalID = queueID;
                             }
@@ -20042,7 +20024,7 @@ function do_main() {
                 }
                 var endTime = NEVER;
                 for (var slot = 1; slot <= 3; slot++) {
-                    zoneNrS = "farmersmarket-5" + "." + slot;
+                    var zoneNrS = "farmersmarket-5" + "." + slot;
                     if (!zones.getBlock(zoneNrS)) {
                         var help = zones.getEndtime(zoneNrS);
                         endTime = Math.min(endTime, help);
@@ -20185,11 +20167,11 @@ function do_main() {
                                         zones.setBonus(zoneNrF, 0);
                                         if ((!currBlock) && (unsafeWindow.farmersmarket_data.nursery && unsafeWindow.farmersmarket_data.nursery.slots)) {
                                             tempZoneProductionData = [[{}, {}], 0, 0, true];
-                                            for (var slot = 1; slot <= 3; slot++) {
-                                                zoneNrS = zoneNrF + "." + slot;
+                                            for (var slot_1 = 1; slot_1 <= 3; slot_1++) {
+                                                zoneNrS = zoneNrF + "." + slot_1;
                                                 zones.setBlock(zoneNrS, "");
                                                 tempZoneProductionDataSlot = [[{}, {}], 0, 0, true];
-                                                if (item = unsafeWindow.farmersmarket_data.nursery.slots[slot]) {
+                                                if (item = unsafeWindow.farmersmarket_data.nursery.slots[slot_1]) {
                                                     if (item["block"]) {
                                                         zones.setBlock(zoneNrS, "b");
                                                     }
@@ -20243,22 +20225,22 @@ function do_main() {
                                             if (unsafeWindow.farmersmarket_data.megafruit.current) {
                                                 zones.setBonus(zoneNrF, 0);
                                                 item = unsafeWindow.farmersmarket_data.megafruit;
-                                                slot = 0;
+                                                var slot_2 = 0;
                                                 iProd = item.current.pid;
                                                 iAmount = 0;
                                                 iPoints = 0;
                                                 tempZoneProductionData = [[{}, {}], 0, 0, true];
-                                                for (var i in item.current.data) {
-                                                    if (!item.current.data.hasOwnProperty(i)) {
+                                                for (var i_11 in item.current.data) {
+                                                    if (!item.current.data.hasOwnProperty(i_11)) {
                                                         continue;
                                                     }
-                                                    slot++;
-                                                    zoneNrS = zoneNrF + "." + slot;
+                                                    slot_2++;
+                                                    zoneNrS = zoneNrF + "." + slot_2;
                                                     zones.setBlock(zoneNrS, "");
                                                     tempZoneProductionDataSlot = [[{}, {}], 0, 0, true];
                                                     if (item.current.remain >= 0) {
-                                                        if (item.current.data[i].remain > 0) {
-                                                            iTime = nowServer + item.current.data[i].remain;
+                                                        if (item.current.data[i_11].remain > 0) {
+                                                            iTime = nowServer + item.current.data[i_11].remain;
                                                         }
                                                         else {
                                                             //iTime = nowServer+item.current.data[i].remain;
@@ -20288,9 +20270,9 @@ function do_main() {
                                             else {
                                                 tempZoneProductionData = [[{}, {}], 0, 0, true];
                                                 item = unsafeWindow.farmersmarket_data.megafruit;
-                                                for (slot = 1; slot <= 3; slot++) {
-                                                    zoneNrS = zoneNrF + "." + slot;
-                                                    if (item.objects[Object.keys(item.objects)[slot - 1]][0].locked) {
+                                                for (var slot_3 = 1; slot_3 <= 3; slot_3++) {
+                                                    zoneNrS = zoneNrF + "." + slot_3;
+                                                    if (item.objects[Object.keys(item.objects)[slot_3 - 1]][0].locked) {
                                                         zones.setBlock(zoneNrS, "blpqs");
                                                         continue;
                                                     }
@@ -20319,16 +20301,16 @@ function do_main() {
                                         if ((!currBlock) && (unsafeWindow.farmersmarket_data.pets && unsafeWindow.farmersmarket_data.pets.production)) {
                                             //Products for animal breeding
                                             tempZoneProductionData = [[{}, {}], 0, 0, true];
-                                            for (var slot = 1; slot <= 4; slot++) {
-                                                zoneNrS = zoneNrF + "." + slot;
+                                            for (var slot_4 = 1; slot_4 <= 4; slot_4++) {
+                                                zoneNrS = zoneNrF + "." + slot_4;
                                                 zones.setBlock(zoneNrS, "");
                                                 tempZoneProductionDataSlot = [[{}, {}], 0, 0, true];
-                                                item = unsafeWindow.farmersmarket_data.pets.production[slot];
-                                                if (slot >= 3 && unsafeWindow.farmersmarket_data.pets.data.slots[slot]["block"]) {
+                                                item = unsafeWindow.farmersmarket_data.pets.production[slot_4];
+                                                if (slot_4 >= 3 && unsafeWindow.farmersmarket_data.pets.data.slots[slot_4]["block"]) {
                                                     zones.setBlock(zoneNrS, "b");
                                                 }
-                                                else if (unsafeWindow.farmersmarket_data.pets.production[slot]) {
-                                                    item = unsafeWindow.farmersmarket_data.pets.production[slot]["1"];
+                                                else if (unsafeWindow.farmersmarket_data.pets.production[slot_4]) {
+                                                    item = unsafeWindow.farmersmarket_data.pets.production[slot_4]["1"];
                                                     iProd = (item["pid"] ? parseInt(item["pid"], 10) : null);
                                                     if (isNaN(iProd)) {
                                                         iProd = null;
@@ -27543,9 +27525,9 @@ function scriptInit() {
         regMsgContentContractsale = new RegExp(getText("msgContentContractsale"));
         regMsgContentContractsaleList = new RegExp(getText("msgContentContractsaleList"));
         regMsgSubjectFriend = new RegExp(getText("msgSubjectFriend"));
-        regMsgSubjectFriendEnd = new RegExp(getText("msgSubjectFriendEnd"));
-        regMsgSubjectMarketsale = new RegExp(getText("msgSubjectMarketsale"));
-        regMsgSubjectQuest = new RegExp(getText("msgSubjectQuest"));
+        // regMsgSubjectFriendEnd = new RegExp(getText("msgSubjectFriendEnd"));
+        // regMsgSubjectMarketsale = new RegExp(getText("msgSubjectMarketsale"));
+        // regMsgSubjectQuest = new RegExp(getText("msgSubjectQuest"));
         err_trace = "Events";
         if (DEVMODE_EVENTS && (self == top)) {
             var allEvents = new Array();

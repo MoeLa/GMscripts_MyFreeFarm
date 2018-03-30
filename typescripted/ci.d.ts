@@ -75,6 +75,11 @@ interface UnsafeData {
 
     money: number; // e.g. 2252446.94
     carpentry_bonus: number;
+
+    reallocateBuildingSet: any[]; // Array of size 2 with information about two buildungs being swapped
+    pony_data: any;
+    megafieldVehicle: any;
+    logMegafieldJob: any[];
 }
 
 interface Window {
@@ -205,17 +210,79 @@ interface Window {
     infoupdatebuilding: string; // "Gebäude ausbauen
     error1005: string; // "Du benötigst mindestens Level %LEVEL%, um dieses Feature nutzen zu können."
     updatetext: string[];
+
+    /** Is only filled, when e.g. factory is opened */
+    locationinfo: {
+        4: number;
+        6: string;
+        7: number;
+        8: number;
+        9: number;
+        in: number[];
+        out: {
+            1: number;
+            2: number;
+            3: number;
+        }[];
+        need: number[];
+        pid: string;
+    }
+
+    /** Is only filled, when e.g. factory is opened */
+    factory: {
+        currentPosition: number;
+        currentSlot: number;
+        type: string; // e.g. strickerei
+        data: {
+            buildingid: string; // e.g. "16"
+            cropbonus: number;
+            farm: string; // e.g. "4"
+            first: number;
+            level: string; // e.g. "4"
+            position: number; // from 1 to 6
+            products: any;
+            slots: {
+                1: {
+                    amount: number;
+                    pid: string;
+                    remain: number;
+                }
+                2: {
+                    amount: number;
+                    pid: string;
+                    remain: number;
+                    block: number;
+                    cost: any[];
+                }
+                3: {
+                    block: number;
+                    cost: any[];
+                }
+            }
+
+        }
+    }
+
+    imgpath: string; // "http://mff.wavecdn.de/mff/"
+    guildmultibox_headline4: string; // "Questbeteiligung"
+    guildrank: string[]; // 1: "Clubchef", 2: "Stellvertretender Clubchef", ..., 6: "Anwärter"
+
+    findTreatedAnimal();
+
+    flowerarea_dailybonus_percent: string; // e.g. "15"
 }
 
 interface VetData {
-    drugs: {};
+    drugs: {}
+
     info: {
         level: number;
-    };
+    }
+
     quest: {
         campaign: string;
         quest_id: number;
-    };
+    }
 }
 
 interface Pets {
@@ -254,6 +321,25 @@ interface MegafieldData {
     area_free: {};
     block: any; // Not sure about type. Should be boolean or boolean-like (e.g. a number with only 0 or 1)
     job_start: string; // Yep, that's a string for what ever reason
+    job_endtime: string;
+
+    // Only set, when quest was finished
+    reward: {
+
+    }
+
+    reward_info: {
+        difficultybonus_points: number;
+        difficultybonus_money: number;
+        difficultybonus_license: number;
+        license: number;
+        money: number;
+        quality: number;
+        points: number;
+        timebonus_points: number;
+        timebonus_money: number;
+        timebonus_license: number;
+    }
 }
 
 interface FarmsData {
@@ -262,6 +348,11 @@ interface FarmsData {
     freegardenspeedup: number;
     freegardenspeedup2: number;
     blocked: any;
+    map: {
+        achievements: any[];
+        config: any;
+        vehicles: any[];
+    }
 }
 
 interface Butterfly {
@@ -272,8 +363,31 @@ interface Butterfly {
 // Note: An attribute might only be there, if the building is unlocked
 interface FarmersmarketData {
     vet: {
+        animals: {
+            queue: any;
+            slots: {
+                duration: number;
+                id: number;
+                remain: number;
+                time: number;
+            }[];
+            slots2: {
+                buy_time: number;
+                coins: number;
+                block: number; // Is either 1 or not existing
+            }[];
+        }
+        drugs: {
+            coins: number; // Only existing, if drugs costs coins
+            diseases: number[]; // Against with disease does this drug help?
+            level: number;
+        }[];
 
-    };
+        info: {
+            level: number;
+        }
+    }
+
     megafruit: {
         // Note: Since I/Moe haven't a megafruit plant, I'm not sure about the attribute types.
         current: {
@@ -287,6 +401,55 @@ interface FarmersmarketData {
             }
         }
     }
+
+    farmis: {
+        // TODO Moe, du musst prüfen, ob das so passt!
+        id: number;
+        price: string;
+        points: string;
+        cart: {
+            pid: string;
+            amount: number;
+        }[];
+    }[];
+
+    flower_slots: {
+        slots: {
+            pid: string;
+            points: number;
+            remain: number;
+            waterremain: number;
+        }[];
+    }
+
+    flower_bonus: {
+        pid: number;
+        remain: number;
+    }
+
+    pos: {
+        block: number;
+        cost: number;
+        name: string;
+        level: string;
+    }
+
+    flower_area: {
+        createdate: string;
+        duration: string;
+        pid: string;
+        remain: number;
+        water_remain: number;
+    }[];
+
+    nursery: {
+        slots: {
+            cost: number;
+            block: number;
+            coins: number;
+        }[];
+    }
+
 }
 // Custom interfaces END
 
